@@ -4,4 +4,6 @@ class Recording
   field :recording_location, :type => String
   field :duration, :type => Integer
   field :rythm, :type => Integer
+  
+  validates_presence_of :duration
 end
