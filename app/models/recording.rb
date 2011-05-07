@@ -6,4 +6,6 @@ class Recording
   field :rythm, :type => Integer
   
   validates_presence_of :duration
+  validates_numericality_of :duration, :greater_than=>0
+
 end

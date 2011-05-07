@@ -3,6 +3,6 @@
 Factory.define :recording do |f|
   f.recording_date ""
   f.recording_location ""
-  f.duration ""
+  f.duration "60"
   f.rythm ""
 end
