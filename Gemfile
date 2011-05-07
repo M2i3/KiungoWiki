@@ -8,6 +8,8 @@ gem "mongoid", ">= 2.0.1"
 gem 'will_paginate', '>=3.0.pre'
 gem 'acts-as-taggable-on'
 
+gem "jquery-rails"
+
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
@@ -17,8 +19,10 @@ group :development, :test do
   gem 'spork'
   gem 'launchy'    # So you can do Then show me the page
 
-  gem 'factory_girl_rails'
-  
+
+  gem 'rails3-generators'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'  
   gem 'mongoid-rspec'
 end
 
