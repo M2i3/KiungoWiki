@@ -7,5 +7,7 @@ class Recording
   
   validates_presence_of :duration
   validates_numericality_of :duration, :greater_than=>0
+  
+  validates_numericality_of :rythm, :greater_than=>0, :allow_nil=>true
 
 end
