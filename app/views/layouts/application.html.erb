@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>KiungoWiki</title>
+  <title><%= content_for(:title) %> - KiungoWiki</title>
+
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
+  <%= render :partial=>"common/google_analytics" %>
 </head>
 <body>
+<div id="page"> 
+  <div id="content"> 
+    <% if notice || alert %>
+	    <div id="app_messages">
+		    <% if notice %><p class="notice"><%= notice %></p><% end %>
+		    <% if alert %><p class="alert"><%= alert %></p><% end %>					
+	    </div>  
+    <% end %>
+    <%= yield %>
+  </div>
 
-<%= yield %>
+  <div id="header"> 
+    <%= link_to root_url do %><div id="sitetitle">KiungoWiki</div><% end %>
+	  <em id="siteslogan">La référence en musique.</em> 
+  </div><!-- END div#header -->		 
 
+  <div id="footer"> 
+	  <ul class="nav"> 
+		  <li><%= link_to "Accueil", root_url %></li> 
+	  </ul> 
+	  <div id="copyright">&copy; 2011 - KiungoWiki</div> 
+  </div><!-- END div#footer -->		
+</div><!-- END div#page -->
 </body>
 </html>
