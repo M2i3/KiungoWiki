@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.7'
 
 gem "bson_ext", ">= 1.3.0"
-gem "mongoid", ">= 2.0.1"
+gem "mongoid", ">= 2.0.2"
 
 gem 'will_paginate', '>=3.0.pre'
 gem 'acts-as-taggable-on'
