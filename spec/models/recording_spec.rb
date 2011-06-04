@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Recording do
 
 	describe "Testing for required values" do 
-		[:recording_date, :recording_location, :rythm].each {|field|	
+		[:recording_date, :recording_location, :rythm, :sample_rate].each {|field|	
 			it "#{field} should allow nil" do 
 				rec = Factory.build(:recording, field =>  nil)			
 				rec.valid?.should == true
@@ -46,6 +46,22 @@ describe Recording do
 		[1, 15, 300, 10000, 500000, 1000000].each do |value|
 			it "when specified, rythm should be numerical and greater than 0 (#{value} is valid)" do
 				rec = Factory.build(:recording, :rythm=>value)
+				rec.valid?.should == true
+			end		
+		end
+	end
+	
+	describe "Testing for the sample_rate" do
+		["a", -15, 0].each {|value|
+			it "when specified, sample_rate should be numerical and greater than 0 (#{value} is invalid)" do
+				rec = Factory.build(:recording, :sample_rate=>value)
+				rec.valid?.should == false
+			end		
+		}
+		# TODO : Insert commonly-used sample rates here
+		[1, 15, 300, 10000, 500000, 1000000].each do |value|
+			it "when specified, sample_rate should be numerical and greater than 0 (#{value} is valid)" do
+				rec = Factory.build(:recording, :sample_rate=>value)
 				rec.valid?.should == true
 			end		
 		end
