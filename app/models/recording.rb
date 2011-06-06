@@ -1,5 +1,6 @@
 class Recording
   include Mongoid::Document
+  field :name, :type => String
   field :recording_date, :type => DateTime
   field :recording_location, :type => String
   field :duration, :type => Integer
@@ -11,5 +12,5 @@ class Recording
   
   validates_numericality_of :rythm, :greater_than=>0, :allow_nil=>true
   validates_numericality_of :sample_rate, :greater_than=>0, :allow_nil=>true
-
+  validates_length_of :name, :in=>1..500, :allow_nil=>true
 end
