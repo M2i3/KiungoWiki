@@ -12,6 +12,14 @@ require 'date'
     class VarPrecisionDate < ::Range
       attr_reader :year, :month, :day
 
+      def self.set(object)
+        if object.blank?
+          nil
+        else
+          return self.new(object)
+        end
+      end
+
       # Create a new VarPrecisionDate. The parameter _date_ must be a String in
       # the form <em>YYYY</em>, <em>YYYY-MM</em> or <em>YYYY-MM-DD</em>.
       def initialize(date)

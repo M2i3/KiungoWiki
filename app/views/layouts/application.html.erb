@@ -11,12 +11,8 @@
 <body>
 <div id="page"> 
   <div id="content"> 
-    <% if notice || alert %>
-	    <div id="app_messages">
-		    <% if notice %><p class="notice"><%= notice %></p><% end %>
-		    <% if alert %><p class="alert"><%= alert %></p><% end %>					
-	    </div>  
-    <% end %>
+    <%= render partial: "common/site_messages" %>
+
     <%= yield %>
   </div>
 

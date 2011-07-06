@@ -1,0 +1,9 @@
+<% {:info=>"Just so you know", :error=>"Oups, an error occured", :warning=>"Wait, I must warn you!", :notice=>"Congrats, you did it!"}.each do |msg_type, heading|
+  if flash[msg_type] %>
+  <div class="<%= msg_type %> message">
+    <h3><%= heading %></h3>
+    <p><%= flash[msg_type] %></p>
+  </div>
+<% end
+end %>
+

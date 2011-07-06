@@ -1,0 +1,14 @@
+# Étiquettes en français pour KiungoWiki
+
+fr:
+  mongoid:
+    models:
+      recording: Enregistrement
+    attributes:
+      recording:
+        work_name: Oeuvre
+        recording_date: Date d'enregistrement
+        recording_location: Lieu
+        duration: Durée
+        rythm: Rythme
+

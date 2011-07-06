@@ -1,0 +1,21 @@
+<%= title(@recording.title) %>
+<div class="section summary">
+  <p>Enregistré le: <%= @recording.recording_date %></p>
+  <p>Lieu: <%= @recording.recording_location %></p>
+  <p>Durée: <%= @recording.duration %></p>
+  <p>Rythme: <%= @recording.rythm %>bpm
+</div>
+
+<h2>Crédits</h2>
+<p>Here be credits</p>
+
+<h2>Albums</h2>
+<p>Here be albums</p>
+
+<div class="revision_info">
+Révision: <%= @recording.version %>, le <%= @recording.updated_at %> par <%= @recording.updated_by %>
+
+</div>
+
+
+<%= render :partial=>'links' %>
