@@ -1,5 +1,132 @@
-body { margin: 0; padding: 0; font: 80%/1.5 Arial,Helvetica,sans-serif; color: #111; background-color: #FFF; }
+/* basic page structure */ 
+body { 
+  margin: 0; 
+  padding: 0; 
+  font: 12px/1.5 Arial,Helvetica,sans-serif; 
+  color: #111; 
+  background-color: #FFF; 
+  background: url('../images/bg.png');  
+}
 
+#page {
+  width: 960px;
+  margin: 0 auto 0 auto;
+  padding-bottom: 15px;
+  position: relative;
+  background-color: white;
+}
+
+#header {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 135px;  
+  width: 960px;
+  background-color: #dedede;
+}
+
+#content {
+  padding: 135px 10px 10px 10px;
+}
+
+#footer {
+  width: 960px;
+  text-align: center;
+}
+
+/* header elements */
+#sitetitle { /* TEMPORARY UNTIL GRAPHICAL ELEMENTS ARE GIVEN */
+  position: absolute;
+  left: 15px;
+  top: 40px;
+  width: 361px;
+  height: 85px;
+  text-indent: -99999px;
+  background: url('../images/logo.png');
+
+}
+
+#header a {
+  text-decoration: none;
+}
+
+/* navigation in header*/
+#header ul.profilenav {
+	position: absolute;
+	display: block;
+  left: 0px;
+  top: 0px;
+  background-color: black;
+  color: white;
+  width: 950px;
+  height: 15px;
+  margin: 0;
+  padding: 5px;  
+  text-align: right;
+}
+
+#header ul.profilenav a {
+  color: white;
+}
+
+#header ul.profilenav li {
+	display: inline; 
+	list-style: none;	  
+}
+
+#header ul.profilenav li + li {
+	margin-left: 5px;
+}
+
+/* navigation in footer */ 
+#footer ul.nav {
+	position: static;
+	display: block;
+	margin: 0 auto 0 auto;
+  padding: 0;  
+}
+
+#footer ul.nav li {
+	display: inline; 
+	list-style: none;	  
+}
+
+#footer ul.nav li + li {
+	margin-left: 5px;
+  padding-left: 5px;
+  border-left: 1px solid black;
+}
+
+
+/* actions on a specific wiki entity */
+#pageactions {
+  position: absolute;
+  top: 100px;
+  right: 15px;    
+  z-index:999; /* TODO: find better way*/
+	display: block;
+	margin: 0 auto 0 auto;
+  padding: 0;    
+}
+
+#pageactions li {
+	display: inline; 
+	list-style: none;	  
+  margin: 0;
+  padding: 5px 5px 12px 5px;
+  font: 18px/1.5 Arial,Helvetica,sans-serif;   
+}
+
+#pageactions li.active {
+  background-color: white;
+}
+
+#pageactions li, #pageactions li a {
+  color: #202020;
+  text-decoration: none;  
+}
+
+/* messaging (BEGIN) */ 
 .message
 {
                 -webkit-background-size: 40px 40px;
@@ -28,12 +155,13 @@ body { margin: 0; padding: 0; font: 80%/1.5 Arial,Helvetica,sans-serif; color: #
                  -moz-box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
                  -webkit-box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
                  box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
-                 width: 100%;
+                 width: 928px; /* 960px - 15px -15px - 2px for border */
                  border: 1px solid;
                  color: #fff;
                  padding: 15px;
-                 position: fixed;
-                 _position: absolute;
+                 position: absolute;
+                 top: 0px;
+                 left: 0px;
                  text-shadow: 0 1px 0 rgba(0,0,0,.5);
                  -webkit-animation: animate-bg 5s linear infinite;
                  -moz-animation: animate-bg 5s linear infinite;
@@ -92,3 +220,4 @@ body { margin: 0; padding: 0; font: 80%/1.5 Arial,Helvetica,sans-serif; color: #
        background-position: -80px 0;
     }
 }
+/* messaging (END) */ 

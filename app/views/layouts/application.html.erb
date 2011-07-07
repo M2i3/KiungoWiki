@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html>
 <head>
   <title><%= content_for(:title) %> - KiungoWiki</title>
@@ -11,22 +11,31 @@
 <body>
 <div id="page"> 
   <div id="content"> 
-    <%= render partial: "common/site_messages" %>
-
     <%= yield %>
   </div>
 
   <div id="header"> 
     <%= link_to root_url do %><div id="sitetitle">KiungoWiki</div><% end %>
 	  <em id="siteslogan">La référence en musique.</em> 
+    <ul class="profilenav">
+		  <li><%= link_to "Accueil", root_url %></li>
+      <li>Mon profil</li>
+    </ul>
   </div><!-- END div#header -->		 
 
   <div id="footer"> 
 	  <ul class="nav"> 
-		  <li><%= link_to "Accueil", root_url %></li> 
+		  <li><%= link_to "Accueil", root_url %></li>
+      <li>Changements récents</li>
+      <li>Conditions d'utilisation</li>
+      <li>Nous contacter</li>
+      <li>À propos de KiungoWiki</li>
+      <li>Plan du site</li>
 	  </ul> 
 	  <div id="copyright">&copy; 2011 - KiungoWiki</div> 
   </div><!-- END div#footer -->		
+
+  <%= render partial: "common/site_messages" %>
 </div><!-- END div#page -->
 </body>
 </html>
