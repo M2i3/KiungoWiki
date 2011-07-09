@@ -17,8 +17,15 @@
   <div id="header"> 
     <%= link_to root_url do %><div id="sitetitle">KiungoWiki</div><% end %>
 	  <em id="siteslogan">La référence en musique.</em> 
-    <ul class="profilenav">
+    <ul class="nav entities">
 		  <li><%= link_to "Accueil", root_url %></li>
+      <li><%= link_to "Artistes", root_url %></li>
+      <li><%= link_to "Albums", root_url %></li>
+      <li><%= link_to "Enregistrements", recordings_path %></li>
+      <li><%= link_to "Oeuvres", root_url %></li>
+    </ul>
+    <ul class="nav profile">
+
       <li>Mon profil</li>
     </ul>
   </div><!-- END div#header -->		 

@@ -19,4 +19,12 @@ class Recording
     self.work_name
   end
 
+  def artists
+    []
+  end
+  
+  def albums
+    []
+  end
+
 end

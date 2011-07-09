@@ -50,33 +50,52 @@ body {
   text-decoration: none;
 }
 
+#header a:hover {
+  text-decoration: underline;
+}
+
 /* navigation in header*/
-#header ul.profilenav {
+#header ul.profile.nav {
 	position: absolute;
 	display: block;
-  left: 0px;
+  right: 0px;
   top: 0px;
   background-color: black;
   color: white;
-  width: 950px;
+  width: 300px;
   height: 15px;
   margin: 0;
   padding: 5px;  
   text-align: right;
 }
 
-#header ul.profilenav a {
+#header ul.nav a {
   color: white;
 }
 
-#header ul.profilenav li {
+#header ul.nav li {
 	display: inline; 
 	list-style: none;	  
 }
 
-#header ul.profilenav li + li {
+#header ul.nav li + li {
 	margin-left: 5px;
 }
+
+#header ul.entities.nav {
+	position: absolute;
+	display: block;
+  left: 0px;
+  top: 0px;
+  background-color: black;
+  color: white;
+  width: 660px;
+  height: 15px;
+  margin: 0;
+  padding: 5px;  
+  text-align: left;
+}
+
 
 /* navigation in footer */ 
 #footer ul.nav {

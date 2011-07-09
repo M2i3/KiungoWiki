@@ -14,6 +14,14 @@ function hideAllMessages()
   }
 }
 
+function slideAllMessages()
+{
+  $('.message').each(function(){
+    $(this).animate({top: -$(this).outerHeight()}, 500);
+  });            
+}
+
+
 $(document).ready(function(){
 
   // Initially, hide them all
@@ -29,6 +37,7 @@ $(document).ready(function(){
   $('.message').click(function(){
     $(this).animate({top: -$(this).outerHeight()}, 500);
   });            
-  
+
+  setTimeout(slideAllMessages, 5000);  
 
 });

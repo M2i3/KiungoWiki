@@ -1,5 +1,28 @@
 <%= title("Recordings") %>
 
+<table>
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Date</th>
+      <th>Durée</th>
+      <th>Artiste(s)</th>
+      <th>Album(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @recordings.each do |recording| %>
+    <tr>
+      <td><%= link_to recording.title, recording_path(recording) %></td>
+      <td><%= format_date(recording.recording_date) %></td>
+      <td><%= recording.duration %></td>
+      <td><%= recording.artists.join(", ") %></td>
+      <td><%= recording.albums.join(", ") %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
 
 <%= link_to 'New', new_recording_path %>
