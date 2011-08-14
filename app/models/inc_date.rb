@@ -17,7 +17,7 @@ class IncDate < String
       return
     when Hash
       @day, @month, @year = value[:day], value[:month], value[:year]
-    when Date
+    when Date, Time, DateTime
       @day, @month, @year = value.mday, value.month, value.year
     when IncDate
       @day, @month, @year = value.day, value.month, value.year
@@ -30,7 +30,7 @@ class IncDate < String
     when nil #invaluable for existing databases!
      @day, @month, @year = 0, 0, 0
     else
-      raise ArgumentError, "Invalid #{self.class.name} specification"
+      raise ArgumentError, "Unexpected date of type #{value.class} when instancing #{self.class.name}"
     end
 
     @day = 0 if @day.nil?
