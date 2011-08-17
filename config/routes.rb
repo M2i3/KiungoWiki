@@ -1,4 +1,6 @@
 KiungoWiki::Application.routes.draw do
+  resources :works
+
   resources :recordings
 
 

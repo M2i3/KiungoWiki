@@ -1,6 +1,7 @@
 <%= title(@recording.title + " - Enregistrement") %>
 <div class="section summary">
-  <p>Enregistré le: <%= format_date(@recording.recording_date) %></p>
+  <p>Un enregistrement de: <%= work_wiki_link_path(@recording.work_wiki_link) %></p>
+  <p>Enregistré le: <%= @recording.recording_date %></p>
   <p>Lieu: <%= @recording.recording_location %></p>
   <p>Durée: <%= @recording.duration %></p>
   <p>Rythme: <%= @recording.rythm %>bpm
