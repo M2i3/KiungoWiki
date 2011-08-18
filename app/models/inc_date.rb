@@ -1,27 +1,28 @@
 require 'date'
 
 class IncDate < String
+  include Mongoid::Fields::Serializable
   
   attr_reader :day, :month, :year
   alias mday day
 
-  def initialize(value)
+  def deserialize(value)
+
+    value = nil if value.blank?
 
     case value
-    when Fixnum
-        
+    when ::Fixnum        
       #num = value.abs
       #num, @day = num.divmod(100)
       #@year, @month = num.divmod(100)
-      initialize(value.to_s)
-      return
-    when Hash
+      return deserialize(value.to_s)
+    when ::Hash
       @day, @month, @year = value[:day], value[:month], value[:year]
-    when Date, Time, DateTime
+    when ::Date, ::Time, ::DateTime
       @day, @month, @year = value.mday, value.month, value.year
-    when IncDate
+    when ::IncDate
       @day, @month, @year = value.day, value.month, value.year
-    when String
+    when ::String
       if value =~ /^(\d{4})(?:-?(\d{2})(?:-?(\d{2}))?)?$/
         @year = $1.to_i
         @month = $2 ? $2.to_i : 0
@@ -39,19 +40,8 @@ class IncDate < String
     
     valid_date?
     
-    self << to_s
-  end
-
-  def self.set(object)
-    if object.blank?
-      nil
-    else
-      return self.new(object)
-    end
-  end
-  
-  def self.get(object)
-    self.set(object)
+    self.replace(to_s)
+    self
   end
   
   #--
@@ -78,7 +68,7 @@ class IncDate < String
 
   def valid_day?(day, month = nil, year = nil)
     return true if day.zero?
-    max = IncDate.max_month_days(month || self.month, year || self.year)
+    max = self.class.max_month_days(month || self.month, year || self.year)
     (1..max).include?(day)
   end
 
@@ -91,18 +81,18 @@ class IncDate < String
     return true if year.nil? || year.zero?
     day ||= self.day
     month ||= self.month
-    !(!IncDate.leap_year?(year) && (day == 29) && (month == 2))
+    !(!self.class.leap_year?(year) && (day == 29) && (month == 2))
   end
   
   def valid_date?
      unless @month.zero?
         unless @day.zero?
-          Date.civil( @year, @month, @day)
+          ::Date.civil( @year, @month, @day)
         else
-          Date.civil( @year, @month)
+          ::Date.civil( @year, @month)
         end
       else
-        Date.civil( @year)
+        ::Date.civil( @year)
       end
   end
 
@@ -202,7 +192,7 @@ class IncDate < String
   #
   def lowest
     return nil unless has_year?
-    Date.civil(self.year, self.month || 1, self.day || 1)
+    ::Date.civil(self.year, self.month || 1, self.day || 1)
   end
   alias min lowest
   alias first lowest
@@ -218,8 +208,8 @@ class IncDate < String
   def highest
     return nil unless has_year?
     max_month = self.month || 12
-    max_day = self.day || IncompleteDate.max_month_days(max_month, self.year)
-    Date.civil(self.year, max_month, max_day)
+    max_day = self.day || self.class.max_month_days(max_month, self.year)
+    ::Date.civil(self.year, max_month, max_day)
   end
   alias max highest
   alias last highest
@@ -236,8 +226,8 @@ class IncDate < String
   # defaults to 1, and not to the reference date.
   #
   def to_date(opts = {})
-    ref = opts.fetch(:ref, Date.today)
-    Date.civil(
+    ref = opts.fetch(:ref, ::Date.today)
+    ::Date.civil(
       (self.year || opts[:year] || ref.year).to_i,
       (self.month || opts[:month] || ref.month).to_i,
       (self.day || opts[:day] || 1).to_i)
