@@ -1,7 +1,7 @@
 <ul>
   <li>
     <%= form.label :work_title %>
-    <%= form.text_field :work_title %>
+    <%= form.text_field :work_link, :class=>"work_title_lookup", :"data-prepopulate"=>[{id:"4e4c325f41c25e0a64000023",name:"La maison de mon enfance"}].to_json %>
   </li>
 
   <li>

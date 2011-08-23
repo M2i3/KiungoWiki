@@ -70,7 +70,7 @@ describe Recording do
 	describe "Testing for name" do
 		[""].each {|value|
 			it "when specified, name should be a non-empty string of alphanumeric characters and symbols (#{value} is invalid)" do
-				rec = Factory.build(:recording, :work_name=>value)
+				rec = Factory.build(:recording, :work_title=>value)
 				rec.valid?.should be_false
 			end
 		}
@@ -96,8 +96,8 @@ describe Recording do
 			"&",
 			"(",
 			")"].each {|value|
-			it "when specified, work_name should be a non-empty string of alphanumeric characters and symbols (#{value} is valid)" do
-				rec = Factory.build(:recording, :work_name=>value)
+			it "when specified, work_title should be a non-empty string of alphanumeric characters and symbols (#{value} is valid)" do
+				rec = Factory.build(:recording, :work_title=>value)
 				rec.valid?.should be_true
 			end
 		}

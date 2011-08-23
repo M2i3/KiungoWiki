@@ -1,5 +1,9 @@
 KiungoWiki::Application.routes.draw do
-  resources :works
+  resources :works do
+    collection do
+      get 'lookup'
+    end
+  end
 
   resources :recordings
 

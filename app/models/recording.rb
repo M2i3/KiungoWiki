@@ -1,14 +1,14 @@
 class Recording 
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Versioning
+#TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
+  after_initialize :set_defaults
 
   field :recording_date, :type => IncDate
   field :recording_location, :type => String
   field :duration, :type => Integer
   field :rythm, :type => Integer
   field :sample_rate, :type => Integer
-  field :updated_by, :default => "anonymous"
   
   validates_length_of :work_title, :in=>1..500, :allow_nil=>true
   validates_numericality_of :duration, :greater_than=>0, :allow_nil=>true  
@@ -17,13 +17,21 @@ class Recording
 
   embeds_one :work_wiki_link
 
-#TODO: Need to make work title work with the dirty and trigger the versionning
+
+
   def work_title
-    self.work_wiki_link.title if self.work_wiki_link  
+    self.work_wiki_link.title 
   end
   def work_title=(value)
-    self.work_wiki_link = WorkWikiLink.new
     self.work_wiki_link.title = value
+  end
+
+  def work_link
+    if self.work_wiki_link.work_id 
+      Base64::encode64(self.work_wiki_link.work_id).to_query("work_id")
+    else
+      Base64::encode64(self.work_title).to_query("unlinked")      
+    end
   end
 
   def title
@@ -36,5 +44,10 @@ class Recording
   
   def albums
     []
+  end
+
+  private 
+  def set_defaults
+    self.work_wiki_link = WorkWikiLink.new unless self.work_wiki_link
   end
 end

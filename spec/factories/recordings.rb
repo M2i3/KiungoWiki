@@ -1,7 +1,7 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
 Factory.define :recording do |f|
-  f.work_name "A sample work"
+  f.work_title "A sample work"
 
   f.recording_date ""
   f.recording_location ""

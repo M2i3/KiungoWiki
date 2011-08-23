@@ -5,15 +5,16 @@ class WorkWikiLink
   field :referenced_version, :type => Integer
   referenced_in :work
 
-  embedded_in :parent_link, :inverse_of => :work_wiki_link
+#  embedded_in :parent_link, :inverse_of => :work_wiki_link
 
-  before_save :record_cached_attributes
-
-  private
-  def record_cached_attributes
-    if work
-      self.title = work.title
-      self.referenced_version = work.version
+  def work=(value)
+    if value
+      self.title = value.title
+      self.referenced_version = value.version
     end
+  end
+
+  def combined
+    self.title.to_s + ":" + self.work_id.to_s
   end
 end

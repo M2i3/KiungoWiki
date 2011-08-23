@@ -2,6 +2,11 @@ class RecordingsController < ApplicationController
 
   def index
     @recordings = Recording.all
+    respond_to do |format|
+      format.xml { render :xml=>@recordings }
+      format.json { render :json=>@recordings }
+      format.html
+    end
   end
   
   def show
@@ -11,7 +16,6 @@ class RecordingsController < ApplicationController
       format.json { render :json=>@recording }
       format.html
     end
-
   end
 
   def new

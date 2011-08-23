@@ -41,3 +41,29 @@ $(document).ready(function(){
   setTimeout(slideAllMessages, 5000);  
 
 });
+
+
+$(document).ready(function () {
+  $("input.work_title_lookup").tokenInput("/works/lookup.json", {
+     tokenLimit: 1,
+     classes: {
+          tokenList: "token-input-list-facebook",
+          token: "token-input-token-facebook",
+          tokenDelete: "token-input-delete-token-facebook",
+          selectedToken: "token-input-selected-token-facebook",
+          highlightedToken: "token-input-highlighted-token-facebook",
+          dropdown: "token-input-dropdown-facebook",
+          dropdownItem: "token-input-dropdown-item-facebook",
+          dropdownItem2: "token-input-dropdown-item2-facebook",
+          selectedDropdownItem: "token-input-selected-dropdown-item-facebook",
+          inputToken: "token-input-input-token-facebook"
+      },
+     prePopulate: [{"id":"4e4c325f41c25e0a64000023","name":"La maison de mon enfance"}] 
+  });
+
+  $("input.work_title_lookup").each(function (){
+    alert($.data(this,"prepopulate"));
+  });
+
+});
+

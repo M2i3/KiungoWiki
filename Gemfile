@@ -1,3 +1,4 @@
+# migrated to bamboo-mri-1.9.2
 source 'http://rubygems.org'
 
 gem 'rake', '0.9.2'
