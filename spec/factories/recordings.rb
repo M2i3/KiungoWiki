@@ -10,5 +10,5 @@ Factory.define :recording do |f|
   f.rythm nil
   f.sample_rate nil
 
-  f.updated_by "anonymous"
+#  f.updated_by "anonymous"
 end

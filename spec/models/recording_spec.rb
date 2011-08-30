@@ -76,6 +76,7 @@ describe Recording do
 		}
 		# TODO : Complete this list
 		#			+ How can I test for accentuated characters? They always crash the script with "invalid multibyte char"
+    YAML.load_file("spec/factories/multi.yml")["multibytestrings"] + 
 		[	"A",
 			"a",
 			"Ab",
