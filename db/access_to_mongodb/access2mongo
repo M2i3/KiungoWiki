@@ -1,0 +1,230 @@
+#/bin/bash
+# Commande pour transférer la BD de Pierre  format Access en format MongoDB
+# 
+# Pour que ce script fonctionne bien, il faut:
+# 1) Etre dans l'environnement Linux (tester avec Ubuntu 10.04 (Lucid))
+# 2) la présences des fichiers suivants dans le même répertoire:
+#	a) languages_for_mongo.csv
+#	b) categories_for_mongo.csv
+#	c) le script python csv2json.py (http://github.com/shawnbot/csv2json avec ajouts de http://docs.python.org/library/csv.html )
+#	d) le script perl substitute.pl
+# 3) l'installation de mdbtools (0.5.99) (libmdbtools (Linux)) (synaptic pour ubuntu)
+# 4) Un serveur local mongoDB en place et actif
+# Il faut évidemment ajuster au besoin les path de perl et python dans la première ligne des scripts ci-haut mentionnés.
+
+# Pour executer: 
+# ./access2mongo nom_de_la_db_de_PF.mdb
+
+# Pour conserver les fichiers intermédiaire (CSV et JSON), commenter les deux dernières lignes
+
+# Pour visionner les données d'un fichier access (sur Linux), utiliser gmdb2 (sudo apt-get install mdbtools-gmdb)
+# Pour les fichiers intermédiaires (CSV et JSON), plusieurs formats et types de séparateur ont été testés, 
+# et ceux utilisés dans ce script sont optimal et conserve l'originalité de la DB de départ ainsi que les caractères accentués
+# ainsi, une entête au début et l'utilisation des "|" à la place des virgules sont nécessaire.
+# ATTENTION, dans le fichier JSON, il faut enlever les crochets (premier et dernier caractère du fichier), (fait par ce script)
+# et s'assurer d'avoir un élément {} par ligne (fait par ce script). S'il y a une ligne de plusieurs "null"
+# à la fin à cause du \. de fin de fichier, il faut l'enlever. On pourrait modifier csv2json pour ne pas à faire cette étape manuellement.
+
+# Il est recommander de mettre un timestamp au fichier access ainsi qu'aux fichiers JSON générés pour 
+# s'y retrouver dans les versions. Par défaut, la date de transfert est utilisé mais il serait préférable
+# d'utiliser à la place la date de création de la dernière version de la DB Access.
+
+export DATE=`date +%F |tr "-" "_"`
+# export DATE="2011_07_19"
+
+# Effacement des fichiers intermédiaires et de output pour la date en question.
+/bin/rm -f *_${DATE}.csv 
+/bin/rm -f *_${DATE}.json
+
+./csv2json.py --field-separator='|' < languages_for_mongo.csv > languages_for_mongo_${DATE}.json
+./substitute.pl "}, {" "}
+{" languages_for_mongo_${DATE}.json
+./substitute.pl "\[{" "{" languages_for_mongo_${DATE}.json
+./substitute.pl "}\]" "}" languages_for_mongo_${DATE}.json
+
+./csv2json.py --field-quote='|' < categories_for_mongo.csv > categories_for_mongo_${DATE}.json
+./substitute.pl "}, {" "}
+{" categories_for_mongo_${DATE}.json
+./substitute.pl "\[{" "{" categories_for_mongo_${DATE}.json
+./substitute.pl "}\]" "}" categories_for_mongo_${DATE}.json
+
+echo "artist_id,artist_surname,artist_given_name,date_of_birth,place_of_birth,date_of_death,place_of_death,notes" > artists_${DATE}.csv
+mdb-export  -H -q '|' $1 Artistes >> artists_${DATE}.csv
+./csv2json.py --field-quote='|' < artists_${DATE}.csv > artists_${DATE}.json
+./substitute.pl "}, {" "}
+{" artists_${DATE}.json
+./substitute.pl "\[{" "{" artists_${DATE}.json
+./substitute.pl "}\]" "}" artists_${DATE}.json
+
+echo "editor_id,editor_name" > editors_${DATE}.csv
+mdb-export  -H -q '|' $1 Éditeurs >> editors_${DATE}.csv
+./csv2json.py --field-quote='|' < editors_${DATE}.csv > editors_${DATE}.json
+./substitute.pl "}, {" "}
+{" editors_${DATE}.json
+./substitute.pl "\[{" "{" editors_${DATE}.json
+./substitute.pl "}\]" "}" editors_${DATE}.json
+
+echo "label_id,label_name" > labels_${DATE}.csv
+mdb-export  -H -q '|' $1 Étiquettes >> labels_${DATE}.csv
+./csv2json.py --field-quote='|' < labels_${DATE}.csv > labels_${DATE}.json
+./substitute.pl "}, {" "}
+{" labels_${DATE}.json
+./substitute.pl "\[{" "{" labels_${DATE}.json
+./substitute.pl "}\]" "}" labels_${DATE}.json
+
+echo "role_id,role_name" > roles_${DATE}.csv
+mdb-export  -H -q '|' $1 Roles >> roles_${DATE}.csv
+./csv2json.py --field-quote='|' < roles_${DATE}.csv > roles_${DATE}.json
+./substitute.pl "}, {" "}
+{" roles_${DATE}.json
+./substitute.pl "\[{" "{" roles_${DATE}.json
+./substitute.pl "}\]" "}" roles_${DATE}.json
+
+echo "owner_id,owner_surname,owner_given_name" > owners_${DATE}.csv
+mdb-export  -H -q '|' $1 Proprietaires >> owners_${DATE}.csv
+./csv2json.py --field-quote='|' < owners_${DATE}.csv > owners_${DATE}.json
+./substitute.pl "}, {" "}
+{" owners_${DATE}.json
+./substitute.pl "\[{" "{" owners_${DATE}.json
+./substitute.pl "}\]" "}" owners_${DATE}.json
+
+echo "work_id,work_title,year,language_id,verified_text,verified_credits,original_work_id,notes,text" > works_${DATE}.csv
+mdb-export  -H -q '|' $1 Pieces >> works_${DATE}.csv
+./csv2json.py --field-quote='|' < works_${DATE}.csv > works_${DATE}.json
+./substitute.pl "}, {" "}
+{" works_${DATE}.json
+./substitute.pl "\[{" "{" works_${DATE}.json
+./substitute.pl "}\]" "}" works_${DATE}.json
+
+echo "recording_id,years,duration,category_id,notes,bpm,work_id" > recordings_${DATE}.csv
+mdb-export  -H -q '|' $1 Versions >> recordings_${DATE}.csv
+./csv2json.py --field-quote='|' < recordings_${DATE}.csv > recordings_${DATE}.json
+./substitute.pl '12/30/99 ' '' recordings_${DATE}.json
+./substitute.pl ':00"' '"' recordings_${DATE}.json
+./substitute.pl '"bpm": "0", ' '' recordings_${DATE}.json
+./substitute.pl '"bpm": "1", ' '' recordings_${DATE}.json
+./substitute.pl '"bpm": "2", ' '' recordings_${DATE}.json
+./substitute.pl '"bpm": "3", ' '' recordings_${DATE}.json
+./substitute.pl '"bpm": "4", ' '' recordings_${DATE}.json
+./substitute.pl '"bpm": "5", ' '' recordings_${DATE}.json
+./substitute.pl '"bpm": "6", ' '' recordings_${DATE}.json
+./substitute.pl '"bpm": "7", ' '' recordings_${DATE}.json
+./substitute.pl '"bpm": "", ' '' recordings_${DATE}.json
+./substitute.pl '"category_id": "1"' '"category_id": "32"' recordings_${DATE}.json
+./substitute.pl '"category_id": "2"' '"category_id": "17"' recordings_${DATE}.json
+./substitute.pl '"category_id": "3"' '"category_id": "8"' recordings_${DATE}.json
+./substitute.pl '"category_id": "4"' '"category_id": "2"' recordings_${DATE}.json
+./substitute.pl '"category_id": "5"' '"category_id": "10"' recordings_${DATE}.json
+./substitute.pl '"category_id": "6"' '"category_id": "13"' recordings_${DATE}.json
+./substitute.pl '"category_id": "7"' '"category_id": "126"' recordings_${DATE}.json
+./substitute.pl '"category_id": "8"' '"category_id": "127"' recordings_${DATE}.json
+./substitute.pl '"category_id": "9"' '"category_id": "80"' recordings_${DATE}.json
+./substitute.pl '"category_id": "10"' '"category_id": "37"' recordings_${DATE}.json
+./substitute.pl '"category_id": "11"' '"category_id": "128"' recordings_${DATE}.json
+./substitute.pl '"category_id": "12"' '"category_id": "129"' recordings_${DATE}.json
+./substitute.pl '"category_id": "13"' '"category_id": "130"' recordings_${DATE}.json
+./substitute.pl '"category_id": "14"' '"category_id": "131"' recordings_${DATE}.json
+./substitute.pl '"category_id": "15"' '"category_id": "100"' recordings_${DATE}.json
+./substitute.pl '"category_id": "16"' '"category_id": "115"' recordings_${DATE}.json
+./substitute.pl "}, {" "}
+{" recordings_${DATE}.json
+./substitute.pl "\[{" "{" recordings_${DATE}.json
+./substitute.pl "}\]" "}" recordings_${DATE}.json
+
+echo "link_owner_support_id,owner_id,support_id" > links_owner_support_${DATE}.csv
+mdb-export  -H -q '|' $1 Lien\ Propriete >> links_owner_support_${DATE}.csv
+./addIDcolumn.pl links_owner_support_${DATE}.csv
+./csv2json.py --field-quote='|' < links_owner_support_${DATE}.csv > links_owner_support_${DATE}.json
+./substitute.pl "}, {" "}
+{" links_owner_support_${DATE}.json
+./substitute.pl "\[{" "{" links_owner_support_${DATE}.json
+./substitute.pl "}\]" "}" links_owner_support_${DATE}.json
+
+echo "link_work_editor_id,work_id,editor_id" > links_work_editor_${DATE}.csv
+mdb-export  -H -q '|' $1 Lien\ Editeur\ Piece >> links_work_editor_${DATE}.csv
+./addIDcolumn.pl links_work_editor_${DATE}.csv
+./csv2json.py --field-quote='|' < links_work_editor_${DATE}.csv > links_work_editor_${DATE}.json
+./substitute.pl "}, {" "}
+{" links_work_editor_${DATE}.json
+./substitute.pl "\[{" "{" links_work_editor_${DATE}.json
+./substitute.pl "}\]" "}" links_work_editor_${DATE}.json
+
+echo "link_work_artist_id,work_id,artist_id,role_id" > links_work_artist_${DATE}.csv
+mdb-export  -H -q '|' $1 Lien\ Artiste\ Auteur-compositeur >> links_work_artist_${DATE}.csv
+./addIDcolumn.pl links_work_artist_${DATE}.csv
+./csv2json.py --field-quote='|' < links_work_artist_${DATE}.csv > links_work_artist_${DATE}.json
+./substitute.pl "}, {" "}
+{" links_work_artist_${DATE}.json
+./substitute.pl "\[{" "{" links_work_artist_${DATE}.json
+./substitute.pl "}\]" "}" links_work_artist_${DATE}.json
+
+echo "link_recording_artist_role_id,recording_id,artist_id,role_id" > links_recording_artist_role_${DATE}.csv
+mdb-export  -H -q '|' $1 Lien\ Artiste\ Interprete >> links_recording_artist_role_${DATE}.csv
+./addIDcolumn.pl links_recording_artist_role_${DATE}.csv
+./csv2json.py --field-quote='|' < links_recording_artist_role_${DATE}.csv > links_recording_artist_role_${DATE}.json
+./substitute.pl "}, {" "}
+{" links_recording_artist_role_${DATE}.json
+./substitute.pl "\[{" "{" links_recording_artist_role_${DATE}.json
+./substitute.pl "}\]" "}" links_recording_artist_role_${DATE}.json
+
+echo "link_recording_support_id,recording_id,support_id,support_element_id,face,track,notes" > links_recording_support_${DATE}.csv
+mdb-export  -H -q '|' $1 Lien\ Album\ Version >> links_recording_support_${DATE}.csv
+./addIDcolumn.pl links_recording_support_${DATE}.csv
+./csv2json.py --field-quote='|' < links_recording_support_${DATE}.csv > links_recording_support_${DATE}.json
+./substitute.pl "}, {" "}
+{" links_recording_support_${DATE}.json
+./substitute.pl "\[{" "{" links_recording_support_${DATE}.json
+./substitute.pl "}\]" "}" links_recording_support_${DATE}.json
+
+echo "support_id,support_title,artist_id,category_id,identification_code,number_of_pieces,alpha_ordering, year,temporal_ordering,notes,support_format,label_id" > supports_${DATE}.csv
+mdb-export  -H -q '|' $1 Albums >> supports_${DATE}.csv
+./csv2json.py --field-quote='|' < supports_${DATE}.csv > supports_${DATE}.json
+./substitute.pl "}, {" "}
+{" supports_${DATE}.json
+./substitute.pl '"category_id": "1"' '"category_id": "32"' supports_${DATE}.json
+./substitute.pl '"category_id": "2"' '"category_id": "17"' supports_${DATE}.json
+./substitute.pl '"category_id": "3"' '"category_id": "8"' supports_${DATE}.json
+./substitute.pl '"category_id": "4"' '"category_id": "2"' supports_${DATE}.json
+./substitute.pl '"category_id": "5"' '"category_id": "10"' supports_${DATE}.json
+./substitute.pl '"category_id": "6"' '"category_id": "13"' supports_${DATE}.json
+./substitute.pl '"category_id": "7"' '"category_id": "126"' supports_${DATE}.json
+./substitute.pl '"category_id": "8"' '"category_id": "127"' supports_${DATE}.json
+./substitute.pl '"category_id": "9"' '"category_id": "80"' supports_${DATE}.json
+./substitute.pl '"category_id": "10"' '"category_id": "37"' supports_${DATE}.json
+./substitute.pl '"category_id": "11"' '"category_id": "128"' supports_${DATE}.json
+./substitute.pl '"category_id": "12"' '"category_id": "129"' supports_${DATE}.json
+./substitute.pl '"category_id": "13"' '"category_id": "130"' supports_${DATE}.json
+./substitute.pl '"category_id": "14"' '"category_id": "131"' supports_${DATE}.json
+./substitute.pl '"category_id": "15"' '"category_id": "100"' supports_${DATE}.json
+./substitute.pl '"category_id": "16"' '"category_id": "115"' supports_${DATE}.json
+./substitute.pl '"support_format": "1"' '"support_format": "CD"' supports_${DATE}.json
+./substitute.pl '"support_format": "2"' '"support_format": "45 tours"' supports_${DATE}.json
+./substitute.pl '"support_format": "3"' '"support_format": "33 tours"' supports_${DATE}.json
+./substitute.pl '"support_format": "4"' '"support_format": "Cassette"' supports_${DATE}.json
+./substitute.pl '"support_format": "5"' '"support_format": "78 tours"' supports_${DATE}.json
+./substitute.pl "\[{" "{" supports_${DATE}.json
+./substitute.pl "}\]" "}" supports_${DATE}.json
+
+# Transfert au serveur mongoDB
+# Si le serveur n'est pas local ou actif, on peut modifier ou commenter les lignes suivantes jusqu'à la fin
+# et ne conserver que les fichiers JSON pour un transfert manuel.
+mongoimport -d kiungodb -c languages -f language_id,language_code,language_name_english,language_name_french --type json --file languages_for_mongo_${DATE}.json
+mongoimport -d kiungodb -c categories -f category_name,category_id --type json --file categories_for_mongo_${DATE}.json
+mongoimport -d kiungodb -c artists -f artist_id,artist_surname,artist_given_name,date_of_birth,place_of_birth,date_of_death,place_of_death,notes --type json --file artists_${DATE}.json
+mongoimport -d kiungodb -c editors -f editor_id,editor_name --type json --file editors_${DATE}.json
+mongoimport -d kiungodb -c labels -f label_id,label_name --type json --file labels_${DATE}.json
+mongoimport -d kiungodb -c roles -f role_id,role_name --type json --file roles_${DATE}.json
+mongoimport -d kiungodb -c owners -f owner_id,owner_surname,owner_given_name --type json --file owners_${DATE}.json
+mongoimport -d kiungodb -c works -f work_id,work_title,year,language_id,verified_text,verified_credits,original_work_id,notes,text --type json --file works_${DATE}.json
+mongoimport -d kiungodb -c recordings -f recording_id,year,duration,category_id,notes,bpm,work_id --type json --file recordings_${DATE}.json
+mongoimport -d kiungodb -c links_owner_support -f link_owner_support_id,owner_id,support_id --type json --file links_owner_support_${DATE}.json
+mongoimport -d kiungodb -c links_work_editor -f link_work_editor_id,work_id,editor_id --type json --file links_work_editor_${DATE}.json
+mongoimport -d kiungodb -c links_work_artist -f link_work_artist_id,work_id,artist_id,role_id --type json --file links_work_artist_${DATE}.json
+mongoimport -d kiungodb -c links_recording_artist_role -f link_recording_artist_role_id,recording_id,artist_id,role_id --type json --file links_recording_artist_role_${DATE}.json
+mongoimport -d kiungodb -c links_recording_support -f link_recording_support_id,recording_id,support_id,support_element_id,face,track,notes --type json --file links_recording_support_${DATE}.json
+mongoimport -d kiungodb -c supports -f support_id,support_title,artist_id,category_id,identification_code,number_of_pieces,alpha_ordering,year,temporal_ordering,notes,support_format,label_id --type json --file supports_${DATE}.json
+
+# Effacement des fichiers intermédiaires.
+/bin/rm -f *_${DATE}.csv 
+/bin/rm -f *_${DATE}.json
+

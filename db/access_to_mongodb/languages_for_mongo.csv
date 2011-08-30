@@ -1,0 +1,493 @@
+language_id|language_code|language_name_english|language_name_french
+1|fre|French|français
+2|eng|English|anglais
+3|003|French/English|français/anglais
+4|spa|Spanish; Castilian|espagnol; castillan
+5|ita|Italian|italien
+6|ger|German|allemand
+7|cos|Corsican|corse
+8|008|Flemish/French|flamand/français
+9|por|Portuguese|portugais
+10|010|Instrumental|instrumental
+11|011|French/Italian|français/italien
+12|lat|Latin|latin
+13|heb|Hebrew|hébreu
+14|jpn|Japanese|japonais
+15|015|French/Russian|français/russe
+16|016|French/English|français/anglais
+17|017|French/Spanish|français/espagnol
+18|aar|Afar|afar
+19|abk|Abkhazian|abkhaze
+20|ace|Achinese|aceh
+21|ach|Acoli|acoli
+22|ada|Adangme|adangme
+23|ady|Adyghe; Adygei|adyghé
+24|afa|Afro-Asiatic languages|afro-asiatiques, langues
+25|afh|Afrihili|afrihili
+26|afr|Afrikaans|afrikaans
+27|ain|Ainu|aïnou
+28|aka|Akan|akan
+29|akk|Akkadian|akkadien
+30|alb|Albanian|albanais
+31|ale|Aleut|aléoute
+32|alg|Algonquian languages|algonquines, langues
+33|alt|Southern Altai|altai du Sud
+34|amh|Amharic|amharique
+35|ang|English, Old (ca.450-1100)|anglo-saxon (ca.450-1100)
+36|anp|Angika|angika
+37|apa|Apache languages|apaches, langues
+38|ara|Arabic|arabe
+39|arc|Official Aramaic (700-300 BCE); Imperial Aramaic (700-300 BCE)|araméen d'empire (700-300 BCE)
+40|arg|Aragonese|aragonais
+41|arm|Armenian|arménien
+42|arn|Mapudungun; Mapuche|mapudungun; mapuche; mapuce
+43|arp|Arapaho|arapaho
+44|art|Artificial languages|artificielles, langues
+45|arw|Arawak|arawak
+46|asm|Assamese|assamais
+47|ast|Asturian; Bable; Leonese; Asturleonese|asturien; bable; léonais; asturoléonais
+48|ath|Athapascan languages|athapascanes, langues
+49|aus|Australian languages|australiennes, langues
+50|ava|Avaric|avar
+51|ave|Avestan|avestique
+52|awa|Awadhi|awadhi
+53|aym|Aymara|aymara
+54|aze|Azerbaijani|azéri
+55|bad|Banda languages|banda, langues
+56|bai|Bamileke languages|bamiléké, langues
+57|bak|Bashkir|bachkir
+58|bal|Baluchi|baloutchi
+59|bam|Bambara|bambara
+60|ban|Balinese|balinais
+61|baq|Basque|basque
+62|bas|Basa|basa
+63|bat|Baltic languages|baltes, langues
+64|bej|Beja; Bedawiyet|bedja
+65|bel|Belarusian|biélorusse
+66|bem|Bemba|bemba
+67|ben|Bengali|bengali
+68|ber|Berber languages|berbères, langues
+69|bho|Bhojpuri|bhojpuri
+70|bih|Bihari languages|langues biharis
+71|bik|Bikol|bikol
+72|bin|Bini; Edo|bini; edo
+73|bis|Bislama|bichlamar
+74|bla|Siksika|blackfoot
+75|bnt|Bantu languages|bantou, langues
+76|bos|Bosnian|bosniaque
+77|bra|Braj|braj
+78|bre|Breton|breton
+79|btk|Batak languages|batak, langues
+80|bua|Buriat|bouriate
+81|bug|Buginese|bugi
+82|bul|Bulgarian|bulgare
+83|bur|Burmese|birman
+84|byn|Blin; Bilin|blin; bilen
+85|cad|Caddo|caddo
+86|cai|Central American Indian languages|amérindiennes de l'Amérique centrale,  langues
+87|car|Galibi Carib|karib; galibi; carib
+88|cat|Catalan; Valencian|catalan; valencien
+89|cau|Caucasian languages|caucasiennes, langues
+90|ceb|Cebuano|cebuano
+91|cel|Celtic languages|celtiques, langues; celtes, langues
+92|cha|Chamorro|chamorro
+93|chb|Chibcha|chibcha
+94|che|Chechen|tchétchène
+95|chg|Chagatai|djaghataï
+96|chi|Chinese|chinois
+97|chk|Chuukese|chuuk
+98|chm|Mari|mari
+99|chn|Chinook jargon|chinook, jargon
+100|cho|Choctaw|choctaw
+101|chp|Chipewyan; Dene Suline|chipewyan
+102|chr|Cherokee|cherokee
+103|chu|Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic|slavon d'église; vieux slave; slavon liturgique; vieux bulgare
+104|chv|Chuvash|tchouvache
+105|chy|Cheyenne|cheyenne
+106|cmc|Chamic languages|chames, langues
+107|cop|Coptic|copte
+108|cor|Cornish|cornique
+109|cpe|Creoles and pidgins, English based|créoles et pidgins basés sur l'anglais
+110|cpf|Creoles and pidgins, French-based|créoles et pidgins basés sur le français
+111|cpp|Creoles and pidgins, Portuguese-based|créoles et pidgins basés sur le portugais
+112|cre|Cree|cree
+113|crh|Crimean Tatar; Crimean Turkish|tatar de Crimé
+114|crp|Creoles and pidgins|créoles et pidgins
+115|csb|Kashubian|kachoube
+116|cus|Cushitic languages|couchitiques,  langues
+117|cze|Czech|tchèque
+118|dak|Dakota|dakota
+119|dan|Danish|danois
+120|dar|Dargwa|dargwa
+121|day|Land Dayak languages|dayak, langues
+122|del|Delaware|delaware
+123|den|Slave (Athapascan)|esclave (athapascan)
+124|dgr|Dogrib|dogrib
+125|din|Dinka|dinka
+126|div|Divehi; Dhivehi; Maldivian|maldivien
+127|doi|Dogri|dogri
+128|dra|Dravidian languages|dravidiennes,  langues
+129|dsb|Lower Sorbian|bas-sorabe
+130|dua|Duala|douala
+131|dum|Dutch, Middle (ca.1050-1350)|néerlandais moyen (ca. 1050-1350)
+132|dut|Dutch; Flemish|néerlandais; flamand
+133|dyu|Dyula|dioula
+134|dzo|Dzongkha|dzongkha
+135|efi|Efik|efik
+136|egy|Egyptian (Ancient)|égyptien
+137|eka|Ekajuk|ekajuk
+138|elx|Elamite|élamite
+139|enm|English, Middle (1100-1500)|anglais moyen (1100-1500)
+140|epo|Esperanto|espéranto
+141|est|Estonian|estonien
+142|ewe|Ewe|éwé
+143|ewo|Ewondo|éwondo
+144|fan|Fang|fang
+145|fao|Faroese|féroïen
+146|fat|Fanti|fanti
+147|fij|Fijian|fidjien
+148|fil|Filipino; Pilipino|filipino; pilipino
+149|fin|Finnish|finnois
+150|fiu|Finno-Ugrian languages|finno-ougriennes,  langues
+151|fon|Fon|fon
+152|frm|French, Middle (ca.1400-1600)|français moyen (1400-1600)
+153|fro|French, Old (842-ca.1400)|français ancien (842-ca.1400)
+154|frr|Northern Frisian|frison septentrional
+155|frs|Eastern Frisian|frison oriental
+156|fry|Western Frisian|frison occidental
+157|ful|Fulah|peul
+158|fur|Friulian|frioulan
+159|gaa|Ga|ga
+160|gay|Gayo|gayo
+161|gba|Gbaya|gbaya
+162|gem|Germanic languages|germaniques, langues
+163|geo|Georgian|géorgien
+164|gez|Geez|guèze
+165|gil|Gilbertese|kiribati
+166|gla|Gaelic; Scottish Gaelic|gaélique; gaélique écossais
+167|gle|Irish|irlandais
+168|glg|Galician|galicien
+169|glv|Manx|manx; mannois
+170|gmh|German, Middle High (ca.1050-1500)|allemand, moyen haut (ca. 1050-1500)
+171|goh|German, Old High (ca.750-1050)|allemand, vieux haut (ca. 750-1050)
+172|gon|Gondi|gond
+173|gor|Gorontalo|gorontalo
+174|got|Gothic|gothique
+175|grb|Grebo|grebo
+176|grc|Greek, Ancient (to 1453)|grec ancien (jusqu'à 1453)
+177|gre|Greek, Modern (1453-)|grec moderne (après 1453)
+178|grn|Guarani|guarani
+179|gsw|Swiss German; Alemannic; Alsatian|suisse alémanique; alémanique; alsacien
+180|guj|Gujarati|goudjrati
+181|gwi|Gwich'in|gwich'in
+182|hai|Haida|haida
+183|hat|Haitian; Haitian Creole|haïtien; créole haïtien
+184|hau|Hausa|haoussa
+185|haw|Hawaiian|hawaïen
+186|her|Herero|herero
+187|hil|Hiligaynon|hiligaynon
+188|him|Himachali languages; Western Pahari languages|langues himachalis; langues paharis occidentales
+189|hin|Hindi|hindi
+190|hit|Hittite|hittite
+191|hmn|Hmong; Mong|hmong
+192|hmo|Hiri Motu|hiri motu
+193|hrv|Croatian|croate
+194|hsb|Upper Sorbian|haut-sorabe
+195|hun|Hungarian|hongrois
+196|hup|Hupa|hupa
+197|iba|Iban|iban
+198|ibo|Igbo|igbo
+199|ice|Icelandic|islandais
+200|ido|Ido|ido
+201|iii|Sichuan Yi; Nuosu|yi de Sichuan
+202|ijo|Ijo languages|ijo, langues
+203|iku|Inuktitut|inuktitut
+204|ile|Interlingue; Occidental|interlingue
+205|ilo|Iloko|ilocano
+206|ina|Interlingua (International Auxiliary Language Association)|interlingua (langue auxiliaire internationale)
+207|inc|Indic languages|indo-aryennes, langues
+208|ind|Indonesian|indonésien
+209|ine|Indo-European languages|indo-européennes, langues
+210|inh|Ingush|ingouche
+211|ipk|Inupiaq|inupiaq
+212|ira|Iranian languages|iraniennes, langues
+213|iro|Iroquoian languages|iroquoises, langues
+214|jav|Javanese|javanais
+215|jbo|Lojban|lojban
+216|jpr|Judeo-Persian|judéo-persan
+217|jrb|Judeo-Arabic|judéo-arabe
+218|kaa|Kara-Kalpak|karakalpak
+219|kab|Kabyle|kabyle
+220|kac|Kachin; Jingpho|kachin; jingpho
+221|kal|Kalaallisut; Greenlandic|groenlandais
+222|kam|Kamba|kamba
+223|kan|Kannada|kannada
+224|kar|Karen languages|karen, langues
+225|kas|Kashmiri|kashmiri
+226|kau|Kanuri|kanouri
+227|kaw|Kawi|kawi
+228|kaz|Kazakh|kazakh
+229|kbd|Kabardian|kabardien
+230|kha|Khasi|khasi
+231|khi|Khoisan languages|khoïsan, langues
+232|khm|Central Khmer|khmer central
+233|kho|Khotanese; Sakan|khotanais; sakan
+234|kik|Kikuyu; Gikuyu|kikuyu
+235|kin|Kinyarwanda|rwanda
+236|kir|Kirghiz; Kyrgyz|kirghiz
+237|kmb|Kimbundu|kimbundu
+238|kok|Konkani|konkani
+239|kom|Komi|kom
+240|kon|Kongo|kongo
+241|kor|Korean|coréen
+242|kos|Kosraean|kosrae
+243|kpe|Kpelle|kpellé
+244|krc|Karachay-Balkar|karatchai balkar
+245|krl|Karelian|carélien
+246|kro|Kru languages|krou, langues
+247|kru|Kurukh|kurukh
+248|kua|Kuanyama; Kwanyama|kuanyama; kwanyama
+249|kum|Kumyk|koumyk
+250|kur|Kurdish|kurde
+251|kut|Kutenai|kutenai
+252|lad|Ladino|judéo-espagnol
+253|lah|Lahnda|lahnda
+254|lam|Lamba|lamba
+255|lao|Lao|lao
+256|lav|Latvian|letton
+257|lez|Lezghian|lezghien
+258|lim|Limburgan; Limburger; Limburgish|limbourgeois
+259|lin|Lingala|lingala
+260|lit|Lithuanian|lituanien
+261|lol|Mongo|mongo
+262|loz|Lozi|lozi
+263|ltz|Luxembourgish; Letzeburgesch|luxembourgeois
+264|lua|Luba-Lulua|luba-lulua
+265|lub|Luba-Katanga|luba-katanga
+266|lug|Ganda|ganda
+267|lui|Luiseno|luiseno
+268|lun|Lunda|lunda
+269|luo|Luo (Kenya and Tanzania)|luo (Kenya et Tanzanie)
+270|lus|Lushai|lushai
+271|mac|Macedonian|macédonien
+272|mad|Madurese|madourais
+273|mag|Magahi|magahi
+274|mah|Marshallese|marshall
+275|mai|Maithili|maithili
+276|mak|Makasar|makassar
+277|mal|Malayalam|malayalam
+278|man|Mandingo|mandingue
+279|mao|Maori|maori
+280|map|Austronesian languages|austronésiennes, langues
+281|mar|Marathi|marathe
+282|mas|Masai|massaï
+283|may|Malay|malais
+284|mdf|Moksha|moksa
+285|mdr|Mandar|mandar
+286|men|Mende|mendé
+287|mga|Irish, Middle (900-1200)|irlandais moyen (900-1200)
+288|mic|Mi'kmaq; Micmac|mi'kmaq; micmac
+289|min|Minangkabau|minangkabau
+290|mis|Uncoded languages|langues non codées
+291|mkh|Mon-Khmer languages|môn-khmer, langues
+292|mlg|Malagasy|malgache
+293|mlt|Maltese|maltais
+294|mnc|Manchu|mandchou
+295|mni|Manipuri|manipuri
+296|mno|Manobo languages|manobo, langues
+297|moh|Mohawk|mohawk
+298|mon|Mongolian|mongol
+299|mos|Mossi|moré
+300|mul|Multiple languages|multilingue
+301|mun|Munda languages|mounda, langues
+302|mus|Creek|muskogee
+303|mwl|Mirandese|mirandais
+304|mwr|Marwari|marvari
+305|myn|Mayan languages|maya, langues
+306|myv|Erzya|erza
+307|nah|Nahuatl languages|nahuatl, langues
+308|nai|North American Indian languages|nord-amérindiennes, langues
+309|nap|Neapolitan|napolitain
+310|nau|Nauru|nauruan
+311|nav|Navajo; Navaho|navaho
+312|nbl|Ndebele, South; South Ndebele|ndébélé du Sud
+313|nde|Ndebele, North; North Ndebele|ndébélé du Nord
+314|ndo|Ndonga|ndonga
+315|nds|Low German; Low Saxon; German, Low; Saxon, Low|bas allemand; bas saxon; allemand, bas; saxon, bas
+316|nep|Nepali|népalais
+317|new|Nepal Bhasa; Newari|nepal bhasa; newari
+318|nia|Nias|nias
+319|nic|Niger-Kordofanian languages|nigéro-kordofaniennes, langues
+320|niu|Niuean|niué
+321|nno|Norwegian Nynorsk; Nynorsk, Norwegian|norvégien nynorsk; nynorsk, norvégien
+322|nob|Bokmål, Norwegian; Norwegian Bokmål|norvégien bokmål
+323|nog|Nogai|nogaï; nogay
+324|non|Norse, Old|norrois, vieux
+325|nor|Norwegian|norvégien
+326|nqo|N'Ko|n'ko
+327|nso|Pedi; Sepedi; Northern Sotho|pedi; sepedi; sotho du Nord
+328|nub|Nubian languages|nubiennes, langues
+329|nwc|Classical Newari; Old Newari; Classical Nepal Bhasa|newari classique
+330|nya|Chichewa; Chewa; Nyanja|chichewa; chewa; nyanja
+331|nym|Nyamwezi|nyamwezi
+332|nyn|Nyankole|nyankolé
+333|nyo|Nyoro|nyoro
+334|nzi|Nzima|nzema
+335|oci|Occitan (post 1500)|occitan (après 1500)
+336|oji|Ojibwa|ojibwa
+337|ori|Oriya|oriya
+338|orm|Oromo|galla
+339|osa|Osage|osage
+340|oss|Ossetian; Ossetic|ossète
+341|ota|Turkish, Ottoman (1500-1928)|turc ottoman (1500-1928)
+342|oto|Otomian languages|otomi, langues
+343|paa|Papuan languages|papoues, langues
+344|pag|Pangasinan|pangasinan
+345|pal|Pahlavi|pahlavi
+346|pam|Pampanga; Kapampangan|pampangan
+347|pan|Panjabi; Punjabi|pendjabi
+348|pap|Papiamento|papiamento
+349|pau|Palauan|palau
+350|peo|Persian, Old (ca.600-400 B.C.)|perse, vieux (ca. 600-400 av. J.-C.)
+351|per|Persian|persan
+352|phi|Philippine languages|philippines, langues
+353|phn|Phoenician|phénicien
+354|pli|Pali|pali
+355|pol|Polish|polonais
+356|pon|Pohnpeian|pohnpei
+357|pra|Prakrit languages|prâkrit, langues
+358|pro|Provençal, Old (to 1500);Occitan, Old (to 1500)|provençal ancien (jusqu'à 1500); occitan ancien (jusqu'à 1500)
+359|pus|Pushto; Pashto|pachto
+360|que|Quechua|quechua
+361|raj|Rajasthani|rajasthani
+362|rap|Rapanui|rapanui
+363|rar|Rarotongan; Cook Islands Maori|rarotonga; maori des îles Cook
+364|roa|Romance languages|romanes, langues
+365|roh|Romansh|romanche
+366|rom|Romany|tsigane
+367|rum|Romanian; Moldavian; Moldovan|roumain; moldave
+368|run|Rundi|rundi
+369|rup|Aromanian; Arumanian; Macedo-Romanian|aroumain; macédo-roumain
+370|rus|Russian|russe
+371|sad|Sandawe|sandawe
+372|sag|Sango|sango
+373|sah|Yakut|iakoute
+374|sai|South American Indian languages|sud-amérindiennes, langues
+375|sal|Salishan languages|salishennes, langues
+376|sam|Samaritan Aramaic|samaritain
+377|san|Sanskrit|sanskrit
+378|sas|Sasak|sasak
+379|sat|Santali|santal
+380|scn|Sicilian|sicilien
+381|sco|Scots|écossais
+382|sel|Selkup|selkoupe
+383|sem|Semitic languages|sémitiques, langues
+384|sga|Irish, Old (to 900)|irlandais ancien (jusqu'à 900)
+385|sgn|Sign Languages|langues des signes
+386|shn|Shan|chan
+387|sid|Sidamo|sidamo
+388|sin|Sinhala; Sinhalese|singhalais
+389|sio|Siouan languages|sioux, langues
+390|sit|Sino-Tibetan languages|sino-tibétaines, langues
+391|sla|Slavic languages|slaves, langues
+392|slo|Slovak|slovaque
+393|slv|Slovenian|slovène
+394|sma|Southern Sami|sami du Sud
+395|sme|Northern Sami|sami du Nord
+396|smi|Sami languages|sames, langues
+397|smj|Lule Sami|sami de Lule
+398|smn|Inari Sami|sami d'Inari
+399|smo|Samoan|samoan
+400|sms|Skolt Sami|sami skolt
+401|sna|Shona|shona
+402|snd|Sindhi|sindhi
+403|snk|Soninke|soninké
+404|sog|Sogdian|sogdien
+405|som|Somali|somali
+406|son|Songhai languages|songhai, langues
+407|sot|Sotho, Southern|sotho du Sud
+408|srd|Sardinian|sarde
+409|srn|Sranan Tongo|sranan tongo
+410|srp|Serbian|serbe
+411|srr|Serer|sérère
+412|ssa|Nilo-Saharan languages|nilo-sahariennes, langues
+413|ssw|Swati|swati
+414|suk|Sukuma|sukuma
+415|sun|Sundanese|soundanais
+416|sus|Susu|soussou
+417|sux|Sumerian|sumérien
+418|swa|Swahili|swahili
+419|swe|Swedish|suédois
+420|syc|Classical Syriac|syriaque classique
+421|syr|Syriac|syriaque
+422|tah|Tahitian|tahitien
+423|tai|Tai languages|tai, langues
+424|tam|Tamil|tamoul
+425|tat|Tatar|tatar
+426|tel|Telugu|télougou
+427|tem|Timne|temne
+428|ter|Tereno|tereno
+429|tet|Tetum|tetum
+430|tgk|Tajik|tadjik
+431|tgl|Tagalog|tagalog
+432|tha|Thai|thaï
+433|tib|Tibetan|tibétain
+434|tig|Tigre|tigré
+435|tir|Tigrinya|tigrigna
+436|tiv|Tiv|tiv
+437|tkl|Tokelau|tokelau
+438|tlh|Klingon; tlhIngan-Hol|klingon
+439|tli|Tlingit|tlingit
+440|tmh|Tamashek|tamacheq
+441|tog|Tonga (Nyasa)|tonga (Nyasa)
+442|ton|Tonga (Tonga Islands)|tongan (Îles Tonga)
+443|tpi|Tok Pisin|tok pisin
+444|tsi|Tsimshian|tsimshian
+445|tsn|Tswana|tswana
+446|tso|Tsonga|tsonga
+447|tuk|Turkmen|turkmène
+448|tum|Tumbuka|tumbuka
+449|tup|Tupi languages|tupi, langues
+450|tur|Turkish|turc
+451|tut|Altaic languages|altaïques, langues
+452|tvl|Tuvalu|tuvalu
+453|twi|Twi|twi
+454|tyv|Tuvinian|touva
+455|udm|Udmurt|oudmourte
+456|uga|Ugaritic|ougaritique
+457|uig|Uighur; Uyghur|ouïgour
+458|ukr|Ukrainian|ukrainien
+459|umb|Umbundu|umbundu
+460|und|Undetermined|indéterminée
+461|urd|Urdu|ourdou
+462|uzb|Uzbek|ouszbek
+463|vai|Vai|vaï
+464|ven|Venda|venda
+465|vie|Vietnamese|vietnamien
+466|vol|Volapük|volapük
+467|vot|Votic|vote
+468|wak|Wakashan languages|wakashanes, langues
+469|wal|Wolaitta; Wolaytta|wolaitta; wolaytta
+470|war|Waray|waray
+471|was|Washo|washo
+472|wel|Welsh|gallois
+473|wen|Sorbian languages|sorabes, langues
+474|wln|Walloon|wallon
+475|wol|Wolof|wolof
+476|xal|Kalmyk; Oirat|kalmouk; oïrat
+477|xho|Xhosa|xhosa
+478|yao|Yao|yao
+479|yap|Yapese|yapois
+480|yid|Yiddish|yiddish
+481|yor|Yoruba|yoruba
+482|ypk|Yupik languages|yupik, langues
+483|zap|Zapotec|zapotèque
+484|zbl|Blissymbols; Blissymbolics; Bliss|symboles Bliss; Bliss
+485|zen|Zenaga|zenaga
+486|zha|Zhuang; Chuang|zhuang; chuang
+487|znd|Zande languages|zandé, langues
+488|zul|Zulu|zoulou
+489|zun|Zuni|zuni
+490|zxx|No linguistic content; Not applicable|pas de contenu linguistique; non applicable
+491|zza|Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki|zaza; dimili; dimli; kirdki; kirmanjki; zazaki
+
