@@ -15,7 +15,8 @@ class Recording
   validates_numericality_of :rythm, :greater_than=>0, :allow_nil=>true
   validates_numericality_of :sample_rate, :greater_than=>0, :allow_nil=>true
 
-  embeds_one :work_wiki_link
+  embeds_one :work_wiki_link, :as => :linkable
+  accepts_nested_attributes_for :work_wiki_link
 
 
 
@@ -24,14 +25,6 @@ class Recording
   end
   def work_title=(value)
     self.work_wiki_link.title = value
-  end
-
-  def work_link
-    if self.work_wiki_link.work_id 
-      Base64::encode64(self.work_wiki_link.work_id).to_query("work_id")
-    else
-      Base64::encode64(self.work_title).to_query("unlinked")      
-    end
   end
 
   def title
