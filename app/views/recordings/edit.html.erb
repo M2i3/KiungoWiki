@@ -1,7 +1,6 @@
 <%= title("Modifier l'enregistrement") %>
 <%= form_for @recording do |f| %>
 <%= render :partial=>'form', :object=>f %>
-<%= f.hidden_field :version %>
 <%= f.submit %> ou <%= link_to 'annuler', :back %>
 <% end %>
 

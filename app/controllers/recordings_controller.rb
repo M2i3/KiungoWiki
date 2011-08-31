@@ -50,17 +50,12 @@ class RecordingsController < ApplicationController
     @recording = Recording.find(params[:id])
 
     respond_to do |format|
-      if @recording.version == params[:recording][:version].to_i
-        if @recording.update_attributes(params[:recording])
-          format.html { redirect_to(@recording, :notice => "Recording succesfully updated.") }
-          format.xml  { render :xml => @recording, :status => :ok, :location => @recording }
-        else
-          format.html { render :action => "edit" }
-          format.xml  { render :xml => @recording.errors, :status => :unprocessable_entity }
-        end
+      if @recording.update_attributes(params[:recording])
+        format.html { redirect_to(@recording, :notice => "Recording succesfully updated.") }
+        format.xml  { render :xml => @recording, :status => :ok, :location => @recording }
       else
-        format.html { redirect_to(@recording, :error => "The recording was updated by another user while you were editing it. You changes have been discarded.") }
-        format.xml  { render :xml => {:version=>"Invalid Version Number"}, :status => :unprocessable_entity }
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @recording.errors, :status => :unprocessable_entity }
       end
     end
   end

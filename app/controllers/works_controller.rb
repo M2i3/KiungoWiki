@@ -14,7 +14,7 @@ class WorksController < ApplicationController
 # find an encoding that allows determining it's not really BSON ID
     respond_to do |format|
       #careful here not to allow injection of bad stuff in the regex
-      format.json { render :json=>(Work.where(:title=>/#{params[:q]}/i).only(:title).limit(20).collect{|w| {id: w.id, name: w.title} } << {id: Base64::encode64(params[:q]).to_query("unlinked"), name: params[:q] + " (nouveau)"}) }
+      format.json { render :json=>(Work.where(:title=>/#{params[:q]}/i).only(:title).limit(20).collect{|w| {id: w.id.to_s.to_query("b"), name: w.title} } << {id: Base64::encode64(params[:q]).to_query("u"), name: params[:q] + " (nouveau)"}) }
     end
   end
 

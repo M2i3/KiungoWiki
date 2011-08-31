@@ -57,13 +57,7 @@ $(document).ready(function () {
           dropdownItem2: "token-input-dropdown-item2-facebook",
           selectedDropdownItem: "token-input-selected-dropdown-item-facebook",
           inputToken: "token-input-input-token-facebook"
-      },
-     prePopulate: [{"id":"4e4c325f41c25e0a64000023","name":"La maison de mon enfance"}] 
+      }  
   });
-
-  $("input.work_title_lookup").each(function (){
-    alert($.data(this,"prepopulate"));
-  });
-
 });
 
