@@ -22,11 +22,25 @@ class WorkWikiLink
     if self.work_id 
       work_id.to_s.to_query("b")
     else
-      Base64::encode64(self.title).to_query("u")
+      Base64::encode64(self.title.to_s).to_query("u")
+    end
+  end
+  
+  def encoded_link=(value)
+    puts "we are called with value:" + (value || "")
+    case value[0..1]
+      when "u="
+        self.title = Base64::decode64(value.from(2))
+      when "b="
+        self.work = Work.find(value.from(2))
+      else
+        self.title = value
     end
   end
 
   def combined_link
-    {id: self.encoded_link, name: self.title}
+    if self.title || self.work_id 
+      {id: self.encoded_link, name: self.title.to_s}
+    end
   end 
 end
