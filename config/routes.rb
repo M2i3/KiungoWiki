@@ -1,4 +1,6 @@
 KiungoWiki::Application.routes.draw do
+  resources :artists
+
   resources :works do
     collection do
       get 'lookup'

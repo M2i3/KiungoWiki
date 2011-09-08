@@ -1,5 +1,4 @@
 class ArtistsController < ApplicationController
-
   def index
     @artists = Artist.all
     respond_to do |format|
@@ -69,5 +68,4 @@ class ArtistsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-
 end
