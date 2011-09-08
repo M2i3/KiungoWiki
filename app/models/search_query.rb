@@ -12,7 +12,7 @@ class SearchQuery
   attr_reader :q
   self.query_expressions.keys.each {|key| attr_reader key }
 
-  def initialize(query_value)
+  def initialize(query_value = nil)
     self.q = query_value
     
   end
@@ -30,8 +30,8 @@ class SearchQuery
   end
 
   def q=(value)
-    @q = value
-    value = " " + value + " "
+    @q = value.to_s
+    value = " " + @q + " "
     QUERY_EXPRESSIONS.each {|var_name, expression|
       if match_result = expression.match(value)
         puts "offsets are #{match_result.offset(0)[0]} .. #{match_result.offset(0)[1]}"
