@@ -1,24 +1,23 @@
 class SearchQuery
   def self.query_expressions
-    { title: / title:"(.+)" /, 
-      date_written: / date_written:([0-9]{4,4}(\-|\/)[0-9]{1,2}(\-|\/)[0-9]{1,2}) /,
-      language:  / language:(\w+) /,
-      publisher: / publisher:"(.+)" /        
-    }
+    {}
+  end
+  def self.catch_all
+    nil
   end
 
-  QUERY_EXPRESSIONS = self.query_expressions
-
   attr_reader :q
-  self.query_expressions.keys.each {|key| attr_reader key }
 
-  def initialize(query_value)
+# to make this work you'll need to change this class into a module
+#  self.query_expressions.keys.each {|key| attr_reader key }
+
+  def initialize(query_value = nil)
     self.q = query_value
     
   end
 
   def query_fields
-    QUERY_EXPRESSIONS.keys
+    self.class.query_expressions.keys
   end
 
   def [](key)
@@ -30,12 +29,10 @@ class SearchQuery
   end
 
   def q=(value)
-    @q = value
-    value = " " + value + " "
-    QUERY_EXPRESSIONS.each {|var_name, expression|
+    @q = value.to_s
+    value = " " + @q + " "
+    self.class.query_expressions.each {|var_name, expression|
       if match_result = expression.match(value)
-        puts "offsets are #{match_result.offset(0)[0]} .. #{match_result.offset(0)[1]}"
-        puts "found #{value[match_result.offset(0)[0]..match_result.offset(0)[1]]}"
         self.instance_variable_set("@#{var_name}", match_result[1])
         # remove the value found from the searh string
         value[match_result.offset(0)[0]..(match_result.offset(0)[1] - 1 )] = " "
@@ -43,6 +40,8 @@ class SearchQuery
         self.instance_variable_set("@#{var_name}", nil)
       end
     }
-    @title = value.strip unless @title
+    if self.class.catch_all and not self.instance_variable_get("@#{self.class.catch_all}")
+      self.instance_variable_set("@#{self.class.catch_all}", value.strip) 
+    end
   end
 end
