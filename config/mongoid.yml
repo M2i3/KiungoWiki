@@ -18,3 +18,7 @@ test:
 production:
   uri: <%= ENV['MONGOHQ_URL'] %>
 
+# set these environment variables on your prod server (to work on Heroku)
+staging:
+  uri: <%= ENV['MONGOHQ_URL'] %>
+
