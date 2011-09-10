@@ -1,0 +1,29 @@
+<%= title("Artists") %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Birth Date</th>
+      <th>Birth Location</th>
+      <th>Death Date</th>
+      <th>Death Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @artists.each do |artist| %>
+    <tr>
+      <td><%= link_to artist.name, artist_path(artist) %></td>
+      <td><%= artist.birth_date %></td>
+      <td><%= artist.birth_location %></td>
+      <td><%= artist.death_date %></td>
+      <td><%= artist.death_location %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<%= link_to 'New', new_artist_path %>
+
