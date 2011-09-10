@@ -9,12 +9,16 @@ class ArtistsController < ApplicationController
   end
   
   def show
-    @artist = Artist.find(params[:id])  
-    respond_to do |format|
-      format.xml { render :xml=>@artist.to_xml(:except=>[:versions]) }
-      format.json { render :json=>@artist }
-      format.html
-    end
+  	if :id
+		@artist = Artist.find(params[:id])
+	else
+		print "no id"
+	end  	
+#    respond_to do |format|
+#      format.xml { render :xml=>@artist.to_xml(:except=>[:versions]) }
+#      format.json { render :json=>@artist }
+#      format.html
+#    end
   end
 
   def new
