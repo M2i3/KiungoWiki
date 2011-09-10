@@ -1,0 +1,7 @@
+<%= title("Modifier l'artiste") %>
+<%= form_for @artist do |f| %>
+<%= render :partial=>'form', :object=>f %>
+<%= f.submit %> ou <%= link_to 'annuler', :back %>
+<% end %>
+
+<%= render :partial=>'links' %>
