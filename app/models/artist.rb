@@ -2,7 +2,7 @@ class Artist
   include Mongoid::Document
   include Mongoid::Timestamps
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
-  after_initialize :set_defaults
+  #after_initialize :set_defaults
 
   field :name, :type => String
   field :birth_date, :type => IncDate

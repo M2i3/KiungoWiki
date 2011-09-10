@@ -1,7 +1,7 @@
-<%= title("Nouvel enregistrement") %>
+<%= title("Nouvel Artiste") %>
 
 <% unless @artist.errors.empty? %>
-<div class="validationerror">Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel enregistrement:<br/>
+<div class="validationerror">Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel artiste:<br/>
     <%= @artist.errors.full_messages.join("</br>").html_safe %>
 </div>
 <% end %>

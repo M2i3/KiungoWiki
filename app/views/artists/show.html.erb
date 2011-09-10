@@ -1,17 +1,9 @@
-<%= title(@artist.name + " - Artiste") %>
+<%= title(@artist.name " - Artiste") %>
 <div class="section summary">
-  <p><%= work_wiki_link_path(@recording.work_wiki_link) %></p>
-  <p>Enregistré le: <%= @recording.recording_date %></p>
-  <p>Lieu: <%= @recording.recording_location %></p>
-  <p>Durée: <%= @recording.duration %></p>
-  <p>Rythme: <%= @recording.rythm %>bpm
-  <p style="display:hidden"><%= @recording.recording_location %></p>
+	<p>Naissance: <cite>date, lieu</cite></p>
+	<p>Décès: <cite>date, lieu</cite>
 </div>
-
-<h2>Crédits</h2>
-<p>Here be credits</p>
-
-<h2>Albums</h2>
-<p>Here be albums</p>
+<h2>Oeuvres</h2>
+<h2>Discographie</h2>
 
 <%= render :partial=>'links' %>
