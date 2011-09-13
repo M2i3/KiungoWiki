@@ -208,21 +208,21 @@ mdb-export  -H -q '|' $1 Albums >> supports_${DATE}.csv
 # Transfert au serveur mongoDB
 # Si le serveur n'est pas local ou actif, on peut modifier ou commenter les lignes suivantes jusqu'à la fin
 # et ne conserver que les fichiers JSON pour un transfert manuel.
-mongoimport -d kiungodb -c languages -f language_id,language_code,language_name_english,language_name_french --type json --file languages_for_mongo_${DATE}.json
-mongoimport -d kiungodb -c categories -f category_name,category_id --type json --file categories_for_mongo_${DATE}.json
-mongoimport -d kiungodb -c artists -f artist_id,artist_surname,artist_given_name,birth_date,birth_location,death_date,death_location,notes --type json --file artists_${DATE}.json
-mongoimport -d kiungodb -c editors -f editor_id,editor_name --type json --file editors_${DATE}.json
-mongoimport -d kiungodb -c labels -f label_id,label_name --type json --file labels_${DATE}.json
-mongoimport -d kiungodb -c roles -f role_id,role_name --type json --file roles_${DATE}.json
-mongoimport -d kiungodb -c owners -f owner_id,owner_surname,owner_given_name --type json --file owners_${DATE}.json
-mongoimport -d kiungodb -c works -f work_id,work_title,date_written,language_id,verified_text,verified_credits,original_work_id,notes,lyrics --type json --file works_${DATE}.json
-mongoimport -d kiungodb -c recordings -f recording_id,recording_date,duration,category_id,notes,rythm,work_id --type json --file recordings_${DATE}.json
-mongoimport -d kiungodb -c links_owner_support -f link_owner_support_id,owner_id,support_id --type json --file links_owner_support_${DATE}.json
-mongoimport -d kiungodb -c links_work_editor -f link_work_editor_id,work_id,editor_id --type json --file links_work_editor_${DATE}.json
-mongoimport -d kiungodb -c links_work_artist -f link_work_artist_id,work_id,artist_id,role_id --type json --file links_work_artist_${DATE}.json
-mongoimport -d kiungodb -c links_recording_artist_role -f link_recording_artist_role_id,recording_id,artist_id,role_id --type json --file links_recording_artist_role_${DATE}.json
-mongoimport -d kiungodb -c links_recording_support -f link_recording_support_id,recording_id,support_id,support_element_id,face,track,notes --type json --file links_recording_support_${DATE}.json
-mongoimport -d kiungodb -c supports -f support_id,support_title,artist_id,category_id,reference_code,number_of_pieces,alpha_ordering,date_released,temporal_ordering,notes,media_type,label_id --type json --file supports_${DATE}.json
+mongoimport -d kiungo_raw_db -c languages -f language_id,language_code,language_name_english,language_name_french --type json --file languages_for_mongo_${DATE}.json
+mongoimport -d kiungo_raw_db -c categories -f category_name,category_id --type json --file categories_for_mongo_${DATE}.json
+mongoimport -d kiungo_raw_db -c artists -f artist_id,artist_surname,artist_given_name,birth_date,birth_location,death_date,death_location,notes --type json --file artists_${DATE}.json
+mongoimport -d kiungo_raw_db -c editors -f editor_id,editor_name --type json --file editors_${DATE}.json
+mongoimport -d kiungo_raw_db -c labels -f label_id,label_name --type json --file labels_${DATE}.json
+mongoimport -d kiungo_raw_db -c roles -f role_id,role_name --type json --file roles_${DATE}.json
+mongoimport -d kiungo_raw_db -c owners -f owner_id,owner_surname,owner_given_name --type json --file owners_${DATE}.json
+mongoimport -d kiungo_raw_db -c works -f work_id,work_title,date_written,language_id,verified_text,verified_credits,original_work_id,notes,lyrics --type json --file works_${DATE}.json
+mongoimport -d kiungo_raw_db -c recordings -f recording_id,recording_date,duration,category_id,notes,rythm,work_id --type json --file recordings_${DATE}.json
+mongoimport -d kiungo_raw_db -c links_owner_support -f link_owner_support_id,owner_id,support_id --type json --file links_owner_support_${DATE}.json
+mongoimport -d kiungo_raw_db -c links_work_editor -f link_work_editor_id,work_id,editor_id --type json --file links_work_editor_${DATE}.json
+mongoimport -d kiungo_raw_db -c links_work_artist -f link_work_artist_id,work_id,artist_id,role_id --type json --file links_work_artist_${DATE}.json
+mongoimport -d kiungo_raw_db -c links_recording_artist_role -f link_recording_artist_role_id,recording_id,artist_id,role_id --type json --file links_recording_artist_role_${DATE}.json
+mongoimport -d kiungo_raw_db -c links_recording_support -f link_recording_support_id,recording_id,support_id,support_element_id,face,track,notes --type json --file links_recording_support_${DATE}.json
+mongoimport -d kiungo_raw_db -c supports -f support_id,support_title,artist_id,category_id,reference_code,number_of_pieces,alpha_ordering,date_released,temporal_ordering,notes,media_type,label_id --type json --file supports_${DATE}.json
 
 # Effacement des fichiers intermédiaires.
 /bin/rm -f *_${DATE}.csv 
