@@ -1,9 +1,13 @@
-<%= title(@artist.name " - Artiste") %>
+<%= title(@artist.name + " - Artiste") %>
 <div class="section summary">
-	<p>Naissance: <cite>date, lieu</cite></p>
-	<p>Décès: <cite>date, lieu</cite>
+	<p>Naissance: <%= @artist.birth_date %> &agrave; <%= @artist.birth_location %></p>
+	<p>Décès: <%= @artist.death_date %> &agrave; <%= @artist.death_location %> </p>
 </div>
 <h2>Oeuvres</h2>
+<p>Here be the Works</p>
 <h2>Discographie</h2>
+<p>Here be albums</p>
 
 <%= render :partial=>'links' %>
+
+

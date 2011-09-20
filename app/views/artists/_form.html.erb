@@ -1,8 +1,28 @@
 <ul>
   <li>
-    *<%= form.label :artist_name %>
-    <%= form.fields_for :work_wiki_link do |work_link_form| %>
-    <% end %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
   </li>
+
+  <li>
+    <%= form.label :birth_date %>
+    <%= form.text_field :birth_date %>
+  </li>
+
+  <li>
+    <%= form.label :birth_location %>
+    <%= form.text_field :birth_location %>
+  </li>
+
+  <li>
+    <%= form.label :death_date %>
+    <%= form.text_field :death_date %>
+  </li>
+
+  <li>
+    <%= form.label :death_location %>
+    <%= form.text_field :death_location %>
+  </li>
+
 </ul>
 

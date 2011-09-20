@@ -1,0 +1,35 @@
+<%= title("Works") %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Date written</th>
+      <th>Copyright</th>
+      <th>Language</th>
+      <th>Publisher</th>
+      <th>Lyrics</th>
+      <th>Chords</th>
+      <th>Original work ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @works.each do |work| %>
+    <tr>
+      <td><%= link_to work.title, work_path(work) %></td>
+      <td><%= work.date_written %></td>
+      <td><%= work.copyright %></td>
+      <td><%= work.language %></td>
+      <td><%= work.publisher %></td>
+      <td><%= work.lyrics %></td>
+      <td><%= work.chords %></td>
+      <td><%= work.origworkid %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<%= link_to 'New', new_work_path %>
+
