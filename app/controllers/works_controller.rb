@@ -11,16 +11,12 @@ class WorksController < ApplicationController
   end
 
   def show
-    if :id
-      @work = Work.find(params[:id])
-    else
-      print "no id"
-    end  	
-#    respond_to do |format|
-#      format.xml { render :xml=>@work.to_xml(:except=>[:versions]) }
-#      format.json { render :json=>@work }
-#      format.html
-#    end
+    @work = Work.find(params[:id])
+
+    respond_to do |format|
+      format.json { render :json=>@work }
+      format.html
+    end
   end
 
   def new
