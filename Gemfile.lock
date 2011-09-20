@@ -164,7 +164,6 @@ DEPENDENCIES
   mongoid-rspec
   rails (= 3.0.7)
   rails3-generators
-  rake (= 0.9.2)
   rspec-rails
   spork
   thin
