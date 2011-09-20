@@ -1,7 +1,7 @@
-
 namespace :kiungo do
   namespace :migration do
-    task :all, 'Migrate all the data from the Raw models to the application models' do |t|
+    desc "Migrate all the data from the Raw models to the application models"
+    task :all do
 
       unless Artist.count == 0 
         puts "There are already artists in the Artist model. Reloading is not possible."
