@@ -12,8 +12,7 @@ class SearchQuery
 #  self.query_expressions.keys.each {|key| attr_reader key }
 
   def initialize(query_value = nil)
-    self.q = query_value
-    
+    self.q = query_value    
   end
 
   def query_fields
@@ -35,7 +34,7 @@ class SearchQuery
       if match_result = expression.match(value)
         self.instance_variable_set("@#{var_name}", match_result[1])
         # remove the value found from the searh string
-        value[match_result.offset(0)[0]..(match_result.offset(0)[1] - 1 )] = " "
+        value[match_result.offset(0)[0]..(match_result.offset(0)[1] - 1 )] = " "   
       else
         self.instance_variable_set("@#{var_name}", nil)
       end

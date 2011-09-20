@@ -13,4 +13,8 @@ class Work
   field :origworkid, :type => Integer
 
   validates_presence_of :title
+
+  scope :queried, lambda {|q| 
+    wsq = WorkSearchQuery.new(q)
+  }
 end

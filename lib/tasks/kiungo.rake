@@ -1,11 +1,10 @@
 namespace :kiungo do
   namespace :migration do
     desc "Migrate all the data from the Raw models to the application models"
-    task :all do
+    task :all=>:environment do
 
       unless Artist.count == 0 
         puts "There are already artists in the Artist model. Reloading is not possible."
-
       else
 
         RawArtist.all.each do |rawArtist|
