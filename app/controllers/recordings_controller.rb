@@ -70,4 +70,12 @@ class RecordingsController < ApplicationController
     end
   end
 
+  def lookup
+# find an encoding that allows determining it's not really BSON ID
+    respond_to do |format|
+      #careful here not to allow injection of bad stuff in the regex
+      format.json { render :json=>(Recording.where(:title=>/#{params[:q]}/i).only(:title).limit(20).collect{|w| {id: w.id.to_s.to_query("b"), title: w.title} } << {id: Base64::encode64(params[:q]).to_query("u"), title: params[:q] + " (nouveau)"}) }
+    end
+  end
+
 end

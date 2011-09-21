@@ -53,7 +53,7 @@ class WorksController < ApplicationController
     @work = Work.find(params[:id])
 
     respond_to do |format|
-      if @recording.update_attributes(params[:work])
+      if @work.update_attributes(params[:work])
         format.html { redirect_to(@work, :notice => "Work succesfully updated.") }
         format.xml  { render :xml => @work, :status => :ok, :location => @work }
       else

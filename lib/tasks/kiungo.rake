@@ -22,8 +22,8 @@ namespace :kiungo do
                       :origworkid=>rawWork.work_id)
 
           RawRecording.where(:work_id=>rawWork.work_id).each do |rawRecording|
-            puts "creating recording"
-            Recording.create!(:recording_date=>rawRecording.recording_date, 
+            Recording.create!(:title=>rawWork.work_title,
+                             :recording_date=>rawRecording.recording_date, 
                              :duration=>rawRecording.duration,
                              :rythm=>rawRecording.rythm,
                              :work_id=>rawRecording.work_id)

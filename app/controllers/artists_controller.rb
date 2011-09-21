@@ -55,7 +55,7 @@ class ArtistsController < ApplicationController
     @artist = Artist.find(params[:id])
 
     respond_to do |format|
-      if @recording.update_attributes(params[:artist])
+      if @artist.update_attributes(params[:artist])
         format.html { redirect_to(@artist, :notice => "Artist succesfully updated.") }
         format.xml  { render :xml => @artist, :status => :ok, :location => @artist }
       else

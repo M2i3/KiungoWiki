@@ -4,6 +4,7 @@ class Recording
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
   after_initialize :set_defaults
 
+  field :title, :type => String
   field :recording_date, :type => IncDate
   field :recording_location, :type => String
   field :duration, :type => String
