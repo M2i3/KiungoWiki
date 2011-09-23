@@ -15,9 +15,17 @@ namespace :kiungo do
                         :name=>rawArtist.artist_given_name + " " + rawArtist.artist_surname)
         end # rawArtists.each
 
+        RawLanguage.all.each do |rawLanguage|
+          Language.create!(:language_id=>rawLanguage.language_id, 
+                        :language_name_english=>rawLanguage.language_name_english,
+                        :language_name_french=>rawLanguage.language_name_french, 
+                        :language_code=>rawLanguage.language_code)
+        end # rawLanguages.each
+
         RawWork.all.each do |rawWork|
           Work.create!(:title=>rawWork.work_title, 
                       :date_written=>rawWork.date_written,
+                      :language_id=>rawWork.language_id,
                       :lyrics=>rawWork.lyrics,
                       :origworkid=>rawWork.work_id)
 

@@ -6,7 +6,7 @@ class Recording
 
   field :recording_date, :type => IncDate
   field :recording_location, :type => String
-  field :duration, :type => String
+  field :duration, :type => Duration
   field :rythm, :type => Integer
   field :sample_rate, :type => Integer
   field :work_id, :type => Integer
