@@ -1,8 +1,8 @@
 class WorkWikiLink
   include Mongoid::Document
 
+  field :reference
   field :title
-  field :referenced_version, :type => Integer
   referenced_in :work
   embedded_in :linkable, :polymorphic => true
 
@@ -10,31 +10,24 @@ class WorkWikiLink
     if value
       self.work_id = value.id
       self.title = value.title
-      self.referenced_version = value.version
+    else   
+      self.title = nil
+      self.work_id = nil
     end
-  end
-
-  def combined
-    self.title.to_s + ":" + self.work_id.to_s
   end
 
   def encoded_link
-    if self.work_id 
-      work_id.to_s.to_query("b")
-    else
-      Base64::encode64(self.title.to_s).to_query("u")
-    end
+    self.title
   end
   
   def encoded_link=(value)
-    puts "we are called with value:" + (value || "")
-    case value[0..1]
-      when "u="
-        self.title = Base64::decode64(value.from(2))
-      when "b="
-        self.work = Work.find(value.from(2))
-      else
-        self.title = value
+    self.reference = value
+    wsq = WorkSearchQuery.new(value)
+    if wsq[:oid]
+      self.work = Work.find(wsq[:oid]) 
+    else
+      self.work = nil
+      self.title = self.reference
     end
   end
 

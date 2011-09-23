@@ -42,7 +42,6 @@ $(document).ready(function(){
 
 });
 
-
 $(document).ready(function () {
   $("input.work_title_lookup").tokenInput("/works/lookup.json", {
      tokenLimit: 1,

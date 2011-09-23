@@ -4,7 +4,6 @@ class Recording
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
   after_initialize :set_defaults
 
-  field :title, :type => String
   field :recording_date, :type => IncDate
   field :recording_location, :type => String
   field :duration, :type => String
@@ -17,10 +16,9 @@ class Recording
   validates_numericality_of :rythm, :greater_than=>0, :allow_nil=>true
   validates_numericality_of :sample_rate, :greater_than=>0, :allow_nil=>true
 
-  embeds_one :work_wiki_link, :as => :linkable
+  embeds_one :work_wiki_link
   accepts_nested_attributes_for :work_wiki_link
-
-
+  validates_associated :work_wiki_link
 
   def work_title
     self.work_wiki_link.title 
@@ -45,4 +43,5 @@ class Recording
   def set_defaults
     self.work_wiki_link = WorkWikiLink.new unless self.work_wiki_link
   end
+
 end

@@ -14,7 +14,19 @@ class Work
 
   validates_presence_of :title
 
-  scope :queried, lambda {|q| 
+  scope :queried, ->(q) {
+    current_query = all
     wsq = WorkSearchQuery.new(q)
+    wsq.filled_query_fields.each {|field|
+      case field
+        when :title, :publisher
+          current_query = current_query.where(field=>/#{wsq[field].downcase}/i)
+        when :copyright, :origworkid
+          current_query = current_query.where(field=>wsq[field].to_i)
+        when :language, :date_written
+          current_query = current_query.where(field=>wsq[field])        
+      end 
+    }
+    current_query
   }
 end

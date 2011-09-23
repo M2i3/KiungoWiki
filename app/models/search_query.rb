@@ -1,6 +1,6 @@
 class SearchQuery
   def self.query_expressions
-    {}
+    {oid: / oid:([0-9a-f]{24}) /}
   end
   def self.catch_all
     nil
@@ -17,6 +17,10 @@ class SearchQuery
 
   def query_fields
     self.class.query_expressions.keys
+  end
+
+  def filled_query_fields
+    self.class.query_expressions.keys.find_all {|field| not self[field].blank? }
   end
 
   def [](key)
