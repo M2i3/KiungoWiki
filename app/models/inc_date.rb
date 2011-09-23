@@ -23,7 +23,7 @@ class IncDate < String
     when ::IncDate
       @day, @month, @year = value.day, value.month, value.year
     when ::String
-      if value =~ /^(\d{4})(?:-?(\d{2})(?:-?(\d{2}))?)?$/
+      if value =~ /^(\d{4})(?:-?(\d{0,2})(?:-?(\d{0,2}))?)?$/
         @year = $1.to_i
         @month = $2 ? $2.to_i : 0
         @day = $3 ? $3.to_i : 0
