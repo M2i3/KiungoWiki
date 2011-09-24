@@ -6,6 +6,10 @@
 #  - Tsutomu Kuroda - http://github.com/kuroda (t-kuroda@oiax.jp)
 
 fr:
+  mongoid:
+    errors:
+      messages:
+        document_not_found: "Document introuvable"
   date:
     formats:
       default: "%d/%m/%Y"
@@ -135,7 +139,7 @@ fr:
       prompt: "Veuillez sélectionner"
     submit:
       create: "Créer un %{model}"
-      update: "Modifier ce %{model}"
+      update: "Modifier cet %{model}"
       submit: "Enregistrer ce %{model}"
 
   attributes:
