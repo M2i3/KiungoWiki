@@ -34,6 +34,32 @@ body {
   text-align: center;
 }
 
+/* default tag behaviour */
+dl, dt, dd {
+	padding: 0;
+	margin: 0;
+}
+dl {
+ width:100%;
+ overflow: hidden;
+}
+dt {
+ float:left;
+ clear: left;
+ font-weight: bold;
+ width:10%;
+}
+dt:after { content:":"; }
+dd {
+ float:left;
+ width:85%;
+}
+
+/* main content elements */
+.summary {
+	margin-left: 3em;
+}
+
 /* header elements */
 #sitetitle { /* TEMPORARY UNTIL GRAPHICAL ELEMENTS ARE GIVEN */
   position: absolute;
@@ -239,4 +265,7 @@ body {
        background-position: -80px 0;
     }
 }
-/* messaging (END) */ 
+/* messaging (END) */
+
+/* TEMP start */
+table td { border: 1px solid #000; }

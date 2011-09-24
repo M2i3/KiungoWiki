@@ -14,7 +14,7 @@ class ArtistsController < ApplicationController
       @artist = Artist.find(params[:id])
     else
       print "no id"
-    end  	
+    end
 #    respond_to do |format|
 #      format.xml { render :xml=>@artist.to_xml(:except=>[:versions]) }
 #      format.json { render :json=>@artist }
@@ -55,7 +55,7 @@ class ArtistsController < ApplicationController
     @artist = Artist.find(params[:id])
 
     respond_to do |format|
-      if @artist.update_attributes(params[:artist])
+      if @artist.update_attributes(Hash[params[:artist], "updated_at" => Time.new])
         format.html { redirect_to(@artist, :notice => "Artist succesfully updated.") }
         format.xml  { render :xml => @artist, :status => :ok, :location => @artist }
       else

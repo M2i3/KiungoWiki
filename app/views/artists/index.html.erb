@@ -13,11 +13,29 @@
   <tbody>
     <% @artists.each do |artist| %>
     <tr>
-      <td><%= link_to artist.name, artist_path(artist) %></td>
-      <td><%= artist.birth_date %></td>
-      <td><%= artist.birth_location %></td>
-      <td><%= artist.death_date %></td>
-      <td><%= artist.death_location %></td>
+      <td>
+      	<%= link_to artist.name, artist_path(artist) %>
+      </td>
+      <td>
+      	<% if (artist.birth_date != "0-00-00") then %>
+      		<%= artist.birth_date %>
+      	<% end %>
+      </td>
+      <td>
+      	<% if (artist.birth_location != "") then %>
+	      	<%= artist.birth_location %>
+	    <% end %>
+      </td>
+      <td>
+      	<% if (artist.death_date != "0-00-00") then %>
+      		<%= artist.death_date %>
+      	<% end %>
+      </td>
+      <td>
+      	<% if (artist.death_location != "") then %>
+	      	<%= artist.death_location %>
+	    <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>

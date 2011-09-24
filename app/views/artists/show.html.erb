@@ -1,13 +1,47 @@
-<%= title(@artist.name + " - Artiste") %>
-<div class="section summary">
-	<p>Naissance: <%= @artist.birth_date %> &agrave; <%= @artist.birth_location %></p>
-	<p>Décès: <%= @artist.death_date %> &agrave; <%= @artist.death_location %> </p>
+<%= title(@artist.name) %>
+<div class="section summary">     
+	<dl> 
+  	<% if ((@artist.birth_date != "0-00-00") || @artist.birth_location != "") then %>
+		<dt>Naissance</dt>
+		<dd>
+		<% if (@artist.birth_location != "") then %>
+			<% @weHaveBirthLocation = true %>
+		<% end %>
+		<% if (@artist.birth_date != "0-00-00") then %>
+			<%= @artist.birth_date %><% if(@weHaveBirthLocation) then %>, <% end %>
+		<% end %>
+		<% if(@weHaveBirthLocation) then %>
+			<%= @artist.birth_location %>
+		<% end %>
+		</dd>
+	<% end %>
+	<% if ((@artist.death_date != "0-00-00") || @artist.death_location != "") then %>
+		<dt>Décès</dt>
+		<dd>
+		<% if (@artist.death_location != "") then %>
+			<% @weHaveDeathLocation = true %>
+		<% end %>
+		<% if (@artist.death_date != "0-00-00") then %>
+			<%= @artist.death_date %><% if(@weHaveDeathLocation) then %>, <% end %>
+		<% end %>
+		<% if(@weHaveDeathLocation) then %>
+			<%= @artist.death_location %>
+		<% end %>
+		</dd>
+	<% end %>
 </div>
 <h2>Oeuvres</h2>
 <p>Here be the Works</p>
+
 <h2>Discographie</h2>
 <p>Here be albums</p>
-
+<small>
+<% if (@artist.updated_at) then %>
+	Modifié le <%= @artist.updated_at %>
+<% elsif (@artist.created_at) then %>
+	Créé le <%= @artist.created_at %>
+<% end %>
+</small>	
 <%= render :partial=>'links' %>
 
 
