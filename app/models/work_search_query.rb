@@ -3,7 +3,7 @@ class WorkSearchQuery < SearchQuery
     superclass.query_expressions.merge({ title: / title:"(.+)" /,
       copyright: / copyright:"(.+)" /,
       date_written: / date_written:([0-9]{4,4}(\-|\/)[0-9]{1,2}(\-|\/)[0-9]{1,2}) /,
-      language_id:  / language_id:([0-9]{1,3}) /,
+      language_code:  / language_code:([a-zA-Z]{2,3}) /,
       publisher: / publisher:"(.+)" /,
       origworkid: / origworkid:([0-9]{1,10}) /
     })

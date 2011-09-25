@@ -16,25 +16,34 @@ namespace :kiungo do
         end # rawArtists.each
 
         RawLanguage.all.each do |rawLanguage|
-          Language.create!(:language_id=>rawLanguage.language_id, 
-                        :language_name_english=>rawLanguage.language_name_english,
+          Language.create!(:language_name_english=>rawLanguage.language_name_english,
                         :language_name_french=>rawLanguage.language_name_french, 
                         :language_code=>rawLanguage.language_code)
         end # rawLanguages.each
 
         RawWork.all.each do |rawWork|
-          Work.create!(:title=>rawWork.work_title, 
-                      :date_written=>rawWork.date_written,
-                      :language_id=>rawWork.language_id,
-                      :lyrics=>rawWork.lyrics,
-                      :origworkid=>rawWork.work_id)
-
+          if rawWork.language_id != "0" 
+            if rawWork.language_id != ""
+              l = RawLanguage.where(:language_id => rawWork.language_id).first
+              Work.create!(:title=>rawWork.work_title, 
+                          :date_written=>rawWork.date_written,
+                          :language_code=>l[:language_code],
+                          :lyrics=>rawWork.lyrics,
+                          :origworkid=>rawWork.work_id)
+            else
+              Work.create!(:title=>rawWork.work_title, 
+                           :date_written=>rawWork.date_written,
+                           :lyrics=>rawWork.lyrics,
+                           :origworkid=>rawWork.work_id)
+            end
+          end                       
           RawRecording.where(:work_id=>rawWork.work_id).each do |rawRecording|
             Recording.create!(:title=>rawWork.work_title,
-                             :recording_date=>rawRecording.recording_date, 
-                             :duration=>rawRecording.duration,
-                             :rythm=>rawRecording.rythm,
-                             :work_id=>rawRecording.work_id)
+                              :recording_date=>rawRecording.recording_date, 
+                              :duration=>rawRecording.duration,
+                              :rythm=>rawRecording.rythm,
+                              :work_id=>rawRecording.work_id)
+            
           end # rawRecordings.each
         end # rawWorks.each
       end

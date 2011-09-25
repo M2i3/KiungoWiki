@@ -6,7 +6,7 @@ class Work
   field :title, :type => String
   field :date_written, :type => IncDate
   field :copyright, :type => String
-  field :language_id, :type => Integer
+  field :language_code, :type => String
   field :publisher, :type => String
   field :lyrics, :type => String
   field :chords, :type => String
@@ -19,11 +19,11 @@ class Work
     wsq = WorkSearchQuery.new(q)
     wsq.filled_query_fields.each {|field|
       case field
-        when :title, :publisher
+        when :title, :publisher, :copyright, :language_code
           current_query = current_query.where(field=>/#{wsq[field].downcase}/i)
-        when :copyright, :origworkid
+        when :origworkid
           current_query = current_query.where(field=>wsq[field].to_i)
-        when :language_id, :date_written
+        when :date_written
           current_query = current_query.where(field=>wsq[field])        
       end 
     }
