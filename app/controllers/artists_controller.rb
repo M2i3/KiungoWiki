@@ -1,7 +1,7 @@
 class ArtistsController < ApplicationController
 
   def index
-    @artists = Artist.all
+    @artists = Artist.all(sort: [[ :name, :asc ]])
     respond_to do |format|
       format.xml { render :xml=>@artists }
       format.json { render :json=>@artists }
@@ -10,7 +10,11 @@ class ArtistsController < ApplicationController
   end
 
   def show
-    @artist = Artist.find(params[:id])
+	if :id
+    	@artist = Artist.find(params[:id])
+    else
+    	print "no id"
+    end
     respond_to do |format|
       format.xml { render :xml=>@artist.to_xml(:except=>[:versions]) }
       format.json { render :json=>@artist }
