@@ -46,6 +46,14 @@ namespace :kiungo do
             
           end # rawRecordings.each
         end # rawWorks.each
+
+        RawSupport.all.each do |rawSupport|
+          Album.create!(:title=>rawSupport.support_title, 
+                        :date_released=>rawSupport.date_released,
+                        :label=>rawSupport.label_id, 
+                        :media_type=>rawSupport.support_id,
+                        :reference_code=>rawSupport.reference_code)
+        end # rawSupports.each
       end
     end
   end

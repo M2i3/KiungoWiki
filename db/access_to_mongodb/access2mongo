@@ -176,7 +176,7 @@ mdb-export  -H -q '|' $1 Lien\ Album\ Version >> links_recording_support_${DATE}
 ./substitute.pl "\[{" "{" links_recording_support_${DATE}.json
 ./substitute.pl "}\]" "}" links_recording_support_${DATE}.json
 
-echo "support_id,support_title,artist_id,category_id,reference_code,number_of_pieces,alpha_ordering, date_released,temporal_ordering,notes,media_type,label_id" > supports_${DATE}.csv
+echo "support_id,support_title,artist_id,category_id,reference_code,number_of_pieces,alpha_ordering,date_released,temporal_ordering,notes,media_type,label_id" > supports_${DATE}.csv
 mdb-export  -H -q '|' $1 Albums >> supports_${DATE}.csv
 ./csv2json.py --field-quote='|' < supports_${DATE}.csv > supports_${DATE}.json
 ./substitute.pl "}, {" "}

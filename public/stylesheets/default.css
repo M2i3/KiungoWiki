@@ -122,6 +122,11 @@ dd {
   text-align: left;
 }
 
+#searchForm {
+	position: absolute;
+	right: 1em;
+	top: 2.5em;
+}
 
 /* navigation in footer */ 
 #footer ul.nav {

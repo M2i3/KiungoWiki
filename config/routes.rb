@@ -1,5 +1,4 @@
 KiungoWiki::Application.routes.draw do
-  resources :artists
 
   resources :works do
     collection do
@@ -7,7 +6,7 @@ KiungoWiki::Application.routes.draw do
     end
   end
 
-  resources :recordings, :artists
+  resources :recordings, :artists, :albums
 
 
   root :to => "home#index"
