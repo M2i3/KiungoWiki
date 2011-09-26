@@ -142,6 +142,10 @@ class IncDate < String
     @day.nil? && @month.nil? && @year.nil?
   end
 
+  def blank?
+    empty? || (@day == 0 && @month == 0 && @year == 0)
+  end
+
   def has?(*parts)
     parts.collect!(&:to_sym)
     parts.inject(true) { |total,part| total && !self.send(part).nil? }
