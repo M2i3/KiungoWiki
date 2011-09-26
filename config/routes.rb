@@ -7,7 +7,7 @@ KiungoWiki::Application.routes.draw do
     end
   end
 
-  resources :recordings, :artists
+  resources :recordings, :artists, :albums
 
 
   root :to => "home#index"

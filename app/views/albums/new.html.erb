@@ -1,0 +1,14 @@
+<%= title("Nouvel Album") %>
+
+<% unless @album.errors.empty? %>
+<div class="validationerror">Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel album:<br/>
+    <%= @album.errors.full_messages.join("</br>").html_safe %>
+</div>
+<% end %>
+
+<%= form_for @album do |f| %>
+<%= render :partial=>'form', :object=>f %>
+<%= f.submit %> ou <%= link_to 'annuler', :back %>
+<% end %>
+
+

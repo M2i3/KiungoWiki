@@ -1,0 +1,7 @@
+<%= title("Modifier l'album") %>
+<%= form_for @album do |f| %>
+<%= render :partial=>'form', :object=>f %>
+<%= f.submit %> ou <%= link_to 'annuler', :back %>
+<% end %>
+
+<%= render :partial=>'links' %>

@@ -1,0 +1,29 @@
+<%= title("Albums") %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Released Date</th>
+      <th>Label</th>
+      <th>Media Type</th>
+      <th>Reference Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @albums.each do |album| %>
+    <tr>
+      <td><%= album.title %></td>
+      <td><%= album.date_released %></td>
+      <td><%= album.label %></td>
+      <td><%= album.media_type %></td>
+      <td><%= album.reference_code %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<%= link_to 'New', new_album_path %>
+

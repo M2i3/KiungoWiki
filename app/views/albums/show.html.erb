@@ -1,0 +1,14 @@
+<%= title(@album.title + " - Album") %>
+
+<div class="section summary">
+  <p>Title: <%= @album.title %></p>
+  <p>Released Date: <%= @album.date_released %></p>
+  <p>Label: <%= @album.label %></p>
+  <p>Media Type: <%= @album.media_type %></p>
+  <p>Reference code: <%= @album.reference_code %></p>
+</div>
+
+
+<%= render :partial=>'links' %>
+
+
