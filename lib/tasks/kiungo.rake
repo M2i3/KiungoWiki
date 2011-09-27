@@ -48,11 +48,16 @@ namespace :kiungo do
         end # rawWorks.each
 
         RawSupport.all.each do |rawSupport|
-          Album.create!(:title=>rawSupport.support_title, 
-                        :date_released=>rawSupport.date_released,
-                        :label=>rawSupport.label_id, 
-                        :media_type=>rawSupport.media_type,
-                        :reference_code=>rawSupport.reference_code)
+          if rawSupport.label_id != "0" 
+            if rawSupport.label_id != ""
+              l = RawLabel.where(:label_id => rawSupport.label_id).first
+              Album.create!(:title=>rawSupport.support_title, 
+                          :date_released=>rawSupport.date_released,
+                          :label=>l[:label_name], 
+                          :media_type=>rawSupport.media_type,
+                          :reference_code=>rawSupport.reference_code)
+            end
+          end
         end # rawSupports.each
       end
     end
