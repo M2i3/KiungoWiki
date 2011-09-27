@@ -13,11 +13,23 @@
   <tbody>
     <% @albums.each do |album| %>
     <tr>
-      <td><%= album.title %></td>
-      <td><%= album.date_released %></td>
-      <td><%= album.label %></td>
-      <td><%= album.media_type %></td>
-      <td><%= album.reference_code %></td>
+      <td>
+        <%= link_to album.title, album_path(album) %>
+      </td>
+      <td>
+      	<% if (album.date_released != "0-00-00") then %>
+             <%= album.date_released %>
+      	<% end %>
+      </td>
+      <td>
+        <%= album.label %>
+      </td>
+      <td>
+        <%= album.media_type %>
+      </td>
+      <td>
+        <%= album.reference_code %>
+      </td>
     </tr>
     <% end %>
   </tbody>

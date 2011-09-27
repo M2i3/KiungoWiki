@@ -51,7 +51,7 @@ namespace :kiungo do
           Album.create!(:title=>rawSupport.support_title, 
                         :date_released=>rawSupport.date_released,
                         :label=>rawSupport.label_id, 
-                        :media_type=>rawSupport.support_id,
+                        :media_type=>rawSupport.media_type,
                         :reference_code=>rawSupport.reference_code)
         end # rawSupports.each
       end
