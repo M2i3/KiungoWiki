@@ -27,6 +27,9 @@ group :development, :test do
   gem 'factory_girl'
   gem 'factory_girl_rails'  
   gem 'mongoid-rspec'
+
+  
+  gem 'guard-rspec'    # To run the tests continuously
 end
 
 # ======
