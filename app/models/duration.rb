@@ -1,42 +1,67 @@
-class Duration < String
+class Duration
   include Mongoid::Fields::Serializable
   
-  attr_reader :minutes, :seconds
+  attr_reader :hours, :minutes, :seconds
 
-  def deserialize(value)
-
-    value = nil if value.blank?
-
-    case value
-    when ::Fixnum        
-      return deserialize(value.to_s)
-    when ::Hash
-      @minutes, @seconds = value[:minutes], value[:seconds]
-    when ::Duration
-      @minutes, @seconds = value.minutes, value.seconds
-    when ::String
-      if value =~ /^(\d{1,4})(?:\:?(\d{2}))?$/
-        @minutes = $1 ? $1.to_i : 0
-        @seconds = $2 ? $2.to_i : 0
-      end
-    when nil #invaluable for existing databases!
-     @minutes, @seconds = 0, 0, 0
+  def serialize(object)
+    if object.blank? 
+      nil
     else
-      raise ArgumentError, "Unexpected duration of type #{value.class} when instancing #{self.class.name}"
+      deserialize(object).to_i
+    end 
+  end
+
+  def deserialize(object)
+
+    object = nil if object.blank?
+
+    case object
+    when ::Integer
+      @hours, @minutes, @seconds = (object / 3600), ((object % 3600) / 60), (object % 60)
+
+    when ::Hash
+      @hours, @minutes, @seconds = object[:hours], object[:minutes], object[:seconds]
+
+    when ::Duration
+      @hours, @minutes, @seconds = object.hours, object.minutes, object.seconds
+
+    when ::String
+      @seconds, @minutes, @hours = object.split(':').map(&:to_i).reverse
+
+    when nil #invaluable for existing databases!
+     @hours, @minutes, @seconds = 0, 0, 0
+
+    else
+      raise ArgumentError, "Unexpected duration of type #{object.class} when instancing #{self.class.name}"
     end
 
+    @hours = 0 if @hours.nil?
     @minutes = 0 if @minutes.nil?
     @seconds = 0 if @seconds.nil?
-    
-    self.replace(to_s)
+
     self
   end
 
-  def valid_seconds?(seconds)
+  def to_i
+    (seconds + minutes*60 + hours*3600)
+  end
+
+  def to_s
+    duration = []
+    duration << (hours.to_s) unless hours.zero?
+    duration << (duration.empty? ? minutes.to_s : "00#{minutes}"[-2..-1]) unless (minutes.zero? && duration.empty?)
+    duration << (duration.empty? ? seconds.to_s : "00#{seconds}"[-2..-1])
+    duration.join(":")
+  end
+
+
+  
+
+  def valid_seconds?(seconds = self.seconds)
     return true if seconds.zero?
     (0..59).include?(seconds)
   end
-
+  
   def seconds=(value)
     value = (value.nil?) ? 0 : value
     raise ArgumentError, "invalid seconds" unless valid_seconds?(value)
@@ -101,15 +126,6 @@ class Duration < String
     self
   end
 
-  def to_i
-    m,s = [minutes,seconds].collect(&:to_i) # converts +nil+ values to zero
-    (s + m*60)
-  end
-
-  def to_s
-    duration = @minutes.to_s + ":" + @seconds.to_s
-    return duration
-  end
 
   def to_hash
     result = {}
