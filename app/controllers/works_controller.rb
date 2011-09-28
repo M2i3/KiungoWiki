@@ -2,6 +2,8 @@ class WorksController < ApplicationController
 
   def index
     @works = Work.all
+    @works = @works.queried(params[:q]) if params[:q]
+    @works = @works.limit(20)
 
     respond_to do |format|
       format.xml { render :xml=>@works }
@@ -74,7 +76,6 @@ class WorksController < ApplicationController
   end
 
   def lookup
-# find an encoding that allows determining it's not really BSON ID
     respond_to do |format|
       #careful here not to allow injection of bad stuff in the regex
       format.json { render :json=>(Work.queried(params[:q]).limit(20).collect{|w| {id: "oid:#{w.id}", name: w.title} } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) }
