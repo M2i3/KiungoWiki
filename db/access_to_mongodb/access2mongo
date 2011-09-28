@@ -217,11 +217,11 @@ mongoimport -d kiungo_raw_db -c raw_roles -f role_id,role_name --type json --fil
 mongoimport -d kiungo_raw_db -c raw_owners -f owner_id,owner_surname,owner_given_name --type json --file owners_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_works -f work_id,work_title,date_written,language_id,verified_text,verified_credits,original_work_id,notes,lyrics --type json --file works_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_recordings -f recording_id,recording_date,duration,category_id,notes,rythm,work_id --type json --file recordings_${DATE}.json
-mongoimport -d kiungo_raw_db -c raw_links_owner_support -f link_owner_support_id,owner_id,support_id --type json --file links_owner_support_${DATE}.json
-mongoimport -d kiungo_raw_db -c raw_links_work_editor -f link_work_editor_id,work_id,editor_id --type json --file links_work_editor_${DATE}.json
-mongoimport -d kiungo_raw_db -c raw_links_work_artist -f link_work_artist_id,work_id,artist_id,role_id --type json --file links_work_artist_${DATE}.json
-mongoimport -d kiungo_raw_db -c raw_links_recording_artist_role -f link_recording_artist_role_id,recording_id,artist_id,role_id --type json --file links_recording_artist_role_${DATE}.json
-mongoimport -d kiungo_raw_db -c raw_links_recording_support -f link_recording_support_id,recording_id,support_id,support_element_id,face,track,notes --type json --file links_recording_support_${DATE}.json
+mongoimport -d kiungo_raw_db -c raw_links_owner_supports -f link_owner_support_id,owner_id,support_id --type json --file links_owner_support_${DATE}.json
+mongoimport -d kiungo_raw_db -c raw_links_work_editors -f link_work_editor_id,work_id,editor_id --type json --file links_work_editor_${DATE}.json
+mongoimport -d kiungo_raw_db -c raw_links_work_artists -f link_work_artist_id,work_id,artist_id,role_id --type json --file links_work_artist_${DATE}.json
+mongoimport -d kiungo_raw_db -c raw_links_recording_artist_roles -f link_recording_artist_role_id,recording_id,artist_id,role_id --type json --file links_recording_artist_role_${DATE}.json
+mongoimport -d kiungo_raw_db -c raw_links_recording_supports -f link_recording_support_id,recording_id,support_id,support_element_id,face,track,notes --type json --file links_recording_support_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_supports -f support_id,support_title,artist_id,category_id,reference_code,number_of_pieces,alpha_ordering,date_released,temporal_ordering,notes,media_type,label_id --type json --file supports_${DATE}.json
 
 # Effacement des fichiers intermédiaires.
