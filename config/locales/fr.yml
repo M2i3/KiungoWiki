@@ -6,7 +6,30 @@
 #  - Tsutomu Kuroda - http://github.com/kuroda (t-kuroda@oiax.jp)
 
 fr:
+  show: "Afficher"
+  modify: "Modifier"
+  discuss: "Discuter"
+  history: "Historique"
+  new: "Nouveau"
+  cancel: "Annuler"
+  modify_artist: "Modifier l'artiste"
+  birth: "Naissance"
+  death: "Décès"
+
   mongoid:
+    models:
+      artist:
+        one: Artiste
+        other: Artistes
+      work:
+        one: Oeuvre
+        other: Oeuvres
+      recording:
+        one: Enregistrement
+        other: Enregistrements
+      album:
+        one: Album
+        other: Albums
     errors:
       messages:
         document_not_found: "Document introuvable"
@@ -145,6 +168,11 @@ fr:
   attributes:
     created_at: "Créé le"
     updated_at: "Modifié le"
+    name: "Nom"
+    birth_date: "Date de naissance"
+    birth_location: "Lieu de naissance"
+    death_date: "Date de décès"
+    death_location: "Lieu de décès"
 
   errors:
     format: "Le %{attribute} %{message}"

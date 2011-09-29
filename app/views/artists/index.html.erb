@@ -1,13 +1,13 @@
-<%= title("Artists") %>
+<%= title(Artist.model_name.human.pluralize) %>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Birth Date</th>
-      <th>Birth Location</th>
-      <th>Death Date</th>
-      <th>Death Location</th>
+      <th><%= Artist.human_attribute_name("name") %></th>
+      <th><%= Artist.human_attribute_name("birth_date") %></th>
+      <th><%= Artist.human_attribute_name("birth_location") %></th>
+      <th><%= Artist.human_attribute_name("death_date") %></th>
+      <th><%= Artist.human_attribute_name("death_location") %></th>
     </tr>
   </thead>
   <tbody>
@@ -43,5 +43,5 @@
 
 
 
-<%= link_to 'New', new_artist_path %>
+<%= link_to t("new"), new_artist_path %>
 

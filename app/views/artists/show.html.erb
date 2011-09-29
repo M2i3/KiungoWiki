@@ -1,22 +1,18 @@
 <%= title(@artist.name) %>
 <div class="section summary">     
 	<dl> 
-    <%= date_location_formatted("Naissance", @artist.birth_date, @artist.birth_location) %>
-    <%= date_location_formatted("Décès", @artist.death_date, @artist.death_location) %>
+    <%= date_location_formatted(t("birth"), @artist.birth_date, @artist.birth_location) %>
+    <%= date_location_formatted(t("death"), @artist.death_date, @artist.death_location) %>
 	</dl>
 </div>
-<h2>Oeuvres</h2>
+<h2><%= Work.model_name.human.pluralize %></h2>
 <p>Here be the Works</p>
 
-<h2>Discographie</h2>
+<h2><%= Album.model_name.human.pluralize %></h2>
 <p>Here be albums</p>
-<small>
-<% if (@artist.updated_at) then %>
-	Modifié le <%= @artist.updated_at %>
-<% elsif (@artist.created_at) then %>
-	Créé le <%= @artist.created_at %>
-<% end %>
-</small>	
+
+<%= content_tag(:small, Artist.human_attribute_name("updated_at") + " " + @artist.updated_at.to_s) %>
+
 <%= render :partial=>'links' %>
 
 
