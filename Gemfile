@@ -29,6 +29,8 @@ group :development, :test do
   gem 'mongoid-rspec'
 
   
+  gem 'rb-inotify'
+  gem 'libnotify'
   gem 'guard-rspec'    # To run the tests continuously
 end
 
