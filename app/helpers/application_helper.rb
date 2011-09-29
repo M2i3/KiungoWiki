@@ -5,7 +5,7 @@ module ApplicationHelper
     if wwl.work_id
       link_to(wwl.title, work_path(:id=>wwl.work_id))
     else
-      link_to(wwl.title, works_path(:title=>wwl.title))
+      link_to(wwl.title, works_path(:q=>wwl.reference))
     end
   end
 
