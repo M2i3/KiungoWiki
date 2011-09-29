@@ -4,6 +4,7 @@ fr:
   mongoid:
     models:
       recording: Enregistrement
+      work_wiki_link: Lien Wiki d'oeuvre
     attributes:
       recording:
         work_name: Oeuvre
