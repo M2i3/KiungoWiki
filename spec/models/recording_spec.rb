@@ -66,43 +66,46 @@ describe Recording do
 			end
 		}
 	end
-	
-	describe "Testing for name" do
-		[""].each {|value|
-			it "when specified, name should be a non-empty string of alphanumeric characters and symbols (#{value} is invalid)" do
-				rec = Factory.build(:recording, :work_title=>value)
-				rec.valid?.should be_false
-			end
-		}
-		# TODO : Complete this list
-		#			+ How can I test for accentuated characters? They always crash the script with "invalid multibyte char"
-    YAML.load_file("spec/factories/multi.yml")["multibytestrings"] + 
-		[	"A",
-			"a",
-			"Ab",
-			"1",
-			"Alpha123",
-			"with spaces",
-			"With 2 spaces",
-			":",
-			",",
-			".",
-			"'",
-			"\"",
-			"!",
-			"@",
-			"#",
-			"%",
-			"?",
-			"&",
-			"(",
-			")"].each {|value|
-			it "when specified, work_title should be a non-empty string of alphanumeric characters and symbols (#{value} is valid)" do
-				rec = Factory.build(:recording, :work_title=>value)
-				rec.valid?.should be_true
-			end
-		}
-	end
+
+  if false # TODO this test needs reviewing considering the recording is a link on the work and does not have a title by itself.	
+	  describe "Testing for name" do
+
+		  [""].each {|value|
+			  it "when specified, name should be a non-empty string of alphanumeric characters and symbols (#{value} is invalid)" do
+				  rec = Factory.build(:recording, :work_title=>value)
+				  rec.valid?.should be_false
+			  end
+		  }
+		  # TODO : Complete this list
+		  #			+ How can I test for accentuated characters? They always crash the script with "invalid multibyte char"
+      YAML.load_file("spec/factories/multi.yml")["multibytestrings"] + 
+		  [	"A",
+			  "a",
+			  "Ab",
+			  "1",
+			  "Alpha123",
+			  "with spaces",
+			  "With 2 spaces",
+			  ":",
+			  ",",
+			  ".",
+			  "'",
+			  "\"",
+			  "!",
+			  "@",
+			  "#",
+			  "%",
+			  "?",
+			  "&",
+			  "(",
+			  ")"].each {|value|
+			  it "when specified, work_title should be a non-empty string of alphanumeric characters and symbols (#{value} is valid)" do
+				  rec = Factory.build(:recording, :work_title=>value)
+				  rec.valid?.should be_true
+			  end
+		  }
+	  end
+  end
 	
 	describe "Testing the recording date" do
 	  it "for proper deserialization" do
