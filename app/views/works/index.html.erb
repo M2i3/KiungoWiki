@@ -1,7 +1,7 @@
 <%= title("Works") %>
 
 <form action="" method="get">
-  <input type="text" name="q" /> 
+  <input type="text" name="q" value="<%= params[:q] if params[:q] %>" /> 
   <input type="submit" />
 </form>
 
