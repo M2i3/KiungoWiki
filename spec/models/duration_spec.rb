@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'mongoid/fields/serializable/duration'
 
-describe Duration do
+describe Mongoid::Fields::Serializable::Duration do
   #
   # large size durations ref: http://wiki.answers.com/Q/What_is_the_longest_song_ever_recorded
   #
