@@ -22,42 +22,45 @@ namespace :kiungo do
         end # rawLanguages.each
 
         RawWork.all.each do |rawWork|
-          if rawWork.language_id != "0" 
-            if rawWork.language_id != ""
-              l = RawLanguage.where(:language_id => rawWork.language_id).first
-              Work.create!(:title=>rawWork.work_title, 
-                          :date_written=>rawWork.date_written,
-                          :language_code=>l[:language_code],
-                          :lyrics=>rawWork.lyrics,
-                          :origworkid=>rawWork.work_id)
-            else
-              Work.create!(:title=>rawWork.work_title, 
+          params = {:title=>rawWork.work_title, 
                            :date_written=>rawWork.date_written,
                            :lyrics=>rawWork.lyrics,
-                           :origworkid=>rawWork.work_id)
+                           :origworkid=>rawWork.work_id}
+          unless ["0","",nil].include?(rawWork.language_id)
+            params[:language_code] = RawLanguage.where(:language_id => rawWork.language_id).first[:language_code]
+          end
+          
+          lwe = RawLinksWorkEditor.where(:work_id => rawWork.work_id)
+          unless lwe.first == nil 
+            lwe.each do |lwe_i|
+              e = RawEditor.where(:editor_id => lwe_i[:editor_id])
+              unless e.first == nil
+                params[:publisher] = e.first[:editor_name]
+              end
             end
-          end                       
+          end
+          Work.create!(params)
+                     
           RawRecording.where(:work_id=>rawWork.work_id).each do |rawRecording|
-            Recording.create!(:title=>rawWork.work_title,
-                              :recording_date=>rawRecording.recording_date, 
-                              :duration=>rawRecording.duration,
-                              :rythm=>rawRecording.rythm,
-                              :work_id=>rawRecording.work_id)
+            params = {:title=>rawWork.work_title,
+                      :recording_date=>rawRecording.recording_date, 
+                      :duration=>rawRecording.duration,
+                      :rythm=>rawRecording.rythm,
+                      :work_id=>rawRecording.work_id}
+            Recording.create!(params)
             
           end # rawRecordings.each
         end # rawWorks.each
 
         RawSupport.all.each do |rawSupport|
-          if rawSupport.label_id != "0" 
-            if rawSupport.label_id != ""
-              l = RawLabel.where(:label_id => rawSupport.label_id).first
-              Album.create!(:title=>rawSupport.support_title, 
-                          :date_released=>rawSupport.date_released,
-                          :label=>l[:label_name], 
-                          :media_type=>rawSupport.media_type,
-                          :reference_code=>rawSupport.reference_code)
-            end
+          params = {:title=>rawSupport.support_title, 
+                    :date_released=>rawSupport.date_released,
+                    :media_type=>rawSupport.media_type,
+                    :reference_code=>rawSupport.reference_code}
+          unless["0","",nil].include?(rawSupport.label_id)
+            params[:label] = RawLabel.where(:label_id => rawSupport.label_id).first[:label_name]
           end
+          Album.create!(params)
         end # rawSupports.each
       end
     end
