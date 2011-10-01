@@ -1,7 +1,9 @@
 class ArtistsController < ApplicationController
 
   def index
-    @artists = Artist.all(sort: [:name, :asc]).limit(100)
+    @artists = Artist.all(sort: [:name, :asc])
+    @artists = @artists.queried(params[:q]) if params[:q]
+    @artists = @artists.limit(100)
     respond_to do |format|
       format.xml { render :xml=>@artists }
       format.json { render :json=>@artists }
