@@ -264,12 +264,27 @@ class IncDate < String
     (d + m*100 + y*10000)
   end
 
+#  def to_s
+#    dt = to_date
+#    ord = has_day? ? dt.day.ordinalize : nil
+#    result = case defined_parts
+#      when [:year, :month, :day] then dt.strftime("%B #{ord}, %Y")
+#      when [:year, :month] then dt.strftime("%B %Y")
+#      when [:month, :day] then dt.strftime("%B #{ord}")
+#      when [:year, :day] then dt.strftime("#{ord} of the month, %Y")
+#      when [:year] then dt.strftime("%Y")
+#      when [:month] then dt.strftime("%B")
+#      when [:day] then "#{ord} of the month"
+#      else return "unknown"
+#    end
+#  end
+
   def to_s
     date = @year.to_s
     [@month, @day].each {|value|
-      date += '-%02d' % value if value
+      date += '-%02d' % value if value && value != 0
     }
-    return date
+      return date == "0" ? "" : date
   end
 
   #

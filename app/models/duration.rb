@@ -49,6 +49,7 @@ class Duration
     duration << (hours.to_s) unless hours.zero?
     duration << (duration.empty? ? minutes.to_s : "00#{minutes}"[-2..-1]) unless (minutes.zero? && duration.empty?)
     duration << (duration.empty? ? seconds.to_s : "00#{seconds}"[-2..-1])
-    duration.join(":")
+    d = duration.join(":")
+    return d == "0" ? "" : d
   end
 end
