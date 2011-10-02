@@ -1,14 +1,17 @@
 <%= title("Recordings") %>
 
+<%= render partial: 'common/search' %>
+
 <table>
   <thead>
     <tr>
-      <th><%= Work.human_attribute_name("title") %></th>
+      <th><%= Recording.human_attribute_name("title") %></th>
       <th><%= Recording.human_attribute_name("recording_date") %></th>
       <th><%= Recording.human_attribute_name("recording_location") %></th>
       <th><%= Recording.human_attribute_name("duration") %></th>
-      <th>Artiste(s)</th>
-      <th>Album(s)</th>
+      <th><%= Recording.human_attribute_name("rythm") %></th>
+      <th><%= Recording.human_attribute_name("artist_wiki_link") %></th>
+      <th><%= Recording.human_attribute_name("album_wiki_link") %></th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +21,7 @@
       <td><%= recording.recording_date %></td>
       <td><%= recording.recording_location %></td>
       <td><%= recording.duration %></td>
+      <td><%= recording.rythm %></td>
       <td><%= artist_wiki_link_path(recording.artist_wiki_link) %></td>
       <td><%= album_wiki_link_path(recording.album_wiki_link) %></td>
     </tr>

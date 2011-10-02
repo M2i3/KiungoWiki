@@ -1,13 +1,15 @@
-<%= title("Albums") %>
+<%= title(Album.model_name.human.pluralize) %>
+
+<%= render partial: 'common/search' %>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Released Date</th>
-      <th>Label</th>
-      <th>Media Type</th>
-      <th>Reference Code</th>
+      <th><%= Album.human_attribute_name("title") %></th>
+      <th><%= Album.human_attribute_name("date_released") %></th>
+      <th><%= Album.human_attribute_name("label") %></th>
+      <th><%= Album.human_attribute_name("media_type") %></th>
+      <th><%= Album.human_attribute_name("reference_code") %></th>
     </tr>
   </thead>
   <tbody>

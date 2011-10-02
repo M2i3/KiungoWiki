@@ -1,20 +1,17 @@
 <%= title("Works") %>
 
-<form action="" method="get">
-  <input type="text" name="q" value="<%= params[:q] if params[:q] %>" /> 
-  <input type="submit" value="<%= t("search") %>" />
-</form>
+<%= render partial: 'common/search' %>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Date written</th>
-      <th>Copyright</th>
-      <th>Language code</th>
-      <th>Publisher</th>
-      <th>Lyrics</th>
-      <th>Chords</th>
+      <th><%= Work.human_attribute_name("title") %></th>
+      <th><%= Work.human_attribute_name("date_written") %></th>
+      <th><%= Work.human_attribute_name("copyright") %></th>
+      <th><%= Work.human_attribute_name("language_code") %></th>
+      <th><%= Work.human_attribute_name("publisher") %></th>
+      <th><%= Work.human_attribute_name("lyrics") %></th>
+      <th><%= Work.human_attribute_name("chords") %></th>
     </tr>
   </thead>
   <tbody>

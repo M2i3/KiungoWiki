@@ -1,44 +1,29 @@
-<ul>
-  <li>
-    <%= form.label :work_title %>
-    <%= form.fields_for :work_wiki_link do |work_link_form| %>
-      <%= work_link_form.text_field :encoded_link, :class=>"work_title_lookup", :"data-pre"=>[work_link_form.object.combined_link].to_json %>
-    <% end %>
-  </li>
+<dl>
+  <dt><%= form.label :work_title %></dt>
+  <dd><%= form.fields_for :work_wiki_link do |work_link_form| %>
+        <%= work_link_form.text_field :encoded_link, :class=>"work_title_lookup", :"data-pre"=>[work_link_form.object.combined_link].to_json %>
+      <% end %></dd>
 
-  <li>
-    <%= form.label :recording_date %>
-    <%= form.text_field :recording_date %>
-  </li>
+  <dt><%= form.label :recording_date %></dt>
+  <dd><%= form.text_field :recording_date %></dd>
 
-  <li>
-    <%= form.label :recording_location %>
-    <%= form.text_field :recording_location %>
-  </li>
+  <dt><%= form.label :recording_location %></dt>
+  <dd><%= form.text_field :recording_location %></dd>
 
-  <li>
-    <%= form.label :duration %>
-    <%= form.text_field :duration %>
-  </li>
+  <dt><%= form.label :duration %></dt>
+  <dd><%= form.text_field :duration %></dd>
 
-  <li>
-    <%= form.label :rythm %>
-    <%= form.text_field :rythm %>
-  </li>
+  <dt><%= form.label :rythm %></dt>
+  <dd><%= form.text_field :rythm %></dd>
 
-  <li>
-    <%= form.label :artist_name %>
-    <%= form.fields_for :artist_wiki_link do |artist_link_form| %>
-      <%= artist_link_form.text_field :encoded_link, :class=>"artist_name_lookup", :"data-pre"=>[artist_link_form.object.combined_link].to_json %>
-    <% end %>
-  </li>
+  <dt><%= form.label :artist_name %></dt>
+  <dd><%= form.fields_for :artist_wiki_link do |artist_link_form| %>
+        <%= artist_link_form.text_field :encoded_link, :class=>"artist_name_lookup", :"data-pre"=>[artist_link_form.object.combined_link].to_json %>
+      <% end %></dd>
 
-  <li>
-    <%= form.label :album_title %>
-    <%= form.fields_for :album_wiki_link do |album_link_form| %>
-      <%= album_link_form.text_field :encoded_link, :class=>"album_title_lookup", :"data-pre"=>[album_link_form.object.combined_link].to_json %>
-    <% end %>
-  </li>
-
-</ul>
+  <dt><%= form.label :album_title %></dt>
+  <dd><%= form.fields_for :album_wiki_link do |album_link_form| %>
+        <%= album_link_form.text_field :encoded_link, :class=>"album_title_lookup", :"data-pre"=>[album_link_form.object.combined_link].to_json %>
+      <% end %></dd>
+</dl>
 

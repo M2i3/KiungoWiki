@@ -1,9 +1,6 @@
 <%= title(Artist.model_name.human.pluralize) %>
 
-<form action="" method="get">
-  <input type="text" name="q" value="<%= params[:q] if params[:q] %>" /> 
-  <input type="submit" value="<%= t("search") %>" />
-</form>
+<%= render partial: 'common/search' %>
 
 <table>
   <thead>
