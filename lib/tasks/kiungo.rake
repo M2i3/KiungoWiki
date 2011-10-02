@@ -39,15 +39,16 @@ namespace :kiungo do
               end
             end
           end
-          Work.create!(params)
+          w = Work.create!(params)
                      
           RawRecording.where(:work_id=>rawWork.work_id).each do |rawRecording|
             params = {:title=>rawWork.work_title,
                       :recording_date=>rawRecording.recording_date, 
                       :duration=>rawRecording.duration,
                       :rythm=>rawRecording.rythm,
-                      :work_id=>rawRecording.work_id}
-            Recording.create!(params)
+                      :work_wiki_link=>WorkWikiLink.new({:reference=>w.id,:title=>w.title,:work_id=>w.id})}
+            
+            r = Recording.create!(params)
             
           end # rawRecordings.each
         end # rawWorks.each

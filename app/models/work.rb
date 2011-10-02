@@ -10,7 +10,6 @@ class Work
   field :publisher, :type => String
   field :lyrics, :type => String
   field :chords, :type => String
-  field :origworkid, :type => Integer
 
   validates_presence_of :title
 
@@ -21,8 +20,6 @@ class Work
       case field
         when :title, :publisher, :copyright, :language_code
           current_query = current_query.where(field=>/#{wsq[field].downcase}/i)
-        when :origworkid
-          current_query = current_query.where(field=>wsq[field].to_i)
         when :date_written
           current_query = current_query.where(field=>wsq[field])        
       end 
