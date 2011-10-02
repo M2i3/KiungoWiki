@@ -17,7 +17,7 @@ class ArtistWikiLink
   end
 
   def encoded_link
-    self.title
+    self.name
   end
   
   def encoded_link=(value)
