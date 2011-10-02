@@ -3,9 +3,10 @@
 <table>
   <thead>
     <tr>
-      <th>Titre</th>
-      <th>Date</th>
-      <th>Durée</th>
+      <th><%= Work.human_attribute_name("title") %></th>
+      <th><%= Recording.human_attribute_name("recording_date") %></th>
+      <th><%= Recording.human_attribute_name("recording_location") %></th>
+      <th><%= Recording.human_attribute_name("duration") %></th>
       <th>Artiste(s)</th>
       <th>Album(s)</th>
     </tr>
@@ -15,6 +16,7 @@
     <tr>
       <td><%= link_to recording.title, recording_path(recording) %></td>
       <td><%= recording.recording_date %></td>
+      <td><%= recording.recording_location %></td>
       <td><%= recording.duration %></td>
       <td><%= recording.artists.join(", ") %></td>
       <td><%= recording.albums.join(", ") %></td>
@@ -25,5 +27,5 @@
 
 
 
-<%= link_to 'New', new_recording_path %>
+<%= link_to t("new"), new_recording_path %>
 
