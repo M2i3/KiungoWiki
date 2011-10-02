@@ -12,7 +12,7 @@ class ArtistsController < ApplicationController
   end
 
   def show
-	@artist = Artist.find(params[:id])
+    @artist = Artist.find(params[:id])
     respond_to do |format|
       format.xml { render :xml=>@artist.to_xml(:except=>[:versions]) }
       format.json { render :json=>@artist }

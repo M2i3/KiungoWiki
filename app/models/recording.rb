@@ -36,18 +36,19 @@ class Recording
     self.work_title
   end
 
-  def artist
-    self.artist_wiki_link.name 
+  def artist_name
+    self.artist_wiki_link.name
   end
 
-  def artist=(value)
+  def artist_name=(value)
     self.artist_wiki_link.name = value
   end
   
-  def album
+  def album_title
     self.album_wiki_link.title 
   end
-  def album=(value)
+
+  def album_title=(value)
     self.album_wiki_link.title = value
   end
 

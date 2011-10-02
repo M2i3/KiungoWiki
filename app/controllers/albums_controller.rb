@@ -14,6 +14,7 @@ class AlbumsController < ApplicationController
     @album = Album.find(params[:id])
 
     respond_to do |format|
+      format.xml { render :xml=>@recording.to_xml(:except=>[:versions]) }
       format.json { render :json=>@album }
       format.html
     end

@@ -18,8 +18,8 @@
       <td><%= recording.recording_date %></td>
       <td><%= recording.recording_location %></td>
       <td><%= recording.duration %></td>
-      <td><%= recording.artist %></td>
-      <td><%= recording.album %></td>
+      <td><%= artist_wiki_link_path(recording.artist_wiki_link) %></td>
+      <td><%= album_wiki_link_path(recording.album_wiki_link) %></td>
     </tr>
     <% end %>
   </tbody>
