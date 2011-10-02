@@ -1,16 +1,16 @@
 # Étiquettes en français pour KiungoWiki
 
 fr:
-  show: "Afficher"
-  modify: "Modifier"
-  discuss: "Discuter"
-  history: "Historique"
-  new: "Nouveau"
-  search: "Rechercher"
-  cancel: "Annuler"
-  modify_artist: "Modifier l'artiste"
-  birth: "Naissance"
-  death: "Décès"
+  show: Afficher
+  modify: Modifier
+  discuss: Discuter
+  history: Historique
+  new: Nouveau
+  search: Rechercher
+  cancel: Annuler
+  modify_artist: Modifier l'artiste
+  birth: Naissance
+  death: Décès
 
   mongoid:
     models:
@@ -26,22 +26,36 @@ fr:
       album:
         one: Album
         other: Albums
-      work_wiki_link: Lien Wiki d'oeuvre
-    errors:
-      messages:
-        document_not_found: "Document introuvable"
     attributes:
+      album:
+        date_released: Date de sortie
+        media_type: Type de support
+        reference_code: Code de référence
       recording:
         work_name: Oeuvre
         recording_date: Date d'enregistrement
         recording_location: Lieu
         duration: Durée
         rythm: Rythme
+        artist_wiki_link: Artiste(s)
+        album_wiki_link: Album(s)
+      work:
+        date_written: Date d'écriture
+        copyright: Droits d'auteurs
+        language_code: Code de langue
+        publisher: Éditeur
+        lyrics: Paroles
+        chords: Accords
+    errors:
+      messages:
+        document_not_found: Document introuvable
+
   attributes:
-    created_at: "Créé le"
-    updated_at: "Modifié le"
-    name: "Nom"
-    birth_date: "Date de naissance"
-    birth_location: "Lieu de naissance"
-    death_date: "Date de décès"
-    death_location: "Lieu de décès"
+    created_at: Créé le
+    updated_at: Modifié le
+    name: Nom
+    title: Titre
+    birth_date: Date de naissance
+    birth_location: Lieu de naissance
+    death_date: Date de décès
+    death_location: Lieu de décès
