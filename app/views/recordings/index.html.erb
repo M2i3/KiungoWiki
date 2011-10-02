@@ -16,8 +16,8 @@
       <td><%= link_to recording.title, recording_path(recording) %></td>
       <td><%= recording.recording_date %></td>
       <td><%= recording.duration %></td>
-      <td><%= recording.artists.join(", ") %></td>
-      <td><%= recording.albums.join(", ") %></td>
+      <td><%= recording.artist %></td>
+      <td><%= recording.album %></td>
     </tr>
     <% end %>
   </tbody>

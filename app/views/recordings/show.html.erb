@@ -9,9 +9,9 @@
 </div>
 
 <h2>Crédits</h2>
-<p>Here be credits</p>
+<p><%= artist_wiki_link_path(@recording.artist_wiki_link) %></p>
 
 <h2>Albums</h2>
-<p>Here be albums</p>
+<p><%= album_wiki_link_path(@recording.album_wiki_link) %></p>
 
 <%= render :partial=>'links' %>
