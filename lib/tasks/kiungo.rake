@@ -46,7 +46,6 @@ namespace :kiungo do
                       :recording_date=>rawRecording.recording_date, 
                       :duration=>rawRecording.duration,
                       :rythm=>rawRecording.rythm,
-                      :work_id=>rawRecording.work_id,
                       :work_wiki_link=>WorkWikiLink.new({:reference=>w.id,:title=>w.title,:work_id=>w.id})}
             
             r = Recording.create!(params)

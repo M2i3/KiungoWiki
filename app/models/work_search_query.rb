@@ -4,8 +4,7 @@ class WorkSearchQuery < SearchQuery
       copyright: / copyright:"(.+?)" /,
       date_written: / date_written:([0-9]{4,4}(\-|\/)[0-9]{1,2}(\-|\/)[0-9]{1,2}) /,
       language_code:  / language_code:([a-zA-Z]{2,3}) /,
-      publisher: / publisher:"(.+?)" /,
-      origworkid: / origworkid:([0-9]{1,10}) /
+      publisher: / publisher:"(.+?)" /
     })
   end
   def self.catch_all
