@@ -21,6 +21,11 @@ namespace :kiungo do
                         :language_code=>rawLanguage.language_code)
         end # rawLanguages.each
 
+        RawCategory.all.each do |rawCategory|
+          Category.create!(:category_id=>rawCategory.category_id,
+                        :category_name=>rawCategory.category_name)
+        end # RawCategories.each
+
         RawWork.all.each do |rawWork|
           params = {:title=>rawWork.work_title, 
                            :date_written=>rawWork.date_written,
