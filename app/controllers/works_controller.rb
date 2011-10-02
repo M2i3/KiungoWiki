@@ -1,9 +1,9 @@
 class WorksController < ApplicationController
 
   def index
-    @works = Work.all
+    @works = Work.all#(sort: [:title, :asc]) TODO: Add an index on title to enable sorting on huge number of works
     @works = @works.queried(params[:q]) if params[:q]
-    @works = @works.limit(20)
+    @works = @works.limit(100)
 
     respond_to do |format|
       format.xml { render :xml=>@works }

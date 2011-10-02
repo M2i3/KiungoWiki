@@ -1,10 +1,4 @@
-<%= #form_for @artist do |f|
-%>
-	<%= #f.search_field(:artist, :name)
-	%>
-<% #end
-%>
-<form id="searchForm" action="" method="">
-	<input type="text" name="searchPhrase" />
-	<input type="submit" value="Search" name="search" />
+<form action="" method="get">
+  <input type="text" name="q" value="<%= params[:q] if params[:q] %>" /> 
+  <input type="submit" value="<%= t("search") %>" />
 </form>

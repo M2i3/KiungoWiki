@@ -1,8 +1,9 @@
 class AlbumsController < ApplicationController
 
   def index
-    @albums = Album.all
-
+    @albums = Album.all(sort: [:title, :asc]) # TODO: Add an index on title to enable sorting on huge number of albums
+    @albums = @albums.queried(params[:q]) if params[:q]
+    @albums = @albums.limit(100)
     respond_to do |format|
       format.xml { render :xml=>@albums }
       format.json { render :json=>@albums }

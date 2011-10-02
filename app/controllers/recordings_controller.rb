@@ -1,7 +1,9 @@
 class RecordingsController < ApplicationController
 
   def index
-    @recordings = Recording.all.limit(100)
+    @recordings = Recording.all#(sort: [:title, :asc]) TODO: Add an index on title to enable sorting on huge number of recordings
+    @recordings = @recordings.queried(params[:q]) if params[:q]
+    @recordings = @recordings.limit(100)
     respond_to do |format|
       format.xml { render :xml=>@recordings }
       format.json { render :json=>@recordings }

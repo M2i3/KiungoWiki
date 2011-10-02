@@ -13,13 +13,13 @@ class Album
 
   scope :queried, ->(q) {
     current_query = all
-    wsq = AlbumSearchQuery.new(q)
-    wsq.filled_query_fields.each {|field|
+    asq = AlbumSearchQuery.new(q)
+    asq.filled_query_fields.each {|field|
       case field
         when :title, :label, :media_type, :reference_code
-          current_query = current_query.where(field=>/#{wsq[field].downcase}/i)
-        when :date_released
-          current_query = current_query.where(field=>wsq[field])        
+          current_query = current_query.where(field=>/#{asq[field].downcase}/i)
+        when :date_released, :created_at, :updated_at
+          current_query = current_query.where(field=>asq[field])        
       end 
     }
     current_query

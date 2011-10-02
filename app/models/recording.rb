@@ -51,6 +51,20 @@ class Recording
   def album_title=(value)
     self.album_wiki_link.title = value
   end
+  
+  scope :queried, ->(q) {
+    current_query = all
+    rsq = RecordingSearchQuery.new(q)
+    rsq.filled_query_fields.each {|field|
+      case field
+        when :title
+          current_query = current_query.where(field=>/#{rsq[field].downcase}/i)
+        when :created_at, :duration, :recording_date, :rythm, :update_at
+          current_query = current_query.where(field=>rsq[field])        
+      end 
+    }
+    current_query
+  }
 
   private 
   def set_defaults

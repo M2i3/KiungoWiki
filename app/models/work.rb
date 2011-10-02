@@ -18,9 +18,9 @@ class Work
     wsq = WorkSearchQuery.new(q)
     wsq.filled_query_fields.each {|field|
       case field
-        when :title, :publisher, :copyright, :language_code
+        when :title, :publisher, :copyright, :language_code, :lyrics
           current_query = current_query.where(field=>/#{wsq[field].downcase}/i)
-        when :date_written
+        when :date_written, :created_at, :updated_at
           current_query = current_query.where(field=>wsq[field])        
       end 
     }
