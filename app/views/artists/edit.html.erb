@@ -1,7 +1,9 @@
 <%= title(t("modify_artist")) %>
 <%= form_for @artist do |f| %>
 <%= render :partial=>'form', :object=>f %>
-<%= f.submit %> ou <%= link_to t("cancel"), :back %>
+<div class="formActions">
+	<%= f.submit %> ou <%= link_to t("cancel"), :back %>
+</div>
 <% end %>
 
 <%= render :partial=>'links' %>
