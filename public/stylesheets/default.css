@@ -26,7 +26,7 @@ body {
 }
 
 #content {
-  padding: 135px 10px 10px 10px;
+  padding: 135px 15px 10px 15px;
 }
 
 #footer {
@@ -39,25 +39,41 @@ dl, dt, dd {
 	padding: 0;
 	margin: 0;
 }
+
 dl {
  width:100%;
  overflow: hidden;
 }
+
 dt {
  float:left;
  clear: left;
  font-weight: bold;
- width:10%;
+ width:15%;
 }
+
 dt:after { content:":"; }
 dd {
  float:left;
  width:85%;
 }
 
+label {
+	cursor: pointer;
+}
+
 /* main content elements */
 .summary {
 	margin-left: 3em;
+}
+
+.formActions {
+	/* Should be aligned with <dd>s, so `.formActions.marginLeft = dt.width` */
+	margin-left: 15%;
+}
+
+.edit_artist dt, edit_album dt, edit_recording dt, edit-work dt {
+	margin-bottom: 1em;
 }
 
 /* header elements */
@@ -132,7 +148,7 @@ dd {
 #footer ul.nav {
 	position: static;
 	display: block;
-	margin: 0 auto 0 auto;
+	margin: 1em auto 0 auto;
   padding: 0;  
 }
 
@@ -150,7 +166,7 @@ dd {
 
 /* actions on a specific wiki entity */
 #pageactions {
-  position: absolute;
+  position: absolute; /* TODO: find better way */
   top: 100px;
   right: 15px;    
   z-index:999; /* TODO: find better way*/
@@ -272,5 +288,5 @@ dd {
 }
 /* messaging (END) */
 
-/* TEMP start */
+/* TEMP */
 table td { border: 1px solid #000; }
