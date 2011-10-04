@@ -20,7 +20,11 @@ module Mongoid #:nodoc:
         end
 
         def deserialize(object)
-          ::Duration.new(object)
+          begin 
+            ::Duration.new(object)
+          rescue
+            nil
+          end
         end
 
       end    

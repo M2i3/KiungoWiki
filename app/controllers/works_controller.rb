@@ -77,7 +77,6 @@ class WorksController < ApplicationController
 
   def lookup
     respond_to do |format|
-      #careful here not to allow injection of bad stuff in the regex
       format.json { render :json=>(Work.queried(params[:q]).limit(20).collect{|w| {id: "oid:#{w.id}", name: w.title} } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) }
     end
   end

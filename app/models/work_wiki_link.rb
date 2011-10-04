@@ -6,25 +6,17 @@ class WorkWikiLink
   referenced_in :work
   embedded_in :linkable, :polymorphic => true
 
-  def work=(value)
-    if value
-      self.work_id = value.id
-      self.title = value.title
-    else   
-      self.title = nil
-      self.work_id = nil
-    end
-  end
-
-  def encoded_link
-    self.title
+  def reference_text
+    self.reference
   end
   
-  def encoded_link=(value)
+  def reference_text=(value)
     self.reference = value
+
     wsq = WorkSearchQuery.new(value)
     if wsq[:oid]
       self.work = Work.find(wsq[:oid]) 
+      self.title = self.work.title
     else
       self.work = nil
       self.title = self.reference
@@ -32,8 +24,8 @@ class WorkWikiLink
   end
 
   def combined_link
-    if self.title || self.work_id 
-      {id: self.encoded_link, name: self.title.to_s}
+    if self.reference_text || self.title
+      {id: self.reference_text, name: self.title.to_s}
     end
   end 
 end

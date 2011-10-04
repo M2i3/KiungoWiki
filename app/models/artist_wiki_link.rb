@@ -6,25 +6,18 @@ class ArtistWikiLink
   referenced_in :artist
   embedded_in :linkable, :polymorphic => true
 
-  def artist=(value)
-    if value
-      self.artist_id = value.id
-      self.name = value.name
-    else   
-      self.name = nil
-      self.artist_id = nil
-    end
-  end
-
-  def encoded_link
-    self.name
+  def reference_text
+    self.reference
   end
   
-  def encoded_link=(value)
+  def reference_text=(value)
     self.reference = value
+
+    wsq = WorkSearchQuery.new(value)
     asq = ArtistSearchQuery.new(value)
     if asq[:oid]
       self.artist = Artist.find(asq[:oid]) 
+      self.name = self.artist.name
     else
       self.artist = nil
       self.name = self.reference
@@ -32,8 +25,8 @@ class ArtistWikiLink
   end
 
   def combined_link
-    if self.name || self.artist_id 
-      {id: self.encoded_link, name: self.name.to_s}
+    if self.reference_text || self.name
+      {id: self.reference_text, name: self.name.to_s}
     end
   end 
 end

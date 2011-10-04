@@ -18,7 +18,7 @@ describe Recording do
 			end
 		}
 	end
-	
+
 	describe "Testing for the duration" do	
 		["a", -15, 0].each {|value|
 			it "when specified, duration should be numerical and greater than 0 (#{value} is not valid)" do
@@ -27,7 +27,7 @@ describe Recording do
 			end
 		}
 	
-		[1, 15, 300, 10000, 500000, 1000000].each {|value|
+		[1, 15, 300, 10000, 500000, 1000000, "23:32", "50432:23:21", "1:90", "12"].each {|value|
 			it "when specified, duration should be numerical and greater than 0 (#{value} is valid)" do
 				rec = Factory.build(:recording, :duration=>value)
 				rec.valid?.should be_true
@@ -66,6 +66,10 @@ describe Recording do
 			end
 		}
 	end
+
+  describe "Testing the links to the artists" do
+    
+  end
 
   if false # TODO this test needs reviewing considering the recording is a link on the work and does not have a title by itself.	
 	  describe "Testing for name" do

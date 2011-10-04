@@ -16,14 +16,16 @@ class Recording
   validates_numericality_of :sample_rate, :greater_than=>0, :allow_nil=>true
 
   embeds_one :work_wiki_link
-  embeds_one :artist_wiki_link
-  embeds_one :album_wiki_link
+  validates_associated :work_wiki_link  
   accepts_nested_attributes_for :work_wiki_link
-  accepts_nested_attributes_for :artist_wiki_link
+
+  embeds_one :album_wiki_link
   accepts_nested_attributes_for :album_wiki_link
-  validates_associated :work_wiki_link
-  validates_associated :artist_wiki_link
   validates_associated :album_wiki_link
+
+  embeds_many :artist_wiki_links
+  accepts_nested_attributes_for :artist_wiki_links
+  validates_associated :artist_wiki_links
 
   def work_title
     self.work_wiki_link.title 
@@ -35,14 +37,6 @@ class Recording
   def title
     self.work_title
   end
-
-  def artist_name
-    self.artist_wiki_link.name
-  end
-
-  def artist_name=(value)
-    self.artist_wiki_link.name = value
-  end
   
   def album_title
     self.album_wiki_link.title 
@@ -50,6 +44,21 @@ class Recording
 
   def album_title=(value)
     self.album_wiki_link.title = value
+  end
+
+  def artist_wiki_links_text
+    artist_wiki_links.collect{|v| v.reference_text }.join(",")
+  end
+
+  def artist_wiki_links_combined_links
+    artist_wiki_links.collect{|v| v.combined_link }
+  end
+
+  def artist_wiki_links_text=(value)
+    self.artist_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
+    value.split(",").each{|q| 
+      self.artist_wiki_links.build(:reference_text=>q.strip) 
+    }    
   end
   
   scope :queried, ->(q) {
@@ -68,9 +77,9 @@ class Recording
 
   private 
   def set_defaults
-    self.work_wiki_link = WorkWikiLink.new unless self.work_wiki_link
-    self.artist_wiki_link = ArtistWikiLink.new unless self.artist_wiki_link
-    self.album_wiki_link = AlbumWikiLink.new unless self.album_wiki_link
+    self.work_wiki_link ||= WorkWikiLink.new 
+    self.artist_wiki_link ||= ArtistWikiLink.new
+    self.album_wiki_link ||= AlbumWikiLink.new    
   end
 
 end

@@ -74,10 +74,8 @@ class ArtistsController < ApplicationController
   end
 
   def lookup
-# find an encoding that allows determining it's not really BSON ID
     respond_to do |format|
-      #careful here not to allow injection of bad stuff in the regex
-      format.json { render :json=>(Artist.where(:name=>/#{params[:q]}/i).only(:name).limit(20).collect{|w| {id: w.id.to_s.to_query("b"), name: w.name} } << {id: Base64::encode64(params[:q]).to_query("u"), name: params[:q] + " (nouveau)"}) }
+      format.json { render :json=>(Artist.queried(params[:q]).limit(20).collect{|w| {id: "oid:#{w.id}", name: w.name} } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) }
     end
   end
 
