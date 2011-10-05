@@ -64,14 +64,22 @@ namespace :kiungo do
                       :duration=>rawRecording.duration,
                       :rythm=>rawRecording.rythm,
                       :work_wiki_link=>WorkWikiLink.new({:reference=>w.id,:title=>w.title,:work_id=>w.id})}
-            a = RawLinksRecordingArtistRole.where(:recording_id=>rawRecording.recording_id)
-            unless a.count == 0
-              art = RawArtist.where(:artist_id => a.first[:artist_id]).first
-              art2 = Artist.where(:name => art[:artist_given_name]+" "+art[:artist_surname]).first
-              unless art2 == nil
-                params[:artist_wiki_link] = ArtistWikiLink.new({:reference=>art2.id,:name=>art2.name,:artist_id=>art2.id})
+
+            if true 
+              params[:artist_wiki_links_text] = RawLinksRecordingArtistRole.where(:recording_id=>rawRecording.recording_id).collect {|art| 
+               "oid:" + Artist.where(:name => art[:artist_given_name]+" "+art[:artist_surname]).first.id.to_s
+              }.join(",")
+            else
+              a = RawLinksRecordingArtistRole.where(:recording_id=>rawRecording.recording_id)
+              unless a.count == 0
+                art = RawArtist.where(:artist_id => a.first[:artist_id]).first
+                art2 = Artist.where(:name => art[:artist_given_name]+" "+art[:artist_surname]).first
+                unless art2 == nil
+                  params[:artist_wiki_link] = ArtistWikiLink.new({:reference=>art2.id,:name=>art2.name,:artist_id=>art2.id})
+                end
               end
             end
+
             s = RawLinksRecordingSupport.where(:recording_id=>rawRecording.recording_id)
             unless s.count == 0
               alb = RawSupport.where(:support_id => s.first[:support_id]).first
