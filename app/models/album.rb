@@ -8,6 +8,7 @@ class Album
   field :label, :type => String
   field :media_type, :type => String
   field :reference_code, :type => String
+  field :origalbumid, :type => String
 
   validates_presence_of :title
 

@@ -10,6 +10,7 @@ class Work
   field :publisher, :type => String
   field :lyrics, :type => String
   field :chords, :type => String
+  field :origworkid, :type => String
 
   validates_presence_of :title
 

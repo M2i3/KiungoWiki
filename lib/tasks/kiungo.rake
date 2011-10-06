@@ -12,7 +12,8 @@ namespace :kiungo do
                         :birth_date=>rawArtist.birth_date,
                         :death_location=>rawArtist.death_location, 
                         :death_date=>rawArtist.death_date,
-                        :name=>rawArtist.artist_given_name + " " + rawArtist.artist_surname)
+                        :name=>rawArtist.artist_given_name + " " + rawArtist.artist_surname,
+                        :origartistid=>rawArtist.artist_id)
         end # rawArtists.each
 
         RawLanguage.all.each do |rawLanguage|
@@ -30,7 +31,8 @@ namespace :kiungo do
           params = {:title=>rawSupport.support_title, 
                     :date_released=>rawSupport.date_released,
                     :media_type=>rawSupport.media_type,
-                    :reference_code=>rawSupport.reference_code}
+                    :reference_code=>rawSupport.reference_code,
+                    :origalbumid=>rawSupport.support_id}
           unless["0","",nil].include?(rawSupport.label_id)
             params[:label] = RawLabel.where(:label_id => rawSupport.label_id).first[:label_name]
           end
@@ -63,22 +65,14 @@ namespace :kiungo do
                       :recording_date=>rawRecording.recording_date, 
                       :duration=>rawRecording.duration,
                       :rythm=>rawRecording.rythm,
-                      :work_wiki_link=>WorkWikiLink.new({:reference=>w.id,:title=>w.title,:work_id=>w.id})}
+                      :work_wiki_link=>WorkWikiLink.new({:reference=>w.id,:title=>w.title,:work_id=>w.id}),
+                      :origrecordingid=>rawRecording.recording_id}
 
-            if true 
-              params[:artist_wiki_links_text] = RawLinksRecordingArtistRole.where(:recording_id=>rawRecording.recording_id).collect {|art| 
-               "oid:" + Artist.where(:name => art[:artist_given_name]+" "+art[:artist_surname]).first.id.to_s
+
+              params[:artist_wiki_links_text] = RawLinksRecordingArtistRole.where(:recording_id=>rawRecording.recording_id).collect {|art|
+               "oid:" + Artist.where(:origartistid => art[:artist_id]).first.id.to_s
               }.join(",")
-            else
-              a = RawLinksRecordingArtistRole.where(:recording_id=>rawRecording.recording_id)
-              unless a.count == 0
-                art = RawArtist.where(:artist_id => a.first[:artist_id]).first
-                art2 = Artist.where(:name => art[:artist_given_name]+" "+art[:artist_surname]).first
-                unless art2 == nil
-                  params[:artist_wiki_link] = ArtistWikiLink.new({:reference=>art2.id,:name=>art2.name,:artist_id=>art2.id})
-                end
-              end
-            end
+
 
             s = RawLinksRecordingSupport.where(:recording_id=>rawRecording.recording_id)
             unless s.count == 0

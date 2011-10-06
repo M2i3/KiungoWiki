@@ -9,6 +9,7 @@ class Recording
   field :duration, :type => Duration
   field :rythm, :type => Integer
   field :sample_rate, :type => Integer
+  field :origrecordingid, :type => String
   
 #  validates_length_of :work_title, :in=>1..500, :allow_nil=>true
 #  validates_numericality_of :duration, :greater_than=>0, :allow_nil=>true  
@@ -78,7 +79,6 @@ class Recording
   private 
   def set_defaults
     self.work_wiki_link ||= WorkWikiLink.new 
-    self.artist_wiki_link ||= ArtistWikiLink.new
     self.album_wiki_link ||= AlbumWikiLink.new    
   end
 
