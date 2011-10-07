@@ -12,8 +12,6 @@ class ArtistWikiLink
   
   def reference_text=(value)
     self.reference = value
-
-    wsq = WorkSearchQuery.new(value)
     asq = ArtistSearchQuery.new(value)
     if asq[:oid]
       self.artist = Artist.find(asq[:oid]) 

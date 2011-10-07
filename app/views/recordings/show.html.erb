@@ -25,6 +25,15 @@
 </table>
 
 <h2>Albums</h2>
-<p><%= album_wiki_link_path(@recording.album_wiki_link) %></p>
+<table>
+  <tbody>
+    <% @recording.album_wiki_links.each do |album| %>
+    <tr>
+      <td><%= album_wiki_link_path(album) %></td>
+      <td>&nbsp;</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= render :partial=>'links' %>

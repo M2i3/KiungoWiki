@@ -19,10 +19,8 @@
   <dt><%= form.label :artist_wiki_links_text %></dt>
   <dd><%= form.text_field :artist_wiki_links_text, :class=>"artist_name_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json %></dd>
 
+  <dt><%= form.label :album_wiki_links_text %></dt>
+  <dd><%= form.text_field :album_wiki_links_text, :class=>"album_title_lookup", :"data-pre"=>form.object.album_wiki_links_combined_links.to_json %></dd>
 
-  <dt><%= form.label :album_title %></dt>
-  <dd><%= form.fields_for :album_wiki_link do |album_link_form| %>
-        <%= album_link_form.text_field :encoded_link, :class=>"album_title_lookup", :"data-pre"=>[album_link_form.object.combined_link].to_json %>
-      <% end %></dd>
 </dl>
 

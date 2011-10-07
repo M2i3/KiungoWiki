@@ -20,13 +20,13 @@ class Recording
   validates_associated :work_wiki_link  
   accepts_nested_attributes_for :work_wiki_link
 
-  embeds_one :album_wiki_link
-  accepts_nested_attributes_for :album_wiki_link
-  validates_associated :album_wiki_link
-
   embeds_many :artist_wiki_links
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
+
+  embeds_many :album_wiki_links
+  accepts_nested_attributes_for :album_wiki_links
+  validates_associated :album_wiki_links
 
   def work_title
     self.work_wiki_link.title 
@@ -61,6 +61,21 @@ class Recording
       self.artist_wiki_links.build(:reference_text=>q.strip) 
     }    
   end
+
+  def album_wiki_links_text
+    album_wiki_links.collect{|v| v.reference_text }.join(",")
+  end
+
+  def album_wiki_links_combined_links
+    album_wiki_links.collect{|v| v.combined_link }
+  end
+
+  def album_wiki_links_text=(value)
+    self.album_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.album_wiki_links.clear does not work
+    value.split(",").each{|q| 
+      self.album_wiki_links.build(:reference_text=>q.strip) 
+    }    
+  end
   
   scope :queried, ->(q) {
     current_query = all
@@ -79,7 +94,6 @@ class Recording
   private 
   def set_defaults
     self.work_wiki_link ||= WorkWikiLink.new 
-    self.album_wiki_link ||= AlbumWikiLink.new    
   end
 
 end

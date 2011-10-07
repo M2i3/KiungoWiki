@@ -23,7 +23,7 @@
       <td><%= recording.duration %></td>
       <td><%= recording.rythm %></td>
       <td><%= recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe %></td>
-      <td><%= album_wiki_link_path(recording.album_wiki_link) %></td>
+      <td><%= recording.album_wiki_links.collect{|awl| album_wiki_link_path(awl) }.join(", ").html_safe %></td>
     </tr>
     <% end %>
   </tbody>

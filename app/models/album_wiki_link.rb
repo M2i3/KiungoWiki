@@ -6,25 +6,16 @@ class AlbumWikiLink
   referenced_in :album
   embedded_in :linkable, :polymorphic => true
 
-  def album=(value)
-    if value
-      self.album_id = value.id
-      self.title = value.title
-    else   
-      self.title = nil
-      self.album_id = nil
-    end
-  end
-
-  def encoded_link
-    self.title
+  def reference_text
+    self.reference
   end
   
-  def encoded_link=(value)
+  def reference_text=(value)
     self.reference = value
     asq = AlbumSearchQuery.new(value)
     if asq[:oid]
       self.album = Album.find(asq[:oid]) 
+      self.title = self.album.title
     else
       self.album = nil
       self.title = self.reference
@@ -32,8 +23,14 @@ class AlbumWikiLink
   end
 
   def combined_link
-    if self.title || self.album_id 
-      {id: self.encoded_link, name: self.title.to_s}
+    if self.reference_text || self.title 
+      {id: self.reference_text, name: self.title.to_s}
     end
   end 
 end
+
+
+
+
+
+

@@ -73,15 +73,9 @@ namespace :kiungo do
                "oid:" + Artist.where(:origartistid => art[:artist_id]).first.id.to_s
               }.join(",")
 
-
-            s = RawLinksRecordingSupport.where(:recording_id=>rawRecording.recording_id)
-            unless s.count == 0
-              alb = RawSupport.where(:support_id => s.first[:support_id]).first
-              alb2 = Album.where(:title => alb.support_title).first
-              unless alb2 == nil
-                params[:album_wiki_link] = AlbumWikiLink.new({:reference=>alb2.id,:title=>alb2.title,:album_id=>alb2.id})
-              end
-            end
+              params[:album_wiki_links_text] = RawLinksRecordingSupport.where(:recording_id=>rawRecording.recording_id).collect {|art|
+               "oid:" + Album.where(:origalbumid => art[:support_id]).first.id.to_s
+              }.join(",")
            
             r = Recording.create!(params)
             
