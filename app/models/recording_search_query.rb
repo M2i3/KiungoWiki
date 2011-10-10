@@ -4,7 +4,7 @@ class RecordingSearchQuery < SearchQuery
       recording_date: / recording_date:[ "]*(.+?)[ "]* /, 
       duration: / duration:[ "]*(.+?)[ "]* /, 
       artist_wiki_link: / artist_wiki_link:[ "]*(.+?)[ "]* /, 
-      album_wiki_link: / artist_wiki_link:[ "]*(.+?)[ "]* /, 
+      album_wiki_link: / album_wiki_link:[ "]*(.+?)[ "]* /, 
       recording_location:  / recording_location:[ "]*(.+?)[ "]* /,
       rythm: / rythm:[ "]*(.+?)[ "]* /        
     })
