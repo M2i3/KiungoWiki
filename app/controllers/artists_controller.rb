@@ -1,7 +1,7 @@
 class ArtistsController < ApplicationController
 
   def index
-    @artists = Artist.all(sort: [:name, :asc]) #TODO: Add an index on title to enable sorting on huge number of artists
+    @artists = Artist.all#(sort: [:name, :asc]) TODO: Add an index on title to enable sorting on huge number of artists
     @artists = @artists.queried(params[:q]) if params[:q]
     @artists = @artists.limit(100)
     respond_to do |format|
