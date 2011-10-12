@@ -13,12 +13,65 @@ class Artist
 
   validates_presence_of :name
 
+  embeds_many :work_wiki_links
+  validates_associated :work_wiki_links
+  accepts_nested_attributes_for :work_wiki_links
+
+  embeds_many :album_wiki_links
+  accepts_nested_attributes_for :album_wiki_links
+  validates_associated :album_wiki_links
+
   def works
     []
   end
   
   def albums
     []
+  end
+
+  def work_title
+    self.work_wiki_link.title 
+  end
+  def work_title=(value)
+    self.work_wiki_link.title = value
+  end
+  
+  def album_title
+    self.album_wiki_link.title 
+  end
+
+  def album_title=(value)
+    self.album_wiki_link.title = value
+  end
+
+  def work_wiki_links_text
+    work_wiki_links.collect{|v| v.reference_text }.join(",")
+  end
+
+  def work_wiki_links_combined_links
+    work_wiki_links.collect{|v| v.combined_link }
+  end
+
+  def album_wiki_links_text
+    album_wiki_links.collect{|v| v.reference_text }.join(",")
+  end
+
+  def album_wiki_links_combined_links
+    album_wiki_links.collect{|v| v.combined_link }
+  end
+
+  def work_wiki_links_text=(value)
+    self.work_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.work_wiki_links.clear does not work
+    value.split(",").each{|q| 
+      self.work_wiki_links.build(:reference_text=>q.strip) 
+    }    
+  end
+
+  def album_wiki_links_text=(value)
+    self.album_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.album_wiki_links.clear does not work
+    value.split(",").each{|q| 
+      self.album_wiki_links.build(:reference_text=>q.strip) 
+    }    
   end
 
   scope :queried, ->(q) {

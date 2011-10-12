@@ -12,6 +12,24 @@ class Album
 
   validates_presence_of :title
 
+  embeds_many :artist_wiki_links
+  accepts_nested_attributes_for :artist_wiki_links
+  validates_associated :artist_wiki_links
+
+  def artist_wiki_links_text
+    artist_wiki_links.collect{|v| v.reference_text }.join(",")
+  end
+
+  def artist_wiki_links_combined_links
+    artist_wiki_links.collect{|v| v.combined_link }
+  end
+
+  def artist_wiki_links_text=(value)
+    self.artist_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
+    value.split(",").each{|q| 
+      self.artist_wiki_links.build(:reference_text=>q.strip) 
+    }    
+  end
   scope :queried, ->(q) {
     current_query = all
     asq = AlbumSearchQuery.new(q)

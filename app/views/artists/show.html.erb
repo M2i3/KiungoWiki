@@ -6,10 +6,26 @@
 	</dl>
 </div>
 <h2><%= Work.model_name.human.pluralize %></h2>
-<p>Here be the Works</p>
+<table>
+  <tbody>
+    <% @artist.work_wiki_links.each do |work| %>
+    <tr>
+      <td><%= work_wiki_link_path(work) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <h2><%= Album.model_name.human.pluralize %></h2>
-<p>Here be albums</p>
+<table>
+  <tbody>
+    <% @artist.album_wiki_links.each do |album| %>
+    <tr>
+      <td><%= album_wiki_link_path(album) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= content_tag(:small, Artist.human_attribute_name("updated_at") + " " + @artist.updated_at.to_s) %>
 

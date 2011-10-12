@@ -9,6 +9,17 @@
 </div>
 
 
+<h2>Artists</h2>
+<table>
+  <tbody>
+    <% @album.artist_wiki_links.each do |artist| %>
+    <tr>
+      <td><%= artist_wiki_link_path(artist) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= render :partial=>'links' %>
 
 

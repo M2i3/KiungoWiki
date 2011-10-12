@@ -31,6 +31,7 @@ class Recording
   def work_title
     self.work_wiki_link.title 
   end
+
   def work_title=(value)
     self.work_wiki_link.title = value
   end

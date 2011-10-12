@@ -3,6 +3,7 @@ class ArtistWikiLink
 
   field :reference
   field :name
+  field :role
   referenced_in :artist
   embedded_in :linkable, :polymorphic => true
 

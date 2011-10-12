@@ -8,7 +8,7 @@
       <th><%= Work.human_attribute_name("title") %></th>
       <th><%= Work.human_attribute_name("date_written") %></th>
       <th><%= Work.human_attribute_name("copyright") %></th>
-      <th><%= Work.human_attribute_name("language_code") %></th>
+      <th><%= Work.human_attribute_name("language_name_french") %></th>
       <th><%= Work.human_attribute_name("publisher") %></th>
       <th><%= Work.human_attribute_name("lyrics") %></th>
       <th><%= Work.human_attribute_name("chords") %></th>
@@ -20,7 +20,7 @@
       <td><%= link_to work.title, work_path(work) %></td>
       <td><%= work.date_written %></td>
       <td><%= work.copyright %></td>
-      <td><%= work.language_code %></td>
+      <td><%= work.language_name %></td>
       <td><%= work.publisher %></td>
       <td><%= work.lyrics %></td>
       <td><%= work.chords %></td>

@@ -3,12 +3,22 @@
 <div class="section summary">
   <p>Date: <%= @work.date_written %></p>
   <p>Copyright: <%= @work.copyright %></p>
-  <p>Language: <%= @work.language_code %></p>
+  <p>Language: <%= @work.language_name %></p>
   <p>Publisher: <%= @work.publisher %></p>
   <p>Paroles: <%= @work.lyrics %></p>
   <p>Chords: <%= @work.chords %></p>
 </div>
 
+<h2>Artists</h2>
+<table>
+  <tbody>
+    <% @work.artist_wiki_links.each do |artist| %>
+    <tr>
+      <td><%= artist_wiki_link_path(artist) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= render :partial=>'links' %>
 
