@@ -13,5 +13,9 @@
 
   <dt><%= form.label :reference_code %></dt>
   <dd><%= form.text_field :reference_code %></dd>
+
+  <dt><%= form.label :artist_wiki_links_text %></dt>
+  <dd><%= form.text_field :artist_wiki_links_text, :class=>"artist_name_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json %></dd>
+
 </dl>
 

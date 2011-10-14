@@ -1,6 +1,9 @@
 <dl>
-	<dt><%= form.label :name %></dt>
-	<dd><%= form.text_field :name %></dd>
+	<dt><%= form.label :surname %></dt>
+	<dd><%= form.text_field :surname %></dd>
+
+	<dt><%= form.label :given_name %></dt>
+	<dd><%= form.text_field :given_name %></dd>
 
 	<dt><%= form.label :birth_date %></dt>
 	<dd><%= form.text_field :birth_date %></dd>
@@ -13,4 +16,8 @@
 
 	<dt><%= form.label :death_location %></dt>
 	<dd><%= form.text_field :death_location %></dd>
+
+  <dt><%= form.label :album_wiki_links_text %></dt>
+  <dd><%= form.text_field :album_wiki_links_text, :class=>"album_title_lookup", :"data-pre"=>form.object.album_wiki_links_combined_links.to_json %></dd>
+
 </dl>

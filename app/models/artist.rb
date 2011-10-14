@@ -4,14 +4,15 @@ class Artist
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
   #after_initialize :set_defaults
 
-  field :name, :type => String
+  field :surname, :type => String
+  field :given_name, :type => String
   field :birth_date, :type => IncDate
   field :birth_location, :type => String
   field :death_date, :type => IncDate
   field :death_location, :type => String
   field :origartistid, :type => String
 
-  validates_presence_of :name
+  validates_presence_of :surname
 
   embeds_many :work_wiki_links
   validates_associated :work_wiki_links
@@ -29,9 +30,24 @@ class Artist
     []
   end
 
+  def name
+    if ![nil,""].include?(self.surname)
+      if ![nil,""].include?(self.given_name)
+        self.surname + ", " + self.given_name
+      else
+        self.surname
+      end
+    else 
+      if ![nil,""].include?( self.given_name )
+        self.given_name
+      end
+    end
+  end
+
   def work_title
     self.work_wiki_link.title 
   end
+
   def work_title=(value)
     self.work_wiki_link.title = value
   end
@@ -79,7 +95,7 @@ class Artist
     asq = ArtistSearchQuery.new(q)
     asq.filled_query_fields.each {|field|
       case field
-        when :name, :birth_location, :death_location
+        when :surname, :given_name, :birth_location, :death_location
           current_query = current_query.where(field=>/#{asq[field].downcase}/i)
         when :birth_death, :death_date, :created_at, :updated_at
           current_query = current_query.where(field=>asq[field])        
@@ -90,5 +106,6 @@ class Artist
 
   private 
   def set_defaults
+    self.work_wiki_link ||= WorkWikiLink.new 
   end
 end

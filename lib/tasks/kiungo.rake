@@ -12,7 +12,8 @@ namespace :kiungo do
                         :birth_date=>rawArtist.birth_date,
                         :death_location=>rawArtist.death_location, 
                         :death_date=>rawArtist.death_date,
-                        :name=>rawArtist.artist_given_name + " " + rawArtist.artist_surname,
+                        :surname=>rawArtist.artist_surname,
+                        :given_name=>rawArtist.artist_given_name,
                         :origartistid=>rawArtist.artist_id)
         end # rawArtists.each
 

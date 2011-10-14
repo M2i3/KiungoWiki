@@ -17,6 +17,17 @@ class ArtistWikiLink
     if asq[:oid]
       self.artist = Artist.find(asq[:oid]) 
       self.name = self.artist.name
+      if ![nil,""].include?(self.artist.surname)
+        if ![nil,""].include?(self.artist.given_name)
+          self.name = self.artist.surname + ", " + self.artist.given_name
+        else
+          self.name = self.artist.surname
+        end
+      else 
+        if ![nil,""].include?( self.artist.given_name )
+          self.name = self.artist.given_name
+        end
+      end
     else
       self.artist = nil
       self.name = self.reference
