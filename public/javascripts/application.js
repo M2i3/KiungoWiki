@@ -59,7 +59,7 @@ $(document).ready(function () {
       }  
   });
 
-  $("input.artist_name_lookup").tokenInput("/artists/lookup.json", {
+  $("input.artists_lookup").tokenInput("/artists/lookup.json", {
      classes: {
           tokenList: "token-input-list",
           token: "token-input-token",
