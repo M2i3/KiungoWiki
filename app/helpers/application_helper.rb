@@ -8,6 +8,14 @@ module ApplicationHelper
       link_to(wwl.title, works_path(:q=>wwl.reference))
     end
   end
+    
+  def tokeninput_formatted_combined_link(combined_link)
+    if combined_link
+      [combined_link].to_json
+    else
+      ""
+    end
+  end
 
   def artist_wiki_link_path(awl)
     if awl.artist_id

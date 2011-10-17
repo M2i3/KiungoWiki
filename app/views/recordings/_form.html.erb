@@ -1,11 +1,12 @@
 <dl>
   <dt><%= form.label :work_title %></dt>
   <dd><%= form.fields_for :work_wiki_link do |work_link_form| %>
-        <%= work_link_form.text_field :reference_text, :class=>"work_title_lookup", :"data-pre"=>[work_link_form.object.combined_link].to_json %>
+        <%= work_link_form.text_field :reference_text, :class=>"work_title_lookup", 
+            :"data-pre"=>tokeninput_formatted_combined_link(work_link_form.object.combined_link) %>
       <% end %></dd>
 
-  <dt><%= form.label :recording_date %></dt>
-  <dd><%= form.text_field :recording_date %></dd>
+  <dt><%= form.label :recording_date_text %></dt>
+  <dd><%= form.text_field :recording_date_text %></dd>
 
   <dt><%= form.label :recording_location %></dt>
   <dd><%= form.text_field :recording_location %></dd>
