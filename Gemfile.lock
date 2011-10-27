@@ -78,6 +78,8 @@ GEM
       thor (~> 0.14)
     json (1.6.1)
     json_pure (1.6.1)
+    kaminari (0.12.4)
+      rails (>= 3.0.0)
     launchy (2.0.5)
       addressable (~> 2.2.6)
     libnotify (0.5.9)
@@ -169,6 +171,7 @@ DEPENDENCIES
   factory_girl_rails
   guard-rspec
   jquery-rails
+  kaminari
   launchy
   libnotify
   mongoid (>= 2.0.2)

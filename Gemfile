@@ -13,6 +13,9 @@ gem 'acts-as-taggable-on'
 
 gem "jquery-rails"
 
+# for pagination https://github.com/amatsuda/kaminari
+gem 'kaminari' 
+
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'

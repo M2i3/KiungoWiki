@@ -2,6 +2,8 @@
 
 <%= render partial: 'common/search' %>
 
+<%= paginate @artists %>
+
 <table>
   <thead>
     <tr>
@@ -43,7 +45,7 @@
   </tbody>
 </table>
 
-
+<%= paginate @artists %>
 
 <%= link_to t("new"), new_artist_path %>
 
