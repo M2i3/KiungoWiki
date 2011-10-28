@@ -4,3 +4,6 @@ en:
       previous: "&laquo; Prev"
       next: "Next &raquo;"
       truncate: "..."
+      last: "Last"
+      first: "First"
+

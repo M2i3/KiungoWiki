@@ -17,6 +17,8 @@ fr:
       previous: "&laquo; Suiv."
       next: "Pr&eacute;c. &raquo;"
       truncate: "..."
+      last: "Dernier"
+      first: "Premier"
 
   mongoid:
     models:
