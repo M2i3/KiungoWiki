@@ -2,6 +2,8 @@
 
 <%= render partial: 'common/search' %>
 
+<%= paginate @works %>
+
 <table>
   <thead>
     <tr>
@@ -29,7 +31,7 @@
   </tbody>
 </table>
 
-
+<%= paginate @works %>
 
 <%= link_to 'New', new_work_path %>
 
