@@ -2,6 +2,8 @@
 
 <%= render partial: 'common/search' %>
 
+<%= paginate @recordings %>
+
 <table>
   <thead>
     <tr>
@@ -29,7 +31,7 @@
   </tbody>
 </table>
 
-
+<%= paginate @recordings %>
 
 <%= link_to t("new"), new_recording_path %>
 
