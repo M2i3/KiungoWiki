@@ -12,6 +12,12 @@ fr:
   birth: Naissance
   death: Décès
 
+  views:
+    pagination:
+      previous: "&laquo; Suiv."
+      next: "Pr&eacute;c. &raquo;"
+      truncate: "..."
+
   mongoid:
     models:
       artist:
