@@ -2,6 +2,8 @@
 
 <%= render partial: 'common/search' %>
 
+<%= paginate @albums %>
+
 <table>
   <thead>
     <tr>
@@ -37,7 +39,7 @@
   </tbody>
 </table>
 
-
+<%= paginate @albums %>
 
 <%= link_to 'New', new_album_path %>
 
