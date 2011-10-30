@@ -14,8 +14,8 @@ fr:
 
   views:
     pagination:
-      previous: "&laquo; Suiv."
-      next: "Pr&eacute;c. &raquo;"
+      previous: "&laquo; Pr&eacute;c."
+      next: "Suiv. &raquo;"
       truncate: "..."
       last: "Dernier"
       first: "Premier"
