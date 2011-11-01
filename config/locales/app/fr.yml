@@ -35,6 +35,9 @@ fr:
         one: Album
         other: Albums
     attributes:
+      artist:
+        surname: Nom de famille
+        given_name: Prénom
       album:
         date_released: Date de sortie
         media_type: Type de support
