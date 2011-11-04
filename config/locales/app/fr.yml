@@ -66,6 +66,8 @@ fr:
     created_at: Créé le
     updated_at: Modifié le
     name: Nom
+    surname: Nom
+    given_name: Prénom
     title: Titre
     birth_date: Date de naissance
     birth_location: Lieu de naissance
