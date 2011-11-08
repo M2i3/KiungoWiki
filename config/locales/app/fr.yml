@@ -14,8 +14,8 @@ fr:
 
   views:
     pagination:
-      previous: "&laquo; Suiv."
-      next: "Pr&eacute;c. &raquo;"
+      previous: "&laquo; Pr&eacute;c."
+      next: "Suiv. &raquo;"
       truncate: "..."
       last: "Dernier"
       first: "Premier"
@@ -35,6 +35,9 @@ fr:
         one: Album
         other: Albums
     attributes:
+      artist:
+        surname: Nom de famille
+        given_name: Prénom
       album:
         date_released: Date de sortie
         media_type: Type de support
@@ -63,6 +66,8 @@ fr:
     created_at: Créé le
     updated_at: Modifié le
     name: Nom
+    surname: Nom
+    given_name: Prénom
     title: Titre
     birth_date: Date de naissance
     birth_location: Lieu de naissance

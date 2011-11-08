@@ -3,7 +3,9 @@ class Artist
   include Mongoid::Timestamps
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
   #after_initialize :set_defaults
+  before_save :set_name
 
+  field :name, :type => String
   field :surname, :type => String
   field :given_name, :type => String
   field :birth_date, :type => IncDate
@@ -30,16 +32,16 @@ class Artist
     []
   end
 
-  def name
+  def set_name
     if ![nil,""].include?(self.surname)
       if ![nil,""].include?(self.given_name)
-        self.surname + ", " + self.given_name
+        self.name = self.surname + ", " + self.given_name
       else
-        self.surname
+        self.name = self.surname
       end
     else 
       if ![nil,""].include?( self.given_name )
-        self.given_name
+        self.name = self.given_name
       end
     end
   end
