@@ -20,6 +20,17 @@
   </tbody>
 </table>
 
+<h2>Recordings</h2>
+<table>
+  <tbody>
+    <% @album.recording_wiki_links.each do |recording| %>
+    <tr>
+      <td><%= recording_wiki_link_path(recording) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= render :partial=>'links' %>
 
 

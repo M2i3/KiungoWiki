@@ -16,6 +16,10 @@ class Album
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
 
+	embeds_many :recording_wiki_links
+  accepts_nested_attributes_for :recording_wiki_links
+  validates_associated :recording_wiki_links
+
   def artist_wiki_links_text
     artist_wiki_links.collect{|v| v.reference_text }.join(",")
   end
@@ -30,6 +34,22 @@ class Album
       self.artist_wiki_links.build(:reference_text=>q.strip) 
     }    
   end
+  
+  def recording_wiki_links_text
+    recording_wiki_links.collect{|v| v.reference_text }.join(",")
+  end
+
+  def recording_wiki_links_combined_links
+    recording_wiki_links.collect{|v| v.combined_link }
+  end
+
+  def recording_wiki_links_text=(value)
+    self.recording_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.recording_wiki_links.clear does not work
+    value.split(",").each{|q| 
+      self.recording_wiki_links.build(:reference_text=>q.strip) 
+    }    
+  end
+  
   scope :queried, ->(q) {
     current_query = all
     asq = AlbumSearchQuery.new(q)

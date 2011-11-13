@@ -18,7 +18,11 @@ KiungoWiki::Application.routes.draw do
     end
   end
   
-  resources :recordings
+  resources :recordings do
+    collection do
+      get 'lookup'
+    end
+  end
 
 
   root :to => "home#index"
