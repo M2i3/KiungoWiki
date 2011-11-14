@@ -4,7 +4,7 @@ class RecordingWikiLink
   field :reference
   field :title
   field :trackNb
-  referenced_in :album
+  referenced_in :recording
   embedded_in :linkable, :polymorphic => true
 
   def reference_text
