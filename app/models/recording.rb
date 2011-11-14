@@ -85,7 +85,7 @@ class Recording
     rsq.filled_query_fields.each {|field|
       case field
         when :title
-          current_query = current_query.where(field=>/#{rsq[field].downcase}/i)
+          current_query = current_query.where("work_wiki_link.title"=>/#{rsq[field].downcase}/i)
         when :created_at, :duration, :recording_date, :rythm, :update_at
           current_query = current_query.where(field=>rsq[field])        
       end 
