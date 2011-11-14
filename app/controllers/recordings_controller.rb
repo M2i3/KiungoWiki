@@ -34,6 +34,7 @@ class RecordingsController < ApplicationController
     @recording = Recording.new(params[:recording])
 
     respond_to do |format|
+    	puts @recording.to_xml
       if @recording.save
         format.html { redirect_to(@recording , :notice => 'Recording succesfully created.') }
         format.xml  { render :xml => @recording, :status => :created, :location => @recording }
@@ -75,7 +76,7 @@ class RecordingsController < ApplicationController
 
 	def lookup
     respond_to do |format|
-      format.json { render :json=>(Recording.queried(params[:q]).limit(20).collect{|w| {id: "oid:#{w.id}", title: w.title} } << {id: params[:q].to_s, title: params[:q].to_s + " (nouveau)"}) }
+      format.json { render :json=>(Recording.queried(params[:q]).limit(20).collect{|r| {id: "oid:#{r.id}", title: r.title} } << {id: params[:q].to_s, title: params[:q].to_s + " (nouveau)"}) }
     end
   end
 
