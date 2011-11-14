@@ -76,7 +76,7 @@ class RecordingsController < ApplicationController
 
 	def lookup
     respond_to do |format|
-      format.json { render :json=>(Recording.queried(params[:q]).limit(20).collect{|r| {id: "oid:#{r.id}", title: r.title} } << {id: params[:q].to_s, title: params[:q].to_s + " (nouveau)"}) }
+      format.json { render :json=>(Recording.queried(params[:q]).limit(20).collect{|r| {id: "oid:#{r.id}", name: r.title} } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) }
     end
   end
 
