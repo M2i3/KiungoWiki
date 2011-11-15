@@ -48,7 +48,7 @@ export DATE=`date +%F |tr "-" "_"`
 ./substitute.pl "\[{" "{" categories_for_mongo_${DATE}.json
 ./substitute.pl "}\]" "}" categories_for_mongo_${DATE}.json
 
-echo "artist_id,artist_surname,artist_given_name,birth_date,birth_location,death_date,death_location,notes" > artists_${DATE}.csv
+echo "artist_id,artist_surname,artist_given_name,birth_date,birth_location,death_date,death_location,notes,collective" > artists_${DATE}.csv
 mdb-export  -H -q '|' $1 Artistes >> artists_${DATE}.csv
 ./csv2json.py --field-quote='|' < artists_${DATE}.csv > artists_${DATE}.json
 ./substitute.pl "}, {" "}
@@ -210,7 +210,7 @@ mdb-export  -H -q '|' $1 Albums >> supports_${DATE}.csv
 # et ne conserver que les fichiers JSON pour un transfert manuel.
 mongoimport -d kiungo_raw_db -c raw_languages -f language_id,language_code,language_name_english,language_name_french --type json --file languages_for_mongo_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_categories -f category_name,category_id --type json --file categories_for_mongo_${DATE}.json
-mongoimport -d kiungo_raw_db -c raw_artists -f artist_id,artist_surname,artist_given_name,birth_date,birth_location,death_date,death_location,notes --type json --file artists_${DATE}.json
+mongoimport -d kiungo_raw_db -c raw_artists -f artist_id,artist_surname,artist_given_name,birth_date,birth_location,death_date,death_location,notes,collective --type json --file artists_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_editors -f editor_id,editor_name --type json --file editors_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_labels -f label_id,label_name --type json --file labels_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_roles -f role_id,role_name --type json --file roles_${DATE}.json

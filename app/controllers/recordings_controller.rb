@@ -34,6 +34,7 @@ class RecordingsController < ApplicationController
     @recording = Recording.new(params[:recording])
 
     respond_to do |format|
+    	puts @recording.to_xml
       if @recording.save
         format.html { redirect_to(@recording , :notice => 'Recording succesfully created.') }
         format.xml  { render :xml => @recording, :status => :created, :location => @recording }
@@ -73,11 +74,9 @@ class RecordingsController < ApplicationController
     end
   end
 
-  def lookup
-# find an encoding that allows determining it's not really BSON ID
+	def lookup
     respond_to do |format|
-      #careful here not to allow injection of bad stuff in the regex
-      format.json { render :json=>(Recording.where(:title=>/#{params[:q]}/i).only(:title).limit(20).collect{|w| {id: w.id.to_s.to_query("b"), title: w.title} } << {id: Base64::encode64(params[:q]).to_query("u"), title: params[:q] + " (nouveau)"}) }
+      format.json { render :json=>(Recording.queried(params[:q]).limit(20).collect{|r| {id: "oid:#{r.id}", name: r.title} } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) }
     end
   end
 

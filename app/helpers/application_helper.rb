@@ -32,6 +32,14 @@ module ApplicationHelper
       link_to(awl.title, albums_path(:q=>awl.reference))
     end
   end
+  
+  def recording_wiki_link_path(rwl)
+  	if rwl.recording_id
+  		link_to(rwl.title, recording_path(:q=>rwl.reference))
+  	else
+  		link_to(rwl.title, recordings_path(:q=>rwl.reference))
+  	end
+  end
 
   def format_date(date)
     if date
