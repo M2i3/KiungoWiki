@@ -72,14 +72,6 @@ mdb-export  -H -q '|' $1 Étiquettes >> labels_${DATE}.csv
 ./substitute.pl "\[{" "{" labels_${DATE}.json
 ./substitute.pl "}\]" "}" labels_${DATE}.json
 
-echo "role_id,role_name" > roles_${DATE}.csv
-mdb-export  -H -q '|' $1 Roles >> roles_${DATE}.csv
-./csv2json.py --field-quote='|' < roles_${DATE}.csv > roles_${DATE}.json
-./substitute.pl "}, {" "}
-{" roles_${DATE}.json
-./substitute.pl "\[{" "{" roles_${DATE}.json
-./substitute.pl "}\]" "}" roles_${DATE}.json
-
 echo "owner_id,owner_surname,owner_given_name" > owners_${DATE}.csv
 mdb-export  -H -q '|' $1 Proprietaires >> owners_${DATE}.csv
 ./csv2json.py --field-quote='|' < owners_${DATE}.csv > owners_${DATE}.json
@@ -155,8 +147,27 @@ mdb-export  -H -q '|' $1 Lien\ Artiste\ Auteur-compositeur >> links_work_artist_
 ./csv2json.py --field-quote='|' < links_work_artist_${DATE}.csv > links_work_artist_${DATE}.json
 ./substitute.pl "}, {" "}
 {" links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "1"' '"role": "Interprète"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "2"' '"role": "Auteur"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "3"' '"role": "Adapteur/Traducteur"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "4"' '"role": "Compositeur"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "5"' '"role": "Auteur ou compositeur"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "6"' '"role": "Poète"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "7"' '"role": "Chef dXXXorchestre"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "8"' '"role": "Violoniste"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "9"' '"role": "Animateur"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "10"' '"role": "Pianiste"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "11"' '"role": "Flash"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "12"' '"role": "Librettiste"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "14"' '"role": "Remixeur"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "15"' '"role": "Orchestre"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "16"' '"role": "Harmoniciste"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "17"' '"role": "Psaltérioniste"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "18"' '"role": "Présentateur"' links_work_artist_${DATE}.json
+./substitute.pl '"role_id": "19"' '"role": "Accordéoniste"' links_work_artist_${DATE}.json
 ./substitute.pl "\[{" "{" links_work_artist_${DATE}.json
 ./substitute.pl "}\]" "}" links_work_artist_${DATE}.json
+./substitute.pl "XXX" "'" links_work_artist_${DATE}.json
 
 echo "link_recording_artist_role_id,recording_id,artist_id,role_id" > links_recording_artist_role_${DATE}.csv
 mdb-export  -H -q '|' $1 Lien\ Artiste\ Interprete >> links_recording_artist_role_${DATE}.csv
@@ -164,8 +175,27 @@ mdb-export  -H -q '|' $1 Lien\ Artiste\ Interprete >> links_recording_artist_rol
 ./csv2json.py --field-quote='|' < links_recording_artist_role_${DATE}.csv > links_recording_artist_role_${DATE}.json
 ./substitute.pl "}, {" "}
 {" links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "1"' '"role": "Interprète"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "2"' '"role": "Auteur"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "3"' '"role": "Adapteur/Traducteur"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "4"' '"role": "Compositeur"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "5"' '"role": "Auteur ou compositeur"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "6"' '"role": "Poète"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "7"' '"role": "Chef dXXXorchestre"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "8"' '"role": "Violoniste"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "9"' '"role": "Animateur"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "10"' '"role": "Pianiste"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "11"' '"role": "Flash"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "12"' '"role": "Librettiste"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "14"' '"role": "Remixeur"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "15"' '"role": "Orchestre"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "16"' '"role": "Harmoniciste"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "17"' '"role": "Psaltérioniste"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "18"' '"role": "Présentateur"' links_recording_artist_role_${DATE}.json
+./substitute.pl '"role_id": "19"' '"role": "Accordéoniste"' links_recording_artist_role_${DATE}.json
 ./substitute.pl "\[{" "{" links_recording_artist_role_${DATE}.json
 ./substitute.pl "}\]" "}" links_recording_artist_role_${DATE}.json
+./substitute.pl "XXX" "'" links_recording_artist_role_${DATE}.json
 
 echo "link_recording_support_id,recording_id,support_id,support_element_id,face,track,notes" > links_recording_support_${DATE}.csv
 mdb-export  -H -q '|' $1 Lien\ Album\ Version >> links_recording_support_${DATE}.csv
@@ -213,14 +243,13 @@ mongoimport -d kiungo_raw_db -c raw_categories -f category_name,category_id --ty
 mongoimport -d kiungo_raw_db -c raw_artists -f artist_id,artist_surname,artist_given_name,birth_date,birth_location,death_date,death_location,notes,collective --type json --file artists_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_editors -f editor_id,editor_name --type json --file editors_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_labels -f label_id,label_name --type json --file labels_${DATE}.json
-mongoimport -d kiungo_raw_db -c raw_roles -f role_id,role_name --type json --file roles_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_owners -f owner_id,owner_surname,owner_given_name --type json --file owners_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_works -f work_id,work_title,date_written,language_id,verified_text,verified_credits,original_work_id,notes,lyrics --type json --file works_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_recordings -f recording_id,recording_date,duration,category_id,notes,rythm,work_id --type json --file recordings_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_links_owner_supports -f link_owner_support_id,owner_id,support_id --type json --file links_owner_support_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_links_work_editors -f link_work_editor_id,work_id,editor_id --type json --file links_work_editor_${DATE}.json
-mongoimport -d kiungo_raw_db -c raw_links_work_artists -f link_work_artist_id,work_id,artist_id,role_id --type json --file links_work_artist_${DATE}.json
-mongoimport -d kiungo_raw_db -c raw_links_recording_artist_roles -f link_recording_artist_role_id,recording_id,artist_id,role_id --type json --file links_recording_artist_role_${DATE}.json
+mongoimport -d kiungo_raw_db -c raw_links_work_artists -f link_work_artist_id,work_id,artist_id,role --type json --file links_work_artist_${DATE}.json
+mongoimport -d kiungo_raw_db -c raw_links_recording_artist_roles -f link_recording_artist_role_id,recording_id,artist_id,role --type json --file links_recording_artist_role_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_links_recording_supports -f link_recording_support_id,recording_id,support_id,support_element_id,face,track,notes --type json --file links_recording_support_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_supports -f support_id,support_title,artist_id,category_id,reference_code,number_of_pieces,alpha_ordering,date_released,temporal_ordering,notes,media_type,label_id --type json --file supports_${DATE}.json
 
