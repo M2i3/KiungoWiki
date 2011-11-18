@@ -43,6 +43,13 @@ class Album
     recording_wiki_links.collect{|v| v.combined_link }
   end
 
+  def recording_wiki_links_combined_links_renamed
+  	mappings = {:title => :name}
+  	recording_wiki_links_combined_links.collect do |x|
+			Hash[x.map {|k,v| [mappings[k] || k, v] }]
+		end
+  end
+
   def recording_wiki_links_text=(value)
     self.recording_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.recording_wiki_links.clear does not work
     value.split(",").each{|q| 
