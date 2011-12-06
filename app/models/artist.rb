@@ -2,7 +2,6 @@ class Artist
   include Mongoid::Document
   include Mongoid::Timestamps
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
-  #after_initialize :set_defaults
   before_save :set_name
 
   field :name, :type => String
@@ -46,14 +45,6 @@ class Artist
     end
   end
 
-  def work_title
-    self.work_wiki_link.title 
-  end
-
-  def work_title=(value)
-    self.work_wiki_link.title = value
-  end
-  
   def album_title
     self.album_wiki_link.title 
   end
@@ -105,9 +96,4 @@ class Artist
     }
     current_query
   }
-
-  private 
-  def set_defaults
-    self.work_wiki_link ||= WorkWikiLink.new 
-  end
 end

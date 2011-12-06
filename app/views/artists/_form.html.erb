@@ -17,6 +17,9 @@
 	<dt><%= form.label :death_location %></dt>
 	<dd><%= form.text_field :death_location %></dd>
 
+	<dt><%= form.label :work_wiki_links_text %></dt>
+  <dd><%= form.text_field :work_wiki_links_text, :class=>"works_title_lookup", :"data-pre"=>form.object.work_wiki_links_combined_links.to_json %></dd>
+
   <dt><%= form.label :album_wiki_links_text %></dt>
   <dd><%= form.text_field :album_wiki_links_text, :class=>"albums_title_lookup", :"data-pre"=>form.object.album_wiki_links_combined_links.to_json %></dd>
 
