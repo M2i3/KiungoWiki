@@ -9,6 +9,6 @@ class ArtistSearchQuery < SearchQuery
     })
   end
   def self.catch_all
-    "surname"   #TODO ajouter recherche sur prenoms itou
+    "name"   #TODO ajouter recherche sur prenoms itou
   end 
 end
