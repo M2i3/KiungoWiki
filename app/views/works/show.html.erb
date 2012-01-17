@@ -25,17 +25,29 @@
   	<tr>
 	  	<th><%= Work.human_attribute_name("title") %></th>
   		<th><%= Recording.human_attribute_name("recording_date") %></th>
+  		<th><%= Recording.human_attribute_name("recording_location") %></th>
+  		<th><%= Recording.human_attribute_name("duration") %></th>
+  		<th><%= Recording.human_attribute_name("rythm") %></th>
+  		<th><%= Recording.human_attribute_name("sample_rate") %></th>
   	</tr>
     <% @work.recording_wiki_links.each do |recording_wiki_link|
     	begin
 		  	recording = Recording.find(recording_wiki_link.reference[4, 25]) %>
 				<tr>
 					<td><%= recording_wiki_link_path(recording_wiki_link) %></td>
-					<td><%= recording.date_released %></td>
+					<td><%= recording.recording_date %></td>
+					<td><%= recording.recording_location %></td>
+					<td><%= recording.duration %></td>
+					<td><%= recording.rythm %></td>
+					<td><%= recording.sample_rate %></td>
 				</tr>
 			<% rescue %>
 					<tr>
-						<td><%= recording_wiki_link_path(album_wiki_link) %></td>
+						<td><%= recording_wiki_link_path(recording_wiki_link) %></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
 						<td></td>
 					</tr>
 			<% end %>					

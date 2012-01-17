@@ -22,6 +22,9 @@
 
   <dt><%= form.label :artist_wiki_links_text %></dt>
   <dd><%= form.text_field :artist_wiki_links_text, :class=>"artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json %></dd>
+  
+  <dt><%= form.label :recording_wiki_links_text %></dt>
+  <dd><%= form.text_field :recording_wiki_links_text, :class=>"recordings_title_lookup", :"data-pre"=>form.object.recording_wiki_links_combined_links.to_json %></dd>
 
 </dl>
 
