@@ -17,15 +17,41 @@
 </table>
 
 <h2><%= Album.model_name.human.pluralize %></h2>
+<% if @artist.album_wiki_links.length > 0 %>
 <table>
   <tbody>
-    <% @artist.album_wiki_links.each do |album| %>
-    <tr>
-      <td><%= album_wiki_link_path(album) %></td>
-    </tr>
+  	<tr>
+  		<th><%= Album.human_attribute_name("title") %></th>
+      <th><%= Album.human_attribute_name("date_released") %></th>
+      <th><%= Album.human_attribute_name("label") %></th>
+      <th><%= Album.human_attribute_name("media_type") %></th>
+      <th><%= Album.human_attribute_name("reference_code") %></th>
+  	</tr>
+    <% @artist.album_wiki_links.each do |album_wiki_link|
+    	begin
+		  	album = Album.find(album_wiki_link.reference[4, 25]) %>
+				<tr>
+					<td><%= album_wiki_link_path(album_wiki_link) %></td>
+					<td><%= album.date_released %></td>
+					<td><%= album.label %></td>
+					<td><%= album.media_type %></td>
+					<td><%= album.reference_code %></td>
+				</tr>
+			<% rescue %>
+					<tr>
+						<td><%= album_wiki_link_path(album_wiki_link) %></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+			<% end %>					
     <% end %>
   </tbody>
 </table>
+<% else %>
+	<!-- TODO: What do we want to show when an artist has no albums? -->
+<% end %>
 
 <%= content_tag(:small, Artist.human_attribute_name("updated_at") + " " + @artist.updated_at.to_s) %>
 

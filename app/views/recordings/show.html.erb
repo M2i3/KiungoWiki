@@ -24,15 +24,41 @@
   </tbody>
 </table>
 
-<h2>Albums</h2>
-<table>
-  <tbody>
-    <% @recording.album_wiki_links.each do |album| %>
-    <tr>
-      <td><%= album_wiki_link_path(album) %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<h2><%= Album.model_name.human.pluralize %></h2>
+<% if @recording.album_wiki_links.length > 0 %>
+	<table>
+		<tbody>
+			<tr>
+				<th><%= Album.human_attribute_name("title") %></th>
+		    <th><%= Album.human_attribute_name("date_released") %></th>
+		    <th><%= Album.human_attribute_name("label") %></th>
+		    <th><%= Album.human_attribute_name("media_type") %></th>
+		    <th><%= Album.human_attribute_name("reference_code") %></th>
+			</tr>
+		  <% @recording.album_wiki_links.each do |album_wiki_link|
+		  	begin
+					album = Album.find(album_wiki_link.reference[4, 25]) %>
+					<tr>
+						<td><%= album_wiki_link_path(album_wiki_link) %></td>
+						<td><%= album.date_released %></td>
+						<td><%= album.label %></td>
+						<td><%= album.media_type %></td>
+						<td><%= album.reference_code %></td>
+					</tr>
+				<% rescue %>
+						<tr>
+							<td><%= album_wiki_link_path(album_wiki_link) %></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+				<% end %>					
+		  <% end %>
+		</tbody>
+	</table>
+<% else %>
+<!-- TODO What to put when there are no albums -->
+<% end %>
 
 <%= render :partial=>'links' %>

@@ -1,15 +1,13 @@
 <%= title(@work.title) %>
 
 <div class="section summary">
-  <p>Date: <%= @work.date_written %></p>
-  <p>Copyright: <%= @work.copyright %></p>
-  <p>Language: <%= @work.language_name %></p>
-  <p>Publisher: <%= @work.publisher %></p>
-  <p>Paroles: <%= @work.lyrics %></p>
-  <p>Chords: <%= @work.chords %></p>
+  <p><%= Work.human_attribute_name("date_written") %>: <%= @work.date_written %></p>
+  <p><%= Work.human_attribute_name("copyright") %>: <%= @work.copyright %></p>
+  <p><%= Work.human_attribute_name("language_name") %>: <%= @work.language_name %></p>
+  <p><%= Work.human_attribute_name("publisher") %>: <%= @work.publisher %></p>
 </div>
 
-<h2>Artists</h2>
+<h2><%= Artist.model_name.human.pluralize %></h2>
 <table>
   <tbody>
     <% @work.artist_wiki_links.each do |artist| %>
@@ -19,6 +17,51 @@
     <% end %>
   </tbody>
 </table>
+
+<h2><%= Recording.model_name.human.pluralize %></h2>
+<% if defined? @work.recording_wiki_links and @work.recording_wiki_links.length > 0 %>
+<table>
+  <tbody>
+  	<tr>
+	  	<th><%= Work.human_attribute_name("title") %></th>
+  		<th><%= Recording.human_attribute_name("recording_date") %></th>
+  		<th><%= Recording.human_attribute_name("recording_location") %></th>
+  		<th><%= Recording.human_attribute_name("duration") %></th>
+  		<th><%= Recording.human_attribute_name("rythm") %></th>
+  		<th><%= Recording.human_attribute_name("sample_rate") %></th>
+  	</tr>
+    <% @work.recording_wiki_links.each do |recording_wiki_link|
+    	begin
+		  	recording = Recording.find(recording_wiki_link.reference[4, 25]) %>
+				<tr>
+					<td><%= recording_wiki_link_path(recording_wiki_link) %></td>
+					<td><%= recording.recording_date %></td>
+					<td><%= recording.recording_location %></td>
+					<td><%= recording.duration %></td>
+					<td><%= recording.rythm %></td>
+					<td><%= recording.sample_rate %></td>
+				</tr>
+			<% rescue %>
+					<tr>
+						<td><%= recording_wiki_link_path(recording_wiki_link) %></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+			<% end %>					
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+	<!-- TODO: What do we want to show when a work has no recordings? -->
+<% end %>
+
+<h2><%= Work.human_attribute_name("lyrics") %></h2>
+<p><%= @work.lyrics %></p>
+<h2><%= Work.human_attribute_name("chords") %></h2>
+<p><%= @work.chords %></p>
 
 <%= render :partial=>'links' %>
 

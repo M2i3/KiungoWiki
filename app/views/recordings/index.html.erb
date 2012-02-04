@@ -10,11 +10,8 @@
     <tr>
       <th><%= Recording.human_attribute_name("title") %></th>
       <th><%= Recording.human_attribute_name("recording_date") %></th>
-      <th><%= Recording.human_attribute_name("recording_location") %></th>
       <th><%= Recording.human_attribute_name("duration") %></th>
-      <th><%= Recording.human_attribute_name("rythm") %></th>
       <th><%= Recording.human_attribute_name("artist_wiki_link") %></th>
-      <th><%= Recording.human_attribute_name("album_wiki_link") %></th>
     </tr>
   </thead>
   <tbody>
@@ -22,11 +19,8 @@
     <tr>
       <td><%= link_to recording.title, recording_path(recording) %></td>
       <td><%= recording.recording_date %></td>
-      <td><%= recording.recording_location %></td>
       <td><%= recording.duration %></td>
-      <td><%= recording.rythm %></td>
       <td><%= recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe %></td>
-      <td><%= recording.album_wiki_links.collect{|awl| album_wiki_link_path(awl) }.join(", ").html_safe %></td>
     </tr>
     <% end %>
   </tbody>
