@@ -62,7 +62,7 @@ namespace :kiungo do
             end
           end
           params[:artist_wiki_links_text] = RawLinksWorkArtist.where(:work_id=>rawWork.work_id).collect {|w|
-               "oid:" + Artist.where(:origartistid => w[:artist_id]).first.id.to_s
+               "oid:" + Artist.where(:origartistid => w[:artist_id]).first.id.to_s 
               }.join(",")
           w = Work.create!(params)
            
@@ -77,7 +77,7 @@ namespace :kiungo do
 
 
               params[:artist_wiki_links_text] = RawLinksRecordingArtistRole.where(:recording_id=>rawRecording.recording_id).collect {|art|
-               "oid:" + Artist.where(:origartistid => art[:artist_id]).first.id.to_s
+               "oid:" + Artist.where(:origartistid => art[:artist_id]).first.id.to_s + " role:" + art.role_id
               }.join(",")
 
               params[:album_wiki_links_text] = RawLinksRecordingSupport.where(:recording_id=>rawRecording.recording_id).collect {|art|
