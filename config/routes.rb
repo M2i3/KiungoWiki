@@ -9,6 +9,7 @@ KiungoWiki::Application.routes.draw do
   resources :artists do
     collection do
       get 'lookup'
+      get 'list'
     end
   end
 
