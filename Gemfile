@@ -16,6 +16,11 @@ gem "jquery-rails"
 # for pagination https://github.com/amatsuda/kaminari
 gem 'kaminari' 
 
+# for user registration and authentication
+gem 'devise'
+gem 'devise_rpx_connectable'
+
+
 group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'

@@ -1,5 +1,7 @@
 KiungoWiki::Application.routes.draw do
 
+  devise_for :users
+
   resources :works do
     collection do
       get 'lookup'

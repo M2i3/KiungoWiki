@@ -33,7 +33,13 @@
     </ul>
     <ul class="nav profile">
 
-      <li>Mon profil</li>
+      <li><%= link_to "Mon profil", edit_user_registration_path %></li>
+      <% if current_user %>
+        <li><%= link_to "Se déconnecter", destroy_user_session_path, :method=>"delete" %></li>
+      <% else %>
+        <li><%= link_to "Se connecter", new_user_session_path %></li>
+
+      <% end %>
     </ul>
   </div><!-- END div#header -->		 
 
