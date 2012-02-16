@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Modifier <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -10,20 +10,20 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+  <div><%= f.label :password %> <i>(laissez vide si vous ne désirez pas changer votre mot de passe)</i><br />
   <%= f.password_field :password %></div>
 
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+  <div><%= f.label :current_password %> <i>(nous avons besoins de votre mot de passe courant pour confirmer vos changements)</i><br />
   <%= f.password_field :current_password %></div>
 
-  <div><%= f.submit "Update" %></div>
+  <div><%= f.submit "Modifier" %></div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<h3>Fermer mon compte</h3>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+<p>Vous ne désirez plus être membre de KiungoWiki? <%= link_to "Fermez mon compte.", registration_path(resource_name), :confirm => "Êtes vous certains?", :method => :delete %>.</p>
 
-<%= link_to "Back", :back %>
+<%= link_to "Retour", :back %>

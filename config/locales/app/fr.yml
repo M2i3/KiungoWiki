@@ -34,6 +34,9 @@ fr:
       album:
         one: Album
         other: Albums
+      user:
+        one: Utilisateur
+        other: Utilisateurs
     attributes:
       artist:
         surname: Nom de famille
@@ -58,6 +61,14 @@ fr:
         publisher: Éditeur
         lyrics: Paroles
         chords: Accords
+      user:
+        nickname: Alias
+        email: Courriel
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+        current_password: Mot de passe actuel
+        remember_me: Garder ma session active
+
     errors:
       messages:
         document_not_found: Document introuvable

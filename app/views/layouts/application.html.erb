@@ -37,7 +37,7 @@
       <% if current_user %>
         <li><%= link_to "Se déconnecter", destroy_user_session_path, :method=>"delete" %></li>
       <% else %>
-        <li><%= link_to "Se connecter", new_user_session_path %></li>
+        <li><%= link_to "Créer un compte ou se connecter", new_user_session_path %></li>
 
       <% end %>
     </ul>
