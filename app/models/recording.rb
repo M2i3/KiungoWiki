@@ -8,14 +8,13 @@ class Recording
   field :recording_location, :type => String
   field :duration, :type => Duration
   field :rythm, :type => Integer
-  field :sample_rate, :type => Integer
+  field :category_id, :type => Integer
   field :origrecordingid, :type => String
   
 #  validates_length_of :work_title, :in=>1..500, :allow_nil=>true
 #  validates_numericality_of :duration, :greater_than=>0, :allow_nil=>true  
 #  validates_format_of :recording_date_text, :with=>/^(\d{4})(?:-?(\d{0,2})(?:-?(\d{0,2}))?)?$/, :allow_nil=>true
   validates_numericality_of :rythm, :greater_than=>0, :allow_nil=>true
-  validates_numericality_of :sample_rate, :greater_than=>0, :allow_nil=>true
 
   embeds_one :work_wiki_link
   validates_associated :work_wiki_link  

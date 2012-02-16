@@ -4,6 +4,8 @@ class RecordingWikiLink
   field :reference
   field :title
   field :trackNb
+  field :itemId
+  field :itemSection
   referenced_in :recording
   embedded_in :linkable, :polymorphic => true
 

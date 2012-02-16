@@ -1,7 +1,7 @@
 class ArtistsController < ApplicationController
 
   def index
-    @artists = Artist.all#(sort: [:name, :asc]) TODO: Add an index on title to enable sorting on huge number of artists
+    @artists = Artist.all(sort: [:name, :asc]) #TODO: Add an index on title to enable sorting on huge number of artists
     @artists = @artists.queried(params[:q]) if params[:q]
 
     @artists = @artists.page(params[:page])
@@ -81,6 +81,18 @@ class ArtistsController < ApplicationController
     respond_to do |format|
       format.json { render :json=>(Artist.queried(params[:q]).limit(20).collect{|w| {id: "oid:#{w.id}", name: w.name} } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) }
     end
+  end
+
+  def list
+   if params[:q].nil?
+    alpha = 'A%'
+   else
+    alpha = params[:q] + '%'
+   end
+   @artists = Artist.find(
+    :all,
+    :order => 'name',  
+    :conditions => ["name like ?", alpha])
   end
 
 end
