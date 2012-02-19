@@ -90,7 +90,7 @@ class Artist
       case field
         when :name, :surname, :given_name, :birth_location, :death_location
           current_query = current_query.where(field=>/#{asq[field].downcase}/i)
-        when :birth_death, :death_date, :created_at, :updated_at
+        when :birth_date, :death_date, :created_at, :updated_at
           current_query = current_query.where(field=>asq[field])        
       end 
     }
