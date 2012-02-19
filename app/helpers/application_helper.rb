@@ -49,20 +49,18 @@ module ApplicationHelper
     end
   end
 
-  def alpha_links(action)
-    return_text = '[ '
+  def alpha_links()
+    return_text = ' '
     ('A'..'Z').to_a.each do |letter|
       return_text = return_text + link_to(
         "#{letter} ", 
-        :action => action, 
-        :id => letter)
+        :q => '^'+letter)
     end    
     ('0'..'9').to_a.each do |number|
       return_text = return_text + link_to(
         "#{number} ", 
-        :action => action, 
-        :id => number)
+        :q => '^'+number)
     end   
-    return return_text + ' ]'
+    return return_text 
   end
 end

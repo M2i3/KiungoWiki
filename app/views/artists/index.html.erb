@@ -4,7 +4,7 @@
 
 <%= link_to t("new"), new_artist_path %>
 <p>
-<%= alpha_links('list').html_safe %>
+<%= alpha_links().html_safe %>
 
 <%= paginate @artists %>
 

@@ -3,6 +3,9 @@
 <%= render partial: 'common/search' %>
 
 <%= link_to t("new"), new_recording_path %>
+<p>
+<%= alpha_links().html_safe %>
+
 <%= paginate @recordings %>
 
 <table>
