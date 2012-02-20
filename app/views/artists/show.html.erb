@@ -8,9 +8,15 @@
 <h2><%= Work.model_name.human.pluralize %></h2>
 <table>
   <tbody>
-    <% @artist.work_wiki_links.each do |work| %>
+      <th><%= Work.human_attribute_name("title") %></th>
+      <th><%= Work.human_attribute_name("date_written") %></th>
+      <th><%= Work.human_attribute_name("role") %></th>
+    <% @artist.work_wiki_links.each do |wwl| %>
     <tr>
-      <td><%= work_wiki_link_path(work) %></td>
+       <% work = Work.find(wwl.reference[4, 25]) %>
+      <td><%= work_wiki_link_path(wwl) %></td>
+      <td><%= work.date_written %></td>
+      <td><%=  %></td>
     </tr>
     <% end %>
   </tbody>
@@ -31,7 +37,7 @@
     	begin
 		  	album = Album.find(album_wiki_link.reference[4, 25]) %>
 				<tr>
-					<td><%= album_wiki_link_path(album_wiki_link) %></td>
+					<td><%= link_to album.title, album_path(album) %></td>
 					<td><%= album.date_released %></td>
 					<td><%= album.label %></td>
 					<td><%= album.media_type %></td>

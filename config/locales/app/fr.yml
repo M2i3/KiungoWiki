@@ -51,6 +51,9 @@ fr:
         recording_location: Lieu
         duration: Durée
         rythm: Rythme
+        itemSection: Face
+        itemId: No de disque
+        trackNb: Plage
         artist_wiki_link: Artiste(s)
         album_wiki_link: Album(s)
       work:

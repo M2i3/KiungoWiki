@@ -24,7 +24,7 @@ class AlbumWikiLink
 
   def combined_link
     if self.reference_text || self.title 
-      {id: self.reference_text, name: self.title.to_s}
+      {id: self.reference_text, title: self.title.to_s}
     end
   end 
 end

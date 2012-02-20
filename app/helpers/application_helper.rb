@@ -35,7 +35,7 @@ module ApplicationHelper
   
   def recording_wiki_link_path(rwl)
   	if rwl.recording_id
-  		link_to(rwl.title, recording_path(:q=>rwl.reference))
+  		link_to(rwl.title, recording_path(:id=>rwl.recording_id))
   	else
   		link_to(rwl.title, recordings_path(:q=>rwl.reference))
   	end
