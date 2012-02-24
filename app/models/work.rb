@@ -14,12 +14,10 @@ class Work
 
   validates_presence_of :title
 
-  embeds_many :artist_wiki_links
-  accepts_nested_attributes_for :artist_wiki_links
+  embeds_many :artist_wiki_links, :as=>:linkable
   validates_associated :artist_wiki_links
   
-  embeds_many :recording_wiki_links
-  accepts_nested_attributes_for :recording_wiki_links
+  embeds_many :recording_wiki_links, :as=>:linkable
   validates_associated :recording_wiki_links
 
   def artist_wiki_links_text
@@ -31,10 +29,15 @@ class Work
   end
 
   def artist_wiki_links_text=(value)
-    self.artist_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
+    puts "******************* handling new value #{value}"
+#    self.artist_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
+    self.artist_wiki_links.clear
+    puts "there are now #{self.artist_wiki_links.size}"
     value.split(",").each{|q| 
       self.artist_wiki_links.build(:reference_text=>q.strip) 
     }    
+    puts "there are now #{self.artist_wiki_links.size}"
+    puts "parent changed?? #{self.changed?}"
   end
   
   def recording_wiki_links_text

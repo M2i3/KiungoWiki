@@ -1,36 +1,42 @@
 class ArtistWikiLink
   include Mongoid::Document
 
-  field :reference
-  field :name
-  field :role
+  field :reference_text
   referenced_in :artist
   embedded_in :linkable, :polymorphic => true
-
-  def reference_text
-    self.reference
-  end
   
   def reference_text=(value)
-    self.reference = value
+    self[:reference_text] = value
     asq = ArtistSearchQuery.new(value)
     if asq[:oid]
       self.artist = Artist.find(asq[:oid]) 
-      self.name = self.artist.name
-      if ![nil,""].include?(self.artist.surname)
-        if ![nil,""].include?(self.artist.given_name)
-          self.name = self.artist.surname + ", " + self.artist.given_name
-        else
-          self.name = self.artist.surname
-        end
-      else 
-        if ![nil,""].include?( self.artist.given_name )
-          self.name = self.artist.given_name
-        end
-      end
     else
       self.artist = nil
-      self.name = self.reference
+    end
+  end
+
+  def reference
+    ArtistSearchQuery.new(self.reference_text)
+  end
+
+  def role
+    reference[:role]
+  end
+
+  def name
+    if artist
+      case
+        when !self.artist.surname.blank? && !self.artist.given_name.blank?
+          self.artist.surname + ", " + self.artist.given_name
+        when !self.artist.surname.blank?
+          self.artist.surname
+        when !self.artist.given_name.blank?
+          self.artist.given_name
+        else
+          self.artist.name
+      end
+    else
+      self.reference_text
     end
   end
 

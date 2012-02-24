@@ -78,8 +78,22 @@ class ArtistsController < ApplicationController
   end
 
   def lookup
+    asq = ArtistSearchQuery.new(params[:q])
     respond_to do |format|
-      format.json { render :json=>(Artist.queried(params[:q]).limit(20).collect{|w| {id: "oid:#{w.id}", name: w.name} } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) }
+      format.json { 
+        render :json=>(Artist.queried(params[:q]).limit(20).collect{|w| 
+          reference_text = ["oid:#{w.id}"]
+          reference_label = [w.name]
+
+          if asq[:role]
+            reference_text << "role:#{asq[:role]}"
+            reference_label << "(#{asq[:role]})"
+          end
+
+          {id: reference_text.join(" "), name: reference_label.join(" ")}               
+
+        } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
+      }
     end
   end
 end
