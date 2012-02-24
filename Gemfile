@@ -1,14 +1,12 @@
 # migrated to bamboo-mri-1.9.2
 source 'http://rubygems.org'
 
-gem 'thin'
+gem 'rails', '3.1.1'
 
-gem 'rails', '3.0.7'
+gem "mongoid"
+gem "bson_ext"
 
-gem "bson_ext", ">= 1.3.0"
-gem "mongoid", ">= 2.0.2"
-
-gem 'will_paginate', '>=3.0.pre'
+#gem 'will_paginate', '>=3.0.pre'
 gem 'acts-as-taggable-on'
 
 gem "jquery-rails"
@@ -21,26 +19,31 @@ gem 'devise'
 gem 'devise_rpx_connectable'
 
 
+
 group :development, :test do
-  gem 'capybara'
-  gem 'database_cleaner'
-  gem 'cucumber-rails'
-  gem 'cucumber'
-  gem 'rspec-rails'
-  gem 'spork'
-  gem 'launchy'    # So you can do Then show me the page
-
-
-  gem 'rails3-generators'
-  gem 'factory_girl'
-  gem 'factory_girl_rails'  
-  gem 'mongoid-rspec'
-
-  
-  gem 'rb-inotify'
-  gem 'libnotify'
-  gem 'guard-rspec'    # To run the tests continuously
+#  gem 'capybara'
+#  gem 'database_cleaner'
+#  gem 'cucumber-rails'
+#  gem 'cucumber'
+#  gem 'rspec-rails'
+#  gem 'spork'
+#  gem 'launchy'    # So you can do Then show me the page
+#  gem 'rails3-generators'
+#  gem 'factory_girl'
+#  gem 'factory_girl_rails'  
+#  gem 'mongoid-rspec'
+ 
+#  gem 'rb-inotify'
+#  gem 'libnotify'
+#  gem 'guard-rspec'    # To run the tests continuously
 end
+
+group :assets do
+  gem 'yui-compressor'
+  gem 'execjs'
+  gem 'therubyracer'
+end
+
 
 # ======
 # The other original references in the file
