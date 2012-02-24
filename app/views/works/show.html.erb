@@ -19,7 +19,7 @@
 </table>
 
 <h2><%= Recording.model_name.human.pluralize %></h2>
-<% if defined? @work.recording_wiki_links and @work.recording_wiki_links.length > 0 %>
+<% unless @work.recording_wiki_links.blank? %>
 <table>
   <tbody>
   	<tr>

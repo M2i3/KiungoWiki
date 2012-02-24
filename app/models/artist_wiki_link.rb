@@ -37,7 +37,7 @@ class ArtistWikiLink
       end
     else
       self.reference_text
-    end
+    end + (role.blank? ? "" : " (#{self.role})")
   end
 
   def combined_link
