@@ -1,6 +1,6 @@
-require 'mongoid/fields/serializable/duration'
-
 class Duration
+  include Mongoid::Fields::Serializable
+
   attr_reader :hours, :minutes, :seconds
 
   def initialize(object)
@@ -52,4 +52,25 @@ class Duration
     d = duration.join(":")
     return d == "0" ? "" : d
   end
+
+  def serialize(object)
+    if object.blank? 
+      nil
+    else
+      begin 
+        deserialize(object).to_i
+      rescue
+        nil
+      end
+    end 
+  end
+
+  def deserialize(object)
+    begin 
+      ::Duration.new(object)
+    rescue
+      nil
+    end
+  end
+
 end

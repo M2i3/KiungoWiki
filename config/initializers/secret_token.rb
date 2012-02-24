@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-KiungoWiki::Application.config.secret_token = 'bc0b93808a7a9f9e9e6f064a72728ac38a99fd4a9ee1f3e0caaeb682c436f0bbfe1bcd850ae6ddf73fd6fd02a19a7ddd28e6b00310be696491776a67d9f327cf'
+KiungoWiki::Application.config.secret_token = '82d68d079eeec993b195c401a601a550d7d028a41482746a089fb9bf8516cfdb0cee40c9fbacd995c9952c3f4c451b81dd5e3634c32cddb8cec0627bcae2c1f4'
