@@ -13,11 +13,9 @@
 <table>
   <tbody>
       <th><%= Artist.human_attribute_name("name") %></th>
-      <th><%= Artist.human_attribute_name("role") %></th>
     <% @album.artist_wiki_links.each do |artist| %>
     <tr>
       <td><%= artist_wiki_link_path(artist) %></td>
-      <td><%=  %></td>
     </tr>
     <% end %>
   </tbody>
