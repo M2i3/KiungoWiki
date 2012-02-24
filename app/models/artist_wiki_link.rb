@@ -15,12 +15,12 @@ class ArtistWikiLink
     end
   end
 
-  def reference
-    ArtistSearchQuery.new(self.reference_text)
+  def searchref
+    ArtistSearchQuery.new(self.reference)
   end
 
   def role
-    reference[:role]
+    searchref[:role]
   end
 
   def name

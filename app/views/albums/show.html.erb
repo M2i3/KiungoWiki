@@ -38,13 +38,13 @@
       <% @album.recording_wiki_links.each do |rwl| %>
           <tr>
           <td><%= recording_wiki_link_path(rwl) %></td>
-          <td><%=  %></td>      
+          <td><%= rwl.recording_date%></td>      
           <td><%= rwl.trackNb %></td>
           <% if ["33 tours","45 tours"].include?(@album.media_type) %>
-              <td><%=  %></td>      
-              <td><%=  %></td>
+              <td><%= rwl.itemId %></td>      
+              <td><%=  rwl.itemSection%></td>
           <% end %>
-      <td><%=  %></td>      
+      <td><%=  rwl.duration%></td>      
     </tr>
     <% end %>
   </tbody>

@@ -7,7 +7,7 @@ class ArtistSearchQuery < SearchQuery
       birth_location: / birth_location:(.+?) /,
       death_date: / death_date:(.+?) /,
       death_location: / death_location:(.+?) /,
-      role: / role:([0-9a-zA-Z]+) /
+      role: / role:([[:alpha:]]+) /
     })
   end
   def self.catch_all

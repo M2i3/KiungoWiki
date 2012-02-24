@@ -7,12 +7,14 @@
   <p><%= Work.human_attribute_name("publisher") %>: <%= @work.publisher %></p>
 </div>
 
-<h2><%= Artist.model_name.human.pluralize %></h2>
 <table>
+  <thead><tr>
+    <th><%= Artist.model_name.human.pluralize %></th>
+  </tr></thead>
   <tbody>
-    <% @work.artist_wiki_links.each do |artist| %>
+    <% @work.artist_wiki_links.each do |awl| %>
     <tr>
-      <td><%= artist_wiki_link_path(artist) %></td>
+      <td><%= artist_wiki_link_path(awl) %></td>
     </tr>
     <% end %>
   </tbody>

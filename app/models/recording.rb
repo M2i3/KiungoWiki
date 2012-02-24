@@ -16,15 +16,15 @@ class Recording
 #  validates_format_of :recording_date_text, :with=>/^(\d{4})(?:-?(\d{0,2})(?:-?(\d{0,2}))?)?$/, :allow_nil=>true
   validates_numericality_of :rythm, :greater_than=>0, :allow_nil=>true
 
-  embeds_one :work_wiki_link
+  embeds_one :work_wiki_link, :as=>:linkable
   validates_associated :work_wiki_link  
   accepts_nested_attributes_for :work_wiki_link
 
-  embeds_many :artist_wiki_links
+  embeds_many :artist_wiki_links, :as=>:linkable
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
 
-  embeds_many :album_wiki_links
+  embeds_many :album_wiki_links, :as=>:linkable
   accepts_nested_attributes_for :album_wiki_links
   validates_associated :album_wiki_links
 

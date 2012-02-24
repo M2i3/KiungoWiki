@@ -6,7 +6,10 @@ class RecordingSearchQuery < SearchQuery
       artist_wiki_link: / artist_wiki_link:(.+?) /,
       album_wiki_link: / album_wiki_link:(.+?) /,
       recording_location:  / recording_location:(.+?) /,
-      rythm: / rythm:(.+?) /
+      rythm: / rythm:(.+?) /,
+      trackNb: / trackNb:([0-9]+) /,
+      itemId: / idemId:([0-9a-zA-Z]+) /,
+      itemSection: / itemSection:([A-Z]) /
     })
   end
   def self.catch_all
