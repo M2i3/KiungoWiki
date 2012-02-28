@@ -34,7 +34,7 @@
   	</tr>
     <% @work.recording_wiki_links.each do |recording_wiki_link|
     	begin
-		  	recording = Recording.find(recording_wiki_link.reference[4, 25]) %>
+		  	recording = Recording.find(recording_wiki_link.searchref[:oid]) %>
 				<tr>
 					<td><%= recording_wiki_link_path(recording_wiki_link) %></td>
 					<td><%= recording.recording_date %></td>

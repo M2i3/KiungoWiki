@@ -4,6 +4,7 @@ class Recording
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
   after_initialize :set_defaults
 
+  field :title, :type => String
   field :recording_date, :type => IncDate
   field :recording_location, :type => String
   field :duration, :type => Duration
@@ -34,10 +35,6 @@ class Recording
 
   def work_title=(value)
     self.work_wiki_link.title = value
-  end
-
-  def title
-    self.work_title
   end
   
   def album_title
@@ -84,7 +81,7 @@ class Recording
     rsq.filled_query_fields.each {|field|
       case field
         when :title
-          current_query = current_query.where("work_wiki_link.title"=>/#{rsq[field].downcase}/i)
+          current_query = current_query.where(field=>/#{rsq[field].downcase}/i)
         when :created_at, :duration, :recording_date, :rythm, :update_at
           current_query = current_query.where(field=>rsq[field])        
       end 

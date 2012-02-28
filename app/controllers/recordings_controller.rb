@@ -75,27 +75,26 @@ class RecordingsController < ApplicationController
   end
 
   def lookup
-    asq = RecordingSearchQuery.new(params[:q])
+    rsq = RecordingSearchQuery.new(params[:q])
     respond_to do |format|
       format.json { 
         render :json=>(Recording.queried(params[:q]).limit(20).collect{|r| 
           reference_text = ["oid:#{r.id}"]
           reference_label = [r.title]
-
-          if asq[:trackNb]
-            reference_text << "trackNb:#{asq[:trackNb]}"
-            reference_label << "(#{asq[:trackNb]})"
+          if rsq[:trackNb]
+            reference_text << "trackNb:#{rsq[:trackNb]}"
+            reference_label << "(#{rsq[:trackNb]})"
           end
-          if asq[:itemId]
-            reference_text << "itemId:#{asq[:itemId]}"
-            reference_label << "(#{asq[:itemId]})"
+          if rsq[:itemId]
+            reference_text << "itemId:#{rsq[:itemId]}"
+            reference_label << "(#{rsq[:itemId]})"
           end
-          if asq[:itemSection]
-            reference_text << "itemSection:#{asq[:itemSection]}"
-            reference_label << "(#{asq[:itemSection]})"
+          if rsq[:itemSection]
+            reference_text << "itemSection:#{rsq[:itemSection]}"
+            reference_label << "(#{rsq[:itemSection]})"
           end
-          {id: reference_text.join(" "), title: reference_label.join(" ")} 
-        } << {id: params[:q].to_s, title: params[:q].to_s + " (nouveau)"}) 
+          {id: reference_text.join(" "), name: reference_label.join(" ")} 
+        } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) 
       }
     end
   end

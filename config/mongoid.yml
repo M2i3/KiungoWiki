@@ -9,10 +9,10 @@ defaults: &defaults
 development:
   host: localhost
   database: kiungo_wiki_development
-#  databases:
-#    raw_db:
-#      database: kiungo_raw_db
-#      host: localhost
+  databases:
+    raw_db:
+      database: kiungo_raw_db
+      host: localhost
 
 test:
   <<: *defaults

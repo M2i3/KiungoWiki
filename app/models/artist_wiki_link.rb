@@ -16,7 +16,7 @@ class ArtistWikiLink
   end
 
   def searchref
-    ArtistSearchQuery.new(self.reference)
+    ArtistSearchQuery.new(self.reference_text)
   end
 
   def role

@@ -34,8 +34,9 @@
       <% end %>
       <th><%= Recording.human_attribute_name("duration") %></th>
       <% @album.recording_wiki_links.each do |rwl| %>
+      <% recording = Recording.find(rwl.searchref[:oid]) %>
           <tr>
-          <td><%= recording_wiki_link_path(rwl) %></td>
+          <td><%= link_to recording.title, recording_path(recording)%></td>
           <td><%= rwl.recording_date%></td>      
           <td><%= rwl.trackNb %></td>
           <% if ["33 tours","45 tours"].include?(@album.media_type) %>
