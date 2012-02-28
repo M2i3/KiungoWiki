@@ -74,7 +74,7 @@ namespace :kiungo do
                       :duration=>rawRecording.duration,
                       :rythm=>rawRecording.rythm,
                       :category_id=>rawRecording.category_id,
-                      :work_wiki_link=>WorkWikiLink.new({:reference=>w.id,:title=>w.title,:work_id=>w.id}),
+                      :work_wiki_link=>WorkWikiLink.new({:reference_text=>"oid: "+ w.id.to_s,:work_id=>w.id}),
                       :origrecordingid=>rawRecording.recording_id}
 
 

@@ -78,8 +78,13 @@ class WorksController < ApplicationController
 
   def lookup
     respond_to do |format|
-      format.json { render :json=>(Work.queried(params[:q]).limit(20).collect{|w| {id: "oid:#{w.id}", name: w.title} } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) }
+      format.json { 
+        render :json=>(Work.queried(params[:q]).limit(20).collect{|w| 
+          reference_text = ["oid:#{w.id}"]
+          reference_label = [w.title]
+          {id: reference_text.join(" "), name: reference_label.join(" ")}               
+         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) 
+       }
     end
   end
-
 end

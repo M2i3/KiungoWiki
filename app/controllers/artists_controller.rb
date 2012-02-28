@@ -91,7 +91,6 @@ class ArtistsController < ApplicationController
           end
 
           {id: reference_text.join(" "), name: reference_label.join(" ")}               
-
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }
     end

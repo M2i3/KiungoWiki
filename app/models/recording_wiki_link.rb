@@ -5,24 +5,18 @@ class RecordingWikiLink
   referenced_in :recording
   embedded_in :linkable, :polymorphic => true
 
-  
   def reference_text=(value)
-    self.reference = value
+    self[:reference_text] = value
     rsq = RecordingSearchQuery.new(value)
     if rsq[:oid]
       self.recording = Recording.find(rsq[:oid]) 
-      self.title = self.recording.title
-      if ![nil,""].include?(self.recording.title)
-        self.title = self.recording.title
-      end
     else
       self.recording = nil
-      self.title = self.reference
     end
   end
 
   def searchref
-    RecordingSearchQuery.new(self.reference)
+    RecordingSearchQuery.new(self.reference_text)
   end
 
   def trackNb
@@ -38,7 +32,12 @@ class RecordingWikiLink
   end
 
   def title
-     self.recording.title
+    if recording
+      self.recording.title
+    else
+      recording = Recording.find(searchref[:oid])
+      self.recording.title
+    end + (title.blank? ? "" : " (#{self.title})")
   end
 
   def recording_date

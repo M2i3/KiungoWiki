@@ -81,8 +81,13 @@ class AlbumsController < ApplicationController
 # find an encoding that allows determining it's not really BSON ID
     respond_to do |format|
       #careful here not to allow injection of bad stuff in the regex
-      format.json { render :json=>(Album.queried(params[:q]).limit(20).collect{|w| {id: "oid:#{w.id}", name: w.title} } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) }
+      format.json { 
+        render :json=>(Album.queried(params[:q]).limit(20).collect{|w| 
+          reference_text = ["oid:#{w.id}"]
+          reference_label = [w.title]
+          {id: reference_text.join(" "), name: reference_label.join(" ")}               
+        } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
+      }
     end
   end
-
 end

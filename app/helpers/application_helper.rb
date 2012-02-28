@@ -5,7 +5,7 @@ module ApplicationHelper
     if wwl.work_id
       link_to(wwl.title, work_path(:id=>wwl.work_id))
     else
-      link_to(wwl.title, works_path(:q=>wwl.reference))
+      link_to(wwl.title, works_path(:q=>wwl.reference_text))
     end
   end
     
@@ -21,7 +21,7 @@ module ApplicationHelper
     if awl.artist_id
       link_to(awl.name, artist_path(:id=>awl.artist_id))
     else
-      link_to(awl.name, artists_path(:q=>awl.reference))
+      link_to(awl.name, artists_path(:q=>awl.reference_text))
     end
   end
 
@@ -29,7 +29,7 @@ module ApplicationHelper
     if awl.album_id
       link_to(awl.title, album_path(:id=>awl.album_id))
     else
-      link_to(awl.title, albums_path(:q=>awl.reference))
+      link_to(awl.title, albums_path(:q=>awl.reference_text))
     end
   end
   
@@ -37,7 +37,7 @@ module ApplicationHelper
   	if rwl.recording_id
   		link_to(rwl.title, recording_path(:id=>rwl.recording_id))
   	else
-  		link_to(rwl.title, recordings_path(:q=>rwl.reference))
+  		link_to(rwl.title, recordings_path(:q=>rwl.reference_text))
   	end
   end
 
