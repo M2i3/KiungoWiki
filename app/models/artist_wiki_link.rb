@@ -45,4 +45,5 @@ class ArtistWikiLink
       {id: self.reference_text, name: self.name.to_s}
     end
   end 
+
 end
