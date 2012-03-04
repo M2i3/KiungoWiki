@@ -131,7 +131,7 @@ GEM
       POpen4 (>= 0.1.4)
 
 PLATFORMS
-  ruby
+  ruby (1.9.2)
 
 DEPENDENCIES
   acts-as-taggable-on
