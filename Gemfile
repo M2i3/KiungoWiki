@@ -29,8 +29,8 @@ group :development, :test do
 #  gem 'spork'
 #  gem 'launchy'    # So you can do Then show me the page
 #  gem 'rails3-generators'
-#  gem 'factory_girl'
-#  gem 'factory_girl_rails'  
+gem 'factory_girl'
+gem 'factory_girl_rails'  
 #  gem 'mongoid-rspec'
  
 #  gem 'rb-inotify'
