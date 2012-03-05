@@ -2,6 +2,7 @@ class WorkWikiLink
   include Mongoid::Document
 
   field :reference_text
+  field :artist_role
   referenced_in :work
   embedded_in :linkable, :polymorphic => true
 
@@ -27,9 +28,13 @@ class WorkWikiLink
     end
   end
 
+  def date_written
+    work.date_written if work
+  end
+
   def combined_link
     if self.reference_text || self.title
-      {id: self.reference_text, title: self.title.to_s}
+      {id: self.reference_text, name: self.title.to_s}
     end
   end 
 end

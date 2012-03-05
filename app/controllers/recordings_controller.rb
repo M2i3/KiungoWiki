@@ -1,5 +1,8 @@
 class RecordingsController < ApplicationController
 
+  # only registered users can edit this wiki
+  before_filter :authenticate_user!, :except => [:show, :index, :lookup]
+
   def index
     @recordings = Recording.all(sort: [:title, :asc]) #TODO: Add an index on title to enable sorting on huge number of recordings
     @recordings = @recordings.queried(params[:q]) if params[:q]
