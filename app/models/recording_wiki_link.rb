@@ -35,9 +35,8 @@ class RecordingWikiLink
     if recording
       self.recording.title
     else
-      recording = Recording.find(searchref[:oid])
-      self.recording.title
-    end + (title.blank? ? "" : " (#{self.title})")
+      self.reference_text
+    end 
   end
 
   def recording_date

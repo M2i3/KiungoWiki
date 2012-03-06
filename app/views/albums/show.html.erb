@@ -23,7 +23,8 @@
 
 <h2><%= Recording.model_name.human.pluralize %></h2>
 <table>
-  <tbody>
+  <thead>
+    <tr>
       <th><%= Recording.human_attribute_name("title") %></th>
       <th><%= Recording.human_attribute_name("recording_date") %></th>
       <th><%= Recording.human_attribute_name("trackNb") %></th>
@@ -33,18 +34,20 @@
           <th><%= Recording.human_attribute_name("itemSection") %></th>
       <% end %>
       <th><%= Recording.human_attribute_name("duration") %></th>
-      <% @album.recording_wiki_links.each do |rwl| %>
-      <% recording = Recording.find(rwl.searchref[:oid]) %>
-          <tr>
-          <td><%= link_to recording.title, recording_path(recording)%></td>
-          <td><%= rwl.recording_date%></td>      
-          <td><%= rwl.trackNb %></td>
-          <% if ["33 tours","45 tours"].include?(@album.media_type) %>
-              <td><%= rwl.itemId %></td>      
-              <td><%=  rwl.itemSection%></td>
-          <% end %>
-      <td><%=  rwl.duration%></td>      
     </tr>
+  </thead>
+  <tbody>
+    <% @album.recording_wiki_links.each do |rwl| %>
+      <tr>
+        <td><%= recording_wiki_link_path(rwl) %></td>
+        <td><%= rwl.recording_date %></td>      
+        <td><%= rwl.trackNb %></td>
+        <% if ["33 tours","45 tours"].include?(@album.media_type) %>
+            <td><%= rwl.itemId %></td>      
+            <td><%= rwl.itemSection %></td>
+        <% end %>
+        <td><%= rwl.duration %></td>      
+      </tr>
     <% end %>
   </tbody>
 </table>
