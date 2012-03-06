@@ -12,7 +12,7 @@
     <th><%= Artist.model_name.human.pluralize %></th>
   </tr></thead>
   <tbody>
-    <% @work.artist_wiki_links.each do |awl| %>
+    <% @work.artist_wiki_links.sort{|a,b| a.name.downcase <=> b.name.downcase}.each do |awl| %>
     <tr>
       <td><%= artist_wiki_link_path(awl) %></td>
     </tr>

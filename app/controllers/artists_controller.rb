@@ -1,6 +1,7 @@
 class ArtistsController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:show, :index]
+  # only registered users can edit this wiki
+  before_filter :authenticate_user!, :except => [:show, :index, :lookup]
 
   def index
     @artists = Artist.all(sort: [:name, :asc]) #TODO: Add an index on title to enable sorting on huge number of artists

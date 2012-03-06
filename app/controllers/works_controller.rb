@@ -1,5 +1,8 @@
 class WorksController < ApplicationController
 
+  # only registered users can edit this wiki
+  before_filter :authenticate_user!, :except => [:show, :index, :lookup]
+
   def index
     @works = Work.all(sort: [:title, :asc]) #TODO: Add an index on title to enable sorting on huge number of works
     @works = @works.queried(params[:q]) if params[:q]

@@ -11,12 +11,11 @@
       <th><%= Work.human_attribute_name("title") %></th>
       <th><%= Work.human_attribute_name("date_written") %></th>
       <th><%= Work.human_attribute_name("role") %></th>
-    <% @artist.work_wiki_links.each do |wwl| %>
+    <% @artist.work_wiki_links.sort{|a,b| a.title.downcase <=> b.title.downcase}.each do |wwl| %>
     <tr>
-       <% work = Work.find(wwl.searchref[:oid]) %>
       <td><%= work_wiki_link_path(wwl) %></td>
-      <td><%= work.date_written %></td>
-      <td><%=  %></td>
+      <td><%= wwl.date_written %></td>
+      <td><%= wwl.artist_role %></td>
     </tr>
     <% end %>
   </tbody>

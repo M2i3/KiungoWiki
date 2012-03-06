@@ -4,7 +4,7 @@ class ArtistWikiLink
   field :reference_text
   referenced_in :artist
   embedded_in :linkable, :polymorphic => true
-  
+
   def reference_text=(value)
     self[:reference_text] = value
     asq = ArtistSearchQuery.new(value)
