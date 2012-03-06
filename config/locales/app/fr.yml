@@ -59,6 +59,7 @@ fr:
       work:
         date_written: Date d'écriture
         copyright: Droits d'auteurs
+        artist_wiki_link: Artiste(s)
         language_name_french: Langue
         language_code: Code de langue
         publisher: Éditeur

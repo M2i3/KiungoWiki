@@ -61,7 +61,7 @@
 <% end %>
 
 <h2><%= Work.human_attribute_name("lyrics") %></h2>
-<p><%= @work.lyrics %></p>
+<p><%= content_tag('pre', @work.lyrics )%></p>
 <h2><%= Work.human_attribute_name("chords") %></h2>
 <p><%= @work.chords %></p>
 

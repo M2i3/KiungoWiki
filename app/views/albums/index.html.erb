@@ -2,7 +2,7 @@
 
 <%= render partial: 'common/search' %>
 
-<%= link_to 'New', new_album_path %>
+<%= button_to t("new"), new_album_path, :method => :get  %>
 <p>
 <%= alpha_links().html_safe %>
 
@@ -45,5 +45,5 @@
 
 <%= paginate @albums %>
 
-<%= link_to 'New', new_album_path %>
+<%= button_to t("new"), new_album_path, :method => :get  %>
 
