@@ -2,7 +2,8 @@
 
 <%= render partial: 'common/search' %>
 
-<%= link_to t("new"), new_recording_path %>
+<%= button_to t("new"), new_recording_path, :method => :get  %>
+
 <p>
 <%= alpha_links().html_safe %>
 
@@ -31,5 +32,5 @@
 
 <%= paginate @recordings %>
 
-<%= link_to t("new"), new_recording_path %>
+<%= button_to t("new"), new_recording_path, :method => :get  %>
 
