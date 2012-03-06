@@ -1,5 +1,7 @@
 class ArtistsController < ApplicationController
 
+  before_filter :authenticate_user!, :except => [:show, :index]
+
   def index
     @artists = Artist.all(sort: [:name, :asc]) #TODO: Add an index on title to enable sorting on huge number of artists
     @artists = @artists.queried(params[:q]) if params[:q]
