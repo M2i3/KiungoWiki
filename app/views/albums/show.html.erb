@@ -28,7 +28,6 @@
       <th><%= Recording.human_attribute_name("title") %></th>
       <th><%= Recording.human_attribute_name("recording_date") %></th>
       <th><%= Recording.human_attribute_name("trackNb") %></th>
-
       <% if ["33 tours","45 tours"].include?(@album.media_type) %>
           <th><%= Recording.human_attribute_name("itemId") %></th>
           <th><%= Recording.human_attribute_name("itemSection") %></th>
