@@ -33,7 +33,7 @@
         %th= Album.human_attribute_name("media_type")
         %th= Album.human_attribute_name("reference_code")
     %tbody
-      - @recording.album_wiki_links.each do |album_wiki_link|
+      - @recording.album_wiki_links.each do |awl|
         %tr
           %td= album_wiki_link_path(awl)
           %td= awl.date_released
