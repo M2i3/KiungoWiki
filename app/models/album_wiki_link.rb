@@ -26,6 +26,22 @@ class AlbumWikiLink
       self.reference_text
     end
   end
+  
+  def date_released
+    self.album.date_released if self.album
+  end
+
+  def label
+    self.album.label if self.album
+  end
+
+  def media_type
+    self.album.media_type if self.album
+  end
+
+  def reference_code
+    self.album.reference_code if self.album
+  end
 
   def combined_link
     if self.reference_text || self.title 

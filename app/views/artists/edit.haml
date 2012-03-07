@@ -1,0 +1,15 @@
+= title(t("modify_artist"))
+
+- unless @artist.errors.empty?
+  .validationerror
+    Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'artiste:
+    %br/
+    = @artist.errors.full_messages.join("</br>").html_safe
+
+= form_for @artist do |f|
+  = render :partial=>'form', :object=>f
+  .formActions
+    = f.submit
+    ou #{link_to t("cancel"), :back}
+
+= render :partial=>'links'

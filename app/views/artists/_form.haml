@@ -1,0 +1,17 @@
+%dl
+  %dt= form.label :surname
+  %dd= form.text_field :surname
+  %dt= form.label :given_name
+  %dd= form.text_field :given_name
+  %dt= form.label :birth_date
+  %dd= form.text_field :birth_date
+  %dt= form.label :birth_location
+  %dd= form.text_field :birth_location
+  %dt= form.label :death_date
+  %dd= form.text_field :death_date
+  %dt= form.label :death_location
+  %dd= form.text_field :death_location
+  %dt= form.label :work_wiki_links_text
+  %dd= form.text_field :work_wiki_links_text, :class=>"works_title_lookup", :"data-pre"=>form.object.work_wiki_links_combined_links.to_json
+  %dt= form.label :album_wiki_links_text
+  %dd= form.text_field :album_wiki_links_text, :class=>"albums_title_lookup", :"data-pre"=>form.object.album_wiki_links_combined_links.to_json

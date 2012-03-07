@@ -1,7 +1,0 @@
-<ul id="pageactions">
-  <li class="<%= "active" if current_page?(:action=>"show") %>"><%= link_to t("show"), artist_path(@artist) %></li>
-  <li class="<%= "active" if current_page?(:action=>"edit") %>"><%= link_to t("modify"), edit_artist_path(@artist) %></li>
-  <li><%= t("discuss") %></li>
-  <li><%= t("history") %></li>
-</ul>
-

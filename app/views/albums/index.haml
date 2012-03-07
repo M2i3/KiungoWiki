@@ -1,6 +1,9 @@
 = title(Album.model_name.human.pluralize)
+
 = render partial: 'common/search'
+
 = button_to t("new"), new_album_path, :method => :get
+
 %p
   = alpha_links().html_safe
   = paginate @albums
@@ -27,4 +30,5 @@
           %td
             = album.reference_code
   = paginate @albums
-  = button_to t("new"), new_album_path, :method => :get
+
+= button_to t("new"), new_album_path, :method => :get

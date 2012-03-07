@@ -1,0 +1,5 @@
+%ul#pageactions
+  %li{:class =>current_page_classes(:action=>"show")}= link_to t("show"), artist_path(@artist)
+  %li{:class =>current_page_classes(:action=>"edit")}= link_to t("modify"), edit_artist_path(@artist)
+  %li= t("discuss")
+  %li= t("history")
