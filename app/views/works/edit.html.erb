@@ -1,9 +1,0 @@
-<%= title("Modifier l'oeuvre") %>
-<%= form_for @work do |f| %>
-<%= render :partial=>'form', :object=>f %>
-<div class="formActions">
-	<%= f.submit %> ou <%= link_to t("cancel"), :back %>
-</div>
-<% end %>
-
-<%= render :partial=>'links' %>

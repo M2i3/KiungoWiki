@@ -1,0 +1,56 @@
+= title(@work.title)
+
+.section.summary
+  %p
+    = Work.human_attribute_name("date_written")
+    \: #{@work.date_written}
+  %p
+    = Work.human_attribute_name("copyright")
+    \: #{@work.copyright}
+  %p
+    = Work.human_attribute_name("language_name")
+    \: #{@work.language_name}
+  %p
+    = Work.human_attribute_name("publisher")
+    \: #{@work.publisher}
+
+%table
+  %thead
+    %tr
+      %th= Artist.model_name.human.pluralize
+  %tbody
+    - @work.artist_wiki_links.sort{|a,b| a.name.downcase <=> b.name.downcase}.each do |awl|
+      %tr
+        %td= artist_wiki_link_path(awl)
+
+%h2= Recording.model_name.human.pluralize
+- unless @work.recording_wiki_links.blank?
+  %table
+    %thead
+      %tr
+        %th= Work.human_attribute_name("title")
+        %th= Recording.human_attribute_name("recording_date")
+        %th= Recording.human_attribute_name("recording_location")
+        %th= Recording.human_attribute_name("duration")
+        %th= Recording.human_attribute_name("rythm")
+        %th= Recording.human_attribute_name("sample_rate")
+
+    %tbody
+      - @work.recording_wiki_links.each do |rwl|
+        %tr
+          %td= recording_wiki_link_path(rwl)
+          %td= rwl.recording_date
+          %td= rwl.recording_location
+          %td= rwl.duration
+          %td= rwl.rythm
+          %td= rwl.sample_rate
+- else
+  / TODO: What do we want to show when a work has no recordings?
+
+%h2= Work.human_attribute_name("lyrics")
+%p= content_tag('pre', @work.lyrics )
+
+%h2= Work.human_attribute_name("chords")
+%p= @work.chords
+
+= render :partial=>'links'
