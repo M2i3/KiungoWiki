@@ -1,0 +1,15 @@
+%dl
+  %dt= form.label :title
+  %dd= form.text_field :title
+  %dt= form.label :date_released
+  %dd= form.text_field :date_released
+  %dt= form.label :label
+  %dd= form.text_field :label
+  %dt= form.label :media_type
+  %dd= form.text_field :media_type
+  %dt= form.label :reference_code
+  %dd= form.text_field :reference_code
+  %dt= form.label :artist_wiki_links_text
+  %dd= form.text_field :artist_wiki_links_text, :class=>"artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
+  %dt= form.label :recording_wiki_links_text
+  %dd= form.text_field :recording_wiki_links_text, :class=>"recordings_title_lookup", :"data-pre"=>form.object.recording_wiki_links_combined_links_renamed.to_json

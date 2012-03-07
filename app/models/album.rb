@@ -30,7 +30,7 @@ class Album
   end
 
   def artist_wiki_links_text=(value)
-    self.artist_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
+    self.artist_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
     value.split(",").each{|q| 
       self.artist_wiki_links.build(:reference_text=>q.strip) 
     }    
@@ -52,7 +52,7 @@ class Album
   end
 
   def recording_wiki_links_text=(value)
-    self.recording_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.recording_wiki_links.clear does not work
+    self.recording_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.recording_wiki_links.clear does not work
     value.split(",").each{|q| 
       self.recording_wiki_links.build(:reference_text=>q.strip) 
     }    

@@ -40,11 +40,11 @@ class RecordingWikiLink
   end
 
   def recording_date
-     self.recording.recording_date
+     self.recording.recording_date if self.recording
   end
 
   def duration
-     self.recording.duration
+     self.recording.duration if self.recording
   end
 
   def combined_link

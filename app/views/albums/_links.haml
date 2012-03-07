@@ -1,0 +1,5 @@
+%ul#pageactions
+  %li{:class =>current_page_classes(:action=>"show")}= link_to 'Afficher', album_path(@album)
+  %li{:class =>current_page_classes(:action=>"edit")}= link_to 'Modifier', edit_album_path(@album)
+  %li Discuter
+  %li Historique

@@ -63,4 +63,12 @@ module ApplicationHelper
     end   
     return return_text 
   end
+
+  def current_page_classes(params ={}, classes="")
+    if current_page?(params)
+      [classes, "active"].join(" ")
+    else
+      classes
+    end
+  end
 end

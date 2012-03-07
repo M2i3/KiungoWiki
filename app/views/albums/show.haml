@@ -1,0 +1,45 @@
+= title(@album.title)
+
+.section.summary
+  %p
+    Title: #{@album.title}
+  %p
+    Released Date: #{@album.date_released}
+  %p
+    Label: #{@album.label}
+  %p
+    Media Type: #{@album.media_type}
+  %p
+    Reference code: #{@album.reference_code}
+
+%h2= Artist.model_name.human.pluralize
+%table
+  %tbody
+    %th= Artist.human_attribute_name("name")
+    - @album.artist_wiki_links.each do |artist|
+      %tr
+        %td= artist_wiki_link_path(artist)
+
+%h2= Recording.model_name.human.pluralize
+%table
+  %thead
+    %tr
+      %th= Recording.human_attribute_name("title")
+      %th= Recording.human_attribute_name("recording_date")
+      %th= Recording.human_attribute_name("trackNb")
+      - if ["33 tours","45 tours"].include?(@album.media_type)
+        %th= Recording.human_attribute_name("itemId")
+        %th= Recording.human_attribute_name("itemSection")
+      %th= Recording.human_attribute_name("duration")
+  %tbody
+    - @album.recording_wiki_links.each do |rwl|
+      %tr
+        %td= recording_wiki_link_path(rwl)
+        %td= rwl.recording_date
+        %td= rwl.trackNb
+        - if ["33 tours","45 tours"].include?(@album.media_type)
+          %td= rwl.itemId
+          %td= rwl.itemSection
+        %td= rwl.duration
+
+= render :partial=>'links'

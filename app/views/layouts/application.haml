@@ -1,0 +1,53 @@
+!!!
+%html
+  %head
+    %title
+      = content_for(:title)
+      \- KiungoWiki
+
+    = stylesheet_link_tag :all
+
+    = javascript_include_tag "jquery"
+    = javascript_include_tag "jquery_ujs"
+    = javascript_include_tag "jquery.tokeninput"
+    = javascript_include_tag "application"
+
+    = csrf_meta_tag
+
+    = render :partial=>"common/google_analytics"
+
+  %body
+    #page
+      #content
+        = yield
+
+      #header
+        = link_to root_url do
+          #sitetitle KiungoWiki
+        %em#siteslogan La référence en musique.
+        %ul.nav.entities
+          %li= link_to "Accueil", root_url
+          %li= link_to "Artistes", artists_path
+          %li= link_to "Oeuvres", works_path
+          %li= link_to "Enregistrements", recordings_path
+          %li= link_to "Albums", albums_path
+
+        %ul.nav.profile
+          %li= link_to "Mon profil", edit_user_registration_path
+          - if current_user
+            %li= link_to "Se déconnecter", destroy_user_session_path, :method=>"delete"
+          - else
+            %li= link_to "Créer un compte ou se connecter", new_user_session_path
+
+      #footer
+        %ul.nav
+          %li= link_to "Accueil", root_url
+          %li Changements récents
+          %li Conditions d'utilisation
+          %li Nous contacter
+          %li À propos de KiungoWiki
+          %li Plan du site
+        #copyright © 2011 - KiungoWiki
+     
+      = render partial: "common/site_messages"
+
