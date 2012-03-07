@@ -1,0 +1,6 @@
+- {:info=>"Just so you know", :error=>"Oups, an error occured", :alert=>"Wait, I must warn you!", :warning=>"Wait, I must warn you!", :notice=>"Congrats, you did it!"}.each do |msg_type, heading|
+  - if flash[msg_type]
+    %div{:class => "#{{:alert=>:warning}[msg_type] || msg_type} message"}
+      %h3= heading
+      %p= flash[msg_type]
+
