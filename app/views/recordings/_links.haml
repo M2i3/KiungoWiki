@@ -1,0 +1,5 @@
+%ul#pageactions
+  %li{:class =>current_page_classes(:action=>"show")}= link_to 'Afficher', recording_path(@recording)
+  %li{:class =>current_page_classes(:action=>"edit")}= link_to 'Modifier', edit_recording_path(@recording)
+  %li Discuter
+  %li Historique

@@ -1,0 +1,18 @@
+%dl
+  %dt= form.label :work_title
+  %dd
+    = form.fields_for :work_wiki_link do |work_link_form|
+      = work_link_form.text_field :reference_text, :class=>"work_title_lookup",              |
+        :"data-pre"=>tokeninput_formatted_combined_link(work_link_form.object.combined_link) |
+  %dt= form.label :recording_date_text
+  %dd= form.text_field :recording_date_text
+  %dt= form.label :recording_location
+  %dd= form.text_field :recording_location
+  %dt= form.label :duration
+  %dd= form.text_field :duration
+  %dt= form.label :rythm
+  %dd= form.text_field :rythm
+  %dt= form.label :artist_wiki_links_text
+  %dd= form.text_field :artist_wiki_links_text, :class=>"artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
+  %dt= form.label :album_wiki_links_text
+  %dd= form.text_field :album_wiki_links_text, :class=>"albums_title_lookup", :"data-pre"=>form.object.album_wiki_links_combined_links.to_json

@@ -1,0 +1,13 @@
+= title("Nouvel enregistrement")
+
+- unless @recording.errors.empty?
+  .validationerror
+    Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel enregistrement:
+    %br/
+    = @recording.errors.full_messages.join("</br>").html_safe
+
+= form_for @recording do |f|
+  = render :partial=>'form', :object=>f
+  = f.submit
+  ou #{link_to 'annuler', :back}
+

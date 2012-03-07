@@ -1,0 +1,15 @@
+= title("Modifier l'enregistrement")
+
+- unless @recording.errors.empty?
+  .validationerror
+    Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'enregistrement:
+    %br/
+    = @recording.errors.full_messages.join("</br>").html_safe
+
+= form_for @recording do |f|
+  = render :partial=>'form', :object=>f
+  .formActions
+    = f.submit
+    ou #{link_to t("cancel"), :back}
+
+= render :partial=>'links'
