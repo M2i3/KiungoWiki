@@ -2,11 +2,11 @@
 %html
   %head
     %title
-      = content_for(:title)
-      \- KiungoWiki
+      = content_for(:title).blank? ? "KiungoWiki" : content_for(:title) +  " - KiungoWiki"
 
     = stylesheet_link_tag :all
 
+    = javascript_include_tag "bootstrap"
     = javascript_include_tag "jquery"
     = javascript_include_tag "jquery_ujs"
     = javascript_include_tag "jquery.tokeninput"
@@ -16,38 +16,50 @@
 
     = render :partial=>"common/google_analytics"
 
-  %body
-    #page
-      #content
-        = yield
+  %body{"data-spy"=>"scroll", "data-target"=>".subnav", "data-offset"=>50}
 
-      #header
-        = link_to root_url do
-          #sitetitle KiungoWiki
-        %em#siteslogan La référence en musique.
-        %ul.nav.entities
-          %li= link_to "Accueil", root_url
-          %li= link_to "Artistes", artists_path
-          %li= link_to "Oeuvres", works_path
-          %li= link_to "Enregistrements", recordings_path
-          %li= link_to "Albums", albums_path
 
-        %ul.nav.profile
-          %li= link_to "Mon profil", edit_user_registration_path
-          - if current_user
-            %li= link_to "Se déconnecter", destroy_user_session_path, :method=>"delete"
-          - else
-            %li= link_to "Créer un compte ou se connecter", new_user_session_path
+    #content
+      .container
+        .inner.row
+          .span12
+            = yield
 
-      #footer
-        %ul.nav
-          %li= link_to "Accueil", root_url
-          %li Changements récents
-          %li Conditions d'utilisation
-          %li Nous contacter
-          %li À propos de KiungoWiki
-          %li Plan du site
-        #copyright © 2011 - KiungoWiki
-     
-      = render partial: "common/site_messages"
+
+    #header.navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          = link_to root_url, :class=>"brand" do
+            #sitetitle KiungoWiki
+          %em#siteslogan La référence en musique.
+
+          %ul.nav.entities
+            %li= link_to "Accueil", root_url
+            %li= link_to "Artistes", artists_path
+            %li= link_to "Oeuvres", works_path
+            %li= link_to "Enregistrements", recordings_path
+            %li= link_to "Albums", albums_path
+
+          %ul.nav.profile.pull-right
+            %li= link_to "Mon profil", edit_user_registration_path
+            - if current_user
+              %li= link_to "Se déconnecter", destroy_user_session_path, :method=>"delete"
+            - else
+              %li= link_to "Créer un compte ou se connecter", new_user_session_path
+
+    %footer#footer.footer
+      .container
+        .row
+          .navbar
+            .navbar-inner
+              %ul.nav
+                %li= link_to "Accueil", root_url
+                %li= link_to "Changements récents", "#"
+                %li= link_to "Conditions d'utilisation", "#"
+                %li= link_to "Nous contacter", "#"
+                %li= link_to "À propos de KiungoWiki", "#"
+                %li= link_to "Plan du site", "#"
+          %p#copyright.span12 © 2012 - KiungoWiki
+   
+    = render partial: "common/site_messages"
 
