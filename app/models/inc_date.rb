@@ -316,7 +316,7 @@ class IncDate < String
 
   def <=>(value)
     puts "testing dates with #{self.object_id} and #{value.object_id}"
-    to_date <=> value.to_date
+    to_date(:month=>1, :day=>1) <=> value.to_date(:month=>1, :day=>1)
   end
 
 end
