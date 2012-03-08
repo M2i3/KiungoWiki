@@ -2,11 +2,12 @@ require 'date'
 
 class IncDate < String
   include Mongoid::Fields::Serializable
+  include Comparable
   
   attr_reader :day, :month, :year
   alias mday day
 
-  def deserialize(value)
+  def initialize(value)
 
     value = nil if value.blank?
 
@@ -15,7 +16,7 @@ class IncDate < String
       #num = value.abs
       #num, @day = num.divmod(100)
       #@year, @month = num.divmod(100)
-      return deserialize(value.to_s)
+      return initialize(value.to_s)
     when ::Hash
       @day, @month, @year = value[:day], value[:month], value[:year]
     when ::Date, ::Time, ::DateTime
@@ -43,6 +44,15 @@ class IncDate < String
     self.replace(to_s)
     self
   end
+
+  def deserialize(object)
+    begin 
+      ::IncDate.new(object)
+    rescue
+      nil
+    end
+  end
+
   
   #--
   # Core attributes handling
@@ -233,8 +243,8 @@ class IncDate < String
     ref = opts.fetch(:ref, ::Date.today)
     ::Date.civil(
       (self.year || opts[:year] || ref.year).to_i,
-      (self.month || opts[:month] || ref.month).to_i,
-      (self.day || opts[:day] || 1).to_i)
+      (self.month != 0 ? self.month : (opts[:month] || ref.month)).to_i,
+      (self.day != 0 ? self.day : (opts[:day] || 1)).to_i)
   end
 
   def to_incomplete_date
@@ -302,6 +312,11 @@ class IncDate < String
     result = {}
     VALID_DATE_PARTS.each { |part| result[part] = self.send(part) }
     result
+  end
+
+  def <=>(value)
+    puts "testing dates with #{self.object_id} and #{value.object_id}"
+    to_date <=> value.to_date
   end
 
 end

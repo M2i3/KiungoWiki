@@ -28,7 +28,7 @@
         %th= Album.human_attribute_name("media_type")
         %th= Album.human_attribute_name("reference_code")
     %tbody
-      - @artist.album_wiki_links.each do |awl|
+      - @artist.album_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
         %tr
           %td= album_wiki_link_path(awl)
           %td= awl.date_released
@@ -37,6 +37,7 @@
           %td= awl.reference_code
 - else
   / TODO: What do we want to show when an artist has no albums?
+  %p This artist does not have any album
 
 = content_tag(:small, Artist.human_attribute_name("updated_at") + " " + @artist.updated_at.to_s)
 
