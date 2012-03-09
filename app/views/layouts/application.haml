@@ -4,6 +4,8 @@
     %title
       = content_for(:title).blank? ? "KiungoWiki" : content_for(:title) +  " - KiungoWiki"
 
+    %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
+
     = stylesheet_link_tag :all
 
     = javascript_include_tag "bootstrap"
@@ -18,6 +20,31 @@
 
   %body{"data-spy"=>"scroll", "data-target"=>".subnav", "data-offset"=>50}
 
+    #header.navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{"data-toggle"=>"collapse","data-target"=>".nav-collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+
+          = link_to root_url, :class=>"brand" do
+            #sitetitle KiungoWiki
+
+          .nav-collapse
+            %ul.nav.entities
+              %li= link_to "Accueil", root_url
+              %li= link_to "Artistes", artists_path
+              %li= link_to "Oeuvres", works_path
+              %li= link_to "Enregistrements", recordings_path
+              %li= link_to "Albums", albums_path
+
+            %ul.nav.profile.pull-right
+              %li= link_to "Mon profil", edit_user_registration_path
+              - if current_user
+                %li= link_to "Se déconnecter", destroy_user_session_path, :method=>"delete"
+              - else
+                %li= link_to "Créer un compte ou se connecter", new_user_session_path
 
     #content
       .container
@@ -25,27 +52,6 @@
           .span12
             = yield
 
-
-    #header.navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          = link_to root_url, :class=>"brand" do
-            #sitetitle KiungoWiki
-          %em#siteslogan La référence en musique.
-
-          %ul.nav.entities
-            %li= link_to "Accueil", root_url
-            %li= link_to "Artistes", artists_path
-            %li= link_to "Oeuvres", works_path
-            %li= link_to "Enregistrements", recordings_path
-            %li= link_to "Albums", albums_path
-
-          %ul.nav.profile.pull-right
-            %li= link_to "Mon profil", edit_user_registration_path
-            - if current_user
-              %li= link_to "Se déconnecter", destroy_user_session_path, :method=>"delete"
-            - else
-              %li= link_to "Créer un compte ou se connecter", new_user_session_path
 
     %footer#footer.footer
       .container
