@@ -2,7 +2,6 @@ class WorkWikiLink
   include Mongoid::Document
 
   field :reference_text
-  field :artist_role
   referenced_in :work
   embedded_in :linkable, :polymorphic => true
 
@@ -18,6 +17,10 @@ class WorkWikiLink
 
   def searchref
     WorkSearchQuery.new(self.reference_text)
+  end
+
+  def role
+    searchref[:role]
   end
 
   def title

@@ -112,6 +112,13 @@ namespace :kiungo do
           artist.update_attributes(params)
         end # Artist.all.each
 
+        Work.all.each do |work|
+          params = {}
+          params[:recording_wiki_links_text] = RawRecording.where(:work_id=>work.origworkid).collect {|l|
+             "oid:" + Recording.where(:origrecordingid => l[:recording_id]).first.id.to_s 
+             }.join(",")
+          work.update_attributes(params)
+        end # Work.all.each
 
       end
     end

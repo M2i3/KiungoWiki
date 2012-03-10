@@ -5,7 +5,8 @@ class WorkSearchQuery < SearchQuery
       lyrics: / lyrics:(.+?) /,
       date_written: / date_written:(.+?) /,
       language_code:  / language_code:(.+?) /,
-      publisher: / publisher:(.+?) /
+      publisher: / publisher:(.+?) /,
+      role: / role:([[:alpha:]]+) /
     })
   end
   def self.catch_all

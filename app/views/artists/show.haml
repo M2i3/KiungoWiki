@@ -10,12 +10,12 @@
   %tbody
     %th= Work.human_attribute_name("title")
     %th= Work.human_attribute_name("date_written")
-    %th= Work.human_attribute_name("role")
+    %th= Work.human_attribute_name("artist_wiki_link")
     - @artist.work_wiki_links.sort{|a,b| a.title.downcase <=> b.title.downcase}.each do |wwl|
       %tr
         %td= work_wiki_link_path(wwl)
         %td= wwl.date_written
-        %td= wwl.artist_role
+        %td= wwl.work.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
 
 %h2= Album.model_name.human.pluralize
 - if @artist.album_wiki_links.length > 0
@@ -38,6 +38,24 @@
 - else
   / TODO: What do we want to show when an artist has no albums?
   %p This artist does not have any album
+
+%h2= Recording.model_name.human.pluralize
+%table
+  %thead
+    %tr
+      %th= Recording.human_attribute_name("title")
+      %th= Recording.human_attribute_name("recording_date")
+      %th= Recording.human_attribute_name("duration")
+      %th= Recording.human_attribute_name("artist_wiki_link")
+  %tbody
+    - @artist.recording_wiki_links.sort{|a,b| a.recording_date <=> b.recording_date}.each do |rwl| 
+      %tr
+        %td= recording_wiki_link_path(rwl)
+        %td= rwl.recording_date    
+        %td= rwl.duration  
+        %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
+    
+
 
 = content_tag(:small, Artist.human_attribute_name("updated_at") + " " + @artist.updated_at.to_s)
 

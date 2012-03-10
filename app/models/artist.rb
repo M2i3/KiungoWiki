@@ -23,6 +23,10 @@ class Artist
   accepts_nested_attributes_for :album_wiki_links
   validates_associated :album_wiki_links
 
+  embeds_many :recording_wiki_links
+  accepts_nested_attributes_for :recording_wiki_links
+  validates_associated :recording_wiki_links
+
   def works
     []
   end
@@ -82,6 +86,29 @@ class Artist
       self.album_wiki_links.build(:reference_text=>q.strip) 
     }    
   end
+
+  def recording_wiki_links_text
+    recording_wiki_links.collect{|v| v.reference_text }.join(",")
+  end
+
+  def recording_wiki_links_combined_links
+    recording_wiki_links.collect{|v| v.combined_link }
+  end
+
+  def recording_wiki_links_combined_links_renamed
+    mappings = {:title => :name}
+    recording_wiki_links_combined_links.collect do |x|
+      Hash[x.map {|k,v| [mappings[k] || k, v] }]
+    end
+  end
+
+  def recording_wiki_links_text=(value)
+    self.recording_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.recording_wiki_links.clear does not work
+    value.split(",").each{|q| 
+      self.recording_wiki_links.build(:reference_text=>q.strip) 
+    }    
+  end
+
 
   scope :queried, ->(q) {
     current_query = all

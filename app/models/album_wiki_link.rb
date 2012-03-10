@@ -19,6 +19,18 @@ class AlbumWikiLink
     AlbumSearchQuery.new(self.reference_text)
   end
 
+  def trackNb
+    searchref[:trackNb]
+  end
+
+  def itemId
+    searchref[:itemId]
+  end
+
+  def itemSection
+    searchref[:itemSection]
+  end
+
   def title
     if album
       self.album.title
