@@ -2,12 +2,7 @@
 .rvmrc
 db/*.sqlite3
 log/*.log
-*.log
-tmp/**/*
-tmp/*
-doc/api
-doc/app
-*.swp
-*~
-.DS_Store
-
+tmp/
+.sass-cache/
+.tropo_voice_key
+.tropo_messaging_key

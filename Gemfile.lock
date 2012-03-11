@@ -1,3 +1,20 @@
+GIT
+  remote: git://github.com/justinfrench/formtastic.git
+  revision: 8a126178d47389590f4d22bfbab7cc9af20dbdd0
+  branch: 2.1-stable
+  specs:
+    formtastic (2.1.1)
+      actionpack (~> 3.0)
+
+GIT
+  remote: https://github.com/cgunther/formtastic-bootstrap.git
+  revision: 4e6a7f50153af805470d43a2bd2c9885a902e4a6
+  branch: bootstrap2-rails3-2-formtastic-2-1
+  specs:
+    formtastic-bootstrap (1.1.2)
+      formtastic
+      rails (>= 3.1.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -148,6 +165,8 @@ DEPENDENCIES
   execjs
   factory_girl
   factory_girl_rails
+  formtastic!
+  formtastic-bootstrap!
   haml
   jquery-rails
   kaminari
