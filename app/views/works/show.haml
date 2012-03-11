@@ -28,22 +28,17 @@
   %table
     %thead
       %tr
-        %th= Work.human_attribute_name("title")
+        %th= Recording.human_attribute_name("title")
         %th= Recording.human_attribute_name("recording_date")
-        %th= Recording.human_attribute_name("recording_location")
         %th= Recording.human_attribute_name("duration")
-        %th= Recording.human_attribute_name("rythm")
-        %th= Recording.human_attribute_name("sample_rate")
 
     %tbody
-      - @work.recording_wiki_links.each do |rwl|
+      - @work.recording_wiki_links.sort{|a,b| a.recording_date <=> b.recording_date}.each do |rwl|
         %tr
           %td= recording_wiki_link_path(rwl)
           %td= rwl.recording_date
-          %td= rwl.recording_location
           %td= rwl.duration
-          %td= rwl.rythm
-          %td= rwl.sample_rate
+
 - else
   / TODO: What do we want to show when a work has no recordings?
 

@@ -4,7 +4,10 @@ class AlbumSearchQuery < SearchQuery
       media_type: / media_type:(.+?) /,
       date_released: / date_released:(.+?) /,
       label: / label:(.+?) /,
-      reference_code: / reference_code:(.+?) /
+      reference_code: / reference_code:(.+?) /,
+      trackNb: / trackNb:([0-9]+) /,
+      itemId: / idemId:([0-9a-zA-Z]+) /,
+      itemSection: / itemSection:([A-Z]) /
     })
   end
   def self.catch_all

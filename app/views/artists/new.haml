@@ -1,13 +1,17 @@
 = title("Nouvel Artiste")
 
-- unless @artist.errors.empty?
-  .alert.alert-error
-    %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel artiste:
-    %br/
-    = @artist.errors.full_messages.join("</br>").html_safe
+.tabbable.row
+  .span12
+    - unless @artist.errors.empty?
+      .alert.alert-error
+        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel artiste:
+        %br/
+        = @artist.errors.full_messages.join("</br>").html_safe
 
-= form_for @artist do |f|
-  = render :partial=>'form', :object=>f
-  = f.submit
-  ou #{link_to 'annuler', :back}
+    = form_for @artist do |f|
+      = render :partial=>'form', :object=>f
+      .formActions
+        = f.submit :class=>"btn btn-primary"
+        ou #{link_to t("cancel"), :back, :class=>"btn"}
+
 

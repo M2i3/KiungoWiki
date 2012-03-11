@@ -17,7 +17,7 @@ class Album
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
 
-	embeds_many :recording_wiki_links
+  embeds_many :recording_wiki_links
   accepts_nested_attributes_for :recording_wiki_links
   validates_associated :recording_wiki_links
 
@@ -45,10 +45,10 @@ class Album
   end
 
   def recording_wiki_links_combined_links_renamed
-  	mappings = {:title => :name}
-  	recording_wiki_links_combined_links.collect do |x|
-			Hash[x.map {|k,v| [mappings[k] || k, v] }]
-		end
+    mappings = {:title => :name}
+    recording_wiki_links_combined_links.collect do |x|
+      Hash[x.map {|k,v| [mappings[k] || k, v] }]
+    end
   end
 
   def recording_wiki_links_text=(value)

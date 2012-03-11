@@ -1,7 +1,7 @@
 = title(t("modify_artist"))
-.tabbable
+.tabbable.row
   = render :partial=>'links'
-  .tab-content
+  .span12
     - unless @artist.errors.empty?
       .alert.alert-error
         Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'artiste:
@@ -11,7 +11,7 @@
     = form_for @artist do |f|
       = render :partial=>'form', :object=>f
       .formActions
-        = f.submit
-        ou #{link_to t("cancel"), :back}
+        = f.submit :class=>"btn btn-primary"
+        ou #{link_to t("cancel"), :back, :class=>"btn"}
 
 

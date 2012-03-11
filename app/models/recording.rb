@@ -3,7 +3,7 @@ class Recording
   include Mongoid::Timestamps
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
   after_initialize :set_defaults
-  before_save :set_cached_attributes
+  #before_save :set_cached_attributes
 
   field :title, :type => String
   field :recording_date, :type => IncDate
@@ -98,5 +98,4 @@ class Recording
   def set_cached_attributes
     self.title = self.work_title
   end
-
 end

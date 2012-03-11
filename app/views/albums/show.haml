@@ -31,8 +31,9 @@
         %th= Recording.human_attribute_name("itemId")
         %th= Recording.human_attribute_name("itemSection")
       %th= Recording.human_attribute_name("duration")
+      %th= Recording.human_attribute_name("artist_wiki_link")
   %tbody
-    - @album.recording_wiki_links.each do |rwl|
+    - @album.recording_wiki_links.sort{|a,b| a.trackNb.to_i <=> b.trackNb.to_i}.each do |rwl|
       %tr
         %td= recording_wiki_link_path(rwl)
         %td= rwl.recording_date
@@ -41,5 +42,6 @@
           %td= rwl.itemId
           %td= rwl.itemSection
         %td= rwl.duration
+        %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe
 
 = render :partial=>'links'

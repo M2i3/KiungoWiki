@@ -1,28 +1,34 @@
 = title(@artist.name)
 
-.tabbable
+.tabbable.row
   = render :partial=>'links'
-  .tab-content    
+  .span12
     .section.summary
       %dl
         = date_location_formatted(t("birth"), @artist.birth_date, @artist.birth_location)
         = date_location_formatted(t("death"), @artist.death_date, @artist.death_location)
 
     %h2= Work.model_name.human.pluralize
-    %table
-      %tbody
-        %th= Work.human_attribute_name("title")
-        %th= Work.human_attribute_name("date_written")
-        %th= Work.human_attribute_name("role")
-        - @artist.work_wiki_links.sort{|a,b| a.title.downcase <=> b.title.downcase}.each do |wwl|
-          %tr
-            %td= work_wiki_link_path(wwl)
-            %td= wwl.date_written
-            %td= wwl.artist_role
+    - if @artist.work_wiki_links.count == 0 
+      %p This artist does not have any works.
+    - else
+      %table.table.table-striped
+        %tbody
+          %th= Work.human_attribute_name("title")
+          %th= Work.human_attribute_name("date_written")
+          %th= Work.human_attribute_name("artist_wiki_link")
+          - @artist.work_wiki_links.sort{|a,b| a.title.downcase <=> b.title.downcase}.each do |wwl|
+            %tr
+              %td= work_wiki_link_path(wwl)
+              %td= wwl.date_written
+              %td= wwl.work.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
+
 
     %h2= Album.model_name.human.pluralize
-    - if @artist.album_wiki_links.length > 0
-      %table
+    - if @artist.album_wiki_links.count == 0 
+      %p This artist does not have any albums.
+    - else
+      %table.table.table-striped
         %thead
           %tr
             %th= Album.human_attribute_name("title")
@@ -38,10 +44,27 @@
               %td= awl.label
               %td= awl.media_type
               %td= awl.reference_code
-    - else
-      / TODO: What do we want to show when an artist has no albums?
-      %p This artist does not have any album
 
-    = content_tag(:small, Artist.human_attribute_name("updated_at") + " " + @artist.updated_at.to_s)
+    %h2= Recording.model_name.human.pluralize
+    - if @artist.recording_wiki_links.count == 0 
+      %p This artist does not have any recordings.
+    - else
+      %table.table.table-striped
+        %thead
+          %tr
+            %th= Recording.human_attribute_name("title")
+            %th= Recording.human_attribute_name("recording_date")
+            %th= Recording.human_attribute_name("duration")
+            %th= Recording.human_attribute_name("artist_wiki_link")
+        %tbody
+          - @artist.recording_wiki_links.sort{|a,b| a.recording_date <=> b.recording_date}.each do |rwl| 
+            %tr
+              %td= recording_wiki_link_path(rwl)
+              %td= rwl.recording_date    
+              %td= rwl.duration  
+              %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
+
+    .well 
+      = content_tag(:small, Artist.human_attribute_name("updated_at") + " " + @artist.updated_at.to_s)
 
 
