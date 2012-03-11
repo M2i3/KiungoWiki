@@ -83,7 +83,8 @@ namespace :kiungo do
               }.join(",")
 
               params[:album_wiki_links_text] = RawRecordingSupportLink.where(:recording_id=>rawRecording.recording_id).collect {|art|
-               "oid:" + Album.where(:origalbumid => art[:support_id]).first.id.to_s
+               "oid:" + Album.where(:origalbumid => art[:support_id]).first.id.to_s + " trackNb:" + art.track +
+             " itemId:" + art.support_element_id + " itemSection:" + art.face
               }.join(",")
            
             r = Recording.create!(params)
@@ -100,6 +101,14 @@ namespace :kiungo do
           album.update_attributes(params)
         end # Album.all.each
 
+        Work.all.each do |work|
+          params = {}
+          params[:recording_wiki_links_text] = RawRecording.where(:work_id=>work.origworkid).collect {|rr|
+             "oid:" + Recording.where(:origrecordingid => rr[:recording_id]).first.id.to_s 
+             }.join(",")
+          work.update_attributes(params)
+        end # Work.all.each
+
         Artist.all.each do |artist|
           params = {}
           params[:work_wiki_links_text] = RawWorkArtistRoleLink.where(:artist_id=>artist.origartistid).collect {|l|
@@ -109,16 +118,13 @@ namespace :kiungo do
           params[:album_wiki_links_text] = RawSupport.where(:artist_id=>artist.origartistid).collect {|s|
              "oid:" + Album.where(:origalbumid => s[:support_id]).first.id.to_s
              }.join(",")
+
+          params[:recording_wiki_links_text] = RawRecordingArtistRoleLink.where(:artist_id=>artist.origartistid).collect {|r|
+             "oid:" + Recording.where(:origrecordingid => r[:recording_id]).first.id.to_s + " role:" + r.role
+             }.join(",")
+
           artist.update_attributes(params)
         end # Artist.all.each
-
-        Work.all.each do |work|
-          params = {}
-          params[:recording_wiki_links_text] = RawRecording.where(:work_id=>work.origworkid).collect {|l|
-             "oid:" + Recording.where(:origrecordingid => l[:recording_id]).first.id.to_s 
-             }.join(",")
-          work.update_attributes(params)
-        end # Work.all.each
 
       end
     end
