@@ -1,11 +1,13 @@
 = title(Artist.model_name.human.pluralize)
 
+
 = render partial: 'common/search'
+.row
+  .span1
+    = link_to t("new"), new_artist_path, :class=>"btn"
+  .span11
+    = alpha_links().html_safe
 
-= button_to t("new"), new_artist_path, :method => :get
-
-
-= alpha_links().html_safe
 = paginate @artists
 %table.table.table-striped
   %thead
@@ -34,4 +36,9 @@
             = artist.death_location
 = paginate @artists
 
-= button_to t("new"), new_artist_path, :method => :get
+.row
+  .span1
+    = link_to t("new"), new_artist_path, :class=>"btn"
+  .span11
+    = alpha_links().html_safe
+

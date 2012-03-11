@@ -1,8 +1,8 @@
 = title("Nouvel Artiste")
 
 - unless @artist.errors.empty?
-  .validationerror
-    Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel artiste:
+  .alert.alert-error
+    %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel artiste:
     %br/
     = @artist.errors.full_messages.join("</br>").html_safe
 

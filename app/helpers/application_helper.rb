@@ -71,4 +71,8 @@ module ApplicationHelper
       classes
     end
   end
+
+  def site_message_class(msg_type)
+   ({:info=>"alert-info", :error=>"alert-error", :alert=>"", :warning=>"", :notice=>"alert-success"}[msg_type]).to_s
+  end
 end

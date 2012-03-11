@@ -1,5 +1,5 @@
-%ul#pageactions
+%ul#pageactions.nav.nav-tabs.pull-right
   %li{:class =>current_page_classes(:action=>"show")}= link_to t("show"), artist_path(@artist)
   %li{:class =>current_page_classes(:action=>"edit")}= link_to t("modify"), edit_artist_path(@artist)
-  %li= t("discuss")
-  %li= t("history")
+  %li= link_to t("discuss"), "#"
+  %li= link_to t("history"), "#"

@@ -46,9 +46,10 @@
               - else
                 %li= link_to "Créer un compte ou se connecter", new_user_session_path
 
-    #content
+    #content  
       .container
-        .inner.row
+        = render partial: "common/site_messages"  
+        .inner.row      
           .span12
             = yield
 
@@ -67,5 +68,5 @@
                 %li= link_to "Plan du site", "#"
           %p#copyright.span12 © 2012 - KiungoWiki
    
-    = render partial: "common/site_messages"
+
 
