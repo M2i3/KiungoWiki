@@ -4,8 +4,9 @@
   = render :partial=>'links'
   .span12
     .section.summary
-      %dl
+      %p
         = date_location_formatted(t("birth"), @artist.birth_date, @artist.birth_location)
+      %p
         = date_location_formatted(t("death"), @artist.death_date, @artist.death_location)
 
     %h2= Work.model_name.human.pluralize

@@ -1,20 +1,22 @@
 = title(Album.model_name.human.pluralize)
 
 = render partial: 'common/search'
+.row
+  .span1
+    = link_to t("new"), new_album_path, :class=>"btn"
+  .span11
+    = alpha_links().html_safe
 
-= button_to t("new"), new_album_path, :method => :get
+= paginate @albums
 
-%p
-  = alpha_links().html_safe
-  = paginate @albums
-  %table
-    %thead
-      %tr
-        %th= Album.human_attribute_name("title")
-        %th= Album.human_attribute_name("date_released")
-        %th= Album.human_attribute_name("label")
-        %th= Album.human_attribute_name("media_type")
-        %th= Album.human_attribute_name("reference_code")
+%table.table.table-striped
+  %thead
+    %tr
+      %th= Album.human_attribute_name("title")
+      %th= Album.human_attribute_name("date_released")
+      %th= Album.human_attribute_name("label")
+      %th= Album.human_attribute_name("media_type")
+      %th= Album.human_attribute_name("reference_code")
     %tbody
       - @albums.each do |album|
         %tr
@@ -29,6 +31,12 @@
             = album.media_type
           %td
             = album.reference_code
-  = paginate @albums
 
-= button_to t("new"), new_album_path, :method => :get
+= paginate @albums
+
+.row
+  .span1
+    = link_to t("new"), new_album_path, :class=>"btn"
+  .span11
+    = alpha_links().html_safe
+

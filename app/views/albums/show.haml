@@ -1,47 +1,55 @@
 = title(@album.title)
 
-.section.summary
-  %p
-    Title: #{@album.title}
-  %p
-    Released Date: #{@album.date_released}
-  %p
-    Label: #{@album.label}
-  %p
-    Media Type: #{@album.media_type}
-  %p
-    Reference code: #{@album.reference_code}
+.row
+  = render :partial=>'links'
+  .span12
+    .section.summary
+      %p
+        Title: #{@album.title}
+      %p
+        Released Date: #{@album.date_released}
+      %p
+        Label: #{@album.label}
+      %p
+        Media Type: #{@album.media_type}
+      %p
+        Reference code: #{@album.reference_code}
 
-%h2= Artist.model_name.human.pluralize
-%table
-  %tbody
-    %th= Artist.human_attribute_name("name")
-    - @album.artist_wiki_links.each do |artist|
-      %tr
-        %td= artist_wiki_link_path(artist)
+    %h2= Artist.model_name.human.pluralize
+    - if @album.artist_wiki_links.count == 0 
+      %p This album does not have any artist associated with it.
+    - else
+      %table.table.table-striped
+        %tbody
+          %th= Artist.human_attribute_name("name")
+          - @album.artist_wiki_links.each do |artist|
+            %tr
+              %td= artist_wiki_link_path(artist)
 
-%h2= Recording.model_name.human.pluralize
-%table
-  %thead
-    %tr
-      %th= Recording.human_attribute_name("title")
-      %th= Recording.human_attribute_name("recording_date")
-      %th= Recording.human_attribute_name("trackNb")
-      - if ["33 tours","45 tours"].include?(@album.media_type)
-        %th= Recording.human_attribute_name("itemId")
-        %th= Recording.human_attribute_name("itemSection")
-      %th= Recording.human_attribute_name("duration")
-      %th= Recording.human_attribute_name("artist_wiki_link")
-  %tbody
-    - @album.recording_wiki_links.sort{|a,b| a.trackNb.to_i <=> b.trackNb.to_i}.each do |rwl|
-      %tr
-        %td= recording_wiki_link_path(rwl)
-        %td= rwl.recording_date
-        %td= rwl.trackNb
-        - if ["33 tours","45 tours"].include?(@album.media_type)
-          %td= rwl.itemId
-          %td= rwl.itemSection
-        %td= rwl.duration
-        %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe
+    %h2= Recording.model_name.human.pluralize
+    - if @album.recording_wiki_links == 0
+      %p This album does not have any recording associated with it.
+    - else
+      %table.table.table-striped
+        %thead
+          %tr
+            %th= Recording.human_attribute_name("title")
+            %th= Recording.human_attribute_name("recording_date")
+            %th= Recording.human_attribute_name("trackNb")
+            - if ["33 tours","45 tours"].include?(@album.media_type)
+              %th= Recording.human_attribute_name("itemId")
+              %th= Recording.human_attribute_name("itemSection")
+            %th= Recording.human_attribute_name("duration")
+            %th= Recording.human_attribute_name("artist_wiki_link")
+        %tbody
+          - @album.recording_wiki_links.sort{|a,b| a.trackNb.to_i <=> b.trackNb.to_i}.each do |rwl|
+            %tr
+              %td= recording_wiki_link_path(rwl)
+              %td= rwl.recording_date
+              %td= rwl.trackNb
+              - if ["33 tours","45 tours"].include?(@album.media_type)
+                %td= rwl.itemId
+                %td= rwl.itemSection
+              %td= rwl.duration
+              %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe
 
-= render :partial=>'links'
