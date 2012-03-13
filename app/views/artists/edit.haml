@@ -4,7 +4,7 @@
   .span12
     - unless @artist.errors.empty?
       .alert.alert-error
-        Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'artiste:
+        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'artiste:
         %br/
         = @artist.errors.full_messages.join("</br>").html_safe
 
