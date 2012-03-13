@@ -1,53 +1,56 @@
 = title(@recording.title)
 
-.section.summary
-  %p
-    Un enregistrement de: #{work_wiki_link_path(@recording.work_wiki_link)}
-  %p
-    Enregistré le: #{@recording.recording_date}
-  %p
-    Lieu: #{@recording.recording_location}
-  %p
-    Durée: #{@recording.duration}
-  %p
-    Rythme: #{@recording.rythm}bpm
+.row
+  = render :partial=>'links'
+  .span12
+    .section.summary
+      %p
+        Un enregistrement de: #{work_wiki_link_path(@recording.work_wiki_link)}
+      %p
+        Enregistré le: #{@recording.recording_date}
+      %p
+        Lieu: #{@recording.recording_location}
+      %p
+        Durée: #{@recording.duration}
+      %p
+        Rythme: #{@recording.rythm}bpm
 
-%h2 Crédits
-%table
-  %thead
-    %tr
-      %th= Artist.model_name.human.pluralize
-  %tbody
-    - @recording.artist_wiki_links.each do |awl|
-      %tr
-        %td= artist_wiki_link_path(awl)
+    %h2 Crédits
+    - if @recording.artist_wiki_links == 0
+      %p This recording is not associated with any artist.
+    - else
+      %table.table.table-striped
+        %thead
+          %tr
+            %th= Artist.model_name.human.pluralize
+        %tbody
+          - @recording.artist_wiki_links.each do |awl|
+            %tr
+              %td= artist_wiki_link_path(awl)
 
-%h2= Album.model_name.human.pluralize
-- if @recording.album_wiki_links.length > 0
-  %table
-    %thead
-      %tr
-        %th= Album.human_attribute_name("title")
-        %th= Album.human_attribute_name("date_released")
-        %th= Album.human_attribute_name("label")
-        %th= Album.human_attribute_name("media_type")
-        %th= Recording.human_attribute_name("trackNb") 
-        %th= Recording.human_attribute_name("itemId")
-        %th= Recording.human_attribute_name("itemSection")
-        %th= Album.human_attribute_name("reference_code")
-    %tbody
-      - @recording.album_wiki_links.each do |awl|
-        %tr
-          %td= album_wiki_link_path(awl)
-          %td= awl.date_released
-          %td= awl.label
-          %td= awl.media_type
-          %td= awl.trackNb
-          %td= awl.itemId      
-          %td= awl.itemSection
-          %td= awl.reference_code
-
-- else
-  / TODO What to put when there are no albums
-
-= render :partial=>'links'
+    %h2= Album.model_name.human.pluralize
+    - if @recording.album_wiki_links.length == 0
+      %p This recording is not on any album.
+    - else
+      %table.table.table-striped
+        %thead
+          %tr
+            %th= Album.human_attribute_name("title")
+            %th= Album.human_attribute_name("date_released")
+            %th= Album.human_attribute_name("label")
+            %th= Album.human_attribute_name("media_type")
+            %th= Recording.human_attribute_name("trackNb") 
+            %th= Recording.human_attribute_name("itemId")
+            %th= Recording.human_attribute_name("itemSection")
+            %th= Album.human_attribute_name("reference_code")
+        %tbody
+          - @recording.album_wiki_links.each do |awl|
+            %tr
+              %td= album_wiki_link_path(awl)
+              %td= awl.date_released
+              %td= awl.label
+              %td= awl.media_type
+              %td= awl.trackNb
+              %td= awl.itemId      
+              %td= awl.itemSection
+              %td= awl.reference_code
