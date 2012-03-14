@@ -6,6 +6,7 @@ defaults: &defaults
   #   - host: slave2.local
   #     port: 27019
 
+
 development:
   host: localhost
   database: kiungo_wiki_development
