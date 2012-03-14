@@ -1,15 +1,17 @@
 = title("Modifier l'oeuvre")
+.row
+  = render :partial=>'links'
+  .span12
+    - unless @work.errors.empty?
+      .alert.alert-error
+        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'oeuvre:
+        %br/
+        = @work.errors.full_messages.join("</br>").html_safe
 
-- unless @work.errors.empty?
-  .validationerror
-    Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'oeuvre:
-    %br/
-    = @work.errors.full_messages.join("</br>").html_safe
+    = form_for @work do |f|
+      = render :partial=>'form', :object=>f
+      .formActions
+        = f.submit :class=>"btn btn-primary"
+        ou #{link_to t("cancel"), :back, :class=>"btn"}
 
-= form_for @work do |f|
-  = render :partial=>'form', :object=>f
-  .formActions
-    = f.submit
-    ou #{link_to t("cancel"), :back}
 
-= render :partial=>'links'
