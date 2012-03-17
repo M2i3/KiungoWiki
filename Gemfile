@@ -25,6 +25,7 @@ gem 'devise'
 gem 'devise_rpx_connectable'
 
 
+gem 'newrelic_rpm'
 
 group :development, :test do
 #  gem 'capybara'
