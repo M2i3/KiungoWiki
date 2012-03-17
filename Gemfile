@@ -48,7 +48,7 @@ end
 group :assets do
   gem 'yui-compressor'
   gem 'execjs'
-  gem 'therubyracer'
+#  gem 'therubyracer'
 end
 
 
