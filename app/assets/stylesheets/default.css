@@ -1,6 +1,6 @@
 body { 
   background-color: #FFF; 
-  background: url('../images/bg.png');  
+  background: url('bg.png');  
 }
 
 
@@ -17,7 +17,7 @@ body {
 #sitetitle {
   width: 121px;
   height: 20px;
-  background: url('../images/header-logo.png');  
+  background: url('header-logo.png');  
 text-indent: -999999px;
 }
 
