@@ -18,7 +18,7 @@ KiungoWiki::Application.configure do
   config.assets.compile = false
 
   # Generate digests for assets URLs
-#  config.assets.digest = true
+  config.assets.digest = true
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
@@ -31,7 +31,7 @@ KiungoWiki::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  # config.log_level = :debug
+  config.log_level = :debug
 
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new
