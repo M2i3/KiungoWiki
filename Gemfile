@@ -48,9 +48,11 @@ end
 group :assets do
   gem 'yui-compressor'
   gem 'execjs'
-#  gem 'therubyracer'
 end
 
+group :development, :test do
+  gem 'therubyracer'
+end
 
 # ======
 # The other original references in the file
