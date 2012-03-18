@@ -24,6 +24,8 @@ gem 'kaminari'
 gem 'devise'
 gem 'devise_rpx_connectable'
 
+# for text-to-html formatting
+gem 'RedCloth'
 
 gem 'newrelic_rpm'
 
