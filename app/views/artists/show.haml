@@ -17,12 +17,17 @@
         %tbody
           %th= Work.human_attribute_name("title")
           %th= Work.human_attribute_name("date_written")
-          %th= Work.human_attribute_name("artist_wiki_link")          
+          %th= Work.human_attribute_name("artist_wiki_link")       
+          - last_title = ""   
+          - last_date_written = ""
           - @artist.work_wiki_links.sort{|a,b| a.title.downcase <=> b.title.downcase}.each do |wwl|
-            %tr
-              %td= work_wiki_link_path(wwl)
-              %td= wwl.date_written
-              %td= wwl.work.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
+          %tr
+            - if wwl.title != last_title and wwl.date_written != last_date_written
+              - last_title = wwl.title
+              - last_date_written = wwl.date_written
+                %td= work_wiki_link_path(wwl)
+                %td= wwl.date_written
+                %td= wwl.work.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
 
 
     %h2= Album.model_name.human.pluralize
