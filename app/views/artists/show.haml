@@ -17,8 +17,8 @@
         %tbody
           %th= Work.human_attribute_name("title")
           %th= Work.human_attribute_name("date_written")
-          %th= Work.human_attribute_name("artist_wiki_link")
-          - @artist.work_wiki_links.sort{|a,b| a.title.downcase.mb_chars.normalize(:kd).gsub(/[^-x00-\x7F\"]/n, '').to_s <=> b.title.downcase.mb_chars.normalize(:kd).gsub(/[^-x00-\x7F\"]/n, '').to_s}.each do |wwl|
+          %th= Work.human_attribute_name("artist_wiki_link")          
+          - @artist.work_wiki_links.sort{|a,b| a.title.downcase <=> b.title.downcase}.each do |wwl|
             %tr
               %td= work_wiki_link_path(wwl)
               %td= wwl.date_written
