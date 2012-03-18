@@ -22,7 +22,7 @@
             %tr
               %td= work_wiki_link_path(wwl)
               %td= wwl.date_written
-              %td= wwl.work.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
+              %td= "sera réimplémenté bientôt"
 
 
     %h2= Album.model_name.human.pluralize
@@ -63,7 +63,7 @@
               %td= recording_wiki_link_path(rwl)
               %td= rwl.recording_date    
               %td= rwl.duration  
-              %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
+              %td= "sera réimplémenté bientôt"
 
     .well 
       = content_tag(:small, Artist.human_attribute_name("updated_at") + " " + @artist.updated_at.to_s)
