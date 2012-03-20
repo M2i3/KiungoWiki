@@ -42,6 +42,10 @@
               %li= link_to "Albums", albums_path
 
             %ul.nav.profile.pull-right
+              - if ["artists", "works", "recordings", "albums"].include?(params[:controller]) 
+                %li
+                  %form.navbar-search
+                    %input.search-query.span2{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
               %li= link_to "Mon profil", edit_user_registration_path
               - if current_user
                 %li= link_to "Se déconnecter", destroy_user_session_path, :method=>"delete"
