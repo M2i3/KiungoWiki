@@ -14,10 +14,12 @@
       %p This artist does not have any works.
     - else
       %table.table.table-striped
+        %thead
+          %tr
+            %th= Work.human_attribute_name("title")
+            %th= Work.human_attribute_name("date_written")
+            %th= Work.human_attribute_name("artist_wiki_link")       
         %tbody
-          %th= Work.human_attribute_name("title")
-          %th= Work.human_attribute_name("date_written")
-          %th= Work.human_attribute_name("artist_wiki_link")          
           - @artist.work_wiki_links.sort{|a,b| a.title.downcase <=> b.title.downcase}.each do |wwl|
             %tr
               %td= work_wiki_link_path(wwl)
