@@ -56,6 +56,8 @@ group :development, :test do
   gem 'therubyracer'
 end
 
+gem 'mongoid_search'
+
 # ======
 # The other original references in the file
 # ======

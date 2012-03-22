@@ -1,6 +1,8 @@
 class Artist 
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Search
+
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
   before_save :set_name
 
@@ -12,6 +14,8 @@ class Artist
   field :death_date, :type => IncDate
   field :death_location, :type => String
   field :origartistid, :type => String
+
+  search_in :name, :surname, :given_name, :birth_location, :death_location, {:match => :all}
 
   validates_presence_of :surname
 
@@ -115,7 +119,9 @@ class Artist
     asq = ArtistSearchQuery.new(q)
     asq.filled_query_fields.each {|field|
       case field
-        when :name, :surname, :given_name, :birth_location, :death_location
+        when :name
+          current_query = current_query.csearch(asq[field])
+        when :surname, :given_name, :birth_location, :death_location
           current_query = current_query.where(field=>/#{asq[field].downcase}/i)
         when :birth_date, :death_date, :created_at, :updated_at
           current_query = current_query.where(field=>asq[field])        

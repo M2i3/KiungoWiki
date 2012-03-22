@@ -1,6 +1,8 @@
 class Recording 
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Search
+
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
   after_initialize :set_defaults
   #before_save :set_cached_attributes
@@ -12,6 +14,8 @@ class Recording
   field :rythm, :type => Integer
   field :category_id, :type => Integer
   field :origrecordingid, :type => String
+
+  search_in :title, {:match => :all}
   
 #  validates_length_of :work_title, :in=>1..500, :allow_nil=>true
 #  validates_numericality_of :duration, :greater_than=>0, :allow_nil=>true  
@@ -82,7 +86,7 @@ class Recording
     rsq.filled_query_fields.each {|field|
       case field
         when :title
-          current_query = current_query.where(field=>/#{rsq[field].downcase}/i)
+          current_query = current_query.csearch(rsq[field])
         when :created_at, :duration, :recording_date, :rythm, :update_at
           current_query = current_query.where(field=>rsq[field])        
       end 

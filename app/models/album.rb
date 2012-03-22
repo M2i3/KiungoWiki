@@ -2,6 +2,7 @@ class Album
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Versioning
+  include Mongoid::Search
 
   field :title, :type => String
   field :date_released, :type => IncDate
@@ -10,6 +11,8 @@ class Album
   field :reference_code, :type => String
   field :number_of_recordings, :type => Integer
   field :origalbumid, :type => String
+
+  search_in :title, :label, {:match => :all}
 
   validates_presence_of :title
 
@@ -63,7 +66,9 @@ class Album
     asq = AlbumSearchQuery.new(q)
     asq.filled_query_fields.each {|field|
       case field
-        when :title, :label, :media_type, :reference_code
+        when :title
+          current_query = current_query.csearch(asq[field])
+        when :label, :media_type, :reference_code
           current_query = current_query.where(field=>/#{asq[field].downcase}/i)
         when :date_released, :created_at, :updated_at
           current_query = current_query.where(field=>asq[field])        

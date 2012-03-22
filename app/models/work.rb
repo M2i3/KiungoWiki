@@ -2,6 +2,7 @@ class Work
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Versioning
+  include Mongoid::Search
 
   field :title, :type => String
   field :date_written, :type => IncDate
@@ -11,6 +12,8 @@ class Work
   field :lyrics, :type => String
   field :chords, :type => String
   field :origworkid, :type => String
+
+  search_in :title, :publisher, {:match => :all}
 
   validates_presence_of :title
 
@@ -67,7 +70,9 @@ class Work
     wsq = WorkSearchQuery.new(q)
     wsq.filled_query_fields.each {|field|
       case field
-        when :title, :publisher, :copyright, :language_code, :lyrics
+        when :title
+          current_query = current_query.csearch(wsq[field])
+        when :publisher, :copyright, :language_code, :lyrics
           current_query = current_query.where(field=>/#{wsq[field].downcase}/i)
         when :date_written, :created_at, :updated_at
           current_query = current_query.where(field=>wsq[field])        
