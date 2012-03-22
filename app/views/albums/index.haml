@@ -1,4 +1,5 @@
-= title(Album.model_name.human.pluralize)
+.page-header
+  = title(Album.model_name.human.pluralize)
 
 .row
   .span1
@@ -7,30 +8,7 @@
     = alpha_links().html_safe
 
 = paginate @albums
-
-%table.table.table-striped
-  %thead
-    %tr
-      %th= Album.human_attribute_name("title")
-      %th= Album.human_attribute_name("date_released")
-      %th= Album.human_attribute_name("label")
-      %th= Album.human_attribute_name("media_type")
-      %th= Album.human_attribute_name("reference_code")
-    %tbody
-      - @albums.each do |album|
-        %tr
-          %td
-            = link_to album.title, album_path(album)
-          %td
-            - if (album.date_released != "0-00-00") then
-              = album.date_released
-          %td
-            = album.label
-          %td
-            = album.media_type
-          %td
-            = album.reference_code
-
+= render :partial=>"search_result", :object=>@albums
 = paginate @albums
 
 .row

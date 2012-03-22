@@ -1,4 +1,5 @@
-= title(Artist.model_name.human.pluralize)
+.page-header
+  = title(Artist.model_name.human.pluralize)
 
 .row
   .span1
@@ -7,31 +8,7 @@
     = alpha_links().html_safe
 
 = paginate @artists
-%table.table.table-striped
-  %thead
-    %tr
-      %th= Artist.human_attribute_name("name")
-      %th= Artist.human_attribute_name("birth_date")
-      %th= Artist.human_attribute_name("birth_location")
-      %th= Artist.human_attribute_name("death_date")
-      %th= Artist.human_attribute_name("death_location")
-  %tbody
-    - @artists.each do |artist|
-      %tr
-        %td
-          = link_to artist.name, artist_path(artist)
-        %td
-          - if (artist.birth_date != "0-00-00") then
-            = artist.birth_date
-        %td
-          - if (artist.birth_location != "") then
-            = artist.birth_location
-        %td
-          - if (artist.death_date != "0-00-00") then
-            = artist.death_date
-        %td
-          - if (artist.death_location != "") then
-            = artist.death_location
+= render :partial=>"search_result", :object=>@artists
 = paginate @artists
 
 .row

@@ -1,4 +1,5 @@
-= title("Recordings")
+.page-header
+  = title("Recordings")
 
 .row
   .span1
@@ -7,20 +8,7 @@
     = alpha_links().html_safe
 
 = paginate @recordings
-%table.table.table-striped
-  %thead
-    %tr
-      %th= Recording.human_attribute_name("title")
-      %th= Recording.human_attribute_name("recording_date")
-      %th= Recording.human_attribute_name("duration")
-      %th= Recording.human_attribute_name("artist_wiki_link")
-    %tbody
-      - @recordings.each do |recording|
-        %tr
-          %td= link_to recording.title, recording_path(recording)
-          %td= recording.recording_date
-          %td= recording.duration
-          %td= recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe
+= render :partial=>"search_result", :object=>@recordings
 = paginate @recordings
 
 .row

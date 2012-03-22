@@ -1,0 +1,17 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th= Work.human_attribute_name("title")
+      %th= Work.human_attribute_name("date_written")
+      %th= Work.human_attribute_name("language_name_french")
+      %th= Work.human_attribute_name("artist_wiki_link")
+  %tbody
+    - search_result.each do |work|
+      %tr
+        %td= link_to work.title, work_path(work)
+        %td= work.date_written
+        %td= work.language_name
+        %td= work.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe
+
+
+

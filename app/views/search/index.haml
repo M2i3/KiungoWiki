@@ -1,0 +1,28 @@
+.page-header
+  = title('Résultat de la recherche pour "' + params[:q] + '"')
+
+- if @artists.count > 0
+  .row
+    .span12
+      %h2 Artistes
+      = render :partial=>"artists/search_result", :object=>@artists
+
+- if @works.count > 0
+  .row
+    .span12
+      %h2 Oeuvres
+      = render :partial=>"works/search_result", :object=>@works
+
+- if @recordings.count > 0
+  .row
+    .span12
+      %h2 Enregistrements
+      = render :partial=>"recordings/search_result", :object=>@recordings
+
+- if @albums.count > 0
+  .row
+    .span12
+      %h2 Albums
+      = render :partial=>"albums/search_result", :object=>@albums
+
+

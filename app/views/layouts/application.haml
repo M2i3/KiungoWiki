@@ -42,7 +42,7 @@
               %li= link_to "Albums", albums_path
 
             %ul.nav.profile.pull-right
-              - if ["artists", "works", "recordings", "albums"].include?(params[:controller]) 
+              - if ["search", "home", "artists", "works", "recordings", "albums"].include?(params[:controller]) 
                 %li
                   %form.navbar-search
                     %input.search-query.span2{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
@@ -63,8 +63,8 @@
     %footer#footer.footer
       .container
         .row
-          .navbar
-            .navbar-inner
+          .span12
+            .navbar
               %ul.nav
                 %li= link_to "Accueil", root_url
                 %li= link_to "Changements récents", "#"
