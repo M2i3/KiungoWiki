@@ -79,14 +79,14 @@ class Artist
 
   def work_wiki_links_text=(value)
     self.work_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.work_wiki_links.clear does not work
-    value.split(",").each{|q| 
+    value.split(",").uniq.each{|q| 
       self.work_wiki_links.build(:reference_text=>q.strip) 
     }    
   end
 
   def album_wiki_links_text=(value)
     self.album_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.album_wiki_links.clear does not work
-    value.split(",").each{|q| 
+    value.split(",").uniq.each{|q| 
       self.album_wiki_links.build(:reference_text=>q.strip) 
     }    
   end
@@ -108,7 +108,7 @@ class Artist
 
   def recording_wiki_links_text=(value)
     self.recording_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.recording_wiki_links.clear does not work
-    value.split(",").each{|q| 
+    value.split(",").uniq.each{|q| 
       self.recording_wiki_links.build(:reference_text=>q.strip) 
     }    
   end
