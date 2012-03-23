@@ -13,6 +13,7 @@ class RawArtist
   field :death_date, :type => String
   field :death_location, :type => String
   field :artist_id, :type => String
+  field :collective, :type => String
   field :notes, :type => String
 
   private 

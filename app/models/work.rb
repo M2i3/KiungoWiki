@@ -12,6 +12,10 @@ class Work
   field :lyrics, :type => String
   field :chords, :type => String
   field :origworkid, :type => String
+  field :is_lyrics_verified, :type => Integer
+  field :is_credits_verified, :type => Integer
+  field :info, :type => String
+
 
   search_in :title, :publisher, {:match => :all}
 

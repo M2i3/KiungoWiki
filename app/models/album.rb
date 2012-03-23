@@ -11,6 +11,7 @@ class Album
   field :reference_code, :type => String
   field :number_of_recordings, :type => Integer
   field :origalbumid, :type => String
+  field :info, :type => String
 
   search_in :title, :label, {:match => :all}
 

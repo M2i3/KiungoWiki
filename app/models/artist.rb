@@ -14,6 +14,8 @@ class Artist
   field :death_date, :type => IncDate
   field :death_location, :type => String
   field :origartistid, :type => String
+  field :is_group, :type => Integer
+  field :info, :type => String
 
   search_in :name, :surname, :given_name, :birth_location, :death_location, {:match => :all}
 

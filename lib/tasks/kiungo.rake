@@ -14,7 +14,9 @@ namespace :kiungo do
                         :death_date=>rawArtist.death_date,
                         :surname=>rawArtist.artist_surname,
                         :given_name=>rawArtist.artist_given_name,
-                        :origartistid=>rawArtist.artist_id)
+                        :origartistid=>rawArtist.artist_id,
+                        :is_group=>rawArtist.collective,
+                        :info=>rawArtist.notes)
         end # rawArtists.each
 
         RawLanguage.all.each do |rawLanguage|
@@ -34,21 +36,25 @@ namespace :kiungo do
                     :media_type=>rawSupport.media_type,
                     :reference_code=>rawSupport.reference_code,
                     :number_of_recordings=>rawSupport.number_of_pieces,
-                    :origalbumid=>rawSupport.support_id}
+                    :origalbumid=>rawSupport.support_id,
+                    :info=>rawSupport.notes}
           unless["0","",nil].include?(rawSupport.label_id)
             params[:label] = RawLabel.where(:label_id => rawSupport.label_id).first[:label_name]
           end
           params[:artist_wiki_links_text] = Artist.where(:origartistid=>rawSupport.artist_id).collect {|art|
                "oid:" + Artist.where(:origartistid => art[:origartistid]).first.id.to_s
-              }.join(",")
+              }.uniq.join(",")
           Album.create!(params)
         end # rawSupports.each
 
         RawWork.all.each do |rawWork|
           params = {:title=>rawWork.work_title, 
-                           :date_written=>rawWork.date_written,
-                           :lyrics=>rawWork.lyrics,
-                           :origworkid=>rawWork.work_id}
+                    :date_written=>rawWork.date_written,
+                    :lyrics=>rawWork.lyrics,
+                    :origworkid=>rawWork.work_id,
+                    :is_lyrics_verified=>rawWork.verified_text,
+                    :is_credits_verified=>rawWork.verified_credits,
+                    :info=>rawWork.notes}
           unless ["0","",nil].include?(rawWork.language_id)
             params[:language_code] = RawLanguage.where(:language_id => rawWork.language_id).first[:language_code]
           end
@@ -75,7 +81,8 @@ namespace :kiungo do
                       :rythm=>rawRecording.rythm,
                       :category_id=>rawRecording.category_id,
                       :work_wiki_link=>WorkWikiLink.new({:reference_text=>"oid: "+ w.id.to_s,:work_id=>w.id}),
-                      :origrecordingid=>rawRecording.recording_id}
+                      :origrecordingid=>rawRecording.recording_id,
+                      :info=>rawRecording.notes}
 
 
               params[:artist_wiki_links_text] = RawRecordingArtistRoleLink.where(:recording_id=>rawRecording.recording_id).collect {|art|
@@ -94,9 +101,12 @@ namespace :kiungo do
 
         Album.all.each do |album|
           params = {}
-          params[:recording_wiki_links_text] = RawRecordingSupportLink.where(:support_id=>album.origalbumid).collect {|l|
-             "oid:" + Recording.where(:origrecordingid => l[:recording_id]).first.id.to_s + " trackNb:" + l.track +
-             " itemId:" + l.support_element_id + " itemSection:" + l.face
+          params[:recording_wiki_links_text] = RawRecordingSupportLink.where(:support_id=>album.origalbumid).collect {|rsl|
+             "oid:" + Recording.where(:origrecordingid => rsl[:recording_id]).first.id.to_s + " trackNb:" + rsl.track +
+             " itemId:" + rsl.support_element_id + " itemSection:" + rsl.face
+             }.uniq.join(",")
+          params[:artist_wiki_links_text] = RawSupport.where(:support_id=>album.origalbumid).collect {|alb|
+             "oid:" + Artist.where(:origartistid => alb[:artist_id]).first.id.to_s 
              }.uniq.join(",")
           album.update_attributes(params)
         end # Album.all.each
@@ -106,26 +116,30 @@ namespace :kiungo do
           params[:recording_wiki_links_text] = RawRecording.where(:work_id=>work.origworkid).collect {|rr|
              "oid:" + Recording.where(:origrecordingid => rr[:recording_id]).first.id.to_s 
              }.uniq.join(",")
+
+          #unless ["0","",nil].include?(RawWork.where(:work_id=>work.origworkid).first.original_work_id)
+          #  params[:work_wiki_links_text] = RawWork.where(:work_id=>work.origworkid).collect {|wl|
+          #     "oid:" + Work.where(:origworkid => wl[:original_work_id]).first.id.to_s
+          #     }.uniq.join(",")
+          #end
           work.update_attributes(params)
         end # Work.all.each
 
         Artist.all.each do |artist|
           params = {}
-          params[:work_wiki_links_text] = RawWorkArtistRoleLink.where(:artist_id=>artist.origartistid).collect {|l|
-             "oid:" + Work.where(:origworkid => l[:work_id]).first.id.to_s
+          params[:work_wiki_links_text] = RawWorkArtistRoleLink.where(:artist_id=>artist.origartistid).collect {|warl|
+             "oid:" + Work.where(:origworkid => warl[:work_id]).first.id.to_s
              }.uniq.join(",")
 
-          params[:album_wiki_links_text] = RawSupport.where(:artist_id=>artist.origartistid).collect {|s|
-             "oid:" + Album.where(:origalbumid => s[:support_id]).first.id.to_s
+          params[:album_wiki_links_text] = RawSupport.where(:artist_id=>artist.origartistid).collect {|sup|
+             "oid:" + Album.where(:origalbumid => sup[:support_id]).first.id.to_s
              }.uniq.join(",")
 
-          params[:recording_wiki_links_text] = RawRecordingArtistRoleLink.where(:artist_id=>artist.origartistid).collect {|r|
-             "oid:" + Recording.where(:origrecordingid => r[:recording_id]).first.id.to_s + " role:" + r.role
+          params[:recording_wiki_links_text] = RawRecordingArtistRoleLink.where(:artist_id=>artist.origartistid).collect {|rarl|
+             "oid:" + Recording.where(:origrecordingid => rarl[:recording_id]).first.id.to_s + " role:" + rarl.role
              }.uniq.join(",")
-
           artist.update_attributes(params)
         end # Artist.all.each
-
       end
     end
   end
