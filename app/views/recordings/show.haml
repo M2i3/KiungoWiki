@@ -39,18 +39,20 @@
             %th= Album.human_attribute_name("date_released")
             %th= Album.human_attribute_name("label")
             %th= Album.human_attribute_name("media_type")
-            %th= Recording.human_attribute_name("trackNb") 
             %th= Recording.human_attribute_name("itemId")
             %th= Recording.human_attribute_name("itemSection")
+            %th= Recording.human_attribute_name("trackNb") 
             %th= Album.human_attribute_name("reference_code")
         %tbody
-          - @recording.album_wiki_links.each do |awl|
+          - @recording.album_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
             %tr
               %td= album_wiki_link_path(awl)
               %td= awl.date_released
               %td= awl.label
               %td= awl.media_type
-              %td= awl.trackNb
               %td= awl.itemId      
               %td= awl.itemSection
+              %td= awl.trackNb
               %td= awl.reference_code
+    %h2= Recording.human_attribute_name("info")
+    %p=  RedCloth.new(@recording.info).to_html.html_safe 

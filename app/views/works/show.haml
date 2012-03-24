@@ -50,8 +50,9 @@
 
     %h2= Work.human_attribute_name("lyrics")
     %p=  RedCloth.new(@work.lyrics).to_html.html_safe 
-    %h2= Work.human_attribute_name("chords")
-    %p= @work.chords
+    %h2= Work.human_attribute_name("info")
+    %p=  RedCloth.new(@work.info).to_html.html_safe 
+
 
     .well 
       = content_tag(:small, Work.human_attribute_name("updated_at") + " " + @work.updated_at.to_s)

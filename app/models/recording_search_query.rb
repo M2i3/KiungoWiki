@@ -8,8 +8,8 @@ class RecordingSearchQuery < SearchQuery
       recording_location:  / recording_location:(.+?) /,
       rythm: / rythm:(.+?) /,
       trackNb: / trackNb:([0-9]+) /,
-      itemId: / idemId:([0-9a-zA-Z]+) /,
-      itemSection: / itemSection:([A-Z]) /
+      itemId: / itemId:([0-9a-zA-Z]+) /,
+      itemSection: / itemSection:([A-Z1-9]) /
     })
   end
   def self.catch_all

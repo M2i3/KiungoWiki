@@ -66,6 +66,8 @@
               %td= rwl.recording_date    
               %td= rwl.duration  
               %td= "sera réimplémenté bientôt"
+    %h2= Artist.human_attribute_name("info")
+    %p=  RedCloth.new(@artist.info).to_html.html_safe 
 
     .well 
       = content_tag(:small, Artist.human_attribute_name("updated_at") + " " + @artist.updated_at.to_s)
