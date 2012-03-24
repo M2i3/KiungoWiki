@@ -16,3 +16,6 @@
   %dd= form.text_field :artist_wiki_links_text, :class=>"artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
   %dt= form.label :album_wiki_links_text
   %dd= form.text_field :album_wiki_links_text, :class=>"albums_title_lookup", :"data-pre"=>form.object.album_wiki_links_combined_links.to_json
+  %dt= form.label :info
+  %dd= form.text_area :info, :class=>"span12"
+

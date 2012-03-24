@@ -69,7 +69,7 @@ class Album
       case field
         when :title
           current_query = current_query.csearch(asq[field])
-        when :label, :media_type, :reference_code
+        when :label, :media_type, :reference_code, :info
           current_query = current_query.where(field=>/#{asq[field].downcase}/i)
         when :date_released, :created_at, :updated_at
           current_query = current_query.where(field=>asq[field])        

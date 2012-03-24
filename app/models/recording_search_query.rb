@@ -9,7 +9,8 @@ class RecordingSearchQuery < SearchQuery
       rythm: / rythm:(.+?) /,
       trackNb: / trackNb:([0-9]+) /,
       itemId: / itemId:([0-9a-zA-Z]+) /,
-      itemSection: / itemSection:([A-Z1-9]) /
+      itemSection: / itemSection:([A-Z1-9]) /,
+      info: / info:(.+?) /
     })
   end
   def self.catch_all

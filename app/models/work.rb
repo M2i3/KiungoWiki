@@ -76,7 +76,7 @@ class Work
       case field
         when :title
           current_query = current_query.csearch(wsq[field])
-        when :publisher, :copyright, :language_code, :lyrics
+        when :publisher, :copyright, :language_code, :lyrics, :info
           current_query = current_query.where(field=>/#{wsq[field].downcase}/i)
         when :date_written, :created_at, :updated_at
           current_query = current_query.where(field=>wsq[field])        

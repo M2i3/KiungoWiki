@@ -11,9 +11,9 @@
   %dd= form.text_field :publisher
   %dt= form.label :lyrics
   %dd= form.text_area :lyrics, :class=>"span12"
-  %dt= form.label :chords
-  %dd= form.text_field :chords
   %dt= form.label :artist_wiki_links_text
   %dd= form.text_field :artist_wiki_links_text, :class=>"artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
   %dt= form.label :recording_wiki_links_text
   %dd= form.text_field :recording_wiki_links_text, :class=>"recordings_title_lookup", :"data-pre"=>form.object.recording_wiki_links_combined_links.to_json
+  %dt= form.label :info
+  %dd= form.text_area :info, :class=>"span12"

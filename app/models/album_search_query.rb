@@ -7,7 +7,8 @@ class AlbumSearchQuery < SearchQuery
       reference_code: / reference_code:(.+?) /,
       trackNb: / trackNb:([0-9]+) /,
       itemId: / idemId:([0-9a-zA-Z]+) /,
-      itemSection: / itemSection:([A-Z]) /
+      itemSection: / itemSection:([A-Z]) /,
+      info: / info:(.+?) /
     })
   end
   def self.catch_all

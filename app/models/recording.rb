@@ -88,6 +88,8 @@ class Recording
       case field
         when :title
           current_query = current_query.csearch(rsq[field])
+        when :info
+          current_query = current_query.where(field=>/#{rsq[field].downcase}/i)
         when :created_at, :duration, :recording_date, :rythm, :update_at
           current_query = current_query.where(field=>rsq[field])        
       end 
