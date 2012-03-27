@@ -14,7 +14,7 @@ class Recording
   field :rythm, :type => Integer
   field :category_id, :type => Integer
   field :origrecordingid, :type => String
-  field :info, :type => String
+  field :info, :type => String, :default => ""
 
   search_in :title, {:match => :all}
   

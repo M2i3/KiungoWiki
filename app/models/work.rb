@@ -14,7 +14,7 @@ class Work
   field :origworkid, :type => String
   field :is_lyrics_verified, :type => Integer
   field :is_credits_verified, :type => Integer
-  field :info, :type => String
+  field :info, :type => String, :default => ""
 
 
   search_in :title, :publisher, {:match => :all}
