@@ -6,23 +6,31 @@
     .span12
       %h2 Artistes
       = render :partial=>"artists/search_result", :object=>@artists
+      - unless @artists.last_page? 
+        .well= link_to_unless @artists.last_page?, "plus de résultats", artists_path(:page=>@artists.current_page + 1, :q=>params[:q])
 
 - if @works.count > 0
   .row
     .span12
       %h2 Oeuvres
       = render :partial=>"works/search_result", :object=>@works
+      - unless @works.last_page? 
+        .well= link_to "plus de résultats", works_path(:page=>@works.current_page + 1, :q=>params[:q])
 
 - if @recordings.count > 0
   .row
     .span12
       %h2 Enregistrements
       = render :partial=>"recordings/search_result", :object=>@recordings
+      - unless @recordings.last_page? 
+        .well= link_to_unless @recordings.last_page?, "plus de résultats", recordings_path(:page=>@recordings.current_page + 1, :q=>params[:q])
 
 - if @albums.count > 0
   .row
     .span12
       %h2 Albums
       = render :partial=>"albums/search_result", :object=>@albums
+      - unless @albums.last_page? 
+        .well= link_to_unless @albums.last_page?, "plus de résultats", recordings_path(:page=>@albums.current_page + 1, :q=>params[:q])
 
 
