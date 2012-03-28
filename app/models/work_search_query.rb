@@ -6,7 +6,7 @@ class WorkSearchQuery < SearchQuery
       date_written: / date_written:(.+?) /,
       language_code:  / language_code:(.+?) /,
       publisher: / publisher:(.+?) /,
-      role: / role:([[:alpha:]]+) /,
+      role: / role:([[:alpha:]\/]+) /,
       info: / info:(.+?) /
     })
   end
