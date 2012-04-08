@@ -24,7 +24,7 @@
             %tr
               %td= work_wiki_link_path(wwl)
               %td= wwl.date_written
-              %td= "sera réimplémenté bientôt"
+              %td= wwl.work.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe
 
 
     %h2= Album.model_name.human.pluralize
@@ -65,7 +65,7 @@
               %td= recording_wiki_link_path(rwl)
               %td= rwl.recording_date    
               %td= rwl.duration  
-              %td= "sera réimplémenté bientôt"
+              %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe
     %h2= Artist.human_attribute_name("info")
     %p=  RedCloth.new(@artist.info).to_html.html_safe 
 
