@@ -36,17 +36,16 @@
           %tr
             %th= Album.human_attribute_name("title")
             %th= Album.human_attribute_name("date_released")
-            %th= Album.human_attribute_name("label")
             %th= Album.human_attribute_name("media_type")
-            %th= Album.human_attribute_name("reference_code")
+            %th= Album.human_attribute_name("label")
+
         %tbody
           - @artist.album_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
             %tr
               %td= album_wiki_link_path(awl)
               %td= awl.date_released
-              %td= awl.label
               %td= awl.media_type
-              %td= awl.reference_code
+              %td= awl.label
 
     %h2= Recording.model_name.human.pluralize
     - if @artist.recording_wiki_links.count == 0 
