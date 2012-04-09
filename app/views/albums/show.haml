@@ -5,15 +5,20 @@
   .span12
     .section.summary
       %p
-        Title: #{@album.title}
+        = Album.human_attribute_name("title")
+        \: #{@album.title}
       %p
-        Released Date: #{@album.date_released}
+        = Album.human_attribute_name("date_released")
+        \: #{@album.date_released}
       %p
-        Label: #{@album.label}
+        = Album.human_attribute_name("label")
+        \: #{@album.label}
       %p
-        Media Type: #{@album.media_type}
+        = Album.human_attribute_name("media_type")
+        \: #{@album.media_type}
       %p
-        Reference code: #{@album.reference_code}
+        = Album.human_attribute_name("reference_code")
+        \: #{@album.reference_code}
 
     %h2= Artist.model_name.human.pluralize
     - if @album.artist_wiki_links.count == 0 

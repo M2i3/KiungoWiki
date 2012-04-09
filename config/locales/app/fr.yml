@@ -45,6 +45,7 @@ fr:
         date_released: Date de sortie
         media_type: Type de support
         reference_code: Code de référence
+        label: Étiquette
       recording:
         work_name: Oeuvre
         recording_date: Date d'enregistrement
