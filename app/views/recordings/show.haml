@@ -50,7 +50,10 @@
               %td= awl.date_released
               %td= awl.label
               %td= awl.media_type
-              %td= awl.itemId      
+              - unless ["0","",nil].include?(awl.itemId) 
+                %td= awl.itemId 
+              - else
+                %td= "1"
               %td= awl.itemSection
               %td= awl.trackNb
               %td= awl.reference_code
