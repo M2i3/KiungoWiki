@@ -24,7 +24,8 @@
             %tr
               %td= work_wiki_link_path(wwl)
               %td= wwl.date_written
-              %td= wwl.work.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe
+              %td= "Sera réimplémenté plus tard"
+              -# %td= wwl.work.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe
 
     %h2= Recording.model_name.human.pluralize
     - if @artist.recording_wiki_links.count == 0 
@@ -43,7 +44,8 @@
               %td= recording_wiki_link_path(rwl)
               %td= rwl.recording_date    
               %td= rwl.duration  
-              %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe
+              %td= "Sera réimplémenté plus tard"
+              -# %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe
 
     %h2= Album.model_name.human.pluralize
     - if @artist.album_wiki_links.count == 0 
