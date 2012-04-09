@@ -151,7 +151,7 @@ mdb-export  -H -q '|' $1 Lien\ Artiste\ Auteur-compositeur >> work_artist_role_l
 ./substitute.pl '"role_id": "2"' '"role": "Auteur"' work_artist_role_links_${DATE}.json
 ./substitute.pl '"role_id": "3"' '"role": "Adapteur/Traducteur"' work_artist_role_links_${DATE}.json
 ./substitute.pl '"role_id": "4"' '"role": "Compositeur"' work_artist_role_links_${DATE}.json
-./substitute.pl '"role_id": "5"' '"role": "Auteur ou compositeur"' work_artist_role_links_${DATE}.json
+./substitute.pl '"role_id": "5"' '"role": "Incertain"' work_artist_role_links_${DATE}.json
 ./substitute.pl '"role_id": "6"' '"role": "Poète"' work_artist_role_links_${DATE}.json
 ./substitute.pl '"role_id": "7"' '"role": "Chef dXXXorchestre"' work_artist_role_links_${DATE}.json
 ./substitute.pl '"role_id": "8"' '"role": "Violoniste"' work_artist_role_links_${DATE}.json
@@ -179,7 +179,7 @@ mdb-export  -H -q '|' $1 Lien\ Artiste\ Interprete >> recording_artist_role_link
 ./substitute.pl '"role_id": "2"' '"role": "Auteur"' recording_artist_role_links_${DATE}.json
 ./substitute.pl '"role_id": "3"' '"role": "Adapteur/Traducteur"' recording_artist_role_links_${DATE}.json
 ./substitute.pl '"role_id": "4"' '"role": "Compositeur"' recording_artist_role_links_${DATE}.json
-./substitute.pl '"role_id": "5"' '"role": "Auteur ou compositeur"' recording_artist_role_links_${DATE}.json
+./substitute.pl '"role_id": "5"' '"role": "Incertain"' recording_artist_role_links_${DATE}.json
 ./substitute.pl '"role_id": "6"' '"role": "Poète"' recording_artist_role_links_${DATE}.json
 ./substitute.pl '"role_id": "7"' '"role": "Chef dXXXorchestre"' recording_artist_role_links_${DATE}.json
 ./substitute.pl '"role_id": "8"' '"role": "Violoniste"' recording_artist_role_links_${DATE}.json
