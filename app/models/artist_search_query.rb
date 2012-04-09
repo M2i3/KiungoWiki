@@ -7,7 +7,7 @@ class ArtistSearchQuery < SearchQuery
       birth_location: / birth_location:(.+?) /,
       death_date: / death_date:(.+?) /,
       death_location: / death_location:(.+?) /,
-      role: / role:([[:alpha:]\/]+) /,
+      role: / role:([[:alpha:]' \/]+) /,
       info: / info:(.+?) /
     })
   end
