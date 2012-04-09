@@ -3,9 +3,8 @@
     %tr
       %th= Album.human_attribute_name("title")
       %th= Album.human_attribute_name("date_released")
-      %th= Album.human_attribute_name("label")
       %th= Album.human_attribute_name("media_type")
-      %th= Album.human_attribute_name("reference_code")
+      %th= Album.human_attribute_name("label")
     %tbody
       - search_result.each do |album|
         %tr
@@ -15,9 +14,8 @@
             - if (album.date_released != "0-00-00") then
               = album.date_released
           %td
-            = album.label
-          %td
             = album.media_type
           %td
-            = album.reference_code
+            = album.label
+
 
