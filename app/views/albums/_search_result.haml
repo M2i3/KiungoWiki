@@ -2,6 +2,7 @@
   %thead
     %tr
       %th= Album.human_attribute_name("title")
+      %th= Album.human_attribute_name("artist_wiki_link")
       %th= Album.human_attribute_name("date_released")
       %th= Album.human_attribute_name("media_type")
       %th= Album.human_attribute_name("label")
@@ -10,6 +11,8 @@
         %tr
           %td
             = link_to album.title, album_path(album)
+          %td
+            = album.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe
           %td
             - if (album.date_released != "0-00-00") then
               = album.date_released

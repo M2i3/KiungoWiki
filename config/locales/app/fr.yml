@@ -43,6 +43,7 @@ fr:
         given_name: Prénom
         info: Notes biographiques
       album:
+        artist_wiki_link: Artiste principal
         date_released: Date de parution
         media_type: Format
         reference_code: Code de référence
