@@ -1,5 +1,8 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
-Factory.define :album do |f|
-  f.title "Mes meilleurs succes" # TODO UTF8 encoding
+FactoryGirl.define do
+  factory :album do |f|
+    f.title "Mes meilleurs succes" # TODO UTF8 encoding
+  end
 end
+
