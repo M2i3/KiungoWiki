@@ -2,8 +2,6 @@
   = title(Work.model_name.human.pluralize)
 
 .row
-  .span1
-    = link_to t("new"), new_work_path, :class=>"btn"
   .span11
     = alpha_links().html_safe
 
@@ -12,8 +10,6 @@
 = paginate @works
 
 .row
-  .span1
-    = link_to t("new"), new_work_path, :class=>"btn"
   .span11
     = alpha_links().html_safe
 

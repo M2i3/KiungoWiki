@@ -2,8 +2,6 @@
   = title(Artist.model_name.human.pluralize)
 
 .row
-  .span1
-    = link_to t("new"), new_artist_path, :class=>"btn"
   .span11
     = alpha_links().html_safe
 
@@ -12,8 +10,6 @@
 = paginate @artists
 
 .row
-  .span1
-    = link_to t("new"), new_artist_path, :class=>"btn"
   .span11
     = alpha_links().html_safe
 
