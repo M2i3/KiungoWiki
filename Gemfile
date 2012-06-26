@@ -22,12 +22,14 @@ gem 'kaminari'
 
 # for user registration and authentication
 gem 'devise'
-gem 'devise_rpx_connectable'
+#gem 'devise_rpx_connectable'
 
 # for text-to-html formatting
 gem 'RedCloth'
 
-gem 'newrelic_rpm'
+group :production do
+  gem 'newrelic_rpm'
+end
 
 group :development, :test do
 #  gem 'capybara'
@@ -56,7 +58,8 @@ group :development, :test do
   gem 'therubyracer'
 end
 
-gem 'mongoid_search'
+#gem 'mongoid_search'
+gem 'mongoid_search', "0.2.7", :git => "git://github.com/CubesIntoFlatCircles/mongoid_search.git", :branch => "master"
 
 # ======
 # The other original references in the file
