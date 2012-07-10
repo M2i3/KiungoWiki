@@ -1,16 +1,14 @@
 class RecordingSearchQuery < SearchQuery 
   def self.query_expressions
-    superclass.query_expressions.merge({ title: / title:(.+?) /,
-      recording_date: / recording_date:(.+?) /,
-      duration: / duration:(.+?) /,
-      artist_wiki_link: / artist_wiki_link:(.+?) /,
-      album_wiki_link: / album_wiki_link:(.+?) /,
-      recording_location:  / recording_location:(.+?) /,
-      rythm: / rythm:(.+?) /,
+    superclass.query_expressions.merge({ title: :text,
+      recording_date: :date,
+      duration: :word,
+      recording_location:  :text,
+      rythm: :word,
       trackNb: / trackNb:([0-9]+) /,
       itemId: / itemId:([0-9a-zA-Z]+) /,
       itemSection: / itemSection:([A-Z1-9]) /,
-      info: / info:(.+?) /
+      info: :text
     })
   end
   def self.catch_all

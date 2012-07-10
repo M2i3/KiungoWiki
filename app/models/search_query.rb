@@ -5,6 +5,9 @@ class SearchQuery
   def self.catch_all
     nil
   end
+  def self.meta_fields
+    []
+  end
 
   attr_reader :q
 
@@ -34,17 +37,42 @@ class SearchQuery
   def q=(value)
     @q = value.to_s
     value = " " + @q + " "
-    self.class.query_expressions.each {|var_name, expression|
-      if match_result = expression.match(value)
-        self.instance_variable_set("@#{var_name}", match_result[1])
-        # remove the value found from the searh string
-        value[match_result.offset(0)[0]..(match_result.offset(0)[1] - 1 )] = " "   
-      else
-        self.instance_variable_set("@#{var_name}", nil)
-      end
+    self.class.query_expressions.each {|var_name, var_expression|
+
+      self.instance_variable_set("@#{var_name}", nil)
+      self.instance_variable_set("@full_#{var_name}", nil)
+
+      build_expression(var_name, var_expression).each {|expression|
+        if match_result = expression.match(value)
+          self.instance_variable_set("@#{var_name}", match_result[1].strip)
+          self.instance_variable_set("@full_#{var_name}", match_result[0].strip)
+          # remove the value found from the searh string
+          value[match_result.offset(0)[0]..(match_result.offset(0)[1] - 1 )] = " "   
+        end        
+      }
     }
     if self.class.catch_all and not self.instance_variable_get("@#{self.class.catch_all}")
       self.instance_variable_set("@#{self.class.catch_all}", value.strip) 
     end
+  end
+
+  def build_expression(var_name, var_expression)
+    case var_expression
+      when :word
+        [/ #{var_name}:(.+?) /]
+      when :text
+        [/ #{var_name}:"(.+?)" /, / #{var_name}:(.+?) /]
+      when :date
+        [/ #{var_name}:(.+?) /]
+      else
+        (var_expression.respond_to?(:each) ? var_expression : [var_expression])
+    end
+  end
+
+  def metaq
+    (self.filled_query_fields & self.class.meta_fields).collect {|var_name| self.instance_variable_get("@full_#{var_name}") }.join(" ")
+  end
+  def objectq
+    (self.filled_query_fields - self.class.meta_fields).collect {|var_name| self.instance_variable_get("@full_#{var_name}") }.join(" ")
   end
 end

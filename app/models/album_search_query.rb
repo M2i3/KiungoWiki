@@ -1,14 +1,14 @@
 class AlbumSearchQuery < SearchQuery 
   def self.query_expressions
-    superclass.query_expressions.merge({ title: / title:(.+?) /,
-      media_type: / media_type:(.+?) /,
-      date_released: / date_released:(.+?) /,
-      label: / label:(.+?) /,
-      reference_code: / reference_code:(.+?) /,
+    superclass.query_expressions.merge({ title: :text,
+      media_type: :word,
+      date_released: :date,
+      label: :text,
+      reference_code: :text,
       trackNb: / trackNb:([0-9]+) /,
       itemId: / idemId:([0-9a-zA-Z]+) /,
       itemSection: / itemSection:([A-Z]) /,
-      info: / info:(.+?) /
+      info: :text
     })
   end
   def self.catch_all

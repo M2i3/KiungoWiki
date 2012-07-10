@@ -1,17 +1,20 @@
 class ArtistSearchQuery < SearchQuery 
   def self.query_expressions
-    superclass.query_expressions.merge({surname: / surname:(.+?) /,
-      given_name: / given_name:(.+?) /, 
-      name: / name:(.+?) /,
-      birth_date: / birth_date:(.+?) /,
-      birth_location: / birth_location:(.+?) /,
-      death_date: / death_date:(.+?) /,
-      death_location: / death_location:(.+?) /,
-      role: / role:([[:alpha:]' \/]+) /,
-      info: / info:(.+?) /
+    superclass.query_expressions.merge({surname: :text,
+      given_name: :text,
+      name: :text,
+      birth_date: :date,
+      birth_location: :text,
+      death_date: :date,
+      death_location: :text,
+      role: :text,
+      info: :text
     })
   end
   def self.catch_all
-    "name"   #TODO ajouter recherche sur prenoms itou
+    "name"
   end 
+  def self.meta_fields
+    super + [:role]
+  end
 end
