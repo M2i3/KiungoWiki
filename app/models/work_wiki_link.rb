@@ -1,43 +1,18 @@
 class WorkWikiLink
   include Mongoid::Document
+  include WikiLink
 
-  field :reference_text
-  referenced_in :work
-  embedded_in :linkable, :polymorphic => true
-
-  def reference_text=(value)
-    self[:reference_text] = value
-    wsq = WorkSearchQuery.new(value)
-    if wsq[:oid]
-      self.work = Work.find(wsq[:oid]) 
-    else
-      self.work = nil
-    end
-  end
-
-  def searchref
-    WorkSearchQuery.new(self.reference_text)
-  end
-
-  def role
-    searchref[:role]
-  end
+  set_reference_class Work, WorkSearchQuery
 
   def title
-    if work
-      self.work.title
-    else
-      self.reference_text
-    end
+    (self.work && self.work.title) ||self.objectq
+  end
+
+  def display_text
+    self.title.to_s + (self.metaq.empty? ? "" : " (#{self.metaq})")
   end
 
   def date_written
     work.date_written if work
   end
-
-  def combined_link
-    if self.reference_text || self.title
-      {id: self.reference_text, name: self.title.to_s}
-    end
-  end 
 end

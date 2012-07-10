@@ -1,22 +1,11 @@
 class RecordingWikiLink
   include Mongoid::Document
+  include WikiLink
 
-  field :reference_text
-  referenced_in :recording
-  embedded_in :linkable, :polymorphic => true
+  set_reference_class Recording, RecordingSearchQuery
 
-  def reference_text=(value)
-    self[:reference_text] = value
-    rsq = RecordingSearchQuery.new(value)
-    if rsq[:oid]
-      self.recording = Recording.find(rsq[:oid]) 
-    else
-      self.recording = nil
-    end
-  end
-
-  def searchref
-    RecordingSearchQuery.new(self.reference_text)
+  def title
+    (recording && self.recording.title) || self.objectq
   end
 
   def trackNb
@@ -31,25 +20,16 @@ class RecordingWikiLink
     searchref[:itemSection]
   end
 
-  def title
-    if recording
-      self.recording.title
-    else
-      self.reference_text
-    end 
-  end
-
   def recording_date
-     self.recording.recording_date if self.recording
+     (self.recording && self.recording.recording_date) || ""
   end
 
   def duration
-     self.recording.duration if self.recording
+     (self.recording && self.recording.duration) || ""
   end
 
-  def combined_link
-    if self.reference_text || self.title
-      {id: self.reference_text, name: self.title.to_s}
-    end
-  end 
+  def display_text
+    self.title.to_s + (self.metaq.empty? ? "" : " (#{self.metaq})")
+  end
 end
+
