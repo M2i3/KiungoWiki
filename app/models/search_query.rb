@@ -52,7 +52,8 @@ class SearchQuery
       }
     }
     if self.class.catch_all and not self.instance_variable_get("@#{self.class.catch_all}")
-      self.instance_variable_set("@#{self.class.catch_all}", value.strip) 
+      self.instance_variable_set("@#{self.class.catch_all}", value.strip)
+      self.instance_variable_set("@full_#{self.class.catch_all}", "#{self.class.catch_all}:\"#{value.strip}\"")  
     end
   end
 
