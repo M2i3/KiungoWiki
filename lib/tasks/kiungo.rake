@@ -18,17 +18,19 @@ namespace :kiungo do
                         :is_group=>rawArtist.collective,
                         :info=>rawArtist.notes)
         end # rawArtists.each
-
+        puts "rake stage 1"
         RawLanguage.all.each do |rawLanguage|
           Language.create!(:language_name_english=>rawLanguage.language_name_english,
                         :language_name_french=>rawLanguage.language_name_french, 
                         :language_code=>rawLanguage.language_code)
         end # rawLanguages.each
+        puts "rake stage 2"
 
         RawCategory.all.each do |rawCategory|
           Category.create!(:category_id=>rawCategory.category_id,
                         :category_name=>rawCategory.category_name)
         end # RawCategories.each
+        puts "rake stage 3"
 
         RawSupport.all.each do |rawSupport|
           params = {:title=>rawSupport.support_title, 
@@ -46,6 +48,7 @@ namespace :kiungo do
               }.uniq.join(",")
           Album.create!(params)
         end # rawSupports.each
+        puts "rake stage 4"
 
         RawWork.all.each do |rawWork|
           params = {:title=>rawWork.work_title, 
@@ -98,6 +101,7 @@ namespace :kiungo do
             
           end # rawRecordings.each
         end # rawWorks.each
+        puts "rake stage 5"
 
         Album.all.each do |album|
           params = {}
@@ -110,36 +114,58 @@ namespace :kiungo do
              }.uniq.join(",")
           album.update_attributes(params)
         end # Album.all.each
+        puts "rake stage 6"
 
         Work.all.each do |work|
           params = {}
           params[:recording_wiki_links_text] = RawRecording.where(:work_id=>work.origworkid).collect {|rr|
              "oid:" + Recording.where(:origrecordingid => rr[:recording_id]).first.id.to_s 
              }.uniq.join(",")
-
-          #unless ["0","",nil].include?(RawWork.where(:work_id=>work.origworkid).first.original_work_id)
-          #  params[:work_wiki_links_text] = RawWork.where(:work_id=>work.origworkid).collect {|wl|
-          #     "oid:" + Work.where(:origworkid => wl[:original_work_id]).first.id.to_s
-          #     }.uniq.join(",")
-          #end
+          originalworkid = RawWork.where(:work_id=>work.origworkid).first.original_work_id
+          puts "origworkid = " + work.origworkid + " originalworkid = " + originalworkid
+          unless ["0","",nil].include?(originalworkid)
+            originalwork = Work.where(:origworkid => originalworkid)
+            if originalwork
+              puts "Found originalwork"
+              params[:work_wiki_links_text] = RawWork.where(:work_id=>work.origworkid).collect {|wl|
+                 "oid:" + Work.where(:origworkid => wl[:original_work_id]).first.id.to_s
+                 }.uniq.join(",")
+              puts "work_wiki_links_text = " + params[:work_wiki_links_text].to_s
+            else
+              puts "none existing work"
+            end
+          end
           work.update_attributes(params)
         end # Work.all.each
+        puts "rake stage 7"
 
-        Artist.all.each do |artist|
+        Artist.all.each do |artist1|
           params = {}
-          params[:work_wiki_links_text] = RawWorkArtistRoleLink.where(:artist_id=>artist.origartistid).collect {|warl|
-             "oid:" + Work.where(:origworkid => warl[:work_id]).first.id.to_s
-             }.uniq.join(",")
-
-          params[:album_wiki_links_text] = RawSupport.where(:artist_id=>artist.origartistid).collect {|sup|
+          params[:album_wiki_links_text] = RawSupport.where(:artist_id=>artist1.origartistid).collect {|sup|
              "oid:" + Album.where(:origalbumid => sup[:support_id]).first.id.to_s
              }.uniq.join(",")
+          artist1.update_attributes(params)
 
-          params[:recording_wiki_links_text] = RawRecordingArtistRoleLink.where(:artist_id=>artist.origartistid).collect {|rarl|
+        end # Artist.all.each
+        puts "rake stage 8"
+        Artist.all.each do |artist2|
+          params = {}
+          params[:work_wiki_links_text] = RawWorkArtistRoleLink.where(:artist_id=>artist2.origartistid).collect {|warl|
+           "oid:" + Work.where(:origworkid => warl[:work_id]).first.id.to_s
+             }.uniq.join(",")
+          artist2.update_attributes(params)
+
+        end # Artist.all.each
+        puts "rake stage 9"
+        Artist.all.each do |artist3|
+          params = {}
+          params[:recording_wiki_links_text] = RawRecordingArtistRoleLink.where(:artist_id=>artist3.origartistid).collect {|rarl|
              "oid:" + Recording.where(:origrecordingid => rarl[:recording_id]).first.id.to_s + " role:" + rarl.role
              }.uniq.join(",")
-          artist.update_attributes(params)
+          artist3.update_attributes(params)
+
         end # Artist.all.each
+        puts "rake completed"
       end
     end
   end

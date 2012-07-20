@@ -22,11 +22,17 @@ class Work
   validates_presence_of :title
 
   embeds_many :artist_wiki_links, :as=>:linkable
+  accepts_nested_attributes_for :artist_wiki_links
 #  accepts_nested_attributes_for :reminder_times, :allow_destroy => true, 
-#  validates_associated :artist_wiki_links
+  validates_associated :artist_wiki_links
   
   embeds_many :recording_wiki_links, :as=>:linkable
+  accepts_nested_attributes_for :recording_wiki_links
   validates_associated :recording_wiki_links
+
+  embeds_many :work_wiki_links, :as=>:linkable
+  accepts_nested_attributes_for :work_wiki_links
+  validates_associated :work_wiki_links
 
   def artist_wiki_links_text
     artist_wiki_links.collect{|v| v.reference_text }.join(",")
@@ -37,15 +43,15 @@ class Work
   end
 
   def artist_wiki_links_text=(value)
-    puts "******************* handling new value #{value}"
+    #puts "******************* handling new value #{value}"
     self.artist_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
 
-    puts "there are now #{self.artist_wiki_links.size}"
+    #puts "there are now #{self.artist_wiki_links.size}"
     value.split(",").each{|q| 
       self.artist_wiki_links.build(:reference_text=>q.strip) 
     }    
-    puts "there are now #{self.artist_wiki_links.size}"
-    puts "parent changed?? #{self.changed?}"
+    #puts "there are now #{self.artist_wiki_links.size}"
+    #puts "parent changed?? #{self.changed?}"
   end
   
   def recording_wiki_links_text
@@ -63,8 +69,23 @@ class Work
     }    
   end
 
+  def work_wiki_links_text
+    work_wiki_links.collect{|v| v.reference_text }.join(",")
+  end
+
+  def work_wiki_links_combined_links
+    work_wiki_links.collect{|v| v.combined_link }
+  end
+
+  def work_wiki_links_text=(value)
+    self.work_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.work_wiki_links.clear does not work
+    value.split(",").uniq.each{|q| 
+      self.work_wiki_links.build(:reference_text=>q.strip) 
+    }    
+  end
+
   def language_name
-    unless[nil].include?(Language.where(:language_code=>self.language_code).first); 
+    unless["0","",nil].include?(Language.where(:language_code=>self.language_code).first); 
                 Language.where(:language_code=>self.language_code).first[:language_name_french]; 
     end
   end

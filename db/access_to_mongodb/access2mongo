@@ -234,6 +234,8 @@ mdb-export  -H -q '|' $1 Albums >> supports_${DATE}.csv
 ./substitute.pl '"media_type": "5"' '"media_type": "78 tours"' supports_${DATE}.json
 ./substitute.pl "\[{" "{" supports_${DATE}.json
 ./substitute.pl "}\]" "}" supports_${DATE}.json
+./substitute.pl '\\r\\n' '\n' works_${DATE}.json
+./substitute.pl '\\n\\n' '\n<br>\n' works_${DATE}.json
 
 # Transfert au serveur mongoDB
 # Si le serveur n'est pas local ou actif, on peut modifier ou commenter les lignes suivantes jusqu'à la fin

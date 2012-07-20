@@ -4,6 +4,9 @@ class ArtistWikiLink
 
   set_reference_class Artist, ArtistSearchQuery
 
+  accepts_nested_attributes_for :artist
+  belongs_to :artist, inverse_of: nil
+
   def role
     searchref[:role]
   end
