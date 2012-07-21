@@ -8,6 +8,15 @@
         = date_location_formatted(t("birth"), @artist.birth_date, @artist.birth_location)
       %p
         = date_location_formatted(t("death"), @artist.death_date, @artist.death_location)
+      - unless @artist.artist_wiki_links.empty?
+        %p
+        - unless["0",nil,""].include?(@artist.is_group)
+          = Artist.human_attribute_name("group_is_composed_of")
+        - else
+          = Artist.human_attribute_name("is_member_of_group")
+        \: 
+        - @artist.artist_wiki_links.each do |awl|
+          #{artist_wiki_link_path(awl)}; 
 
     %h2= Work.model_name.human.pluralize
     - if @artist.work_wiki_links.count == 0 

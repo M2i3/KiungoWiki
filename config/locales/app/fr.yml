@@ -42,6 +42,8 @@ fr:
         surname: Nom de famille
         given_name: Prénom
         info: Notes biographiques
+        is_member_of_group: Est membre du groupe
+        group_is_composed_of: Membres du groupe
       album:
         artist_wiki_link: Artiste principal
         date_released: Date de parution
