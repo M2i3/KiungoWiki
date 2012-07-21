@@ -49,7 +49,9 @@ fr:
         is_member_of_group: Est membre du groupe
         group_is_composed_of: Membres du groupe
       album:
+        artist_wiki_link: Artiste principal
         artist_wiki_links_text: Artiste principal
+        recording_wiki_links_text: Enregistrements
         date_released: Date de parution
         media_type: Format
         reference_code: Code de référence
@@ -57,6 +59,8 @@ fr:
         info: Notes
       recording:
         work_name: Oeuvre
+        work_title: Titre
+        work_wiki_link: Un enregistrement de
         recording_date: Date d'enregistrement
         recording_location: Lieu
         duration: Durée
@@ -64,14 +68,19 @@ fr:
         itemSection: Face
         itemId: No de disque
         trackNb: Plage
-        artist_wiki_link: Artiste(s)
-        album_wiki_link: Album(s)
+        artist_wiki_link: Artistes
+        artist_wiki_links: Artistes
+        artist_wiki_links_text: Artistes
+        album_wiki_links: Albums
+        album_wiki_links_text: Albums
         info: Notes
+        category: Catégorie
       work:
         work_wiki_links_text: Oeuvres originales
         date_written: Date d'écriture
         copyright: Droits d'auteurs
-        artist_wiki_links_text: Artiste(s)
+        artist_wiki_link: Artistes
+        artist_wiki_links_text: Artistes
         recording_wiki_links_text: Enregistrements
         language_name: Langue
         language_name_french: Français

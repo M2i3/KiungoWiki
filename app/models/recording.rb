@@ -80,6 +80,14 @@ class Recording
       self.album_wiki_links.build(:reference_text=>q.strip) 
     }    
   end
+
+  def category
+    unless["0","",nil].include?(self.category_id)
+      Category.where(:category_id => self.category_id).first.category_name
+    else
+      "unknown"
+    end
+  end
   
   scope :queried, ->(q) {
     current_query = all
