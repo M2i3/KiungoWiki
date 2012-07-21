@@ -1,0 +1,36 @@
+= title("Modifier #{resource_name.to_s.humanize}")
+
+.row
+  .span12
+    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put}) do |form| 
+      = devise_error_messages!
+      %dl
+        %dt= form.label :nickname
+        %dd= form.text_field :nickname
+ 
+        %dt= form.label :email
+        %dd= form.text_field :email 
+
+        %dt= form.label :password
+        %dd= form.text_field :password 
+
+        %dt= form.label :password_confirmation 
+        %dd= form.text_field :password_confirmation 
+
+        %dt= form.label :current_password 
+        %dd= form.text_field :current_password 
+
+        %dt= form.label :nickname
+        %dd= form.text_field :nickname
+
+      = form.submit :class=>"btn btn-primary"
+
+.row
+  .span12
+    %h2 Fermer mon compte
+
+    %p 
+      Vous ne désirez plus être membre de KiungoWiki? 
+      = link_to "Fermez mon compte.", registration_path(resource_name), :confirm => "Êtes vous certains?", :method => :delete 
+
+
