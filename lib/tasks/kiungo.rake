@@ -151,7 +151,7 @@ namespace :kiungo do
         Artist.all.each do |artist2|
           params = {}
           params[:work_wiki_links_text] = RawWorkArtistRoleLink.where(:artist_id=>artist2.origartistid).collect {|warl|
-           "oid:" + Work.where(:origworkid => warl[:work_id]).first.id.to_s
+           "oid:" + Work.where(:origworkid => warl[:work_id]).first.id.to_s + (warl.role.nil? || warl.role.empty? ? "" : " role:" + warl.role)
              }.uniq.join(",")
           artist2.update_attributes(params)
 
