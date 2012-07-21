@@ -81,19 +81,15 @@ class ArtistsController < ApplicationController
   end
 
   def lookup
+
     asq = ArtistSearchQuery.new(params[:q])
+
     respond_to do |format|
       format.json { 
         render :json=>(Artist.queried(params[:q]).limit(20).collect{|w| 
-          reference_text = ["oid:#{w.id}"]
-          reference_label = [w.name]
 
-          if asq[:role]
-            reference_text << "role:#{asq[:role]}"
-            reference_label << "(#{asq[:role]})"
-          end
+          ArtistWikiLink.new(reference_text: "oid:#{w.id} #{asq.metaq}").combined_link
 
-          {id: reference_text.join(" "), name: reference_label.join(" ")}               
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }
     end
