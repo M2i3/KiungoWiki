@@ -20,6 +20,7 @@ class WorksController < ApplicationController
     @work = Work.find(params[:id])
 
     respond_to do |format|
+      format.xml { render :xml=>@work.to_xml(:except=>[:versions]) }
       format.json { render :json=>@work }
       format.html
     end

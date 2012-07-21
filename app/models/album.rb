@@ -17,11 +17,11 @@ class Album
 
   validates_presence_of :title
 
-  embeds_many :artist_wiki_links
+  embeds_many :artist_wiki_links, :as=>:linkable
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
 
-  embeds_many :recording_wiki_links
+  embeds_many :recording_wiki_links, :as=>:linkable
   accepts_nested_attributes_for :recording_wiki_links
   validates_associated :recording_wiki_links
 

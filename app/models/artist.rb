@@ -21,25 +21,21 @@ class Artist
 
   validates_presence_of :surname
 
-  embeds_many :work_wiki_links
+  embeds_many :work_wiki_links, :as=>:linkable
   validates_associated :work_wiki_links
   accepts_nested_attributes_for :work_wiki_links
 
-  embeds_many :album_wiki_links
+  embeds_many :album_wiki_links, :as=>:linkable
   accepts_nested_attributes_for :album_wiki_links
   validates_associated :album_wiki_links
 
-  embeds_many :recording_wiki_links
+  embeds_many :recording_wiki_links, :as=>:linkable
   accepts_nested_attributes_for :recording_wiki_links
   validates_associated :recording_wiki_links
 
-  def works
-    []
-  end
-  
-  def albums
-    []
-  end
+  embeds_many :artist_wiki_links, :as=>:linkable
+  accepts_nested_attributes_for :artist_wiki_links
+  validates_associated :artist_wiki_links
 
   def set_name
     if ![nil,""].include?(self.surname)
@@ -71,19 +67,21 @@ class Artist
     work_wiki_links.collect{|v| v.combined_link }
   end
 
+  def work_wiki_links_text=(value)
+    self.work_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.work_wiki_links.clear does not work
+    value.split(",").uniq.each{|q| 
+      puts "nb wwk bef = " + self.work_wiki_links.count.to_s
+      self.work_wiki_links.build(:reference_text=>q.strip) 
+      puts "nb wwk aft= " + self.work_wiki_links.count.to_s
+    }    
+  end
+
   def album_wiki_links_text
     album_wiki_links.collect{|v| v.reference_text }.join(",")
   end
 
   def album_wiki_links_combined_links
     album_wiki_links.collect{|v| v.combined_link }
-  end
-
-  def work_wiki_links_text=(value)
-    self.work_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.work_wiki_links.clear does not work
-    value.split(",").uniq.each{|q| 
-      self.work_wiki_links.build(:reference_text=>q.strip) 
-    }    
   end
 
   def album_wiki_links_text=(value)
@@ -115,7 +113,20 @@ class Artist
     }    
   end
 
+  def artist_wiki_links_text
+    artist_wiki_links.collect{|v| v.reference_text }.join(",")
+  end
 
+  def artist_wiki_links_combined_links
+    artist_wiki_links.collect{|v| v.combined_link }
+  end
+
+  def artist_wiki_links_text=(value)
+    self.artist_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
+    value.split(",").each{|q| 
+      self.artist_wiki_links.build(:reference_text=>q.strip) 
+    }    
+  end
   scope :queried, ->(q) {
     current_query = all
     asq = ArtistSearchQuery.new(q)
