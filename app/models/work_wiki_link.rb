@@ -8,8 +8,8 @@ class WorkWikiLink
     (self.work && self.work.title) ||self.objectq
   end
 
-  def display_text
-    self.title.to_s + (self.metaq.empty? ? "" : " (#{self.metaq})")
+  def object_text
+    self.title.to_s 
   end
 
   def date_written

@@ -28,8 +28,8 @@ class RecordingWikiLink
      (self.recording && self.recording.duration) || ""
   end
 
-  def display_text
-    self.title.to_s + (self.metaq.empty? ? "" : " (#{self.metaq})")
+  def object_text
+    self.title.to_s 
   end
 end
 

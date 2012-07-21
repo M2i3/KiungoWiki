@@ -36,8 +36,8 @@ class AlbumWikiLink
     (self.album && self.album.reference_code) || ""
   end
 
-  def display_text
-    self.title.to_s + (self.metaq.empty? ? "" : " (#{self.metaq})")
+  def object_text
+    self.title
   end
 end
 

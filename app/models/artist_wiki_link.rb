@@ -25,7 +25,11 @@ class ArtistWikiLink
     end + ((role.blank? || exclude_role) ? "" : " [#{self.role}]")
   end
 
+  def object_text
+    self.name(true).to_s
+  end
+
   def display_text
-    self.name(true).to_s + (self.metaq.empty? ? "" : " (#{self.metaq})")
+    object_text + (self.metaq.empty? ? "" : " (#{self.metaq})")
   end
 end
