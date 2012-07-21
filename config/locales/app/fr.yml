@@ -42,10 +42,14 @@ fr:
         surname: Nom de famille
         given_name: Prénom
         info: Notes biographiques
+        is_group: Groupe
+        artist_wiki_links_text: Liens groupe-artistes
+        work_wiki_links_text: Oeuvres
+        album_wiki_links_text: Albums
         is_member_of_group: Est membre du groupe
         group_is_composed_of: Membres du groupe
       album:
-        artist_wiki_link: Artiste principal
+        artist_wiki_links_text: Artiste principal
         date_released: Date de parution
         media_type: Format
         reference_code: Code de référence
@@ -64,9 +68,11 @@ fr:
         album_wiki_link: Album(s)
         info: Notes
       work:
+        work_wiki_links_text: Oeuvres originales
         date_written: Date d'écriture
         copyright: Droits d'auteurs
-        artist_wiki_link: Artiste(s)
+        artist_wiki_links_text: Artiste(s)
+        recording_wiki_links_text: Enregistrements
         language_name: Langue
         language_name_french: Français
         language_code: Code de langue
