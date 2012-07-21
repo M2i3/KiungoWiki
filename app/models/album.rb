@@ -61,6 +61,23 @@ class Album
       self.recording_wiki_links.build(:reference_text=>q.strip) 
     }    
   end
+
+  def normalized_title
+    self.title.to_s.
+      mb_chars.
+      normalize(:kd).
+      to_s.
+      gsub(/[._:;'"`,?|+={}()!@#%^&*<>~\$\-\\\/\[\]]/, ' '). # strip punctuation
+      gsub(/[^[:alnum:]\s]/,'').   # strip accents
+      downcase.strip
+  end
+
+  def title_first_letter
+    first_letter = self.normalized_title[0] || ""
+    first_letter = "#" if ("0".."9").include?(first_letter)
+    first_letter
+  end
+
   
   scope :queried, ->(q) {
     current_query = all
@@ -77,4 +94,9 @@ class Album
     }
     current_query
   }
+
+
+  #Album.all.group_by {|a| a.title_first_letter.upcase }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
+  #Album.all.group_by {|a| a.date_released.year.to_s }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
+  #Album.all.group_by {|a| a.date_released.year.to_s }.sort{|a, b| a <=> b}.each {|a| puts "" + a[0] + ", " + a[1].length.to_s }; nil
 end
