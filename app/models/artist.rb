@@ -131,4 +131,22 @@ class Artist
     }
     current_query
   }
+
+  def grouped_work_wiki_links
+    GroupedWikiLink.new(WorkWikiLink, self.work_wiki_links).groups
+  end
+
+
+  scope :born_during_month_of, ->(month) {
+    self.where(:birth_date=>/.*\-#{"%02d"%(month)}\-.*/)
+  }
+  #Artist.born_during_month_of(04).all.group_by {|a| a.birth_date.year }.each {|a| puts  "* [" + a[0].to_s + "] - "+ a[1].collect{|b| "["+ b.name + "]"}.join(", ")}
+
+  scope :died_during_month_of, ->(month) {
+    self.where(:death_date=>/.*\-#{"%02d"%(month)}\-.*/)
+  }
+  #Artist.died_during_month_of(04).all.group_by {|a| a.death_date.year }.each {|a| puts  "* [" + a[0].to_s + "] - "+ a[1].collect{|b| "["+ b.name + "]"}.join(", ")}
+
+  #Artist.all.group_by {|a| a.name[0].upcase }.sort{|a, b| a[0] <=> b[0]}.each {|a| puts "* ["+ a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.name + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
+  
 end
