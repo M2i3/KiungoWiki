@@ -5,15 +5,25 @@
   .span12
     .section.summary
       %p
-        Un enregistrement de: #{work_wiki_link_path(@recording.work_wiki_link)}
+        = Recording.human_attribute_name("work_wiki_link")
+        \: #{work_wiki_link_path(@recording.work_wiki_link)}
       %p
-        Enregistré le: #{@recording.recording_date}
+        = Recording.human_attribute_name("recording_date") 
+        \: #{@recording.recording_date}
       %p
-        Lieu: #{@recording.recording_location}
+        = Recording.human_attribute_name("recording_location") 
+        \: #{@recording.recording_location}
       %p
-        Durée: #{@recording.duration}
+        - unless[0,nil].include?(@recording.category_id)
+          = Recording.human_attribute_name("category") 
+          \: #{@recording.category}
       %p
-        Rythme: #{@recording.rythm}bpm
+        = Recording.human_attribute_name("duration") 
+        \: #{@recording.duration}
+      %p
+        - unless["0","",nil].include?(@recording.rythm)
+          = Recording.human_attribute_name("rythm") 
+          \:  #{@recording.rythm}bpm
 
     %h2 Crédits
     - if @recording.artist_wiki_links == 0
