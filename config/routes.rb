@@ -5,6 +5,9 @@ KiungoWiki::Application.routes.draw do
   resources :works do
     collection do
       get 'lookup'
+      get 'portal'
+      get 'letter_:letter', :action=>"alphabetic_index", :as=>:alphabetic
+      get 'recent_changes' #, :action=>"recent_changes", :recent_changes=>1, :as=>:recent_changes
     end
   end
 

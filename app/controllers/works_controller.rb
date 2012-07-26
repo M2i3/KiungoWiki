@@ -1,13 +1,10 @@
 class WorksController < ApplicationController
 
   # only registered users can edit this wiki
-  before_filter :authenticate_user!, :except => [:show, :index, :lookup]
+  before_filter :authenticate_user!, :except => [:show, :index, :lookup, :portal, :recent_changes, :alphabetic_index]
 
   def index
-    @works = Work.all(sort: [:title, :asc]) #TODO: Add an index on title to enable sorting on huge number of works
-    @works = @works.queried(params[:q]) if params[:q]
-
-    @works = @works.page(params[:page])
+    @works = build_filter_from_params(params, Work.all.order(cache_normalized_title:1))
 
     respond_to do |format|
       format.xml { render :xml=>@works }
@@ -15,6 +12,21 @@ class WorksController < ApplicationController
       format.html
     end
   end
+
+  def recent_changes
+    @works = build_filter_from_params(params, Work.all.order(updated_at:-1))
+  end
+
+  def portal
+    respond_to do |format|
+      format.html 
+    end      
+  end
+
+  def alphabetic_index
+    @works = build_filter_from_params(params, Work.where(cache_first_letter: params[:letter]).order(cache_normalized_title:1))
+  end
+  
 
   def show
     @work = Work.find(params[:id])
@@ -93,5 +105,23 @@ class WorksController < ApplicationController
          } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) 
        }
     end
+  end
+
+  protected
+  def filter_params
+    {
+      :q => lambda {|works, params| works.queried(params[:q]) }
+    }
+  end
+
+  def build_filter_from_params(params, works)
+
+    filter_params.each {|param_key, filter|
+      works = filter.call(works,params) if params[param_key]
+    }
+
+    works = works.page(params[:page])
+
+    works
   end
 end

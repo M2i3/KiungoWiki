@@ -1,4 +1,7 @@
 en:
+  headers:
+    works_recent_changes: "Recently Modified Works"
+
   views:
     pagination:
       previous: "&laquo; Prev"
@@ -6,4 +9,6 @@ en:
       truncate: "..."
       last: "Last"
       first: "First"
+
+
 

@@ -1,0 +1,53 @@
+.row      
+  .span12
+    .page-header
+      = title("Oeuvres (portail)")
+
+.row      
+  .span12
+    %p
+      Les oeuvres constituent le matériel brut sur lequel sont construits les enregistrements et auxquels les interprètes prêtent leur voix et émotions. 
+
+.row
+  .span6
+    %h2 Oeuvre du mois
+    %p lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+    %p Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    %p.pull-right continuer la lecture
+
+  .span6
+    %h2 Ce que vous pouvez faire pour contribuer
+    %ul
+      %li 
+        = link_to "Écrire la fiche d'une oeuvre", "#", :class=>"soon-available"
+      %li 
+        Réviser la fiche d'une oeuvre modifiée récemment:
+        %ul 
+          %li 
+            - Work.order_by(:updated_at=>:desc).limit(5).all.each do |work|
+              %span.work>= link_to work.title, work_path(work.id)
+              ;&nbsp;
+            = link_to "...", recent_changes_works_path, :title=>"consulter la liste complète des modifications récentes"
+          %li= link_to "consulter la liste complète oeuvres modifiées récemment", recent_changes_works_path
+
+      %li
+        Améliorer la fiche d'une oeuvre:
+        %ul
+          %li= link_to "Sans artiste", "#", :class=>"soon-available"
+          %li= link_to "Sans enregistrement ou album", "#", :class=>"soon-available"
+          %li= link_to "Sans paroles", "#", :class=>"soon-available"
+          %li= link_to "Sans catégorie", "#", :class=>"soon-available"
+          %li= link_to "Sans section(s) complémentaire(s)", "#", :class=>"soon-available"
+
+.row
+  .span12
+    %h2 Par ordre alphabétique
+    %ul
+      - alphabetic_grouping.each do |letter, heading|
+        %li 
+          %span.letter= heading
+          - Work.where(:cache_first_letter => letter).order(updated_at:1).limit(5).each do |work|
+            %span.work>= link_to work.title, work_path(work.id)
+            ;&nbsp;
+          = link_to "...", alphabetic_works_path(letter: letter, page: 1), :title=>"consulter la liste complète des oeuvres commençant par \"#{letter}\""
+      %li= link_to "toutes les oeuvres", works_path(page: 1)

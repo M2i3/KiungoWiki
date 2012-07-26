@@ -1,6 +1,12 @@
 # Étiquettes en français pour KiungoWiki
 
 fr:
+  headers:
+    works_index: "Oeuvres (portail)"
+    works_recent_changes: "Oeuvres modifiées récemments"
+    works_alphabetic_index: "Oeuvres commençant par %{heading}"
+    works_all_index: "Toutes les oeuvres"
+
   show: Afficher
   modify: Modifier
   discuss: Discuter

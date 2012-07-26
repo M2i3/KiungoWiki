@@ -1,15 +1,8 @@
 .page-header
-  = title(t("headers.works_index"))
-
-.row
-  .span11
-    = alpha_links
+  = title(t("headers.works_recent_changes"))
 
 = paginate @works
 = render :partial=>"search_result", :object=>@works
 = paginate @works
 
-.row
-  .span11
-    = alpha_links
 

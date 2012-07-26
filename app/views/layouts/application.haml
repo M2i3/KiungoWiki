@@ -37,7 +37,7 @@
             %ul.nav.entities
               %li= link_to "Accueil", root_url
               %li= link_to "Artistes", artists_path
-              %li= link_to "Oeuvres", works_path
+              %li= link_to "Oeuvres", portal_works_path
               %li= link_to "Enregistrements", recordings_path
               %li= link_to "Albums", albums_path
 
@@ -55,9 +55,7 @@
     #content  
       .container
         = render partial: "common/site_messages"  
-        .inner.row      
-          .span12
-            = yield
+        = yield
 
 
     %footer#footer.footer

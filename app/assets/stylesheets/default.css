@@ -21,4 +21,11 @@ body {
 text-indent: -999999px;
 }
 
+span.letter:after {
+  content: " - ";
+}
 
+.soon-available:after {
+  content: " (disponible bientôt)";
+  color: #a0a0a0;
+}
