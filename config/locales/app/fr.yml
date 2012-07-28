@@ -5,7 +5,7 @@ fr:
   modify: Modifier
   discuss: Discuter
   history: Historique
-  new: Nouveau
+  new: Créez-le
   search: Rechercher
   cancel: Annuler
   modify_artist: Modifier l'artiste
@@ -76,7 +76,7 @@ fr:
         info: Notes
         category: Catégorie
       work:
-        work_wiki_links_text: Oeuvres originales
+        work_wiki_links_text: Oeuvres Parents/Enfants
         date_written: Date d'écriture
         copyright: Droits d'auteurs
         artist_wiki_link: Artistes
@@ -90,6 +90,11 @@ fr:
         lyrics: Paroles
         chords: Accords
         info: Notes
+        relation: Relation
+        has_a_translated_work: Oeuvre originale qui fut traduite dans
+        has_a_variant_work: Oeuvre originale qui fut adapté dans  
+        is_translated_from: Oeuvre dérivée, une traduction de
+        is_variant_from: Oeuvre dérivée, une variante de
       user:
         nickname: Alias
         email: Courriel

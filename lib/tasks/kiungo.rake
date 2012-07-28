@@ -118,19 +118,31 @@ namespace :kiungo do
 
         Work.all.each do |work|
           params = {}
+          params_original = {}
           params[:recording_wiki_links_text] = RawRecording.where(:work_id=>work.origworkid).collect {|rr|
              "oid:" + Recording.where(:origrecordingid => rr[:recording_id]).first.id.to_s 
              }.uniq.join(",")
           originalworkid = RawWork.where(:work_id=>work.origworkid).first.original_work_id
           puts "origworkid = " + work.origworkid + " originalworkid = " + originalworkid
           unless ["0","",nil].include?(originalworkid)
-            originalwork = Work.where(:origworkid => originalworkid)
-            if originalwork
-              puts "Found originalwork"
+            original_work = Work.where(:origworkid => originalworkid).first
+            if original_work
+              #puts "Found originalwork"
+              if original_work.language_code == work.language_code
+                relation = "is_variant_from"
+                inverse_relation = "has_a_variant_work"
+              else
+                relation = "is_translated_from"
+                inverse_relation = "has_a_translated_work"
+              end
               params[:work_wiki_links_text] = RawWork.where(:work_id=>work.origworkid).collect {|wl|
-                 "oid:" + Work.where(:origworkid => wl[:original_work_id]).first.id.to_s
+                 "oid:" + original_work.id.to_s + " relation:" + relation
                  }.uniq.join(",")
               puts "work_wiki_links_text = " + params[:work_wiki_links_text].to_s
+              params_original[:work_wiki_links_text] = RawWork.where(:work_id=>original_work.origworkid).collect {|wl|
+                 "oid:" + work.id.to_s + " relation:" + inverse_relation
+                 }.uniq.join(",")
+              original_work.update_attributes(params_original)
             else
               puts "none existing work"
             end
