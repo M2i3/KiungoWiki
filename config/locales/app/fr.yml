@@ -77,7 +77,7 @@ fr:
         info: Notes
         category: Catégorie
       work:
-        work_wiki_links_text: Oeuvre
+        work_wiki_links_text: Titre
         date_written: Date d'écriture
         copyright: Droits d'auteurs
         artist_wiki_link: Artistes
