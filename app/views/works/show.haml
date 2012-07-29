@@ -33,11 +33,11 @@
 
     - if @work.work_wiki_links.count == 0 
     - else
-      %h2= Work.human_attribute_name("work_wiki_links_text")
+      %h2= Work.human_attribute_name("relation").pluralize
       %table.table.table-striped
         %thead
           %tr
-            %th= Work.human_attribute_name("relation")
+            %th= Work.human_attribute_name("nature")
             %th= Work.human_attribute_name("work_wiki_links_text") 
             %th= Work.human_attribute_name("language_name")
             %th= Work.human_attribute_name("date_written")

@@ -11,6 +11,7 @@ fr:
   modify_artist: Modifier l'artiste
   birth: Naissance
   death: Décès
+  search_question: Vous n’avez pas trouvé ce que vous cherchiez ?
 
   views:
     pagination:
@@ -76,7 +77,7 @@ fr:
         info: Notes
         category: Catégorie
       work:
-        work_wiki_links_text: Oeuvres Parents/Enfants
+        work_wiki_links_text: Oeuvre
         date_written: Date d'écriture
         copyright: Droits d'auteurs
         artist_wiki_link: Artistes
@@ -91,10 +92,11 @@ fr:
         chords: Accords
         info: Notes
         relation: Relation
-        has_a_translated_work: Oeuvre originale qui fut traduite dans
-        has_a_variant_work: Oeuvre originale qui fut adapté dans  
-        is_translated_from: Oeuvre dérivée, une traduction de
-        is_variant_from: Oeuvre dérivée, une variante de
+        nature: Nature
+        has_a_translated_work: A comme traduction/adaptation
+        has_a_variant_work: A comme variante   
+        is_translated_from: Est une traduction/adaptation de
+        is_variant_from: Est une variante de
       user:
         nickname: Alias
         email: Courriel
