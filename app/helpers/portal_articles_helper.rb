@@ -1,0 +1,8 @@
+module PortalArticlesHelper
+  def featured_lookup(portal_article)
+    {"work"=>"work_title_lookup",
+     "artist"=>"artist_lookup",
+     "album"=>"album_title_lookup",
+     "recording"=>"recording_title_lookup"}[portal_article.category]
+  end
+end

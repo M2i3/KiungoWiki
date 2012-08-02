@@ -1,0 +1,25 @@
+.page-header
+  = title("Articles de portail")
+
+= paginate @portal_articles
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= PortalArticle.human_attribute_name("publish_date")
+      -unless @category
+        %th= PortalArticle.human_attribute_name("category")  
+      %th= PortalArticle.human_attribute_name("featured")
+
+  %tbody
+    - @portal_articles.each do |pa|
+      %tr
+        %td= link_to pa.publish_date, pa
+        -unless @category
+          %th= pa.category
+        %td= self.send("#{pa.category}_wiki_link_path".to_sym, pa.featured_wiki_link)
+
+
+= paginate @portal_articles
+
+

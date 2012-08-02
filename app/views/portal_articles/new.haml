@@ -1,0 +1,20 @@
+.row      
+  .span12
+    .page-header
+      = title("Créer un article (#{@portal_article.category})")
+
+.row
+  .span12
+    - unless @portal_article.errors.empty?
+      .alert.alert-error
+        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'article:
+        %br/
+        = @portal_article.errors.full_messages.join("</br>").html_safe
+
+    = form_for @portal_article, :class=>"form-horizontal" do |f|
+      = render :partial=>'form', :object=>f
+      .formActions
+        = f.submit :class=>"btn btn-primary"
+        ou #{link_to t("cancel"), :back, :class=>"btn"}
+
+

@@ -1,6 +1,5 @@
-class AlbumWikiLink
+class AlbumWikiLink < WikiLink
   include Mongoid::Document
-  include WikiLink
 
   set_reference_class Album, AlbumSearchQuery
 

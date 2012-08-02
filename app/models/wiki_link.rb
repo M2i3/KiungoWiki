@@ -1,12 +1,8 @@
-module WikiLink
-  extend ActiveSupport::Concern
+class  WikiLink
+  include Mongoid::Document
 
-  included do
-
-    field :reference_text, :default=>""
-    embedded_in :linkable, :polymorphic => true
-
-  end
+  field :reference_text, :default=>""
+  embedded_in :linkable, :polymorphic => true
 
   def reference_text=(value)
     self[:reference_text] = value
@@ -53,11 +49,12 @@ module WikiLink
     object_text + (self.metaq.empty? ? "" : " (#{self.metaq})")
   end
 
-  module ClassMethods
+  class << self
 
     def set_reference_class(klass, search_klass)
 
       class_eval <<-EOM
+
         class << self
           def search_klass
             #{search_klass}
@@ -73,9 +70,7 @@ module WikiLink
         end
       EOM
 
-
       belongs_to klass.to_s.downcase.to_sym, inverse_of: nil
-
       
     end
   end

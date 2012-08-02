@@ -1,6 +1,5 @@
-class WorkWikiLink
+class WorkWikiLink < WikiLink
   include Mongoid::Document
-  include WikiLink
 
   set_reference_class Work, WorkSearchQuery
 

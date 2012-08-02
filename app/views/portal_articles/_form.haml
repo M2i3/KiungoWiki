@@ -1,0 +1,10 @@
+= form.hidden_field :category
+%dl
+  %dt= form.label :publish_date
+  %dd= form.text_field :publish_date
+  - if featured_lookup(form.object)
+    %dt= form.label :featured_wiki_link_text
+    %dd= form.text_field :featured_wiki_link_text, :class=>featured_lookup(form.object), :"data-pre"=>form.object.featured_wiki_link_combined_links.to_json
+  %dt= form.label :content
+  %dd= form.text_area :content, :class=>"span12"
+

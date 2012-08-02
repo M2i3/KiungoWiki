@@ -1,0 +1,6 @@
+%ul#pageactions.nav.nav-tabs.pull-right
+  %li{:class =>current_page_classes(:action=>"show")}= link_to t("show"), portal_article_path(@portal_article)
+  %li{:class =>current_page_classes(:action=>"edit")}= link_to t("modify"), edit_portal_article_path(@portal_article)
+  %li= link_to t("discuss"), "#"
+  %li= link_to t("history"), "#"
+

@@ -1,6 +1,5 @@
-class RecordingWikiLink
+class RecordingWikiLink < WikiLink
   include Mongoid::Document
-  include WikiLink
 
   set_reference_class Recording, RecordingSearchQuery
 
