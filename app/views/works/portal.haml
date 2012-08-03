@@ -11,10 +11,11 @@
 .row
   - if @feature_in_month
     .span6
-      %h2 
-        Oeuvre du mois:
-        = work_wiki_link_path(@feature_in_month.featured_wiki_link)
+      %h2= @feature_in_month.title 
       .content= RedCloth.new(@feature_in_month.summary).to_html.html_safe
+      %p.pull-left 
+        Voir l'oeuvre:
+        = work_wiki_link_path(@feature_in_month.featured_wiki_link)
       - if @feature_in_month.more?
         %p.pull-right= link_to "continuer la lecture", @feature_in_month
 

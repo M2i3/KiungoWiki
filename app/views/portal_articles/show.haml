@@ -1,7 +1,7 @@
 .row      
   .span12
-    .page-header
-      = title(@portal_article.category + " du mois: " + @portal_article.featured_wiki_link.display_text)
+    .page-header 
+      = title(@portal_article.title)
 
 .row
   = render :partial=>'links'

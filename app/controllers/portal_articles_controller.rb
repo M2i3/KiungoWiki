@@ -14,7 +14,7 @@ class PortalArticlesController < ApplicationController
   end
 
   def new
-    @portal_article = PortalArticle.new(:category => (params[:category] || "work"))
+    @portal_article = PortalArticle.new(:category => (params[:category] || "general"))
   end
 
   def create

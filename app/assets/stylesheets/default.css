@@ -29,3 +29,7 @@ span.letter:after {
   content: " (disponible bientôt)";
   color: #a0a0a0;
 }
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}

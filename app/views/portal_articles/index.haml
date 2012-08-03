@@ -1,25 +1,42 @@
-.page-header
-  = title("Articles de portail")
-
-= paginate @portal_articles
-
-%table.table.table-striped
-  %thead
-    %tr
-      %th= PortalArticle.human_attribute_name("publish_date")
-      -unless @category
-        %th= PortalArticle.human_attribute_name("category")  
-      %th= PortalArticle.human_attribute_name("featured")
-
-  %tbody
-    - @portal_articles.each do |pa|
-      %tr
-        %td= link_to pa.publish_date, pa
-        -unless @category
-          %th= pa.category
-        %td= self.send("#{pa.category}_wiki_link_path".to_sym, pa.featured_wiki_link)
+.row      
+  .span12
+    .page-header
+      = title("Articles de portail")
+.row      
+  .span12
+    .pull-right
+      %div.dropdown 
+        %a.downdown-toggle{"data-toggle"=>"dropdown"}
+          Nouvel article
+          %b.caret
+        %ul.dropdown-menu
+          %li= link_to "sur un artiste", new_portal_article_path(:category=>"artist")
+          %li= link_to "sur une oeuvre", new_portal_article_path(:category=>"work")
+          %li= link_to "sur un enregistrement", new_portal_article_path(:category=>"recording")
+          %li= link_to "sur un album", new_portal_article_path(:category=>"album")
+          %li.divider
+          %li= link_to "article seulement", new_portal_article_path()
 
 
-= paginate @portal_articles
+    = paginate @portal_articles
+
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= PortalArticle.human_attribute_name("publish_date")
+          -unless @category
+            %th= PortalArticle.human_attribute_name("category")  
+          %th= PortalArticle.human_attribute_name("title")
+
+      %tbody
+        - @portal_articles.each do |pa|
+          %tr
+            %td= link_to pa.publish_date, pa
+            -unless @category
+              %th= pa.category
+            %td= pa.title
+
+
+    = paginate @portal_articles
 
 

@@ -18,7 +18,7 @@ class WorksController < ApplicationController
   end
 
   def portal
-    @feature_in_month = PortalArticle.where(:category =>"work", :publish_date.lt => Time.now).order(publish_date:-1).first
+    @feature_in_month = PortalArticle.where(:category =>"work", :publish_date.lte => Time.now).order(publish_date:-1).first
     respond_to do |format|
       format.html 
     end      

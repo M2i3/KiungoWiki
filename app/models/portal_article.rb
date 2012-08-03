@@ -1,13 +1,22 @@
 class PortalArticle
   include Mongoid::Document
 
-  field :category, :type => String
+  field :title, :type => String
+  field :category, :type => String, :default=>"general"
   field :publish_date, :type => Date, :default => lambda {DateTime.now}
 
   field :content, :type => String, :default => ""
 
   embeds_one :featured_wiki_link, as: :linkable, class_name:"Link"
   index [:category, :publish_date]
+
+  def title
+    if self.featured_wiki_link
+      self.category + " du mois: " + self.featured_wiki_link.display_text
+    else
+      self[:title]
+    end
+  end
 
   def summary
     (/(.*?)\r\n\r\n/m.match(self.content) || /(.*?)\n\n/m.match(self.content) || self.content).to_s
