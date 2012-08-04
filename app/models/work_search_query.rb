@@ -7,7 +7,8 @@ class WorkSearchQuery < SearchQuery
       language_code:  :word,
       publisher: :text,
       role: :text,
-      info: :text
+      info: :text,
+      relation: :text
     })
 
   end

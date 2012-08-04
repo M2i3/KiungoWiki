@@ -17,13 +17,6 @@
       %p
         = Work.human_attribute_name("publisher")
         \: #{@work.publisher}
-      - unless @work.work_wiki_links.empty?
-        %p
-          = Work.human_attribute_name("original_work")
-          \: 
-          - @work.work_wiki_links.each do |wwl|
-            #{work_wiki_link_path(wwl)}; 
-
 
     %h2 Crédits
     - if @work.artist_wiki_links.count == 0 
@@ -37,6 +30,24 @@
           - @work.artist_wiki_links.sort{|a,b| a.name.downcase <=> b.name.downcase}.each do |awl|
             %tr
               %td= artist_wiki_link_path(awl)
+
+    - if @work.work_wiki_links.count == 0 
+    - else
+      %h2= Work.human_attribute_name("relation").pluralize
+      %table.table.table-striped
+        %thead
+          %tr
+            %th= Work.human_attribute_name("nature")
+            %th= Work.human_attribute_name("work_wiki_links_text") 
+            %th= Work.human_attribute_name("language_name")
+            %th= Work.human_attribute_name("date_written")
+        %tbody
+          - @work.work_wiki_links.each do |wwl|
+            %tr
+              %td= Work.human_attribute_name(wwl.relation)
+              %td= work_wiki_link_path(wwl)
+              %td= wwl.language_name
+              %td= wwl.date_written
 
     %h2= Recording.model_name.human.pluralize
     - if @work.recording_wiki_links.count == 0 
@@ -56,7 +67,6 @@
               %td= rwl.recording_date
               %td= rwl.duration
               %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
-
 
     %h2= Work.human_attribute_name("lyrics")
     %p=  RedCloth.new(@work.lyrics).to_html.html_safe 

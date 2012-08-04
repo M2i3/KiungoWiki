@@ -70,9 +70,9 @@ class Artist
   def work_wiki_links_text=(value)
     self.work_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.work_wiki_links.clear does not work
     value.split(",").uniq.each{|q| 
-      puts "nb wwk bef = " + self.work_wiki_links.count.to_s
+      #puts "nb wwk bef = " + self.work_wiki_links.count.to_s
       self.work_wiki_links.build(:reference_text=>q.strip) 
-      puts "nb wwk aft= " + self.work_wiki_links.count.to_s
+      #puts "nb wwk aft= " + self.work_wiki_links.count.to_s
     }    
   end
 
