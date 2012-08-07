@@ -12,18 +12,19 @@
   - if @feature_in_month
     .span6
       %h2= @feature_in_month.title 
-      .content= RedCloth.new(@feature_in_month.summary).to_html.html_safe
+      .content
+        = RedCloth.new(@feature_in_month.summary(750)).to_html.html_safe
       %p.pull-left 
         Voir l'oeuvre:
         = work_wiki_link_path(@feature_in_month.featured_wiki_link)
-      - if @feature_in_month.more?
+      - if @feature_in_month.more?(750)
         %p.pull-right= link_to "continuer la lecture", @feature_in_month
 
   .span6
     %h2 Ce que vous pouvez faire pour contribuer
     %ul
       %li 
-        = link_to "Écrire la fiche d'une oeuvre", "#", :class=>"soon-available"
+        = link_to "Écrire la fiche d'une oeuvre", new_work_path
       %li 
         Réviser la fiche d'une oeuvre modifiée récemment:
         %ul 
@@ -38,7 +39,7 @@
         Améliorer la fiche d'une oeuvre:
         %ul
           %li= link_to "Sans artiste", "#", :class=>"soon-available"
-          %li= link_to "Sans enregistrement ou album", "#", :class=>"soon-available"
+          %li= link_to "Sans enregistrement", "#", :class=>"soon-available"
           %li= link_to "Sans paroles", "#", :class=>"soon-available"
           %li= link_to "Sans catégorie", "#", :class=>"soon-available"
           %li= link_to "Sans section(s) complémentaire(s)", "#", :class=>"soon-available"

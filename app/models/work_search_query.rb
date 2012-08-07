@@ -1,7 +1,7 @@
 class WorkSearchQuery < SearchQuery 
   def self.query_expressions
     superclass.query_expressions.merge({ title: :text,
-      copyright: :word,
+      copyright: :text,
       lyrics: :text,
       date_written: :date,
       language_code:  :word,

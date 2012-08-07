@@ -2,10 +2,19 @@
 
 fr:
   headers:
-    works_index: "Oeuvres (portail)"
+    works_portal: "Oeuvres (portail)"
+    works_index: "Oeuvres"
+    works_search_result: "Oeuvres pour '%{q}'"
+    works_search: "Recherche dans les oeuvres"
     works_recent_changes: "Oeuvres modifiées récemments"
     works_alphabetic_index: "Oeuvres commençant par %{heading}"
     works_all_index: "Toutes les oeuvres"
+    portal_article_album: "Album du mois: %{featured}"
+    portal_article_artist: "Artiste du mois: %{featured}"
+    portal_article_recording: "Enregistrement du mois: %{featured}"
+    portal_article_work: "Oeuvre du mois: %{featured}"
+
+
 
   show: Afficher
   modify: Modifier

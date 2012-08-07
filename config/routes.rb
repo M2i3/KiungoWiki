@@ -10,6 +10,7 @@ KiungoWiki::Application.routes.draw do
       get 'portal'
       get 'letter_:letter', :action=>"alphabetic_index", :as=>:alphabetic
       get 'recent_changes' #, :action=>"recent_changes", :recent_changes=>1, :as=>:recent_changes
+      get 'search'
     end
   end
 

@@ -26,6 +26,14 @@ class SearchQuery
     self.class.query_expressions.keys.find_all {|field| not self[field].blank? }
   end
 
+  def to_hash
+    attributes = {}
+    filled_query_fields.each{|k|
+      attributes[k] = self[k]
+    }
+    attributes
+  end
+
   def [](key)
     if query_fields.include?(key) 
       self.instance_variable_get("@#{key}")

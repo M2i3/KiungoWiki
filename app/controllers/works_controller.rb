@@ -1,7 +1,7 @@
 class WorksController < ApplicationController
 
   # only registered users can edit this wiki
-  before_filter :authenticate_user!, :except => [:show, :index, :lookup, :portal, :recent_changes, :alphabetic_index]
+  before_filter :authenticate_user!, :except => [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index]
 
   def index
     @works = build_filter_from_params(params, Work.all.order(cache_normalized_title:1))
@@ -40,11 +40,14 @@ class WorksController < ApplicationController
   end
 
   def new
-
-    @work = Work.new
-    respond_to do |format|      
-      format.html # new.html.erb
-      format.xml  { render :xml => @work }
+    unless params[:q]
+      redirect_to search_works_path, :alert=> "Please make sure the work you want to create does not already exists."
+    else
+      @work = Work.new(WorkSearchQuery.new(params[:q]).to_hash)
+      respond_to do |format|      
+        format.html # new.html.erb
+        format.xml  { render :xml => @work }
+      end
     end
   end
 
@@ -118,6 +121,7 @@ class WorksController < ApplicationController
   def build_filter_from_params(params, works)
 
     filter_params.each {|param_key, filter|
+      puts "searching using #{param_key} with value #{params[param_key]}"
       works = filter.call(works,params) if params[param_key]
     }
 

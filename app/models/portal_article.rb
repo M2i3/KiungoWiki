@@ -12,18 +12,26 @@ class PortalArticle
 
   def title
     if self.featured_wiki_link
-      self.category + " du mois: " + self.featured_wiki_link.display_text
+      I18n.t("headers.portal_article_#{self.category}", :featured=>self.featured_wiki_link.display_text)
     else
       self[:title]
     end
   end
 
-  def summary
-    (/(.*?)\r\n\r\n/m.match(self.content) || /(.*?)\n\n/m.match(self.content) || self.content).to_s
+  def summary(length=nil)
+    if length
+      self.content[0..length] + (self.content.size > length ? "..." : "")
+    else
+      (/(.*?)\r\n\r\n/m.match(self.content) || /(.*?)\n\n/m.match(self.content) || self.content).to_s      
+    end
   end
 
-  def more?
-    self.summary != self.content
+  def more?(length=nil)
+    if length
+      self.content.size > length
+    else
+      self.summary != self.content
+    end
   end
 
   def featured_wiki_link_text
