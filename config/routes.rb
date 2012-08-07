@@ -35,6 +35,7 @@ KiungoWiki::Application.routes.draw do
 
 
   match 'search' => 'search#index'
+  match 'site_plan' => "home#site_plan"
 
   root :to => "home#index"
 

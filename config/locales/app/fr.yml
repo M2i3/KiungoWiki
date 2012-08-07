@@ -13,6 +13,8 @@ fr:
     portal_article_artist: "Artiste du mois: %{featured}"
     portal_article_recording: "Enregistrement du mois: %{featured}"
     portal_article_work: "Oeuvre du mois: %{featured}"
+    portal_articles: Articles des portails
+    site_plan: Plan du site
 
   messages:
     info: Pour votre information.
