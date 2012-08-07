@@ -41,7 +41,7 @@ class WorksController < ApplicationController
 
   def new
     unless params[:q]
-      redirect_to search_works_path, :alert=> "Please make sure the work you want to create does not already exists."
+      redirect_to search_works_path, :alert=>t("messages.work_new_without_query")
     else
       @work = Work.new(WorkSearchQuery.new(params[:q]).to_hash)
       respond_to do |format|      

@@ -1,4 +1,4 @@
-- {:info=>"Just so you know", :error=>"Oups, an error occured", :alert=>"Wait, I must warn you!", :warning=>"Wait, I must warn you!", :notice=>"Congrats, you did it!"}.each do |msg_type, heading|
+- {:info=>t("messages.info"), :error=>t("messages.error"), :alert=>t("messages.alert"), :warning=>t("messages.alert"), :notice=>t("messages.notice")}.each do |msg_type, heading|
   - if flash[msg_type]
     .row
       .span12

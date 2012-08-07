@@ -14,7 +14,12 @@ fr:
     portal_article_recording: "Enregistrement du mois: %{featured}"
     portal_article_work: "Oeuvre du mois: %{featured}"
 
-
+  messages:
+    info: Pour votre information.
+    error: Oops! une erreur est survenue!
+    alert: Un instant! Je dois vous avertir!
+    notice: Félicitation vous avez réussit!
+    work_new_without_query: Veuillez vous assurer que l'oeuvre que vous désirez créer n'existe pas déjà dans le wiki.
 
   show: Afficher
   modify: Modifier
