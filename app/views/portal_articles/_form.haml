@@ -1,7 +1,8 @@
 = form.hidden_field :category
 %dl
-  %dt= form.label :title
-  %dd= form.text_field :title
+  - unless form.object.generated_title?
+    %dt= form.label :title
+    %dd= form.text_field :title
   %dt= form.label :publish_date
   %dd= form.text_field :publish_date
   - if featured_lookup(form.object)

@@ -18,6 +18,10 @@ class PortalArticle
     end
   end
 
+  def generated_title?
+    self.category != "general"
+  end
+
   def summary(length=nil)
     if length
       self.content[0..length] + (self.content.size > length ? "..." : "")
@@ -44,6 +48,16 @@ class PortalArticle
 
   def featured_wiki_link_text=(value)
     self.featured_wiki_link = featured_wiki_link_klass.new({:reference_text=>value})
+  end
+
+  def to_param
+    self.title.parameterize + ":" + self.id.to_s
+  end
+
+  class << self
+    def id_from_param(param)
+      param.split(":").last
+    end
   end
 
   protected

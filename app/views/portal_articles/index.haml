@@ -23,18 +23,18 @@
     %table.table.table-striped
       %thead
         %tr
-          %th= PortalArticle.human_attribute_name("publish_date")
+          %th= PortalArticle.human_attribute_name("title")
           -unless @category
             %th= PortalArticle.human_attribute_name("category")  
-          %th= PortalArticle.human_attribute_name("title")
+          %th= PortalArticle.human_attribute_name("publish_date")
 
       %tbody
         - @portal_articles.each do |pa|
           %tr
-            %td= link_to pa.publish_date, pa
+            %td= link_to pa.title, pa
             -unless @category
               %th= pa.category
-            %td= pa.title
+            %td= pa.publish_date
 
 
     = paginate @portal_articles

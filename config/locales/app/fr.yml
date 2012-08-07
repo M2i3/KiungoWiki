@@ -53,22 +53,41 @@ fr:
 
   mongoid:
     models:
-      artist:
-        one: Artiste
-        other: Artistes
-      work:
-        one: Oeuvre
-        other: Oeuvres
-      recording:
-        one: Enregistrement
-        other: Enregistrements
       album:
         one: Album
         other: Albums
+
+      artist:
+        one: Artiste
+        other: Artistes
+
+      portal_article:
+        one: Article
+        other: Articles
+
+      recording:
+        one: Enregistrement
+        other: Enregistrements
+
+      work:
+        one: Oeuvre
+        other: Oeuvres
+
       user:
         one: Utilisateur
         other: Utilisateurs
+
     attributes:
+      album:
+        artist_wiki_link: Artiste principal
+        artist_wiki_links_text: Artiste principal
+        recording_wiki_links_text: Enregistrements
+        date_released: Date de parution
+        media_type: Format
+        reference_code: Code de référence
+        label: Étiquette
+        info: Notes
+
       artist:
         surname: Nom de famille
         given_name: Prénom
@@ -79,15 +98,15 @@ fr:
         album_wiki_links_text: Albums
         is_member_of_group: Est membre du groupe
         group_is_composed_of: Membres du groupe
-      album:
-        artist_wiki_link: Artiste principal
-        artist_wiki_links_text: Artiste principal
-        recording_wiki_links_text: Enregistrements
-        date_released: Date de parution
-        media_type: Format
-        reference_code: Code de référence
-        label: Étiquette
-        info: Notes
+
+      portal_article:
+        title: Titre
+        publish_date: Date de publication
+        publish_date: Date de publication
+        featured_wiki_link_text: Wiki link présenté
+        category: Catégorie
+        content: Contenu
+
       recording:
         work_name: Oeuvre
         work_title: Titre
@@ -106,6 +125,7 @@ fr:
         album_wiki_links_text: Albums
         info: Notes
         category: Catégorie
+
       work:
         work_wiki_links_text: Titre
         date_written: Date d'écriture
@@ -127,6 +147,7 @@ fr:
         has_a_variant_work: A comme variante   
         is_translated_from: Est une traduction/adaptation de
         is_variant_from: Est une variante de
+
       user:
         nickname: Alias
         email: Courriel
