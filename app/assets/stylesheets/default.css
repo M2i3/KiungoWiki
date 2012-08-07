@@ -28,6 +28,8 @@ span.letter:after {
 .soon-available:after {
   content: " (disponible bientôt)";
   color: #a0a0a0;
+  font-size: 75%;
+  vertical-align: super;
 }
 
 .dropdown:hover .dropdown-menu {
