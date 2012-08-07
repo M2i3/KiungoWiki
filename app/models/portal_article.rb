@@ -1,6 +1,8 @@
 class PortalArticle
   include Mongoid::Document
 
+  before_save :cache_title
+
   field :title, :type => String
   field :category, :type => String, :default=>"general"
   field :publish_date, :type => Date, :default => lambda {DateTime.now}
@@ -63,6 +65,10 @@ class PortalArticle
   protected
   def featured_wiki_link_klass
     "#{self.category}_wiki_link".classify.constantize
+  end
+
+  def cache_title
+    self[:title] = self.title if generated_title?
   end
 
 end
