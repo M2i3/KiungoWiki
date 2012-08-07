@@ -35,6 +35,14 @@ fr:
   death: Décès
   search_question: Vous n’avez pas trouvé ce que vous cherchiez ?
 
+  actions:
+    new_portal_article: Nouvel article
+    new_artist_portal_article: sur un artiste
+    new_work_portal_article: sur une oeuvres
+    new_recording_portal_article: sur un enregistrements
+    new_album_portal_article: sur un album
+    new_general_portal_article: article seulement
+
   views:
     pagination:
       previous: "&laquo; Pr&eacute;c."
