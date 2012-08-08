@@ -34,4 +34,8 @@ class ArtistWikiLink < WikiLink
   def display_text
     object_text + (self.metaq.empty? ? "" : " (#{self.metaq})")
   end
+
+  def relation
+    searchref[:relation]
+  end
 end

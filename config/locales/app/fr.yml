@@ -98,6 +98,8 @@ fr:
         album_wiki_links_text: Albums
         is_member_of_group: Est membre du groupe
         group_is_composed_of: Membres du groupe
+        relation: Relation
+        nature: Nature
 
       portal_article:
         title: Titre
@@ -127,7 +129,8 @@ fr:
         category: Catégorie
 
       work:
-        work_wiki_links_text: Titre
+        work_wiki_links_text: Oeuvres reliées
+        work_title: Titre
         date_written: Date d'écriture
         copyright: Droits d'auteurs
         artist_wiki_link: Artistes
