@@ -68,11 +68,11 @@ class SearchQuery
   def build_expression(var_name, var_expression)
     case var_expression
       when :word
-        [/ #{var_name}:(.+?) /]
+        [/ #{var_name}:(.+?) /i]
       when :text
-        [/ #{var_name}:"(.+?)" /, / #{var_name}:(.+?) /]
+        [/ #{var_name}:"(.+?)" /i, / #{var_name}:(.+?) /i]
       when :date
-        [/ #{var_name}:(.+?) /]
+        [/ #{var_name}:(.+?) /i]
       else
         (var_expression.respond_to?(:each) ? var_expression : [var_expression])
     end
