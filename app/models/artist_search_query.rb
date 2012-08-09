@@ -8,7 +8,8 @@ class ArtistSearchQuery < SearchQuery
       death_date: :date,
       death_location: :text,
       role: :text,
-      info: :text
+      info: :text,
+      relation: :text
     })
   end
   def self.catch_all

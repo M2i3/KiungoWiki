@@ -37,7 +37,7 @@ class RecordingsController < ApplicationController
     @recording = Recording.new(params[:recording])
 
     respond_to do |format|
-    	puts @recording.to_xml
+      puts @recording.to_xml
       if @recording.save
         format.html { redirect_to(@recording , :notice => 'Recording succesfully created.') }
         format.xml  { render :xml => @recording, :status => :created, :location => @recording }
