@@ -1,7 +1,6 @@
 %dl
-  %dt= form.label :work_title
-  %dd= form.text_field :work_wiki_link, :class=>"work_title_lookup",              |
-        :"data-pre"=>form.object.work_wiki_link.to_json
+  %dt= form.label :work_wiki_link_text
+  %dd= form.text_field :work_wiki_link_text, :class=>"work_title_lookup", :"data-pre"=>form.object.work_wiki_link_combined_link.to_json
   %dt= form.label :recording_date
   %dd= form.text_field :recording_date_text
   %dt= form.label :recording_location

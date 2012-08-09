@@ -4,7 +4,7 @@ class Recording
   include Mongoid::Search
 
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
-  after_initialize :set_defaults
+
   #before_save :set_cached_attributes
 
   field :title, :type => String
@@ -36,19 +36,23 @@ class Recording
   validates_associated :album_wiki_links
 
   def work_title
-    self.work_wiki_link.title 
+    self.work_wiki_link.display_text
   end
 
-  def work_title=(value)
-    self.work_wiki_link.title = value
-  end
-  
   def album_title
     self.album_wiki_link.title 
   end
 
-  def album_title=(value)
-    self.album_wiki_link.title = value
+  def work_wiki_link_text
+    (work_wiki_link && work_wiki_link.reference_text) || ""
+  end
+
+  def work_wiki_link_combined_link
+    work_wiki_link && [work_wiki_link.combined_link]
+  end
+
+  def work_wiki_link_text=(value)
+    self.work_wiki_link = WorkWikiLink.new({:reference_text=>value})
   end
 
   def artist_wiki_links_text
@@ -106,10 +110,6 @@ class Recording
   }
 
   private 
-  def set_defaults
-    self.work_wiki_link ||= WorkWikiLink.new 
-  end
-
   def set_cached_attributes
     self.title = self.work_title
   end
