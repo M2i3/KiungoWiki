@@ -19,7 +19,6 @@ class Work
   field :is_credits_verified, :type => Integer
   field :info, :type => String, :default => ""
 
-
   #
   # calculated values so we can index and sort
   #
@@ -31,7 +30,6 @@ class Work
   index({ cache_normalized_title: 1 }, { background: true })
   index({ cache_first_letter: 1, cache_normalized_title: 1 }, { background: true })
 
-
   search_in :title, :publisher, {:match => :all}
 
   validates_presence_of :title
@@ -39,7 +37,6 @@ class Work
   embeds_many :artist_wiki_links, :as=>:linkable
   validates_associated :artist_wiki_links
   accepts_nested_attributes_for :artist_wiki_links
-  
 
   embeds_many :recording_wiki_links, :as=>:linkable
   accepts_nested_attributes_for :recording_wiki_links
@@ -121,6 +118,11 @@ class Work
     first_letter
   end
 
+  def update_cached_fields
+    self.cache_normalized_title = self.normalized_title
+    self.cache_first_letter = self.title_first_letter
+  end
+
   scope :queried, ->(q) {
     current_query = all
     wsq = WorkSearchQuery.new(q)
@@ -136,11 +138,6 @@ class Work
     }
     current_query
   }
-
-  def update_cached_fields
-    self.cache_normalized_title = self.normalized_title
-    self.cache_first_letter = self.title_first_letter
-  end
 
   #Work.all.group_by {|a| a.title_first_letter.upcase }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
 end

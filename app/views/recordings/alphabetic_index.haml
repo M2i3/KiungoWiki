@@ -1,5 +1,5 @@
-.page-header
-  = title(Recording.model_name.human.pluralize)
+.page-header  
+  = title(t("headers.recordings_alphabetic_index", :heading=>alphabetic_recording_grouping[params[:letter]]))
 
 .row
   .span11

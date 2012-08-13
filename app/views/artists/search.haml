@@ -1,0 +1,67 @@
+.page-header
+  = title(t("headers.artists_search"))
+
+.row
+  .span12
+    %form{:action=>artists_path}
+      %input.search-query.span6{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
+      %input{:type=>"submit", :value=>"Chercher"}
+
+.row
+  .span12
+    %p Une recherche dans les artistes peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants:
+    %dl
+      %dt surname:
+      %dd 
+        Limite la recherche dans le nom de l'artiste seulement. Par exemple:
+        %ul
+          %li surname:Brel
+          %li surname:"de larochellière"  
+
+      %dt given_name:
+      %dd 
+        Limite la recherche dans le prénom de l'artiste seulement. Par exemple:
+        %ul
+          %li surname:Jacques
+          %li surname:"Marie-Michèle"  
+
+      %dt birth_date:
+      %dd 
+        Cherche en utilisant la date de naissance de l'artiste. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. 
+        Par exemple:
+        %ul
+          %li birth_date:1940-03-03
+          %li birth_date:1950
+          %li birth_date:1934-12
+
+      %dt birth_location:
+      %dd 
+        Limite la recherche dans le lieu de naissance de l'artiste seulement. Par exemple:
+        %ul
+          %li birth_location:Paris
+          %li birth_location:"États-Unis" 
+
+      %dt death_date:
+      %dd 
+        Cherche en utilisant la date de décès de l'artiste. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. 
+        Par exemple:
+        %ul
+          %li death_date:2000-03-03
+          %li death_date:1960
+          %li death_date:1980-12
+
+      %dt death_location:
+      %dd 
+        Limite la recherche dans le lieu du décès de l'artiste seulement. Par exemple:
+        %ul
+          %li death_location:Memphis
+          %li death_location:"Los Angeles" 
+
+      %dt role:
+      %dd 
+        Limite la recherche dans le lieu de naissance de l'artiste seulement. Par exemple:
+        %ul
+          %li role:Auteur
+          %li role:"Chef d'orchestre" 
+
+

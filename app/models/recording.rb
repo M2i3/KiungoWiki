@@ -1,11 +1,10 @@
 class Recording 
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Versioning
   include Mongoid::Search
 
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
-
-  before_save :set_cached_attributes
 
   field :title, :type => String
   field :recording_date, :type => IncDate
@@ -15,6 +14,17 @@ class Recording
   field :category_id, :type => Integer
   field :origrecordingid, :type => String
   field :info, :type => String, :default => ""
+
+  #
+  # calculated values so we can index and sort
+  #
+  field :cache_normalized_title, :type => String, :default => ""
+  field :cache_first_letter, :type => String, :default => ""
+
+  before_save :update_cached_fields
+
+  index({ cache_normalized_title: 1 }, { background: true })
+  index({ cache_first_letter: 1, cache_normalized_title: 1 }, { background: true })
 
   search_in :title, {:match => :all}
   
@@ -93,6 +103,28 @@ class Recording
     end
   end
   
+  def normalized_title
+    self.title.to_s.
+      mb_chars.
+      normalize(:kd).
+      to_s.
+      gsub(/[._:;'"`,?|+={}()!@#%^&*<>~\$\-\\\/\[\]]/, ' '). # strip punctuation
+      gsub(/[^[:alnum:]\s]/,'').   # strip accents
+      downcase.strip
+  end
+
+  def title_first_letter
+    first_letter = self.normalized_title[0] || ""
+    first_letter = "#" if ("0".."9").include?(first_letter)
+    first_letter
+  end
+
+  def update_cached_fields
+    self.title = self.work_title
+    self.cache_normalized_title = self.normalized_title
+    self.cache_first_letter = self.title_first_letter
+  end
+
   scope :queried, ->(q) {
     current_query = all
     rsq = RecordingSearchQuery.new(q)
@@ -109,8 +141,4 @@ class Recording
     current_query
   }
 
-  private 
-  def set_cached_attributes
-    self.title = self.work_title
-  end
 end

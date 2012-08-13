@@ -1,9 +1,9 @@
 .page-header
-  = title(Recording.model_name.human.pluralize)
+  = title(t("headers.recordings_all_index"))
 
 .row
   .span11
-    = alpha_recording_links
+    = alpha_links
 
 = paginate @recordings
 = render :partial=>"search_result", :object=>@recordings
@@ -11,5 +11,5 @@
 
 .row
   .span11
-    = alpha_recording_links
+    = alpha_links
 

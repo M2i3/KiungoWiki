@@ -1,9 +1,9 @@
 .page-header  
-  = title(t("headers.works_alphabetic_index", :heading=>alphabetic_grouping[params[:letter]]))
+  = title(t("headers.works_alphabetic_index", :heading=>alphabetic_work_grouping[params[:letter]]))
 
 .row
   .span11
-    = alpha_links
+    = alpha_work_links
 
 = paginate @works
 = render :partial=>"search_result", :object=>@works
@@ -11,5 +11,5 @@
 
 .row
   .span11
-    = alpha_links
+    = alpha_work_links
 

@@ -1,0 +1,63 @@
+.row      
+  .span12
+    .page-header
+      = title(t("headers.artists_portal"))
+
+.row      
+  .span12
+    %p
+      Les artistes sont ceux qui créent les oeuvres et/ou les interprètent dans les enregistrements.
+
+.row
+  - if @feature_in_month
+    .span6
+      %h2= @feature_in_month.title 
+      .content
+        = RedCloth.new(@feature_in_month.summary(750)).to_html.html_safe
+      %p.pull-left 
+        Voir l'artiste:
+        = artist_wiki_link_path(@feature_in_month.featured_wiki_link)
+      - if @feature_in_month.more?(750)
+        %p.pull-right= link_to "continuer la lecture", @feature_in_month
+
+  .span6
+    %h2 Ce que vous pouvez faire pour contribuer
+    %ul
+      %li 
+        = link_to "Écrire la fiche d'un(e) artiste", new_artist_path
+      %li 
+        Réviser la fiche d'un(e) artiste modifiée récemment:
+        %ul 
+          %li 
+            - Artist.order_by(:updated_at=>:desc).limit(5).all.each do |artist|
+              %span.artist>= link_to artist.name, artist_path(artist.id)
+              ;&nbsp;
+            = link_to "...", recent_changes_artists_path, :name=>"consulter la liste complète des modifications récentes"
+          %li= link_to "consulter la liste complète des artistes modifiés récemment", recent_changes_artists_path
+
+      %li
+        Améliorer la fiche d'un(e) artiste:
+        %ul
+          %li= link_to "Sans oeuvre", "#", :class=>"soon-available"
+          %li= link_to "Sans enregistrement", "#", :class=>"soon-available"
+          %li= link_to "Sans album", "#", :class=>"soon-available"
+          %li= link_to "Sans section(s) complémentaire(s)", "#", :class=>"soon-available"
+
+.row
+  .span12
+    %h2 Par ordre alphabétique
+    %ul
+      - alphabetic_artist_grouping.each do |letter, heading|
+        %li 
+          %span.letter= heading
+          - Artist.where(:cache_first_letter => letter).order(updated_at:1).limit(5).each do |artist|
+            %span.artist>= link_to artist.name, artist_path(artist.id)
+            ;&nbsp;
+          = link_to "...", alphabetic_artists_path(letter: letter, page: 1), :name=>"consulter la liste complète des artistes commençant par \"#{letter}\""
+      %li= link_to "toutes les artistes", artists_path(page: 1)
+
+.row
+  .span12
+    %h2.soon-available Par tag/catégorie
+
+

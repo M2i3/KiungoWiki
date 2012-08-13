@@ -27,7 +27,6 @@ class WorksController < ApplicationController
   def alphabetic_index
     @works = build_filter_from_params(params, Work.where(cache_first_letter: params[:letter]).order(cache_normalized_title:1))
   end
-  
 
   def show
     @work = Work.find(params[:id])
@@ -106,8 +105,8 @@ class WorksController < ApplicationController
 
           WorkWikiLink.new(reference_text: "oid:#{w.id} #{wsq.metaq}").combined_link
 
-         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) 
-       }
+        } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) 
+      }
     end
   end
 

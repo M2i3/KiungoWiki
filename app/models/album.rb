@@ -13,6 +13,17 @@ class Album
   field :origalbumid, :type => String
   field :info, :type => String, :default => ""
 
+  #
+  # calculated values so we can index and sort
+  #
+  field :cache_normalized_title, :type => String, :default => ""
+  field :cache_first_letter, :type => String, :default => ""
+
+  before_save :update_cached_fields
+
+  index({ cache_normalized_title: 1 }, { background: true })
+  index({ cache_first_letter: 1, cache_normalized_title: 1 }, { background: true })
+
   search_in :title, :label, {:match => :all}
 
   validates_presence_of :title
@@ -78,6 +89,10 @@ class Album
     first_letter
   end
 
+  def update_cached_fields
+    self.cache_normalized_title = self.normalized_title
+    self.cache_first_letter = self.title_first_letter
+  end
   
   scope :queried, ->(q) {
     current_query = all

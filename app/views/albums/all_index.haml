@@ -1,9 +1,9 @@
 .page-header
-  = title(Album.model_name.human.pluralize)
+  = title(t("headers.albums_all_index"))
 
 .row
   .span11
-    = alpha_album_links
+    = alpha_links
 
 = paginate @albums
 = render :partial=>"search_result", :object=>@albums
@@ -11,5 +11,5 @@
 
 .row
   .span11
-    = alpha_album_links
+    = alpha_links
 

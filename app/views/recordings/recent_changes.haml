@@ -1,0 +1,8 @@
+.page-header
+  = title(t("headers.recordings_recent_changes"))
+
+= paginate @recordings
+= render :partial=>"search_result", :object=>@recordings
+= paginate @recordings
+
+

@@ -1,0 +1,62 @@
+.row      
+  .span12
+    .page-header
+      = title(t("headers.albums_portal"))
+
+.row      
+  .span12
+    %p
+      Les albums regroupent plusieurs enregistrements interprétés par un ou plusieurs artistes. 
+
+.row
+  - if @feature_in_month
+    .span6
+      %h2= @feature_in_month.title 
+      .content
+        = RedCloth.new(@feature_in_month.summary(750)).to_html.html_safe
+      %p.pull-left 
+        Voir l'album:
+        = album_wiki_link_path(@feature_in_month.featured_wiki_link)
+      - if @feature_in_month.more?(750)
+        %p.pull-right= link_to "continuer la lecture", @feature_in_month
+
+  .span6
+    %h2 Ce que vous pouvez faire pour contribuer
+    %ul
+      %li 
+        = link_to "Écrire la fiche d'un album", new_album_path
+      %li 
+        Réviser la fiche d'un album modifiée récemment:
+        %ul 
+          %li 
+            - Album.order_by(:updated_at=>:desc).limit(5).all.each do |album|
+              %span.album>= link_to album.title, album_path(album.id)
+              ;&nbsp;
+            = link_to "...", recent_changes_albums_path, :title=>"consulter la liste complète des modifications récentes"
+          %li= link_to "consulter la liste complète des albums modifiés récemment", recent_changes_albums_path
+
+      %li
+        Améliorer la fiche d'un album:
+        %ul
+          %li= link_to "Sans artiste", "#", :class=>"soon-available"
+          %li= link_to "Sans enregistrement", "#", :class=>"soon-available"
+          %li= link_to "Sans section(s) complémentaire(s)", "#", :class=>"soon-available"
+
+.row
+  .span12
+    %h2 Par ordre alphabétique
+    %ul
+      - alphabetic_album_grouping.each do |letter, heading|
+        %li 
+          %span.letter= heading
+          - Album.where(:cache_first_letter => letter).order(updated_at:1).limit(5).each do |album|
+            %span.album>= link_to album.title, album_path(album.id)
+            ;&nbsp;
+          = link_to "...", alphabetic_albums_path(letter: letter, page: 1), :title=>"consulter la liste complète des albums commençant par \"#{letter}\""
+      %li= link_to "toutes les albums", albums_path(page: 1)
+
+.row
+  .span12
+    %h2.soon-available Par tag/catégorie
+
+

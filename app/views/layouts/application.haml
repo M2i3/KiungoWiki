@@ -36,10 +36,10 @@
           .nav-collapse
             %ul.nav.entities
               %li= link_to "Accueil", root_url
-              %li= link_to "Artistes", artists_path
+              %li= link_to "Artistes", portal_artists_path
               %li= link_to "Oeuvres", portal_works_path
-              %li= link_to "Enregistrements", recordings_path
-              %li= link_to "Albums", albums_path
+              %li= link_to "Enregistrements", portal_recordings_path
+              %li= link_to "Albums", portal_albums_path
 
             %ul.nav.profile.pull-right
               - if ["search", "home", "artists", "works", "recordings", "albums"].include?(params[:controller]) 

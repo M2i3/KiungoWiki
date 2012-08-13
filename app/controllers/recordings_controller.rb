@@ -1,19 +1,31 @@
 class RecordingsController < ApplicationController
 
   # only registered users can edit this wiki
-  before_filter :authenticate_user!, :except => [:show, :index, :lookup]
+  before_filter :authenticate_user!, :except => [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index]
 
   def index
-    @recordings = Recording.all(sort: [:title, :asc]) #TODO: Add an index on title to enable sorting on huge number of recordings
-    @recordings = @recordings.queried(params[:q]) if params[:q]
-
-    @recordings = @recordings.page(params[:page])
+    @recordings = build_filter_from_params(params, Recording.all.order(cache_normalized_title:1))
 
     respond_to do |format|
       format.xml { render :xml=>@recordings }
       format.json { render :json=>@recordings }
       format.html
     end
+  end
+  
+  def recent_changes
+    @recordings = build_filter_from_params(params, Recording.all.order(updated_at:-1))
+  end
+
+  def portal
+    @feature_in_month = PortalArticle.where(:category =>"recording", :publish_date.lte => Time.now).order(publish_date:-1).first
+    respond_to do |format|
+      format.html 
+    end      
+  end
+
+  def alphabetic_index
+    @recordings = build_filter_from_params(params, Recording.where(cache_first_letter: params[:letter]).order(cache_normalized_title:1))
   end
   
   def show
@@ -26,10 +38,14 @@ class RecordingsController < ApplicationController
   end
 
   def new
-    @recording = Recording.new
-    respond_to do |format|      
-      format.html # new.html.erb
-      format.xml  { render :xml => @recording }
+    unless params[:q]
+      redirect_to search_recordings_path, :alert=>t("messages.recording_new_without_query")
+    else
+      @recording = Recording.new(RecordingSearchQuery.new(params[:q]).to_hash)
+      respond_to do |format|      
+        format.html # new.html.erb
+        format.xml  { render :xml => @recording }
+      end
     end
   end
 
@@ -100,5 +116,24 @@ class RecordingsController < ApplicationController
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) 
       }
     end
+  end
+
+  protected
+  def filter_params
+    {
+      :q => lambda {|recordings, params| recordings.queried(params[:q]) }
+    }
+  end
+
+  def build_filter_from_params(params, recordings)
+
+    filter_params.each {|param_key, filter|
+      puts "searching using #{param_key} with value #{params[param_key]}"
+      recordings = filter.call(recordings,params) if params[param_key]
+    }
+
+    recordings = recordings.page(params[:page])
+
+    recordings
   end
 end
