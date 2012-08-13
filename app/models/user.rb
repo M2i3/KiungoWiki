@@ -48,6 +48,8 @@ class User
   validates_uniqueness_of :nickname 
   validates_presence_of :nickname
 
+  field :groups, :type=>Array, :default=>["user"]
+
   embeds_many :album_wiki_links, :as=>:linkable
   accepts_nested_attributes_for :album_wiki_links
   validates_associated :album_wiki_links

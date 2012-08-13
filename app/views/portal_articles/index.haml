@@ -2,20 +2,22 @@
   .span12
     .page-header
       = title(t("headers.portal_articles"))
+
 .row      
   .span12
-    .pull-right
-      %div.dropdown 
-        %a.downdown-toggle{"data-toggle"=>"dropdown"}
-          = t("actions.new_portal_article")
-          %b.caret
-        %ul.dropdown-menu
-          %li= link_to t("actions.new_artist_portal_article"), new_portal_article_path(:category=>"artist")
-          %li= link_to t("actions.new_work_portal_article"), new_portal_article_path(:category=>"work")
-          %li= link_to t("actions.new_recording_portal_article"), new_portal_article_path(:category=>"recording")
-          %li= link_to t("actions.new_album_portal_article"), new_portal_article_path(:category=>"album")
-          %li.divider
-          %li= link_to t("actions.new_general_portal_article"), new_portal_article_path()
+    - if can? :new, PortalArticle
+      .pull-right
+        %div.dropdown 
+          %a.downdown-toggle{"data-toggle"=>"dropdown"}
+            = t("actions.new_portal_article")
+            %b.caret
+          %ul.dropdown-menu
+            %li= link_to t("actions.new_artist_portal_article"), new_portal_article_path(:category=>"artist")
+            %li= link_to t("actions.new_work_portal_article"), new_portal_article_path(:category=>"work")
+            %li= link_to t("actions.new_recording_portal_article"), new_portal_article_path(:category=>"recording")
+            %li= link_to t("actions.new_album_portal_article"), new_portal_article_path(:category=>"album")
+            %li.divider
+            %li= link_to t("actions.new_general_portal_article"), new_portal_article_path()
 
 
     = paginate @portal_articles

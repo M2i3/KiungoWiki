@@ -2,6 +2,7 @@ class WorksController < ApplicationController
 
   # only registered users can edit this wiki
   before_filter :authenticate_user!, :except => [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index]
+  authorize_resource
 
   def index
     @works = build_filter_from_params(params, Work.all.order(cache_normalized_title:1))

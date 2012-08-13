@@ -2,12 +2,13 @@ class PortalArticlesController < ApplicationController
   # only registered users can edit this wiki
   before_filter :authenticate_user!, :except => [:show, :index]
   before_filter :find_entity, :except=>[:index, :new, :create]
+  load_and_authorize_resource
 
   def index
     @category = params[:category]
-    @portal_articles = PortalArticle.all
+#    @portal_articles = PortalArticle.all
     @portal_articles = @portal_articles.where(category:@category) if @category
-    @portal_articles = @portal_articles.where(:publish_date.lte => Time.now) unless current_user
+ #   @portal_articles = @portal_articles.accessible_by(current_ability, :index)
     @portal_articles = @portal_articles.page(params[:page])
   end
 

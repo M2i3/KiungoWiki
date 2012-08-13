@@ -2,7 +2,7 @@ class AlbumsController < ApplicationController
 
   # only registered users can edit this wiki
   before_filter :authenticate_user!, :except => [:show, :index, :lookup]
-
+  authorize_resource
 
   def index
     @albums = Album.all(sort: [:title, :asc]) # TODO: Add an index on title to enable sorting on huge number of albums

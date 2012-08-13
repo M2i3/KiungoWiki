@@ -69,6 +69,7 @@ GEM
     bson_ext (1.6.4)
       bson (~> 1.6.4)
     builder (3.0.0)
+    cancan (1.6.8)
     daemons (1.1.8)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
@@ -168,6 +169,7 @@ DEPENDENCIES
   RedCloth
   acts-as-taggable-on
   bson_ext
+  cancan
   devise
   execjs
   factory_girl

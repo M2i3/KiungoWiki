@@ -18,7 +18,10 @@ gem 'acts-as-taggable-on'
 gem "jquery-rails"
 
 # for pagination https://github.com/amatsuda/kaminari
-gem 'kaminari' 
+gem 'kaminari'
+
+# for access control
+gem 'cancan' 
 
 # for user registration and authentication
 gem 'devise'

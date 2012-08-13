@@ -31,3 +31,14 @@ KiungoWiki::Application.configure do
   # for Devise when writing links in emails
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
+
+#
+# uncomment when testing with closer to production so we have the error
+# messages displaying like on the production system use in combination with above in the code:
+# config.consider_all_requests_local       = false
+#
+#class ActionDispatch::Request
+#  def local?
+#    false
+#  end
+#end
