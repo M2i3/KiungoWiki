@@ -54,7 +54,7 @@
             %span.recording>= link_to recording.title, recording_path(recording.id)
             ;&nbsp;
           = link_to "...", alphabetic_recordings_path(letter: letter, page: 1), :title=>"consulter la liste complète des enregistrements commençant par \"#{letter}\""
-      %li= link_to "toutes les enregistrements", recordings_path(page: 1)
+      %li= link_to "tous les enregistrements", recordings_path(page: 1)
 
 .row
   .span12

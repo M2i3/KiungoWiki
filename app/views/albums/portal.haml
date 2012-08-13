@@ -53,7 +53,7 @@
             %span.album>= link_to album.title, album_path(album.id)
             ;&nbsp;
           = link_to "...", alphabetic_albums_path(letter: letter, page: 1), :title=>"consulter la liste complète des albums commençant par \"#{letter}\""
-      %li= link_to "toutes les albums", albums_path(page: 1)
+      %li= link_to "tous les albums", albums_path(page: 1)
 
 .row
   .span12

@@ -54,7 +54,7 @@
             %span.artist>= link_to artist.name, artist_path(artist.id)
             ;&nbsp;
           = link_to "...", alphabetic_artists_path(letter: letter, page: 1), :name=>"consulter la liste complète des artistes commençant par \"#{letter}\""
-      %li= link_to "toutes les artistes", artists_path(page: 1)
+      %li= link_to "tous les artistes", artists_path(page: 1)
 
 .row
   .span12
