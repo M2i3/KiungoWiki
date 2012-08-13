@@ -1,7 +1,7 @@
 .row      
   .span12
     .page-header
-      = title("Oeuvres (portail)")
+      = title(t("headers.works_portal"))
 
 .row      
   .span12
@@ -33,7 +33,7 @@
               %span.work>= link_to work.title, work_path(work.id)
               ;&nbsp;
             = link_to "...", recent_changes_works_path, :title=>"consulter la liste complète des modifications récentes"
-          %li= link_to "consulter la liste complète oeuvres modifiées récemment", recent_changes_works_path
+          %li= link_to "consulter la liste complète des oeuvres modifiées récemment", recent_changes_works_path
 
       %li
         Améliorer la fiche d'une oeuvre:
@@ -48,7 +48,7 @@
   .span12
     %h2 Par ordre alphabétique
     %ul
-      - alphabetic_grouping.each do |letter, heading|
+      - alphabetic_work_grouping.each do |letter, heading|
         %li 
           %span.letter= heading
           - Work.where(:cache_first_letter => letter).order(updated_at:1).limit(5).each do |work|

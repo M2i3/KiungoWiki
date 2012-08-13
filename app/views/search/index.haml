@@ -8,7 +8,7 @@
     - unless @artists.last_page? 
       .well= link_to_unless @artists.last_page?, "plus de résultats", artists_path(:page=>@artists.current_page + 1, :q=>params[:q])
     = t("search_question")
-    = link_to t("new"), new_artist_path, :class=>"btn"
+    = link_to t("new"), new_artist_path(:q=>params[:q]), :class=>"btn"
 
 .row
   .span12
@@ -27,7 +27,7 @@
     - unless @recordings.last_page? 
       .well= link_to_unless @recordings.last_page?, "plus de résultats", recordings_path(:page=>@recordings.current_page + 1, :q=>params[:q])
     = t("search_question")
-    = link_to t("new"), new_recording_path, :class=>"btn"
+    = link_to t("new"), new_recording_path(:q=>params[:q]), :class=>"btn"
 .row
   .span12
     %h2 Albums
@@ -35,5 +35,5 @@
     - unless @albums.last_page? 
       .well= link_to_unless @albums.last_page?, "plus de résultats", recordings_path(:page=>@albums.current_page + 1, :q=>params[:q])
     = t("search_question")
-    = link_to t("new"), new_album_path, :class=>"btn"
+    = link_to t("new"), new_album_path(:q=>params[:q]), :class=>"btn"
 

@@ -1,0 +1,43 @@
+.page-header
+  = title(t("headers.albums_search"))
+
+.row
+  .span12
+    %form{:action=>albums_path}
+      %input.search-query.span6{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
+      %input{:type=>"submit", :value=>"Chercher"}
+
+.row
+  .span12
+    %p Une recherche dans les albums peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants:
+    %dl
+      %dt title:
+      %dd 
+        Limite la recherche dans le titre de l'album seulement. Par exemple:
+        %ul
+          %li title:Thriller
+          %li title:"Barbara chante Brassens et Brel"  
+
+      %dt date_released:
+      %dd 
+        Cherche en utilisant la date de parution de l'album. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. 
+        Par exemple:
+        %ul
+          %li date_released:2010-03-24
+          %li date_released:1980
+          %li date_released:1984-12
+
+      %dt label:
+      %dd 
+        Limite la recherche dans le nom de l'etiquette (ex: maison de disque). Par exemple:
+        %ul
+          %li title:Epix
+          %li title:"Les productions Guy Cloutier"  
+
+      %dt media_type:
+      %dd 
+        Limite la recherche dans le type de support. Par exemple:
+        %ul
+          %li media_type:CD
+          %li media_type:"33 tours"
+

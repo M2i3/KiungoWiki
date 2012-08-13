@@ -1,14 +1,11 @@
 class ArtistsController < ApplicationController
 
   # only registered users can edit this wiki
-  before_filter :authenticate_user!, :except => [:show, :index, :lookup]
+  before_filter :authenticate_user!, :except => [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index]
   authorize_resource
 
   def index
-    @artists = Artist.all(sort: [:name, :asc]) #TODO: Add an index on title to enable sorting on huge number of artists
-    @artists = @artists.queried(params[:q]) if params[:q]
-
-    @artists = @artists.page(params[:page])
+    @artists = build_filter_from_params(params, Artist.all.order(cache_normalized_name:1))
 
     respond_to do |format|
       format.xml { render :xml=>@artists }
@@ -17,6 +14,21 @@ class ArtistsController < ApplicationController
     end
   end
 
+  def recent_changes
+    @artists = build_filter_from_params(params, Artist.all.order(updated_at:-1))
+  end
+
+  def portal
+    @feature_in_month = PortalArticle.where(:category =>"artist", :publish_date.lte => Time.now).order(publish_date:-1).first
+    respond_to do |format|
+      format.html 
+    end      
+  end
+
+  def alphabetic_index
+    @artists = build_filter_from_params(params, Artist.where(cache_first_letter: params[:letter]).order(cache_normalized_name:1))
+  end
+  
   def show
     @artist = Artist.find(params[:id])
     respond_to do |format|
@@ -27,10 +39,14 @@ class ArtistsController < ApplicationController
   end
 
   def new
-    @artist = Artist.new
-    respond_to do |format|      
-      format.html # new.html.erb
-      format.xml  { render :xml => @artist }
+    unless params[:q]
+      redirect_to search_artists_path, :alert=>t("messages.artist_new_without_query")
+    else
+      @artist = Artist.new(ArtistSearchQuery.new(params[:q]).to_hash)
+      respond_to do |format|      
+        format.html # new.html.erb
+        format.xml  { render :xml => @artist }
+      end
     end
   end
 
@@ -56,8 +72,6 @@ class ArtistsController < ApplicationController
   end 
 
   def update
-  	logger.info "PARAMS[:artist]"
-  	logger.info params[:artist]
     @artist = Artist.find(params[:id])
 		
     respond_to do |format|
@@ -94,5 +108,24 @@ class ArtistsController < ApplicationController
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }
     end
+  end
+
+  protected
+  def filter_params
+    {
+      :q => lambda {|artists, params| artists.queried(params[:q]) }
+    }
+  end
+
+  def build_filter_from_params(params, artists)
+
+    filter_params.each {|param_key, filter|
+      puts "searching using #{param_key} with value #{params[param_key]}"
+      artists = filter.call(artists,params) if params[param_key]
+    }
+
+    artists = artists.page(params[:page])
+
+    artists
   end
 end

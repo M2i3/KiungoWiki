@@ -49,21 +49,6 @@ module ApplicationHelper
     end
   end
 
-  def alpha_links()
-    return_text = ' '
-    ('A'..'Z').to_a.each do |letter|
-      return_text = return_text + link_to(
-        "#{letter} ", 
-        :q => '^'+letter)
-    end    
-    ('0'..'9').to_a.each do |number|
-      return_text = return_text + link_to(
-        "#{number} ", 
-        :q => '^'+number)
-    end   
-    return return_text 
-  end
-
   def current_page_classes(params ={}, classes="")
     if current_page?(params)
       [classes, "active"].join(" ")

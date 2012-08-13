@@ -1,0 +1,8 @@
+.page-header
+  = title(t("headers.albums_recent_changes"))
+
+= paginate @albums
+= render :partial=>"search_result", :object=>@albums
+= paginate @albums
+
+

@@ -3,7 +3,7 @@ module WorksHelper
     Work.first
   end
 
-  def multi_purpose_index_title(params)
+  def multi_purpose_work_index_title(params)
     title = Work.model_name.human.pluralize 
     if params[:recent_changes]
       title += " modifiees recemment"
@@ -11,13 +11,13 @@ module WorksHelper
     title
   end
 
-  def alpha_links
-    alphabetic_grouping.collect{|letter, heading|
+  def alpha_work_links
+    alphabetic_work_grouping.collect{|letter, heading|
       link_to heading, alphabetic_works_path(:letter=>letter)
     }.join(", ").html_safe
   end
 
-  def alphabetic_grouping
+  def alphabetic_work_grouping
     grouping = {"#"=>"0..9"}
 
     ("a".."z").each {|letter|
@@ -25,5 +25,4 @@ module WorksHelper
     }
     grouping
   end
-
 end

@@ -1,14 +1,14 @@
 class Artist 
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Versioning
   include Mongoid::Search
 
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
-  before_save :set_name
 
   field :name, :type => String
-  field :surname, :type => String
-  field :given_name, :type => String
+  field :surname, :type => String, :default => ""
+  field :given_name, :type => String, :default => ""
   field :birth_date, :type => IncDate
   field :birth_location, :type => String
   field :death_date, :type => IncDate
@@ -16,6 +16,17 @@ class Artist
   field :origartistid, :type => String
   field :is_group, :type => Integer
   field :info, :type => String, :default => ""
+
+  #
+  # calculated values so we can index and sort
+  #
+  field :cache_normalized_name, :type => String, :default => ""
+  field :cache_first_letter, :type => String, :default => ""
+
+  before_save :update_cached_fields
+
+  index({ cache_normalized_name: 1 }, { background: true })
+  index({ cache_first_letter: 1, cache_normalized_name: 1 }, { background: true })
 
   search_in :name, :surname, :given_name, :birth_location, :death_location, {:match => :all}
 
@@ -147,6 +158,27 @@ class Artist
     GroupedWikiLink.new(WorkWikiLink, self.work_wiki_links).groups
   end
 
+  def normalized_name
+    self.name.to_s.
+      mb_chars.
+      normalize(:kd).
+      to_s.
+      gsub(/[._:;'"`,?|+={}()!@#%^&*<>~\$\-\\\/\[\]]/, ' '). # strip punctuation
+      gsub(/[^[:alnum:]\s]/,'').   # strip accents
+      downcase.strip
+  end
+
+  def name_first_letter
+    first_letter = self.normalized_name[0] || ""
+    first_letter = "#" if ("0".."9").include?(first_letter)
+    first_letter
+  end
+
+  def update_cached_fields
+    self.set_name
+    self.cache_normalized_name = self.normalized_name
+    self.cache_first_letter = self.name_first_letter
+  end
 
   scope :born_during_month_of, ->(month) {
     self.where(:birth_date=>/.*\-#{"%02d"%(month)}\-.*/)
