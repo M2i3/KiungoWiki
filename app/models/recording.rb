@@ -6,7 +6,6 @@ class Recording
 
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
 
-  field :title, :type => String
   field :recording_date, :type => IncDate
   field :recording_location, :type => String
   field :duration, :type => Duration
@@ -28,6 +27,7 @@ class Recording
 
   search_in :title, {:match => :all}
   
+  validates_presence_of :work_wiki_link
 #  validates_length_of :work_title, :in=>1..500, :allow_nil=>true
 #  validates_numericality_of :duration, :greater_than=>0, :allow_nil=>true  
 #  validates_format_of :recording_date_text, :with=>/^(\d{4})(?:-?(\d{0,2})(?:-?(\d{0,2}))?)?$/, :allow_nil=>true
@@ -45,7 +45,7 @@ class Recording
   accepts_nested_attributes_for :album_wiki_links
   validates_associated :album_wiki_links
 
-  def work_title
+  def title
     self.work_wiki_link.display_text
   end
 
@@ -120,7 +120,6 @@ class Recording
   end
 
   def update_cached_fields
-    self.title = self.work_title
     self.cache_normalized_title = self.normalized_title
     self.cache_first_letter = self.title_first_letter
   end

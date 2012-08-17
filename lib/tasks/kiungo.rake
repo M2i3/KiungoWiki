@@ -78,12 +78,11 @@ namespace :kiungo do
            
           RawRecording.where(:work_id=>rawWork.work_id).each do |rawRecording|
 
-            params = {:title=>rawWork.work_title,
-                      :recording_date=>rawRecording.recording_date, 
+            params = {:recording_date=>rawRecording.recording_date, 
                       :duration=>rawRecording.duration,
                       :rythm=>rawRecording.rythm,
                       :category_id=>rawRecording.category_id,
-                      :work_wiki_link=>WorkWikiLink.new({:reference_text=>"oid: "+ w.id.to_s,:work_id=>w.id}),
+                      :work_wiki_link=>WorkWikiLink.new({:reference_text=>"oid:"+ w.id.to_s,:work_id=>w.id}),
                       :origrecordingid=>rawRecording.recording_id,
                       :info=>rawRecording.notes}
 
