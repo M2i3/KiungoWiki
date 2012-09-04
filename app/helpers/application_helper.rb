@@ -41,6 +41,14 @@ module ApplicationHelper
   	end
   end
 
+  def category_wiki_link_path(cwl)
+  	if cwl.category_id
+  		link_to(cwl.category_name, category_path(:id=>cwl.category_id))
+  	else
+  		link_to(cwl.category_name, categories_path(:q=>cwl.reference_text))
+  	end
+  end
+
   def format_date(date)
     if date
       I18n.l(date.to_date)

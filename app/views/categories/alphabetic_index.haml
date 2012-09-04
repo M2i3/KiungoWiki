@@ -1,0 +1,15 @@
+.page-header  
+  = title(t("headers.categories_alphabetic_index", :heading=>alphabetic_category_grouping[params[:letter]]))
+
+.row
+  .span11
+    = alpha_category_links
+
+= paginate @categories
+= render :partial=>"search_result", :object=>@categories
+= paginate @categories
+
+.row
+  .span11
+    = alpha_category_links
+

@@ -178,6 +178,38 @@ $(document).ready(function () {
           inputToken: "token-input-input-token"
       }  
   });
+
+  $("input.category_lookup").tokenInput("/categories/lookup.json", {
+     tokenLimit: 1,
+     classes: {
+          tokenList: "token-input-list",
+          token: "token-input-token",
+          tokenDelete: "token-input-delete-token",
+          selectedToken: "token-input-selected-token",
+          highlightedToken: "token-input-highlighted-token",
+          dropdown: "token-input-dropdown",
+          dropdownItem: "token-input-dropdown-item",
+          dropdownItem2: "token-input-dropdown-item2",
+          selectedDropdownItem: "token-input-selected-dropdown-item",
+          inputToken: "token-input-input-token"
+      }  
+  });
+
+  $("input.categories_lookup").tokenInput("/categories/lookup.json", {
+     classes: {
+          tokenList: "token-input-list",
+          token: "token-input-token",
+          tokenDelete: "token-input-delete-token",
+          selectedToken: "token-input-selected-token",
+          highlightedToken: "token-input-highlighted-token",
+          dropdown: "token-input-dropdown",
+          dropdownItem: "token-input-dropdown-item",
+          dropdownItem2: "token-input-dropdown-item2",
+          selectedDropdownItem: "token-input-selected-dropdown-item",
+          inputToken: "token-input-input-token"
+      }  
+  });
+
 });
 
 

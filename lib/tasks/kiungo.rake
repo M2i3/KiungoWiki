@@ -27,7 +27,7 @@ namespace :kiungo do
         puts "rake stage 2 (languages) count=" + Language.count.to_s
 
         RawCategory.all.entries.each do |rawCategory|
-          Category.create!(:category_id=>rawCategory.category_id,
+          Category.create!(:origcategoryid=>rawCategory.category_id,
                         :category_name=>rawCategory.category_name)
         end # RawCategories.each
         puts "rake stage 3 (categories) count=" + Category.count.to_s
@@ -81,12 +81,12 @@ namespace :kiungo do
             params = {:recording_date=>rawRecording.recording_date, 
                       :duration=>rawRecording.duration,
                       :rythm=>rawRecording.rythm,
-                      :category_id=>rawRecording.category_id,
                       :work_wiki_link=>WorkWikiLink.new({:reference_text=>"oid:"+ w.id.to_s,:work_id=>w.id}),
                       :origrecordingid=>rawRecording.recording_id,
                       :info=>rawRecording.notes}
-
-
+              unless ["0","",nil].include?(rawRecording.category_id)
+                params[:category_wiki_links_text] = RawCategory.where(:category_id => rawRecording.category_id).collect{|cc| "oid:"+Category.where(:origcategoryid => rawRecording.category_id).first.id.to_s}.uniq.join(",")
+              end
               params[:artist_wiki_links_text] = RawRecordingArtistRoleLink.where(:recording_id=>rawRecording.recording_id).collect {|art|
                "oid:" + Artist.where(:origartistid => art[:artist_id]).first.id.to_s + " role:" + art.role
               }.uniq.join(",")
@@ -146,7 +146,7 @@ namespace :kiungo do
                  }.uniq.join(",")
               original_work.update_attributes(params_original)
             else
-              puts "none existing work"
+              puts "none existing original work: " + originalworkid.to_s
             end
           end
           work2.update_attributes(params)

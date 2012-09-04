@@ -45,6 +45,15 @@ KiungoWiki::Application.routes.draw do
     end
   end
 
+  resources :categories do
+    collection do
+      get 'lookup'
+      get 'portal'
+      get 'recent_changes' #, :action=>"recent_changes", :recent_changes=>1, :as=>:recent_changes
+      get 'search'
+    end
+  end
+
 
   match 'search' => 'search#index'
   match 'site_plan' => "home#site_plan"

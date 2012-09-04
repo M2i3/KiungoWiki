@@ -99,7 +99,7 @@ class RecordingsController < ApplicationController
       format.json { 
         render :json=>(Recording.queried(params[:q]).limit(20).collect{|r| 
           reference_text = ["oid:#{r.id}"]
-          reference_label = [r.title]
+          reference_label = [r.title + " (" + r.duration.to_s + ", " + r.recording_date + ") - " + r.artist_wiki_links.first.name]
           if rsq[:trackNb]
             reference_text << "trackNb:#{rsq[:trackNb]}"
             reference_label << "(#{rsq[:trackNb]})"
