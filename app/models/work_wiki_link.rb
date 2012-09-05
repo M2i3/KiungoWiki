@@ -2,20 +2,17 @@ class WorkWikiLink < WikiLink
   include Mongoid::Document
 
   set_reference_class Work, WorkSearchQuery
+  cache_attributes :title, :language_code, :date_written
 
   accepts_nested_attributes_for :work
-  belongs_to :work, inverse_of: nil
 
-  def title
-    (self.work && self.work.title) ||self.objectq
+  def title_with_objectq
+    title_without_objectq.blank? ? self.objectq : title_without_objectq
   end
+  alias_method_chain :title, :objectq
 
   def work_wiki_links
      (self.work && self.work.work_wiki_links) || ""
-  end
-
-  def language_code
-     (self.work && self.work.language_code) || ""
   end
 
   def language_name
@@ -28,12 +25,12 @@ class WorkWikiLink < WikiLink
     self.title.to_s 
   end
 
-  def date_written
-    work.date_written if work
+  def relation
+    searchref[:relation] || "undetermined"
   end
 
-  def relation
-    searchref[:relation]
+  def relation_text
+    I18n.t("mongoid.attributes.work.nature_text.#{self.relation}")
   end
 
 end

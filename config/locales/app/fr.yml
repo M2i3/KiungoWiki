@@ -167,10 +167,12 @@ fr:
         info: Notes
         relation: Relation
         nature: Nature
-        has_a_translated_work: A comme traduction/adaptation
-        has_a_variant_work: A comme variante   
-        is_translated_from: Est une traduction/adaptation de
-        is_variant_from: Est une variante de
+        nature_text:
+          undetermined: Indéterminée
+          has_a_translated_work: A comme traduction/adaptation
+          has_a_variant_work: A comme variante   
+          is_translated_from: Est une traduction/adaptation de
+          is_variant_from: Est une variante de
 
       user:
         nickname: Alias

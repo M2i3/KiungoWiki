@@ -44,7 +44,7 @@
         %tbody
           - @work.work_wiki_links.each do |wwl|
             %tr
-              %td= Work.human_attribute_name(wwl.relation)
+              %td= wwl.relation_text
               %td= work_wiki_link_path(wwl)
               %td= wwl.language_name
               %td= wwl.date_written

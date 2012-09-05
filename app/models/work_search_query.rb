@@ -16,7 +16,7 @@ class WorkSearchQuery < SearchQuery
     "title"
   end 
   def self.meta_fields
-    super + [:role]
+    super + [:role, :relation]
   end
 end
 
