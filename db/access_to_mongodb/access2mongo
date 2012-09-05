@@ -108,14 +108,14 @@ mdb-export  -H -q '|' $1 Versions >> recordings_${DATE}.csv
 ./substitute.pl '"category_id": "4"' '"category_id": "2"' recordings_${DATE}.json
 ./substitute.pl '"category_id": "5"' '"category_id": "10"' recordings_${DATE}.json
 ./substitute.pl '"category_id": "6"' '"category_id": "13"' recordings_${DATE}.json
-./substitute.pl '"category_id": "7"' '"category_id": "126"' recordings_${DATE}.json
-./substitute.pl '"category_id": "8"' '"category_id": "127"' recordings_${DATE}.json
+./substitute.pl '"category_id": "7"' '"category_id": "148"' recordings_${DATE}.json
+./substitute.pl '"category_id": "8"' '"category_id": "149"' recordings_${DATE}.json
 ./substitute.pl '"category_id": "9"' '"category_id": "80"' recordings_${DATE}.json
 ./substitute.pl '"category_id": "10"' '"category_id": "37"' recordings_${DATE}.json
-./substitute.pl '"category_id": "11"' '"category_id": "128"' recordings_${DATE}.json
-./substitute.pl '"category_id": "12"' '"category_id": "129"' recordings_${DATE}.json
-./substitute.pl '"category_id": "13"' '"category_id": "130"' recordings_${DATE}.json
-./substitute.pl '"category_id": "14"' '"category_id": "131"' recordings_${DATE}.json
+./substitute.pl '"category_id": "11"' '"category_id": "150"' recordings_${DATE}.json
+./substitute.pl '"category_id": "12"' '"category_id": "151"' recordings_${DATE}.json
+./substitute.pl '"category_id": "13"' '"category_id": "152"' recordings_${DATE}.json
+./substitute.pl '"category_id": "14"' '"category_id": "153"' recordings_${DATE}.json
 ./substitute.pl '"category_id": "15"' '"category_id": "100"' recordings_${DATE}.json
 ./substitute.pl '"category_id": "16"' '"category_id": "115"' recordings_${DATE}.json
 ./substitute.pl "}, {" "}
@@ -241,7 +241,7 @@ mdb-export  -H -q '|' $1 Albums >> supports_${DATE}.csv
 # Si le serveur n'est pas local ou actif, on peut modifier ou commenter les lignes suivantes jusqu'à la fin
 # et ne conserver que les fichiers JSON pour un transfert manuel.
 mongoimport -d kiungo_raw_db -c raw_languages -f language_id,language_code,language_name_english,language_name_french --type json --file languages_for_mongo_${DATE}.json
-mongoimport -d kiungo_raw_db -c raw_categories -f category_name,category_id --type json --file categories_for_mongo_${DATE}.json
+mongoimport -d kiungo_raw_db -c raw_categories -f category_id,category_name --type json --file categories_for_mongo_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_artists -f artist_id,artist_surname,artist_given_name,birth_date,birth_location,death_date,death_location,notes,collective --type json --file artists_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_editors -f editor_id,editor_name --type json --file editors_${DATE}.json
 mongoimport -d kiungo_raw_db -c raw_labels -f label_id,label_name --type json --file labels_${DATE}.json

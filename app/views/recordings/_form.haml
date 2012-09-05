@@ -5,8 +5,8 @@
   %dd= form.text_field :recording_date_text
   %dt= form.label :recording_location
   %dd= form.text_field :recording_location
-  %dt= form.label :category
-  %dd= form.text_field :category_id
+  %dt= form.label :category_wiki_links_text
+  %dd= form.text_field :category_wiki_links_text, :class=>"categories_lookup", :"data-pre"=>form.object.category_wiki_links_combined_links.to_json
   %dt= form.label :duration
   %dd= form.text_field :duration
   %dt= form.label :rythm

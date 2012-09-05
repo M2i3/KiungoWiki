@@ -1,0 +1,54 @@
+.row      
+  .span12
+    .page-header
+      = title(t("headers.categories_portal"))
+
+.row      
+  .span12
+    %p
+      Les enregistrements sont regroupés dans les différentes catégories. 
+
+.row
+  - if @feature_in_month
+    .span6
+      %h2= @feature_in_month.title 
+      .content
+        = RedCloth.new(@feature_in_month.summary(750)).to_html.html_safe
+      %p.pull-left 
+        Voir la catégorie:
+        = category_wiki_link_path(@feature_in_month.featured_wiki_link)
+      - if @feature_in_month.more?(750)
+        %p.pull-right= link_to "continuer la lecture", @feature_in_month
+
+  .span6
+    %h2 Ce que vous pouvez faire pour contribuer
+    %ul
+      %li 
+        = link_to "Écrire la fiche d'une catégorie", new_category_path
+      %li 
+        Réviser la fiche d'une catégorie modifiée récemment:
+        %ul 
+          %li 
+            - Category.order_by(:updated_at=>:desc).limit(5).all.each do |category|
+              %span.category>= link_to category.category_name, category_path(category.id)
+              ;&nbsp;
+            = link_to "...", recent_changes_categories_path, :title=>"consulter la liste complète des modifications récentes"
+          %li= link_to "consulter la liste complète des catégories modifiés récemment", recent_changes_categories_path
+
+      %li
+        Améliorer la fiche d'une catégorie:
+        %ul
+          %li= link_to "Sans section(s) complémentaire(s)", "#", :class=>"soon-available"
+
+.row
+  .span12
+    %h2 Par catégorie
+    %ul
+
+      %li= link_to "toutes les catégories", categories_path(page: 1)
+
+.row
+  .span12
+    %h2.soon-available Par tag/catégorie
+
+

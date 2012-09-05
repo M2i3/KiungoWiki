@@ -34,6 +34,7 @@ fr:
     portal_article_artist: "Artiste du mois: %{featured}"
     portal_article_recording: "Enregistrement du mois: %{featured}"
     portal_article_work: "Oeuvre du mois: %{featured}"
+    portal_article_category: "Catégorie du mois: %{featured}"
     portal_articles: Articles des portails
     site_plan: Plan du site
 
@@ -62,6 +63,7 @@ fr:
     new_work_portal_article: sur une oeuvres
     new_recording_portal_article: sur un enregistrements
     new_album_portal_article: sur un album
+    new_category_portal_article: sur une catégorie
     new_general_portal_article: article seulement
 
   views:
@@ -81,6 +83,10 @@ fr:
       artist:
         one: Artiste
         other: Artistes
+
+      category:
+        one: Catégorie
+        other: Catégories
 
       portal_article:
         one: Article
@@ -122,6 +128,10 @@ fr:
         relation: Relation
         nature: Nature
 
+      category:
+        category: Catégorie
+        category_name: Catégories
+
       portal_article:
         title: Titre
         publish_date: Date de publication
@@ -148,6 +158,9 @@ fr:
         album_wiki_links_text: Albums
         info: Notes
         category: Catégorie
+        category_wiki_link: Catégories
+        category_wiki_links: Catégories
+        category_wiki_links_text: Catégories
 
       work:
         work_wiki_links_text: Oeuvres reliées

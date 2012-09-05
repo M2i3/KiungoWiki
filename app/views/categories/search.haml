@@ -1,0 +1,22 @@
+.page-header
+  = title(t("headers.categories_search"))
+
+.row
+  .span12
+    %form{:action=>categories_path}
+      %input.search-query.span6{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
+      %input{:type=>"submit", :value=>"Chercher"}
+
+.row
+  .span12
+    %p Une recherche dans les categories peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants:
+    %dl
+      %dt title:
+      %dd 
+        Limite la recherche dans le nome de la catégorie seulement. Par exemple:
+        %ul
+          %li category_name:Jazz
+          %li category_name:"Text Song"  
+
+
+

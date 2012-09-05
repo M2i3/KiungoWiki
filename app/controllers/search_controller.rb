@@ -3,7 +3,7 @@ class SearchController < ApplicationController
     unless params[:q]
       redirect_to root_path
     else
-      @artists = Artist.all(sort: [:name, :asc]) #TODO: Add an index on title to enable sorting on huge number of artists
+      @artists = Artist.all(sort: [:name, :asc]) #TODO: Add an index on name to enable sorting on huge number of artists
       @artists = @artists.queried(params[:q]) if params[:q]
       @artists = @artists.page(params[:page])
 
@@ -18,6 +18,10 @@ class SearchController < ApplicationController
       @albums = Album.all(sort: [:title, :asc]) # TODO: Add an index on title to enable sorting on huge number of albums
       @albums = @albums.queried(params[:q]) if params[:q]
       @albums = @albums.page(params[:page])
+
+      @categories = Category.all(sort: [:category_name, :asc]) # TODO: Add an index on title to enable sorting on huge number of categories
+      @categories = @categories.queried(params[:q]) if params[:q]
+      @categories = @categories.page(params[:page])
     end
   end
 end

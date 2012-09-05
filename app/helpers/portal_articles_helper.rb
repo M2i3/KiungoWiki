@@ -3,6 +3,7 @@ module PortalArticlesHelper
     {"work"=>"work_title_lookup",
      "artist"=>"artist_lookup",
      "album"=>"album_title_lookup",
-     "recording"=>"recording_title_lookup"}[portal_article.category]
+     "recording"=>"recording_title_lookup",
+     "category"=>"category_lookup"}[portal_article.category]
   end
 end

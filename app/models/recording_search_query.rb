@@ -1,6 +1,8 @@
 class RecordingSearchQuery < SearchQuery 
   def self.query_expressions
-    superclass.query_expressions.merge({ title: :text,
+    superclass.query_expressions.merge({ 
+      title: / title:([:print:]+) /,
+      category: / category:([:print:]+) /,
       recording_date: :date,
       duration: :word,
       recording_location:  :text,

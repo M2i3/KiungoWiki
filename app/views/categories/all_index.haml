@@ -1,0 +1,15 @@
+.page-header
+  = title(t("headers.categories_all_index"))
+
+.row
+  .span11
+    = alpha_links
+
+= paginate @categories
+= render :partial=>"search_result", :object=>@categories
+= paginate @categories
+
+.row
+  .span11
+    = alpha_links
+

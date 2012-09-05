@@ -40,9 +40,10 @@
               %li= link_to "Oeuvres", portal_works_path
               %li= link_to "Enregistrements", portal_recordings_path
               %li= link_to "Albums", portal_albums_path
+              %li= link_to "Catégories", portal_categories_path
 
             %ul.nav.profile.pull-right
-              - if ["search", "home", "artists", "works", "recordings", "albums"].include?(params[:controller]) 
+              - if ["search", "home", "artists", "works", "recordings", "albums", "categories"].include?(params[:controller]) 
                 %li
                   %form.navbar-search{:action=>search_url}
                     %input.search-query.span2{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/

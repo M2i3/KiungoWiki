@@ -1,0 +1,8 @@
+.page-header
+  = title(t("headers.categories_recent_changes"))
+
+= paginate @categories
+= render :partial=>"search_result", :object=>@categories
+= paginate @categories
+
+
