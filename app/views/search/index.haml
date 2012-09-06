@@ -38,12 +38,3 @@
     = t("search_question")
     = link_to t("new"), new_album_path(:q=>params[:q]), :class=>"btn"
 
-.row
-  .span12
-    %h2 Catégories
-    = render :partial=>"categories/search_result", :object=>@categories
-    - unless @categories.last_page? 
-      .well= link_to_unless @categories.last_page?, "plus de résultats", recordings_path(:page=>@categories.current_page + 1, :q=>params[:q])
-    = t("search_question")
-    = link_to t("new"), new_category_path(:q=>params[:q]), :class=>"btn"
-
