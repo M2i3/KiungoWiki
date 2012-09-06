@@ -1,0 +1,12 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th= Category.human_attribute_name("category")
+    %tbody
+      - search_result.each do |category|
+        %tr
+          %td
+            = category.category_name
+
+
+

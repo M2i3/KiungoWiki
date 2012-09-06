@@ -1,0 +1,13 @@
+= title(@category.category_name)
+
+.row
+  = render :partial=>'links'
+  .span12
+    .section.summary
+      %p
+        = Album.human_attribute_name("category")
+        \: #{@category.category_name}
+
+
+  
+
