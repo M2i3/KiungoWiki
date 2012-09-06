@@ -6,7 +6,7 @@
       - search_result.each do |category|
         %tr
           %td
-            = category.category_name
+            = link_to category.category_name, category_path(category)
 
 
 
