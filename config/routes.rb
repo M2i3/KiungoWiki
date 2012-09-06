@@ -45,6 +45,13 @@ KiungoWiki::Application.routes.draw do
     end
   end
 
+  resources :categories do
+    collection do
+      get 'lookup'
+      get 'search'
+    end
+  end
+
   match 'search' => 'search#index'
   match 'site_plan' => "home#site_plan"
 
