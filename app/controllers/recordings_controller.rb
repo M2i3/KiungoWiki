@@ -99,7 +99,32 @@ class RecordingsController < ApplicationController
       format.json { 
         render :json=>(Recording.queried(params[:q]).limit(20).collect{|r| 
           reference_text = ["oid:#{r.id}"]
-          reference_label = [r.title + " (" + r.duration.to_s + ", " + r.recording_date + ") - " + r.artist_wiki_links.first.name]
+          if ![nil,"","0"].include?(r.duration.to_s)
+            if ![nil,"","0"].include?(r.recording_date)
+              if ![nil,""].include?(r.artist_wiki_links.first)
+                reference_label = [r.title + " (" + r.duration.to_s + ", " + r.recording_date + ") - " + r.artist_wiki_links.first.name(true)]
+              else
+                reference_label = [r.title + " (" + r.duration.to_s + ", " + r.recording_date + ")"] 
+              end
+            else
+              if ![nil,""].include?(r.artist_wiki_links.first)
+                reference_label = [r.title + " (" + r.duration.to_s + ") - " + r.artist_wiki_links.first.name(true)]
+              else
+                reference_label = [r.title + " (" + r.duration.to_s + ")"] 
+              end
+            end
+          else
+            if ![nil,""].include?(r.recording_date)
+              if ![nil,""].include?(r.artist_wiki_links.first)
+                reference_label = [r.title + " (" + r.recording_date + ") - " + r.artist_wiki_links.first.name(true)]
+              else
+                reference_label = [r.title + " (" + r.recording_date + ")"] 
+              end
+            else
+              reference_label = [r.title] 
+            end
+          end
+
           if rsq[:trackNb]
             reference_text << "trackNb:#{rsq[:trackNb]}"
             reference_label << "(#{rsq[:trackNb]})"
