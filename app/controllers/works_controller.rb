@@ -102,7 +102,7 @@ class WorksController < ApplicationController
 
     respond_to do |format|
       format.json { 
-        render :json=>(Work.queried(params[:q]).limit(20).collect{|w| 
+        render :json=>(Work.queried(wsq.objectq).limit(20).collect{|w|
           
           WorkWikiLink.new(reference_text: "oid:#{w.id} #{wsq.metaq}").combined_link
 
