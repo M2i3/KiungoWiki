@@ -1,33 +1,8 @@
 class CategoriesController < ApplicationController
 
   # only registered users can edit this wiki
-  before_filter :authenticate_user!, :except => [:show, :index, :lookup, :portal, :recent_changes, :search, :categorical_index]
+  before_filter :authenticate_user!, :except => [:show, :lookup, :search]
   authorize_resource
-
-  def index
-    @categories = build_filter_from_params(params, Category.all.order(cache_normalized_name:1))
-
-    respond_to do |format|
-      format.xml { render :xml=>@categories }
-      format.json { render :json=>@categories }
-      format.html
-    end
-  end
-
-  def recent_changes
-    @categories = build_filter_from_params(params, Category.all.order(updated_at:-1))
-  end
-
-  def portal
-    @feature_in_month = PortalArticle.where(:category =>"category", :publish_date.lte => Time.now).order(publish_date:-1).first
-    respond_to do |format|
-      format.html 
-    end      
-  end
-
-  def categorical_index
-    @categories = build_filter_from_params(params, Recording.where(category_wiki_links.first.category_name=>params[:category_name]).order(category_name:1))
-  end
 
   def show
     @category = Category.find(params[:id])

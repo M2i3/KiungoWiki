@@ -1,14 +1,12 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= Category.human_attribute_name("category_name")
-
+      %th= Category.human_attribute_name("category")
     %tbody
-      - if search_result
-        - search_result.each do |category|
-          %tr
-            %td
-              = link_to category.category_name, category_path(category)
+      - search_result.each do |category|
+        %tr
+          %td
+            = link_to category.category_name, category_path(category)
 
 
 

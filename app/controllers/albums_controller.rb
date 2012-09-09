@@ -103,7 +103,15 @@ class AlbumsController < ApplicationController
       format.json { 
         render :json=>(Album.queried(params[:q]).limit(20).collect{|w| 
           reference_text = ["oid:#{w.id}"]
-          reference_label = [w.title + " (" + w.date_released + ") - " + w.artist_wiki_links.first.name]
+          if ![nil,""].include?(w.date_released)
+            if ![nil,""].include?(w.artist_wiki_links.first.name)
+              reference_label = [w.title + " (" + w.date_released + ") - " + w.artist_wiki_links.first.name(true)]
+            else
+              reference_label = [w.title + " (" + w.date_released + ")"]
+            end
+          else
+            reference_label = [w.title]
+          end
           {id: reference_text.join(" "), name: reference_label.join(" ")}               
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }

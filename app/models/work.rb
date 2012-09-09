@@ -65,7 +65,7 @@ class Work
     #puts "there are now #{self.artist_wiki_links.size}"
     #puts "parent changed?? #{self.changed?}"
   end
-  
+
   def recording_wiki_links_text
     recording_wiki_links.collect{|v| v.reference_text }.join(",")
   end

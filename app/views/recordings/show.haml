@@ -19,7 +19,7 @@
         - unless["",nil].include?(@recording.category_wiki_links.first)
           = Recording.human_attribute_name("category")
           \: 
-          #{@recording.category_wiki_links.collect{|v| category_wiki_link_path(v)}.join(', ').html_safe}
+          #{@recording.category_wiki_links.collect{|v| v.category_name}.join(', ').html_safe}
       %p
         - unless["0","",nil].include?(@recording.duration.to_s)
           = Recording.human_attribute_name("duration") 

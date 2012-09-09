@@ -102,7 +102,11 @@ class WorksController < ApplicationController
       format.json { 
         render :json=>(Work.queried(params[:q]).limit(20).collect{|w| 
           reference_text = ["oid:#{w.id}"]
-          reference_label = [w.title + " (" + w.date_written + ")"]
+          if ![nil,""].include?(w.date_written)
+            reference_label = [w.title + " (" + w.date_written + ")"]
+          else
+            reference_label = [w.title]
+          end
           {id: reference_text.join(" "), name: reference_label.join(" ")}               
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }
