@@ -22,7 +22,9 @@ class WorkWikiLink < WikiLink
   end
 
   def object_text
-    self.title.to_s 
+    text = [self.title.to_s]
+    text << "(" + self.date_written + ")" unless self.date_written.blank?
+    text.join(" ")
   end
 
   def relation

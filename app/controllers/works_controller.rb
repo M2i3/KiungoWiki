@@ -98,16 +98,14 @@ class WorksController < ApplicationController
 
   def lookup
 
+    wsq = WorkSearchQuery.new(params[:q])
+
     respond_to do |format|
       format.json { 
         render :json=>(Work.queried(params[:q]).limit(20).collect{|w| 
-          reference_text = ["oid:#{w.id}"]
-          if ![nil,""].include?(w.date_written)
-            reference_label = [w.title + " (" + w.date_written + ")"]
-          else
-            reference_label = [w.title]
-          end
-          {id: reference_text.join(" "), name: reference_label.join(" ")}               
+          
+          WorkWikiLink.new(reference_text: "oid:#{w.id} #{wsq.metaq}").combined_link
+
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }
     end
