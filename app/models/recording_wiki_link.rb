@@ -2,7 +2,7 @@ class RecordingWikiLink < WikiLink
   include Mongoid::Document
 
   set_reference_class Recording, RecordingSearchQuery
-  cache_attributes :title, :recording_date, :duration
+  cache_attributes :title, :recording_date, :duration 
 
   def title_with_objectq
     title_without_objectq.blank? ? self.objectq : title_without_objectq
@@ -22,7 +22,15 @@ class RecordingWikiLink < WikiLink
   end
 
   def object_text
-    self.title.to_s 
+    GroupText.new([
+        self.title.to_s,
+        GroupText.new([
+            GroupText.new([
+                self.duration, self.recording_date], 
+                :sep=>", ", :before_text=>"(", :after_text=>")"), 
+            self.recording && self.recording.first_artist_display_text],
+            :sep=>" - ")],
+        :sep=>" ").to_s
   end
 end
 

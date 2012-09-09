@@ -16,5 +16,9 @@ class RecordingSearchQuery < SearchQuery
   def self.catch_all
     "title"
   end 
+  def self.meta_fields
+    super + [:trackNb, :itemId, :itemSection]
+  end
+
 end
 

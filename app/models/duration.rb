@@ -53,6 +53,10 @@ class Duration
     return d == "0" ? "" : d
   end
 
+  def blank?
+    self.to_s.blank? or self.to_i.blank?
+  end
+
   def serialize(object)
     if object.blank? 
       nil

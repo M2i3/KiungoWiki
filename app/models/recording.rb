@@ -84,6 +84,11 @@ class Recording
     }    
   end
 
+  def first_artist_display_text
+    self.artist_wiki_links.first && self.artist_wiki_links.first.display_text
+
+  end
+
   def album_wiki_links_text
     album_wiki_links.collect{|v| v.reference_text }.join(",")
   end
