@@ -2,6 +2,8 @@ class ArtistWikiLink < WikiLink
   include Mongoid::Document
 
   set_reference_class Artist, ArtistSearchQuery
+  cache_attributes :name, :surname, :given_name, :birth_date, :birth_location
+
 
   accepts_nested_attributes_for :artist
   belongs_to :artist, inverse_of: nil
@@ -13,14 +15,14 @@ class ArtistWikiLink < WikiLink
   def name(exclude_role=false)
     if artist
       case
-        when !self.artist.surname.blank? && !self.artist.given_name.blank?
-          self.artist.surname + ", " + self.artist.given_name
-        when !self.artist.surname.blank?
-          self.artist.surname
-        when !self.artist.given_name.blank?
-          self.artist.given_name
+        when !self.surname.blank? && !self.given_name.blank?
+          self.surname + ", " + self.given_name
+        when !self.surname.blank?
+          self.surname
+        when !self.given_name.blank?
+          self.given_name
         else
-          self.artist.name
+          self.name
       end
     else
       self.objectq
@@ -28,11 +30,17 @@ class ArtistWikiLink < WikiLink
   end
 
   def object_text
-    self.name(true).to_s
-  end
+    text = [self.name(true).to_s]
 
-  def display_text
-    object_text + (self.metaq.empty? ? "" : " (#{self.metaq})")
+    unless self.birth_date.blank? && self.birth_location.blank?
+      birth_text = []
+      birth_text << self.birth_date.year unless self.birth_date.blank?
+      birth_text << self.birth_location unless self.birth_location.blank?
+
+      text << "(" + birth_text.join(", ") + ")"
+    end
+
+    text.join(" ")
   end
 
   def relation
