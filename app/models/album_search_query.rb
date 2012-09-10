@@ -5,9 +5,9 @@ class AlbumSearchQuery < SearchQuery
       date_released: :date,
       label: :text,
       reference_code: :text,
-      trackNb: / trackNb:([0-9]+) /,
-      itemId: / idemId:([0-9a-zA-Z]+) /,
-      itemSection: / itemSection:([A-Z]) /,
+      trackNb: :numeric,
+      itemId: :character,
+      itemSection: :character,
       info: :text
     })
   end

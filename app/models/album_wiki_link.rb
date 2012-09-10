@@ -2,6 +2,7 @@ class AlbumWikiLink < WikiLink
   include Mongoid::Document
 
   set_reference_class Album, AlbumSearchQuery
+  cache_attributes :title, :label, :date_released
 
   def trackNb
     searchref[:trackNb]
@@ -36,7 +37,15 @@ class AlbumWikiLink < WikiLink
   end
 
   def object_text
-    self.title
+    GroupText.new([
+        self.title.to_s,
+        GroupText.new([
+            GroupText.new([
+                 self.date_released], 
+                 :before_text=>"(", :after_text=>")"), 
+            self.album && self.album.first_artist_display_text],
+            :sep=>" - ")],
+        :sep=>" ").to_s
   end
 end
 

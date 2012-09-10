@@ -73,6 +73,10 @@ class SearchQuery
         [/ #{var_name}:"(.+?)" /i, / #{var_name}:(.+?) /i]
       when :date
         [/ #{var_name}:(.+?) /i]
+      when :numeric
+        [/ #{var_name}:([0-9]+?) /i]
+      when :character
+        [/ #{var_name}:([0-9a-zA-Z]?) /i]
       else
         (var_expression.respond_to?(:each) ? var_expression : [var_expression])
     end

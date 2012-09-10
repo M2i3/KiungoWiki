@@ -44,6 +44,9 @@ fr:
     alert: Un instant! Je dois vous avertir!
     notice: Félicitation vous avez réussit!
     work_new_without_query: Veuillez vous assurer que l'oeuvre que vous désirez créer n'existe pas déjà dans le wiki.
+    recording_new_without_query: Veuillez vous assurer que l'enregistrement que vous désirez créer n'existe pas déjà dans le wiki.
+    artist_new_without_query: Veuillez vous assurer que l'artiste que vous désirez créer n'existe pas déjà dans le wiki.
+    album_new_without_query: Veuillez vous assurer que l'album que vous désirez créer n'existe pas déjà dans le wiki.
 
   show: Afficher
   modify: Modifier

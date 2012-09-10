@@ -50,6 +50,10 @@ class Album
       self.artist_wiki_links.build(:reference_text=>q.strip) 
     }    
   end
+
+  def first_artist_display_text
+    self.artist_wiki_links.first && self.artist_wiki_links.first.display_text
+  end
   
   def recording_wiki_links_text
     recording_wiki_links.collect{|v| v.reference_text }.join(",")

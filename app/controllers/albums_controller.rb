@@ -33,7 +33,7 @@ class AlbumsController < ApplicationController
     @album = Album.find(params[:id])
 
     respond_to do |format|
-      format.xml { render :xml=>@recording.to_xml(:except=>[:versions]) }
+      format.xml { render :xml=>@album.to_xml(:except=>[:versions]) }
       format.json { render :json=>@album }
       format.html
     end
@@ -97,22 +97,14 @@ class AlbumsController < ApplicationController
   end
 
   def lookup
-# find an encoding that allows determining it's not really BSON ID
+    asq = AlbumSearchQuery.new(params[:q])
+
     respond_to do |format|
-      #careful here not to allow injection of bad stuff in the regex
       format.json { 
-        render :json=>(Album.queried(params[:q]).limit(20).collect{|w| 
-          reference_text = ["oid:#{w.id}"]
-          if ![nil,""].include?(w.date_released)
-            if ![nil,""].include?(w.artist_wiki_links.first.name)
-              reference_label = [w.title + " (" + w.date_released + ") - " + w.artist_wiki_links.first.name(true)]
-            else
-              reference_label = [w.title + " (" + w.date_released + ")"]
-            end
-          else
-            reference_label = [w.title]
-          end
-          {id: reference_text.join(" "), name: reference_label.join(" ")}               
+        render :json=>(Album.queried(asq.objectq).limit(20).collect{|alb| 
+
+          AlbumWikiLink.new(reference_text: "oid:#{alb.id} #{asq.metaq}").combined_link
+              
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }
     end

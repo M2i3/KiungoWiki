@@ -86,7 +86,6 @@ class Recording
 
   def first_artist_display_text
     self.artist_wiki_links.first && self.artist_wiki_links.first.display_text
-
   end
 
   def album_wiki_links_text
@@ -119,7 +118,7 @@ class Recording
     }    
   end
 
-  def category
+  def category_name
     unless["0","",nil].include?(self.category_wiki_links)
       self.category_wiki_links.collect{|v| v.category_name}.join(', ')
     else
