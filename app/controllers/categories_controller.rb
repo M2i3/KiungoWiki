@@ -69,12 +69,14 @@ class CategoriesController < ApplicationController
   end
 
   def lookup
+    csq = CategorySearchQuery.new(params[:q])
+
     respond_to do |format|
       format.json { 
-        render :json=>(Category.queried(params[:q]).limit(20).collect{|w| 
-          reference_text = ["oid:#{w.id}"]
-          reference_label = [w.category_name ]
-          {id: reference_text.join(" "), name: reference_label.join(" ")}               
+        render :json=>(Category.queried(csq.objectq).limit(20).collect{|cat| 
+
+          CategoryWikiLink.new(reference_text: "oid:#{cat.id} #{csq.metaq}").combined_link
+              
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }
     end

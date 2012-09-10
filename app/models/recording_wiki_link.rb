@@ -28,7 +28,7 @@ class RecordingWikiLink < WikiLink
             GroupText.new([
                 self.duration, self.recording_date], 
                 :sep=>", ", :before_text=>"(", :after_text=>")"), 
-            self.recording && self.recording.first_artist_display_text],
+            self.recording && self.recording.first_artist_object_text],
             :sep=>" - ")],
         :sep=>" ").to_s
   end
