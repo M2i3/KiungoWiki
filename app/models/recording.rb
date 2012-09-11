@@ -150,7 +150,7 @@ class Recording
 
   scope :queried, ->(q) {
     current_query = all
-    rsq = RecordingSearchQuery.new(q)
+    rsq = RecordingWikiLink.search_query(q)
     rsq.filled_query_fields.each {|field|
       case field
         when :title

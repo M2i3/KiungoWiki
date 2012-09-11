@@ -140,6 +140,10 @@ class  WikiLink
 
     end
 
+    def search_query(q)
+      SearchQuery.new(q)
+    end
+
   end # class << self
 
 end
