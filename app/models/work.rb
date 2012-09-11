@@ -30,7 +30,7 @@ class Work
   index({ cache_normalized_title: 1 }, { background: true })
   index({ cache_first_letter: 1, cache_normalized_title: 1 }, { background: true })
 
-  search_in :title, :publisher, {:match => :all}
+  search_in :title, {:match => :all}
 
   validates_presence_of :title
 

@@ -68,7 +68,7 @@ class SearchQuery
   def build_expression(var_name, var_expression)
     case var_expression
       when :word
-        [/ #{var_name}:(.+?) /i]
+        [/ #{var_name}:([a-zA-Z0-9-]+?) /i]
       when :text
         [/ #{var_name}:"(.+?)" /i, / #{var_name}:(.+?) /i]
       when :date
@@ -77,6 +77,8 @@ class SearchQuery
         [/ #{var_name}:([0-9]+?) /i]
       when :character
         [/ #{var_name}:([0-9a-zA-Z]?) /i]
+      when :duration
+        [/ #{var_name}:([0-9]+[:][0-5][0-9]?) /i]
       else
         (var_expression.respond_to?(:each) ? var_expression : [var_expression])
     end

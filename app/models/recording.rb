@@ -85,7 +85,7 @@ class Recording
   end
 
   def first_artist_object_text
-    self.artist_wiki_links.first && self.artist_wiki_links.first.object_text
+    self.artist_wiki_links.first && self.artist_wiki_links.first.name(true)
   end
 
   def album_wiki_links_text
@@ -155,7 +155,7 @@ class Recording
       case field
         when :title
           current_query = current_query.csearch(rsq[field])
-        when :info, :categories
+        when :info, :category_name
           current_query = current_query.where(field=>/#{rsq[field].downcase}/i)
         when :created_at, :duration, :recording_date, :rythm, :update_at
           current_query = current_query.where(field=>rsq[field])        

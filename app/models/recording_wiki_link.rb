@@ -21,6 +21,18 @@ class RecordingWikiLink < WikiLink
     searchref[:itemSection]
   end
 
+  def title
+    (recording && self.recording.title) || self.objectq
+  end
+  
+  def duration
+    (self.recording && self.recording.duration) || ""
+  end
+
+  def recording_date
+    (self.recording && self.recording.recording_date) || ""
+  end
+
   def object_text
     GroupText.new([
         self.title.to_s,

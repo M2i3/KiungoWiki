@@ -45,7 +45,7 @@ class AlbumWikiLink < WikiLink
                  :before_text=>"(", :after_text=>")"), 
             self.album && self.album.first_artist_display_text],
             :sep=>" - ")],
-        :sep=>" ").to_s
+        :sep=>" - ").to_s
   end
 end
 

@@ -21,6 +21,10 @@ class WorkWikiLink < WikiLink
     end
   end
 
+  def date_written
+    (self.work && self.work.date_written) || ""
+  end
+
   def object_text
     text = [self.title.to_s]
     text << "(" + self.date_written + ")" unless self.date_written.blank?

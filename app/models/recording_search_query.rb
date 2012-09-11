@@ -4,7 +4,7 @@ class RecordingSearchQuery < SearchQuery
       title: :text,
       category_name: :text,
       recording_date: :date,
-      duration: :word,
+      duration: :duration,
       recording_location:  :text,
       rythm: :word,
       trackNb: :numeric,
