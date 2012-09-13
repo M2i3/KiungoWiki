@@ -94,13 +94,16 @@ class RecordingsController < ApplicationController
   end
 
   def lookup
-    rsq = RecordingWikiLink.search_query(params[:q])
+    wiki_link_klass = {"artist"=>ArtistRecordingWikiLink, 
+     "album"=>AlbumRecordingWikiLink}[params[:src]] || RecordingWikiLink
+
+    rsq = wiki_link_klass.search_query(params[:q])
 
     respond_to do |format|
       format.json { 
         render :json=>(Recording.queried(rsq.objectq).limit(20).collect{|r| 
 
-          RecordingWikiLink.new(reference_text: "oid:#{r.id} #{rsq.metaq}").combined_link
+          wiki_link_klass.new(reference_text: "oid:#{r.id} #{rsq.metaq}").combined_link
 
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) 
       }

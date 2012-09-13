@@ -47,7 +47,7 @@
             %th= Recording.human_attribute_name("duration")
             %th= Recording.human_attribute_name("artist_wiki_link")
         %tbody
-          - @album.recording_wiki_links.sort{|a,b| [a.itemId.to_i, a.itemSection, a.trackNb.to_i] <=> [b.itemId.to_i, b.itemSection, b.trackNb.to_i] }.each do |rwl|
+          - @album.recording_wiki_links.sort{|a,b| [a.itemId.to_i, a.itemSection.to_s, a.trackNb.to_i] <=> [b.itemId.to_i, b.itemSection.to_s, b.trackNb.to_i] }.each do |rwl|
             %tr
               %td= recording_wiki_link_path(rwl)
               %td= rwl.recording_date

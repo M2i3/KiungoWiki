@@ -32,7 +32,7 @@ class Album
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
 
-  embeds_many :recording_wiki_links, :as=>:linkable
+  embeds_many :recording_wiki_links, :as=>:linkable, :class_name=>"AlbumRecordingWikiLink"
   accepts_nested_attributes_for :recording_wiki_links
   validates_associated :recording_wiki_links
 

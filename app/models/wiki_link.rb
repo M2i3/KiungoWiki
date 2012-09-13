@@ -6,7 +6,7 @@ class  WikiLink
 
   def reference_text=(value)
     self[:reference_text] = value
-    sq = self.class.search_klass.new(value)
+    sq = self.class.search_query(value)
     if sq[:oid]
       if self.referenced.nil? || self.referenced.id.to_s != sq[:oid]
         begin 
@@ -37,7 +37,7 @@ class  WikiLink
   end
 
   def searchref
-    self.class.search_klass.new(self.reference_text)
+    self.class.search_query(self.reference_text)
   end
 
   def metaq  
@@ -141,7 +141,11 @@ class  WikiLink
     end
 
     def search_query(q)
-      SearchQuery.new(q)
+      if self.respond_to?(:search_klass)
+        self.search_klass.new(q)
+      else
+        self::SearchQuery.new(q)
+      end
     end
 
   end # class << self
