@@ -315,7 +315,7 @@ class IncDate < String
   end
 
   def <=>(value)
-    to_date(:month=>1, :day=>1) <=> value.to_date(:month=>1, :day=>1)
+    to_date(:month=>1, :day=>1) <=> self.class.new(value).to_date(:month=>1, :day=>1)
   end
 
 end
