@@ -35,3 +35,8 @@ span.letter:after {
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+
+#footer ul.nav a:hover {
+  color: black;
+  
+}
