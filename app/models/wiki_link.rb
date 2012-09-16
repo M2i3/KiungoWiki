@@ -126,7 +126,7 @@ class  WikiLink
         class_eval <<-EOM
 
           def #{a}
-            self[:c_#{a}] || (referenced && referenced.#{a})
+            self[:c_#{a}] ? c_#{a} : (referenced && referenced.#{a})
           end
 
         EOM
