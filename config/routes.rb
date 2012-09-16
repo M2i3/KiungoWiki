@@ -1,5 +1,7 @@
 KiungoWiki::Application.routes.draw do
 
+  resources :changes
+
   resources :portal_articles
 
   devise_for :users

@@ -1,8 +1,8 @@
 class Work
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Versioning
   include Mongoid::Search
+  include Mongoid::History::Trackable
 
   #
   # basic entity information
@@ -45,6 +45,14 @@ class Work
   embeds_many :work_wiki_links, :as=>:linkable
   accepts_nested_attributes_for :work_wiki_links
   validates_associated :work_wiki_links
+
+  # telling Mongoid::History how you want to track changes
+  track_history   :modifier_field => :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
+                  :version_field => :version,   # adds "field :version, :type => Integer" to track current version, default is :version
+                  :track_create   =>  true,    # track document creation, default is false
+                  :track_update   =>  true,     # track document updates, default is true
+                  :track_destroy  =>  true     # track document destruction, default is false
+
 
   def artist_wiki_links_text
     artist_wiki_links.collect{|v| v.reference_text }.join(",")

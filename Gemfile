@@ -11,6 +11,7 @@ gem "thin"
 
 gem "mongoid"
 gem "bson_ext"
+gem 'mongoid-history'
 
 #gem 'will_paginate', '>=3.0.pre'
 gem 'acts-as-taggable-on'

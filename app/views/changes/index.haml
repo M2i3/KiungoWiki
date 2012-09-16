@@ -1,0 +1,27 @@
+.row      
+  .span12
+    .page-header
+      = title(t("headers.recent_changes"))
+
+.row
+  .span12
+
+    = paginate @changes
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= "Fait le"
+          %th= "Page"
+          %th= "Auteur"
+          %th= "Changement"
+        %tbody
+          - @changes.each do |change|
+            %tr
+              %td= change.updated_at
+              %td= link_to change.display_text, change.trackable
+              %td= change.modifier ? change.modifier.nickname : "anonyme"
+              %td= change_description(change)
+
+    = paginate @changes
+
+

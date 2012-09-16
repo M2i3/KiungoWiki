@@ -1,8 +1,8 @@
 class Recording 
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Versioning
   include Mongoid::Search
+  include Mongoid::History::Trackable
 
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
   field :title, :type => String
@@ -47,6 +47,13 @@ class Recording
   embeds_many :category_wiki_links, :as=>:linkable
   accepts_nested_attributes_for :category_wiki_links
   validates_associated :category_wiki_links
+
+  # telling Mongoid::History how you want to track changes
+  track_history   :modifier_field => :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
+                  :version_field => :version,   # adds "field :version, :type => Integer" to track current version, default is :version
+                  :track_create   =>  true,    # track document creation, default is false
+                  :track_update   =>  true,     # track document updates, default is true
+                  :track_destroy  =>  true     # track document destruction, default is false
 
 
   def save_local_title

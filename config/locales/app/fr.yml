@@ -37,6 +37,7 @@ fr:
     portal_article_category: "Catégorie du mois: %{featured}"
     portal_articles: Articles des portails
     site_plan: Plan du site
+    recent_changes: Changements récents
 
   messages:
     info: Pour votre information.
