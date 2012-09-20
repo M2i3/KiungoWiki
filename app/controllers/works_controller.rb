@@ -15,7 +15,7 @@ class WorksController < ApplicationController
   end
 
   def recent_changes
-    @works = build_filter_from_params(params, Work.all.order(updated_at:-1))
+    redirect_to changes_path(:scope=>"work")
   end
 
   def portal

@@ -15,7 +15,7 @@ class AlbumsController < ApplicationController
   end
 
   def recent_changes
-    @albums = build_filter_from_params(params, Album.all.order(updated_at:-1))
+    redirect_to changes_path(:scope=>"album")
   end
 
   def portal

@@ -13,8 +13,8 @@ class RecordingsController < ApplicationController
     end
   end
   
-  def recent_changes
-    @recordings = build_filter_from_params(params, Recording.all.order(updated_at:-1))
+  def recent_changes    
+    redirect_to changes_path(:scope=>"recording")
   end
 
   def portal

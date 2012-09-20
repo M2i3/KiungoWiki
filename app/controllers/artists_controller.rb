@@ -15,7 +15,7 @@ class ArtistsController < ApplicationController
   end
 
   def recent_changes
-    @artists = build_filter_from_params(params, Artist.all.order(updated_at:-1))
+    redirect_to changes_path(:scope=>"artist")
   end
 
   def portal

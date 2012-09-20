@@ -1,9 +1,9 @@
 class Change
   include Mongoid::History::Tracker
 
-#  field :author
-#  field :comment  
-#  field :version, :type => Integer, :default => 1
+  index({ scope: 1, _id: 1 }, { background: true })
+  index({ scope: 1, association_chain: 1 }, { background: true })
+
 
   def display_text
     wiki_link.display_text
