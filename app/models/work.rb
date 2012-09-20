@@ -131,6 +131,10 @@ class Work
     self.cache_first_letter = self.title_first_letter
   end
 
+  def to_wiki_link
+    WorkWikiLink.new(:reference_text=>"oid:#{self.id}", :work=>self)
+  end
+
   scope :queried, ->(q) {
     current_query = all
     wsq = WorkSearchQuery.new(q)

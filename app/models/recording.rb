@@ -155,6 +155,10 @@ class Recording
     self.cache_first_letter = self.title_first_letter
   end
 
+  def to_wiki_link
+    RecordingWikiLink.new(:reference_text=>"oid:#{self.id}", :recording=>self)
+  end
+
   scope :queried, ->(q) {
     current_query = all
     rsq = RecordingWikiLink.search_query(q)

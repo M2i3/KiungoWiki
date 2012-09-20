@@ -187,6 +187,10 @@ class Artist
     self.cache_first_letter = self.name_first_letter
   end
 
+  def to_wiki_link
+    ArtistWikiLink.new(:reference_text=>"oid:#{self.id}", :artist=>self)
+  end
+
   scope :born_during_month_of, ->(month) {
     self.where(:birth_date=>/.*\-#{"%02d"%(month)}\-.*/)
   }

@@ -30,7 +30,7 @@
         %ul 
           %li 
             - Album.order_by(:updated_at=>:desc).limit(5).all.each do |album|
-              %span.album>= link_to album.title, album_path(album.id)
+              %span.album>= link_to album.to_wiki_link.display_text, album_path(album.id)
               ;&nbsp;
             = link_to "...", recent_changes_albums_path, :title=>"consulter la liste complète des modifications récentes"
           %li= link_to "consulter la liste complète des albums modifiés récemment", recent_changes_albums_path
@@ -50,7 +50,7 @@
         %li 
           %span.letter= heading
           - Album.where(:cache_first_letter => letter).order(updated_at:1).limit(5).each do |album|
-            %span.album>= link_to album.title, album_path(album.id)
+            %span.album>= link_to album.to_wiki_link.display_text, album_path(album.id)
             ;&nbsp;
           = link_to "...", alphabetic_albums_path(letter: letter, page: 1), :title=>"consulter la liste complète des albums commençant par \"#{letter}\""
       %li= link_to "tous les albums", albums_path(page: 1)

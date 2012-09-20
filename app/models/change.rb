@@ -18,7 +18,7 @@ class Change
   end
 
   def wiki_link
-    (self.trackable.class.to_s + "WikiLink").constantize.new(:reference_text=>"oid:#{self.trackable.id}")
+    self.trackable.to_wiki_link
   end
 
 end

@@ -105,6 +105,10 @@ class Album
     self.cache_normalized_title = self.normalized_title
     self.cache_first_letter = self.title_first_letter
   end
+
+  def to_wiki_link
+    AlbumWikiLink.new(:reference_text=>"oid:#{self.id}", :album=>self)
+  end
   
   scope :queried, ->(q) {
     current_query = all

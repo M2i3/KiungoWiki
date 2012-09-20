@@ -30,7 +30,6 @@ class  WikiLink
 
   def referenced=(obj)
     self.send("#{self.class.reference_field}=".to_sym, obj)
-    update_cached_attributes
   end
   def referenced
     self.send(self.class.reference_field.to_sym)

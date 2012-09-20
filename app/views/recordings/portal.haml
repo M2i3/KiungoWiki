@@ -30,7 +30,7 @@
         %ul 
           %li 
             - Recording.order_by(:updated_at=>:desc).limit(5).all.each do |recording|
-              %span.recording>= link_to recording.title, recording_path(recording.id)
+              %span.recording>= link_to recording.to_wiki_link.display_text, recording_path(recording.id)
               ;&nbsp;
             = link_to "...", recent_changes_recordings_path, :title=>"consulter la liste complète des modifications récentes"
           %li= link_to "consulter la liste complète des enregistrements modifiés récemment", recent_changes_recordings_path
@@ -51,7 +51,7 @@
         %li 
           %span.letter= heading
           - Recording.where(:cache_first_letter => letter).order(updated_at:1).limit(5).each do |recording|
-            %span.recording>= link_to recording.title, recording_path(recording.id)
+            %span.recording>= link_to recording.to_wiki_link.display_text, recording_path(recording.id)
             ;&nbsp;
           = link_to "...", alphabetic_recordings_path(letter: letter, page: 1), :title=>"consulter la liste complète des enregistrements commençant par \"#{letter}\""
       %li= link_to "tous les enregistrements", recordings_path(page: 1)
