@@ -20,10 +20,6 @@ class  WikiLink
     end
   end
 
-  def role
-    searchref[:role]
-  end
-
   def combined_link
     {id: self.reference_text.to_s, name: self.display_text}
   end 
@@ -41,6 +37,9 @@ class  WikiLink
 
   def metaq  
     self.searchref.metaq
+  end
+  def metaq=(text)
+    self.reference_text = [self.objectq, text].join(" ")
   end
 
   def objectq  
