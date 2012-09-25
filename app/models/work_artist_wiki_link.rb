@@ -1,4 +1,4 @@
-class ArtistRecordingWikiLink < RecordingWikiLink
+class WorkArtistWikiLink < ArtistWikiLink
   include Mongoid::Document
 
   def role

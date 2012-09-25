@@ -32,15 +32,15 @@ class Recording
 #  validates_format_of :recording_date_text, :with=>/^(\d{4})(?:-?(\d{0,2})(?:-?(\d{0,2}))?)?$/, :allow_nil=>true
   validates_numericality_of :rythm, :greater_than=>0, :allow_nil=>true
 
-  embeds_one :work_wiki_link, :as=>:linkable
+  embeds_one :work_wiki_link, :as=>:linkable, :class_name=>"RecordingWorkWikiLink"
   validates_associated :work_wiki_link  
   accepts_nested_attributes_for :work_wiki_link
 
-  embeds_many :artist_wiki_links, :as=>:linkable
+  embeds_many :artist_wiki_links, :as=>:linkable, :class_name=>"RecordingArtistWikiLink"
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
 
-  embeds_many :album_wiki_links, :as=>:linkable
+  embeds_many :album_wiki_links, :as=>:linkable, :class_name=>"RecordingAlbumWikiLink"
   accepts_nested_attributes_for :album_wiki_links
   validates_associated :album_wiki_links
 
@@ -56,9 +56,6 @@ class Recording
                   :track_destroy  =>  true     # track document destruction, default is false
 
 
-  def save_local_title
-    self[:title] = self.work_wiki_link.display_text 
-  end
 
   def album_title
     self.album_wiki_link.title 
@@ -85,7 +82,7 @@ class Recording
   end
 
   def artist_wiki_links_text=(value)
-    self.artist_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
+    self.artist_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
     value.split(",").each{|q| 
       self.artist_wiki_links.build(:reference_text=>q.strip) 
     }    
@@ -104,7 +101,7 @@ class Recording
   end
 
   def album_wiki_links_text=(value)
-    self.album_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.album_wiki_links.clear does not work
+    self.album_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.album_wiki_links.clear does not work
     value.split(",").each{|q| 
       self.album_wiki_links.build(:reference_text=>q.strip) 
     }    
@@ -119,7 +116,7 @@ class Recording
   end
 
   def category_wiki_links_text=(value)
-    self.category_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.album_wiki_links.clear does not work
+    self.category_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.album_wiki_links.clear does not work
     value.split(",").each{|q| 
       self.category_wiki_links.build(:reference_text=>q.strip) 
     }    
@@ -150,7 +147,7 @@ class Recording
   end
 
   def update_cached_fields
-    self.save_local_title
+    self[:title] = self.work_wiki_link.display_text 
     self.cache_normalized_title = self.normalized_title
     self.cache_first_letter = self.title_first_letter
   end

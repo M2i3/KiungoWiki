@@ -10,7 +10,7 @@
   %dt= form.label :reference_code
   %dd= form.text_field :reference_code
   %dt= form.label :artist_wiki_links_text
-  %dd= form.text_field :artist_wiki_links_text, :class=>"artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
+  %dd= form.text_field :artist_wiki_links_text, :class=>"album_artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
   %dt= form.label :recording_wiki_links_text
   %dd= form.text_field :recording_wiki_links_text, :class=>"album_recordings_title_lookup", :"data-pre"=>form.object.recording_wiki_links_combined_links_renamed.to_json
   %dt= form.label :info

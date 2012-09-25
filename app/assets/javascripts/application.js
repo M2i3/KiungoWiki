@@ -55,9 +55,7 @@ $(document).ready(function(){
 
 $(document).ready(function () {
 
-  $("input.work_title_lookup").tokenInput("/works/lookup.json", {
-     tokenLimit: 1,
-     classes: {
+  default_classes = {
           tokenList: "token-input-list",
           token: "token-input-token",
           tokenDelete: "token-input-delete-token",
@@ -68,176 +66,115 @@ $(document).ready(function () {
           dropdownItem2: "token-input-dropdown-item2",
           selectedDropdownItem: "token-input-selected-dropdown-item",
           inputToken: "token-input-input-token"
-      }  
+      };
+
+
+  /* 
+    Work === Work === Work === Work === Work === Work === Work === Work === Work === Work
+  */
+  $("input.work_title_lookup").tokenInput("/works/lookup.json", {
+     tokenLimit: 1,
+     classes: default_classes
   });
   
   $("input.works_title_lookup").tokenInput("/works/lookup.json", {
-     classes: {
-          tokenList: "token-input-list",
-          token: "token-input-token",
-          tokenDelete: "token-input-delete-token",
-          selectedToken: "token-input-selected-token",
-          highlightedToken: "token-input-highlighted-token",
-          dropdown: "token-input-dropdown",
-          dropdownItem: "token-input-dropdown-item",
-          dropdownItem2: "token-input-dropdown-item2",
-          selectedDropdownItem: "token-input-selected-dropdown-item",
-          inputToken: "token-input-input-token"
-      }  
+     classes: default_classes
   });
 
+  $("input.artist_works_title_lookup").tokenInput("/works/lookup.json?src=artist", {
+     classes: default_classes
+  });
+
+  $("input.recording_works_title_lookup").tokenInput("/works/lookup.json?src=recording", {
+     classes: default_classes
+  });
+
+  $("input.work_works_title_lookup").tokenInput("/works/lookup.json?src=work", {
+     classes: default_classes
+  });
+
+  /*
+    Artist === Artist === Artist === Artist === Artist === Artist === Artist === Artist
+  */
   $("input.artist_lookup").tokenInput("/artists/lookup.json", {
      tokenLimit: 1,
-     classes: {
-          tokenList: "token-input-list",
-          token: "token-input-token",
-          tokenDelete: "token-input-delete-token",
-          selectedToken: "token-input-selected-token",
-          highlightedToken: "token-input-highlighted-token",
-          dropdown: "token-input-dropdown",
-          dropdownItem: "token-input-dropdown-item",
-          dropdownItem2: "token-input-dropdown-item2",
-          selectedDropdownItem: "token-input-selected-dropdown-item",
-          inputToken: "token-input-input-token"
-      }  
+     classes: default_classes
   });
 
   $("input.artists_lookup").tokenInput("/artists/lookup.json", {
-     classes: {
-          tokenList: "token-input-list",
-          token: "token-input-token",
-          tokenDelete: "token-input-delete-token",
-          selectedToken: "token-input-selected-token",
-          highlightedToken: "token-input-highlighted-token",
-          dropdown: "token-input-dropdown",
-          dropdownItem: "token-input-dropdown-item",
-          dropdownItem2: "token-input-dropdown-item2",
-          selectedDropdownItem: "token-input-selected-dropdown-item",
-          inputToken: "token-input-input-token"
-      }  
+     classes: default_classes
   });
 
+  $("input.album_artists_lookup").tokenInput("/artists/lookup.json?src=album", {
+     classes: default_classes
+  });
+
+  $("input.artist_artists_lookup").tokenInput("/artists/lookup.json?src=artist", {
+     classes: default_classes
+  });
+
+  $("input.recording_artists_lookup").tokenInput("/artists/lookup.json?src=recording", {
+     classes: default_classes
+  });
+
+  $("input.work_artists_lookup").tokenInput("/artists/lookup.json?src=work", {
+     classes: default_classes
+  });
+
+  /*
+    Album === Album === Album === Album === Album === Album === Album === Album === Album
+  */
   $("input.album_title_lookup").tokenInput("/albums/lookup.json", {
      tokenLimit: 1,
-     classes: {
-          tokenList: "token-input-list",
-          token: "token-input-token",
-          tokenDelete: "token-input-delete-token",
-          selectedToken: "token-input-selected-token",
-          highlightedToken: "token-input-highlighted-token",
-          dropdown: "token-input-dropdown",
-          dropdownItem: "token-input-dropdown-item",
-          dropdownItem2: "token-input-dropdown-item2",
-          selectedDropdownItem: "token-input-selected-dropdown-item",
-          inputToken: "token-input-input-token"
-      }  
+     classes: default_classes
   });
   
   $("input.albums_title_lookup").tokenInput("/albums/lookup.json", {
-     classes: {
-          tokenList: "token-input-list",
-          token: "token-input-token",
-          tokenDelete: "token-input-delete-token",
-          selectedToken: "token-input-selected-token",
-          highlightedToken: "token-input-highlighted-token",
-          dropdown: "token-input-dropdown",
-          dropdownItem: "token-input-dropdown-item",
-          dropdownItem2: "token-input-dropdown-item2",
-          selectedDropdownItem: "token-input-selected-dropdown-item",
-          inputToken: "token-input-input-token"
-      }  
+     classes: default_classes
   });
 
+  $("input.artist_albums_title_lookup").tokenInput("/albums/lookup.json?src=artist", {
+     classes: default_classes
+  });
+
+  $("input.recording_albums_title_lookup").tokenInput("/albums/lookup.json?src=recording", {
+     classes: default_classes
+  });
+
+  /* 
+    Recording === Recording === Recording === Recording === Recording === Recording === Recording
+  */
   $("input.recording_title_lookup").tokenInput("/recordings/lookup.json", {
      tokenLimit: 1,
-     classes: {
-          tokenList: "token-input-list",
-          token: "token-input-token",
-          tokenDelete: "token-input-delete-token",
-          selectedToken: "token-input-selected-token",
-          highlightedToken: "token-input-highlighted-token",
-          dropdown: "token-input-dropdown",
-          dropdownItem: "token-input-dropdown-item",
-          dropdownItem2: "token-input-dropdown-item2",
-          selectedDropdownItem: "token-input-selected-dropdown-item",
-          inputToken: "token-input-input-token"
-      }  
+     classes: default_classes
   });
   
   $("input.recordings_title_lookup").tokenInput("/recordings/lookup.json", {
-     classes: {
-          tokenList: "token-input-list",
-          token: "token-input-token",
-          tokenDelete: "token-input-delete-token",
-          selectedToken: "token-input-selected-token",
-          highlightedToken: "token-input-highlighted-token",
-          dropdown: "token-input-dropdown",
-          dropdownItem: "token-input-dropdown-item",
-          dropdownItem2: "token-input-dropdown-item2",
-          selectedDropdownItem: "token-input-selected-dropdown-item",
-          inputToken: "token-input-input-token"
-      }  
+     classes: default_classes
   });
 
   $("input.album_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=album", {
-     classes: {
-          tokenList: "token-input-list",
-          token: "token-input-token",
-          tokenDelete: "token-input-delete-token",
-          selectedToken: "token-input-selected-token",
-          highlightedToken: "token-input-highlighted-token",
-          dropdown: "token-input-dropdown",
-          dropdownItem: "token-input-dropdown-item",
-          dropdownItem2: "token-input-dropdown-item2",
-          selectedDropdownItem: "token-input-selected-dropdown-item",
-          inputToken: "token-input-input-token"
-      }  
+     classes: default_classes
   });
 
   $("input.artist_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=artist", {
-     classes: {
-          tokenList: "token-input-list",
-          token: "token-input-token",
-          tokenDelete: "token-input-delete-token",
-          selectedToken: "token-input-selected-token",
-          highlightedToken: "token-input-highlighted-token",
-          dropdown: "token-input-dropdown",
-          dropdownItem: "token-input-dropdown-item",
-          dropdownItem2: "token-input-dropdown-item2",
-          selectedDropdownItem: "token-input-selected-dropdown-item",
-          inputToken: "token-input-input-token"
-      }  
+     classes: default_classes
   });
 
+  $("input.artist_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=work", {
+     classes: default_classes
+  });
+
+  /*
+    Category === Category === Category === Category === Category === Category === Category
+  */
   $("input.category_lookup").tokenInput("/categories/lookup.json", {
      tokenLimit: 1,
-     classes: {
-          tokenList: "token-input-list",
-          token: "token-input-token",
-          tokenDelete: "token-input-delete-token",
-          selectedToken: "token-input-selected-token",
-          highlightedToken: "token-input-highlighted-token",
-          dropdown: "token-input-dropdown",
-          dropdownItem: "token-input-dropdown-item",
-          dropdownItem2: "token-input-dropdown-item2",
-          selectedDropdownItem: "token-input-selected-dropdown-item",
-          inputToken: "token-input-input-token"
-      }  
+     classes: default_classes
   });
 
   $("input.categories_lookup").tokenInput("/categories/lookup.json", {
-     classes: {
-          tokenList: "token-input-list",
-          token: "token-input-token",
-          tokenDelete: "token-input-delete-token",
-          selectedToken: "token-input-selected-token",
-          highlightedToken: "token-input-highlighted-token",
-          dropdown: "token-input-dropdown",
-          dropdownItem: "token-input-dropdown-item",
-          dropdownItem2: "token-input-dropdown-item2",
-          selectedDropdownItem: "token-input-selected-dropdown-item",
-          inputToken: "token-input-input-token"
-      }  
+     classes: default_classes
   });
 
 });

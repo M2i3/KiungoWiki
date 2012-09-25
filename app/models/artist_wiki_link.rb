@@ -50,11 +50,5 @@ class ArtistWikiLink < WikiLink
     def self.catch_all
       "name"
     end 
- #   def self.meta_fields
- #     super + [:role]
- #   end
   end
 end
-
-#        role: :text,
-#       relation: :text

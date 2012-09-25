@@ -94,8 +94,9 @@ class RecordingsController < ApplicationController
   end
 
   def lookup
-    wiki_link_klass = {"artist"=>ArtistRecordingWikiLink, 
-     "album"=>AlbumRecordingWikiLink}[params[:src]] || RecordingWikiLink
+    wiki_link_klass = { "artist"=>ArtistRecordingWikiLink, 
+                        "album"=>AlbumRecordingWikiLink,
+                        "work"=>WorkRecordingWikiLink }[params[:src]] || RecordingWikiLink
 
     rsq = wiki_link_klass.search_query(params[:q])
 

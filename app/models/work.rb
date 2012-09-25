@@ -34,15 +34,15 @@ class Work
 
   validates_presence_of :title
 
-  embeds_many :artist_wiki_links, :as=>:linkable
+  embeds_many :artist_wiki_links, :as=>:linkable, :class_name=>"WorkArtistWikiLink"
   validates_associated :artist_wiki_links
   accepts_nested_attributes_for :artist_wiki_links
 
-  embeds_many :recording_wiki_links, :as=>:linkable
+  embeds_many :recording_wiki_links, :as=>:linkable, :class_name=>"WorkRecordingWikiLink"
   accepts_nested_attributes_for :recording_wiki_links
   validates_associated :recording_wiki_links
 
-  embeds_many :work_wiki_links, :as=>:linkable
+  embeds_many :work_wiki_links, :as=>:linkable, :class_name=>"WorkWorkWikiLink"
   accepts_nested_attributes_for :work_wiki_links
   validates_associated :work_wiki_links
 
@@ -137,7 +137,7 @@ class Work
 
   scope :queried, ->(q) {
     current_query = all
-    wsq = WorkSearchQuery.new(q)
+    wsq = WorkWikiLink.search_query(q)
     wsq.filled_query_fields.each {|field|
       case field
         when :title

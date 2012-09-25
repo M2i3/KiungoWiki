@@ -69,7 +69,7 @@ class CategoriesController < ApplicationController
   end
 
   def lookup
-    csq = CategorySearchQuery.new(params[:q])
+    csq = CategoryWikiLink.search_query(params[:q])
 
     respond_to do |format|
       format.json { 

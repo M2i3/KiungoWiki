@@ -64,13 +64,19 @@ class  WikiLink
     }
   end
 
+  def flush_cached_attributes
+    cached_attributes.each{|a| 
+      self.unset(a.to_sym)
+    }
+  end
+
   def cached_attributes
     []
   end
 
   class << self
 
-    def set_reference_class(klass, search_klass = nil)
+    def set_reference_class(klass)
 
       class_eval <<-EOM
         class << self
@@ -84,22 +90,13 @@ class  WikiLink
         end
       EOM
 
-      set_search_class(search_klass) if search_klass
 
       belongs_to klass.to_s.downcase.to_sym, inverse_of: nil
       
     end
 
-    def set_search_class(search_klass)
-
-      class_eval <<-EOM
-        class << self
-          def search_klass
-            #{search_klass}
-          end
-        end
-      EOM
-
+    def search_klass
+      self::SearchQuery
     end
 
     def cache_attributes(*attributes)

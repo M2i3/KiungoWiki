@@ -14,11 +14,11 @@
   %dt= form.label :is_group
   %dd= form.text_field :is_group
   %dt= form.label :artist_wiki_links_text
-  %dd= form.text_field :artist_wiki_links_text, :class=>"artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
+  %dd= form.text_field :artist_wiki_links_text, :class=>"artist_artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
   %dt= form.label :work_wiki_links_text
-  %dd= form.text_field :work_wiki_links_text, :class=>"works_title_lookup", :"data-pre"=>form.object.work_wiki_links_combined_links.to_json
+  %dd= form.text_field :work_wiki_links_text, :class=>"artist_works_title_lookup", :"data-pre"=>form.object.work_wiki_links_combined_links.to_json
   %dt= form.label :album_wiki_links_text
-  %dd= form.text_field :album_wiki_links_text, :class=>"albums_title_lookup", :"data-pre"=>form.object.album_wiki_links_combined_links.to_json
+  %dd= form.text_field :album_wiki_links_text, :class=>"artist_albums_title_lookup", :"data-pre"=>form.object.album_wiki_links_combined_links.to_json
   %dt= form.label :info
   %dd= form.text_area :info, :class=>"span12"
 

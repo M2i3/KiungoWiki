@@ -28,7 +28,7 @@ class Album
 
   validates_presence_of :title
 
-  embeds_many :artist_wiki_links, :as=>:linkable
+  embeds_many :artist_wiki_links, :as=>:linkable, :class_name=>"AlbumArtistWikiLink"
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
 
@@ -112,7 +112,7 @@ class Album
   
   scope :queried, ->(q) {
     current_query = all
-    asq = AlbumSearchQuery.new(q)
+    asq = AlbumWikiLink.search_query(q)
     asq.filled_query_fields.each {|field|
       case field
         when :title

@@ -13,7 +13,7 @@ class AlbumRecordingWikiLink < RecordingWikiLink
     searchref[:itemSection]
   end
 
-  class SearchQuery < RecordingWikiLink::SearchQuery 
+  class SearchQuery < self.superclass::SearchQuery 
     def self.query_expressions
       super.merge({ 
         trackNb: :numeric,

@@ -16,7 +16,7 @@ class Category
 
   scope :queried, ->(q) {
     current_query = all
-    asq = CategorySearchQuery.new(q)
+    asq = CategoryWikiLink.search_query(q)
     asq.filled_query_fields.each {|field|
       case field
         when :category_name, :info

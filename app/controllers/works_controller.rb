@@ -98,13 +98,17 @@ class WorksController < ApplicationController
 
   def lookup
 
-    wsq = WorkSearchQuery.new(params[:q])
+    wiki_link_klass = { "artist"=>ArtistWorkWikiLink, 
+                        "recording"=>RecordingWorkWikiLink,
+                        "work"=>WorkWorkWikiLink }[params[:src]] || WorkWikiLink
+
+    wsq = wiki_link_klass.search_query(params[:q])
 
     respond_to do |format|
       format.json { 
         render :json=>(Work.queried(wsq.objectq).limit(20).collect{|w|
           
-          WorkWikiLink.new(reference_text: "oid:#{w.id} #{wsq.metaq}").combined_link
+          wiki_link_klass.new(reference_text: "oid:#{w.id} #{wsq.metaq}").combined_link
 
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }

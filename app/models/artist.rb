@@ -32,19 +32,19 @@ class Artist
 
   validates_presence_of :surname
 
-  embeds_many :work_wiki_links, :as=>:linkable
+  embeds_many :work_wiki_links, :as=>:linkable, :class_name=>"ArtistWorkWikiLink"
   validates_associated :work_wiki_links
   accepts_nested_attributes_for :work_wiki_links
 
-  embeds_many :album_wiki_links, :as=>:linkable
+  embeds_many :album_wiki_links, :as=>:linkable, :class_name=>"ArtistAlbumWikiLink"
   accepts_nested_attributes_for :album_wiki_links
   validates_associated :album_wiki_links
 
-  embeds_many :recording_wiki_links, :as=>:linkable
+  embeds_many :recording_wiki_links, :as=>:linkable, :class_name=>"ArtistRecordingWikiLink"
   accepts_nested_attributes_for :recording_wiki_links
   validates_associated :recording_wiki_links
 
-  embeds_many :artist_wiki_links, :as=>:linkable
+  embeds_many :artist_wiki_links, :as=>:linkable, :class_name=>"ArtistArtistWikiLink"
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
 
@@ -147,7 +147,7 @@ class Artist
   end
   scope :queried, ->(q) {
     current_query = all
-    asq = ArtistSearchQuery.new(q)
+    asq = ArtistWikiLink.search_query(q)
     asq.filled_query_fields.each {|field|
       case field
         when :name
@@ -162,7 +162,7 @@ class Artist
   }
 
   def grouped_work_wiki_links
-    GroupedWikiLink.new(WorkWikiLink, self.work_wiki_links).groups
+    GroupedWikiLink.new(ArtistWorkWikiLink, self.work_wiki_links).groups
   end
 
   def normalized_name
@@ -187,8 +187,8 @@ class Artist
     self.cache_first_letter = self.name_first_letter
   end
 
-  def to_wiki_link
-    ArtistWikiLink.new(:reference_text=>"oid:#{self.id}", :artist=>self)
+  def to_wiki_link(klass=ArtistWikiLink)
+    klass.new(:reference_text=>"oid:#{self.id}" , :artist=>self)
   end
 
   scope :born_during_month_of, ->(month) {
