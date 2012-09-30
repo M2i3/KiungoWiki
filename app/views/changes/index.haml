@@ -17,9 +17,9 @@
         %tbody
           - @changes.each do |change|
             %tr
-              %td= change.updated_at
+              %td= change.created_at
               %td= link_to change.display_text, change.trackable
-              %td= change.modifier ? change.modifier.nickname : "anonyme"
+              %td= change.modifier_display_text
               %td= change_description(change)
 
     = paginate @changes
