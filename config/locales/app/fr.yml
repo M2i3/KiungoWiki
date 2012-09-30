@@ -132,6 +132,11 @@ fr:
         relation: Relation
         nature: Nature
 
+      change:
+        change_type_text:
+          created: Creation
+          updated: Modification
+
       category:
         category: Catégorie
         category_name: Catégories

@@ -22,6 +22,11 @@ class Change
     self.version == 1 ? :created : :updated
   end
 
+  def change_type_text
+    self.change_type  
+    I18n.t("mongoid.attributes.change.change_type_text.#{self.change_type}")
+  end
+
   def wiki_link
     self.trackable.to_wiki_link
   end

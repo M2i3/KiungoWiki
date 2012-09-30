@@ -20,7 +20,7 @@
               %td= change.created_at
               %td= link_to change.display_text, change.trackable
               %td= change.modifier_display_text
-              %td= change_description(change)
+              %td= change.change_type_text
 
     = paginate @changes
 
