@@ -4,6 +4,7 @@
     %title
       = content_for(:title).blank? ? "KiungoWiki" : content_for(:title) +  " - KiungoWiki"
 
+    %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
     %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
 
     = stylesheet_link_tag "application"
@@ -42,10 +43,9 @@
               %li= link_to "Albums", portal_albums_path
 
             %ul.nav.profile.pull-right
-              - if ["search", "home", "artists", "works", "recordings", "albums"].include?(params[:controller]) 
-                %li
-                  %form.navbar-search{:action=>search_url}
-                    %input.search-query.span2{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
+              %li
+                %form.navbar-search{:action=>search_url}
+                  %input.search-query.span2{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
               %li= link_to "Mon profil", edit_user_registration_path
               - if current_user
                 %li= link_to "Se déconnecter", destroy_user_session_path, :method=>"delete"
