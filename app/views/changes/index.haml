@@ -17,7 +17,7 @@
         %tbody
           - @changes.each do |change|
             %tr
-              %td= change.created_at
+              %td= change.created_at_text
               %td= link_to change.display_text, change.trackable
               %td= change.modifier_display_text
               %td= change.change_type_text

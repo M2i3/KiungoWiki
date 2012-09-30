@@ -18,6 +18,10 @@ class Change
     self.id.generation_time
   end
 
+  def created_at_text
+    self.created_at ? I18n.l(self.created_at, :format=>:default) : ""
+  end
+
   def change_type 
     self.version == 1 ? :created : :updated
   end
