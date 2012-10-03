@@ -43,7 +43,7 @@ class WorksController < ApplicationController
     unless params[:q]
       redirect_to search_works_path, :alert=>t("messages.work_new_without_query")
     else
-      @work = Work.new(WorkSearchQuery.new(params[:q]).to_hash)
+      @work = Work.new(WorkWikiLink.search_query(params[:q]).to_hash)
       respond_to do |format|      
         format.html # new.html.erb
         format.xml  { render :xml => @work }

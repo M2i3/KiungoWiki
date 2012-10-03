@@ -74,12 +74,23 @@ class Work
     #puts "parent changed?? #{self.changed?}"
   end
 
+  def first_artist_object_text
+    self.artist_wiki_links.first && self.artist_wiki_links.first.name(true)
+  end
+
   def recording_wiki_links_text
     recording_wiki_links.collect{|v| v.reference_text }.join(",")
   end
 
   def recording_wiki_links_combined_links
     recording_wiki_links.collect{|v| v.combined_link }
+  end
+
+  def recording_wiki_links_combined_links_renamed
+    mappings = {:title => :name}
+    recording_wiki_links_combined_links.collect do |x|
+      Hash[x.map {|k,v| [mappings[k] || k, v] }]
+    end
   end
 
   def recording_wiki_links_text=(value)

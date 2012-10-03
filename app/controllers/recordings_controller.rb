@@ -41,7 +41,7 @@ class RecordingsController < ApplicationController
     unless params[:q]
       redirect_to search_recordings_path, :alert=>t("messages.recording_new_without_query")
     else
-      @recording = Recording.new(RecordingWikiLink.search_query(params[:q]).to_hash)
+      @recording = Recording.new(:work_wiki_link_text=>params[:q])
       respond_to do |format|      
         format.html # new.html.erb
         format.xml  { render :xml => @recording }

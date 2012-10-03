@@ -43,7 +43,7 @@ class AlbumsController < ApplicationController
     unless params[:q]
       redirect_to search_albums_path, :alert=>t("messages.album_new_without_query")
     else
-      @album = Album.new(AlbumSearchQuery.new(params[:q]).to_hash)
+      @album = Album.new(AlbumWikiLink.search_query(params[:q]).to_hash)
       respond_to do |format|      
         format.html # new.html.erb
         format.xml  { render :xml => @album }

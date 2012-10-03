@@ -20,9 +20,15 @@ class WorkWikiLink < WikiLink
   end
 
   def object_text
-    text = [self.title.to_s]
-    text << "(" + self.date_written + ")" unless self.date_written.blank?
-    text.join(" ")
+    GroupText.new([
+        self.title.to_s,
+        GroupText.new([
+            GroupText.new([
+                self.date_written, self.language_code], 
+                :sep=>", ", :before_text=>"(", :after_text=>")"), 
+            self.work && self.work.first_artist_object_text],
+            :sep=>" - ")],
+        :sep=>" ").to_s
   end
 
   class SearchQuery < ::SearchQuery 

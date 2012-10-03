@@ -161,7 +161,7 @@ $(document).ready(function () {
      classes: default_classes
   });
 
-  $("input.artist_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=work", {
+  $("input.work_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=work", {
      classes: default_classes
   });
 

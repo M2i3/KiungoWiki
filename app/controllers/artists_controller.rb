@@ -42,7 +42,7 @@ class ArtistsController < ApplicationController
     unless params[:q]
       redirect_to search_artists_path, :alert=>t("messages.artist_new_without_query")
     else
-      @artist = Artist.new(ArtistSearchQuery.new(params[:q]).to_hash)
+      @artist = Artist.new(:surname=>params[:q])
       respond_to do |format|      
         format.html # new.html.erb
         format.xml  { render :xml => @artist }

@@ -152,6 +152,7 @@ fr:
         work_name: Oeuvre
         work_title: Titre
         work_wiki_link: Un enregistrement de
+        work_wiki_link_text: Titre de l'oeuvre
         recording_date: Date d'enregistrement
         recording_location: Lieu
         duration: Durée
