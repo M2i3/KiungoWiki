@@ -22,6 +22,10 @@ class ArtistWikiLink < WikiLink
   end
 
   def object_text
+    self.name.to_s
+  end
+
+  def display_text
     text = [self.name.to_s]
 
     unless self.birth_date.blank? && self.birth_location.blank?

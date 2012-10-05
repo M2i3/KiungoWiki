@@ -20,6 +20,10 @@ class WorkWikiLink < WikiLink
   end
 
   def object_text
+    self.title.to_s
+  end
+
+  def display_text
     GroupText.new([
         self.title.to_s,
         GroupText.new([

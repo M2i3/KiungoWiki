@@ -147,7 +147,7 @@ class Recording
   end
 
   def update_cached_fields
-    self[:title] = self.work_wiki_link.display_text 
+    self[:title] = self.work_wiki_link.object_text 
     self.cache_normalized_title = self.normalized_title
     self.cache_first_letter = self.title_first_letter
   end
