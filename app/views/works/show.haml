@@ -70,8 +70,10 @@
 
     %h2= Work.human_attribute_name("lyrics")
     %p=  RedCloth.new(@work.lyrics).to_html.html_safe 
-    %h2= Work.human_attribute_name("info")
-    %p=  RedCloth.new(@work.info).to_html.html_safe 
+
+    - @work.supplementary_sections.each do |ss|
+      %h2= ss.title 
+      = RedCloth.new(ss.content).to_html.html_safe
 
 
     .well 

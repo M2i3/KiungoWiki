@@ -17,7 +17,6 @@ class Work
   field :origworkid, :type => String
   field :is_lyrics_verified, :type => Integer
   field :is_credits_verified, :type => Integer
-  field :info, :type => String, :default => ""
 
   #
   # calculated values so we can index and sort
@@ -45,6 +44,10 @@ class Work
   embeds_many :work_wiki_links, :as=>:linkable, :class_name=>"WorkWorkWikiLink"
   accepts_nested_attributes_for :work_wiki_links
   validates_associated :work_wiki_links
+
+  embeds_many :supplementary_sections, :class_name=>"SupplementarySection"
+  accepts_nested_attributes_for :supplementary_sections
+  validates_associated :supplementary_sections
 
   # telling Mongoid::History how you want to track changes
   track_history   :modifier_field => :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
@@ -153,7 +156,7 @@ class Work
       case field
         when :title
           current_query = current_query.csearch(wsq[field])
-        when :publisher, :copyright, :language_code, :lyrics, :info
+        when :publisher, :copyright, :language_code, :lyrics
           current_query = current_query.where(field=>/#{wsq[field].downcase}/i)
         when :date_written, :created_at, :updated_at
           current_query = current_query.where(field=>wsq[field])        

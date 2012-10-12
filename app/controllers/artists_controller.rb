@@ -43,6 +43,7 @@ class ArtistsController < ApplicationController
       redirect_to search_artists_path, :alert=>t("messages.artist_new_without_query")
     else
       @artist = Artist.new(:surname=>params[:q])
+      @supplementary_section = @artist.supplementary_sections.build
       respond_to do |format|      
         format.html # new.html.erb
         format.xml  { render :xml => @artist }

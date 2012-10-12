@@ -47,8 +47,7 @@ class ArtistWikiLink < WikiLink
         birth_date: :date,
         birth_location: :text,
         death_date: :date,
-        death_location: :text,
-        info: :text 
+        death_location: :text
       })
     end
     def self.catch_all

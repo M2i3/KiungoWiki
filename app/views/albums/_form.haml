@@ -13,6 +13,10 @@
   %dd= form.text_field :artist_wiki_links_text, :class=>"album_artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
   %dt= form.label :recording_wiki_links_text
   %dd= form.text_field :recording_wiki_links_text, :class=>"album_recordings_title_lookup", :"data-pre"=>form.object.recording_wiki_links_combined_links_renamed.to_json
-  %dt= form.label :info
-  %dd= form.text_area :info, :class=>"span12"
+  = form.fields_for :supplementary_sections do |ss|
+    %dt= ss.label "Section Supplémentaire"
+    %dd= ss.text_field :title
+    %dd= ss.text_area :content, :class=>"span12"
+
+  %dt= link_to t("Nouvelle section"), :back, :class=>"btn"
 

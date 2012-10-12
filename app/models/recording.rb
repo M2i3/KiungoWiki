@@ -11,7 +11,6 @@ class Recording
   field :duration, :type => Duration
   field :rythm, :type => Integer
   field :origrecordingid, :type => String
-  field :info, :type => String, :default => ""
 
   #
   # calculated values so we can index and sort
@@ -47,6 +46,10 @@ class Recording
   embeds_many :category_wiki_links, :as=>:linkable
   accepts_nested_attributes_for :category_wiki_links
   validates_associated :category_wiki_links
+
+  embeds_many :supplementary_sections, :class_name=>"SupplementarySection"
+  accepts_nested_attributes_for :supplementary_sections
+  validates_associated :supplementary_sections
 
   # telling Mongoid::History how you want to track changes
   track_history   :modifier_field => :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
@@ -163,7 +166,7 @@ class Recording
       case field
         when :title
           current_query = current_query.csearch(rsq[field])
-        when :info, :category_name
+        when :category_name
           current_query = current_query.where(field=>/#{rsq[field].downcase}/i)
         when :created_at, :duration, :recording_date, :rythm, :update_at
           current_query = current_query.where(field=>rsq[field])        

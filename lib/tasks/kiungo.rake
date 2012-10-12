@@ -6,18 +6,23 @@ namespace :kiungo do
       unless Artist.count == 0 
         puts "There are already artists in the Artist model. Reloading is not possible."
       else
-
+      params = {}
         RawArtist.all.entries.each do |rawArtist|
+        params = {}
           Artist.disable_tracking { 
-            Artist.create!(:birth_location=>rawArtist.birth_location, 
+            params={:birth_location=>rawArtist.birth_location, 
                         :birth_date=>rawArtist.birth_date,
                         :death_location=>rawArtist.death_location, 
                         :death_date=>rawArtist.death_date,
                         :surname=>rawArtist.artist_surname,
                         :given_name=>rawArtist.artist_given_name,
                         :origartistid=>rawArtist.artist_id,
-                        :is_group=>rawArtist.collective,
-                        :info=>rawArtist.notes)
+                        :is_group=>rawArtist.collective
+            }
+            unless ["0","",nil].include?(rawArtist.notes)
+              params[:supplementary_sections]=[SupplementarySection.new({:title=>"Notes biographiques:",:content=>rawArtist.notes})]
+            end
+            Artist.create!(params)
           }
         end # rawArtists.each
         puts "rake stage 1 (artists) count=" + Artist.count.to_s
@@ -36,13 +41,18 @@ namespace :kiungo do
         puts "rake stage 3 (categories) count=" + Category.count.to_s
 
         RawSupport.all.entries.each do |rawSupport|
+        params = {}
+
           params = {:title=>rawSupport.support_title, 
                     :date_released=>rawSupport.date_released,
                     :media_type=>rawSupport.media_type,
                     :reference_code=>rawSupport.reference_code,
                     :number_of_recordings=>rawSupport.number_of_pieces,
-                    :origalbumid=>rawSupport.support_id,
-                    :info=>rawSupport.notes}
+                    :origalbumid=>rawSupport.support_id
+                   }
+          unless ["0","",nil].include?(rawSupport.notes)
+            params[:supplementary_sections]=[SupplementarySection.new({:title=>"Notes:",:content=>rawSupport.notes})]
+          end
           unless["0","",nil].include?(rawSupport.label_id)
             params[:label] = RawLabel.where(:label_id => rawSupport.label_id).first[:label_name]
           end
@@ -56,13 +66,17 @@ namespace :kiungo do
         puts "rake stage 4 (albums) count=" + Album.count.to_s
 
         RawWork.all.entries.each do |rawWork|
+          params = {}
           params = {:title=>rawWork.work_title, 
                     :date_written=>rawWork.date_written,
                     :lyrics=>rawWork.lyrics,
                     :origworkid=>rawWork.work_id,
                     :is_lyrics_verified=>rawWork.verified_text,
-                    :is_credits_verified=>rawWork.verified_credits,
-                    :info=>rawWork.notes}
+                    :is_credits_verified=>rawWork.verified_credits
+                   }
+          unless ["0","",nil].include?(rawWork.notes)
+            params[:supplementary_sections]=[SupplementarySection.new({:title=>"Notes:",:content=>rawWork.notes})]
+          end
           unless ["0","",nil].include?(rawWork.language_id)
             params[:language_code] = RawLanguage.where(:language_id => rawWork.language_id).first[:language_code]
           end
@@ -83,23 +97,25 @@ namespace :kiungo do
           Work.disable_tracking {
             w = Work.create!(params)
           }
-           
-          RawRecording.where(:work_id=>rawWork.work_id).each do |rawRecording|
 
+          RawRecording.where(:work_id=>rawWork.work_id).each do |rawRecording|
+            params = {}
             params = {:recording_date=>rawRecording.recording_date, 
                       :duration=>rawRecording.duration,
                       :rythm=>rawRecording.rythm,
                       :work_wiki_link=>WorkWikiLink.new({:reference_text=>"oid:"+ w.id.to_s,:work_id=>w.id}),
-                      :origrecordingid=>rawRecording.recording_id,
-                      :info=>rawRecording.notes}
-              unless ["0","",nil].include?(rawRecording.category_id)
-                params[:category_wiki_links_text] = RawCategory.where(:category_id => rawRecording.category_id).collect{|cc| "oid:"+Category.where(:origcategoryid => rawRecording.category_id).first.id.to_s}.uniq.join(",")
-              end
-              params[:artist_wiki_links_text] = RawRecordingArtistRoleLink.where(:recording_id=>rawRecording.recording_id).collect {|art|
-               "oid:" + Artist.where(:origartistid => art[:artist_id]).first.id.to_s + " role:" + art.role
-              }.uniq.join(",")
+                      :origrecordingid=>rawRecording.recording_id
+                   }
+            unless ["0","",nil].include?(rawRecording.notes)
+              params[:supplementary_sections]=[SupplementarySection.new({:title=>"Notes:",:content=>rawRecording.notes})]
+            end
+            unless ["0","",nil].include?(rawRecording.category_id)
+              params[:category_wiki_links_text] = RawCategory.where(:category_id => rawRecording.category_id).collect{|cc| "oid:"+Category.where(:origcategoryid => rawRecording.category_id).first.id.to_s}.uniq.join(",")
+            end
+            params[:artist_wiki_links_text] = RawRecordingArtistRoleLink.where(:recording_id=>rawRecording.recording_id).collect {|art|
+               "oid:" + Artist.where(:origartistid => art[:artist_id]).first.id.to_s + " role:" + art.role}.uniq.join(",")
 
-              params[:album_wiki_links_text] = RawRecordingSupportLink.where(:recording_id=>rawRecording.recording_id).collect {|art|
+            params[:album_wiki_links_text] = RawRecordingSupportLink.where(:recording_id=>rawRecording.recording_id).collect {|art|
                "oid:" + Album.where(:origalbumid => art[:support_id]).first.id.to_s + " trackNb:" + art.track +
              " itemId:" + art.support_element_id + " itemSection:" + art.face
               }.uniq.join(",")

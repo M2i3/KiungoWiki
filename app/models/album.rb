@@ -11,7 +11,6 @@ class Album
   field :reference_code, :type => String
   field :number_of_recordings, :type => Integer
   field :origalbumid, :type => String
-  field :info, :type => String, :default => ""
 
   #
   # calculated values so we can index and sort
@@ -35,6 +34,10 @@ class Album
   embeds_many :recording_wiki_links, :as=>:linkable, :class_name=>"AlbumRecordingWikiLink"
   accepts_nested_attributes_for :recording_wiki_links
   validates_associated :recording_wiki_links
+
+  embeds_many :supplementary_sections, :class_name=>"SupplementarySection"
+  accepts_nested_attributes_for :supplementary_sections
+  validates_associated :supplementary_sections
 
   # telling Mongoid::History how you want to track changes
   track_history   :modifier_field => :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
@@ -117,7 +120,7 @@ class Album
       case field
         when :title
           current_query = current_query.csearch(asq[field])
-        when :label, :media_type, :reference_code, :info
+        when :label, :media_type, :reference_code
           current_query = current_query.where(field=>/#{asq[field].downcase}/i)
         when :date_released, :created_at, :updated_at
           current_query = current_query.where(field=>asq[field])        

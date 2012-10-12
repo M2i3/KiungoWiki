@@ -31,8 +31,7 @@ class AlbumWikiLink < WikiLink
         media_type: :text,
         date_released: :date,
         label: :text,
-        reference_code: :text, 
-        info: :text
+        reference_code: :text
       })
     end
     def self.catch_all

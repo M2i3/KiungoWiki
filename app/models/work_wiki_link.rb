@@ -42,8 +42,7 @@ class WorkWikiLink < WikiLink
         lyrics: :text,
         date_written: :date,
         language_code:  :word,
-        publisher: :text,
-        info: :text
+        publisher: :text
       })
 
     end

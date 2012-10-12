@@ -15,7 +15,6 @@ class Artist
   field :death_location, :type => String
   field :origartistid, :type => String
   field :is_group, :type => Integer
-  field :info, :type => String, :default => ""
 
   #
   # calculated values so we can index and sort
@@ -47,6 +46,10 @@ class Artist
   embeds_many :artist_wiki_links, :as=>:linkable, :class_name=>"ArtistArtistWikiLink"
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
+
+  embeds_many :supplementary_sections, :class_name=>"SupplementarySection"
+  accepts_nested_attributes_for :supplementary_sections
+  validates_associated :supplementary_sections
 
   # telling Mongoid::History how you want to track changes
   track_history   :modifier_field => :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
@@ -145,6 +148,7 @@ class Artist
       self.artist_wiki_links.build(:reference_text=>q.strip) 
     }    
   end
+
   scope :queried, ->(q) {
     current_query = all
     asq = ArtistWikiLink.search_query(q)
@@ -152,7 +156,7 @@ class Artist
       case field
         when :name
           current_query = current_query.csearch(asq[field])
-        when :surname, :given_name, :birth_location, :death_location, :info
+        when :surname, :given_name, :birth_location, :death_location
           current_query = current_query.where(field=>/#{asq[field].downcase}/i)
         when :birth_date, :death_date, :created_at, :updated_at
           current_query = current_query.where(field=>asq[field])        

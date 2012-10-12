@@ -33,8 +33,7 @@ class RecordingWikiLink < WikiLink
         recording_date: :date,
         duration: :duration,
         recording_location:  :text,
-        rythm: :word,
-        info: :text
+        rythm: :word
       })
     end
     def self.catch_all
