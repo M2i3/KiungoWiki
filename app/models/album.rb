@@ -88,6 +88,10 @@ class Album
     }    
   end
 
+  def add_supplementary_section
+    self.supplementary_sections << SupplementarySection.new()
+  end
+
   def normalized_title
     self.title.to_s.
       mb_chars.

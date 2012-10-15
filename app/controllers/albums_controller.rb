@@ -44,6 +44,7 @@ class AlbumsController < ApplicationController
       redirect_to search_albums_path, :alert=>t("messages.album_new_without_query")
     else
       @album = Album.new(AlbumWikiLink.search_query(params[:q]).to_hash)
+      @supplementary_section = @album.supplementary_sections.build
       respond_to do |format|      
         format.html # new.html.erb
         format.xml  { render :xml => @album }
@@ -70,6 +71,15 @@ class AlbumsController < ApplicationController
 
   def edit 
     @album = Album.find(params[:id])
+  end 
+
+  def add_supplementary_section
+    @album = Album.find(params[:id])
+    @album.add_supplementary_section
+    respond_to do |format|      
+      format.html { render :action => "edit" }
+      format.xml  { render :xml => @album }
+    end
   end 
 
   def update

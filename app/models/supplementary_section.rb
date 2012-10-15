@@ -3,7 +3,7 @@ class SupplementarySection
 
   before_save :cache_title
 
-  field :title, :type => String
+  field :title, :type => String, :default => ""
   field :publish_date, :type => Date, :default => lambda {DateTime.now}
   field :content, :type => String, :default => ""
 

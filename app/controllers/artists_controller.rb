@@ -72,6 +72,15 @@ class ArtistsController < ApplicationController
     @artist = Artist.find(params[:id])
   end 
 
+  def add_supplementary_section
+    @artist = Artist.find(params[:id])
+    @artist.add_supplementary_section
+    respond_to do |format|      
+      format.html { render :action => "edit" }
+      format.xml  { render :xml => @artist }
+    end
+  end 
+
   def update
     @artist = Artist.find(params[:id])
 		

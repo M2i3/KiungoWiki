@@ -118,6 +118,10 @@ class Work
     }    
   end
 
+  def add_supplementary_section
+    self.supplementary_sections << SupplementarySection.new()
+  end
+
   def language_name
     unless["0","",nil].include?(Language.where(:language_code=>self.language_code).first); 
                 Language.where(:language_code=>self.language_code).first[:language_name_french]; 

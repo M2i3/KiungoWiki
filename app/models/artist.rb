@@ -149,6 +149,10 @@ class Artist
     }    
   end
 
+  def add_supplementary_section
+    self.supplementary_sections << SupplementarySection.new()
+  end
+
   scope :queried, ->(q) {
     current_query = all
     asq = ArtistWikiLink.search_query(q)

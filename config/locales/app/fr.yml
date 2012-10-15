@@ -139,6 +139,7 @@ fr:
         relation: Relation
         nature: Nature
         role: Rôle
+        add_supplementary_section: Ajout d'une section supplémentaire
 
       change:
         change_type_text:
