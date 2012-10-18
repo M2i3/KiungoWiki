@@ -20,9 +20,19 @@ class WorkWikiLink < WikiLink
   end
 
   def object_text
-    text = [self.title.to_s]
-    text << "(" + self.date_written + ")" unless self.date_written.blank?
-    text.join(" ")
+    self.title.to_s
+  end
+
+  def display_text
+    GroupText.new([
+        self.title.to_s,
+        GroupText.new([
+            GroupText.new([
+                self.date_written, self.language_code], 
+                :sep=>", ", :before_text=>"(", :after_text=>")"), 
+            self.work && self.work.first_artist_object_text],
+            :sep=>" - ")],
+        :sep=>" ").to_s
   end
 
   class SearchQuery < ::SearchQuery 
@@ -32,8 +42,7 @@ class WorkWikiLink < WikiLink
         lyrics: :text,
         date_written: :date,
         language_code:  :word,
-        publisher: :text,
-        info: :text
+        publisher: :text
       })
 
     end

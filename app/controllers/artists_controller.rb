@@ -42,7 +42,8 @@ class ArtistsController < ApplicationController
     unless params[:q]
       redirect_to search_artists_path, :alert=>t("messages.artist_new_without_query")
     else
-      @artist = Artist.new(ArtistSearchQuery.new(params[:q]).to_hash)
+      @artist = Artist.new(:surname=>params[:q])
+      @supplementary_section = @artist.supplementary_sections.build
       respond_to do |format|      
         format.html # new.html.erb
         format.xml  { render :xml => @artist }
@@ -69,6 +70,15 @@ class ArtistsController < ApplicationController
 
   def edit
     @artist = Artist.find(params[:id])
+  end 
+
+  def add_supplementary_section
+    @artist = Artist.find(params[:id])
+    @artist.add_supplementary_section
+    respond_to do |format|      
+      format.html { render :action => "edit" }
+      format.xml  { render :xml => @artist }
+    end
   end 
 
   def update

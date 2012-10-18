@@ -14,7 +14,7 @@ class PortalArticle
 
   def title
     if self.featured_wiki_link
-      I18n.t("headers.portal_article_#{self.category}", :featured=>self.featured_wiki_link.display_text)
+      I18n.t("headers.portal_article_#{self.category}", :featured=>self.featured_wiki_link.object_text)
     else
       self[:title]
     end

@@ -22,6 +22,10 @@ class ArtistWikiLink < WikiLink
   end
 
   def object_text
+    self.name.to_s
+  end
+
+  def display_text
     text = [self.name.to_s]
 
     unless self.birth_date.blank? && self.birth_location.blank?
@@ -43,8 +47,7 @@ class ArtistWikiLink < WikiLink
         birth_date: :date,
         birth_location: :text,
         death_date: :date,
-        death_location: :text,
-        info: :text 
+        death_location: :text
       })
     end
     def self.catch_all

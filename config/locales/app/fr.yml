@@ -71,6 +71,8 @@ fr:
     new_general_portal_article: article seulement
 
   views:
+    created_at: Créé le
+    updated_at: Modifié le
     pagination:
       previous: "&laquo; Pr&eacute;c."
       next: "Suiv. &raquo;"
@@ -110,6 +112,7 @@ fr:
 
     attributes:
       album:
+        title: Titre
         artist_wiki_link: Artiste principal
         artist_wiki_links_text: Artiste principal
         recording_wiki_links_text: Enregistrements
@@ -117,20 +120,26 @@ fr:
         media_type: Format
         reference_code: Code de référence
         label: Étiquette
-        info: Notes
 
       artist:
         surname: Nom de famille
         given_name: Prénom
-        info: Notes biographiques
+        name: Nom
+        birth_date: Date de naissance
+        birth_location: Lieu de naissance
+        death_date: Date de décès
+        death_location: Lieu de décès
         is_group: Groupe
         artist_wiki_links_text: Liens groupe-artistes
         work_wiki_links_text: Oeuvres
+        recording_wiki_links_text: Enregistrements
         album_wiki_links_text: Albums
         is_member_of_group: Est membre du groupe
         group_is_composed_of: Membres du groupe
         relation: Relation
         nature: Nature
+        role: Rôle
+        add_supplementary_section: Ajout d'une section supplémentaire
 
       change:
         change_type_text:
@@ -149,9 +158,11 @@ fr:
         content: Contenu
 
       recording:
+        title: Titre
         work_name: Oeuvre
         work_title: Titre
         work_wiki_link: Un enregistrement de
+        work_wiki_link_text: Titre de l'oeuvre
         recording_date: Date d'enregistrement
         recording_location: Lieu
         duration: Durée
@@ -164,11 +175,11 @@ fr:
         artist_wiki_links_text: Artistes
         album_wiki_links: Albums
         album_wiki_links_text: Albums
-        info: Notes
         category: Catégorie
         category_wiki_link: Catégories
         category_wiki_links: Catégories
         category_wiki_links_text: Catégories
+        role: Rôle
 
       work:
         work_wiki_links_text: Oeuvres reliées
@@ -185,7 +196,6 @@ fr:
         original_work: Oeuvre original
         lyrics: Paroles
         chords: Accords
-        info: Notes
         relation: Relation
         nature: Nature
         nature_text:
@@ -207,15 +217,4 @@ fr:
       messages:
         document_not_found: Document introuvable
 
-  attributes:
-    created_at: Créé le
-    updated_at: Modifié le
-    name: Nom
-    surname: Nom
-    given_name: Prénom
-    title: Titre
-    birth_date: Date de naissance
-    birth_location: Lieu de naissance
-    death_date: Date de décès
-    death_location: Lieu de décès
-    role: Rôle
+

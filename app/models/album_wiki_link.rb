@@ -10,6 +10,10 @@ class AlbumWikiLink < WikiLink
   alias_method_chain :title, :objectq
 
   def object_text
+    self.title.to_s
+  end
+
+  def display_text
     GroupText.new([
         self.title.to_s,
         GroupText.new([
@@ -27,8 +31,7 @@ class AlbumWikiLink < WikiLink
         media_type: :text,
         date_released: :date,
         label: :text,
-        reference_code: :text, 
-        info: :text
+        reference_code: :text
       })
     end
     def self.catch_all

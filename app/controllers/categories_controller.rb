@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
     unless params[:q]
       redirect_to search_categories_path, :alert=>t("messages.category_new_without_query")
     else
-      @category = Category.new(CategorySearchQuery.new(params[:q]).to_hash)
+      @category = Category.new(CategoryWikiLink.search_query(params[:q]).to_hash)
       respond_to do |format|      
         format.html # new.html.erb
         format.xml  { render :xml => @category }

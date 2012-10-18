@@ -17,7 +17,6 @@ class Work
   field :origworkid, :type => String
   field :is_lyrics_verified, :type => Integer
   field :is_credits_verified, :type => Integer
-  field :info, :type => String, :default => ""
 
   #
   # calculated values so we can index and sort
@@ -45,6 +44,10 @@ class Work
   embeds_many :work_wiki_links, :as=>:linkable, :class_name=>"WorkWorkWikiLink"
   accepts_nested_attributes_for :work_wiki_links
   validates_associated :work_wiki_links
+
+  embeds_many :supplementary_sections, :class_name=>"SupplementarySection"
+  accepts_nested_attributes_for :supplementary_sections
+  validates_associated :supplementary_sections
 
   # telling Mongoid::History how you want to track changes
   track_history   :modifier_field => :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
@@ -74,12 +77,23 @@ class Work
     #puts "parent changed?? #{self.changed?}"
   end
 
+  def first_artist_object_text
+    self.artist_wiki_links.first && self.artist_wiki_links.first.name(true)
+  end
+
   def recording_wiki_links_text
     recording_wiki_links.collect{|v| v.reference_text }.join(",")
   end
 
   def recording_wiki_links_combined_links
     recording_wiki_links.collect{|v| v.combined_link }
+  end
+
+  def recording_wiki_links_combined_links_renamed
+    mappings = {:title => :name}
+    recording_wiki_links_combined_links.collect do |x|
+      Hash[x.map {|k,v| [mappings[k] || k, v] }]
+    end
   end
 
   def recording_wiki_links_text=(value)
@@ -102,6 +116,10 @@ class Work
     value.split(",").uniq.each{|q| 
       self.work_wiki_links.build(:reference_text=>q.strip) 
     }    
+  end
+
+  def add_supplementary_section
+    self.supplementary_sections << SupplementarySection.new()
   end
 
   def language_name
@@ -142,7 +160,7 @@ class Work
       case field
         when :title
           current_query = current_query.csearch(wsq[field])
-        when :publisher, :copyright, :language_code, :lyrics, :info
+        when :publisher, :copyright, :language_code, :lyrics
           current_query = current_query.where(field=>/#{wsq[field].downcase}/i)
         when :date_written, :created_at, :updated_at
           current_query = current_query.where(field=>wsq[field])        

@@ -90,8 +90,9 @@
               %td= awl.media_type
               %td= awl.label
 
-    %h2= Artist.human_attribute_name("info")
-    %p=  RedCloth.new(@artist.info).to_html.html_safe 
+    - @artist.supplementary_sections.each do |ss|
+      %h2= ss.title 
+      = RedCloth.new(ss.content).to_html.html_safe
 
     .well 
       = content_tag(:small, Artist.human_attribute_name("updated_at") + " " + @artist.updated_at.to_s)

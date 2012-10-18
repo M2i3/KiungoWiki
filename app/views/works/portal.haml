@@ -30,7 +30,7 @@
         %ul 
           %li 
             - Work.order_by(:updated_at=>:desc).limit(5).all.each do |work|
-              %span.work>= link_to work.to_wiki_link.display_text, work_path(work.id)
+              %span.work>= link_to work.to_wiki_link.object_text, work_path(work.id)
               ;&nbsp;
             = link_to "...", recent_changes_works_path, :title=>"consulter la liste complète des modifications récentes"
           %li= link_to "consulter la liste complète des oeuvres modifiées récemment", recent_changes_works_path
@@ -52,7 +52,7 @@
         %li 
           %span.letter= heading
           - Work.where(:cache_first_letter => letter).order(updated_at:1).limit(5).each do |work|
-            %span.work>= link_to work.to_wiki_link.display_text, work_path(work.id)
+            %span.work>= link_to work.to_wiki_link.object_text, work_path(work.id)
             ;&nbsp;
           = link_to "...", alphabetic_works_path(letter: letter, page: 1), :title=>"consulter la liste complète des oeuvres commençant par \"#{letter}\""
       %li= link_to "toutes les oeuvres", works_path(page: 1)

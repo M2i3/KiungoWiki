@@ -43,7 +43,8 @@ class WorksController < ApplicationController
     unless params[:q]
       redirect_to search_works_path, :alert=>t("messages.work_new_without_query")
     else
-      @work = Work.new(WorkSearchQuery.new(params[:q]).to_hash)
+      @work = Work.new(WorkWikiLink.search_query(params[:q]).to_hash)
+      @supplementary_section = @work.supplementary_sections.build
       respond_to do |format|      
         format.html # new.html.erb
         format.xml  { render :xml => @work }
@@ -70,6 +71,15 @@ class WorksController < ApplicationController
 
   def edit 
     @work = Work.find(params[:id])
+  end 
+
+  def add_supplementary_section
+    @work = Work.find(params[:id])
+    @work.add_supplementary_section
+    respond_to do |format|      
+      format.html { render :action => "edit" }
+      format.xml  { render :xml => @work }
+    end
   end 
 
   def update

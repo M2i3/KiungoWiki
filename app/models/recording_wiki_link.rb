@@ -10,6 +10,10 @@ class RecordingWikiLink < WikiLink
   alias_method_chain :title, :objectq
 
   def object_text
+    self.title.to_s
+  end
+
+  def display_text
     GroupText.new([
         self.title.to_s,
         GroupText.new([
@@ -29,8 +33,7 @@ class RecordingWikiLink < WikiLink
         recording_date: :date,
         duration: :duration,
         recording_location:  :text,
-        rythm: :word,
-        info: :text
+        rythm: :word
       })
     end
     def self.catch_all
