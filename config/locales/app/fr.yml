@@ -60,6 +60,7 @@ fr:
   birth: Naissance
   death: Décès
   search_question: Vous n’avez pas trouvé ce que vous cherchiez ?
+  delete: Supprimer
 
   actions:
     new_portal_article: Nouvel article
