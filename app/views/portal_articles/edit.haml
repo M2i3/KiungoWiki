@@ -15,6 +15,7 @@
       = render :partial=>'form', :object=>f
       .formActions
         = f.submit :class=>"btn btn-primary"
+        #{link_to t("delete"), @portal_article, :method=>:delete, :class=>'btn'} 
         ou #{link_to t("cancel"), :back, :class=>"btn"}
 
 

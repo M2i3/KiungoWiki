@@ -13,9 +13,9 @@ KiungoWiki::Application.routes.draw do
       get 'letter_:letter', :action=>"alphabetic_index", :as=>:alphabetic
       get 'recent_changes' #, :action=>"recent_changes", :recent_changes=>1, :as=>:recent_changes
       get 'search'
+    end
+    member do
       get 'add_supplementary_section'
-      get 'show'
-      get 'edit'
     end
   end
 
@@ -27,9 +27,9 @@ KiungoWiki::Application.routes.draw do
       get 'recent_changes' #, :action=>"recent_changes", :recent_changes=>1, :as=>:recent_changes
       get 'search'
       get 'list'
+    end
+    member do
       get 'add_supplementary_section'
-      get 'show'
-      get 'edit'
     end
   end
 
@@ -40,9 +40,9 @@ KiungoWiki::Application.routes.draw do
       get 'letter_:letter', :action=>"alphabetic_index", :as=>:alphabetic
       get 'recent_changes' #, :action=>"recent_changes", :recent_changes=>1, :as=>:recent_changes
       get 'search'
+    end
+    member do
       get 'add_supplementary_section'
-      get 'show'
-      get 'edit'
     end
   end
   
@@ -53,9 +53,9 @@ KiungoWiki::Application.routes.draw do
       get 'letter_:letter', :action=>"alphabetic_index", :as=>:alphabetic
       get 'recent_changes' #, :action=>"recent_changes", :recent_changes=>1, :as=>:recent_changes
       get 'search'
+    end
+    member do
       get 'add_supplementary_section'
-      get 'show'
-      get 'edit'
     end
   end
 
