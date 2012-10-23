@@ -1,0 +1,4 @@
+%ul#pageactions.nav.nav-tabs.pull-right
+  %li{:class =>current_page_classes(:action=>"show")}= link_to t("show"), collection_item_path(@item)
+  %li{:class =>current_page_classes(:action=>"edit")}= link_to t("modify"), edit_collection_item_path(@item)
+  %li= link_to t("delete"), collection_item_path(@item), :method=>:delete, :confirm=>"Continue with the deletion?"

@@ -50,22 +50,7 @@ class User
 
   field :groups, :type=>Array, :default=>["user"]
 
-  embeds_many :album_wiki_links, :as=>:linkable
-  accepts_nested_attributes_for :album_wiki_links
-  validates_associated :album_wiki_links
 
-  def album_wiki_links_text
-    album_wiki_links.collect{|v| v.reference_text }.join(",")
-  end
 
-  def album_wiki_links_combined_links
-    album_wiki_links.collect{|v| v.combined_link }
-  end
-
-  def album_wiki_links_text=(value)
-    self.album_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.album_wiki_links.clear does not work
-    value.split(",").uniq.each{|q| 
-      self.album_wiki_links.build(:reference_text=>q.strip) 
-    }    
-  end
+  has_many :collection_items, :as=>:owner
 end

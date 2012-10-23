@@ -42,15 +42,22 @@
               %li= link_to "Enregistrements", portal_recordings_path
               %li= link_to "Albums", portal_albums_path
 
-            %ul.nav.profile.pull-right
+
+            %ul.nav.profile.pull-right              
               %li
                 %form.navbar-search{:action=>search_url}
                   %input.search-query.span2{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
+              %li= link_to "Ma musique", collection_items_path
               %li= link_to "Mon profil", edit_user_registration_path
               - if current_user
-                %li= link_to "Se déconnecter", destroy_user_session_path, :method=>"delete"
-              - else
+                %li= link_to "Se déconnecter", destroy_user_session_path, :method=>"delete"  
+              - unless current_user
                 %li= link_to "Créer un compte ou se connecter", new_user_session_path
+
+
+
+
+
 
     #content  
       .container

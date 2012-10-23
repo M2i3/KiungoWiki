@@ -1,0 +1,26 @@
+= title(@item.title)
+
+.row
+  = render :partial=>'links'
+  .span12
+    .section.summary
+      %dl
+        %dt= CollectionItem.human_attribute_name("acquisition_date")
+        %dd= @item.acquisition_date
+
+        %dt= CollectionItem.human_attribute_name("rating")
+        %dd= rating_to_star(@item.rating)
+
+        %dt= CollectionItem.human_attribute_name("labels")
+        %dd= @item.labels_text
+
+        %dt= CollectionItem.human_attribute_name("notes")
+        %dd= @item.notes
+
+.row
+  .span12
+    .section.object_details
+      %dl
+        %dt= CollectionItem.human_attribute_name("owned_wiki_link")
+        %dd= owned_wiki_link_path(@item.owned_wiki_link)
+

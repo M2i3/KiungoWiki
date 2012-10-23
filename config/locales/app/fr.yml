@@ -151,6 +151,13 @@ fr:
         category: Catégorie
         category_name: Catégories
 
+      collection_item:
+        owned_wiki_link: Lien Wiki
+        acquisition_date: Date d'acquisition
+        rating: Appréciation
+        labels: Étiquettes
+        notes: Notes
+
       portal_article:
         title: Titre
         publish_date: Date de publication

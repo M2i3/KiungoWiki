@@ -57,6 +57,21 @@ module ApplicationHelper
     end
   end
 
+  def owned_wiki_link_path(owl)    
+    case
+      when owl.respond_to?(:album_id) && owl.album_id
+        album_wiki_link_path(owl)
+      when owl.respond_to?(:recording_id) && owl.recording_id
+        recording_wiki_link_path(owl)        
+      else
+        "n/a"
+    end
+  end
+
+  def rating_to_star(rating)
+    render :partial=>"common/rating_to_star", :object=>rating.to_i
+  end
+
   def current_page_classes(params ={}, classes="")
     if current_page?(params)
       [classes, "active"].join(" ")

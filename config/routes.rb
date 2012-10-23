@@ -1,5 +1,7 @@
 KiungoWiki::Application.routes.draw do
 
+  resources :collection_items
+
   resources :changes
 
   resources :portal_articles

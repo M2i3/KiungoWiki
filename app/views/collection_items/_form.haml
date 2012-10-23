@@ -1,0 +1,12 @@
+%dl
+  %dt= form.label :rating
+  %dd= form.text_field :rating
+
+
+  %dt= form.label :labels
+  %dd= form.text_field :labels_text, :class=>"collection_labels_lookup", :"data-pre"=>form.object.labels.to_json
+  
+  %dt= form.label :notes
+  %dd= form.text_area :notes, :class=>"span12"
+
+

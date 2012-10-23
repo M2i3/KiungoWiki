@@ -40,3 +40,7 @@ span.letter:after {
   color: black;
   
 }
+
+span.rating {
+  color: yellow;
+}

@@ -1,0 +1,20 @@
+= title("Nouvelle entrée dans le catalogue")
+
+.tabbable.row
+  .span12
+    - unless @item.errors.empty?
+      .alert.alert-error
+        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel item dans votre collection:
+        %br/
+        = @item.errors.full_messages.join("</br>").html_safe
+
+    = form_for @item do |f|
+      %dl
+        %dt= form.label :owned_wiki_link
+        %dd= form.text_field :owned_wiki_link_text, :class=>"owned_lookup", :"data-pre"=>form.object.owned_wiki_link_combined_links.to_json
+
+      = render :partial=>'form', :object=>f
+      .formActions
+        = f.submit :class=>"btn btn-primary"
+        ou #{link_to t("cancel"), :back, :class=>"btn"}
+
