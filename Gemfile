@@ -1,7 +1,7 @@
 # migrated to bamboo-mri-1.9.2
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.1.10'
 gem "haml"
 
 gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branch => '2.1-stable'
