@@ -1,16 +1,15 @@
 # migrated to bamboo-mri-1.9.2
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.10'
+gem 'rails', '3.2.13.rc2'
 gem "haml"
 
-gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branch => '2.1-stable'
-gem 'formtastic-bootstrap', :git => 'https://github.com/cgunther/formtastic-bootstrap.git', :branch => 'bootstrap2-rails3-2-formtastic-2-1'
+gem 'formtastic', github: 'justinfrench/formtastic', branch: '2.1-stable'
+gem 'formtastic-bootstrap', github: 'cgunther/formtastic-bootstrap', branch: 'bootstrap2-rails3-2-formtastic-2-1'
 
 gem "thin"
 
-gem "mongoid"
-gem "bson_ext"
+gem "mongoid", '~> 3.0.0'
 gem 'mongoid-history'
 
 #gem 'will_paginate', '>=3.0.pre'
@@ -63,7 +62,7 @@ group :development, :test do
 end
 
 #gem 'mongoid_search'
-gem 'mongoid_search', "0.2.7", :git => "git://github.com/CubesIntoFlatCircles/mongoid_search.git", :branch => "master"
+gem 'mongoid_search', "0.2.7", github: "CubesIntoFlatCircles/mongoid_search", branch: "master"
 
 # ======
 # The other original references in the file
