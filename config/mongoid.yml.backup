@@ -1,0 +1,31 @@
+development:
+   sessions:
+  host: localhost
+  database: kiungo_wiki_development
+  databases:
+    raw_db:
+      database: kiungo_raw_db
+      host: localhost
+
+defaults: &defaults
+  host: localhost
+  # slaves:
+  #   - host: slave1.local
+  #     port: 27018
+  #   - host: slave2.local
+  #     port: 27019
+
+test:
+  sessions:
+  <<: *defaults
+  database: kiungo_wiki_test
+
+# set these environment variables on your prod server (to work on Heroku)
+production:
+  sessions:
+  uri: <%= ENV['MONGOHQ_URL'] %>
+
+# set these environment variables on your prod server (to work on Heroku)
+staging:
+  sessions:
+  uri: <%= ENV['MONGOHQ_URL'] %>
