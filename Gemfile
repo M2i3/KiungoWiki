@@ -1,5 +1,5 @@
-# migrated to bamboo-mri-1.9.2
 source 'http://rubygems.org'
+ruby "2.0.0"
 
 gem 'rails', '3.2.13.rc2'
 gem "haml"
