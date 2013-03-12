@@ -50,7 +50,7 @@
       - alphabetic_artist_grouping.each do |letter, heading|
         %li 
           %span.letter= heading
-          - Artist.where(:cache_first_letter => letter).order(updated_at:1).limit(5).each do |artist|
+          - Artist.where(:cache_first_letter => letter).order_by(updated_at:1).limit(5).each do |artist|
             %span.artist>= link_to artist.to_wiki_link.object_text, artist_path(artist.id)
             ;&nbsp;
           = link_to "...", alphabetic_artists_path(letter: letter, page: 1), :name=>"consulter la liste complète des artistes commençant par \"#{letter}\""

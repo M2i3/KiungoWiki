@@ -50,7 +50,7 @@
       - alphabetic_recording_grouping.each do |letter, heading|
         %li 
           %span.letter= heading
-          - Recording.where(:cache_first_letter => letter).order(updated_at:1).limit(5).each do |recording|
+          - Recording.where(:cache_first_letter => letter).sort(updated_at:1).limit(5).each do |recording|
             %span.recording>= link_to recording.to_wiki_link.object_text, recording_path(recording.id)
             ;&nbsp;
           = link_to "...", alphabetic_recordings_path(letter: letter, page: 1), :title=>"consulter la liste complète des enregistrements commençant par \"#{letter}\""

@@ -1,7 +1,6 @@
 require 'date'
 
 class IncDate < String
-  include Mongoid::Fields::Serializable
   include Comparable
   
   attr_reader :day, :month, :year
@@ -43,14 +42,6 @@ class IncDate < String
     
     self.replace(to_s)
     self
-  end
-
-  def deserialize(object)
-    begin 
-      ::IncDate.new(object)
-    rescue
-      nil
-    end
   end
 
   
@@ -318,4 +309,13 @@ class IncDate < String
     to_date(:month=>1, :day=>1) <=> self.class.new(value).to_date(:month=>1, :day=>1)
   end
 
+  class << self
+    def demongoize(object)
+      begin 
+        ::IncDate.new(object)
+      rescue
+        nil
+      end
+    end
+  end
 end

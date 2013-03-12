@@ -51,7 +51,7 @@
       - alphabetic_work_grouping.each do |letter, heading|
         %li 
           %span.letter= heading
-          - Work.where(:cache_first_letter => letter).order(updated_at:1).limit(5).each do |work|
+          - Work.where(:cache_first_letter => letter).order_by(updated_at:1).limit(5).each do |work|
             %span.work>= link_to work.to_wiki_link.object_text, work_path(work.id)
             ;&nbsp;
           = link_to "...", alphabetic_works_path(letter: letter, page: 1), :title=>"consulter la liste complète des oeuvres commençant par \"#{letter}\""

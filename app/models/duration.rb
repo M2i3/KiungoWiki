@@ -1,5 +1,4 @@
 class Duration
-  include Mongoid::Fields::Serializable
 
   attr_reader :hours, :minutes, :seconds
 
@@ -57,24 +56,25 @@ class Duration
     self.to_s.blank? or self.to_i.blank?
   end
 
-  def serialize(object)
-    if object.blank? 
-      nil
-    else
+
+  class << self
+    def mongoize(object)
+      if object.blank? 
+        nil
+      else
+        begin 
+          object.mongoize.to_i
+        rescue
+          nil
+        end
+      end 
+    end
+    def demongoize(object)
       begin 
-        deserialize(object).to_i
+        ::Duration.new(object)
       rescue
         nil
       end
-    end 
-  end
-
-  def deserialize(object)
-    begin 
-      ::Duration.new(object)
-    rescue
-      nil
     end
   end
-
 end

@@ -49,7 +49,7 @@
       - alphabetic_album_grouping.each do |letter, heading|
         %li 
           %span.letter= heading
-          - Album.where(:cache_first_letter => letter).order(updated_at:1).limit(5).each do |album|
+          - Album.where(:cache_first_letter => letter).order_by(updated_at:1).limit(5).each do |album|
             %span.album>= link_to album.to_wiki_link.object_text, album_path(album.id)
             ;&nbsp;
           = link_to "...", alphabetic_albums_path(letter: letter, page: 1), :title=>"consulter la liste complète des albums commençant par \"#{letter}\""

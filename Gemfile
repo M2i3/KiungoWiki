@@ -61,8 +61,8 @@ group :development, :test do
   gem 'therubyracer'
 end
 
-#gem 'mongoid_search'
-gem 'mongoid_search', "0.2.7", github: "CubesIntoFlatCircles/mongoid_search", branch: "master"
+gem 'mongoid_search'
+
 
 # ======
 # The other original references in the file

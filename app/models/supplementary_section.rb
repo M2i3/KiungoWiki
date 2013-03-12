@@ -11,7 +11,7 @@ class SupplementarySection
   embedded_in :album, :inverse_of => :supplementary_sections
   embedded_in :recording, :inverse_of => :supplementary_sections
   embedded_in :work, :inverse_of => :supplementary_sections
-  index [:publish_date]
+  index({publish_date: 1})
 
   def title
     self[:title]

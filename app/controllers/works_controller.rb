@@ -5,7 +5,7 @@ class WorksController < ApplicationController
   authorize_resource
 
   def index
-    @works = build_filter_from_params(params, Work.all.order(cache_normalized_title:1))
+    @works = build_filter_from_params(params, Work.all.order_by(cache_normalized_title:1))
 
     respond_to do |format|
       format.xml { render :xml=>@works }
@@ -19,14 +19,14 @@ class WorksController < ApplicationController
   end
 
   def portal
-    @feature_in_month = PortalArticle.where(:category =>"work", :publish_date.lte => Time.now).order(publish_date:-1).first
+    @feature_in_month = PortalArticle.where(:category =>"work", :publish_date.lte => Time.now).order_by(publish_date:-1).first
     respond_to do |format|
       format.html 
     end      
   end
 
   def alphabetic_index
-    @works = build_filter_from_params(params, Work.where(cache_first_letter: params[:letter]).order(cache_normalized_title:1))
+    @works = build_filter_from_params(params, Work.where(cache_first_letter: params[:letter]).order_by(cache_normalized_name:1))
   end
 
   def show

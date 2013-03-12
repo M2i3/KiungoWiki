@@ -5,7 +5,7 @@ class ArtistsController < ApplicationController
   authorize_resource
 
   def index
-    @artists = build_filter_from_params(params, Artist.all.order(cache_normalized_name:1))
+    @artists = build_filter_from_params(params, Artist.all.order_by(cache_normalized_name:1))
 
     respond_to do |format|
       format.xml { render :xml=>@artists }
@@ -19,14 +19,14 @@ class ArtistsController < ApplicationController
   end
 
   def portal
-    @feature_in_month = PortalArticle.where(:category =>"artist", :publish_date.lte => Time.now).order(publish_date:-1).first
+    @feature_in_month = PortalArticle.where(:category =>"artist", :publish_date.lte => Time.now).order_by(publish_date:-1).first
     respond_to do |format|
       format.html 
     end      
   end
 
   def alphabetic_index
-    @artists = build_filter_from_params(params, Artist.where(cache_first_letter: params[:letter]).order(cache_normalized_name:1))
+    @artists = build_filter_from_params(params, Artist.where(cache_first_letter: params[:letter]).order_by(cache_normalized_name:1))
   end
   
   def show

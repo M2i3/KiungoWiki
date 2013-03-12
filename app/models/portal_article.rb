@@ -10,7 +10,7 @@ class PortalArticle
   field :content, :type => String, :default => ""
 
   embeds_one :featured_wiki_link, as: :linkable, class_name:"Link"
-  index [:category, :publish_date]
+  index({category: 1, publish_date: 1})
 
   def title
     if self.featured_wiki_link
