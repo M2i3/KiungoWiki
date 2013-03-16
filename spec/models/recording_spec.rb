@@ -5,14 +5,14 @@ describe Recording do
 	describe "Testing for required values" do 
 		[:recording_date, :recording_location, :rythm, :duration].each {|field|	
 			it "#{field} should allow nil" do 
-				rec = Factory.build(:recording, field =>  nil)			
+				rec = FactoryGirl.create(:recording, field =>  nil)			
 				rec.valid?.should be_true
 			end
 		}
 	
 		[].each {|field|	
 			it "#{field} should not allow nil" do 
-				rec = Factory.build(:recording, field =>  nil)			
+				rec = FactoryGirl.create(:recording, field =>  nil)			
 				rec.valid?.should be_false
 				rec.errors[field].include?("can't be blank").should == true
 			end
@@ -22,14 +22,14 @@ describe Recording do
 	describe "Testing for the duration" do	
 		["a", -15, 0].each {|value|
 			it "when specified, duration should be numerical and greater than 0 (#{value} is not valid)" do
-				rec = Factory.build(:recording, :duration=>value)
+				rec = FactoryGirl.create(:recording, :duration=>value)
 				rec.valid?.should be_false
 			end
 		}
 	
 		[1, 15, 300, 10000, 500000, 1000000, "23:32", "50432:23:21", "1:90", "12"].each {|value|
 			it "when specified, duration should be numerical and greater than 0 (#{value} is valid)" do
-				rec = Factory.build(:recording, :duration=>value)
+				rec = FactoryGirl.create(:recording, :duration=>value)
 				rec.valid?.should be_true
 			end		
 		}
@@ -38,14 +38,14 @@ describe Recording do
 	describe "Testing for the rythm" do	
 		["a", -15, 0].each {|value|
 			it "when specified, rythm should be numerical and greater than 0 (#{value} is not valid)" do
-				rec = Factory.build(:recording, :rythm=>value)
+				rec = FactoryGirl.create(:recording, :rythm=>value)
 				rec.valid?.should be_false
 			end
 		}
 	
 		[1, 15, 300, 10000, 500000, 1000000].each {|value|
 			it "when specified, rythm should be numerical and greater than 0 (#{value} is valid)" do
-				rec = Factory.build(:recording, :rythm=>value)
+				rec = FactoryGirl.create(:recording, :rythm=>value)
 				rec.valid?.should be_true
 			end
 		}
@@ -61,7 +61,7 @@ describe Recording do
 
 		  [""].each {|value|
 			  it "when specified, name should be a non-empty string of alphanumeric characters and symbols (#{value} is invalid)" do
-				  rec = Factory.build(:recording, :work_title=>value)
+				  rec = FactoryGirl.create(:recording, :work_title=>value)
 				  rec.valid?.should be_false
 			  end
 		  }
@@ -89,7 +89,7 @@ describe Recording do
 			  "(",
 			  ")"].each {|value|
 			  it "when specified, work_title should be a non-empty string of alphanumeric characters and symbols (#{value} is valid)" do
-				  rec = Factory.build(:recording, :work_title=>value)
+				  rec = FactoryGirl.create(:recording, :work_title=>value)
 				  rec.valid?.should be_true
 			  end
 		  }
@@ -98,7 +98,7 @@ describe Recording do
 	
 	describe "Testing the recording date" do
 	  it "for proper deserialization" do
-	    rec = Factory.build(:recording, :duration => 127, :recording_date => "2007-05-30")
+	    rec = FactoryGirl.create(:recording, :duration => 127, :recording_date => "2007-05-30")
 	    rec.valid?.should be_true
 	    rec.save
 	    

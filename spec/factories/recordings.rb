@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :recording do |f|
-    f.work_title "A sample work"
+    f.work_wiki_link_text "A sample work"
 
     f.recording_date ""
     f.recording_location ""
