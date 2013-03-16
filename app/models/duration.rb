@@ -62,8 +62,13 @@ class Duration
       if object.blank? 
         nil
       else
-        begin 
-          object.mongoize.to_i
+        begin
+          if object.is_a?(::Duration)
+            object.to_i
+          else
+            Duration.new(object).to_i
+
+          end
         rescue
           nil
         end

@@ -38,7 +38,7 @@ class IncDate < String
     @month = 0 if @month.nil?
     @year = 0 if @year.nil?
     
-    valid_date?
+    raise ArgumentError, "invalid date of value #{value}" unless valid_date?
     
     self.replace(to_s)
     self
@@ -86,7 +86,8 @@ class IncDate < String
   end
   
   def valid_date?
-     unless @month.zero?
+    begin 
+      unless @month.zero?
         unless @day.zero?
           ::Date.civil( @year, @month, @day)
         else
@@ -95,6 +96,10 @@ class IncDate < String
       else
         ::Date.civil( @year)
       end
+      return true
+    rescue
+      return false
+    end
   end
 
   def day=(value)
