@@ -24,6 +24,8 @@ class Recording
   index({ cache_first_letter: 1, cache_normalized_title: 1 }, { background: true })
 
   search_in :title, {:match => :all}
+
+  validates :duration_text, duration: {allow_nil: true}
   
   validates_presence_of :work_wiki_link
 #  validates_length_of :work_title, :in=>1..500, :allow_nil=>true

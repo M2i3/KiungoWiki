@@ -4,11 +4,11 @@ FactoryGirl.define do
   factory :recording do |f|
     f.work_wiki_link_text "A sample work"
 
-    f.recording_date ""
-    f.recording_location ""
+    f.recording_date_text ""
+    f.recording_location_text ""
 
-    f.duration nil
-    f.rythm nil
+    f.duration_text nil
+    f.rythm_text nil
 
 #  f.updated_by "anonymous"
   end

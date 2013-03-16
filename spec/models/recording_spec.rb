@@ -5,14 +5,14 @@ describe Recording do
 	describe "Testing for required values" do 
 		[:recording_date, :recording_location, :rythm, :duration].each {|field|	
 			it "#{field} should allow nil" do 
-				rec = FactoryGirl.create(:recording, field =>  nil)			
+				rec = FactoryGirl.build(:recording, field =>  nil)			
 				rec.valid?.should be_true
 			end
 		}
 	
 		[].each {|field|	
 			it "#{field} should not allow nil" do 
-				rec = FactoryGirl.create(:recording, field =>  nil)			
+				rec = FactoryGirl.build(:recording, field =>  nil)			
 				rec.valid?.should be_false
 				rec.errors[field].include?("can't be blank").should == true
 			end
@@ -22,14 +22,14 @@ describe Recording do
 	describe "Testing for the duration" do	
 		["a", -15, 0].each {|value|
 			it "when specified, duration should be numerical and greater than 0 (#{value} is not valid)" do
-				rec = FactoryGirl.create(:recording, :duration=>value)
+				rec = FactoryGirl.build(:recording, :duration_text=>value)
 				rec.valid?.should be_false
 			end
 		}
 	
 		[1, 15, 300, 10000, 500000, 1000000, "23:32", "50432:23:21", "1:90", "12"].each {|value|
 			it "when specified, duration should be numerical and greater than 0 (#{value} is valid)" do
-				rec = FactoryGirl.create(:recording, :duration=>value)
+				rec = FactoryGirl.build(:recording, :duration_text=>value)
 				rec.valid?.should be_true
 			end		
 		}
@@ -38,14 +38,14 @@ describe Recording do
 	describe "Testing for the rythm" do	
 		["a", -15, 0].each {|value|
 			it "when specified, rythm should be numerical and greater than 0 (#{value} is not valid)" do
-				rec = FactoryGirl.create(:recording, :rythm=>value)
+				rec = FactoryGirl.build(:recording, :rythm_text=>value)
 				rec.valid?.should be_false
 			end
 		}
 	
 		[1, 15, 300, 10000, 500000, 1000000].each {|value|
 			it "when specified, rythm should be numerical and greater than 0 (#{value} is valid)" do
-				rec = FactoryGirl.create(:recording, :rythm=>value)
+				rec = FactoryGirl.build(:recording, :rythm_text=>value)
 				rec.valid?.should be_true
 			end
 		}
