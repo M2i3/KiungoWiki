@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ArtistSearchQuery do
+describe ArtistWikiLink::SearchQuery do
   it "should all go under the title when doing a basic query" do
     wsq = ArtistSearchQuery.new('This is a search " query with no keyworkds"')
     wsq[:name].should eql('This is a search " query with no keyworkds"')

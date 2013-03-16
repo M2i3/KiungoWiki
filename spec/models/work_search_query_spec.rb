@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe WorkSearchQuery do
+describe WorkWikiLink::SearchQuery do
   it "should all go under the title when doing a basic query" do
     wsq = WorkSearchQuery.new('This is a search " query with no keyworkds"')
     wsq[:title].should eql('This is a search " query with no keyworkds"')

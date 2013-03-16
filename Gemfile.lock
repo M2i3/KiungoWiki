@@ -57,6 +57,7 @@ GEM
     builder (3.0.4)
     cancan (1.6.9)
     daemons (1.1.9)
+    database_cleaner (0.9.1)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -179,6 +180,7 @@ DEPENDENCIES
   RedCloth
   acts-as-taggable-on
   cancan
+  database_cleaner
   devise
   execjs
   factory_girl
