@@ -3,10 +3,8 @@ module Mongoid #:nodoc
   # This module defines behaviour for fields.
   module Fields
 
-    module InstanceMethods
-      def form_text_fields
-        @form_text_fields ||= {}
-      end
+    def form_text_fields
+      @form_text_fields ||= {}
     end
 
     module ClassMethods #:nodoc

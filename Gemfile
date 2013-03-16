@@ -35,6 +35,10 @@ group :production do
 end
 
 group :development, :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'factory_girl'
+
 #  gem 'capybara'
 #  gem 'database_cleaner'
 #  gem 'cucumber-rails'
@@ -43,10 +47,10 @@ group :development, :test do
 #  gem 'spork'
 #  gem 'launchy'    # So you can do Then show me the page
 #  gem 'rails3-generators'
-gem 'factory_girl'
-gem 'factory_girl_rails'  
+
+#  gem 'factory_girl_rails'  
 #  gem 'mongoid-rspec'
- 
+# 
 #  gem 'rb-inotify'
 #  gem 'libnotify'
 #  gem 'guard-rspec'    # To run the tests continuously
