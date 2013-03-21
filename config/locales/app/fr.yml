@@ -2,6 +2,7 @@
 
 fr:
   headers:
+    home_index: "Accueil"
     works_portal: "Oeuvres (portail)"
     works_index: "Oeuvres"
     works_search_result: "Oeuvres pour '%{q}'"
@@ -38,6 +39,14 @@ fr:
     portal_articles: Articles des portails
     site_plan: Plan du site
     recent_changes: Changements récents
+    terms_and_conditions: "Conditions d'utilisation"
+    contact_us: "Nous contacter"
+    about_us: "À propos de KiungoWiki"
+    my_profile: "Mon profil"
+    sign_out: "Se déconnecter"
+    sign_in: "Se connecter"
+    sign_up_sign_in: "Créer un compte ou se connecter"
+    sign_up: "Créer un compte"
 
   messages:
     info: Pour votre information.
@@ -217,5 +226,6 @@ fr:
     errors:
       messages:
         document_not_found: Document introuvable
+
 
 

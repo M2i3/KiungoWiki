@@ -1,6 +1,52 @@
 en:
   headers:
+    home_index: "Home"
+    works_portal: "Works (portal)"
+    works_index: "Works"
+    works_search_result: "Works for '%{q}'"
+    works_search: "Seacing Within the Works"
     works_recent_changes: "Recently Modified Works"
+    works_alphabetic_index: "Works starting with %{heading}"
+    works_all_index: "All the Works"
+    artists_portal: "Artists (portal)"
+    artists_index: "Artists"
+    artists_search_result: "Artists for '%{q}'"
+    artists_search: "Searching Within the Artists"
+    artists_recent_changes: "Recently Modified Artists"
+    artists_alphabetic_index: "Artists starting with %{heading}"
+    artists_all_index: "All he Artists"
+    albums_portal: "Albums (portal)"
+    albums_index: "Albums"
+    albums_search_result: "Albums for '%{q}'"
+    albums_search: "Searching Within the Albums"
+    albums_recent_changes: "Recently Modified Albums"
+    albums_alphabetic_index: "Albums starting with %{heading}"
+    albums_all_index: "All the Albums"
+    recordings_portal: "Recordings (portal)"
+    recordings_index: "Recordings"
+    recordings_search_result: "Recordings for '%{q}'"
+    recordings_search: "Searching Within the Recordings"
+    recordings_recent_changes: "Recently Modified Recordings"
+    recordings_alphabetic_index: "Recordings starting with %{heading}"
+    recordings_all_index: "All the Recordings"
+    portal_article_album: "Album of the month: %{featured}"
+    portal_article_artist: "Artist of the month: %{featured}"
+    portal_article_recording: "Recording of the month: %{featured}"
+    portal_article_work: "Work of the month: %{featured}"
+    portal_article_category: "Category of the month: %{featured}"
+    portal_articles: Articles (portal)
+    site_plan: Site Plan
+    recent_changes: Recent Changes
+    terms_and_conditions: "Terms and Conditions"
+    contact_us: "Contact Us"
+    about_us: "About KiungoWiki"
+    my_profile: "My Profile"
+    sign_out: "Sign Out"
+    sign_in: "Sign In"
+    sign_up_sign_in: "Sign Up/Sign In"
+    sign_up: "Sign Up"
+
+
 
   views:
     pagination:

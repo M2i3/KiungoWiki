@@ -21,6 +21,8 @@ gem 'devise'
 gem 'RedCloth'
 gem 'mongoid_search'
 
+gem "http_accept_language"
+
 group :production do
   gem 'newrelic_rpm'
 end

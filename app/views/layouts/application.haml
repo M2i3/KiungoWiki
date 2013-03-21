@@ -36,21 +36,21 @@
 
           .nav-collapse
             %ul.nav.entities
-              %li= link_to "Accueil", root_url
-              %li= link_to "Artistes", portal_artists_path
-              %li= link_to "Oeuvres", portal_works_path
-              %li= link_to "Enregistrements", portal_recordings_path
-              %li= link_to "Albums", portal_albums_path
+              %li= link_to t("headers.home_index"), root_path
+              %li= link_to t("headers.artists_index"), portal_artists_path
+              %li= link_to t("headers.works_index"), portal_works_path
+              %li= link_to t("headers.recordings_index"), portal_recordings_path
+              %li= link_to t("headers.albums_index"), portal_albums_path
 
             %ul.nav.profile.pull-right
               %li
                 %form.navbar-search{:action=>search_url}
                   %input.search-query.span2{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
-              %li= link_to "Mon profil", edit_user_registration_path
+              %li= link_to t("headers.my_profile"), edit_user_registration_path
               - if current_user
-                %li= link_to "Se déconnecter", destroy_user_session_path, :method=>"delete"
+                %li= link_to t("headers.sign_out"), destroy_user_session_path, :method=>"delete"
               - else
-                %li= link_to "Créer un compte ou se connecter", new_user_session_path
+                %li= link_to t("headers.sign_up_sign_in"), new_user_session_path
 
     #content  
       .container
@@ -64,12 +64,12 @@
           .span12
             .navbar
               %ul.nav
-                %li= link_to "Accueil", root_url
-                %li= link_to "Changements récents", changes_path
-                %li= link_to "Conditions d'utilisation", "#", :class=>"soon-available"
-                %li= link_to "Nous contacter", "#", :class=>"soon-available"
-                %li= link_to "À propos de KiungoWiki", "#", :class=>"soon-available"
-                %li= link_to "Plan du site", site_plan_path
+                %li= link_to t("headers.home_index"), root_url
+                %li= link_to t("headers.recent_changes"), changes_path
+                %li= link_to t("headers.terms_and_conditions"), "#", :class=>"soon-available"
+                %li= link_to t("headers.contact_us"), "#", :class=>"soon-available"
+                %li= link_to t("headers.about_us"), "#", :class=>"soon-available"
+                %li= link_to t("headers.site_plan"), site_plan_path
           %p#copyright.span12 © 2012 - KiungoWiki
    
 
