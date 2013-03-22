@@ -6,22 +6,22 @@ class User
          :recoverable, :rememberable, :trackable, :validatable
 
   ## Database authenticatable
-  field :email,              :type => String#, null: false
-  field :encrypted_password, :type => String#, null: false
+  field :email,              type: String#, null: false
+  field :encrypted_password, type: String#, null: false
 
   ## Recoverable
-  field :reset_password_token,   :type => String
-  field :reset_password_sent_at, :type => Time
+  field :reset_password_token,   type: String
+  field :reset_password_sent_at, type: Time
 
   ## Rememberable
-  field :remember_created_at, :type => Time
+  field :remember_created_at, type: Time
 
   ## Trackable
-  field :sign_in_count,      :type => Integer
-  field :current_sign_in_at, :type => Time
-  field :last_sign_in_at,    :type => Time
-  field :current_sign_in_ip, :type => String
-  field :last_sign_in_ip,    :type => String
+  field :sign_in_count,      type: Integer
+  field :current_sign_in_at, type: Time
+  field :last_sign_in_at,    type: Time
+  field :current_sign_in_ip, type: String
+  field :last_sign_in_ip,    type: String
 
   ## Encryptable
   # field :password_salt, :type => String
@@ -48,11 +48,13 @@ class User
   validates_uniqueness_of :nickname 
   validates_presence_of :nickname
 
-  field :groups, :type=>Array, :default=>["user"]
+  field :groups, type: Array, default: ["user"]
 
-  embeds_many :album_wiki_links, :as=>:linkable
+  embeds_many :album_wiki_links, as: :linkable
   accepts_nested_attributes_for :album_wiki_links
   validates_associated :album_wiki_links
+  
+  has_many :possessions, foreign_key: "owner_id"
 
   def album_wiki_links_text
     album_wiki_links.collect{|v| v.reference_text }.join(",")

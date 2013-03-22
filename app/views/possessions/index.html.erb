@@ -1,0 +1,21 @@
+<h1>Listing possessions</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @possessions.each do |possession| %>
+  <tr>
+    <td><%= link_to 'Show', possession %></td>
+    <td><%= link_to 'Edit', edit_possession_path(possession) %></td>
+    <td><%= link_to 'Destroy', possession, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Possession', new_possession_path %>
