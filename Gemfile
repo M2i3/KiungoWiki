@@ -36,7 +36,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-spork', "~> 1.4.1"
   gem 'rspec-rails'
-  #  gem 'mongoid-rspec'
+  gem 'mongoid-rspec'
   gem 'database_cleaner'
   gem 'therubyracer'
   gem 'spork', "~> 1.0.0rc3"

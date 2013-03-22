@@ -39,6 +39,7 @@ Spork.prefork do
     #  config.use_transactional_fixtures = true
 
     config.include FactoryGirl::Syntax::Methods
+    config.include Mongoid::Matchers
     config.before(:each) do
       DatabaseCleaner.orm = "mongoid" 
       DatabaseCleaner.strategy = :truncation
@@ -48,7 +49,15 @@ Spork.prefork do
 end
 
 Spork.each_run do
-
+  ActiveSupport::Dependencies.clear
+  ActiveRecord::Base.instantiate_observers
+  FactoryGirl.reload
+  Dir["#{Rails.root}/app/controllers/*.rb"].each do |controller|
+    load controller
+  end
+  Dir["#{Rails.root}/app/models/*.rb"].each do |model|
+    load model
+  end
 end
 
 
