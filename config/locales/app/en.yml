@@ -1,6 +1,7 @@
 en:
   headers:
     home_index: "Home"
+    global_search_result: "Search Result for '%{q}'"
     works_portal: "Works (portal)"
     works_index: "Works"
     works_search_result: "Works for '%{q}'"
@@ -14,7 +15,7 @@ en:
     artists_search: "Searching Within the Artists"
     artists_recent_changes: "Recently Modified Artists"
     artists_alphabetic_index: "Artists starting with %{heading}"
-    artists_all_index: "All he Artists"
+    artists_all_index: "All he Artists"    
     albums_portal: "Albums (portal)"
     albums_index: "Albums"
     albums_search_result: "Albums for '%{q}'"
@@ -45,10 +46,43 @@ en:
     sign_in: "Sign In"
     sign_up_sign_in: "Sign Up/Sign In"
     sign_up: "Sign Up"
+    categories_index: "Categories"
 
+  messages:
+    info: For your information.
+    error: Oops! An error has occured!
+    alert: One moment! I must inform you!
+    notice: Great! It worked!
+    work_new_without_query:  Please make sure that the work you are about to create does not already exists in the wiki.
+    recording_new_without_query: Please make sure that the recording you are about to create does not already exists in the wiki.
+    artist_new_without_query: Please make sure that the artist you are about to create does not already exists in the wiki.
+    album_new_without_query: Please make sure that the album you are about to create does not already exists in the wiki.
 
+  show: Show
+  modify: Modify
+  discuss: Discuss
+  history: History
+  new: Create it
+  search: Search
+  cancel: Cancel
+  modify_artist: Modify the artist
+  birth: Birth
+  death: Death
+  search_question: You have not found what you were looking for ?
+  delete: Delete
+
+  actions:
+    new_portal_article: New Article
+    new_artist_portal_article: about an article
+    new_work_portal_article: about a work
+    new_recording_portal_article: about a recording
+    new_album_portal_article: about an album
+    new_category_portal_article: about a category
+    new_general_portal_article: article only
 
   views:
+    created_at: Created at
+    updated_at: Modified on
     pagination:
       previous: "&laquo; Prev"
       next: "Next &raquo;"

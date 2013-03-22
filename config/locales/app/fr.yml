@@ -3,6 +3,7 @@
 fr:
   headers:
     home_index: "Accueil"
+    global_search_result: "Résultat de la recherche pour '%{q}'"
     works_portal: "Oeuvres (portail)"
     works_index: "Oeuvres"
     works_search_result: "Oeuvres pour '%{q}'"
@@ -47,6 +48,7 @@ fr:
     sign_in: "Se connecter"
     sign_up_sign_in: "Créer un compte ou se connecter"
     sign_up: "Créer un compte"
+    categories_index: "Catégories"
 
   messages:
     info: Pour votre information.

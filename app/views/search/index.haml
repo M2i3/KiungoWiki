@@ -1,9 +1,9 @@
 .page-header
-  = title('Résultat de la recherche pour "' + params[:q] + '"')
+  = title(t("headers.global_search_result", :q=>params[:q]))
 
 .row
   .span12
-    %h2 Artistes
+    %h2= t("headers.artists_index")
     = render :partial=>"artists/search_result", :object=>@artists
     - unless @artists.last_page? 
       .well= link_to_unless @artists.last_page?, "plus de résultats", artists_path(:page=>@artists.current_page + 1, :q=>params[:q])
@@ -12,7 +12,7 @@
 
 .row
   .span12
-    %h2 Oeuvres
+    %h2= t("headers.works_index")
     = render :partial=>"works/search_result", :object=>@works
     - unless @works.last_page? 
       .well= link_to "plus de résultats", works_path(:page=>@works.current_page + 1, :q=>params[:q])
@@ -22,7 +22,7 @@
 
 .row
   .span12
-    %h2 Enregistrements
+    %h2= t("headers.recordings_index")
     = render :partial=>"recordings/search_result", :object=>@recordings
     - unless @recordings.last_page? 
       .well= link_to_unless @recordings.last_page?, "plus de résultats", recordings_path(:page=>@recordings.current_page + 1, :q=>params[:q])
@@ -31,7 +31,7 @@
 
 .row
   .span12
-    %h2 Albums
+    %h2= t("headers.albums_index")
     = render :partial=>"albums/search_result", :object=>@albums
     - unless @albums.last_page? 
       .well= link_to_unless @albums.last_page?, "plus de résultats", recordings_path(:page=>@albums.current_page + 1, :q=>params[:q])
@@ -40,7 +40,7 @@
 
 .row
   .span12
-    %h2 Catégories
+    %h2= t("headers.categories_index")
     = render :partial=>"categories/search_result", :object=>@categories
     - unless @categories.last_page? 
       .well= link_to_unless @categories.last_page?, "plus de résultats", recordings_path(:page=>@categories.current_page + 1, :q=>params[:q])

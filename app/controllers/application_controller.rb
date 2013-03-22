@@ -20,10 +20,10 @@ class ApplicationController < ActionController::Base
     @language_source = :http_header
 
     # 2.
-    if current_user && current_user.locale
-      request_language = current_user.locale
-      @language_source = :profile
-    end
+#    if current_user && current_user.locale
+#      request_language = current_user.locale
+#      @language_source = :profile
+#    end
 
     # 1.
     if params[:lang] && params[:lang] != request_language.to_s
