@@ -5,6 +5,11 @@
   .span12
     .section.summary
       %p
+        = link_to "Add to My Music", "#", id: "addmusic", "data-album-id" => @album.id
+        %div{'id' => 'addmusicform', 'title' => 'Add to My Music', 'style' => 'display:none;'}
+          %p
+            = @album.title
+      %p
         = Album.human_attribute_name("title")
         \: #{@album.title}
       %p

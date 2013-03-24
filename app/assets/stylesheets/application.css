@@ -5,9 +5,9 @@
  *= require bootstrap 
  *= require bootstrap-responsive
  *= require token-input
+ *= require jquery.ui.dialog
  *= require default
  *= require_self
-
 */
 
 

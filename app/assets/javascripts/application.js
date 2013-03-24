@@ -7,6 +7,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.tokeninput
+//= require jquery.ui.dialog
+//= require possessions
 //= require_self
 
 // Place your application-specific JavaScript functions and classes here
