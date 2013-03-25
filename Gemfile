@@ -62,5 +62,6 @@ group :assets do
   gem 'execjs'
   gem "jquery-rails", '~> 2.2.1'
   gem 'jquery-ui-rails', '~> 4.0.2'
+  gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails'
 end
 

@@ -22,6 +22,15 @@ GIT
     formtastic (2.1.1)
       actionpack (~> 3.0)
 
+GIT
+  remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
+  revision: 679fc6ee91b8e77e4f30625ca574c142ac3d5782
+  specs:
+    twitter-bootstrap-rails (2.2.6)
+      actionpack (>= 3.1)
+      execjs
+      railties (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -314,4 +323,5 @@ DEPENDENCIES
   spork (~> 1.0.0rc3)
   therubyracer
   thin
+  twitter-bootstrap-rails!
   yui-compressor

@@ -8,6 +8,7 @@
  *= require jquery.ui.dialog
  *= require default
  *= require_self
+ * require bootstrap_and_overrides
 */
 
 

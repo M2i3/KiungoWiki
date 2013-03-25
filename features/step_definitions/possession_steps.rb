@@ -12,7 +12,7 @@ end
 
 When(/^I click on "(.*?)" and confirm$/) do |link|
   click_link link
-  find('div.ui-dialog')
+  # find('div.ui-dialog')
   click_button link
 end
 

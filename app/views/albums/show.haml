@@ -1,14 +1,42 @@
 = title(@album.title)
 
 .row
-  = render :partial=>'links'
+  = render partial: 'links'
   .span12
     .section.summary
-      %p
-        = link_to "Add to My Music", "#", id: "addmusic", "data-album-id" => @album.id
-        %div{'id' => 'addmusicform', 'title' => 'Add to My Music', 'style' => 'display:none;'}
-          %p
-            = @album.title
+      - if current_user
+        - if @possession
+          - link_text = t('addmusic.havemusic')
+        - else
+          - link_text = t('addmusic.addtomusic')
+        %p
+          = link_to link_text, "#addmusicform", id: "addmusic", "data-toggle" => "modal", class: "btn", role: "button"
+          #addmusicform.modal.hide.fade{"tabindex" => "-1", "role" => "dialog", "aria-labelledby" => "myModalLabel"}
+            .modal-header
+              %h3
+                = t('addmusic.addtomusic')
+            .modal-body
+              %p
+                = @album.title
+              %p
+                %label{'for' => 'labels'}
+                  = t('addmusic.labels')
+                %input#posslabels{'type' => 'text'}
+              #addmusic-trans{'style' => 'display:none;'}
+                %span#havemusic
+                  = t('addmusic.havemusic')
+                %span#adderror
+                  = t('addmusic.adderror')
+            .modal-footer
+              %a.btn{"data-dismiss" => "modal"}
+                = t('cancel')
+              - if @possession
+                %a#confirmaddmusic.btn.btn-primary{"data-possession-id" => @possession.id}
+                  = t('update')
+              - else
+                %a#confirmaddmusic.btn.btn-primary{"data-album-id" => @album.id}
+                  = t('addmusic.addtomusic')
+                
       %p
         = Album.human_attribute_name("title")
         \: #{@album.title}

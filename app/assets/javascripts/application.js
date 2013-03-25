@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require jquery.tokeninput
 //= require jquery.ui.dialog
 //= require possessions
@@ -176,6 +177,13 @@ $(document).ready(function () {
   });
 
   $("input.categories_lookup").tokenInput("/categories/lookup.json", {
+     classes: default_classes
+  });
+  
+  /*
+    Label === Label === Label === Label === Label === Label === Label
+  */
+  $('input#posslabels').tokenInput("/labels/lookup.json", {
      classes: default_classes
   });
 

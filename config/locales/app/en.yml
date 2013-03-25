@@ -70,6 +70,7 @@ en:
   death: Death
   search_question: You have not found what you were looking for ?
   delete: Delete
+  update: Update
 
   actions:
     new_portal_article: New Article
@@ -90,5 +91,9 @@ en:
       last: "Last"
       first: "First"
 
-
+  addmusic:
+    addtomusic: Add to My Music
+    havemusic: Already in My Music
+    adderror: Album not added, please try again or be sure that you do not already own this album
+    labels: Labels
 

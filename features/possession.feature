@@ -4,7 +4,7 @@ Feature: Possessions
   I would like to express that I own an album
   So that I can share with others on my musical taste
   
-  @selenium @wip
+  @javascript
   Scenario: A user can add albums to their collections
     Given an album exists
     And a user who is logged in
