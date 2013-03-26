@@ -10,6 +10,7 @@ Spork.prefork do
   # files.
 
   require 'cucumber/rails'
+  require 'capybara-screenshot/cucumber'
 
   # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
   # order to ease the transition to Capybara we set the default here. If you'd
@@ -33,16 +34,18 @@ Spork.prefork do
   # recommended as it will mask a lot of errors for you!
   #
   ActionController::Base.allow_rescue = false
-
+  Capybara.javascript_driver = :webkit
+  Capybara.default_wait_time = 30
   # Remove/comment out the lines below if your app doesn't have a database.
   # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
   begin
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner[:mongoid].strategy = :truncation
   rescue NameError
     raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
   end
 end
 
 Spork.each_run do
-  
+  FileUtils.rm_rf("#{Rails.root}/tmp/capybara/.", secure: true)
+  FactoryGirl.reload
 end

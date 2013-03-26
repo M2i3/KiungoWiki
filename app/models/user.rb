@@ -55,6 +55,7 @@ class User
   validates_associated :album_wiki_links
   
   has_many :possessions, foreign_key: "owner_id"
+  has_many :labels
 
   def album_wiki_links_text
     album_wiki_links.collect{|v| v.reference_text }.join(",")

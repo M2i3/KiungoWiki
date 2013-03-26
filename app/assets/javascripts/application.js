@@ -6,7 +6,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require jquery.tokeninput
+//= require jquery.ui.dialog
+//= require possessions
 //= require_self
 
 // Place your application-specific JavaScript functions and classes here
@@ -174,6 +177,13 @@ $(document).ready(function () {
   });
 
   $("input.categories_lookup").tokenInput("/categories/lookup.json", {
+     classes: default_classes
+  });
+  
+  /*
+    Label === Label === Label === Label === Label === Label === Label
+  */
+  $('input#posslabels').tokenInput("/labels/lookup.json", {
      classes: default_classes
   });
 

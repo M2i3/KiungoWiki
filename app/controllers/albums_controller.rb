@@ -31,7 +31,7 @@ class AlbumsController < ApplicationController
   
   def show
     @album = Album.find(params[:id])
-
+    @possession = Possession.where(owner:current_user, album:@album).first if current_user
     respond_to do |format|
       format.xml { render :xml=>@album.to_xml(:except=>[:versions]) }
       format.json { render :json=>@album }

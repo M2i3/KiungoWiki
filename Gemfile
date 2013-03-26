@@ -43,6 +43,7 @@ group :development, :test do
   gem 'therubyracer'
   gem 'spork', "~> 1.0.0rc3"
   gem 'capybara', '~> 2.0.2'
+  gem "capybara-webkit", "~> 0.14.2"
   gem 'cucumber'
   gem 'launchy'
   gem 'factory_girl_rails', "~> 4.2.0"
@@ -52,11 +53,15 @@ end
 
 group :test do
   gem 'cucumber-rails', '~> 1.3.0', require: false
+  gem "capybara-screenshot"
 end
 
 group :assets do
+  gem 'coffee-rails', '~> 3.2.1'
   gem 'yui-compressor'
   gem 'execjs'
-  gem "jquery-rails"
+  gem "jquery-rails", '~> 2.2.1'
+  gem 'jquery-ui-rails', '~> 4.0.2'
+  gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails'
 end
 

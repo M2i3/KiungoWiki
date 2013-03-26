@@ -3,25 +3,16 @@ class SearchController < ApplicationController
     unless params[:q]
       redirect_to root_path
     else
-      @artists = Artist.all(sort: [:name, :asc]) #TODO: Add an index on name to enable sorting on huge number of artists
-      @artists = @artists.queried(params[:q]) if params[:q]
-      @artists = @artists.page(params[:page])
-
-      @works = Work.all(sort: [:title, :asc]) #TODO: Add an index on title to enable sorting on huge number of works
-      @works = @works.queried(params[:q]) if params[:q]
-      @works = @works.page(params[:page])
-
-      @recordings = Recording.all(sort: [:title, :asc]) #TODO: Add an index on title to enable sorting on huge number of recordings
-      @recordings = @recordings.queried(params[:q]) if params[:q]
-      @recordings = @recordings.page(params[:page])
-
-      @albums = Album.all(sort: [:title, :asc]) # TODO: Add an index on title to enable sorting on huge number of albums
-      @albums = @albums.queried(params[:q]) if params[:q]
-      @albums = @albums.page(params[:page])
-
-      @categories = Category.all(sort: [:category_name, :asc]) # TODO: Add an index on title to enable sorting on huge number of categories
-      @categories = @categories.queried(params[:q]) if params[:q]
-      @categories = @categories.page(params[:page])
+      # TODO: Add an index on name to enable sorting on huge number of artists
+      @artists = Artist.queried(params[:q]).order_by([:name, :asc]).page(params[:page]) 
+      # TODO: Add an index on title to enable sorting on huge number of works
+      @works = Work.queried(params[:q]).order_by([:title, :asc]).page(params[:page])
+      # TODO: Add an index on title to enable sorting on huge number of recordings
+      @recordings = Recording.queried(params[:q]).order_by([:title, :asc]).page(params[:page])
+      # TODO: Add an index on title to enable sorting on huge number of albums
+      @albums = Album.queried(params[:q]).order_by([:title, :asc]).page(params[:page])
+      # TODO: Add an index on title to enable sorting on huge number of categories
+      @categories = Category.queried(params[:q]).order_by([:category_name, :asc]).page(params[:page]) 
     end
   end
 end
