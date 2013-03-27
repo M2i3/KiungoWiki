@@ -1,0 +1,20 @@
+%h1
+  Owned Collections
+
+- if @possessions.size > 0
+  %table
+    %tr
+      %th
+        Album
+    - @possessions.each do |possession|
+      %tr
+        %td
+          = possession.album.title
+        %td
+          = link_to 'Show', possession
+        %td
+          = link_to 'Edit', edit_possession_path(possession)
+        %td
+          = link_to 'Destroy', possession, method: :delete, data: { confirm: 'Are you sure?' }
+- else
+  You own no music, yet
