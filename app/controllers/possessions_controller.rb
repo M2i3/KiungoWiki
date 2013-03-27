@@ -5,7 +5,7 @@ class PossessionsController < ApplicationController
   # GET /possessions.json
   def index
     @possessions = current_user.possessions
-
+    @labels = current_user.labels
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @possessions }

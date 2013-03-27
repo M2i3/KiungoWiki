@@ -39,8 +39,10 @@ describe PossessionsController do
   describe "GET index" do
     it "assigns all possessions as @possessions" do
       user.should_receive(:possessions).and_return [possession]
+      user.should_receive(:labels).and_return []
       get :index, {}, valid_session
       assigns(:possessions).should eq([possession])
+      assigns(:labels).should eq []
     end
   end
 

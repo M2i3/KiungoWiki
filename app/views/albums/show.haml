@@ -21,12 +21,17 @@
               %p
                 %label{'for' => 'labels'}
                   = t('addmusic.labels')
-                %input.labels_lookup{'type' => 'text'}
+                - if @possession
+                  %input#labels.labels_lookup{'type' => 'text', 'data-pre' => @possession.tokenized_labels}
+                - else
+                  %input#labels.labels_lookup{'type' => 'text'}
               #addmusic-trans{'style' => 'display:none;'}
                 %span#havemusic
                   = t('addmusic.havemusic')
                 %span#adderror
                   = t('addmusic.adderror')
+                %span#update
+                  = t('update')
             .modal-footer
               %a.btn{"data-dismiss" => "modal"}
                 = t('cancel')

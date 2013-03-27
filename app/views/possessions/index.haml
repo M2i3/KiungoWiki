@@ -1,6 +1,13 @@
 %h1
   Owned Collections
 
+- if @labels.size > 0
+  %table
+    - @labels.each do |label|
+      %tr
+        %td
+          = label.name
+
 - if @possessions.size > 0
   %table
     %tr
