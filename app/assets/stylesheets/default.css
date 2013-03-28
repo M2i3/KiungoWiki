@@ -40,3 +40,7 @@ span.letter:after {
   color: black;
   
 }
+/* fix for having the jquery.token dropdown visible even in a modal box*/ 
+.token-input-dropdown { 
+  z-index: 9999 !important; 
+}
