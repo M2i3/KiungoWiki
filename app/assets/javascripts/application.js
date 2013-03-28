@@ -183,7 +183,7 @@ $(document).ready(function () {
   /*
     Label === Label === Label === Label === Label === Label === Label
   */
-  $('input#posslabels').tokenInput("/labels/lookup.json", {
+  $('input.labels_lookup').tokenInput("/labels/lookup.json", {
      classes: default_classes
   });
 
