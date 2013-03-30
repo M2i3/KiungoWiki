@@ -21,6 +21,17 @@ class Ability
       if user.groups.include?("super-admin")
         can :manage, :all
       end
+      can :show, Possession
+      can :create, Possession, owner: user
+      can :edit, Possession do |poss|
+        poss.owner == user
+      end
+      can :update, Possession do |poss|
+        poss.owner == user
+      end
+      can :destroy, Possession do |poss|
+        poss.owner == user
+      end
     end
 
     # Define abilities for the passed in user here. For example:
