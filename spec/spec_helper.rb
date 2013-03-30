@@ -10,6 +10,7 @@ Spork.prefork do
   # require 'factory_girl'
   #require 'capybara/rspec'
   #require 'capybara/rails'
+  require "cancan/matchers"
 
 
   # Requires supporting ruby files with custom matchers and macros, etc,

@@ -1,12 +1,12 @@
 $(document).ready ->
   $('a#confirmaddmusic').click (e) ->
     e.preventDefault()
-    haveText = $('span#havemusic').text()
+    haveText = $.trim($('span#havemusic').text())
     $albumLink = $('a#addmusic')
     labels = []
     $('li.token-input-token p').each ->
       labels.push $(this).text()
-    if $.trim($albumLink.text()) != $.trim(haveText)
+    if $.trim($albumLink.text()) != haveText
       jqxhr = $.post '/possessions.json',
         possession:
           album_id: $(this).attr 'data-album-id'

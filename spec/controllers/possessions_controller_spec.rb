@@ -27,6 +27,7 @@ describe PossessionsController do
     allow_message_expectations_on_nil
     ApplicationController.any_instance.stub(:current_user).and_return user
     request.env['warden'].stub(:authenticate!).and_return user
+    PossessionsController.any_instance.stub(:authorize!)
   end
 
   # This should return the minimal set of values that should be in the session
@@ -39,7 +40,9 @@ describe PossessionsController do
   describe "GET index" do
     it "assigns all possessions as @possessions" do
       user.should_receive(:possessions).and_return [possession]
-      user.should_receive(:labels).and_return []
+      labels = []
+      user.should_receive(:labels).and_return labels
+      labels.should_receive(:order_by).with([:count, :desc]).and_return labels
       get :index, {}, valid_session
       assigns(:possessions).should eq([possession])
       assigns(:labels).should eq []
@@ -48,34 +51,28 @@ describe PossessionsController do
 
   describe "GET show" do
     before :each do
-      user.should_receive(:possessions).and_return possessions
-      @find_mock = possessions.should_receive(:find).with(id)
+      @find_mock = Possession.should_receive(:find).with(id)
     end
     it "assigns the requested possession as @possession" do
       @find_mock.and_return possession
       get :show, {id: id}, valid_session
       assigns(:possession).should eq(possession)
     end
-    it "will redirect to possessions path if cannot find a possesion" do
-      @find_mock.and_raise Mongoid::Errors::DocumentNotFound.new Object, {}
-      get :show, {id: id}, valid_session
-      response.should redirect_to possessions_url
-    end
   end
 
   describe "GET new" do
     it "assigns a new possession as @possession" do
-      user.should_receive(:possessions).and_return user
-      user.should_receive(:build).and_return possession
+      PossessionsController.any_instance.should_receive(:authorize!)
+      possession.should_receive(:owner=).with user
+      Possession.should_receive(:new).and_return possession
       get :new, {}, valid_session
-      assigns(:possession).should be_a_new(Possession)
+      assigns(:possession).should eq(possession)
     end
   end
   
   describe "GET edit" do
     it "assigns the requested possession as @possession" do
-      user.should_receive(:possessions).and_return possessions
-      possessions.should_receive(:find).with(id).and_return possession
+      Possession.should_receive(:find).with(id).and_return possession
       get :edit, {id: id}, valid_session
       assigns(:possession).should eq(possession)
     end
@@ -83,8 +80,8 @@ describe PossessionsController do
   
   describe "POST create" do
     before :each do
-      user.should_receive(:possessions).and_return user
-      user.should_receive(:build).with({}).and_return possession
+      possession.should_receive(:owner=).with user
+      Possession.should_receive(:new).and_return possession
       @save_mock = possession.should_receive(:save)
     end
     it "can create with valid params" do
@@ -102,8 +99,7 @@ describe PossessionsController do
    
   describe "PUT update" do
     before :each do
-      user.should_receive(:possessions).and_return possessions
-      possessions.should_receive(:find).with(id).and_return possession
+      Possession.should_receive(:find).with(id).and_return possession
     end
     it "with valid params can update" do
       params = { "these" => "params" }
@@ -123,8 +119,7 @@ describe PossessionsController do
   
   describe "DELETE destroy" do
     it "destroys the requested possession" do
-      user.should_receive(:possessions).and_return possessions
-      possessions.should_receive(:find).with(id).and_return possession
+      Possession.should_receive(:find).with(id).and_return possession
       possession.should_receive(:destroy)
       delete :destroy, {id: id}, valid_session
       response.should redirect_to(possessions_url)

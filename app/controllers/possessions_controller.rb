@@ -1,11 +1,11 @@
 class PossessionsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_possession, only: [:show, :edit, :destroy, :update]
+  load_and_authorize_resource except: :index
   # GET /possessions
   # GET /possessions.json
   def index
     @possessions = current_user.possessions
-    @labels = current_user.labels
+    @labels = current_user.labels.order_by([:count, :desc])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @possessions }
@@ -24,7 +24,6 @@ class PossessionsController < ApplicationController
   # GET /possessions/new
   # GET /possessions/new.json
   def new
-    @possession = current_user.possessions.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,8 +38,6 @@ class PossessionsController < ApplicationController
   # POST /possessions
   # POST /possessions.json
   def create
-    @possession = current_user.possessions.build(params[:possession])
-
     respond_to do |format|
       if @possession.save
         format.html { redirect_to @possession, notice: 'Possession was successfully created.' }
@@ -77,15 +74,5 @@ class PossessionsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  private
-    
-    def find_possession
-      begin
-        @possession = current_user.possessions.find(params[:id])
-      rescue Mongoid::Errors::DocumentNotFound
-        redirect_to possessions_url
-      end
-    end
     
 end

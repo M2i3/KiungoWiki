@@ -12,10 +12,15 @@ end
 
 When(/^I click on "(.*?)" and confirm$/) do |link|
   click_link link
-  # find('div.ui-dialog')
-  click_button link
+  find('a#confirmaddmusic', text:link).click
 end
 
 Then(/^the album should be in my possession$/) do
-  Possession.where(owner_id: @user.id).all.size.should eq 1
+  count = 0
+  while count < 30
+    break if @user.reload.possessions.all.size > 0
+    count += 1
+    sleep 1
+  end
+  @user.possessions.all.size.should eq 1
 end
