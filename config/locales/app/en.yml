@@ -47,6 +47,7 @@ en:
     sign_up_sign_in: "Sign Up/Sign In"
     sign_up: "Sign Up"
     categories_index: "Categories"
+    possessions_index: My Music
 
   messages:
     info: For your information.
@@ -71,6 +72,7 @@ en:
   search_question: You have not found what you were looking for ?
   delete: Delete
   update: Update
+  back: Back
 
   actions:
     new_portal_article: New Article
@@ -96,4 +98,9 @@ en:
     havemusic: Already in My Music
     adderror: Album not added, please try again or be sure that you do not already own this album
     labels: Labels
-
+    acquisitiondate: Acquisition Date
+    rating: Rating
+    comments: Comments
+    album: Album
+    editpossession: Edit Music
+    nomusic: You own no music, yet

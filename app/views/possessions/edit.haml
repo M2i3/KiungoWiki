@@ -1,0 +1,8 @@
+%h1
+  = t('addmusic.editpossession')
+
+= render 'form', submit_text: t('update')
+
+= link_to t('show'), @possession
+|
+= link_to t('back'), possessions_path

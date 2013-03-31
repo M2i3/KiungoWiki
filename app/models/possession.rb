@@ -6,7 +6,7 @@ class Possession
   validates_uniqueness_of :album, scope: :owner
   [:owner, :album].each {|field| validates_presence_of field }
   field :labels, type: Array, default: []
-  field :rating, type: Integer
+  field :rating, type: Integer, default: 0
   field :acquisition_date, type: Date
   field :comments, type: String
   
@@ -18,21 +18,12 @@ class Possession
       original = [] if original.nil?
       # new labels
       (new_labels.reject{|lab| original.include? lab }).each do |label|
-        found = Label.where(name:label,user:doc.owner).first
-        if found
-          found.count += 1
-          found.save!
-        else
-          Label.create!(name:label,user:doc.owner, count:1)
-        end
+        Label.where(name:label,user:doc.owner).first_or_create!.inc(:count, 1)
       end
       # deleted labels
       (original.reject{|lab| new_labels.include? lab }).each do |label|
         found = Label.where(name:label,user:doc.owner).first
-        if found # backwards compatiable
-          found.count -= 1
-          found.save!
-        end
+        found.inc(:count, 1) if found # backwards compatiable
       end
     end
   end
