@@ -1,0 +1,26 @@
+= form_for(@possession) do |f|
+  - if @possession.errors.any?
+    #error_explanation
+      %h2
+        = t('messages.error')
+      %ul
+        - @possession.errors.full_messages.each do |msg|
+          %li
+            = msg
+  %p
+    = f.label :album, t('addmusic.album')
+    = f.text_field :album, value: @possession.album.title, disabled: true
+  %p
+    = f.label :labels, t('addmusic.labels')
+    = f.text_field :labels, 'data-pre' => @possession.tokenized_labels, class: "labels_lookup", name: "possession[labels][]"
+  %p
+    = f.label :acquisition_date, t('addmusic.acquisitiondate')
+    = f.text_field :acquisition_date, id: "acquisition_date"
+  %p
+    = f.label :rating, t('addmusic.rating')
+    = f.text_field :rating
+  %p
+    = f.label :comments, t('addmusic.comments')
+    = f.text_area :comments
+  .actions
+    = f.submit submit_text

@@ -11,7 +11,7 @@
           - link_text = t('addmusic.addtomusic')
         %p
           = link_to link_text, "#addmusicform", id: "addmusic", "data-toggle" => "modal", class: "btn", role: "button"
-          #addmusicform.modal.hide.fade{"tabindex" => "-1", "role" => "dialog", "aria-labelledby" => "myModalLabel"}
+          #addmusicform.modal.hide.fade{tabindex: "-1", role: "dialog", "aria-labelledby" => "myModalLabel"}
             .modal-header
               %h3
                 = t('addmusic.addtomusic')
@@ -22,9 +22,29 @@
                 %label{'for' => 'labels'}
                   = t('addmusic.labels')
                 - if @possession
-                  %input#labels.labels_lookup{'type' => 'text', 'data-pre' => @possession.tokenized_labels}
+                  %input#labels.labels_lookup{type: 'text', 'data-pre' => @possession.tokenized_labels}
                 - else
-                  %input#labels.labels_lookup{'type' => 'text'}
+                  %input#labels.labels_lookup{type: 'text'}
+              %p
+                %label{'for' => 'acquisition_date'}
+                  = t('addmusic.acquisitiondate')
+                - if @possession
+                  %input#acquisition_date{ type: 'text', value: @possession.acquisition_date }
+                - else
+                  %input#acquisition_date{type: 'text'}
+              %p
+                %label{'for' => 'rating'}
+                  = t('addmusic.rating')
+                - if @possession
+                  %input#rating{type: 'text', value: @possession.rating}
+                - else
+                  %input#rating{type: 'text'}
+              %p
+                %label{for: 'comments'}
+                  = t('addmusic.comments')
+                %textarea#comments
+                  - if @possession
+                    = @possession.comments
               #addmusic-trans{'style' => 'display:none;'}
                 %span#havemusic
                   = t('addmusic.havemusic')

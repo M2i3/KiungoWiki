@@ -1,5 +1,5 @@
 %h1
-  Owned Collections
+  = t('headers.possessions_index')
 
 - if @labels.size > 0
   %table
@@ -7,21 +7,23 @@
       %tr
         %td
           = label.name
+        %td
+          = label.count
 
 - if @possessions.size > 0
   %table
     %tr
       %th
-        Album
+        = t('addmusic.album')
     - @possessions.each do |possession|
       %tr
         %td
           = possession.album.title
         %td
-          = link_to 'Show', possession
+          = link_to t('show'), possession
         %td
-          = link_to 'Edit', edit_possession_path(possession)
+          = link_to t('modify'), edit_possession_path(possession)
         %td
-          = link_to 'Destroy', possession, method: :delete, data: { confirm: 'Are you sure?' }
+          = link_to t('delete'), possession, method: :delete, confirm: 'Are you sure?'
 - else
-  You own no music, yet
+  = t('addmusic.nomusic')

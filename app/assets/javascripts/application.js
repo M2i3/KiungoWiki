@@ -8,7 +8,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery.tokeninput
-//= require jquery.ui.dialog
+//= require jquery.ui.datepicker
 //= require possessions
 //= require_self
 

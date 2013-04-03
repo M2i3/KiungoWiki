@@ -6,13 +6,21 @@ describe Possession do
   it { should validate_uniqueness_of(:album).scoped_to(:owner) }
   it { should validate_presence_of(:owner) }
   it { should validate_presence_of(:album) }
-  it { should have_field(:labels).of_type(Array) }
+  it { should have_field(:labels).of_type(Array).with_default_value_of [] }
+  it { should have_field(:rating).of_type(Integer).with_default_value_of 0 }
+  it { should have_field(:acquisition_date).of_type(Date) }
+  it { should have_field(:comments).of_type(String) }
   it "should try to create some user labels after it's been saved" do
     label = "label"
     user = FactoryGirl.create(:user)
-    Label.should_receive(:find_or_create_by).at_least(1).with(name:label,user:user)
     album = FactoryGirl.create(:album)
     Possession.where(owner:user, labels:[label], album:album).create!
+    Possession.where(owner:user, album:album).all.size.should eq 1
+    Label.all.size.should eq 1
+    lab = Label.first
+    lab.user.should eq user
+    lab.name.should eq label
+    # lab.count.should eq 1
   end
   it "should be able to tokenize labels" do
     subject.labels = ["label1", "label2"]
