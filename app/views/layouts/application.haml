@@ -41,12 +41,13 @@
               %li= link_to t("headers.works_index"), portal_works_path
               %li= link_to t("headers.recordings_index"), portal_recordings_path
               %li= link_to t("headers.albums_index"), portal_albums_path
-              %li= link_to t("headers.possessions_index"), possessions_path
+
 
             %ul.nav.profile.pull-right
               %li
                 %form.navbar-search{:action=>search_url}
                   %input.search-query.span2{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
+              %li= link_to t("headers.possessions_index"), possessions_path
               %li= link_to t("headers.my_profile"), edit_user_registration_path
               - if current_user
                 %li= link_to t("headers.sign_out"), destroy_user_session_path, :method=>"delete"
