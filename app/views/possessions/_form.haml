@@ -11,8 +11,8 @@
     = f.label :album, t('addmusic.album')
     = f.text_field :album, value: @possession.album.title, disabled: true
   %p
-    = f.label :labels, t('addmusic.labels')
-    = f.text_field :labels, 'data-pre' => @possession.tokenized_labels, class: "labels_lookup", name: "possession[labels][]"
+    = f.label :labels_text, t('addmusic.labels')
+    = f.text_field :labels_text, 'data-pre' => @possession.tokenized_labels, class: "labels_lookup"
   %p
     = f.label :acquisition_date, t('addmusic.acquisitiondate')
     = f.text_field :acquisition_date, id: "acquisition_date"

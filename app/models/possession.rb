@@ -27,7 +27,18 @@ class Possession
       end
     end
   end
-  
+
+  def labels_text
+    self.labels.join(", ")
+  end
+
+  def labels_text=(value)
+    self.labels.clear
+    value.split(",").each{|q| 
+      self.labels << q
+    }    
+  end
+
   def tokenized_labels
     tokenized = []
     self.labels.each {|label| tokenized << {id:label, name:label}}
