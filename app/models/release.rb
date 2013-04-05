@@ -1,4 +1,4 @@
-class Album
+class Release
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Search

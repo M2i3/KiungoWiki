@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe Possession do
   it { should belong_to(:owner).of_type(User).with_index }
-  it { should belong_to(:album).with_index }
-  it { should validate_uniqueness_of(:album).scoped_to(:owner) }
+  it { should belong_to(:release).with_index }
+  it { should validate_uniqueness_of(:release).scoped_to(:owner) }
   it { should validate_presence_of(:owner) }
-  it { should validate_presence_of(:album) }
+  it { should validate_presence_of(:release) }
   it { should have_field(:labels).of_type(Array).with_default_value_of [] }
   it { should have_field(:rating).of_type(Integer).with_default_value_of 0 }
   it { should have_field(:acquisition_date).of_type(Date) }
@@ -13,9 +13,9 @@ describe Possession do
   it "should try to create some user labels after it's been saved" do
     label = "label"
     user = FactoryGirl.create(:user)
-    album = FactoryGirl.create(:album)
-    Possession.where(owner:user, labels:[label], album:album).create!
-    Possession.where(owner:user, album:album).all.size.should eq 1
+    release = FactoryGirl.create(:release)
+    Possession.where(owner:user, labels:[label], release:release).create!
+    Possession.where(owner:user, release:release).all.size.should eq 1
     Label.all.size.should eq 1
     lab = Label.first
     lab.user.should eq user

@@ -1,15 +1,15 @@
-class AlbumsController < ApplicationController
+class ReleasesController < ApplicationController
 
   # only registered users can edit this wiki
   before_filter :authenticate_user!, :except => [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index]
   authorize_resource
 
   def index
-    @albums = build_filter_from_params(params, Album.all.order_by(cache_normalized_title:1))
+    @releases = build_filter_from_params(params, Release.all.order_by(cache_normalized_title:1))
 
     respond_to do |format|
-      format.xml { render :xml=>@albums }
-      format.json { render :json=>@albums }
+      format.xml { render :xml=>@releases }
+      format.json { render :json=>@releases }
       format.html
     end
   end
@@ -30,8 +30,8 @@ class AlbumsController < ApplicationController
   end
   
   def show
-    @album = Album.find(params[:id])
-    @possession = Possession.where(owner:current_user, album:@album).first if current_user
+    @release = Release.find(params[:id])
+    @possession = Possession.where(owner:current_user, release:@release).first if current_user
     respond_to do |format|
       format.xml { render :xml=>@album.to_xml(:except=>[:versions]) }
       format.json { render :json=>@album }

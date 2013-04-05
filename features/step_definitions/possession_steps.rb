@@ -6,8 +6,8 @@ Given(/^a user who is logged in$/) do
   click_button "Connexion"
 end
 
-Given(/^an album exists$/) do
-  FactoryGirl.create(:album)
+Given(/^a release exists$/) do
+  FactoryGirl.create(:release)
 end
 
 When(/^I click on "(.*?)" and confirm$/) do |link|
@@ -15,7 +15,7 @@ When(/^I click on "(.*?)" and confirm$/) do |link|
   find('a#confirmaddmusic', text:link).click
 end
 
-Then(/^the album should be in my possession$/) do
+Then(/^the release should be in my possession$/) do
   count = 0
   while count < 30
     break if @user.reload.possessions.all.size > 0

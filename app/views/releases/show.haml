@@ -1,4 +1,4 @@
-= title(@album.title)
+= title(@release.title)
 
 .row
   = render partial: 'links'
@@ -17,7 +17,7 @@
                 = t('addmusic.addtomusic')
             .modal-body
               %p
-                = @album.title
+                = @release.title
               %p
                 %label{'for' => 'labels'}
                   = t('addmusic.labels')
@@ -59,38 +59,38 @@
                 %a#confirmaddmusic.btn.btn-primary{"data-possession-id" => @possession.id}
                   = t('update')
               - else
-                %a#confirmaddmusic.btn.btn-primary{"data-album-id" => @album.id}
+                %a#confirmaddmusic.btn.btn-primary{"data-album-id" => @release.id}
                   = t('addmusic.addtomusic')
                 
       %p
-        = Album.human_attribute_name("title")
-        \: #{@album.title}
+        = Release.human_attribute_name("title")
+        \: #{@release.title}
       %p
-        = Album.human_attribute_name("date_released")
-        \: #{@album.date_released}
+        = Release.human_attribute_name("date_released")
+        \: #{@release.date_released}
       %p
-        = Album.human_attribute_name("label")
-        \: #{@album.label}
+        = Release.human_attribute_name("label")
+        \: #{@release.label}
       %p
-        = Album.human_attribute_name("media_type")
-        \: #{@album.media_type}
+        = Release.human_attribute_name("media_type")
+        \: #{@release.media_type}
       %p
-        = Album.human_attribute_name("reference_code")
-        \: #{@album.reference_code}
+        = Release.human_attribute_name("reference_code")
+        \: #{@release.reference_code}
 
     %h2= Artist.model_name.human.pluralize
-    - if @album.artist_wiki_links.count == 0 
+    - if @release.artist_wiki_links.count == 0 
       %p This album does not have any artist associated with it.
     - else
       %table.table.table-striped
         %tbody
           %th= Artist.human_attribute_name("name")
-          - @album.artist_wiki_links.each do |artist|
+          - @release.artist_wiki_links.each do |artist|
             %tr
               %td= artist_wiki_link_path(artist)
 
     %h2= Recording.model_name.human.pluralize
-    - if @album.recording_wiki_links == 0
+    - if @release.recording_wiki_links == 0
       %p This album does not have any recording associated with it.
     - else
       %table.table.table-striped
@@ -99,13 +99,13 @@
             %th= Recording.human_attribute_name("title")
             %th= Recording.human_attribute_name("recording_date")
             %th= Recording.human_attribute_name("itemId")
-            - if ["33 tours","45 tours"].include?(@album.media_type)
+            - if ["33 tours","45 tours"].include?(@release.media_type)
               %th= Recording.human_attribute_name("itemSection")
             %th= Recording.human_attribute_name("trackNb")
             %th= Recording.human_attribute_name("duration")
             %th= Recording.human_attribute_name("artist_wiki_link")
         %tbody
-          - @album.recording_wiki_links.sort{|a,b| [a.itemId.to_i, a.itemSection.to_s, a.trackNb.to_i] <=> [b.itemId.to_i, b.itemSection.to_s, b.trackNb.to_i] }.each do |rwl|
+          - @release.recording_wiki_links.sort{|a,b| [a.itemId.to_i, a.itemSection.to_s, a.trackNb.to_i] <=> [b.itemId.to_i, b.itemSection.to_s, b.trackNb.to_i] }.each do |rwl|
             %tr
               %td= recording_wiki_link_path(rwl)
               %td= rwl.recording_date
@@ -114,13 +114,13 @@
               - else
                 %td= "1"
 
-              - if ["33 tours","45 tours"].include?(@album.media_type)
+              - if ["33 tours","45 tours"].include?(@release.media_type)
                 %td= rwl.itemSection
               %td= rwl.trackNb
               %td= rwl.duration
               %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
 
-      - @album.supplementary_sections.each do |ss|
+      - @release.supplementary_sections.each do |ss|
         %h2= ss.title 
         = RedCloth.new(ss.content).to_html.html_safe
 

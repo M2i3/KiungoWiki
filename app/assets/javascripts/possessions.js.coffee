@@ -10,7 +10,7 @@ $(document).ready ->
     if $.trim($albumLink.text()) != haveText
       jqxhr = $.post '/possessions.json',
         possession:
-          album_id: $(this).attr 'data-album-id'
+          release_id: $(this).attr 'data-album-id'
           labels: labels
           comments: $('textarea#comments').val()
           acquisition_date: $('input#acquisition_date').val()

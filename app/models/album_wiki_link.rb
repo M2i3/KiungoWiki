@@ -1,7 +1,7 @@
 class AlbumWikiLink < WikiLink
   include Mongoid::Document
 
-  set_reference_class Album
+  set_reference_class Release
   cache_attributes :title, :label, :date_released, :reference_code, :media_type
 
   def title_with_objectq

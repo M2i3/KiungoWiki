@@ -19,7 +19,7 @@ fr:
     artists_alphabetic_index: "Artistes commençant par %{heading}"
     artists_all_index: "Tous les artistes"
     albums_portal: "Albums (portail)"
-    albums_index: "Albums"
+    releases_index: "Albums"
     albums_search_result: "Albums pour '%{q}'"
     albums_search: "Recherche dans les albums"
     albums_recent_changes: "Albums modifiés récemments"
@@ -123,7 +123,7 @@ fr:
         other: Utilisateurs
 
     attributes:
-      album:
+      release:
         title: Titre
         artist_wiki_link: Artiste principal
         artist_wiki_links_text: Artiste principal

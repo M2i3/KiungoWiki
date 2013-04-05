@@ -249,5 +249,13 @@ namespace :kiungo do
         puts "rake completed"
       end
     end
+    desc "Migrate Albums into Releases"
+    task albums: :environment do
+      database = Release.collection.database
+      # p database.session.with(database: "admin", consistency: :strong) do |sess|
+      #  sess.command({ :renameCollection => "#{database.name}.albums", :to => "#{database.name}.releases"})
+      # end
+      system "mongo #{database.name} --eval \"printjson(db.albums.renameCollection('releases'))\""
+    end
   end
 end

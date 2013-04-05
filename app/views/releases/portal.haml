@@ -24,13 +24,13 @@
     %h2 Ce que vous pouvez faire pour contribuer
     %ul
       %li 
-        = link_to "Écrire la fiche d'un album", new_album_path
+        = link_to "Écrire la fiche d'un album", new_release_path
       %li 
         Réviser la fiche d'un album modifiée récemment:
         %ul 
           %li 
-            - Album.order_by(:updated_at=>:desc).limit(5).all.each do |album|
-              %span.album>= link_to album.to_wiki_link.object_text, album_path(album.id)
+            - Release.order_by(:updated_at=>:desc).limit(5).all.each do |album|
+              %span.album>= link_to album.to_wiki_link.object_text, release_path(album.id)
               ;&nbsp;
             = link_to "...", recent_changes_albums_path, :title=>"consulter la liste complète des modifications récentes"
           %li= link_to "consulter la liste complète des albums modifiés récemment", recent_changes_albums_path
@@ -49,8 +49,8 @@
       - alphabetic_album_grouping.each do |letter, heading|
         %li 
           %span.letter= heading
-          - Album.where(:cache_first_letter => letter).order_by(updated_at:1).limit(5).each do |album|
-            %span.album>= link_to album.to_wiki_link.object_text, album_path(album.id)
+          - Release.where(:cache_first_letter => letter).order_by(updated_at:1).limit(5).each do |album|
+            %span.album>= link_to album.to_wiki_link.object_text, release_path(album.id)
             ;&nbsp;
           = link_to "...", alphabetic_albums_path(letter: letter, page: 1), :title=>"consulter la liste complète des albums commençant par \"#{letter}\""
       %li= link_to "tous les albums", albums_path(page: 1)

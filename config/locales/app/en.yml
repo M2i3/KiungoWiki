@@ -17,7 +17,7 @@ en:
     artists_alphabetic_index: "Artists starting with %{heading}"
     artists_all_index: "All he Artists"    
     albums_portal: "Albums (portal)"
-    albums_index: "Albums"
+    releases_index: "Releases"
     albums_search_result: "Albums for '%{q}'"
     albums_search: "Searching Within the Albums"
     albums_recent_changes: "Recently Modified Albums"

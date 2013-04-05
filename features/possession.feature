@@ -6,9 +6,9 @@ Feature: Possessions
   
   @javascript
   Scenario: A user can add albums to their collections
-    Given an album exists
+    Given a release exists
     And a user who is logged in
-    And I go to an album
+    And I go to a release
     When I click on "Add to My Music" and confirm
     # Then I should see "Already in My Music"
-    Then the album should be in my possession
+    Then the release should be in my possession

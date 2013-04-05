@@ -10,7 +10,7 @@ class SearchController < ApplicationController
       # TODO: Add an index on title to enable sorting on huge number of recordings
       @recordings = Recording.queried(params[:q]).order_by([:title, :asc]).page(params[:page])
       # TODO: Add an index on title to enable sorting on huge number of albums
-      @albums = Album.queried(params[:q]).order_by([:title, :asc]).page(params[:page])
+      @albums = Release.queried(params[:q]).order_by([:title, :asc]).page(params[:page])
       # TODO: Add an index on title to enable sorting on huge number of categories
       @categories = Category.queried(params[:q]).order_by([:category_name, :asc]).page(params[:page]) 
     end

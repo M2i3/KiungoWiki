@@ -3,7 +3,7 @@ class Ability
 
   def initialize(user)
 
-    wiki_entities = [Artist, Work, Album, Recording, Category]
+    wiki_entities = [Artist, Work, Release, Recording, Category]
    
     wiki_entities.each{|wiki_entity|
       can [:read, :portal, :recent_changes, :search, :alphabetic_index], wiki_entity       
