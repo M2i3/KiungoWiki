@@ -26,4 +26,7 @@
         %td
           = link_to t('delete'), possession, method: :delete, confirm: 'Are you sure?'
 - else
-  = t('addmusic.nomusic')
+  %p
+    = t('addmusic.nomusic')
+%p  
+  = link_to ('new'), new_possession_path

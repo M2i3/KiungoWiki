@@ -112,14 +112,14 @@ class AlbumsController < ApplicationController
                         "recording"=>RecordingAlbumWikiLink }[params[:src]] || AlbumWikiLink
 
     asq = wiki_link_klass.search_query(params[:q])
-
-    respond_to do |format|
-      format.json { 
-        render :json=>(Album.queried(asq.objectq).limit(20).collect{|alb| 
+    data = (Album.queried(asq.objectq).limit(20).collect{|alb| 
 
           wiki_link_klass.new(reference_text: "oid:#{alb.id} #{asq.metaq}").combined_link
               
-        } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
+        } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) 
+    respond_to do |format|
+      format.json { 
+        render :json=>          data
       }
     end
   end

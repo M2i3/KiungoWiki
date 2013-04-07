@@ -7,3 +7,4 @@ tmp/
 .tropo_voice_key
 .tropo_messaging_key
 mongoid_search
+coverage/
