@@ -8,8 +8,8 @@ class LabelsController < ApplicationController
   end
   
   def lookup
-    search_data = params[:q].to_s
-    respond_with current_user.labels.only(:name).where(name:/#{search_data}/).all.map {|l| {id:t.name, name:t.name}} << {id:search_data, name:search_data}
+    search_data = params[:q].to_s 
+    respond_with current_user.labels.only(:name).where(name:/#{search_data}/).all.map {|l| {id:l.name, name:l.name}} << {id:search_data, name:search_data}
   end
   
 end

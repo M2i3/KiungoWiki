@@ -6,7 +6,7 @@
     - @labels.each do |label|
       %tr
         %td
-          = label.name
+          = link_to label.name, possessions_path(label:label.name)
         %td
           = label.count
 

@@ -9,10 +9,7 @@
             = msg
   %p
     = f.label :album, t('addmusic.album')
-    - if @possession.album.try(:title)
-      = f.text_field :album, value: @possession.album.title, class: "album_title_lookup"
-    - else
-      = f.text_field :album, class: "album_title_lookup"
+    = f.text_field :album, value: @possession.album.try(:title) ? @possession.album.title : "", class: "album_title_lookup"
   %p
     = f.label :labels_text, t('addmusic.labels')
     = f.text_field :labels_text, 'data-pre' => @possession.tokenized_labels, class: "labels_lookup"

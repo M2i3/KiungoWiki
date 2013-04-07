@@ -5,6 +5,7 @@ class PossessionsController < ApplicationController
   # GET /possessions.json
   def index
     @possessions = current_user.possessions
+    @possessions = @possessions.where(labels:/#{params[:label].to_s}/) if params[:label]
     @labels = current_user.labels.order_by([:count, :desc])
     respond_to do |format|
       format.html # index.html.erb
