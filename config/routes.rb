@@ -1,6 +1,6 @@
 KiungoWiki::Application.routes.draw do
 
-  resources :possessions, except: :new
+  resources :possessions
 
   resources :changes
 
