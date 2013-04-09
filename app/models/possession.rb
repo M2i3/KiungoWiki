@@ -39,6 +39,14 @@ class Possession
     }    
   end
 
+  def album_wiki=(wiki_id)
+    self.album_id = wiki_id.sub("oid:",'').strip
+  end
+  
+  def album_wiki
+    "oid:#{self.album_id}"
+  end
+
   def tokenized_labels
     tokenized = []
     self.labels.each {|label| tokenized << {id:label, name:label}}

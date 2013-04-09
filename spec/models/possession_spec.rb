@@ -26,4 +26,17 @@ describe Possession do
     subject.labels = ["label1", "label2"]
     subject.tokenized_labels.should eq [{id:"label1", name:"label1"},{id:"label2", name:"label2"}].to_json
   end
+  it "should be able to set and give back an album given in wiki format" do
+    id = "123"
+    wiki_id = "oid:#{id} "
+    subject.album_wiki = wiki_id
+    subject.album_id.should eq id
+    subject.album_wiki.should eq wiki_id.strip
+  end
+  it "should be able to set and retreive labels_text" do
+    labels = ['label1', 'label2']
+    subject.labels_text = labels.join ","
+    subject.labels_text.should eq labels.join(", ")
+    subject.labels.should eq labels
+  end
 end
