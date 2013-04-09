@@ -101,6 +101,7 @@ en:
     acquisitiondate: Acquisition Date
     rating: Rating
     comments: Comments
-    album: Album
+    release: Release
     editpossession: Edit Music
     nomusic: You own no music, yet
+    newpossession: New Music

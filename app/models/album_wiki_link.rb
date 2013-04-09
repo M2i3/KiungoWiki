@@ -20,7 +20,7 @@ class AlbumWikiLink < WikiLink
             GroupText.new([
                  self.date_released], 
                  :before_text=>"(", :after_text=>")"), 
-            self.album && self.album.first_artist_display_text],
+            self.release && self.release.first_artist_display_text],
             :sep=>" - ")],
         :sep=>" - ").to_s
   end

@@ -6,7 +6,7 @@
     - @labels.each do |label|
       %tr
         %td
-          = label.name
+          = link_to label.name, possessions_path(label:label.name)
         %td
           = label.count
 
@@ -14,11 +14,11 @@
   %table
     %tr
       %th
-        = t('addmusic.album')
+        = t('addmusic.release')
     - @possessions.each do |possession|
       %tr
         %td
-          = possession.album.title
+          = possession.release.title
         %td
           = link_to t('show'), possession
         %td
@@ -26,4 +26,7 @@
         %td
           = link_to t('delete'), possession, method: :delete, confirm: 'Are you sure?'
 - else
-  = t('addmusic.nomusic')
+  %p
+    = t('addmusic.nomusic')
+%p  
+  = link_to ('new'), new_possession_path

@@ -115,7 +115,7 @@ class ReleasesController < ApplicationController
 
     respond_to do |format|
       format.json { 
-        render :json=>(Album.queried(asq.objectq).limit(20).collect{|alb| 
+        render :json=>(Release.queried(asq.objectq).limit(20).collect{|alb| 
 
           wiki_link_klass.new(reference_text: "oid:#{alb.id} #{asq.metaq}").combined_link
               

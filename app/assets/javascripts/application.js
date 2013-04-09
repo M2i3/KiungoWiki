@@ -125,9 +125,9 @@ $(document).ready(function () {
   });
 
   /*
-    Album === Album === Album === Album === Album === Album === Album === Album === Album
+    Release === Release === Release === Release === Release === Release === Release === Release === Release
   */
-  $("input.album_title_lookup").tokenInput("/albums/lookup.json", {
+  $("input.release_title_lookup").tokenInput("/releases/lookup.json", {
      tokenLimit: 1,
      classes: default_classes
   });
