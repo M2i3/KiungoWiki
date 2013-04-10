@@ -17,7 +17,6 @@ describe ReleasesController do
       assigns(:releases).should eq releases
     end
   end
-  
   describe "GET show" do
     it "should show a release upon request" do
       id = 99.to_param
@@ -30,5 +29,16 @@ describe ReleasesController do
       assigns(:possession).should eq nil
     end
   end
-
+  describe "GET portal" do
+    it "should pull the proper PortalArticle" do
+      article = Object.new
+      Time.should_receive(:now).at_least(1).and_return article
+      article.should_receive(:-).at_least(1).and_return 1
+      PortalArticle.should_receive(:where).with(category:"release", :publish_date.lte => article).and_return article
+      article.should_receive(:order_by).with(publish_date:-1).and_return article
+      article.should_receive(:first).and_return article
+      get :portal
+      assigns(:feature_in_month).should eq article
+    end
+  end
 end

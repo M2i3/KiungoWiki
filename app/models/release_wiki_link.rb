@@ -1,4 +1,4 @@
-class AlbumWikiLink < WikiLink
+class ReleaseWikiLink < WikiLink
   include Mongoid::Document
 
   set_reference_class Release

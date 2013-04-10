@@ -50,9 +50,9 @@ class User
 
   field :groups, type: Array, default: ["user"]
 
-  embeds_many :album_wiki_links, as: :linkable
-  accepts_nested_attributes_for :album_wiki_links
-  validates_associated :album_wiki_links
+  embeds_many :release_wiki_links, as: :linkable
+  accepts_nested_attributes_for :release_wiki_links
+  validates_associated :release_wiki_links
   
   has_many :possessions, foreign_key: "owner_id"
   has_many :labels

@@ -116,12 +116,12 @@ class Release
   end
 
   def to_wiki_link
-    AlbumWikiLink.new(reference_text: "oid:#{self.id}", album: self)
+    ReleaseWikiLink.new(reference_text: "oid:#{self.id}", album: self)
   end
   
   scope :queried, ->(q) {
     current_query = all
-    asq = AlbumWikiLink.search_query(q)
+    asq = ReleaseWikiLink.search_query(q)
     asq.filled_query_fields.each {|field|
       case field
         when :title

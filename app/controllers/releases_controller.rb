@@ -19,7 +19,7 @@ class ReleasesController < ApplicationController
   end
 
   def portal
-    @feature_in_month = PortalArticle.where(:category =>"album", :publish_date.lte => Time.now).order_by(publish_date:-1).first
+    @feature_in_month = PortalArticle.where(:category =>"release", :publish_date.lte => Time.now).order_by(publish_date:-1).first
     respond_to do |format|
       format.html 
     end      

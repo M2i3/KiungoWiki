@@ -1,4 +1,4 @@
-class RecordingAlbumWikiLink < AlbumWikiLink
+class RecordingAlbumWikiLink < ReleaseWikiLink
   include Mongoid::Document
 
   def trackNb

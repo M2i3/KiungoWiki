@@ -255,7 +255,9 @@ namespace :kiungo do
       # p database.session.with(database: "admin", consistency: :strong) do |sess|
       #  sess.command({ :renameCollection => "#{database.name}.albums", :to => "#{database.name}.releases"})
       # end
-      system "mongo #{database.name} --eval \"printjson(db.albums.renameCollection('releases'))\""
+      # system "mongo #{database.name} --eval \"printjson(db.albums.renameCollection('releases'))\""
+      # system "mongo #{database.name} --eval \"printjson( db.possessions.update({}, {$rename:{ 'album_id': 'release_id' }}, { multi: true }) )\""
+      system "mongo #{database.name} --eval \"db.portal_articles.update({'category': 'album'}, {$set:{ 'category': 'release' }}, { multi: true })\""
     end
   end
 end
