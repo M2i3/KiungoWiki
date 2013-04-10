@@ -8,8 +8,8 @@
           %li
             = msg
   %p
-    = f.label :album, t('addmusic.album')
-    = f.text_field :album, value: @possession.album.try(:title) ? @possession.album.title : "", class: "album_title_lookup"
+    = f.label :album_wiki, t('addmusic.album')
+    = f.text_field :album_wiki, 'data-pre' => @possession.album? ? [{id:@possession.album_wiki, name:@possession.album.title}].to_json : "", class: "album_title_lookup"
   %p
     = f.label :labels_text, t('addmusic.labels')
     = f.text_field :labels_text, 'data-pre' => @possession.tokenized_labels, class: "labels_lookup"
