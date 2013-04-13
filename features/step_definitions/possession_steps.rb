@@ -48,7 +48,7 @@ end
 
 When(/^I fill in posession info and submit$/) do
   @album = Album.first.title
-  fill_in "token-input-possession_album", with: @album[0,3]
+  fill_in "token-input-possession_album_wiki", with: @album[0,3]
   select_token @album
   @label = "test"
   fill_in "token-input-possession_labels_text", with: @label
