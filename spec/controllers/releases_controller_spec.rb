@@ -41,4 +41,23 @@ describe ReleasesController do
       assigns(:feature_in_month).should eq article
     end
   end
+  describe "GET lookup" do
+    it "should be able to lookup releases" do
+      {ReleaseWikiLink => nil, ArtistAlbumWikiLink => "artist", 
+      RecordingAlbumWikiLink => "recording"}.each do |link, src_param|
+        q = "test"
+        data = Object.new
+        link.should_receive(:search_query).with(q).and_return data
+        Release.should_receive(:queried).with(data).and_return data
+        data.should_receive(:objectq).and_return data
+        data.should_receive(:limit).with(20).and_return [data]
+        data.should_receive(:id).and_return 1
+        data.should_receive(:metaq).and_return 2
+        wiki_link = Object.new
+        link.should_receive(:new).with(reference_text:"oid:#{1} #{2}").and_return wiki_link
+        wiki_link.should_receive(:combined_link)
+        get :lookup, q:q, format: :json, src:src_param
+      end
+    end
+  end
 end

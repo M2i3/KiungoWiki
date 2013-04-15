@@ -109,13 +109,13 @@ class ReleasesController < ApplicationController
   def lookup
 
     wiki_link_klass = { "artist"=>ArtistAlbumWikiLink,
-                        "recording"=>RecordingAlbumWikiLink }[params[:src]] || AlbumWikiLink
+                        "recording"=>RecordingAlbumWikiLink }[params[:src]] || ReleaseWikiLink
 
     asq = wiki_link_klass.search_query(params[:q])
 
     respond_to do |format|
       format.json { 
-        render :json=>(Release.queried(asq.objectq).limit(20).collect{|alb| 
+        render json:(Release.queried(asq.objectq).limit(20).collect{|alb| 
 
           wiki_link_klass.new(reference_text: "oid:#{alb.id} #{asq.metaq}").combined_link
               
