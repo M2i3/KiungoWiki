@@ -252,12 +252,19 @@ namespace :kiungo do
     desc "Migrate Albums into Releases"
     task albums: :environment do
       database = Release.collection.database
-      # p database.session.with(database: "admin", consistency: :strong) do |sess|
-      #  sess.command({ :renameCollection => "#{database.name}.albums", :to => "#{database.name}.releases"})
-      # end
-      # system "mongo #{database.name} --eval \"printjson(db.albums.renameCollection('releases'))\""
-      # system "mongo #{database.name} --eval \"printjson( db.possessions.update({}, {$rename:{ 'album_id': 'release_id' }}, { multi: true }) )\""
-      system "mongo #{database.name} --eval \"db.portal_articles.update({'category': 'album'}, {$set:{ 'category': 'release' }}, { multi: true })\""
+      ['db.albums.renameCollection("releases")',
+        'db.possessions.update({}, {$rename:{ "album_id": "release_id" }}, { multi: true })',
+        'db.portal_articles.update({"category": "album"}, {$set:{ "category": "release" }}, { multi: true })',
+        'db.portal_articles.update({"featured_wiki_link._type":"AlbumWikiLink"}, 
+        {$set: {"featured_wiki_link._type":"ReleaseWikiLink"}, $rename:{ "featured_wiki_link.album_id":"release_id" }},
+        { multi: true })',
+        'db.portal_articles.update({"featured_wiki_link._type":"AlbumArtistWikiLink"}, 
+        {$set: {"featured_wiki_link._type":"ReleaseArtistWikiLink"}, $rename:{ "featured_wiki_link.album_id":"release_id" }},
+        { multi: true })',
+        'db.releases.update({"linkable._type":"AlbumArtistWikiLink"}, 
+                {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},
+                { multi: true })'
+      ].each {|command| database.command eval: command }
     end
   end
 end

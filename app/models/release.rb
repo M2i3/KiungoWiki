@@ -27,7 +27,7 @@ class Release
 
   validates_presence_of :title
 
-  embeds_many :artist_wiki_links, as: :linkable, class_name: "AlbumArtistWikiLink"
+  embeds_many :artist_wiki_links, as: :linkable, class_name: "ReleaseArtistWikiLink"
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
 

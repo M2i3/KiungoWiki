@@ -110,7 +110,7 @@ class ArtistsController < ApplicationController
     wiki_link_klass = { "artist"=>ArtistArtistWikiLink, 
                         "recording"=>RecordingArtistWikiLink,
                         "work"=>WorkArtistWikiLink,
-                        "album"=>AlbumArtistWikiLink }[params[:src]] || ArtistWikiLink
+                        "album"=>ReleaseArtistWikiLink }[params[:src]] || ArtistWikiLink
 
     asq = wiki_link_klass.search_query(params[:q])
 

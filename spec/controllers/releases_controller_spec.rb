@@ -60,4 +60,21 @@ describe ReleasesController do
       end
     end
   end
+  describe "GET recent_changes" do
+    it "should redirect to changes_path with scope of release" do
+      get :recent_changes
+      response.should redirect_to changes_path scope: "release"
+    end
+  end
+  describe "GET alphabetic_index" do
+    it "should work" do
+      letter = "a"
+      releases = Object.new
+      Release.should_receive(:where).with(cache_first_letter:letter).and_return releases
+      releases.should_receive(:order_by).with(cache_normalized_title:1).and_return releases
+      ReleasesController.any_instance.should_receive(:build_filter_from_params).with(an_instance_of(ActiveSupport::HashWithIndifferentAccess), releases).and_return releases
+      get :alphabetic_index, letter:letter
+      assigns(:albums).should eq releases
+    end
+  end
 end

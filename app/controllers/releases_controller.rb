@@ -8,46 +8,46 @@ class ReleasesController < ApplicationController
     @releases = build_filter_from_params(params, Release.all.order_by(cache_normalized_title:1))
 
     respond_to do |format|
-      format.xml { render :xml=>@releases }
-      format.json { render :json=>@releases }
+      format.xml { render xml: @releases }
+      format.json { render json: @releases }
       format.html
     end
   end
 
   def recent_changes
-    redirect_to changes_path(:scope=>"album")
+    redirect_to changes_path(scope: "release")
   end
 
   def portal
-    @feature_in_month = PortalArticle.where(:category =>"release", :publish_date.lte => Time.now).order_by(publish_date:-1).first
+    @feature_in_month = PortalArticle.where(category: "release", :publish_date.lte => Time.now).order_by(publish_date:-1).first
     respond_to do |format|
       format.html 
     end      
   end
 
   def alphabetic_index
-    @albums = build_filter_from_params(params, Album.where(cache_first_letter: params[:letter]).order_by(cache_normalized_title:1))
+    @albums = build_filter_from_params(params, Release.where(cache_first_letter: params[:letter]).order_by(cache_normalized_title:1))
   end
   
   def show
     @release = Release.find(params[:id])
     @possession = Possession.where(owner:current_user, release:@release).first if current_user
     respond_to do |format|
-      format.xml { render :xml=>@album.to_xml(:except=>[:versions]) }
-      format.json { render :json=>@album }
+      format.xml { render xml: @album.to_xml(except: [:versions]) }
+      format.json { render json: @album }
       format.html
     end
   end
 
   def new
     unless params[:q]
-      redirect_to search_albums_path, :alert=>t("messages.album_new_without_query")
+      redirect_to search_albums_path, alert: t("messages.album_new_without_query")
     else
       @album = Album.new(AlbumWikiLink.search_query(params[:q]).to_hash)
       @supplementary_section = @album.supplementary_sections.build
       respond_to do |format|      
         format.html # new.html.erb
-        format.xml  { render :xml => @album }
+        format.xml  { render xml: @album }
       end
     end
   end
@@ -127,19 +127,19 @@ class ReleasesController < ApplicationController
   protected
   def filter_params
     {
-      :q => lambda {|albums, params| albums.queried(params[:q]) }
+      :q => lambda {|releases, params| releases.queried(params[:q]) }
     }
   end
 
-  def build_filter_from_params(params, albums)
+  def build_filter_from_params(params, releases)
 
     filter_params.each {|param_key, filter|
       puts "searching using #{param_key} with value #{params[param_key]}"
-      albums = filter.call(albums,params) if params[param_key]
+      releases = filter.call(releases,params) if params[param_key]
     }
 
-    albums = albums.page(params[:page])
+    releases = releases.page(params[:page])
 
-    albums
+    releases
   end
 end
