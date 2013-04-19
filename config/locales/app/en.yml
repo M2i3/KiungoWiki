@@ -48,6 +48,8 @@ en:
     sign_up: "Sign Up"
     categories_index: "Categories"
     possessions_index: My Music
+    possessions_all_music: All my Music
+
 
   messages:
     info: For your information.
@@ -102,6 +104,7 @@ en:
     rating: Rating
     comments: Comments
     album: Album
-    editpossession: Edit Music
+    editpossession: Edit Entry
     nomusic: You own no music, yet
-    newpossession: New Music
+    nomusiclabel: You have no music with this label
+    newpossession: New Entry
