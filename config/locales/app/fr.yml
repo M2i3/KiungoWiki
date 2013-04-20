@@ -49,6 +49,8 @@ fr:
     sign_up_sign_in: "Créer un compte ou se connecter"
     sign_up: "Créer un compte"
     categories_index: "Catégories"
+    possessions_index: Ma musique
+    possessions_all_music: Toute ma musique
 
   messages:
     info: Pour votre information.
@@ -91,6 +93,20 @@ fr:
       truncate: "..."
       last: "Dernier"
       first: "Premier"
+
+  addmusic:
+    addtomusic: "Ajouter à ma musique"
+    havemusic: "Déjà dans ma musique"
+    adderror: "Album non ajouté, veuillez ressayer de nouveau plus tard"
+    labels: "Étiquettes"
+    acquisitiondate: "Date d'acquisition "
+    rating: "Classement"
+    comments: "Commentaire"
+    album: "Album"
+    editpossession: "Éditer cette entrée"
+    nomusic: "Vous n'avez pas de musique dans votre collection en ce moment"
+    nomusiclabel: "Vous n'avez pas de musique pour cette étiquette"
+    newpossession: "Nouvelle entrée"
 
   mongoid:
     models:
