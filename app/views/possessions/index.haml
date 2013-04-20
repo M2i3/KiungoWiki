@@ -1,32 +1,52 @@
 %h1
   = t('headers.possessions_index')
 
-- if @labels.size > 0
-  %table
-    - @labels.each do |label|
-      %tr
-        %td
-          = link_to label.name, possessions_path(label:label.name)
-        %td
-          = label.count
+.row
+  .span4
 
-- if @possessions.size > 0
-  %table
-    %tr
-      %th
-        = t('addmusic.album')
-    - @possessions.each do |possession|
-      %tr
-        %td
-          = possession.album.title
-        %td
-          = link_to t('show'), possession
-        %td
-          = link_to t('modify'), edit_possession_path(possession)
-        %td
-          = link_to t('delete'), possession, method: :delete, confirm: 'Are you sure?'
-- else
-  %p
-    = t('addmusic.nomusic')
-%p  
-  = link_to ('new'), new_possession_path
+    %p 
+      = link_to t('addmusic.newpossession'), new_possession_path, :class=>"btn"
+
+    %h2= t('addmusic.labels')
+    - if @labels.size > 0
+      %table
+        - @labels.each do |label|
+          %tr
+            %td
+              = link_to label.name, possessions_path(label:label.name)
+            %td
+              = label.count
+
+        %tr
+          %td
+            = link_to t('headers.possessions_all_music'), possessions_path
+          %td
+            = current_user.possessions.count
+
+  .span8
+    %h2= @labelled || t('headers.possessions_all_music')
+
+    - if @possessions.size > 0
+      %table.table.table-striped
+        %thead
+          %tr
+            %th
+              = t('addmusic.album')
+        %tbody
+          - @possessions.each do |possession|
+            %tr
+              %td
+                = possession.album.title
+              %td
+                = link_to t('show'), possession
+              %td
+                = link_to t('modify'), edit_possession_path(possession)
+              %td
+                = link_to t('delete'), possession, method: :delete, confirm: 'Are you sure?'
+    - else
+      %p.hero-unit
+        - if @labelled
+          = t('addmusic.nomusiclabel')
+        - else 
+          = t('addmusic.nomusic')
+

@@ -53,7 +53,7 @@ describe PossessionsController do
     end
     it "should filter on labels if label param is present" do
       label = "test"
-      @possessions.should_receive(:where).with(labels:/#{label}/)
+      @possessions.should_receive(:where).with(labels: label)
       get :index, {label:label}, valid_session
     end
   end
