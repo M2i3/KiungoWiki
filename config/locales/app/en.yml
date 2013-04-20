@@ -16,12 +16,12 @@ en:
     artists_recent_changes: "Recently Modified Artists"
     artists_alphabetic_index: "Artists starting with %{heading}"
     artists_all_index: "All he Artists"    
-    albums_portal: "Albums (portal)"
+    releases_portal: "Releases (portal)"
     releases_index: "Releases"
     albums_search_result: "Albums for '%{q}'"
     albums_search: "Searching Within the Albums"
     albums_recent_changes: "Recently Modified Albums"
-    albums_alphabetic_index: "Albums starting with %{heading}"
+    releases_alphabetic_index: "Releases starting with %{heading}"
     albums_all_index: "All the Albums"
     recordings_portal: "Recordings (portal)"
     recordings_index: "Recordings"
@@ -56,10 +56,10 @@ en:
     error: Oops! An error has occured!
     alert: One moment! I must inform you!
     notice: Great! It worked!
-    work_new_without_query:  Please make sure that the work you are about to create does not already exists in the wiki.
-    recording_new_without_query: Please make sure that the recording you are about to create does not already exists in the wiki.
-    artist_new_without_query: Please make sure that the artist you are about to create does not already exists in the wiki.
-    album_new_without_query: Please make sure that the album you are about to create does not already exists in the wiki.
+    work_new_without_query:  Please make sure that the work you are about to create does not already exist in the wiki.
+    recording_new_without_query: Please make sure that the recording you are about to create does not already exist in the wiki.
+    artist_new_without_query: Please make sure that the artist you are about to create does not already exist in the wiki.
+    release_new_without_query: Please make sure that the release you are about to create does not already exist in the wiki.
 
   show: Show
   modify: Modify

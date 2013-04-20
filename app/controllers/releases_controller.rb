@@ -6,7 +6,7 @@ class ReleasesController < ApplicationController
 
   def index
     @releases = build_filter_from_params(params, Release.all.order_by(cache_normalized_title:1))
-
+    
     respond_to do |format|
       format.xml { render xml: @releases }
       format.json { render json: @releases }
@@ -26,7 +26,7 @@ class ReleasesController < ApplicationController
   end
 
   def alphabetic_index
-    @albums = build_filter_from_params(params, Release.where(cache_first_letter: params[:letter]).order_by(cache_normalized_title:1))
+    @releases = build_filter_from_params(params, Release.where(cache_first_letter: params[:letter]).order_by(cache_normalized_title:1))
   end
   
   def show
@@ -41,67 +41,63 @@ class ReleasesController < ApplicationController
 
   def new
     unless params[:q]
-      redirect_to search_albums_path, alert: t("messages.album_new_without_query")
+      redirect_to search_releases_path, alert: t("messages.release_new_without_query")
     else
-      @album = Album.new(AlbumWikiLink.search_query(params[:q]).to_hash)
-      @supplementary_section = @album.supplementary_sections.build
+      @release = Release.new(ReleaseWikiLink.search_query(params[:q]).to_hash)
+      @supplementary_section = @release.supplementary_sections.build
       respond_to do |format|      
         format.html # new.html.erb
-        format.xml  { render xml: @album }
+        format.xml  { render xml: @release }
       end
     end
   end
 
   def create
-
-    @album = Album.new(params[:album])
-
+    @release = Release.new(params[:release])
     respond_to do |format|
-      puts @album.to_xml
-      if @album.save
-        format.html { redirect_to(@album , :notice => 'Album succesfully created.') }
-        format.xml  { render :xml => @album, :status => :created, :location => @album }
-
+      if @release.save
+        format.html { redirect_to(@release, notice: 'Release succesfully created.') }
+        format.xml  { render xml: @release, status: :created, location: @release }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @album.errors, :status => :unprocessable_entity }
+        format.html { render action: :new }
+        format.xml  { render xml: @release.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def edit 
-    @album = Album.find(params[:id])
+    @release = Release.find(params[:id])
   end 
 
   def add_supplementary_section
-    @album = Album.find(params[:id])
-    @album.add_supplementary_section
+    @release = Release.find(params[:id])
+    @release.add_supplementary_section
     respond_to do |format|      
-      format.html { render :action => "edit" }
-      format.xml  { render :xml => @album }
+      format.html { render action: :edit }
+      format.xml  { render xml: @release }
     end
   end 
 
   def update
-    @album = Album.find(params[:id])
+    @release = Release.find(params[:id])
 
     respond_to do |format|
-      if @album.update_attributes(params[:album])
-        format.html { redirect_to(@album, :notice => "Album succesfully updated.") }
-        format.xml  { render :xml => @album, :status => :ok, :location => @album }
+      if @release.update_attributes(params[:album])
+        format.html { redirect_to(@release, notice: "Release succesfully updated.") }
+        format.xml  { render xml: @release, status: :ok, location: @release }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @album.errors, :status => :unprocessable_entity }
+        format.html { render action: :edit }
+        format.xml  { render xml: @release.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @album = Album.find(params[:id])
+    @release = Release.find(params[:id])
     
-    @album.destroy
+    @release.destroy
     respond_to do |format|
-      format.html { redirect_to(albums_url) }
+      format.html { redirect_to(releases_url) }
       format.xml  { head :ok }
     end
   end

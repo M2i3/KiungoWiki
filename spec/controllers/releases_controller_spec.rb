@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe ReleasesController do
   let(:user) { User.new }
+  let(:release) { Object.new }
   before :each do
     allow_message_expectations_on_nil
     ApplicationController.any_instance.stub(:current_user).and_return user
@@ -20,7 +21,6 @@ describe ReleasesController do
   describe "GET show" do
     it "should show a release upon request" do
       id = 99.to_param
-      release = Object.new
       Release.should_receive(:find).with(id).and_return release
       Possession.should_receive(:where).with(owner:user, release:release).and_return Possession
       Possession.should_receive(:first).and_return nil
@@ -74,7 +74,95 @@ describe ReleasesController do
       releases.should_receive(:order_by).with(cache_normalized_title:1).and_return releases
       ReleasesController.any_instance.should_receive(:build_filter_from_params).with(an_instance_of(ActiveSupport::HashWithIndifferentAccess), releases).and_return releases
       get :alphabetic_index, letter:letter
-      assigns(:albums).should eq releases
+      assigns(:releases).should eq releases
+    end
+  end
+  describe "GET new" do
+    it "should redirect to search_releases_path if no q parameter" do
+      get :new
+      response.should redirect_to search_releases_path
+      flash[:alert].should eq I18n.t("messages.release_new_without_query")
+    end
+    it "should" do
+      section = Object.new
+      q = "test"
+      link = {}
+      ReleaseWikiLink.should_receive(:search_query).with(q).and_return link
+      Release.should_receive(:new).with(link).and_return release
+      release.should_receive(:supplementary_sections).and_return release
+      release.should_receive(:build).and_return section
+      get :new, q:q
+      assigns(:release).should eq release
+      assigns(:supplementary_section).should eq section
+    end
+  end
+  describe "POST create" do
+    before :each do
+      @release_params = HashWithIndifferentAccess.new {name:"Test"}
+      @release = Release.new(id: 99)
+      Release.should_receive(:new).with(@release_params).and_return @release
+      @release_save = @release.should_receive(:save)
+    end
+    it "should redirect to the new release after creation" do
+      @release_save.and_return true
+      post :create, release:@release_params
+      response.should redirect_to @release
+      flash[:notice].should eq 'Release succesfully created.'
+    end
+    it "should render new if failed to create" do
+      @release_save.and_return false
+      post :create, release:@release_params
+      response.should render_template :new
+      assigns(:release).should eq @release
+    end
+  end
+  describe "GET edit" do
+    it "should render properly a release to be edited" do
+      id = "99"
+      Release.should_receive(:find).with(id).and_return release
+      get :edit, id:id
+      response.should render_template :edit
+      assigns(:release).should eq release
+    end
+  end
+  describe "GET add_supplementary_section" do
+    it "should be able to add supplementary section" do
+      id = "99"
+      Release.should_receive(:find).with(id).and_return release
+      release.should_receive(:add_supplementary_section)
+      get :add_supplementary_section, id:id
+      assigns(:release).should eq release
+      response.should render_template :edit
+    end
+  end
+  describe "PUT update" do
+    before :each do
+      @release_params = HashWithIndifferentAccess.new {name:"Test"}
+      @release = Release.new(id: 99)
+      @id = @release.id.to_s
+      Release.should_receive(:find).with(@id).and_return @release
+      @release_update = @release.should_receive(:update_attributes)
+    end
+    it "should redirect to the new release after creation" do
+      @release_update.and_return true
+      put :update, release:@release_params, id:@id
+      response.should redirect_to @release
+      flash[:notice].should eq 'Release succesfully updated.'
+    end
+    it "should render new if failed to create" do
+      @release_update.and_return false
+      put :update, release:@release_params, id:@id
+      response.should render_template :edit
+      assigns(:release).should eq @release
+    end
+  end
+  describe "DELETE destroy" do
+    it "should be able to destroy a release" do
+      id = "99"
+      Release.should_receive(:find).with(id).and_return release
+      release.should_receive(:destroy)
+      delete :destroy, id:id
+      response.should redirect_to releases_url
     end
   end
 end

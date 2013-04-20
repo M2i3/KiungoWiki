@@ -262,8 +262,11 @@ namespace :kiungo do
         {$set: {"featured_wiki_link._type":"ReleaseArtistWikiLink"}, $rename:{ "featured_wiki_link.album_id":"release_id" }},
         { multi: true })',
         'db.releases.update({"linkable._type":"AlbumArtistWikiLink"}, 
-                {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},
-                { multi: true })'
+         {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},{ multi: true })',
+        'db.changes.update({"scope":"album"},{$set: {"scope":"release"}},{ multi: true })',
+        'db.releases.update({"linkable._type":"AlbumArtistWikiLink"}, 
+        {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},
+        { multi: true })'
       ].each {|command| database.command eval: command }
     end
   end

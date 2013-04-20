@@ -1,12 +1,12 @@
 .row      
   .span12
     .page-header
-      = title(t("headers.albums_portal"))
+      = title(t("headers.releases_portal"))
 
 .row      
   .span12
     %p
-      Les albums regroupent plusieurs enregistrements interprétés par un ou plusieurs artistes. 
+      Les releases regroupent plusieurs enregistrements interprétés par un ou plusieurs artistes. 
 
 .row
   - if @feature_in_month
@@ -15,7 +15,7 @@
       .content
         = RedCloth.new(@feature_in_month.summary(750)).to_html.html_safe
       %p.pull-left 
-        Voir l'album:
+        Voir l'release:
         = release_wiki_link_path(@feature_in_month.featured_wiki_link)
       - if @feature_in_month.more?(750)
         %p.pull-right= link_to "continuer la lecture", @feature_in_month
@@ -24,19 +24,19 @@
     %h2 Ce que vous pouvez faire pour contribuer
     %ul
       %li 
-        = link_to "Écrire la fiche d'un album", new_release_path
+        = link_to "Écrire la fiche d'un release", new_release_path
       %li 
-        Réviser la fiche d'un album modifiée récemment:
+        Réviser la fiche d'un release modifiée récemment:
         %ul 
           %li 
             - Release.order_by(:updated_at=>:desc).limit(5).all.each do |release|
               %span.album>= link_to release.to_wiki_link.object_text, release_path(release.id)
               ;&nbsp;
             = link_to "...", recent_changes_releases_path, :title=>"consulter la liste complète des modifications récentes"
-          %li= link_to "consulter la liste complète des albums modifiés récemment", recent_changes_albums_path
+          %li= link_to "consulter la liste complète des releases modifiés récemment", recent_changes_releases_path
 
       %li
-        Améliorer la fiche d'un album:
+        Améliorer la fiche d'un release:
         %ul
           %li= link_to "Sans artiste", "#", :class=>"soon-available"
           %li= link_to "Sans enregistrement", "#", :class=>"soon-available"
@@ -46,14 +46,14 @@
   .span12
     %h2 Par ordre alphabétique
     %ul
-      - alphabetic_album_grouping.each do |letter, heading|
+      - alphabetic_release_grouping.each do |letter, heading|
         %li 
           %span.letter= heading
           - Release.where(:cache_first_letter => letter).order_by(updated_at:1).limit(5).each do |release|
             %span.album>= link_to release.to_wiki_link.object_text, release_path(release.id)
             ;&nbsp;
-          = link_to "...", alphabetic_releases_path(letter: letter, page: 1), :title=>"consulter la liste complète des albums commençant par \"#{letter}\""
-      %li= link_to "tous les albums", releases_path(page: 1)
+          = link_to "...", alphabetic_releases_path(letter: letter, page: 1), :title=>"consulter la liste complète des releases commençant par \"#{letter}\""
+      %li= link_to "tous les releases", releases_path(page: 1)
 
 .row
   .span12

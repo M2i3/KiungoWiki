@@ -18,12 +18,12 @@ fr:
     artists_recent_changes: "Artistes modifiés récemments"
     artists_alphabetic_index: "Artistes commençant par %{heading}"
     artists_all_index: "Tous les artistes"
-    albums_portal: "Albums (portail)"
-    releases_index: "Albums"
+    releases_portal: "Releases (portail)"
+    releases_index: "Releases"
     albums_search_result: "Albums pour '%{q}'"
     albums_search: "Recherche dans les albums"
     albums_recent_changes: "Albums modifiés récemments"
-    albums_alphabetic_index: "Albums commençant par %{heading}"
+    releases_alphabetic_index: "Albums commençant par %{heading}"
     albums_all_index: "Tous les albums"
     recordings_portal: "Enregistrements (portail)"
     recordings_index: "Enregistrements"
@@ -60,7 +60,7 @@ fr:
     work_new_without_query: Veuillez vous assurer que l'oeuvre que vous désirez créer n'existe pas déjà dans le wiki.
     recording_new_without_query: Veuillez vous assurer que l'enregistrement que vous désirez créer n'existe pas déjà dans le wiki.
     artist_new_without_query: Veuillez vous assurer que l'artiste que vous désirez créer n'existe pas déjà dans le wiki.
-    album_new_without_query: Veuillez vous assurer que l'album que vous désirez créer n'existe pas déjà dans le wiki.
+    release_new_without_query: Veuillez vous assurer que l'album que vous désirez créer n'existe pas déjà dans le wiki.
 
   show: Afficher
   modify: Modifier

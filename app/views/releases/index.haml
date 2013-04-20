@@ -1,15 +1,15 @@
 .page-header
-  = title(Album.model_name.human.pluralize)
+  = title(Release.model_name.human.pluralize)
 
 .row
   .span11
-    = alpha_album_links
+    = alpha_release_links
 
 = paginate @releases
-= render :partial=>"search_result", :object=>@releases
+= render partial: "search_result", object: @releases
 = paginate @releases
 
 .row
   .span11
-    = alpha_album_links
+    = alpha_release_links
 

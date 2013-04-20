@@ -42,25 +42,25 @@
             %tr
               %td= artist_wiki_link_path(awl)
 
-    %h2= Album.model_name.human.pluralize
+    %h2= Release.model_name.human.pluralize
     - if @recording.album_wiki_links.length == 0
-      %p This recording is not on any album.
+      %p This recording is not on any release.
     - else
       %table.table.table-striped
         %thead
           %tr
-            %th= Album.human_attribute_name("title")
-            %th= Album.human_attribute_name("date_released")
-            %th= Album.human_attribute_name("label")
-            %th= Album.human_attribute_name("media_type")
+            %th= Release.human_attribute_name("title")
+            %th= Release.human_attribute_name("date_released")
+            %th= Release.human_attribute_name("label")
+            %th= Release.human_attribute_name("media_type")
             %th= Recording.human_attribute_name("itemId")
             %th= Recording.human_attribute_name("itemSection")
             %th= Recording.human_attribute_name("trackNb") 
-            %th= Album.human_attribute_name("reference_code")
+            %th= Release.human_attribute_name("reference_code")
         %tbody
           - @recording.album_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
             %tr
-              %td= album_wiki_link_path(awl)
+              %td= release_wiki_link_path(awl)
               %td= awl.date_released
               %td= awl.label
               %td= awl.media_type

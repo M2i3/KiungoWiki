@@ -25,11 +25,11 @@ module ApplicationHelper
     end
   end
 
-  def album_wiki_link_path(awl)
-    if awl.album_id
-      link_to(awl.title, album_path(:id=>awl.album_id))
+  def release_wiki_link_path(rwl)
+    if rwl.release_id
+      link_to(rwl.title, releases_path(id: rwl.release_id))
     else
-      link_to(awl.title, albums_path(:q=>awl.reference_text))
+      link_to(rwl.title, releases_path(q: rwl.reference_text))
     end
   end
   

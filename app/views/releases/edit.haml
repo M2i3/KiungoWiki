@@ -1,17 +1,17 @@
 = title("Modifier l'album")
 .row
-  = render :partial=>'links'
+  = render partial: 'links'
   .span12
-    - unless @album.errors.empty?
+    - unless @release.errors.empty?
       .alert.alert-error
         %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'album:
         %br/
-        = @album.errors.full_messages.join("</br>").html_safe
+        = @release.errors.full_messages.join("</br>").html_safe
 
-    = form_for @album do |f|
-      = render :partial=>'form', :object=>f
+    = form_for @release do |f|
+      = render partial: 'form', object: f
       .formActions
-        = f.submit :class=>"btn btn-primary"
-        #{link_to t("delete"), @album, :method=>:delete, :class=>'btn'} 
+        = f.submit class: "btn btn-primary"
+        #{link_to t("delete"), @release, method: :delete, class: 'btn'} 
         ou #{link_to t("cancel"), :back, :class=>"btn"}
 

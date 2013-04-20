@@ -1,15 +1,15 @@
 .page-header  
-  = title(t("headers.albums_alphabetic_index", :heading=>alphabetic_album_grouping[params[:letter]]))
+  = title(t("headers.releases_alphabetic_index", heading: alphabetic_album_grouping[params[:letter]]))
 
 .row
   .span11
-    = alpha_album_links
+    = alpha_release_links
 
-= paginate @albums
-= render :partial=>"search_result", :object=>@albums
-= paginate @albums
+= paginate @releases
+= render partial: "search_result", object: @releases
+= paginate @releases
 
 .row
   .span11
-    = alpha_album_links
+    = alpha_release_links
 

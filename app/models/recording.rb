@@ -5,18 +5,18 @@ class Recording
   include Mongoid::History::Trackable
 
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
-  field :title, :type => String
-  field :recording_date, :type => IncDate
-  field :recording_location, :type => String
-  field :duration, :type => Duration
-  field :rythm, :type => Integer
-  field :origrecordingid, :type => String
+  field :title, type:  String
+  field :recording_date, type:  IncDate
+  field :recording_location, type:  String
+  field :duration, type:  Duration
+  field :rythm, type:  Integer
+  field :origrecordingid, type:  String
 
   #
   # calculated values so we can index and sort
   #
-  field :cache_normalized_title, :type => String, :default => ""
-  field :cache_first_letter, :type => String, :default => ""
+  field :cache_normalized_title, type:  String, default: ""
+  field :cache_first_letter, type:  String, default: ""
 
   before_save :update_cached_fields
 
@@ -33,29 +33,29 @@ class Recording
 #  validates_format_of :recording_date_text, :with=>/^(\d{4})(?:-?(\d{0,2})(?:-?(\d{0,2}))?)?$/, :allow_nil=>true
   validates_numericality_of :rythm, :greater_than=>0, :allow_nil=>true
 
-  embeds_one :work_wiki_link, :as=>:linkable, :class_name=>"RecordingWorkWikiLink"
+  embeds_one :work_wiki_link, as: :linkable, class_name: "RecordingWorkWikiLink"
   validates_associated :work_wiki_link  
   accepts_nested_attributes_for :work_wiki_link
 
-  embeds_many :artist_wiki_links, :as=>:linkable, :class_name=>"RecordingArtistWikiLink"
+  embeds_many :artist_wiki_links, as: :linkable, class_name: "RecordingArtistWikiLink"
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
 
-  embeds_many :album_wiki_links, :as=>:linkable, :class_name=>"RecordingAlbumWikiLink"
+  embeds_many :album_wiki_links, as: :linkable, class_name: "RecordingAlbumWikiLink"
   accepts_nested_attributes_for :album_wiki_links
   validates_associated :album_wiki_links
 
-  embeds_many :category_wiki_links, :as=>:linkable
+  embeds_many :category_wiki_links, as: :linkable
   accepts_nested_attributes_for :category_wiki_links
   validates_associated :category_wiki_links
 
-  embeds_many :supplementary_sections, :class_name=>"SupplementarySection"
+  embeds_many :supplementary_sections, class_name: "SupplementarySection"
   accepts_nested_attributes_for :supplementary_sections
   validates_associated :supplementary_sections
 
   # telling Mongoid::History how you want to track changes
   track_history   :modifier_field => :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
-                  :version_field => :version,   # adds "field :version, :type => Integer" to track current version, default is :version
+                  :version_field => :version,   # adds "field :version, type:  Integer" to track current version, default is :version
                   :track_create   =>  true,    # track document creation, default is false
                   :track_update   =>  true,     # track document updates, default is true
                   :track_destroy  =>  true     # track document destruction, default is false
