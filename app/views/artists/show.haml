@@ -71,7 +71,7 @@
               %td= rwl.recording.artist_wiki_links.where(artist_id: @artist.id).collect{|awl| awl.role }.join(", ").html_safe
 
     %h2= Release.model_name.human.pluralize
-    - if @artist.album_wiki_links.count == 0 
+    - if @artist.release_wiki_links.count == 0 
       %p This artist does not have any releases.
     - else
       %table.table.table-striped
@@ -83,7 +83,7 @@
             %th= Release.human_attribute_name("label")
 
         %tbody
-          - @artist.album_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
+          - @artist.release_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
             %tr
               %td= release_wiki_link_path(awl)
               %td= awl.date_released

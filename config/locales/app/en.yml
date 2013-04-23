@@ -18,11 +18,11 @@ en:
     artists_all_index: "All he Artists"    
     releases_portal: "Releases (portal)"
     releases_index: "Releases"
-    albums_search_result: "Albums for '%{q}'"
-    albums_search: "Searching Within the Albums"
-    albums_recent_changes: "Recently Modified Albums"
+    releases_search_result: "Releases for '%{q}'"
+    releases_search: "Searching Within the Releases"
+    releases_recent_changes: "Recently Modified Albums"
     releases_alphabetic_index: "Releases starting with %{heading}"
-    albums_all_index: "All the Albums"
+    releases_all_index: "All the Albums"
     recordings_portal: "Recordings (portal)"
     recordings_index: "Recordings"
     recordings_search_result: "Recordings for '%{q}'"
@@ -30,7 +30,7 @@ en:
     recordings_recent_changes: "Recently Modified Recordings"
     recordings_alphabetic_index: "Recordings starting with %{heading}"
     recordings_all_index: "All the Recordings"
-    portal_article_album: "Album of the month: %{featured}"
+    portal_article_release: "Album of the month: %{featured}"
     portal_article_artist: "Artist of the month: %{featured}"
     portal_article_recording: "Recording of the month: %{featured}"
     portal_article_work: "Work of the month: %{featured}"
@@ -81,7 +81,7 @@ en:
     new_artist_portal_article: about an article
     new_work_portal_article: about a work
     new_recording_portal_article: about a recording
-    new_album_portal_article: about an album
+    new_release_portal_article: about an release
     new_category_portal_article: about a category
     new_general_portal_article: article only
 
@@ -98,7 +98,7 @@ en:
   addmusic:
     addtomusic: Add to My Music
     havemusic: Already in My Music
-    adderror: Album not added, please try again or be sure that you do not already own this album
+    adderror: Album not added, please try again or be sure that you do not already own this release
     labels: Labels
     acquisitiondate: Acquisition Date
     rating: Rating

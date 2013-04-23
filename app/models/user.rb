@@ -57,18 +57,18 @@ class User
   has_many :possessions, foreign_key: "owner_id"
   has_many :labels
 
-  def album_wiki_links_text
-    album_wiki_links.collect{|v| v.reference_text }.join(",")
+  def release_wiki_links_text
+    release_wiki_links.collect{|v| v.reference_text }.join(",")
   end
 
-  def album_wiki_links_combined_links
-    album_wiki_links.collect{|v| v.combined_link }
+  def release_wiki_links_combined_links
+    release_wiki_links.collect{|v| v.combined_link }
   end
 
-  def album_wiki_links_text=(value)
-    self.album_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.album_wiki_links.clear does not work
+  def release_wiki_links_text=(value)
+    self.release_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.release_wiki_links.clear does not work
     value.split(",").uniq.each{|q| 
-      self.album_wiki_links.build(:reference_text=>q.strip) 
+      self.release_wiki_links.build(:reference_text=>q.strip) 
     }    
   end
 end

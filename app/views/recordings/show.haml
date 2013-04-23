@@ -43,7 +43,7 @@
               %td= artist_wiki_link_path(awl)
 
     %h2= Release.model_name.human.pluralize
-    - if @recording.album_wiki_links.length == 0
+    - if @recording.release_wiki_links.length == 0
       %p This recording is not on any release.
     - else
       %table.table.table-striped
@@ -58,7 +58,7 @@
             %th= Recording.human_attribute_name("trackNb") 
             %th= Release.human_attribute_name("reference_code")
         %tbody
-          - @recording.album_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
+          - @recording.release_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
             %tr
               %td= release_wiki_link_path(awl)
               %td= awl.date_released

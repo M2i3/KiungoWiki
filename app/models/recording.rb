@@ -41,9 +41,9 @@ class Recording
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
 
-  embeds_many :album_wiki_links, as: :linkable, class_name: "RecordingAlbumWikiLink"
-  accepts_nested_attributes_for :album_wiki_links
-  validates_associated :album_wiki_links
+  embeds_many :release_wiki_links, as: :linkable, class_name: "RecordingReleaseWikiLink"
+  accepts_nested_attributes_for :release_wiki_links
+  validates_associated :release_wiki_links
 
   embeds_many :category_wiki_links, as: :linkable
   accepts_nested_attributes_for :category_wiki_links
@@ -62,8 +62,8 @@ class Recording
 
 
 
-  def album_title
-    self.album_wiki_link.title 
+  def release_title
+    self.release_wiki_link.title 
   end
 
   def work_wiki_link_text
@@ -97,18 +97,18 @@ class Recording
     self.artist_wiki_links.first && self.artist_wiki_links.first.name(true)
   end
 
-  def album_wiki_links_text
-    album_wiki_links.collect{|v| v.reference_text }.join(",")
+  def release_wiki_links_text
+    release_wiki_links.collect{|v| v.reference_text }.join(",")
   end
 
-  def album_wiki_links_combined_links
-    album_wiki_links.collect{|v| v.combined_link }
+  def release_wiki_links_combined_links
+    release_wiki_links.collect{|v| v.combined_link }
   end
 
-  def album_wiki_links_text=(value)
-    self.album_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.album_wiki_links.clear does not work
+  def release_wiki_links_text=(value)
+    self.release_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.release_wiki_links.clear does not work
     value.split(",").each{|q| 
-      self.album_wiki_links.build(:reference_text=>q.strip) 
+      self.release_wiki_links.build(:reference_text=>q.strip) 
     }    
   end
 
@@ -121,7 +121,7 @@ class Recording
   end
 
   def category_wiki_links_text=(value)
-    self.category_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.album_wiki_links.clear does not work
+    self.category_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.release_wiki_links.clear does not work
     value.split(",").each{|q| 
       self.category_wiki_links.build(:reference_text=>q.strip) 
     }    

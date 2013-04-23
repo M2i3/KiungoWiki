@@ -33,8 +33,8 @@ class ReleasesController < ApplicationController
     @release = Release.find(params[:id])
     @possession = Possession.where(owner:current_user, release:@release).first if current_user
     respond_to do |format|
-      format.xml { render xml: @album.to_xml(except: [:versions]) }
-      format.json { render json: @album }
+      format.xml { render xml: @release.to_xml(except: [:versions]) }
+      format.json { render json: @release }
       format.html
     end
   end
@@ -82,7 +82,7 @@ class ReleasesController < ApplicationController
     @release = Release.find(params[:id])
 
     respond_to do |format|
-      if @release.update_attributes(params[:album])
+      if @release.update_attributes(params[:release])
         format.html { redirect_to(@release, notice: "Release succesfully updated.") }
         format.xml  { render xml: @release, status: :ok, location: @release }
       else
@@ -104,8 +104,8 @@ class ReleasesController < ApplicationController
 
   def lookup
 
-    wiki_link_klass = { "artist"=>ArtistAlbumWikiLink,
-                        "recording"=>RecordingAlbumWikiLink }[params[:src]] || ReleaseWikiLink
+    wiki_link_klass = { "artist"=>ArtistReleaseWikiLink,
+                        "recording"=>RecordingReleaseWikiLink }[params[:src]] || ReleaseWikiLink
 
     asq = wiki_link_klass.search_query(params[:q])
 

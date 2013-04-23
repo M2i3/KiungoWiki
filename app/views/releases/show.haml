@@ -59,7 +59,7 @@
                 %a#confirmaddmusic.btn.btn-primary{"data-possession-id" => @possession.id}
                   = t('update')
               - else
-                %a#confirmaddmusic.btn.btn-primary{"data-album-id" => @release.id}
+                %a#confirmaddmusic.btn.btn-primary{"data-release-id" => @release.id}
                   = t('addmusic.addtomusic')
                 
       %p
@@ -80,7 +80,7 @@
 
     %h2= Artist.model_name.human.pluralize
     - if @release.artist_wiki_links.count == 0 
-      %p This album does not have any artist associated with it.
+      %p This release does not have any artist associated with it.
     - else
       %table.table.table-striped
         %tbody
@@ -91,7 +91,7 @@
 
     %h2= Recording.model_name.human.pluralize
     - if @release.recording_wiki_links == 0
-      %p This album does not have any recording associated with it.
+      %p This release does not have any recording associated with it.
     - else
       %table.table.table-striped
         %thead

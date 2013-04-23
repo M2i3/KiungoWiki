@@ -31,7 +31,7 @@ class Release
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
 
-  embeds_many :recording_wiki_links, as: :linkable, class_name: "AlbumRecordingWikiLink"
+  embeds_many :recording_wiki_links, as: :linkable, class_name: "ReleaseRecordingWikiLink"
   accepts_nested_attributes_for :recording_wiki_links
   validates_associated :recording_wiki_links
 
@@ -116,7 +116,7 @@ class Release
   end
 
   def to_wiki_link
-    ReleaseWikiLink.new(reference_text: "oid:#{self.id}", album: self)
+    ReleaseWikiLink.new(reference_text: "oid:#{self.id}", release: self)
   end
   
   scope :queried, ->(q) {
@@ -136,7 +136,7 @@ class Release
   }
 
 
-  #Album.all.group_by {|a| a.title_first_letter.upcase }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
-  #Album.all.group_by {|a| a.date_released.year.to_s }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
-  #Album.all.group_by {|a| a.date_released.year.to_s }.sort{|a, b| a <=> b}.each {|a| puts "" + a[0] + ", " + a[1].length.to_s }; nil
+  #Release.all.group_by {|a| a.title_first_letter.upcase }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
+  #Release.all.group_by {|a| a.date_released.year.to_s }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
+  #Release.all.group_by {|a| a.date_released.year.to_s }.sort{|a, b| a <=> b}.each {|a| puts "" + a[0] + ", " + a[1].length.to_s }; nil
 end

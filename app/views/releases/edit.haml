@@ -1,10 +1,10 @@
-= title("Modifier l'album")
+= title("Modifier l'release")
 .row
   = render partial: 'links'
   .span12
     - unless @release.errors.empty?
       .alert.alert-error
-        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'album:
+        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'release:
         %br/
         = @release.errors.full_messages.join("</br>").html_safe
 

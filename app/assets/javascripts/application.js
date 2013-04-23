@@ -108,7 +108,7 @@ $(document).ready(function () {
      classes: default_classes
   });
 
-  $("input.album_artists_lookup").tokenInput("/artists/lookup.json?src=album", {
+  $("input.release_artists_lookup").tokenInput("/artists/lookup.json?src=release", {
      classes: default_classes
   });
 
@@ -132,15 +132,15 @@ $(document).ready(function () {
      classes: default_classes
   });
   
-  $("input.albums_title_lookup").tokenInput("/albums/lookup.json", {
+  $("input.releases_title_lookup").tokenInput("/releases/lookup.json", {
      classes: default_classes
   });
 
-  $("input.artist_albums_title_lookup").tokenInput("/albums/lookup.json?src=artist", {
+  $("input.artist_releases_title_lookup").tokenInput("/releases/lookup.json?src=artist", {
      classes: default_classes
   });
 
-  $("input.recording_albums_title_lookup").tokenInput("/albums/lookup.json?src=recording", {
+  $("input.recording_releases_title_lookup").tokenInput("/releases/lookup.json?src=recording", {
      classes: default_classes
   });
 
@@ -156,7 +156,7 @@ $(document).ready(function () {
      classes: default_classes
   });
 
-  $("input.album_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=album", {
+  $("input.release_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=release", {
      classes: default_classes
   });
 

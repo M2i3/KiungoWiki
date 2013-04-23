@@ -43,8 +43,8 @@ describe ReleasesController do
   end
   describe "GET lookup" do
     it "should be able to lookup releases" do
-      {ReleaseWikiLink => nil, ArtistAlbumWikiLink => "artist", 
-      RecordingAlbumWikiLink => "recording"}.each do |link, src_param|
+      {ReleaseWikiLink => nil, ArtistReleaseWikiLink => "artist", 
+      RecordingReleaseWikiLink => "recording"}.each do |link, src_param|
         q = "test"
         data = Object.new
         link.should_receive(:search_query).with(q).and_return data

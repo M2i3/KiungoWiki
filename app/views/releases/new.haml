@@ -4,7 +4,7 @@
   .span12
     - unless @release.errors.empty?
       .alert.alert-error
-        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel album:
+        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel release:
         %br/
         = @release.errors.full_messages.join("</br>").html_safe
 
