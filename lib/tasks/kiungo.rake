@@ -266,7 +266,21 @@ namespace :kiungo do
         'db.changes.update({"scope":"album"},{$set: {"scope":"release"}},{ multi: true })',
         'db.releases.update({"linkable._type":"AlbumArtistWikiLink"}, 
         {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},
-        { multi: true })'
+        { multi: true })',
+        'db.recordings.update({},{$rename:{ "album_wiki_links":"release_wiki_links" }},{ multi: true })',
+        'var newArray;db.recordings.find().forEach(function(doc){
+          newArray = doc.release_wiki_links;
+          if(newArray != undefined) {
+            for(i = 0; i < newArray.length; i++) {
+              var obj = newArray[i];
+              obj.release_id = obj.album_id;
+              delete obj.album_id;
+              printjson(obj);
+              newArray[i] = obj;
+            }
+            doc.release_wiki_links = newArray;
+          }
+        })'
       ].each {|command| database.command eval: command }
     end
   end
