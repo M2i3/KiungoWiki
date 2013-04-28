@@ -268,11 +268,11 @@ namespace :kiungo do
         {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},
         { multi: true })',
         'db.recordings.update({},{$rename:{ "album_wiki_links":"release_wiki_links" }},{ multi: true })',
-        'var newArray;db.recordings.find().forEach(function(doc){
+        'var newArray; var obj;db.recordings.find().forEach(function(doc){
           newArray = doc.release_wiki_links;
           if(newArray != undefined) {
             for(i = 0; i < newArray.length; i++) {
-              var obj = newArray[i];
+              obj = newArray[i];
               obj.release_id = obj.album_id;
               delete obj.album_id;
               printjson(obj);
@@ -280,7 +280,9 @@ namespace :kiungo do
             }
             doc.release_wiki_links = newArray;
           }
-        })'
+        })',
+        'db.artists.update({},{$rename:{ "album_wiki_links":"release_wiki_links" }},{ multi: true })',
+        'db.changes.drop()'
       ].each {|command| database.command eval: command }
     end
   end
