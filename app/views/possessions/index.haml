@@ -42,7 +42,7 @@
               %td
                 = link_to t('modify'), edit_possession_path(possession)
               %td
-                = link_to t('delete'), possession, method: :delete, confirm: 'Are you sure?'
+                = link_to t('delete'), possession, method: :delete, confirm: t('messages.confirm')
     - else
       %p.hero-unit
         - if @labelled

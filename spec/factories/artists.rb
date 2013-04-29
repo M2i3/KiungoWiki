@@ -3,6 +3,7 @@
 FactoryGirl.define do
   factory :artist do
       name "MyString"
+      surname "Surname"
       birth_date ""
       birth_location "MyString"
       death_date ""

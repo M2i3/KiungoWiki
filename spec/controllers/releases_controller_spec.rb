@@ -161,6 +161,7 @@ describe ReleasesController do
       id = "99"
       Release.should_receive(:find).with(id).and_return release
       release.should_receive(:destroy)
+      user.groups << "super-admin"
       delete :destroy, id:id
       response.should redirect_to releases_url
     end

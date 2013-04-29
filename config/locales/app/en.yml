@@ -5,7 +5,7 @@ en:
     works_portal: "Works (portal)"
     works_index: "Works"
     works_search_result: "Works for '%{q}'"
-    works_search: "Seacing Within the Works"
+    works_search: "Searching Within the Works"
     works_recent_changes: "Recently Modified Works"
     works_alphabetic_index: "Works starting with %{heading}"
     works_all_index: "All the Works"
@@ -60,6 +60,7 @@ en:
     recording_new_without_query: Please make sure that the recording you are about to create does not already exist in the wiki.
     artist_new_without_query: Please make sure that the artist you are about to create does not already exist in the wiki.
     release_new_without_query: Please make sure that the release you are about to create does not already exist in the wiki.
+    confirm: Are you sure?
 
   show: Show
   modify: Modify

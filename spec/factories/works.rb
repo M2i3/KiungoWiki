@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :work do
     title "La vie en rose"
+    lyrics "test song"
   end
 end

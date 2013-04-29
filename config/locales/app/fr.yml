@@ -61,7 +61,8 @@ fr:
     recording_new_without_query: Veuillez vous assurer que l'enregistrement que vous désirez créer n'existe pas déjà dans le wiki.
     artist_new_without_query: Veuillez vous assurer que l'artiste que vous désirez créer n'existe pas déjà dans le wiki.
     release_new_without_query: Veuillez vous assurer que l'release que vous désirez créer n'existe pas déjà dans le wiki.
-
+    confirm: Are you sure?
+    
   show: Afficher
   modify: Modifier
   discuss: Discuter

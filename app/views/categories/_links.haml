@@ -1,4 +1,6 @@
 %ul#pageactions.nav.nav-tabs.pull-right
-  %li{:class =>current_page_classes(:action=>"show")}= link_to t("show"), category_path(@category)
-  %li{:class =>current_page_classes(:action=>"edit")}= link_to t("modify"), edit_category_path(@category)
+  %li{class: current_page_classes(action: "show")}= link_to t("show"), category_path(@category)
+  %li{class: current_page_classes(action: "edit")}= link_to t("modify"), edit_category_path(@category)
+  - if can? :destroy, @category
+    %li= link_to t("delete"), @category, method: :delete, confirm: t('messages.confirm')
 
