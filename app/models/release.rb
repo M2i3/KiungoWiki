@@ -125,7 +125,7 @@ class Release
     asq.filled_query_fields.each {|field|
       case field
         when :title
-          current_query = current_query.csearch(asq[field])
+          current_query = current_query.csearch(asq[field], match: :all)
         when :label, :media_type, :reference_code
           current_query = current_query.where(field=>/#{asq[field].downcase}/i)
         when :date_released, :created_at, :updated_at

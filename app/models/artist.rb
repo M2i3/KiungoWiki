@@ -159,7 +159,7 @@ class Artist
     asq.filled_query_fields.each {|field|
       case field
         when :name
-          current_query = current_query.csearch(asq[field])
+          current_query = current_query.csearch(asq[field], match: :all)
         when :surname, :given_name, :birth_location, :death_location
           current_query = current_query.where(field=>/#{asq[field].downcase}/i)
         when :birth_date, :death_date, :created_at, :updated_at

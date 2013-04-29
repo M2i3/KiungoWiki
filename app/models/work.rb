@@ -159,7 +159,7 @@ class Work
     wsq.filled_query_fields.each {|field|
       case field
         when :title
-          current_query = current_query.csearch(wsq[field])
+          current_query = current_query.csearch(wsq[field], match: :all)
         when :publisher, :copyright, :language_code, :lyrics
           current_query = current_query.where(field=>/#{wsq[field].downcase}/i)
         when :date_written, :created_at, :updated_at
