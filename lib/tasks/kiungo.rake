@@ -266,6 +266,24 @@ namespace :kiungo do
                   }
         })"
       end
+      def rename_array_type collec, attribute
+        "var newArray; var obj;db.#{collec}.find().forEach(function(doc) {
+            newArray = doc.#{attribute};
+            if(newArray != undefined) {
+              for(i = 0; i < newArray.length; i++) {
+                obj = newArray[i];
+                if (obj._type === 'AlbumRecordingWikiLink') {
+                  obj._type = 'ReleaseRecordingWikiLink';
+                }
+                else if (obj._type === 'AlbumArtistWikiLink') {
+                  obj._type = 'ReleaseArtistWikiLink';
+                }
+              }
+              doc.#{attribute} = newArray;
+              db.#{collec}.save(doc);
+            }
+        })"
+      end
       def rename_album_array collec
         "db.#{collec}.update({},{$rename:{ \"album_wiki_links\":\"release_wiki_links\" }},{ multi: true })"
       end
@@ -285,6 +303,8 @@ namespace :kiungo do
         'db.releases.update({"linkable._type":"AlbumArtistWikiLink"}, 
         {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},
         { multi: true })',
+        rename_array_type('releases', 'artist_wiki_links'),
+        rename_array_type('releases', 'recording_wiki_links'),
         rename_album_array('recordings'),
         rename_inner_release('recordings'),
         rename_album_array('artists'),
