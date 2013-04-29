@@ -251,6 +251,24 @@ namespace :kiungo do
     end
     desc "Migrate Albums into Releases"
     task albums: :environment do
+      def rename_inner_release collec
+        "var newArray; var obj;db.#{collec}.find().forEach(function(doc) {
+                  newArray = doc.release_wiki_links;
+                  if(newArray != undefined) {
+                    for(i = 0; i < newArray.length; i++) {
+                      obj = newArray[i];
+                      obj.release_id = obj.album_id;
+                      delete obj.album_id;
+                      newArray[i] = obj;
+                    }
+                    doc.release_wiki_links = newArray;
+                    db.#{collec}.save(doc);
+                  }
+        })"
+      end
+      def rename_album_array collec
+        "db.#{collec}.update({},{$rename:{ \"album_wiki_links\":\"release_wiki_links\" }},{ multi: true })"
+      end
       database = Release.collection.database
       ['db.albums.renameCollection("releases")',
         'db.possessions.update({}, {$rename:{ "album_id": "release_id" }}, { multi: true })',
@@ -267,21 +285,10 @@ namespace :kiungo do
         'db.releases.update({"linkable._type":"AlbumArtistWikiLink"}, 
         {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},
         { multi: true })',
-        'db.recordings.update({},{$rename:{ "album_wiki_links":"release_wiki_links" }},{ multi: true })',
-        'var newArray; var obj;db.recordings.find().forEach(function(doc){
-          newArray = doc.release_wiki_links;
-          if(newArray != undefined) {
-            for(i = 0; i < newArray.length; i++) {
-              obj = newArray[i];
-              obj.release_id = obj.album_id;
-              delete obj.album_id;
-              printjson(obj);
-              newArray[i] = obj;
-            }
-            doc.release_wiki_links = newArray;
-          }
-        })',
-        'db.artists.update({},{$rename:{ "album_wiki_links":"release_wiki_links" }},{ multi: true })',
+        rename_album_array('recordings'),
+        rename_inner_release('recordings'),
+        rename_album_array('artists'),
+        rename_inner_release('artists'),
         'db.changes.drop()'
       ].each {|command| database.command eval: command }
     end
