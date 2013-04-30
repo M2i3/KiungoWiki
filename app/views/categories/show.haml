@@ -1,13 +1,9 @@
 = title(@category.category_name)
 
 .row
-  = render :partial=>'links'
+  = render partial: 'links'
   .span12
     .section.summary
       %p
-        = Album.human_attribute_name("category")
+        = Release.human_attribute_name("category")
         \: #{@category.category_name}
-
-
-  
-

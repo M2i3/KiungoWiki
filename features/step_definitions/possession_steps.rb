@@ -1,26 +1,18 @@
-Given(/^a user who is logged in$/) do
-  @user = FactoryGirl.create(:user)
-  visit new_user_session_path(lang: "en")
-  fill_in "Email", with: @user.email
-  fill_in "Password", with: FactoryGirl.build(:user).password
-  click_button "Connexion"
+Given(/^a release exists$/) do
+  FactoryGirl.create(:release)
 end
 
-Given(/^an album exists$/) do
-  FactoryGirl.create(:album)
-end
-
-Given(/^a user who is logged in and looking at an album$/) do
-  step "an album exists"
+Given(/^a user who is logged in and looking at a release$/) do
+  step "a release exists"
   step "a user who is logged in"
-  step "I go to an album"
+  step "I go to a release"
 end
 
 Given(/^a user with multiple possessions who logs in$/) do
   step "a user who is logged in"
   (1..3).each do |num|
     title = "test#{num}"
-    Possession.where(album:FactoryGirl.create(:album, title:title), owner:@user).create!
+    Possession.where(release:FactoryGirl.create(:release, title:title), owner:@user).create!
   end
 end
 
@@ -29,7 +21,7 @@ When(/^I click on "(.*?)" and confirm$/) do |link|
   find('a#confirmaddmusic', text:link).click
 end
 
-When(/^I add this album to my collection$/) do
+When(/^I add this release to my collection$/) do
   click_link "Add to My Music"
 end
 
@@ -43,20 +35,20 @@ end
 When(/^I remove a random possession$/) do
   poss = @user.possessions.sample
   find(:xpath, "//a[@href='#{possession_path poss}' and @data-method='delete']").click
-  @removed_poss = poss.album.title
+  @removed_poss = poss.release.title
 end
 
 When(/^I fill in posession info and submit$/) do
-  @album = Album.first.title
-  fill_in "token-input-possession_album", with: @album[0,3]
-  select_token @album
+  @release = Release.first.title
+  fill_in "token-input-possession_release_wiki", with: @release[0,3]
+  select_token @release
   @label = "test"
   fill_in "token-input-possession_labels_text", with: @label
   select_token @label
   fill_in "Comments", with: "This album rocks!"
 end
 
-Then(/^the album should be in my possession$/) do
+Then(/^the release should be in my possession$/) do
   count = 0
   while count < 30
     break if @user.reload.possessions.all.size > 0
@@ -67,7 +59,7 @@ Then(/^the album should be in my possession$/) do
 end
 
 Then(/^my possession should be labeled$/) do
-  step "the album should be in my possession"
+  step "the release should be in my possession"
   poss = @user.possessions.first
   poss.labels.size.should eq 1
   poss.labels.should include "test"
@@ -75,7 +67,7 @@ end
 
 Then(/^I should see all of my possessions$/) do
   @user.possessions.each do |poss|
-    page.should have_content poss.album.title
+    page.should have_content poss.release.title
   end
 end
 
@@ -84,6 +76,6 @@ Then(/^it should not be shown in My Music$/) do
 end
 
 Then(/^I should see my new possession$/) do
-  page.should have_content @album
+  page.should have_content @release
   page.should have_content @label
 end

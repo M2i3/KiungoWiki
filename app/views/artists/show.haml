@@ -1,7 +1,7 @@
 = title(@artist.name)
 
 .row
-  = render :partial=>'links'
+  = render partial: 'links'
   .span12
     .section.summary
       %p
@@ -68,24 +68,24 @@
               %td= recording_wiki_link_path(rwl)
               %td= rwl.recording_date    
               %td= rwl.duration  
-              %td= rwl.recording.artist_wiki_links.where(:artist_id=>@artist.id).collect{|awl| awl.role }.join(", ").html_safe
+              %td= rwl.recording.artist_wiki_links.where(artist_id: @artist.id).collect{|awl| awl.role }.join(", ").html_safe
 
-    %h2= Album.model_name.human.pluralize
-    - if @artist.album_wiki_links.count == 0 
-      %p This artist does not have any albums.
+    %h2= Release.model_name.human.pluralize
+    - if @artist.release_wiki_links.count == 0 
+      %p This artist does not have any releases.
     - else
       %table.table.table-striped
         %thead
           %tr
-            %th= Album.human_attribute_name("title")
-            %th= Album.human_attribute_name("date_released")
-            %th= Album.human_attribute_name("media_type")
-            %th= Album.human_attribute_name("label")
+            %th= Release.human_attribute_name("title")
+            %th= Release.human_attribute_name("date_released")
+            %th= Release.human_attribute_name("media_type")
+            %th= Release.human_attribute_name("label")
 
         %tbody
-          - @artist.album_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
+          - @artist.release_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
             %tr
-              %td= album_wiki_link_path(awl)
+              %td= release_wiki_link_path(awl)
               %td= awl.date_released
               %td= awl.media_type
               %td= awl.label
@@ -96,5 +96,3 @@
 
     .well 
       = content_tag(:small, Artist.human_attribute_name("updated_at") + " " + @artist.updated_at.to_s)
-
-

@@ -1,0 +1,17 @@
+= title("Modifier l'release")
+.row
+  = render partial: 'links'
+  .span12
+    - unless @release.errors.empty?
+      .alert.alert-error
+        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'release:
+        %br/
+        = @release.errors.full_messages.join("</br>").html_safe
+
+    = form_for @release do |f|
+      = render partial: 'form', object: f
+      .formActions
+        = f.submit class: "btn btn-primary"
+        #{link_to t("delete"), @release, method: :delete, class: 'btn'} 
+        ou #{link_to t("cancel"), :back, :class=>"btn"}
+

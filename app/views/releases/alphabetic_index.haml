@@ -1,0 +1,15 @@
+.page-header  
+  = title(t("headers.releases_alphabetic_index", heading: alphabetic_release_grouping[params[:letter]]))
+
+.row
+  .span11
+    = alpha_release_links
+
+= paginate @releases
+= render partial: "search_result", object: @releases
+= paginate @releases
+
+.row
+  .span11
+    = alpha_release_links
+

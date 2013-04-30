@@ -5,7 +5,7 @@ en:
     works_portal: "Works (portal)"
     works_index: "Works"
     works_search_result: "Works for '%{q}'"
-    works_search: "Seacing Within the Works"
+    works_search: "Searching Within the Works"
     works_recent_changes: "Recently Modified Works"
     works_alphabetic_index: "Works starting with %{heading}"
     works_all_index: "All the Works"
@@ -16,13 +16,13 @@ en:
     artists_recent_changes: "Recently Modified Artists"
     artists_alphabetic_index: "Artists starting with %{heading}"
     artists_all_index: "All he Artists"    
-    albums_portal: "Albums (portal)"
-    albums_index: "Albums"
-    albums_search_result: "Albums for '%{q}'"
-    albums_search: "Searching Within the Albums"
-    albums_recent_changes: "Recently Modified Albums"
-    albums_alphabetic_index: "Albums starting with %{heading}"
-    albums_all_index: "All the Albums"
+    releases_portal: "Releases (portal)"
+    releases_index: "Releases"
+    releases_search_result: "Releases for '%{q}'"
+    releases_search: "Searching Within the Releases"
+    releases_recent_changes: "Recently Modified Albums"
+    releases_alphabetic_index: "Releases starting with %{heading}"
+    releases_all_index: "All the Albums"
     recordings_portal: "Recordings (portal)"
     recordings_index: "Recordings"
     recordings_search_result: "Recordings for '%{q}'"
@@ -30,7 +30,7 @@ en:
     recordings_recent_changes: "Recently Modified Recordings"
     recordings_alphabetic_index: "Recordings starting with %{heading}"
     recordings_all_index: "All the Recordings"
-    portal_article_album: "Album of the month: %{featured}"
+    portal_article_release: "Album of the month: %{featured}"
     portal_article_artist: "Artist of the month: %{featured}"
     portal_article_recording: "Recording of the month: %{featured}"
     portal_article_work: "Work of the month: %{featured}"
@@ -56,10 +56,11 @@ en:
     error: Oops! An error has occured!
     alert: One moment! I must inform you!
     notice: Great! It worked!
-    work_new_without_query:  Please make sure that the work you are about to create does not already exists in the wiki.
-    recording_new_without_query: Please make sure that the recording you are about to create does not already exists in the wiki.
-    artist_new_without_query: Please make sure that the artist you are about to create does not already exists in the wiki.
-    album_new_without_query: Please make sure that the album you are about to create does not already exists in the wiki.
+    work_new_without_query:  Please make sure that the work you are about to create does not already exist in the wiki.
+    recording_new_without_query: Please make sure that the recording you are about to create does not already exist in the wiki.
+    artist_new_without_query: Please make sure that the artist you are about to create does not already exist in the wiki.
+    release_new_without_query: Please make sure that the release you are about to create does not already exist in the wiki.
+    confirm: Are you sure?
 
   show: Show
   modify: Modify
@@ -81,7 +82,7 @@ en:
     new_artist_portal_article: about an article
     new_work_portal_article: about a work
     new_recording_portal_article: about a recording
-    new_album_portal_article: about an album
+    new_release_portal_article: about an release
     new_category_portal_article: about a category
     new_general_portal_article: article only
 
@@ -98,13 +99,13 @@ en:
   addmusic:
     addtomusic: Add to My Music
     havemusic: Already in My Music
-    adderror: Album not added, please try again or be sure that you do not already own this album
+    adderror: Album not added, please try again or be sure that you do not already own this release
     labels: Labels
     acquisitiondate: Acquisition Date
     rating: Rating
     comments: Comments
-    album: Album
-    editpossession: Edit Entry
+    release: Release
+    editpossession: Edit Music
     nomusic: You own no music, yet
     nomusiclabel: You have no music with this label
     newpossession: New Entry

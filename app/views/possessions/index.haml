@@ -31,22 +31,21 @@
         %thead
           %tr
             %th
-              = t('addmusic.album')
+              = t('addmusic.release')
         %tbody
           - @possessions.each do |possession|
             %tr
               %td
-                = possession.album.title
+                = possession.release.title
               %td
                 = link_to t('show'), possession
               %td
                 = link_to t('modify'), edit_possession_path(possession)
               %td
-                = link_to t('delete'), possession, method: :delete, confirm: 'Are you sure?'
+                = link_to t('delete'), possession, method: :delete, confirm: t('messages.confirm')
     - else
       %p.hero-unit
         - if @labelled
           = t('addmusic.nomusiclabel')
         - else 
           = t('addmusic.nomusic')
-

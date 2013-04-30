@@ -4,10 +4,10 @@ guard 'bundler', cli: "--verbose" do
   # watch(/^.+\.gemspec/)
 end
 
-# guard 'rails' do
-#   watch('Gemfile.lock')
-#   watch(%r{^(config|lib)/.*})
-# end
+guard 'rails' do
+  watch('Gemfile.lock')
+  watch(%r{^(config|lib)/.*})
+end
 
 guard 'spork', cucumber_env: { 'RAILS_ENV' => 'test' }, rspec_env: { 'RAILS_ENV' => 'test' }, test_unit: false, wait: 90 do
   watch('config/application.rb')

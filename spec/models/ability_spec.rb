@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Ability do
   let(:ability) { Ability.new(user) }
   let(:user) { User.new }
-  context "Possession" do
+  describe "Possession" do
     let(:possession) { Possession.new }
     context "different owners" do
       before :each do
@@ -43,6 +43,14 @@ describe Ability do
       end
       it "can let all logged in users create a possession" do
         ability.should be_able_to :create, possession
+      end
+    end
+  end
+  describe "Artist" do
+    let(:artist) { Artist.new }
+    context "normal user" do
+      it "should not be able to destroy an Artist" do
+        ability.should_not be_able_to :destroy, artist
       end
     end
   end

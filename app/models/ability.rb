@@ -3,10 +3,10 @@ class Ability
 
   def initialize(user)
 
-    wiki_entities = [Artist, Work, Album, Recording, Category]
+    wiki_entities = [Artist, Work, Release, Recording, Category]
    
     wiki_entities.each{|wiki_entity|
-      can [:read, :portal, :recent_changes, :search, :alphabetic_index], wiki_entity       
+      can [:read, :portal, :recent_changes, :search, :alphabetic_index], wiki_entity
     }
 
     can :read, PortalArticle, :publish_date.lte => Time.now
@@ -20,6 +20,10 @@ class Ability
 
       if user.groups.include?("super-admin")
         can :manage, :all
+      else
+        wiki_entities.each{|wiki_entity|
+          cannot :destroy, wiki_entity
+        }
       end
       can :manage, Possession, owner: user
     end

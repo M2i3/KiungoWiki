@@ -1,4 +1,4 @@
-class Album
+class Release
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Search
@@ -27,11 +27,11 @@ class Album
 
   validates_presence_of :title
 
-  embeds_many :artist_wiki_links, as: :linkable, class_name: "AlbumArtistWikiLink"
+  embeds_many :artist_wiki_links, as: :linkable, class_name: "ReleaseArtistWikiLink"
   accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
 
-  embeds_many :recording_wiki_links, as: :linkable, class_name: "AlbumRecordingWikiLink"
+  embeds_many :recording_wiki_links, as: :linkable, class_name: "ReleaseRecordingWikiLink"
   accepts_nested_attributes_for :recording_wiki_links
   validates_associated :recording_wiki_links
 
@@ -116,16 +116,16 @@ class Album
   end
 
   def to_wiki_link
-    AlbumWikiLink.new(reference_text: "oid:#{self.id}", album: self)
+    ReleaseWikiLink.new(reference_text: "oid:#{self.id}", release: self)
   end
   
   scope :queried, ->(q) {
     current_query = all
-    asq = AlbumWikiLink.search_query(q)
+    asq = ReleaseWikiLink.search_query(q)
     asq.filled_query_fields.each {|field|
       case field
         when :title
-          current_query = current_query.csearch(asq[field])
+          current_query = current_query.csearch(asq[field], match: :all)
         when :label, :media_type, :reference_code
           current_query = current_query.where(field=>/#{asq[field].downcase}/i)
         when :date_released, :created_at, :updated_at
@@ -136,7 +136,7 @@ class Album
   }
 
 
-  #Album.all.group_by {|a| a.title_first_letter.upcase }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
-  #Album.all.group_by {|a| a.date_released.year.to_s }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
-  #Album.all.group_by {|a| a.date_released.year.to_s }.sort{|a, b| a <=> b}.each {|a| puts "" + a[0] + ", " + a[1].length.to_s }; nil
+  #Release.all.group_by {|a| a.title_first_letter.upcase }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
+  #Release.all.group_by {|a| a.date_released.year.to_s }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
+  #Release.all.group_by {|a| a.date_released.year.to_s }.sort{|a, b| a <=> b}.each {|a| puts "" + a[0] + ", " + a[1].length.to_s }; nil
 end

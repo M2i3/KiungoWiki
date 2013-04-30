@@ -1,7 +1,7 @@
-class AlbumWikiLink < WikiLink
+class ReleaseWikiLink < WikiLink
   include Mongoid::Document
 
-  set_reference_class Album
+  set_reference_class Release
   cache_attributes :title, :label, :date_released, :reference_code, :media_type
 
   def title_with_objectq
@@ -20,7 +20,7 @@ class AlbumWikiLink < WikiLink
             GroupText.new([
                  self.date_released], 
                  :before_text=>"(", :after_text=>")"), 
-            self.album && self.album.first_artist_display_text],
+            self.release && self.release.first_artist_display_text],
             :sep=>" - ")],
         :sep=>" - ").to_s
   end

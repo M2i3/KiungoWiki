@@ -8,7 +8,7 @@ class SupplementarySection
   field :content, :type => String, :default => ""
 
   embedded_in :artist, :inverse_of => :supplementary_sections
-  embedded_in :album, :inverse_of => :supplementary_sections
+  embedded_in :release, :inverse_of => :supplementary_sections
   embedded_in :recording, :inverse_of => :supplementary_sections
   embedded_in :work, :inverse_of => :supplementary_sections
   index({publish_date: 1})

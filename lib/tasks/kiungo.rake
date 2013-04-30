@@ -249,5 +249,68 @@ namespace :kiungo do
         puts "rake completed"
       end
     end
+    desc "Migrate Albums into Releases"
+    task albums: :environment do
+      def rename_inner_release collec
+        "var newArray; var obj;db.#{collec}.find().forEach(function(doc) {
+                  newArray = doc.release_wiki_links;
+                  if(newArray != undefined) {
+                    for(i = 0; i < newArray.length; i++) {
+                      obj = newArray[i];
+                      obj.release_id = obj.album_id;
+                      delete obj.album_id;
+                      newArray[i] = obj;
+                    }
+                    doc.release_wiki_links = newArray;
+                    db.#{collec}.save(doc);
+                  }
+        })"
+      end
+      def rename_array_type collec, attribute
+        "var newArray; var obj;db.#{collec}.find().forEach(function(doc) {
+            newArray = doc.#{attribute};
+            if(newArray != undefined) {
+              for(i = 0; i < newArray.length; i++) {
+                obj = newArray[i];
+                if (obj._type === 'AlbumRecordingWikiLink') {
+                  obj._type = 'ReleaseRecordingWikiLink';
+                }
+                else if (obj._type === 'AlbumArtistWikiLink') {
+                  obj._type = 'ReleaseArtistWikiLink';
+                }
+              }
+              doc.#{attribute} = newArray;
+              db.#{collec}.save(doc);
+            }
+        })"
+      end
+      def rename_album_array collec
+        "db.#{collec}.update({},{$rename:{ \"album_wiki_links\":\"release_wiki_links\" }},{ multi: true })"
+      end
+      database = Release.collection.database
+      ['db.albums.renameCollection("releases")',
+        'db.possessions.update({}, {$rename:{ "album_id": "release_id" }}, { multi: true })',
+        'db.portal_articles.update({"category": "album"}, {$set:{ "category": "release" }}, { multi: true })',
+        'db.portal_articles.update({"featured_wiki_link._type":"AlbumWikiLink"}, 
+        {$set: {"featured_wiki_link._type":"ReleaseWikiLink"}, $rename:{ "featured_wiki_link.album_id":"release_id" }},
+        { multi: true })',
+        'db.portal_articles.update({"featured_wiki_link._type":"AlbumArtistWikiLink"}, 
+        {$set: {"featured_wiki_link._type":"ReleaseArtistWikiLink"}, $rename:{ "featured_wiki_link.album_id":"release_id" }},
+        { multi: true })',
+        'db.releases.update({"linkable._type":"AlbumArtistWikiLink"}, 
+         {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},{ multi: true })',
+        'db.changes.update({"scope":"album"},{$set: {"scope":"release"}},{ multi: true })',
+        'db.releases.update({"linkable._type":"AlbumArtistWikiLink"}, 
+        {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},
+        { multi: true })',
+        rename_array_type('releases', 'artist_wiki_links'),
+        rename_array_type('releases', 'recording_wiki_links'),
+        rename_album_array('recordings'),
+        rename_inner_release('recordings'),
+        rename_album_array('artists'),
+        rename_inner_release('artists'),
+        'db.changes.drop()'
+      ].each {|command| database.command eval: command }
+    end
   end
 end

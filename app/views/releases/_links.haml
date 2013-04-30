@@ -1,6 +1,6 @@
 %ul#pageactions.nav.nav-tabs.pull-right
-  %li{class: current_page_classes(action: "show")}= link_to t("show"), recording_path(@recording)
-  %li{class: current_page_classes(action: "edit")}= link_to t("modify"), edit_recording_path(@recording)
+  %li{class: current_page_classes(action: "show")}= link_to t("show"), release_path(@release)
+  %li{class: current_page_classes(action: "edit")}= link_to t("modify"), edit_release_path(@release)
   %li= link_to t("discuss"), "#"
   %li= link_to t("history"), "#"
   - if can? :destroy, @recording

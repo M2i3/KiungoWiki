@@ -1,22 +1,22 @@
 Feature: Possessions
 
-  As a user who owns many albums
-  I would like to express that I own an album
+  As a user who owns many releases
+  I would like to express that I own an release
   So that I can share with others on my musical taste
   
   @javascript
-  Scenario: A user can add albums to their collections
-    Given an album exists
+  Scenario: A user can add releases to their collections
+    Given a release exists
     And a user who is logged in
-    And I go to an album
+    And I go to a release
     When I click on "Add to My Music" and confirm
     Then I should see "Already in My Music"
-    And the album should be in my possession
+    And the release should be in my possession
   
   @javascript  
   Scenario: A user can label their possessions
-    Given a user who is logged in and looking at an album
-    When I add this album to my collection
+    Given a user who is logged in and looking at a release
+    When I add this release to my collection
     And I fill in a few labels
     Then my possession should be labeled
     
@@ -33,7 +33,7 @@ Feature: Possessions
   
   @javascript  
   Scenario: A user can add a possession through the My Music section
-    Given an album exists
+    Given a release exists
     And a user who is logged in
     And I go to new possession
     When I fill in posession info and submit

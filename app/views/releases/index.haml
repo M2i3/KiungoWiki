@@ -1,0 +1,15 @@
+.page-header
+  = title(Release.model_name.human.pluralize)
+
+.row
+  .span11
+    = alpha_release_links
+
+= paginate @releases
+= render partial: "search_result", object: @releases
+= paginate @releases
+
+.row
+  .span11
+    = alpha_release_links
+

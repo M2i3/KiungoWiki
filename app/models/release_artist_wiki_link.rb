@@ -1,4 +1,4 @@
-class ArtistAlbumWikiLink < AlbumWikiLink
+class ReleaseArtistWikiLink < ArtistWikiLink
   include Mongoid::Document
 
   class SearchQuery < self.superclass::SearchQuery 

@@ -1,23 +1,23 @@
-$(document).ready ->
+$ ->
   $('input#acquisition_date').datepicker dateFormat: "yy-mm-dd"
   $('a#confirmaddmusic').click (e) ->
     e.preventDefault()
     haveText = $.trim($('span#havemusic').text())
-    $albumLink = $('a#addmusic')
+    $releaseLink = $('a#addmusic')
     labels = []
     $('li.token-input-token p').each ->
       labels.push $(this).text()
-    if $.trim($albumLink.text()) != haveText
+    if $.trim($releaseLink.text()) != haveText
       jqxhr = $.post '/possessions.json',
         possession:
-          album_id: $(this).attr 'data-album-id'
+          release_id: $(this).attr 'data-release-id'
           labels: labels
           comments: $('textarea#comments').val()
           acquisition_date: $('input#acquisition_date').val()
           rating: $('input#rating').val()
         (data) =>
           $(this).attr 'data-possession-id', data._id
-          $albumLink.text haveText
+          $releaseLink.text haveText
           $(this).text $('span#update').text()
           $('#addmusicform').modal('hide')
       jqxhr.fail (data) ->
@@ -33,7 +33,7 @@ $(document).ready ->
           rating: $('input#rating').val()
         (data) ->
           console.log data
-          $albumLink.text haveText
+          $releaseLink.text haveText
           $('#addmusicform').modal('hide')
       jqxhr.fail (data) ->
         console.log data

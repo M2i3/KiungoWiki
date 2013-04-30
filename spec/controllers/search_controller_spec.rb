@@ -12,7 +12,7 @@ describe SearchController do
     Artist.should_receive(:queried).with(q).and_return Artist
     Artist.should_receive(:page).with(page)
     
-    [Work, Recording, Album].each do |klass|
+    [Work, Recording, Release].each do |klass|
       klass.should_receive(:order_by).with([:title, :asc]).and_return klass
       klass.should_receive(:queried).with(q).and_return klass
       klass.should_receive(:page).with(page)

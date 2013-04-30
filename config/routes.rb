@@ -41,7 +41,7 @@ KiungoWiki::Application.routes.draw do
     end
   end
 
-  resources :albums do
+  resources :releases do
     collection do
       get 'lookup'
       get 'portal'
@@ -77,5 +77,5 @@ KiungoWiki::Application.routes.draw do
   match 'search' => 'search#index'
   match 'site_plan' => "home#site_plan"
 
-  root :to => "home#index"
+  root to: "home#index"
 end

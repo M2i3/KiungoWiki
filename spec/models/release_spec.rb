@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Album do
+describe Release do
   it { should have_many(:possessions) }
 end

@@ -7,11 +7,10 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-
     when /the home\s?page/
       '/'
-    when /an album/
-      album_path Album.first
+    when /a release/
+      release_path Release.first
     when /My Music/
       possessions_path
     when /new possession/

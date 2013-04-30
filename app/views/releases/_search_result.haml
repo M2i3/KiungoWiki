@@ -1,0 +1,24 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th= Release.human_attribute_name("title")
+      %th= Release.human_attribute_name("artist_wiki_link")
+      %th= Release.human_attribute_name("date_released")
+      %th= Release.human_attribute_name("media_type")
+      %th= Release.human_attribute_name("label")
+    %tbody
+      - search_result.each do |release|
+        %tr
+          %td
+            = link_to release.title, release_path(release)
+          %td
+            = release.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe
+          %td
+            - if (release.date_released != "0-00-00") then
+              = release.date_released
+          %td
+            = release.media_type
+          %td
+            = release.label
+
+
