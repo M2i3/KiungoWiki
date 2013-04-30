@@ -27,7 +27,7 @@ module ApplicationHelper
 
   def release_wiki_link_path(rwl)
     if rwl.release_id
-      link_to(rwl.title, releases_path(id: rwl.release_id))
+      link_to(rwl.title, release_path(id: rwl.release_id))
     else
       link_to(rwl.title, releases_path(q: rwl.reference_text))
     end
