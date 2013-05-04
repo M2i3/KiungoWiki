@@ -54,11 +54,11 @@ class Recording
   validates_associated :supplementary_sections
 
   # telling Mongoid::History how you want to track changes
-  track_history   :modifier_field => :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
-                  :version_field => :version,   # adds "field :version, type:  Integer" to track current version, default is :version
-                  :track_create   =>  true,    # track document creation, default is false
-                  :track_update   =>  true,     # track document updates, default is true
-                  :track_destroy  =>  true     # track document destruction, default is false
+  track_history   modifier_field: :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
+                  version_field: :version,   # adds "field :version, type:  Integer" to track current version, default is :version
+                  track_create:  true,    # track document creation, default is false
+                  track_update:  true,     # track document updates, default is true
+                  track_destroy:  true     # track document destruction, default is false
 
 
 
@@ -75,7 +75,7 @@ class Recording
   end
 
   def work_wiki_link_text=(value)
-    self.work_wiki_link = WorkWikiLink.new({:reference_text=>value})
+    self.work_wiki_link = WorkWikiLink.new({reference_text: value})
   end
 
   def artist_wiki_links_text
@@ -89,7 +89,7 @@ class Recording
   def artist_wiki_links_text=(value)
     self.artist_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
     value.split(",").each{|q| 
-      self.artist_wiki_links.build(:reference_text=>q.strip) 
+      self.artist_wiki_links.build(reference_text: q.strip) 
     }    
   end
 
@@ -108,7 +108,7 @@ class Recording
   def release_wiki_links_text=(value)
     self.release_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.release_wiki_links.clear does not work
     value.split(",").each{|q| 
-      self.release_wiki_links.build(:reference_text=>q.strip) 
+      self.release_wiki_links.build(reference_text: q.strip) 
     }    
   end
 
@@ -123,7 +123,7 @@ class Recording
   def category_wiki_links_text=(value)
     self.category_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.release_wiki_links.clear does not work
     value.split(",").each{|q| 
-      self.category_wiki_links.build(:reference_text=>q.strip) 
+      self.category_wiki_links.build(reference_text: q.strip) 
     }    
   end
 
@@ -162,7 +162,7 @@ class Recording
   end
 
   def to_wiki_link
-    RecordingWikiLink.new(:reference_text=>"oid:#{self.id}", :recording=>self)
+    RecordingWikiLink.new(reference_text: "oid:#{self.id}", recording: self)
   end
 
   scope :queried, ->(q) {
@@ -180,5 +180,21 @@ class Recording
     }
     current_query
   }
-
+  
+  after_destroy do |doc|
+    attrs = "" 
+    RecordingWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: #{doc.send(attri)} "}
+    [Artist, Release, Work].each do |klass|
+      klass.where("recording_wiki_links.recording_id" => doc.id).all.each do |rec|
+        rec.recording_wiki_links.each do |recording|
+          if recording.recording_id == doc.id
+            recording.recording_id = nil
+            recording.reference_text = attrs
+            recording.save!
+          end
+        end
+      end
+    end
+  end
+  
 end

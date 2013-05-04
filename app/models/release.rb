@@ -134,7 +134,22 @@ class Release
     }
     current_query
   }
-
+  
+  after_destroy do |doc|
+    attrs = "" 
+    ReleaseWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: #{doc.send(attri)} "}
+    [Artist, Recording].each do |klass|
+      klass.where("release_wiki_links.release_id" => doc.id).all.each do |rec|
+        rec.release_wiki_links.each do |release|
+          if release.release_id == doc.id
+            release.release_id = nil
+            release.reference_text = attrs
+            release.save!
+          end
+        end
+      end
+    end
+  end
 
   #Release.all.group_by {|a| a.title_first_letter.upcase }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
   #Release.all.group_by {|a| a.date_released.year.to_s }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil

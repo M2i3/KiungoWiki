@@ -6,11 +6,11 @@ class Category
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
   #after_initialize :set_defaults
 
-  field :category_name, :type => String
-  field :origcategoryid, :type => String
-  field :info, :type => String, :default => ""
+  field :category_name, type: String
+  field :origcategoryid, type: String
+  field :info, type: String, default: ""
 
-  search_in :category_name, {:match => :all}
+  search_in :category_name, {match: :all}
 
   validates_presence_of :category_name
 
