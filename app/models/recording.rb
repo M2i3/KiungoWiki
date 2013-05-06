@@ -23,7 +23,7 @@ class Recording
   index({ cache_normalized_title: 1 }, { background: true })
   index({ cache_first_letter: 1, cache_normalized_title: 1 }, { background: true })
 
-  search_in :title, {:match => :all}
+  search_in :title, {match: :all}
 
   validates :duration_text, duration: {allow_nil: true}
   
@@ -31,7 +31,7 @@ class Recording
 #  validates_length_of :work_title, :in=>1..500, :allow_nil=>true
 #  validates_numericality_of :duration, :greater_than=>0, :allow_nil=>true  
 #  validates_format_of :recording_date_text, :with=>/^(\d{4})(?:-?(\d{0,2})(?:-?(\d{0,2}))?)?$/, :allow_nil=>true
-  validates_numericality_of :rythm, :greater_than=>0, :allow_nil=>true
+  validates_numericality_of :rythm, greater_than: 0, allow_nil: true
 
   embeds_one :work_wiki_link, as: :linkable, class_name: "RecordingWorkWikiLink"
   validates_associated :work_wiki_link  

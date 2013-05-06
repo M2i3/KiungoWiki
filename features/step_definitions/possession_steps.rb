@@ -12,7 +12,9 @@ Given(/^a user with multiple possessions who logs in$/) do
   step "a user who is logged in"
   (1..3).each do |num|
     title = "test#{num}"
-    Possession.where(release:FactoryGirl.create(:release, title:title), owner:@user).create!
+    release = FactoryGirl.create(:release, title:title)
+    Possession.where(release_wiki_link:ReleaseWikiLink.new(release_id:release.id, 
+    reference_text:"oid:#{release.id}", title:release.title), owner:@user).create!
   end
 end
 
@@ -35,12 +37,12 @@ end
 When(/^I remove a random possession$/) do
   poss = @user.possessions.sample
   find(:xpath, "//a[@href='#{possession_path poss}' and @data-method='delete']").click
-  @removed_poss = poss.release.title
+  @removed_poss = poss.release_wiki_link.title
 end
 
 When(/^I fill in posession info and submit$/) do
   @release = Release.first.title
-  fill_in "token-input-possession_release_wiki", with: @release[0,3]
+  fill_in "token-input-possession_release_wiki_link_text", with: @release[0,3]
   select_token @release
   @label = "test"
   fill_in "token-input-possession_labels_text", with: @label
@@ -67,7 +69,7 @@ end
 
 Then(/^I should see all of my possessions$/) do
   @user.possessions.each do |poss|
-    page.should have_content poss.release.title
+    page.should have_content poss.release_wiki_link.title
   end
 end
 
