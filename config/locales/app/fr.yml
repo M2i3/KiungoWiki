@@ -62,7 +62,27 @@ fr:
     artist_new_without_query: Veuillez vous assurer que l'artiste que vous désirez créer n'existe pas déjà dans le wiki.
     release_new_without_query: Veuillez vous assurer que l'release que vous désirez créer n'existe pas déjà dans le wiki.
     confirm: Are you sure?
-    
+    artist_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel artiste:
+      
+  portal:
+    artist_explanation: Les artistes sont ceux qui créent les oeuvres et/ou les interprètent dans les enregistrements.
+    continue_reading: continuer la lecture
+    new_artist_text: Écrire la fiche d'un(e) artiste
+    recent_changes: consulter la liste complète des modifications récentes
+    recent_changes_artist: consulter la liste complète des artistes modifiés récemment
+    see_artist: Voir l'artiste
+    how_to_help: Ce que vous pouvez faire pour contribuer
+    revise_artist: Réviser la fiche d'un(e) artiste modifiée récemment
+    improve_artist: Améliorer la fiche d'un(e) artiste
+    without_work: Sans oeuvre
+    without_registration: Sans enregistrement
+    without_releases: Sans release
+    without_additional_sec: Sans section(s) complémentaire(s)
+    complete_artist_alphabet: consulter la liste complète des artistes commençant par
+    all_artists: tous les artistes
+    alphabetical: Par ordre alphabétique
+    by_tag: Par tag/catégorie
+      
   show: Afficher
   modify: Modifier
   discuss: Discuter
