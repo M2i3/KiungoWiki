@@ -3,65 +3,83 @@
 
 .row
   .span12
-    %form{:action=>artists_path}
-      %input.search-query.span6{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
-      %input{:type=>"submit", :value=>"Chercher"}
+    %form{action: artists_path}
+      %input.search-query.span6{name: "q", type: "text", value: params[:q] ? params[:q] : "", placeholder: "Chercher"}/
+      %input{type: "submit", value: "Chercher"}
 
 .row
   .span12
-    %p Une recherche dans les artistes peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants:
+    %p
+      = "#{t('search.search_keywords')}:"
     %dl
-      %dt surname:
+      %dt
+        = "#{Artist.human_attribute_name 'surname'}:"
       %dd 
-        Limite la recherche dans le nom de l'artiste seulement. Par exemple:
+        = "#{t('search.limit_artist_name')}:"
         %ul
-          %li surname:Brel
-          %li surname:"de larochellière"  
+          %li 
+            = "#{Artist.human_attribute_name 'surname'}:Brel"
+          %li 
+            = "#{Artist.human_attribute_name 'surname'}:\"de larochellière\""
 
-      %dt given_name:
+      %dt 
+        = "#{Artist.human_attribute_name 'given_name'}:"
       %dd 
-        Limite la recherche dans le prénom de l'artiste seulement. Par exemple:
+        = "#{t('search.limit_artist_given_name')}:"
         %ul
-          %li surname:Jacques
-          %li surname:"Marie-Michèle"  
+          %li 
+            = "#{Artist.human_attribute_name 'given_name'}:Jacques"
+          %li 
+            = "#{Artist.human_attribute_name 'given_name'}:\"Marie-Michèle\""
 
-      %dt birth_date:
+      %dt 
+        = "#{Artist.human_attribute_name 'birth_date'}:"
       %dd 
-        Cherche en utilisant la date de naissance de l'artiste. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. 
-        Par exemple:
+        = "#{t('search.limit_artist_birth_date')}:"
         %ul
-          %li birth_date:1940-03-03
-          %li birth_date:1950
-          %li birth_date:1934-12
+          %li 
+            = "#{Artist.human_attribute_name 'birth_date'}:1940-03-03"
+          %li 
+            = "#{Artist.human_attribute_name 'birth_date'}:1950"
+          %li 
+            = "#{Artist.human_attribute_name 'birth_date'}:1934-12"
 
-      %dt birth_location:
+      %dt 
+        = "#{Artist.human_attribute_name 'birth_location'}:"
       %dd 
-        Limite la recherche dans le lieu de naissance de l'artiste seulement. Par exemple:
+        = "#{t('search.limit_artist_birth_place')}:"
         %ul
-          %li birth_location:Paris
-          %li birth_location:"États-Unis" 
+          %li 
+            = "#{Artist.human_attribute_name 'birth_location'}:Paris"
+          %li 
+            = "#{Artist.human_attribute_name 'birth_location'}:\"États-Unis\""
 
-      %dt death_date:
+      %dt 
+        = "#{Artist.human_attribute_name 'death_date'}:"
       %dd 
-        Cherche en utilisant la date de décès de l'artiste. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. 
-        Par exemple:
+        = "#{t('search.limit_artist_death_date')}:"
         %ul
-          %li death_date:2000-03-03
-          %li death_date:1960
-          %li death_date:1980-12
-
-      %dt death_location:
+          %li 
+            = "#{Artist.human_attribute_name 'death_date'}:2000-03-03"
+          %li 
+            = "#{Artist.human_attribute_name 'death_date'}:1960"
+          %li 
+            = "#{Artist.human_attribute_name 'death_date'}:1980-12"
+      %dt 
+        = "#{Artist.human_attribute_name 'death_location'}:"
       %dd 
-        Limite la recherche dans le lieu du décès de l'artiste seulement. Par exemple:
+        = "#{t('search.limit_artist_death_location')}:"
         %ul
-          %li death_location:Memphis
-          %li death_location:"Los Angeles" 
-
-      %dt role:
+          %li 
+            = "#{Artist.human_attribute_name 'death_location'}:Memphis"
+          %li
+            = "#{Artist.human_attribute_name 'death_location'}:\"Los Angeles\""
+      %dt 
+        = "#{Artist.human_attribute_name 'role'}:"
       %dd 
-        Limite la recherche dans le lieu de naissance de l'artiste seulement. Par exemple:
+        = t('search.limit_artist_birth_place')
         %ul
-          %li role:Auteur
-          %li role:"Chef d'orchestre" 
-
-
+          %li 
+            = "#{Artist.human_attribute_name 'role'}:Auteur"
+          %li 
+            = "#{Artist.human_attribute_name 'role'}:\"Chef d'orchestre\""

@@ -62,7 +62,7 @@ fr:
     artist_new_without_query: Veuillez vous assurer que l'artiste que vous désirez créer n'existe pas déjà dans le wiki.
     release_new_without_query: Veuillez vous assurer que l'release que vous désirez créer n'existe pas déjà dans le wiki.
     confirm: Are you sure?
-    artist_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel artiste:
+    artist_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel artiste
       
   portal:
     artist_explanation: Les artistes sont ceux qui créent les oeuvres et/ou les interprètent dans les enregistrements.
@@ -82,6 +82,15 @@ fr:
     all_artists: tous les artistes
     alphabetical: Par ordre alphabétique
     by_tag: Par tag/catégorie
+  
+  search:
+    search_keywords: Une recherche dans les artistes peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants
+    limit_artist_surname: Limite la recherche dans le nom de l'artiste seulement. Par exemple
+    limit_artist_given_name: Limit the search to the given name of the artist only. For example
+    limit_artist_birth_date: Cherche en utilisant la date de naissance de l'artiste. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
+    limit_artist_birth_place: Limite la recherche dans le lieu de naissance de l'artiste seulement. Par exemple
+    limit_artist_death_date: Cherche en utilisant la date de décès de l'artiste. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
+    limit_artist_death_location: Limite la recherche dans le lieu du décès de l'artiste seulement. Par exemple
       
   show: Afficher
   modify: Modifier

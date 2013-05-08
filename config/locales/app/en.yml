@@ -81,6 +81,15 @@ en:
     all_artists: all artists
     alphabetical: Alphabetical
     by_tag: By tag/category
+    
+  search:
+    search_keywords: A search of the artists can take many forms and can be refined with the following keywords
+    limit_artist_surname: Limit the search to the surname of the artist only. For example
+    limit_artist_given_name: Limit the search to the given name of the artist only. For example
+    limit_artist_birth_date: Search using the date of birth of the artist. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
+    limit_artist_birth_place: Limited research in the birthplace of the artist only. For example
+    limit_artist_death_date: Search using the date of death of the artist. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
+    limit_artist_death_location: Limit research in the place of death of the artist only. For example
 
   show: Show
   modify: Modify
