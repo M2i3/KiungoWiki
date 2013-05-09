@@ -1,17 +1,15 @@
-= title("Nouvelle Catégorie")
+= title(t("headers.new_category"))
 
 .tabbable.row
   .span12
     - unless @category.errors.empty?
       .alert.alert-error
-        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer la nouvelle catégorie:
+        %strong #{t('messages.category_errors_warning')}:
         %br/
         = @category.errors.full_messages.join("</br>").html_safe
 
     = form_for @category do |f|
-      = render :partial=>'form', :object=>f
+      = render partial: 'form', object: f
       .formActions
-        = f.submit :class=>"btn btn-primary"
-        ou #{link_to t("cancel"), :back, :class=>"btn"}
-
-
+        = f.submit class: "btn btn-primary"
+        #{t('or')} #{link_to t("cancel"), :back, class: "btn"}

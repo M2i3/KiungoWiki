@@ -1,12 +1,12 @@
 .page-header  
-  = title(t("headers.recordings_alphabetic_index", :heading=>alphabetic_recording_grouping[params[:letter]]))
+  = title(t("headers.recordings_alphabetic_index", heading: alphabetic_recording_grouping[params[:letter]]))
 
 .row
   .span11
     = alpha_recording_links
 
 = paginate @recordings
-= render :partial=>"search_result", :object=>@recordings
+= render partial: "search_result", object: @recordings
 = paginate @recordings
 
 .row

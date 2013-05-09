@@ -1,4 +1,4 @@
-= title("Nouvel Artiste")
+= title(t("headers.new_artist"))
 
 .tabbable.row
   .span12
@@ -10,9 +10,7 @@
         = @artist.errors.full_messages.join("</br>").html_safe
 
     = form_for @artist do |f|
-      = render :partial=>'form', :object=>f
+      = render partial: 'form', object: f
       .formActions
-        = f.submit :class=>"btn btn-primary"
-        ou #{link_to t("cancel"), :back, :class=>"btn"}
-
-
+        = f.submit class: "btn btn-primary"
+        #{t("ou")} #{link_to t("cancel"), :back, class: "btn"}

@@ -4,82 +4,82 @@
 .row
   .span12
     %form{action: artists_path}
-      %input.search-query.span6{name: "q", type: "text", value: params[:q] ? params[:q] : "", placeholder: "Chercher"}/
+      %input.rsearch-query.span6{name: "q", type: "text", value: params[:q] ? params[:q] : "", placeholder: "Chercher"}/
       %input{type: "submit", value: "Chercher"}
 
 .row
   .span12
     %p
-      = "#{t('search.search_keywords')}:"
+      #{t('rsearch.search_keywords')}:
     %dl
       %dt
-        = "#{Artist.human_attribute_name 'surname'}:"
+        #{Artist.human_attribute_name 'surname'}:
       %dd 
-        = "#{t('search.limit_artist_name')}:"
+        #{t('rsearch.limit_artist_surname')}:
         %ul
           %li 
-            = "#{Artist.human_attribute_name 'surname'}:Brel"
+            #{Artist.human_attribute_name 'surname'}:Brel
           %li 
-            = "#{Artist.human_attribute_name 'surname'}:\"de larochellière\""
+            #{Artist.human_attribute_name 'surname'}:"de larochellière"
 
       %dt 
-        = "#{Artist.human_attribute_name 'given_name'}:"
+        #{Artist.human_attribute_name 'given_name'}:
       %dd 
-        = "#{t('search.limit_artist_given_name')}:"
+        #{t('rsearch.limit_artist_given_name')}:
         %ul
           %li 
-            = "#{Artist.human_attribute_name 'given_name'}:Jacques"
+            #{Artist.human_attribute_name 'given_name'}:Jacques
           %li 
-            = "#{Artist.human_attribute_name 'given_name'}:\"Marie-Michèle\""
+            #{Artist.human_attribute_name 'given_name'}:"Marie-Michèle"
 
       %dt 
-        = "#{Artist.human_attribute_name 'birth_date'}:"
+        #{Artist.human_attribute_name 'birth_date'}:
       %dd 
-        = "#{t('search.limit_artist_birth_date')}:"
+        #{t('rsearch.limit_artist_birth_date')}:
         %ul
           %li 
-            = "#{Artist.human_attribute_name 'birth_date'}:1940-03-03"
+            #{Artist.human_attribute_name 'birth_date'}:1940-03-03
           %li 
-            = "#{Artist.human_attribute_name 'birth_date'}:1950"
+            #{Artist.human_attribute_name 'birth_date'}:1950
           %li 
-            = "#{Artist.human_attribute_name 'birth_date'}:1934-12"
+            #{Artist.human_attribute_name 'birth_date'}:1934-12
 
       %dt 
-        = "#{Artist.human_attribute_name 'birth_location'}:"
+        #{Artist.human_attribute_name 'birth_location'}:
       %dd 
-        = "#{t('search.limit_artist_birth_place')}:"
+        #{t('rsearch.limit_artist_birth_place')}:
         %ul
           %li 
-            = "#{Artist.human_attribute_name 'birth_location'}:Paris"
+            #{Artist.human_attribute_name 'birth_location'}:Paris
           %li 
-            = "#{Artist.human_attribute_name 'birth_location'}:\"États-Unis\""
+            #{Artist.human_attribute_name 'birth_location'}:"États-Unis"
 
       %dt 
-        = "#{Artist.human_attribute_name 'death_date'}:"
+        #{Artist.human_attribute_name 'death_date'}:
       %dd 
-        = "#{t('search.limit_artist_death_date')}:"
+        #{t('rsearch.limit_artist_death_date')}:
         %ul
           %li 
-            = "#{Artist.human_attribute_name 'death_date'}:2000-03-03"
+            #{Artist.human_attribute_name 'death_date'}:2000-03-03
           %li 
-            = "#{Artist.human_attribute_name 'death_date'}:1960"
+            #{Artist.human_attribute_name 'death_date'}:1960
           %li 
-            = "#{Artist.human_attribute_name 'death_date'}:1980-12"
+            #{Artist.human_attribute_name 'death_date'}:1980-12
       %dt 
-        = "#{Artist.human_attribute_name 'death_location'}:"
+        #{Artist.human_attribute_name 'death_location'}:
       %dd 
-        = "#{t('search.limit_artist_death_location')}:"
+        #{t('rsearch.limit_artist_death_location')}:
         %ul
           %li 
-            = "#{Artist.human_attribute_name 'death_location'}:Memphis"
+            #{Artist.human_attribute_name 'death_location'}:Memphis
           %li
-            = "#{Artist.human_attribute_name 'death_location'}:\"Los Angeles\""
+            #{Artist.human_attribute_name 'death_location'}:"Los Angeles"
       %dt 
-        = "#{Artist.human_attribute_name 'role'}:"
+        #{Artist.human_attribute_name 'role'}:
       %dd 
-        = t('search.limit_artist_birth_place')
+        = t('rsearch.limit_artist_birth_place')
         %ul
           %li 
-            = "#{Artist.human_attribute_name 'role'}:Auteur"
+            #{Artist.human_attribute_name 'role'}:Auteur
           %li 
-            = "#{Artist.human_attribute_name 'role'}:\"Chef d'orchestre\""
+            #{Artist.human_attribute_name 'role'}:"Chef d'orchestre"
