@@ -7,7 +7,7 @@ namespace :kiungo do
         puts "There are already artists in the Artist model. Reloading is not possible."
       else
       params = {}
-        RawArtist.all.entries.each do |rawArtist|
+        RawArtist.with(database: "kiungo_raw_db").all.entries.each do |rawArtist|
         params = {}
           Artist.disable_tracking { 
             params={:birth_location=>rawArtist.birth_location, 
@@ -26,7 +26,7 @@ namespace :kiungo do
           }
         end # rawArtists.each
         puts "rake stage 1 (artists) count=" + Artist.count.to_s
-        RawLanguage.all.entries.each do |rawLanguage|
+        RawLanguage.with(database: "kiungo_raw_db").all.entries.each do |rawLanguage|
 
         Language.create!(:language_name_english=>rawLanguage.language_name_english,
                         :language_name_french=>rawLanguage.language_name_french, 
@@ -34,13 +34,13 @@ namespace :kiungo do
         end # rawLanguages.each
         puts "rake stage 2 (languages) count=" + Language.count.to_s
 
-        RawCategory.all.entries.each do |rawCategory|
+        RawCategory.with(database: "kiungo_raw_db").all.entries.each do |rawCategory|
           Category.create!(:origcategoryid=>rawCategory.category_id,
                         :category_name=>rawCategory.category_name)
         end # RawCategories.each
         puts "rake stage 3 (categories) count=" + Category.count.to_s
 
-        RawSupport.all.entries.each do |rawSupport|
+        RawSupport.with(database: "kiungo_raw_db").all.entries.each do |rawSupport|
         params = {}
 
           params = {:title=>rawSupport.support_title, 
@@ -54,18 +54,18 @@ namespace :kiungo do
             params[:supplementary_sections]=[SupplementarySection.new({:title=>"Notes:",:content=>rawSupport.notes})]
           end
           unless["0","",nil].include?(rawSupport.label_id)
-            params[:label] = RawLabel.where(:label_id => rawSupport.label_id).first[:label_name]
+            params[:label] = RawLabel.with(database: "kiungo_raw_db").where(:label_id => rawSupport.label_id).first[:label_name]
           end
-          Album.disable_tracking {
+          Release.disable_tracking {
             params[:artist_wiki_links_text] = Artist.where(:origartistid=>rawSupport.artist_id).collect {|art|
                "oid:" + Artist.where(:origartistid => art[:origartistid]).first.id.to_s
               }.uniq.join(",")
-            Album.create!(params)
+            Release.create!(params)
           }
         end # rawSupports.each
-        puts "rake stage 4 (albums) count=" + Album.count.to_s
+        puts "rake stage 4 (releases) count=" + Release.count.to_s
 
-        RawWork.all.entries.each do |rawWork|
+        RawWork.with(database: "kiungo_raw_db").all.entries.each do |rawWork|
           params = {}
           params = {:title=>rawWork.work_title, 
                     :date_written=>rawWork.date_written,
@@ -78,19 +78,19 @@ namespace :kiungo do
             params[:supplementary_sections]=[SupplementarySection.new({:title=>"Notes:",:content=>rawWork.notes})]
           end
           unless ["0","",nil].include?(rawWork.language_id)
-            params[:language_code] = RawLanguage.where(:language_id => rawWork.language_id).first[:language_code]
+            params[:language_code] = RawLanguage.with(database: "kiungo_raw_db").where(:language_id => rawWork.language_id).first[:language_code]
           end
           
-          lwe = RawWorkEditorLink.where(:work_id => rawWork.work_id)
+          lwe = RawWorkEditorLink.with(database: "kiungo_raw_db").where(:work_id => rawWork.work_id)
           unless lwe.first == nil 
             lwe.each do |lwe_i|
-              e = RawEditor.where(:editor_id => lwe_i[:editor_id])
+              e = RawEditor.with(database: "kiungo_raw_db").where(:editor_id => lwe_i[:editor_id])
               unless e.first == nil
                 params[:publisher] = e.first[:editor_name]
               end
             end
           end
-          params[:artist_wiki_links_text] = RawWorkArtistRoleLink.where(:work_id=>rawWork.work_id).collect {|w|
+          params[:artist_wiki_links_text] = RawWorkArtistRoleLink.with(database: "kiungo_raw_db").where(:work_id=>rawWork.work_id).collect {|w|
                "oid:" + Artist.where(:origartistid => w[:artist_id]).first.id.to_s + " role:" + w.role
               }.uniq.join(",")
           w = nil
@@ -98,7 +98,7 @@ namespace :kiungo do
             w = Work.create!(params)
           }
 
-          RawRecording.where(:work_id=>rawWork.work_id).each do |rawRecording|
+          RawRecording.with(database: "kiungo_raw_db").where(:work_id=>rawWork.work_id).each do |rawRecording|
             params = {}
             params = {:recording_date=>rawRecording.recording_date, 
                       :duration=>rawRecording.duration,
@@ -110,13 +110,13 @@ namespace :kiungo do
               params[:supplementary_sections]=[SupplementarySection.new({:title=>"Notes:",:content=>rawRecording.notes})]
             end
             unless ["0","",nil].include?(rawRecording.category_id)
-              params[:category_wiki_links_text] = RawCategory.where(:category_id => rawRecording.category_id).collect{|cc| "oid:"+Category.where(:origcategoryid => rawRecording.category_id).first.id.to_s}.uniq.join(",")
+              params[:category_wiki_links_text] = RawCategory.with(database: "kiungo_raw_db").where(:category_id => rawRecording.category_id).collect{|cc| "oid:"+Category.where(:origcategoryid => rawRecording.category_id).first.id.to_s}.uniq.join(",")
             end
-            params[:artist_wiki_links_text] = RawRecordingArtistRoleLink.where(:recording_id=>rawRecording.recording_id).collect {|art|
+            params[:artist_wiki_links_text] = RawRecordingArtistRoleLink.with(database: "kiungo_raw_db").where(:recording_id=>rawRecording.recording_id).collect {|art|
                "oid:" + Artist.where(:origartistid => art[:artist_id]).first.id.to_s + " role:" + art.role}.uniq.join(",")
 
-            params[:album_wiki_links_text] = RawRecordingSupportLink.where(:recording_id=>rawRecording.recording_id).collect {|art|
-               "oid:" + Album.where(:origalbumid => art[:support_id]).first.id.to_s + " trackNb:" + art.track +
+            params[:release_wiki_links_text] = RawRecordingSupportLink.with(database: "kiungo_raw_db").where(:recording_id=>rawRecording.recording_id).collect {|art|
+               "oid:" + Release.where(:origalbumid => art[:support_id]).first.id.to_s + " trackNb:" + art.track +
              " itemId:" + art.support_element_id + " itemSection:" + art.face
               }.uniq.join(",")
             Recording.disable_tracking {
@@ -127,32 +127,32 @@ namespace :kiungo do
         end # rawWorks.each
         puts "rake stage 5 (works/recordings) count=" + Work.count.to_s + "/" + Recording.count.to_s
 
-        Album.disable_tracking {
-          Album.all.entries.each do |album|
+        Release.disable_tracking {
+          Release.all.entries.each do |release|
             params = {}
-            params[:recording_wiki_links_text] = RawRecordingSupportLink.where(:support_id=>album.origalbumid).collect {|rsl|
+            params[:recording_wiki_links_text] = RawRecordingSupportLink.with(database: "kiungo_raw_db").where(:support_id=>release.origalbumid).collect {|rsl|
                "oid:" + Recording.where(:origrecordingid => rsl[:recording_id]).first.id.to_s + " trackNb:" + rsl.track +
                " itemId:" + rsl.support_element_id + " itemSection:" + rsl.face
                }.uniq.join(",")
-            params[:artist_wiki_links_text] = RawSupport.where(:support_id=>album.origalbumid).collect {|alb|
+            params[:artist_wiki_links_text] = RawSupport.with(database: "kiungo_raw_db").where(:support_id=>release.origalbumid).collect {|alb|
                "oid:" + Artist.where(:origartistid => alb[:artist_id]).first.id.to_s 
                }.uniq.join(",")
-            album.update_attributes(params)
-          end # Album.all.entries.each
+            release.update_attributes(params)
+          end # Release.all.entries.each
         }
-        puts "rake stage 6 (albums wiki links recording/artist)"
+        puts "rake stage 6 (releases wiki links recording/artist)"
         puts "Before the big Work loop  work_count=" + Work.count.to_s
         Work.disable_tracking {
           Work.all.entries.each do |work2|
             params = {}
             params_original = {}
-            params[:recording_wiki_links_text] = RawRecording.where(:work_id=>work2.origworkid).collect {|rr|
+            params[:recording_wiki_links_text] = RawRecording.with(database: "kiungo_raw_db").where(:work_id=>work2.origworkid).collect {|rr|
                "oid:" + Recording.where(:origrecordingid => rr[:recording_id]).first.id.to_s 
                }.uniq.join(",")
 
             #puts "Work id="+work2.id.to_s + "origworkid="+work2.origworkid.to_s+" rwl="+params[:recording_wiki_links_text].to_s
 
-            originalworkid = RawWork.where(:work_id=>work2.origworkid).first.original_work_id
+            originalworkid = RawWork.with(database: "kiungo_raw_db").where(:work_id=>work2.origworkid).first.original_work_id
             #puts "origworkid = " + work2.origworkid + " originalworkid = " + originalworkid
             unless ["0","",nil].include?(originalworkid)
               original_work = Work.where(:origworkid => originalworkid).first
@@ -165,11 +165,11 @@ namespace :kiungo do
                   relation = "is_translated_from"
                   inverse_relation = "has_a_translated_work"
                 end
-                params[:work_wiki_links_text] = RawWork.where(:work_id=>work2.origworkid).collect {|wl|
+                params[:work_wiki_links_text] = RawWork.with(database: "kiungo_raw_db").where(:work_id=>work2.origworkid).collect {|wl|
                    "oid:" + original_work.id.to_s + " relation:" + relation
                    }.uniq.join(",")
                 #puts "work_wiki_links_text = " + params[:work_wiki_links_text].to_s
-                params_original[:work_wiki_links_text] = RawWork.where(:work_id=>original_work.origworkid).collect {|wl|
+                params_original[:work_wiki_links_text] = RawWork.with(database: "kiungo_raw_db").where(:work_id=>original_work.origworkid).collect {|wl|
                    "oid:" + work2.id.to_s + " relation:" + inverse_relation
                    }.uniq.join(",")
                 original_work.update_attributes(params_original)
@@ -184,8 +184,8 @@ namespace :kiungo do
         Artist.disable_tracking {
           Artist.all.entries.each do |artist1|
             params = {}
-            params[:album_wiki_links_text] = RawSupport.where(:artist_id=>artist1.origartistid).collect {|sup|
-               "oid:" + Album.where(:origalbumid => sup[:support_id]).first.id.to_s
+            params[:release_wiki_links_text] = RawSupport.with(database: "kiungo_raw_db").where(:artist_id=>artist1.origartistid).collect {|sup|
+               "oid:" + Release.where(:origalbumid => sup[:support_id]).first.id.to_s
                }.uniq.join(",")
             artist1.update_attributes(params)
 
@@ -193,7 +193,7 @@ namespace :kiungo do
           puts "rake stage 8"
           Artist.all.entries.each do |artist2|
             params = {}
-            params[:work_wiki_links_text] = RawWorkArtistRoleLink.where(:artist_id=>artist2.origartistid).collect {|warl|
+            params[:work_wiki_links_text] = RawWorkArtistRoleLink.with(database: "kiungo_raw_db").where(:artist_id=>artist2.origartistid).collect {|warl|
              "oid:" + Work.where(:origworkid => warl[:work_id]).first.id.to_s + (warl.role.nil? || warl.role.empty? ? "" : " role:" + warl.role)
                }.uniq.join(",")
             artist2.update_attributes(params)
@@ -202,7 +202,7 @@ namespace :kiungo do
           puts "rake stage 9"
           Artist.all.entries.each do |artist3|
             params = {}
-            params[:recording_wiki_links_text] = RawRecordingArtistRoleLink.where(:artist_id=>artist3.origartistid).collect {|rarl|
+            params[:recording_wiki_links_text] = RawRecordingArtistRoleLink.with(database: "kiungo_raw_db").where(:artist_id=>artist3.origartistid).collect {|rarl|
                "oid:" + Recording.where(:origrecordingid => rarl[:recording_id]).first.id.to_s + (rarl.role.nil? || rarl.role.empty? ? "" : " role:" + rarl.role)
                }.uniq.join(",")
             #puts "Artist id="+artist3.id.to_s + "origartistid="+artist3.origartistid.to_s+" rwl="+params[:recording_wiki_links_text].to_s
@@ -213,19 +213,19 @@ namespace :kiungo do
         Artist.disable_tracking {
           Recording.disable_tracking {
             Work.disable_tracking {
-              Album.disable_tracking {
+              Release.disable_tracking {
                 Artist.all.each {|a|
                   a.work_wiki_links.each{|w| w.unset(:_type)}
                   a.artist_wiki_links.each{|w| w.unset(:_type)}
                   a.recording_wiki_links.each{|w| w.unset(:_type)} 
-                  a.album_wiki_links.each{|w| w.unset(:_type)} 
+                  a.release_wiki_links.each{|w| w.unset(:_type)} 
                   a.timeless.save  
                 }
 
                 Recording.all.each {|a|
                   a.work_wiki_link.unset(:_type)
                   a.artist_wiki_links.each{|w| w.unset(:_type)}
-                  a.album_wiki_links.each{|w| w.unset(:_type)}  
+                  a.release_wiki_links.each{|w| w.unset(:_type)}  
                   a.category_wiki_links.each{|w| w.unset(:_type)}  
                   a.timeless.save  
                 }
@@ -237,7 +237,7 @@ namespace :kiungo do
                   a.timeless.save  
                 }
 
-                Album.all.each {|a|
+                Release.all.each {|a|
                   a.artist_wiki_links.each{|w| w.unset(:_type)}
                   a.recording_wiki_links.each{|w| w.unset(:_type)}  
                   a.timeless.save  
@@ -249,68 +249,69 @@ namespace :kiungo do
         puts "rake completed"
       end
     end
-    desc "Migrate Albums into Releases"
-    task albums: :environment do
-      def rename_inner_release collec
-        "var newArray; var obj;db.#{collec}.find().forEach(function(doc) {
-                  newArray = doc.release_wiki_links;
-                  if(newArray != undefined) {
-                    for(i = 0; i < newArray.length; i++) {
-                      obj = newArray[i];
-                      obj.release_id = obj.album_id;
-                      delete obj.album_id;
-                      newArray[i] = obj;
-                    }
-                    doc.release_wiki_links = newArray;
-                    db.#{collec}.save(doc);
-                  }
-        })"
-      end
-      def rename_array_type collec, attribute
-        "var newArray; var obj;db.#{collec}.find().forEach(function(doc) {
-            newArray = doc.#{attribute};
-            if(newArray != undefined) {
-              for(i = 0; i < newArray.length; i++) {
-                obj = newArray[i];
-                if (obj._type === 'AlbumRecordingWikiLink') {
-                  obj._type = 'ReleaseRecordingWikiLink';
-                }
-                else if (obj._type === 'AlbumArtistWikiLink') {
-                  obj._type = 'ReleaseArtistWikiLink';
-                }
-              }
-              doc.#{attribute} = newArray;
-              db.#{collec}.save(doc);
-            }
-        })"
-      end
-      def rename_album_array collec
-        "db.#{collec}.update({},{$rename:{ \"album_wiki_links\":\"release_wiki_links\" }},{ multi: true })"
-      end
-      database = Release.collection.database
-      ['db.albums.renameCollection("releases")',
-        'db.possessions.update({}, {$rename:{ "album_id": "release_id" }}, { multi: true })',
-        'db.portal_articles.update({"category": "album"}, {$set:{ "category": "release" }}, { multi: true })',
-        'db.portal_articles.update({"featured_wiki_link._type":"AlbumWikiLink"}, 
-        {$set: {"featured_wiki_link._type":"ReleaseWikiLink"}, $rename:{ "featured_wiki_link.album_id":"release_id" }},
-        { multi: true })',
-        'db.portal_articles.update({"featured_wiki_link._type":"AlbumArtistWikiLink"}, 
-        {$set: {"featured_wiki_link._type":"ReleaseArtistWikiLink"}, $rename:{ "featured_wiki_link.album_id":"release_id" }},
-        { multi: true })',
-        'db.releases.update({"linkable._type":"AlbumArtistWikiLink"}, 
-         {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},{ multi: true })',
-        'db.changes.update({"scope":"album"},{$set: {"scope":"release"}},{ multi: true })',
-        'db.releases.update({"linkable._type":"AlbumArtistWikiLink"}, 
-        {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},
-        { multi: true })',
-        rename_array_type('releases', 'artist_wiki_links'),
-        rename_array_type('releases', 'recording_wiki_links'),
-        rename_album_array('recordings'),
-        rename_inner_release('recordings'),
-        rename_album_array('artists'),
-        rename_inner_release('artists'),
-        'db.changes.drop()'
-      ].each {|command| database.command eval: command }
-    end
+
+#    desc "Migrate Albums into Releases"
+#    task albums: :environment do
+#      def rename_inner_release collec
+#        "var newArray; var obj;db.#{collec}.find().forEach(function(doc) {
+#                  newArray = doc.release_wiki_links;
+#                  if(newArray != undefined) {
+#                    for(i = 0; i < newArray.length; i++) {
+#                      obj = newArray[i];
+#                      obj.release_id = obj.album_id;
+#                      delete obj.album_id;
+#                      newArray[i] = obj;
+#                    }
+#                    doc.release_wiki_links = newArray;
+#                    db.#{collec}.save(doc);
+#                  }
+#        })"
+#      end
+#      def rename_array_type collec, attribute
+#        "var newArray; var obj;db.#{collec}.find().forEach(function(doc) {
+#            newArray = doc.#{attribute};
+#            if(newArray != undefined) {
+#              for(i = 0; i < newArray.length; i++) {
+#                obj = newArray[i];
+#                if (obj._type === 'AlbumRecordingWikiLink') {
+#                  obj._type = 'ReleaseRecordingWikiLink';
+#                }
+#                else if (obj._type === 'AlbumArtistWikiLink') {
+#                  obj._type = 'ReleaseArtistWikiLink';
+#                }
+#              }
+#              doc.#{attribute} = newArray;
+#              db.#{collec}.save(doc);
+#            }
+#        })"
+#      end
+#      def rename_album_array collec
+#        "db.#{collec}.update({},{$rename:{ \"album_wiki_links\":\"release_wiki_links\" }},{ multi: true })"
+#      end
+#      database = Release.collection.database
+#      ['db.albums.renameCollection("releases")',
+#        'db.possessions.update({}, {$rename:{ "album_id": "release_id" }}, { multi: true })',
+#        'db.portal_articles.update({"category": "album"}, {$set:{ "category": "release" }}, { multi: true })',
+#        'db.portal_articles.update({"featured_wiki_link._type":"AlbumWikiLink"}, 
+#        {$set: {"featured_wiki_link._type":"ReleaseWikiLink"}, $rename:{ "featured_wiki_link.album_id":"release_id" }},
+#        { multi: true })',
+#        'db.portal_articles.update({"featured_wiki_link._type":"AlbumArtistWikiLink"}, 
+#        {$set: {"featured_wiki_link._type":"ReleaseArtistWikiLink"}, $rename:{ "featured_wiki_link.album_id":"release_id" }},
+#        { multi: true })',
+#        'db.releases.update({"linkable._type":"AlbumArtistWikiLink"}, 
+#         {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},{ multi: true })',
+#        'db.changes.update({"scope":"album"},{$set: {"scope":"release"}},{ multi: true })',
+#        'db.releases.update({"linkable._type":"AlbumArtistWikiLink"}, 
+#        {$set: {"linkable._type":"ReleaseArtistWikiLink"}, $rename:{ "linkable.album_id":"release_id" }},
+#        { multi: true })',
+#        rename_array_type('releases', 'artist_wiki_links'),
+#        rename_array_type('releases', 'recording_wiki_links'),
+#        rename_album_array('recordings'),
+#        rename_inner_release('recordings'),
+#        rename_album_array('artists'),
+#        rename_inner_release('artists'),
+#        'db.changes.drop()'
+#      ].each {|command| database.command eval: command }
+#    end
   end
 end
