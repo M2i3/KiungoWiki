@@ -93,32 +93,33 @@
     - if @release.recording_wiki_links == 0
       %p This release does not have any recording associated with it.
     - else
-      %table.table.table-striped
-        %thead
-          %tr
-            %th= Recording.human_attribute_name("title")
-            %th= Recording.human_attribute_name("recording_date")
-            %th= Recording.human_attribute_name("itemId")
-            - if ["33 tours","45 tours"].include?(@release.media_type)
-              %th= Recording.human_attribute_name("itemSection")
-            %th= Recording.human_attribute_name("trackNb")
-            %th= Recording.human_attribute_name("duration")
-            %th= Recording.human_attribute_name("artist_wiki_link")
-        %tbody
-          - @release.recording_wiki_links.sort{|a,b| [a.itemId.to_i, a.itemSection.to_s, a.trackNb.to_i] <=> [b.itemId.to_i, b.itemSection.to_s, b.trackNb.to_i] }.each do |rwl|
+      .right-size
+        %table.table.table-striped
+          %thead
             %tr
-              %td= recording_wiki_link_path(rwl)
-              %td= rwl.recording_date
-              - unless ["0","",nil].include?(rwl.itemId) 
-                %td= rwl.itemId 
-              - else
-                %td= "1"
-
+              %th= Recording.human_attribute_name("title")
+              %th= Recording.human_attribute_name("recording_date")
+              %th= Recording.human_attribute_name("itemId")
               - if ["33 tours","45 tours"].include?(@release.media_type)
-                %td= rwl.itemSection
-              %td= rwl.trackNb
-              %td= rwl.duration
-              %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
+                %th= Recording.human_attribute_name("itemSection")
+              %th= Recording.human_attribute_name("trackNb")
+              %th= Recording.human_attribute_name("duration")
+              %th= Recording.human_attribute_name("artist_wiki_link")
+          %tbody
+            - @release.recording_wiki_links.sort{|a,b| [a.itemId.to_i, a.itemSection.to_s, a.trackNb.to_i] <=> [b.itemId.to_i, b.itemSection.to_s, b.trackNb.to_i] }.each do |rwl|
+              %tr
+                %td= recording_wiki_link_path(rwl)
+                %td= rwl.recording_date
+                - unless ["0","",nil].include?(rwl.itemId) 
+                  %td= rwl.itemId 
+                - else
+                  %td= "1"
+
+                - if ["33 tours","45 tours"].include?(@release.media_type)
+                  %td= rwl.itemSection
+                %td= rwl.trackNb
+                %td= rwl.duration
+                %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
 
       - @release.supplementary_sections.each do |ss|
         %h2= ss.title 

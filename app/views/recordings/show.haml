@@ -46,31 +46,33 @@
     - if @recording.release_wiki_links.length == 0
       %p This recording is not on any release.
     - else
-      %table.table.table-striped
-        %thead
-          %tr
-            %th= Release.human_attribute_name("title")
-            %th= Release.human_attribute_name("date_released")
-            %th= Release.human_attribute_name("label")
-            %th= Release.human_attribute_name("media_type")
-            %th= Recording.human_attribute_name("itemId")
-            %th= Recording.human_attribute_name("itemSection")
-            %th= Recording.human_attribute_name("trackNb") 
-            %th= Release.human_attribute_name("reference_code")
-        %tbody
-          - @recording.release_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
+      .right-size
+        %table.table.table-striped
+          %thead
             %tr
-              %td= release_wiki_link_path(awl)
-              %td= awl.date_released
-              %td= awl.label
-              %td= awl.media_type
-              - unless ["0","",nil].include?(awl.itemId) 
-                %td= awl.itemId 
-              - else
-                %td= "1"
-              %td= awl.itemSection
-              %td= awl.trackNb
-              %td= awl.reference_code
+              %th= Release.human_attribute_name("title")
+              %th= Release.human_attribute_name("date_released")
+              %th= Release.human_attribute_name("label")
+              %th= Release.human_attribute_name("media_type")
+              %th= Recording.human_attribute_name("itemId")
+              %th= Recording.human_attribute_name("itemSection")
+              %th= Recording.human_attribute_name("trackNb") 
+              %th= Release.human_attribute_name("reference_code")
+          %tbody
+            - @recording.release_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
+              %tr
+                %td= release_wiki_link_path(awl)
+                %td= awl.date_released
+                %td= awl.label
+                %td= awl.media_type
+                - unless ["0","",nil].include?(awl.itemId) 
+                  %td= awl.itemId 
+                - else
+                  %td= "1"
+                %td= awl.itemSection
+                %td= awl.trackNb
+                %td= awl.reference_code
+
       - @recording.supplementary_sections.each do |ss|
         %h2= ss.title 
         = RedCloth.new(ss.content).to_html.html_safe

@@ -22,73 +22,77 @@
     - if @artist.work_wiki_links.count == 0 
       %p #{t('messages.artist_no_work')}.
     - else
-      %table.table.table-striped
-        %thead
-          %tr
-            %th= Work.human_attribute_name("title")
-            %th= Work.human_attribute_name("date_written")
-            %th= WorkWikiLink.human_attribute_name("role")       
-        %tbody
-          - @artist.grouped_work_wiki_links.sort{|a,b| a.date_written <=> b.date_written}.each do |wwl|
-
+      .right-size
+        %table.table.table-striped
+          %thead
             %tr
-              %td= work_wiki_link_path(wwl)
-              %td= wwl.date_written
-              %td= wwl.role
+              %th= Work.human_attribute_name("title")
+              %th= Work.human_attribute_name("date_written")
+              %th= WorkWikiLink.human_attribute_name("role")       
+          %tbody
+            - @artist.grouped_work_wiki_links.sort{|a,b| a.date_written <=> b.date_written}.each do |wwl|
+
+              %tr
+                %td= work_wiki_link_path(wwl)
+                %td= wwl.date_written
+                %td= wwl.role
 
     - if @artist.artist_wiki_links.count == 0 
     - else
       %h2= Work.human_attribute_name("relation").pluralize
-      %table.table.table-striped
-        %thead
-          %tr
-            %th= Artist.human_attribute_name("nature")
-            %th= Artist.human_attribute_name("artist_wiki_links_text") 
-
-        %tbody
-          - @artist.artist_wiki_links.each do |awl|
+      .right-size
+        %table.table.table-striped
+          %thead
             %tr
-              %td= Artist.human_attribute_name(awl.relation)
-              %td= artist_wiki_link_path(awl)
+              %th= Artist.human_attribute_name("nature")
+              %th= Artist.human_attribute_name("artist_wiki_links_text") 
+
+          %tbody
+            - @artist.artist_wiki_links.each do |awl|
+              %tr
+                %td= Artist.human_attribute_name(awl.relation)
+                %td= artist_wiki_link_path(awl)
 
     %h2= Recording.model_name.human.pluralize
     - if @artist.recording_wiki_links.count == 0 
       %p #{t('messages.artist_no_recordings')}.
     - else
-      %table.table.table-striped
-        %thead
-          %tr
-            %th= Recording.human_attribute_name("title")
-            %th= Recording.human_attribute_name("recording_date")
-            %th= Recording.human_attribute_name("duration")
-            %th= Recording.human_attribute_name("role")
-        %tbody
-          - @artist.recording_wiki_links.sort{|a,b| a.recording_date <=> b.recording_date}.each do |rwl| 
+      .right-size
+        %table.table.table-striped
+          %thead
             %tr
-              %td= recording_wiki_link_path(rwl)
-              %td= rwl.recording_date    
-              %td= rwl.duration  
-              %td= rwl.recording.artist_wiki_links.where(artist_id: @artist.id).collect{|awl| awl.role }.join(", ").html_safe
+              %th= Recording.human_attribute_name("title")
+              %th= Recording.human_attribute_name("recording_date")
+              %th= Recording.human_attribute_name("duration")
+              %th= Recording.human_attribute_name("role")
+          %tbody
+            - @artist.recording_wiki_links.sort{|a,b| a.recording_date <=> b.recording_date}.each do |rwl| 
+              %tr
+                %td= recording_wiki_link_path(rwl)
+                %td= rwl.recording_date    
+                %td= rwl.duration  
+                %td= rwl.recording.artist_wiki_links.where(artist_id: @artist.id).collect{|awl| awl.role }.join(", ").html_safe
 
     %h2= Release.model_name.human.pluralize
     - if @artist.release_wiki_links.count == 0 
       %p #{t('messages.artist_no_releases')}.
     - else
-      %table.table.table-striped
-        %thead
-          %tr
-            %th= Release.human_attribute_name("title")
-            %th= Release.human_attribute_name("date_released")
-            %th= Release.human_attribute_name("media_type")
-            %th= Release.human_attribute_name("label")
-
-        %tbody
-          - @artist.release_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
+      .right-size
+        %table.table.table-striped
+          %thead
             %tr
-              %td= release_wiki_link_path(awl)
-              %td= awl.date_released
-              %td= awl.media_type
-              %td= awl.label
+              %th= Release.human_attribute_name("title")
+              %th= Release.human_attribute_name("date_released")
+              %th= Release.human_attribute_name("media_type")
+              %th= Release.human_attribute_name("label")
+
+          %tbody
+            - @artist.release_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
+              %tr
+                %td= release_wiki_link_path(awl)
+                %td= awl.date_released
+                %td= awl.media_type
+                %td= awl.label
 
     - @artist.supplementary_sections.each do |ss|
       %h2= ss.title 
