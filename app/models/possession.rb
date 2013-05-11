@@ -2,13 +2,15 @@ class Possession
   include Mongoid::Document
   
   belongs_to :owner, class_name: "User", index: true
-  belongs_to :release, index: true
-  validates_uniqueness_of :release, scope: :owner
-  [:owner, :release].each {|field| validates_presence_of field }
+  [:owner, :release_wiki_link].each {|field| validates_presence_of field }
   field :labels, type: Array, default: []
   field :rating, type: Integer, default: 0
   field :acquisition_date, type: Date
   field :comments, type: String
+  
+  embeds_one :release_wiki_link, as: :linkable, class_name: "ReleaseWikiLink"
+  validates_associated :release_wiki_link  
+  accepts_nested_attributes_for :release_wiki_link
   
   after_save do |doc|
     if doc.changes.has_key? "labels"
@@ -38,13 +40,13 @@ class Possession
       self.labels << q
     }    
   end
-
-  def release_wiki=(wiki_id)
-    self.release_id = wiki_id.sub("oid:",'').strip
+  
+  def release_wiki_link_text
+    (self.release_wiki_link && release_wiki_link.reference_text) || ""
   end
   
-  def release_wiki
-    "oid:#{self.release_id}"
+  def release_wiki_link_text=(value)
+    self.release_wiki_link = ReleaseWikiLink.new({reference_text: value})
   end
 
   def tokenized_labels

@@ -4,7 +4,7 @@
   = notice
 %p
   = "#{t('addmusic.release')}:"
-  = link_to @possession.release.title,  release_path(@possession.release)
+  = release_wiki_link_path @possession.release_wiki_link
 %p
   = "#{t('addmusic.labels')}:"
   %ul

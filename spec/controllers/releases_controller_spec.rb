@@ -22,7 +22,9 @@ describe ReleasesController do
     it "should show a release upon request" do
       id = 99.to_param
       Release.should_receive(:find).with(id).and_return release
-      Possession.should_receive(:where).with(owner:user, release:release).and_return Possession
+      release.should_receive(:id).and_return id
+      user.should_receive(:possessions).and_return Possession
+      Possession.should_receive(:where).with("release_wiki_link.release_id" => id).and_return Possession
       Possession.should_receive(:first).and_return nil
       get :show, id: id
       assigns(:release).should eq release

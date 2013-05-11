@@ -8,8 +8,8 @@
           %li
             = msg
   %p
-    = f.label :release_wiki, t('addmusic.release')
-    = f.text_field :release_wiki, 'data-pre' => @possession.release? ? [{id:@possession.release_wiki, name:@possession.release.title}].to_json : "", class: "release_title_lookup"
+    = f.label :release_wiki_link_text, t('addmusic.release')
+    = f.text_field :release_wiki_link_text, 'data-pre' => @possession.release_wiki_link? ? [{id:@possession.release_wiki_link, name:@possession.release_wiki_link.title}].to_json : "", class: "release_title_lookup"
   %p
     = f.label :labels_text, t('addmusic.labels')
     = f.text_field :labels_text, 'data-pre' => @possession.tokenized_labels, class: "labels_lookup"

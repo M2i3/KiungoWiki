@@ -10,7 +10,7 @@ $ ->
     if $.trim($releaseLink.text()) != haveText
       jqxhr = $.post '/possessions.json',
         possession:
-          release_id: $(this).attr 'data-release-id'
+          release_wiki_link_text: "oid:#{$(this).attr 'data-release-id'}"
           labels: labels
           comments: $('textarea#comments').val()
           acquisition_date: $('input#acquisition_date').val()

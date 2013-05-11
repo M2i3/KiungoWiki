@@ -49,7 +49,16 @@ en:
     categories_index: "Categories"
     possessions_index: My Music
     possessions_all_music: All my Music
-
+    modify_category: Edit Category
+    new_category: New Category
+    new_artist: New Artist
+    welcome_banner: Welcome to KiungoWiki
+    various_pages: Various Pages
+    modify_article: Modify Article
+    create_article: "Create an Article"
+    supplement_section: Supplementary Section
+    new_section: New Section
+    new_recording: New Record
 
   messages:
     info: For your information.
@@ -61,6 +70,46 @@ en:
     artist_new_without_query: Please make sure that the artist you are about to create does not already exist in the wiki.
     release_new_without_query: Please make sure that the release you are about to create does not already exist in the wiki.
     confirm: Are you sure?
+    artist_errors_warning: The following problem(s) prevent us from saving the artist
+    artist_no_work: This artist does not have any works
+    artist_no_recordings: This artist does not have any recordings
+    artist_no_releases: This artist does not have any releases
+    category_errors_warning: The following problem(s) prevent us from saving the category
+    article_errors_warning: The following problem(s) prevent us from saving the article
+    recording_errors_warning: The following problem(s) prevent us from saving the recording
+  
+  portal:
+    artist_explanation: Artists are those who create works and/or interpret the records
+    continue_reading: continue reading
+    new_artist_text: Create a new artist
+    recent_changes: a complete list of recent changes
+    recent_changes_artist: a complete list of recently modified artists
+    see_artist: See the artist
+    how_to_help: What you can do to help
+    revise_artist: Revise a recently changed artist
+    improve_artist: Improve an artist
+    without_work: Without work
+    without_registration: Without registration
+    without_releases: Without releases
+    without_additional_sec: Without additional sections
+    complete_artist_alphabet: Complete list of artists starting with
+    all_artists: all artists
+    alphabetical: Alphabetical
+    by_tag: By tag/category
+    
+  home:
+    music_reference: ???
+    work_link: ???
+    
+    
+  rsearch:
+    search_keywords: A search of the artists can take many forms and can be refined with the following keywords
+    limit_artist_surname: Limit the search to the surname of the artist only. For example
+    limit_artist_given_name: Limit the search to the given name of the artist only. For example
+    limit_artist_birth_date: Search using the date of birth of the artist. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
+    limit_artist_birth_place: Limited research in the birthplace of the artist only. For example
+    limit_artist_death_date: Search using the date of death of the artist. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
+    limit_artist_death_location: Limit research in the place of death of the artist only. For example
 
   show: Show
   modify: Modify
@@ -76,6 +125,11 @@ en:
   delete: Delete
   update: Update
   back: Back
+  or: or
+  date: Date
+  page: Page
+  author: Author
+  change: Change
 
   actions:
     new_portal_article: New Article

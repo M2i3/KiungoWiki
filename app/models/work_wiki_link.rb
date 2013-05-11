@@ -35,16 +35,16 @@ class WorkWikiLink < WikiLink
         :sep=>" ").to_s
   end
 
-  class SearchQuery < ::SearchQuery 
-    def self.query_expressions
-      superclass.query_expressions.merge({ title: :text,
+  class SearchQuery < ::SearchQuery
+    QUERY_ATTRS = { title: :text,
         copyright: :text,
         lyrics: :text,
         date_written: :date,
         language_code:  :word,
         publisher: :text
-      })
-
+      }
+    def self.query_expressions
+      superclass.query_expressions.merge QUERY_ATTRS
     end
     def self.catch_all
       "title"

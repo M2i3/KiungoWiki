@@ -23,7 +23,7 @@ class Recording
   index({ cache_normalized_title: 1 }, { background: true })
   index({ cache_first_letter: 1, cache_normalized_title: 1 }, { background: true })
 
-  search_in :title, {:match => :all}
+  search_in :title, {match: :all}
 
   validates :duration_text, duration: {allow_nil: true}
   
@@ -31,7 +31,7 @@ class Recording
 #  validates_length_of :work_title, :in=>1..500, :allow_nil=>true
 #  validates_numericality_of :duration, :greater_than=>0, :allow_nil=>true  
 #  validates_format_of :recording_date_text, :with=>/^(\d{4})(?:-?(\d{0,2})(?:-?(\d{0,2}))?)?$/, :allow_nil=>true
-  validates_numericality_of :rythm, :greater_than=>0, :allow_nil=>true
+  validates_numericality_of :rythm, greater_than: 0, allow_nil: true
 
   embeds_one :work_wiki_link, as: :linkable, class_name: "RecordingWorkWikiLink"
   validates_associated :work_wiki_link  
@@ -54,11 +54,11 @@ class Recording
   validates_associated :supplementary_sections
 
   # telling Mongoid::History how you want to track changes
-  track_history   :modifier_field => :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
-                  :version_field => :version,   # adds "field :version, type:  Integer" to track current version, default is :version
-                  :track_create   =>  true,    # track document creation, default is false
-                  :track_update   =>  true,     # track document updates, default is true
-                  :track_destroy  =>  true     # track document destruction, default is false
+  track_history   modifier_field: :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
+                  version_field: :version,   # adds "field :version, type:  Integer" to track current version, default is :version
+                  track_create:  true,    # track document creation, default is false
+                  track_update:  true,     # track document updates, default is true
+                  track_destroy:  true     # track document destruction, default is false
 
 
 
@@ -75,7 +75,7 @@ class Recording
   end
 
   def work_wiki_link_text=(value)
-    self.work_wiki_link = WorkWikiLink.new({:reference_text=>value})
+    self.work_wiki_link = WorkWikiLink.new({reference_text: value})
   end
 
   def artist_wiki_links_text
@@ -89,7 +89,7 @@ class Recording
   def artist_wiki_links_text=(value)
     self.artist_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
     value.split(",").each{|q| 
-      self.artist_wiki_links.build(:reference_text=>q.strip) 
+      self.artist_wiki_links.build(reference_text: q.strip) 
     }    
   end
 
@@ -108,7 +108,7 @@ class Recording
   def release_wiki_links_text=(value)
     self.release_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.release_wiki_links.clear does not work
     value.split(",").each{|q| 
-      self.release_wiki_links.build(:reference_text=>q.strip) 
+      self.release_wiki_links.build(reference_text: q.strip) 
     }    
   end
 
@@ -123,7 +123,7 @@ class Recording
   def category_wiki_links_text=(value)
     self.category_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.release_wiki_links.clear does not work
     value.split(",").each{|q| 
-      self.category_wiki_links.build(:reference_text=>q.strip) 
+      self.category_wiki_links.build(reference_text: q.strip) 
     }    
   end
 
@@ -162,7 +162,7 @@ class Recording
   end
 
   def to_wiki_link
-    RecordingWikiLink.new(:reference_text=>"oid:#{self.id}", :recording=>self)
+    RecordingWikiLink.new(reference_text: "oid:#{self.id}", recording: self)
   end
 
   scope :queried, ->(q) {
@@ -180,5 +180,21 @@ class Recording
     }
     current_query
   }
-
+  
+  after_destroy do |doc|
+    attrs = "" 
+    RecordingWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: #{doc.send(attri)} "}
+    [Artist, Release, Work].each do |klass|
+      klass.where("recording_wiki_links.recording_id" => doc.id).all.each do |rec|
+        rec.recording_wiki_links.each do |recording|
+          if recording.recording_id == doc.id
+            recording.recording_id = nil
+            recording.reference_text = attrs
+            recording.save!
+          end
+        end
+      end
+    end
+  end
+  
 end

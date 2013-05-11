@@ -10,10 +10,10 @@
     %table.table.table-striped
       %thead
         %tr
-          %th= "Fait le"
-          %th= "Page"
-          %th= "Auteur"
-          %th= "Changement"
+          %th= t('date')
+          %th= t('page')
+          %th= t("author")
+          %th= t("change")
         %tbody
           - @changes.each do |change|
             %tr
@@ -23,5 +23,3 @@
               %td= change.change_type_text
 
     = paginate @changes
-
-

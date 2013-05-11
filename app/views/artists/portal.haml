@@ -6,7 +6,7 @@
 .row      
   .span12
     %p
-      Les artistes sont ceux qui créent les oeuvres et/ou les interprètent dans les enregistrements.
+      = t('portal.artist_explanation')
 
 .row
   - if @feature_in_month
@@ -15,49 +15,52 @@
       .content
         = RedCloth.new(@feature_in_month.summary(750)).to_html.html_safe
       %p.pull-left 
-        Voir l'artiste:
+        = "#{t('see_artist')}:"
         = artist_wiki_link_path(@feature_in_month.featured_wiki_link)
       - if @feature_in_month.more?(750)
-        %p.pull-right= link_to "continuer la lecture", @feature_in_month
+        %p.pull-right= link_to t("portal.continue_reading"), @feature_in_month
 
   .span6
-    %h2 Ce que vous pouvez faire pour contribuer
+    %h2
+      = t('portal.how_to_help')
     %ul
       %li 
-        = link_to "Écrire la fiche d'un(e) artiste", new_artist_path
+        = link_to t("portal.new_artist_text"), new_artist_path
       %li 
-        Réviser la fiche d'un(e) artiste modifiée récemment:
+        = "#{t('portal.revise_artist')}:"
         %ul 
           %li 
-            - Artist.order_by(:updated_at=>:desc).limit(5).all.each do |artist|
+            - Artist.order_by(updated_at: :desc).limit(5).all.each do |artist|
               %span.artist>= link_to artist.to_wiki_link.object_text, artist_path(artist.id)
               ;&nbsp;
-            = link_to "...", recent_changes_artists_path, :name=>"consulter la liste complète des modifications récentes"
-          %li= link_to "consulter la liste complète des artistes modifiés récemment", recent_changes_artists_path
+            = link_to "...", recent_changes_artists_path, name: t("portal.recent_changes")
+          %li= link_to t("portal.recent_changes_artist"), recent_changes_artists_path
 
       %li
-        Améliorer la fiche d'un(e) artiste:
+        = "#{t("portal.improve_artist")}:"
         %ul
-          %li= link_to "Sans oeuvre", "#", :class=>"soon-available"
-          %li= link_to "Sans enregistrement", "#", :class=>"soon-available"
-          %li= link_to "Sans release", "#", :class=>"soon-available"
-          %li= link_to "Sans section(s) complémentaire(s)", "#", :class=>"soon-available"
+          %li= link_to t("portal.without_work"), "#", class: "soon-available"
+          %li= link_to t("portal.without_registration"), "#", class: "soon-available"
+          %li= link_to t("portal.without_releases"), "#", class: "soon-available"
+          %li= link_to t("portal.without_additional_sec"), "#", class: "soon-available"
 
 .row
   .span12
-    %h2 Par ordre alphabétique
+    %h2
+      = t('portal.alphabetical')
     %ul
       - alphabetic_artist_grouping.each do |letter, heading|
         %li 
           %span.letter= heading
-          - Artist.where(:cache_first_letter => letter).order_by(updated_at:1).limit(5).each do |artist|
+          - Artist.where(cache_first_letter: letter).order_by(updated_at:1).limit(5).each do |artist|
             %span.artist>= link_to artist.to_wiki_link.object_text, artist_path(artist.id)
             ;&nbsp;
-          = link_to "...", alphabetic_artists_path(letter: letter, page: 1), :name=>"consulter la liste complète des artistes commençant par \"#{letter}\""
-      %li= link_to "tous les artistes", artists_path(page: 1)
+          = link_to "...", alphabetic_artists_path(letter: letter, page: 1), name: "#{t('portal.complete_artist_alphabet')} \"#{letter}\""
+      %li= link_to t("portal.all_artists"), artists_path(page: 1)
 
 .row
   .span12
-    %h2.soon-available Par tag/catégorie
+    %h2.soon-available
+      = t('portal.by_tag')
 
 

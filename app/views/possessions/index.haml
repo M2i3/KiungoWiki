@@ -36,9 +36,7 @@
           - @possessions.each do |possession|
             %tr
               %td
-                = possession.release.title
-              %td
-                = link_to t('show'), possession
+                = release_wiki_link_path possession.release_wiki_link
               %td
                 = link_to t('modify'), edit_possession_path(possession)
               %td

@@ -106,4 +106,26 @@ describe Recording do
 	    ctr.recording_date.should be_kind_of(IncDate)
 	  end
 	end
+  it "should null out some wiki links that are attached to it when destroyed" do
+    recording = FactoryGirl.create(:recording)
+    attr_string = ""
+    RecordingWikiLink::SearchQuery::QUERY_ATTRS.keys.each do |attri| 
+      attr_string += "#{attri}: #{attri} "
+      recording.should_receive(attri).at_least(1).and_return attri
+    end
+    wiki_link = Object.new
+    klasses = [Artist, Release, Work]
+    klasses_size = klasses.size
+    wiki_link.stub(:recording_id).and_return recording.id
+    wiki_link.should_receive(:recording_id=).with(nil).at_least klasses_size
+    wiki_link.should_receive(:reference_text=).with(attr_string).at_least klasses_size
+    wiki_link.should_receive(:save!).at_least klasses_size
+    record = Object.new
+    record.should_receive(:recording_wiki_links).at_least(1).and_return [wiki_link]
+    klasses.each do |klass|
+      klass.should_receive(:where).at_least(1).with("recording_wiki_links.recording_id" => recording.id).and_return klass
+      klass.should_receive(:all).at_least(1).and_return [record]
+    end
+    recording.destroy
+  end
 end

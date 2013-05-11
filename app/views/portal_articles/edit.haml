@@ -1,21 +1,21 @@
 .row      
   .span12
     .page-header
-      = title("Modifier l'article (#{@portal_article.category})")
+      = title("#{t('headers.modify_article')} (#{@portal_article.category})")
 .row
-  = render :partial=>'links'
+  = render partial: 'links'
   .span12
     - unless @portal_article.errors.empty?
       .alert.alert-error
-        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'article:
+        %strong #{t('article_errors_warning')}:
         %br/
         = @portal_article.errors.full_messages.join("</br>").html_safe
 
-    = form_for @portal_article, :class=>"form-horizontal" do |f|
-      = render :partial=>'form', :object=>f
+    = form_for @portal_article, class: "form-horizontal" do |f|
+      = render partial: 'form', object: f
       .formActions
-        = f.submit :class=>"btn btn-primary"
-        #{link_to t("delete"), @portal_article, :method=>:delete, :class=>'btn'} 
-        ou #{link_to t("cancel"), :back, :class=>"btn"}
+        = f.submit class: "btn btn-primary"
+        #{link_to t("delete"), @portal_article, method: :delete, class: 'btn'} 
+        #{t('or')} #{link_to t("cancel"), :back, class: "btn"}
 
 

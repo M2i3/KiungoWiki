@@ -19,20 +19,21 @@ class ReleaseWikiLink < WikiLink
         GroupText.new([
             GroupText.new([
                  self.date_released], 
-                 :before_text=>"(", :after_text=>")"), 
+                 before_text: "(", after_text: ")"), 
             self.release && self.release.first_artist_display_text],
-            :sep=>" - ")],
-        :sep=>" - ").to_s
+            sep: " - ")],
+        sep: " - ").to_s
   end
 
-  class SearchQuery < ::SearchQuery 
-    def self.query_expressions
-      superclass.query_expressions.merge({ title: :text,
+  class SearchQuery < ::SearchQuery
+    QUERY_ATTRS = { title: :text,
         media_type: :text,
         date_released: :date,
         label: :text,
         reference_code: :text
-      })
+      }
+    def self.query_expressions
+      superclass.query_expressions.merge QUERY_ATTRS
     end
     def self.catch_all
       "title"

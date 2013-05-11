@@ -4,7 +4,7 @@
       = title(@portal_article.title)
 
 .row
-  = render :partial=>'links'
+  = render partial: 'links'
   .span12
     .content= RedCloth.new(@portal_article.content).to_html.html_safe
     .well 
