@@ -59,7 +59,7 @@
               %th= Recording.human_attribute_name("trackNb") 
               %th= Release.human_attribute_name("reference_code")
           %tbody
-            - @recording.release_wiki_links.sort{|a,b| a.date_released <=> b.date_released}.each do |awl|
+            - @recording.release_wiki_links.sort{|a,b| ((a.date_released <=> b.date_released) || 1)}.each do |awl|
               %tr
                 %td= release_wiki_link_path(awl)
                 %td= awl.date_released

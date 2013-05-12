@@ -39,7 +39,7 @@ class GroupedWikiLink
     end
 
     def grouped_attribute(name)
-      ((self.links.first && self.links.first.send(name)) || self.send(name))
+      ((self.links.first && self.links.first.send(name)) || nil)
     end
     
     def distinct_attribute(name)
