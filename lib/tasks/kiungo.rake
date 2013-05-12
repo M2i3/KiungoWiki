@@ -67,16 +67,16 @@ namespace :kiungo do
 
         RawOwnerSupportLink.with(database: "kiungo_raw_db").all.entries.each do |rawOwnerSupportLink|
           if( rawOwnerSupportLink.owner_id == "1" )
-              Possession.create!(:release_id=>Release.where(:origalbumid=>rawOwnerSupportLink.support_id).first.id.to_s,
+              Possession.create!(:release_wiki_link=>ReleaseWikiLink.new({:reference_text=>"oid:"+ Release.where(:origalbumid=>rawOwnerSupportLink.support_id).first.id.to_s}),
                                  :owner_id=>User.where(:email=>"pfreyssonnet@gmail.com").first.id.to_s,
                                  :acquisition_date=>nil, :comments=>"")
           end
           if( rawOwnerSupportLink.owner_id == "2" )
-              Possession.create!(:release_id=>Release.where(:origalbumid=>rawOwnerSupportLink.support_id).first.id.to_s,
+              Possession.create!(:release_wiki_link=>ReleaseWikiLink.new({:reference_text=>"oid:"+ Release.where(:origalbumid=>rawOwnerSupportLink.support_id).first.id.to_s}),
                                  :owner_id=>User.where(:email=>"mar1@videotron.ca").first.id.to_s,
                                  :acquisition_date=>nil, :comments=>"")
           end
-        end # RawCategories.each
+        end # RawOwnerSupportLink.each
 
 
         RawWork.with(database: "kiungo_raw_db").all.entries.each do |rawWork|
