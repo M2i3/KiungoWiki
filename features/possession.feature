@@ -36,5 +36,5 @@ Feature: Possessions
     Given a release exists
     And a user who is logged in
     And I go to new possession
-    When I fill in posession info and submit
+    When I fill in possession info and submit
     Then I should see my new possession
