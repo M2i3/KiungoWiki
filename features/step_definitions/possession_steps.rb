@@ -40,7 +40,7 @@ When(/^I remove a random possession$/) do
   @removed_poss = poss.release_wiki_link.title
 end
 
-When(/^I fill in posession info and submit$/) do
+When(/^I fill in possession info and submit$/) do
   @release = Release.first.title
   fill_in "token-input-possession_release_wiki_link_text", with: @release[0,3]
   select_token @release
