@@ -12,10 +12,10 @@
             = t("actions.new_portal_article")
             %b.caret
           %ul.dropdown-menu
-            %li= link_to t("actions.new_artist_portal_article"), new_portal_article_path(:category=>"artist")
-            %li= link_to t("actions.new_work_portal_article"), new_portal_article_path(:category=>"work")
-            %li= link_to t("actions.new_recording_portal_article"), new_portal_article_path(:category=>"recording")
-            %li= link_to t("actions.new_release_portal_article"), new_portal_article_path(:category=>"release")
+            %li= link_to t("actions.new_artist_portal_article"), new_portal_article_path(category: "artist")
+            %li= link_to t("actions.new_work_portal_article"), new_portal_article_path(category: "work")
+            %li= link_to t("actions.new_recording_portal_article"), new_portal_article_path(category: "recording")
+            %li= link_to t("actions.new_release_portal_article"), new_portal_article_path(category: "release")
             %li.divider
             %li= link_to t("actions.new_general_portal_article"), new_portal_article_path()
 
@@ -40,5 +40,3 @@
 
 
     = paginate @portal_articles
-
-

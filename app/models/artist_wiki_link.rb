@@ -39,16 +39,17 @@ class ArtistWikiLink < WikiLink
     text.join(" ")
   end
 
-  class SearchQuery < ::SearchQuery 
+  class SearchQuery < ::SearchQuery
+    QUERY_ATTRS = {surname: :text,
+            given_name: :text,
+            name: :text,
+            birth_date: :date,
+            birth_location: :text,
+            death_date: :date,
+            death_location: :text
+          }
     def self.query_expressions
-      superclass.query_expressions.merge({surname: :text,
-        given_name: :text,
-        name: :text,
-        birth_date: :date,
-        birth_location: :text,
-        death_date: :date,
-        death_location: :text
-      })
+      superclass.query_expressions.merge QUERY_ATTRS
     end
     def self.catch_all
       "name"

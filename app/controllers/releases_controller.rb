@@ -31,7 +31,7 @@ class ReleasesController < ApplicationController
   
   def show
     @release = Release.find(params[:id])
-    @possession = Possession.where(owner:current_user, release:@release).first if current_user
+    @possession = current_user.possessions.where("release_wiki_link.release_id" => @release.id).first if current_user
     respond_to do |format|
       format.xml { render xml: @release.to_xml(except: [:versions]) }
       format.json { render json: @release }

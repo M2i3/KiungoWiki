@@ -20,7 +20,7 @@
 
     %h2= Work.model_name.human.pluralize
     - if @artist.work_wiki_links.count == 0 
-      %p This artist does not have any works.
+      %p #{t('messages.artist_no_work')}.
     - else
       %table.table.table-striped
         %thead
@@ -53,7 +53,7 @@
 
     %h2= Recording.model_name.human.pluralize
     - if @artist.recording_wiki_links.count == 0 
-      %p This artist does not have any recordings.
+      %p #{t('messages.artist_no_recordings')}.
     - else
       %table.table.table-striped
         %thead
@@ -72,7 +72,7 @@
 
     %h2= Release.model_name.human.pluralize
     - if @artist.release_wiki_links.count == 0 
-      %p This artist does not have any releases.
+      %p #{t('messages.artist_no_releases')}.
     - else
       %table.table.table-striped
         %thead

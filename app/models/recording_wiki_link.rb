@@ -25,16 +25,17 @@ class RecordingWikiLink < WikiLink
         :sep=>" ").to_s
   end
 
-  class SearchQuery < ::SearchQuery 
-    def self.query_expressions
-      super.merge({ 
+  class SearchQuery < ::SearchQuery
+    QUERY_ATTRS = { 
         title: :text,
         category_name: :text,
         recording_date: :date,
         duration: :duration,
         recording_location:  :text,
         rythm: :word
-      })
+      }
+    def self.query_expressions
+      super.merge QUERY_ATTRS
     end
     def self.catch_all
       "title"

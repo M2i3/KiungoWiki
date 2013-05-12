@@ -169,6 +169,22 @@ class Work
     current_query
   }
 
+  after_destroy do |doc|
+    attrs = "" 
+    WorkWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: #{doc.send(attri)} "}
+    [Artist, Recording, Work].each do |klass|
+      klass.where("work_wiki_links.work_id" => doc.id).all.each do |rec|
+        rec.work_wiki_links.each do |work|
+          if work.work_id == doc.id
+            work.work_id = nil
+            work.reference_text = attrs
+            work.save!
+          end
+        end
+      end
+    end
+  end
+  
   #Work.all.group_by {|a| a.title_first_letter.upcase }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
 end
 

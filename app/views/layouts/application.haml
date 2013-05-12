@@ -5,7 +5,7 @@
       = content_for(:title).blank? ? "KiungoWiki" : content_for(:title) +  " - KiungoWiki"
 
     %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
-    %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
 
     = stylesheet_link_tag "application"
 
@@ -19,7 +19,7 @@
 
     = csrf_meta_tag
 
-    = render :partial=>"common/google_analytics"
+    = render partial: "common/google_analytics"
 
   %body{"data-spy"=>"scroll", "data-target"=>".subnav", "data-offset"=>50}
 
@@ -31,7 +31,7 @@
             %span.icon-bar
             %span.icon-bar
 
-          = link_to root_url, :class=>"brand" do
+          = link_to root_url, class: "brand" do
             #sitetitle KiungoWiki
 
           .nav-collapse
@@ -45,12 +45,12 @@
 
             %ul.nav.profile.pull-right
               %li
-                %form.navbar-search{:action=>search_url}
-                  %input.search-query.span2{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
+                %form.navbar-search{action: search_url}
+                  %input.search-query.span2{name: "q", type: "text", value: params[:q] ? params[:q] : "", placeholder: "Chercher"}/
               %li= link_to t("headers.possessions_index"), possessions_path
               %li= link_to t("headers.my_profile"), edit_user_registration_path
               - if current_user
-                %li= link_to t("headers.sign_out"), destroy_user_session_path, :method=>"delete"
+                %li= link_to t("headers.sign_out"), destroy_user_session_path, method: :delete
               - else
                 %li= link_to t("headers.sign_up_sign_in"), new_user_session_path
 
@@ -68,11 +68,8 @@
               %ul.nav
                 %li= link_to t("headers.home_index"), root_url
                 %li= link_to t("headers.recent_changes"), changes_path
-                %li= link_to t("headers.terms_and_conditions"), "#", :class=>"soon-available"
-                %li= link_to t("headers.contact_us"), "#", :class=>"soon-available"
-                %li= link_to t("headers.about_us"), "#", :class=>"soon-available"
+                %li= link_to t("headers.terms_and_conditions"), "#", class: "soon-available"
+                %li= link_to t("headers.contact_us"), "#", class: "soon-available"
+                %li= link_to t("headers.about_us"), "#", class: "soon-available"
                 %li= link_to t("headers.site_plan"), site_plan_path
           %p#copyright.span12 © 2012 - KiungoWiki
-   
-
-

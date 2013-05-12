@@ -27,7 +27,7 @@ class Artist
   index({ cache_normalized_name: 1 }, { background: true })
   index({ cache_first_letter: 1, cache_normalized_name: 1 }, { background: true })
 
-  search_in :name, :surname, :given_name, :birth_location, :death_location, {:match => :all}
+  search_in :name, :surname, :given_name, :birth_location, :death_location, {match: :all}
 
   validates_presence_of :surname
 
@@ -52,11 +52,11 @@ class Artist
   validates_associated :supplementary_sections
 
   # telling Mongoid::History how you want to track changes
-  track_history   :modifier_field => :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
-                  :version_field => :version,   # adds "field :version, type:  Integer" to track current version, default is :version
-                  :track_create   =>  true,    # track document creation, default is false
-                  :track_update   =>  true,     # track document updates, default is true
-                  :track_destroy  =>  true     # track document destruction, default is false
+  track_history   modifier_field: :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
+                  version_field: :version,   # adds "field :version, type:  Integer" to track current version, default is :version
+                  track_create:  true,    # track document creation, default is false
+                  track_update:  true,     # track document updates, default is true
+                  track_destroy:  true     # track document destruction, default is false
 
   def set_name
     if ![nil,""].include?(self.surname)
@@ -92,7 +92,7 @@ class Artist
     self.work_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.work_wiki_links.clear does not work
     value.split(",").uniq.each{|q| 
       #puts "nb wwk bef = " + self.work_wiki_links.count.to_s
-      self.work_wiki_links.build(:reference_text=>q.strip) 
+      self.work_wiki_links.build(reference_text: q.strip) 
       #puts "nb wwk aft= " + self.work_wiki_links.count.to_s
     }    
   end
@@ -108,7 +108,7 @@ class Artist
   def release_wiki_links_text=(value)
     self.release_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.release_wiki_links.clear does not work
     value.split(",").uniq.each{|q| 
-      self.release_wiki_links.build(:reference_text=>q.strip) 
+      self.release_wiki_links.build(reference_text: q.strip) 
     }    
   end
 
@@ -121,7 +121,7 @@ class Artist
   end
 
   def recording_wiki_links_combined_links_renamed
-    mappings = {:title => :name}
+    mappings = {title: :name}
     recording_wiki_links_combined_links.collect do |x|
       Hash[x.map {|k,v| [mappings[k] || k, v] }]
     end
@@ -130,7 +130,7 @@ class Artist
   def recording_wiki_links_text=(value)
     self.recording_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.recording_wiki_links.clear does not work
     value.split(",").uniq.each{|q| 
-      self.recording_wiki_links.build(:reference_text=>q.strip) 
+      self.recording_wiki_links.build(reference_text: q.strip) 
     }    
   end
 
@@ -145,7 +145,7 @@ class Artist
   def artist_wiki_links_text=(value)
     self.artist_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
     value.split(",").each{|q| 
-      self.artist_wiki_links.build(:reference_text=>q.strip) 
+      self.artist_wiki_links.build(reference_text: q.strip) 
     }    
   end
 
@@ -196,19 +196,34 @@ class Artist
   end
 
   def to_wiki_link(klass=ArtistWikiLink)
-    klass.new(:reference_text=>"oid:#{self.id}" , :artist=>self)
+    klass.new(reference_text: "oid:#{self.id}" , artist: self)
   end
 
   scope :born_during_month_of, ->(month) {
-    self.where(:birth_date=>/.*\-#{"%02d"%(month)}\-.*/)
+    self.where(birth_date: /.*\-#{"%02d"%(month)}\-.*/)
   }
   #Artist.born_during_month_of(04).all.group_by {|a| a.birth_date.year }.each {|a| puts  "* [" + a[0].to_s + "] - "+ a[1].collect{|b| "["+ b.name + "]"}.join(", ")}
 
   scope :died_during_month_of, ->(month) {
-    self.where(:death_date=>/.*\-#{"%02d"%(month)}\-.*/)
+    self.where(death_date: /.*\-#{"%02d"%(month)}\-.*/)
   }
   #Artist.died_during_month_of(04).all.group_by {|a| a.death_date.year }.each {|a| puts  "* [" + a[0].to_s + "] - "+ a[1].collect{|b| "["+ b.name + "]"}.join(", ")}
 
   #Artist.all.group_by {|a| a.name[0].upcase }.sort{|a, b| a[0] <=> b[0]}.each {|a| puts "* ["+ a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.name + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
+  after_destroy do |doc|
+    attrs = "" 
+    ArtistWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: #{doc.send(attri)} "}
+    [Artist, Recording, Release, Work].each do |klass|
+      klass.where("artist_wiki_links.artist_id" => doc.id).all.each do |rec|
+        rec.artist_wiki_links.each do |artist|
+          if artist.artist_id == doc.id
+            artist.artist_id = nil
+            artist.reference_text = attrs
+            artist.save!
+          end
+        end
+      end
+    end
+  end
   
 end

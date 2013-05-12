@@ -7,6 +7,7 @@ fr:
       send_paranoid_instructions: Si votre email existe sur notre base de données,
         vous recevrez sous quelques minutes un message avec des instructions sur la
         façon de confirmer votre compte.
+      resend_instructions: "Resend confirmation instructions"
     failure:
       already_authenticated: Vous êtes déjà connecté.
       inactive: Votre compte n'est pas encore activé.
@@ -19,6 +20,7 @@ fr:
     mailer:
       confirmation_instructions:
         subject: Instructions de confirmation
+        confirm: 'Confirm my account'
       reset_password_instructions:
         subject: Instructions pour changer le mot de passe
       unlock_instructions:

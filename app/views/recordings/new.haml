@@ -1,16 +1,16 @@
-= title("Nouvel enregistrement")
+= title(t('headers.new_recording'))
 
 .tabbable.row
   .span12
     - unless @recording.errors.empty?
       .alert.alert-error
-        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel enregistrement:
+        %strong #{t('messages.recording_errors_warning')}:
         %br/
         = @recording.errors.full_messages.join("</br>").html_safe
 
     = form_for @recording do |f|
-      = render :partial=>'form', :object=>f
+      = render partial: 'form', object: f
       .formActions
-        = f.submit :class=>"btn btn-primary"
-        ou #{link_to t("cancel"), :back, :class=>"btn"}
+        = f.submit class: "btn btn-primary"
+        #{t('or')} #{link_to t("cancel"), :back, class: "btn"}
 

@@ -51,6 +51,16 @@ fr:
     categories_index: "Catégories"
     possessions_index: Ma musique
     possessions_all_music: Toute ma musique
+    modify_category: Modifier la catégorie
+    new_category: Nouvelle Catégorie
+    new_artist: Nouvel Artiste
+    welcome_banner: Bienvenue sur KiungoWiki
+    various_pages: Pages diverses
+    modify_article: Modifier l'article
+    create_article: "Créer un article"
+    supplement_section: Section Supplémentaire
+    new_section: Nouvelle section
+    new_recording: Nouvel enregistrement
 
   messages:
     info: Pour votre information.
@@ -62,7 +72,46 @@ fr:
     artist_new_without_query: Veuillez vous assurer que l'artiste que vous désirez créer n'existe pas déjà dans le wiki.
     release_new_without_query: Veuillez vous assurer que l'release que vous désirez créer n'existe pas déjà dans le wiki.
     confirm: Are you sure?
+    artist_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel artiste
+    artist_no_work: ???
+    artist_no_recordings: ???
+    artist_no_releases: ???
+    category_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer la catégorie
+    article_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'article
+    recording_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'enregistrement
+      
+  portal:
+    artist_explanation: Les artistes sont ceux qui créent les oeuvres et/ou les interprètent dans les enregistrements.
+    continue_reading: continuer la lecture
+    new_artist_text: Écrire la fiche d'un(e) artiste
+    recent_changes: consulter la liste complète des modifications récentes
+    recent_changes_artist: consulter la liste complète des artistes modifiés récemment
+    see_artist: Voir l'artiste
+    how_to_help: Ce que vous pouvez faire pour contribuer
+    revise_artist: Réviser la fiche d'un(e) artiste modifiée récemment
+    improve_artist: Améliorer la fiche d'un(e) artiste
+    without_work: Sans oeuvre
+    without_registration: Sans enregistrement
+    without_releases: Sans release
+    without_additional_sec: Sans section(s) complémentaire(s)
+    complete_artist_alphabet: consulter la liste complète des artistes commençant par
+    all_artists: tous les artistes
+    alphabetical: Par ordre alphabétique
+    by_tag: Par tag/catégorie
     
+  home:
+    music_reference: La référence en musique qui mets en évidence le <strong>rôle des créateurs et interprêtes</strong>
+    work_link: Un Wiki sur les oeuvres audios ainsi que les <strong>liens entre ces oeuvres</strong> dans le temps et l'espace
+  
+  rsearch:
+    search_keywords: Une recherche dans les artistes peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants
+    limit_artist_surname: Limite la recherche dans le nom de l'artiste seulement. Par exemple
+    limit_artist_given_name: Limit the search to the given name of the artist only. For example
+    limit_artist_birth_date: Cherche en utilisant la date de naissance de l'artiste. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
+    limit_artist_birth_place: Limite la recherche dans le lieu de naissance de l'artiste seulement. Par exemple
+    limit_artist_death_date: Cherche en utilisant la date de décès de l'artiste. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
+    limit_artist_death_location: Limite la recherche dans le lieu du décès de l'artiste seulement. Par exemple
+      
   show: Afficher
   modify: Modifier
   discuss: Discuter
@@ -75,6 +124,11 @@ fr:
   death: Décès
   search_question: Vous n’avez pas trouvé ce que vous cherchiez ?
   delete: Supprimer
+  or: ou
+  date: Fait le
+  page: Page
+  author: Auteur
+  change: Changement
 
   actions:
     new_portal_article: Nouvel article
