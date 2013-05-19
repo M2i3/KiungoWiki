@@ -59,6 +59,10 @@ en:
     supplement_section: Supplementary Section
     new_section: New Section
     new_recording: New Record
+    modify_release: Modify Release
+    new_release: New Release
+    modify_work: Modify Work
+    new_work: New Work
 
   messages:
     info: For your information.
@@ -77,6 +81,14 @@ en:
     category_errors_warning: The following problem(s) prevent us from saving the category
     article_errors_warning: The following problem(s) prevent us from saving the article
     recording_errors_warning: The following problem(s) prevent us from saving the recording
+    recording_without_artist: This recording is not associated with any artist
+    recording_without_release: This recording is not associated with any release
+    release_errors_warning: The following problem(s) prevents us from saving the release
+    release_without_artist: This release is not associated with any artist
+    release_without_recording: This release does not have any recording associated with it
+    work_errors_warning: The following problem(s) prevent us from saving the work
+    work_no_artists: This work does not have any artists
+    work_no_recordings: This work does not have any recordings
   
   portal:
     artist_explanation: Artists are those who create works and/or interpret the records
@@ -89,13 +101,38 @@ en:
     revise_artist: Revise a recently changed artist
     improve_artist: Improve an artist
     without_work: Without work
-    without_registration: Without registration
+    without_recording: Without registration
     without_releases: Without releases
     without_additional_sec: Without additional sections
     complete_artist_alphabet: Complete list of artists starting with
     all_artists: all artists
     alphabetical: Alphabetical
     by_tag: By tag/category
+    recording_explanation: The recordings are sound production of a work which form the elements of a release (eg 33 rpm vinyl, CD, etc.) or that exist on other media (mp3, internet, etc.).
+    see_recording: See Recording
+    new_recording_text: Create a new recording
+    revise_recording: Revise a recently changed recording
+    recent_changes_recording: a complete list of recently modified records
+    without_artist: Without artists
+    without_categories: Without categories
+    improve_recording: Improve a recording
+    complete_recording_alphabet: Complete list of recordings starting with
+    all_recordings: all recordings
+    release_explanation: Releases include several recordings or are interpreted by a number of artists
+    new_release_text: Create a new release
+    revise_release: Revise a recently changed release
+    recent_changes_release: a complete list of recently modified releases
+    see_release: See release
+    improve_release: Improve a realease
+    work_explanation: Works are the raw material on which records are built and which performers lend their voices and emotions
+    see_work: See the work
+    revise_work: Revise a recently changed work
+    new_work_text: Create a new work
+    recent_changes_work: a complete list of recently modified works
+    without_lyrics: Without lyrics
+    improve_work: Improve a work
+    all_works: all works
+    complete_work_alphabet: consulter la liste complète des oeuvres commençant par
     
   home:
     music_reference: ???
@@ -103,14 +140,30 @@ en:
     
     
   rsearch:
-    search_keywords: A search of the artists can take many forms and can be refined with the following keywords
+    search_artist_keywords: A search of the artists can take many forms and can be refined with the following keywords
     limit_artist_surname: Limit the search to the surname of the artist only. For example
     limit_artist_given_name: Limit the search to the given name of the artist only. For example
     limit_artist_birth_date: Search using the date of birth of the artist. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
     limit_artist_birth_place: Limited research in the birthplace of the artist only. For example
     limit_artist_death_date: Search using the date of death of the artist. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
     limit_artist_death_location: Limit research in the place of death of the artist only. For example
-
+    search_recording_keywords: A search of recordings can take many forms and can be refined with the following keywords
+    limit_recording_title: Limit the search to the title of the recording only. For example
+    limit_recording_date: Limit the search to the recording date only. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
+    limit_recording_location: Limit the search to the recording location only. For example
+    search_release_keywords: A search of the releases can take many forms and be refined with the following keywords
+    limit_release_title: Limit the search to the title of the release only. For example
+    limit_release_date_released: Search using the publication date of the release. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
+    limit_release_label: Limit the search to the label of the release. For example
+    limit_release_media_type: Limit the search to the type of media. For example
+    more_results: more results
+    search_work_keywords: A search of work can take many forms and be refined with the following keywords
+    limit_work_title: Limit the search to the title of the work only. For example
+    limit_work_copyright: Limit the search to the copyright of the work only. For example
+    limit_work_lyrics: Limit the search to the lyrics of the work only. For example
+    limit_work_date_written: Search using the date the work was written. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
+    limit_work_language: Limit the search to the language code of the work. For example
+    
   show: Show
   modify: Modify
   discuss: Discuss
@@ -130,6 +183,7 @@ en:
   page: Page
   author: Author
   change: Change
+  credits: Credits
 
   actions:
     new_portal_article: New Article

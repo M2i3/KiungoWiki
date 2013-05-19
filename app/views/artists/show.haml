@@ -10,7 +10,7 @@
         = date_location_formatted(t("death"), @artist.death_date, @artist.death_location)
       - unless @artist.artist_wiki_links.empty?
         %p
-        - unless["0",nil,""].include?(@artist.is_group)
+        - unless @artist.is_group.blank? or @artist.is_group == "0"
           = Artist.human_attribute_name("group_is_composed_of")
         - else
           = Artist.human_attribute_name("is_member_of_group")

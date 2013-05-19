@@ -1,6 +1,6 @@
 = title(@work.title)
 .row
-  = render :partial=>'links'
+  = render partial: 'links'
   .span12
     .section.summary
       %p
@@ -18,9 +18,9 @@
         = Work.human_attribute_name("publisher")
         \: #{@work.publisher}
 
-    %h2 Crédits
+    %h2 #{t('credits')}
     - if @work.artist_wiki_links.count == 0 
-      %p This artist does not have any works.
+      %p #{t('messages.work_no_artists')}.
     - else
       .right-size
         %table.table.table-striped
@@ -53,7 +53,7 @@
 
     %h2= Recording.model_name.human.pluralize
     - if @work.recording_wiki_links.count == 0 
-      %p This artist does not have any works.
+      %p #{t('messages.work_no_recordings')}
     - else
       .right-size
         %table.table.table-striped

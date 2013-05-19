@@ -14,19 +14,19 @@
   %dt= form.label :is_group
   %dd= form.text_field :is_group
   %dt= form.label :artist_wiki_links_text
-  %dd= form.text_field :artist_wiki_links_text, :class=>"artist_artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
+  %dd= form.text_field :artist_wiki_links_text, class: "artist_artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
   %dt= form.label :work_wiki_links_text
-  %dd= form.text_field :work_wiki_links_text, :class=>"artist_works_title_lookup", :"data-pre"=>form.object.work_wiki_links_combined_links.to_json
+  %dd= form.text_field :work_wiki_links_text, class: "artist_works_title_lookup", :"data-pre"=>form.object.work_wiki_links_combined_links.to_json
   %dt= form.label :recording_wiki_links_text
-  %dd= form.text_field :recording_wiki_links_text, :class=>"artist_recordings_title_lookup", :"data-pre"=>form.object.recording_wiki_links_combined_links.to_json
+  %dd= form.text_field :recording_wiki_links_text, class: "artist_recordings_title_lookup", :"data-pre"=>form.object.recording_wiki_links_combined_links.to_json
   %dt= form.label :release_wiki_links_text
-  %dd= form.text_field :release_wiki_links_text, :class=>"artist_releases_title_lookup", :"data-pre"=>form.object.release_wiki_links_combined_links.to_json
+  %dd= form.text_field :release_wiki_links_text, class: "artist_releases_title_lookup", :"data-pre"=>form.object.release_wiki_links_combined_links.to_json
   = form.fields_for :supplementary_sections do |ss|
-    %dt= ss.label "Section Supplémentaire"
+    %dt= ss.label t("headers.supplement_section")
     %dd= ss.text_field :title
-    %dd= ss.text_area :content, :class=>"span12"
+    %dd= ss.text_area :content, class: "span12"
   %p
-  %dt= link_to "Nouvelle section", {:controller=>:artists, :action=>:add_supplementary_section, :id=>@artist.id}, :class=>'btn'
+  %dt= link_to t("headers.new_section"), {controller: :artists, action: :add_supplementary_section, id: @artist.id}, class: 'btn'
 
 
 

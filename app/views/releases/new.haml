@@ -1,17 +1,17 @@
-= title("Nouvel Release")
+= title(t("headers.new_release"))
 
 .tabbable.row
   .span12
     - unless @release.errors.empty?
       .alert.alert-error
-        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel release:
+        %strong #{t('messages.release_errors_warning')}:
         %br/
         = @release.errors.full_messages.join("</br>").html_safe
 
     = form_for @release do |f|
-      = render :partial=>'form', :object=>f
+      = render partial: 'form', object: f
       .formActions
-        = f.submit :class=>"btn btn-primary"
-        ou #{link_to t("cancel"), :back, :class=>"btn"}
+        = f.submit class: "btn btn-primary"
+        #{t('or')} #{link_to t("cancel"), :back, class: "btn"}
 
 

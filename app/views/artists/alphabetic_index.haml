@@ -1,12 +1,12 @@
 .page-header  
-  = title(t("headers.artists_alphabetic_index", :heading=>alphabetic_artist_grouping[params[:letter]]))
+  = title(t("headers.artists_alphabetic_index", heading: alphabetic_artist_grouping[params[:letter]]))
 
 .row
   .span11
     = alpha_artist_links
 
 = paginate @artists
-= render :partial=>"search_result", :object=>@artists
+= render partial: "search_result", object: @artists
 = paginate @artists
 
 .row

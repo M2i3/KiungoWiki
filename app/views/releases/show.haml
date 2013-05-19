@@ -80,7 +80,7 @@
 
     %h2= Artist.model_name.human.pluralize
     - if @release.artist_wiki_links.count == 0 
-      %p This release does not have any artist associated with it.
+      %p #{t('messages.release_without_artist')}
     - else
       %table.table.table-striped
         %tbody
@@ -91,7 +91,7 @@
 
     %h2= Recording.model_name.human.pluralize
     - if @release.recording_wiki_links == 0
-      %p This release does not have any recording associated with it.
+      %p #{t('messages.release_without_recording')}.
     - else
       .right-size
         %table.table.table-striped
@@ -110,11 +110,10 @@
               %tr
                 %td= recording_wiki_link_path(rwl)
                 %td= rwl.recording_date
-                - unless ["0","",nil].include?(rwl.itemId) 
+                - unless rwl.itemId.blank? || rwl.itemId == "0"
                   %td= rwl.itemId 
                 - else
                   %td= "1"
-
                 - if ["33 tours","45 tours"].include?(@release.media_type)
                   %td= rwl.itemSection
                 %td= rwl.trackNb
@@ -124,5 +123,3 @@
       - @release.supplementary_sections.each do |ss|
         %h2= ss.title 
         = RedCloth.new(ss.content).to_html.html_safe
-
-

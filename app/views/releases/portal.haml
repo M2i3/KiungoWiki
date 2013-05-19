@@ -6,7 +6,7 @@
 .row      
   .span12
     %p
-      Les releases regroupent plusieurs enregistrements interprétés par un ou plusieurs artistes. 
+      #{t('portal.release_explanation')}. 
 
 .row
   - if @feature_in_month
@@ -15,48 +15,46 @@
       .content
         = RedCloth.new(@feature_in_month.summary(750)).to_html.html_safe
       %p.pull-left 
-        Voir l'release:
+        #{t('portal.see_release')}:
         = release_wiki_link_path(@feature_in_month.featured_wiki_link)
       - if @feature_in_month.more?(750)
-        %p.pull-right= link_to "continuer la lecture", @feature_in_month
+        %p.pull-right= link_to t("portal.continue_reading"), @feature_in_month
 
   .span6
-    %h2 Ce que vous pouvez faire pour contribuer
+    %h2 #{t('portal.how_to_help')}
     %ul
       %li 
-        = link_to "Écrire la fiche d'un release", new_release_path
+        = link_to t("portal.new_release_text"), new_release_path
       %li 
-        Réviser la fiche d'un release modifiée récemment:
+        #{t('portal.revise_release')}:
         %ul 
           %li 
-            - Release.order_by(:updated_at=>:desc).limit(5).all.each do |release|
+            - Release.order_by(updated_at: :desc).limit(5).all.each do |release|
               %span.release>= link_to release.to_wiki_link.object_text, release_path(release.id)
               ;&nbsp;
-            = link_to "...", recent_changes_releases_path, :title=>"consulter la liste complète des modifications récentes"
-          %li= link_to "consulter la liste complète des releases modifiés récemment", recent_changes_releases_path
+            = link_to "...", recent_changes_releases_path, title: t("portal.recent_changes_release")
+          %li= link_to t("portal.recent_changes_release"), recent_changes_releases_path
 
       %li
-        Améliorer la fiche d'un release:
+        #{t('portal.improve_release')}:
         %ul
-          %li= link_to "Sans artiste", "#", :class=>"soon-available"
-          %li= link_to "Sans enregistrement", "#", :class=>"soon-available"
-          %li= link_to "Sans section(s) complémentaire(s)", "#", :class=>"soon-available"
+          %li= link_to t("portal.without_artist"), "#", class: "soon-available"
+          %li= link_to t("portal.without_recording"), "#", class:"soon-available"
+          %li= link_to t("portal.without_additional_sec"), "#", class: "soon-available"
 
 .row
   .span12
-    %h2 Par ordre alphabétique
+    %h2 #{t('portal.alphabetical')}
     %ul
       - alphabetic_release_grouping.each do |letter, heading|
         %li 
           %span.letter= heading
-          - Release.where(:cache_first_letter => letter).order_by(updated_at:1).limit(5).each do |release|
+          - Release.where(cache_first_letter: letter).order_by(updated_at:1).limit(5).each do |release|
             %span.release>= link_to release.to_wiki_link.object_text, release_path(release.id)
             ;&nbsp;
-          = link_to "...", alphabetic_releases_path(letter: letter, page: 1), :title=>"consulter la liste complète des releases commençant par \"#{letter}\""
+          = link_to "...", alphabetic_releases_path(letter: letter, page: 1), title: "consulter la liste complète des releases commençant par \"#{letter}\""
       %li= link_to "tous les releases", releases_path(page: 1)
 
 .row
   .span12
-    %h2.soon-available Par tag/catégorie
-
-
+    %h2.soon-available #{t('portal.by_tag')}

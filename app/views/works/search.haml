@@ -3,39 +3,38 @@
 
 .row
   .span12
-    %form{:action=>works_path}
-      %input.search-query.span6{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
-      %input{:type=>"submit", :value=>"Chercher"}
+    %form{action: works_path}
+      %input.search-query.span6{name: "q", type: "text", value: params[:q] ? params[:q] : "", placeholder: t("search")}/
+      %input{type: "submit", value: t("search")}
 
 .row
   .span12
-    %p Une recherche dans les oeuvres peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants:
+    %p #{t('rsearch.search_work_keywords')}:
     %dl
       %dt title:
       %dd 
-        Limite la recherche dans le titre de l'oeuvre seulement. Par exemple:
+        #{t('rsearch.limit_work_title')}:
         %ul
           %li title:amsterdam
           %li title:"il nous faut regarder"  
 
       %dt copyright: 
       %dd 
-        Effectue une recherche sur le copyright de l'oeuvre. Par exemple:
+        #{t('rsearch.limit_work_copyright')}:
         %ul
           %li copyright:1985
           %li copyright:"La maison des oeuvres"
 
       %dt lyrics:
       %dd 
-        Effectue la recherche sur les paroles de l'oeuvre. Par exemple:
+        #{t('rsearch.limit_work_lyrics')}:
         %ul
           %li lyrics:chanson
           %li lyrics:"what a wonderful world"
 
       %dt date_written:
       %dd 
-        Cherche en utilisant la date d'écriture de l'oeuvre. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. 
-        Par exemple:
+        #{t('rsearch.limit_work_date_written')}:
         %ul
           %li date_written:1940-03-03
           %li date_written:1950
@@ -43,8 +42,6 @@
 
       %dt language_code:
       %dd 
-        Cherche en utilisant le code de langue de l'oeuvre. Par exemple:
+        #{t('rsearch.limit_work_language')}:
         %ul
           %li language_code:fre
-
-
