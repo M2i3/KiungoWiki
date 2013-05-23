@@ -1,6 +1,7 @@
 fr:
   devise:
     confirmations:
+      new_header: ??
       confirmed: Votre compte a été confirmé avec succès. Vous êtes désormais connecté.
       send_instructions: Vous allez recevoir sous quelques minutes un email comportant
         des instructions sur la façon de confirmer votre compte.
@@ -8,6 +9,7 @@ fr:
         vous recevrez sous quelques minutes un message avec des instructions sur la
         façon de confirmer votre compte.
       resend_instructions: "Resend confirmation instructions"
+      have_not_received: Vous n'avez pas reçu les instructions pour confirmer votre compte?
     failure:
       already_authenticated: Vous êtes déjà connecté.
       inactive: Votre compte n'est pas encore activé.
@@ -21,10 +23,21 @@ fr:
       confirmation_instructions:
         subject: Instructions de confirmation
         confirm: 'Confirm my account'
+        welcome_message: '?? %{email}!'
+        confirm_message: ??
       reset_password_instructions:
         subject: Instructions pour changer le mot de passe
+        hello_greeting: '?? %{email} !'
+        reset_warning: ??
+        change_password: ??
+        please_ignore: ??
+        password_change: ??
       unlock_instructions:
         subject: Instructions pour déverrouiller le compte
+        greeting: '?? %{email}'
+        account_locked: ??
+        click_link: ??
+        unlock: ??
     omniauth_callbacks:
       failure: ! 'Nous n''avons pas pu vous autoriser à %{kind} pour la raison suivante
         : ''%{reason}''.'
@@ -37,6 +50,12 @@ fr:
       updated: Votre mot de passe a été modifié avec succès. Vous êtes maintenant
         connecté.
       updated_not_active: Votre mot de pass a été modifié avec succès.
+      edit_header: ??
+      new_password: ??
+      confirm_password: ??
+      change_password: ??
+      new_header: ??
+      send_reset: ??
     registrations:
       destroyed: Au revoir ! Votre compte a été annulé avec succès. Nous espérons
         vous revoir bientôt.
@@ -52,15 +71,25 @@ fr:
         emails et cliquer sur le lien de confirmation pour finalizer votre nouvelle
         adresse.
       updated: Votre compte a été modifié avec succès.
+      modify_user: 'Modifier %{name}'
+      close_account: Fermer mon compte
+      member_account: Vous ne désirez plus être membre de KiungoWiki?
+      certain_close: Êtes vous certains?
+      new_header: Créer un compte
     sessions:
       signed_in: Connecté avec succès.
       signed_out: Déconnecté avec succès.
+      sign_in: Se connecter
+      login: Connexion
+      login_with: 'Se connecter avec %{provider}'
     unlocks:
       send_instructions: Vous allez recevoir un email sous quelques minutes contenant
         les instructions nécessaires au débloquage de votre compte.
       send_paranoid_instructions: Si votre compte existe, vous recevrez un email indiquant
         comment le déverrouiller sous quelques minutes.
       unlocked: Votre compte a été débloqué avec succès. Veuillez vous connecter.
+      not_received: Vous n'avez pas reçu les instructions pour déverouiller votre compte?
+      header: ??
   errors:
     messages:
       already_confirmed: a déjà été confirmé(e)

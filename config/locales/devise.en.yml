@@ -1,7 +1,6 @@
 # Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 
 en:
-  
   errors:
     messages:
       expired: "has expired, please request a new one"
@@ -11,7 +10,6 @@ en:
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
-
   devise:
     failure:
       already_authenticated: 'You are already signed in.'
@@ -25,16 +23,27 @@ en:
     sessions:
       signed_in: 'Signed in successfully.'
       signed_out: 'Signed out successfully.'
+      sign_in: 'Sign in'
+      login: 'Login'
+      login_with: 'Login with %{provider}'
     passwords:
       send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
       updated: 'Your password was changed successfully. You are now signed in.'
       updated_not_active: 'Your password was changed successfully.'
       send_paranoid_instructions: "If your e-mail exists on our database, you will receive a password recovery link on your e-mail"
+      edit_header: 'Change your password'
+      new_password: 'New password'
+      confirm_password: 'Confirm new password'
+      change_password: 'Change my password'
+      new_header: 'Forgot your password?'
+      send_reset: 'Send me reset password instructions'
     confirmations:
+      new_header: Resend confirmation instructions
       send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes.'
       send_paranoid_instructions: 'If your e-mail exists on our database, you will receive an email with instructions about how to confirm your account in a few minutes.'
       confirmed: 'Your account was successfully confirmed. You are now signed in.'
       resend_instructions: "Resend confirmation instructions"
+      have_not_received: 'You have not received your confirmation instructions, yet?'
     registrations:
       signed_up: 'Welcome! You have signed up successfully.'
       inactive_signed_up: 'You have signed up successfully. However, we could not sign you in because your account is %{reason}.'
@@ -44,18 +53,36 @@ en:
         inactive: 'inactive'
         unconfirmed: 'unconfirmed'
         locked: 'locked'
+      modify_user: 'Edit %{name}'
+      close_account: 'Close my account'
+      member_account: You no longer wish to be a member of KiungoWiki?
+      certain_close: Are you certain?
+      new_header: Create an account
     unlocks:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
       unlocked: 'Your account was successfully unlocked. You are now signed in.'
       send_paranoid_instructions: 'If your account exists, you will receive an email with instructions about how to unlock it in a few minutes.'
+      not_received: 'You have not received instructions to unlock your account?'
+      header: 'Resend unlock instructions'
     omniauth_callbacks:
       success: 'Successfully authorized from %{kind} account.'
       failure: 'Could not authorize you from %{kind} because "%{reason}".'
     mailer:
       confirmation_instructions:
+        welcome_message: 'Welcome %{email}!'
         subject: 'Confirmation instructions'
         confirm: 'Confirm my account'
+        confirm_message: You can confirm your account through the link below
       reset_password_instructions:
+        hello_greeting: 'Hello %{email} !'
         subject: 'Reset password instructions'
+        reset_warning: 'Someone has requested a link to change your password, and you can do this through the link below.'
+        change_password: Change my password
+        please_ignore: 'If you did not request this, please ignore this email.'
+        password_change: 'Your password will not change until you access the link above and create a new one.'
       unlock_instructions:
         subject: 'Unlock Instructions'
+        greeting: 'Hello %{email}!'
+        account_locked: 'Your account has been locked due to an excessive amount of unsuccessful sign in attempts.'
+        click_link: 'Click the link below to unlock your account'
+        unlock: 'Unlock my account'
