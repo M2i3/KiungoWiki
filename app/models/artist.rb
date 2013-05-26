@@ -212,7 +212,7 @@ class Artist
   #Artist.all.group_by {|a| a.name[0].upcase }.sort{|a, b| a[0] <=> b[0]}.each {|a| puts "* ["+ a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.name + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
   after_destroy do |doc|
     attrs = "" 
-    ArtistWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: #{doc.send(attri)} "}
+    ArtistWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: \"#{doc.send(attri)}\" "}
     [Artist, Recording, Release, Work].each do |klass|
       klass.where("artist_wiki_links.artist_id" => doc.id).all.each do |rec|
         rec.artist_wiki_links.each do |artist|

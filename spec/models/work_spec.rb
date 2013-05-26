@@ -5,7 +5,7 @@ describe Work do
     work = FactoryGirl.create(:work)
     attr_string = ""
     WorkWikiLink::SearchQuery::QUERY_ATTRS.keys.each do |attri| 
-      attr_string += "#{attri}: #{attri} "
+      attr_string += "#{attri}: \"#{attri}\" "
       work.should_receive(attri).at_least(1).and_return attri
     end
     wiki_link = Object.new

@@ -6,7 +6,7 @@ describe Release do
     release = FactoryGirl.create(:release)
     attr_string = ""
     ReleaseWikiLink::SearchQuery::QUERY_ATTRS.keys.each do |attri| 
-      attr_string += "#{attri}: #{attri} "
+      attr_string += "#{attri}: \"#{attri}\" "
       release.should_receive(attri).at_least(1).and_return attri
     end
     wiki_link = Object.new

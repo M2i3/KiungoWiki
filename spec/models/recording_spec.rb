@@ -110,7 +110,7 @@ describe Recording do
     recording = FactoryGirl.create(:recording)
     attr_string = ""
     RecordingWikiLink::SearchQuery::QUERY_ATTRS.keys.each do |attri| 
-      attr_string += "#{attri}: #{attri} "
+      attr_string += "#{attri}: \"#{attri}\" "
       recording.should_receive(attri).at_least(1).and_return attri
     end
     wiki_link = Object.new

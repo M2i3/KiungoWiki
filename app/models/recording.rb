@@ -183,7 +183,7 @@ class Recording
   
   after_destroy do |doc|
     attrs = "" 
-    RecordingWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: #{doc.send(attri)} "}
+    RecordingWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: \"#{doc.send(attri)}\" "}
     [Artist, Release, Work].each do |klass|
       klass.where("recording_wiki_links.recording_id" => doc.id).all.each do |rec|
         rec.recording_wiki_links.each do |recording|

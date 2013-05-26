@@ -171,7 +171,7 @@ class Work
 
   after_destroy do |doc|
     attrs = "" 
-    WorkWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: #{doc.send(attri)} "}
+    WorkWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: \"#{doc.send(attri)}\" "}
     [Artist, Recording, Work].each do |klass|
       klass.where("work_wiki_links.work_id" => doc.id).all.each do |rec|
         rec.work_wiki_links.each do |work|

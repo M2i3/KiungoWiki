@@ -137,7 +137,7 @@ class Release
   
   after_destroy do |doc|
     attrs = "" 
-    ReleaseWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: #{doc.send(attri)} "}
+    ReleaseWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: \"#{doc.send(attri)}\" "}
     [Artist, Recording].each do |klass|
       klass.where("release_wiki_links.release_id" => doc.id).all.each do |rec|
         rec.release_wiki_links.each do |release|
