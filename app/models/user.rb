@@ -54,8 +54,9 @@ class User
   accepts_nested_attributes_for :release_wiki_links
   validates_associated :release_wiki_links
   
-  has_many :possessions, foreign_key: "owner_id"
-  has_many :labels
+  has_many :possessions, foreign_key: "owner_id", dependent: :destroy
+  has_many :labels, dependent: :destroy
+  has_many :user_tags, dependent: :destroy
 
   def release_wiki_links_text
     release_wiki_links.collect{|v| v.reference_text }.join(",")

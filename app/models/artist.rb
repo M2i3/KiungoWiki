@@ -50,6 +50,8 @@ class Artist
   embeds_many :supplementary_sections, class_name: "SupplementarySection"
   accepts_nested_attributes_for :supplementary_sections
   validates_associated :supplementary_sections
+  
+  embeds_many :tags, as: :taggable, class_name: "PublicTag"
 
   # telling Mongoid::History how you want to track changes
   track_history   modifier_field: :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier

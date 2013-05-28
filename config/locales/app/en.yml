@@ -184,6 +184,7 @@ en:
   author: Author
   change: Change
   credits: Credits
+  tag: tag
 
   actions:
     new_portal_article: New Article

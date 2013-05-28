@@ -16,8 +16,11 @@
           = Artist.human_attribute_name("is_member_of_group")
         \: 
         - @artist.artist_wiki_links.each do |awl|
-          #{artist_wiki_link_path(awl)}; 
-
+          #{artist_wiki_link_path(awl)};
+          
+    - if current_user
+      = render partial: 'common/tag_form', locals: {title: @artist.name, resource: @artist}
+    
     %h2= Work.model_name.human.pluralize
     - if @artist.work_wiki_links.count == 0 
       %p #{t('messages.artist_no_work')}.

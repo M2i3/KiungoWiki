@@ -1,0 +1,18 @@
+%p
+  = link_to t('tag'), "#addtagform", id: "addtag", "data-toggle" => "modal", class: "btn", role: "button"
+  #addtagform.modal.hide.fade{tabindex: "-1", role: "dialog", "aria-labelledby" => "myModalLabel"}
+    .modal-header
+      %h3
+        = t('tag')
+    .modal-body
+      %p
+        = title
+      %p
+        %label{for: 'name'}
+          = UserTag.human_attribute_name("name")
+        %input#name{type: 'text'}
+    .modal-footer
+      %a.btn{"data-dismiss" => "modal"}
+        = t('cancel')
+      %a#confirmaddtag.btn.btn-primary{"data-resource-id" => resource.id, "data-resource-class" => resource.class.to_s}
+        = t('new')

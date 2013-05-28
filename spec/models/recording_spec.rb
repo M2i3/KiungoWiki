@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Recording do
-
+  it { should embed_many(:tags) }
 	describe "Testing for required values" do 
 		[:recording_date, :recording_location, :rythm, :duration].each {|field|	
 			it "#{field} should allow nil" do 

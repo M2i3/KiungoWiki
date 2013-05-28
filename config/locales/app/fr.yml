@@ -183,6 +183,7 @@ fr:
   author: Auteur
   change: Changement
   credits: Crédits
+  tag: tag
 
   actions:
     new_portal_article: Nouvel article

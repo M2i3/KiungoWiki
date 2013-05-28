@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Work do
+  it { should embed_many(:tags) }
   it "should null out some wiki links that are attached to it when destroyed" do
     work = FactoryGirl.create(:work)
     attr_string = ""

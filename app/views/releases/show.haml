@@ -78,6 +78,9 @@
         = Release.human_attribute_name("reference_code")
         \: #{@release.reference_code}
 
+    - if current_user
+      = render partial: 'common/tag_form', locals: {title: @release.title, resource: @release}
+
     %h2= Artist.model_name.human.pluralize
     - if @release.artist_wiki_links.count == 0 
       %p #{t('messages.release_without_artist')}

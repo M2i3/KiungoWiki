@@ -28,7 +28,10 @@
         - unless @recording.rythm.blank?
           = Recording.human_attribute_name("rythm") 
           \:  #{@recording.rythm}bpm
-
+    
+    - if current_user
+      = render partial: 'common/tag_form', locals: {title: @recording.title, resource: @recording}
+    
     %h2 #{t('credits')}
     - if @recording.artist_wiki_links == 0
       %p #{t('messages.recording_without_artist')}.
