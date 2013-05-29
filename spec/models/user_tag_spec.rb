@@ -6,4 +6,5 @@ describe UserTag do
   [:user, :name].each do |field|
     it { should validate_presence_of field }
   end
+  it { should belong_to :taggable }
 end

@@ -5,7 +5,7 @@ class UserTagsController < ApplicationController
   def create
     respond_to do |format|
       if @user_tag.save
-        format.json { render json: @user_tag, status: :created, location: @user_tag }
+        format.json { render json: @user_tag, status: :created }
       else
         format.json { render json: @user_tag.errors, status: :unprocessable_entity }
       end

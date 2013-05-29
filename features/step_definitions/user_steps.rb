@@ -16,7 +16,13 @@ Then(/^I should be able to tag them$/) do
     find('a#confirmaddtag', text: I18n.t('new')).click
     page.should_not have_selector modal
   end
-  [@artist, @recording, @release, @work].each do |resource|
-    UserTag.where(name:tag, user:@user, taggable_id:resource.id, taggable_type:resource.class.to_s).size.should == 1
+  count = 0
+  while count < 30
+    break if @user.reload.user_tags.all.size > 0
+    count += 1
+    sleep 1
+  end
+  @user.user_tags.each do |tag|
+    [@artist, @recording, @release, @work].should include tag.taggable
   end
 end
