@@ -32,6 +32,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'foreman'
   gem 'guard', "~> 1.6.1"
   gem "guard-rails", github: "guard/guard-rails"
   gem 'guard-cucumber', "~> 1.3.2"
