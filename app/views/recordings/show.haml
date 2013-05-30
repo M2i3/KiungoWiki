@@ -8,30 +8,33 @@
         = Recording.human_attribute_name("work_wiki_link")
         \: #{work_wiki_link_path(@recording.work_wiki_link)}
       %p
-        - unless["",nil].include?(@recording.recording_date)
+        - unless @recording.recording_date.blank?
           = Recording.human_attribute_name("recording_date") 
           \: #{@recording.recording_date}
       %p
-        - unless["",nil].include?(@recording.recording_location)
+        - unless @recording.recording_location.blank?
           = Recording.human_attribute_name("recording_location") 
           \: #{@recording.recording_location}
       %p
-        - unless["",nil].include?(@recording.category_wiki_links.first)
+        - unless @recording.category_wiki_links.first.blank?
           = Recording.human_attribute_name("category")
           \: 
           #{@recording.category_wiki_links.collect{|v| v.category_name}.join(', ').html_safe}
       %p
-        - unless["0","",nil].include?(@recording.duration.to_s)
+        - unless @recording.duration.to_s.blank?
           = Recording.human_attribute_name("duration") 
           \: #{@recording.duration}
       %p
-        - unless["0","",nil].include?(@recording.rythm)
+        - unless @recording.rythm.blank?
           = Recording.human_attribute_name("rythm") 
           \:  #{@recording.rythm}bpm
-
-    %h2 Crédits
+    
+    - if current_user
+      = render partial: 'common/tag_form', locals: {title: @recording.title, resource: @recording}
+    
+    %h2 #{t('credits')}
     - if @recording.artist_wiki_links == 0
-      %p This recording is not associated with any artist.
+      %p #{t('messages.recording_without_artist')}.
     - else
       %table.table.table-striped
         %thead
@@ -44,7 +47,7 @@
 
     %h2= Release.model_name.human.pluralize
     - if @recording.release_wiki_links.length == 0
-      %p This recording is not on any release.
+      %p #{t('messages.recording_without_release')}.
     - else
       .right-size
         %table.table.table-striped
@@ -65,7 +68,7 @@
                 %td= awl.date_released
                 %td= awl.label
                 %td= awl.media_type
-                - unless ["0","",nil].include?(awl.itemId) 
+                - unless awl.itemId.blank?
                   %td= awl.itemId 
                 - else
                   %td= "1"

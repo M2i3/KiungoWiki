@@ -33,28 +33,32 @@ class Work
 
   validates_presence_of :title
 
-  embeds_many :artist_wiki_links, :as=>:linkable, :class_name=>"WorkArtistWikiLink"
+  embeds_many :artist_wiki_links, as: :linkable, class_name: "WorkArtistWikiLink"
   validates_associated :artist_wiki_links
   accepts_nested_attributes_for :artist_wiki_links
 
-  embeds_many :recording_wiki_links, :as=>:linkable, :class_name=>"WorkRecordingWikiLink"
+  embeds_many :recording_wiki_links, as: :linkable, class_name: "WorkRecordingWikiLink"
   accepts_nested_attributes_for :recording_wiki_links
   validates_associated :recording_wiki_links
 
-  embeds_many :work_wiki_links, :as=>:linkable, :class_name=>"WorkWorkWikiLink"
+  embeds_many :work_wiki_links, as: :linkable, class_name: "WorkWorkWikiLink"
   accepts_nested_attributes_for :work_wiki_links
   validates_associated :work_wiki_links
 
-  embeds_many :supplementary_sections, :class_name=>"SupplementarySection"
+  embeds_many :supplementary_sections, class_name: "SupplementarySection"
   accepts_nested_attributes_for :supplementary_sections
   validates_associated :supplementary_sections
+  
+  embeds_many :tags, as: :taggable, class_name: "PublicTag"
+  
+  has_many :user_tags, as: :taggable
 
   # telling Mongoid::History how you want to track changes
-  track_history   :modifier_field => :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
-                  :version_field => :version,   # adds "field :version, :type => Integer" to track current version, default is :version
-                  :track_create   =>  true,    # track document creation, default is false
-                  :track_update   =>  true,     # track document updates, default is true
-                  :track_destroy  =>  true     # track document destruction, default is false
+  track_history   modifier_field: :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
+                  version_field: :version,   # adds "field :version, :type => Integer" to track current version, default is :version
+                  track_create:  true,    # track document creation, default is false
+                  track_update:  true,     # track document updates, default is true
+                  track_destroy:  true     # track document destruction, default is false
 
 
   def artist_wiki_links_text
@@ -171,7 +175,7 @@ class Work
 
   after_destroy do |doc|
     attrs = "" 
-    WorkWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: #{doc.send(attri)} "}
+    WorkWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: \"#{doc.send(attri)}\" "}
     [Artist, Recording, Work].each do |klass|
       klass.where("work_wiki_links.work_id" => doc.id).all.each do |rec|
         rec.work_wiki_links.each do |work|

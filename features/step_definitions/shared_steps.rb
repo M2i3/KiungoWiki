@@ -7,5 +7,5 @@ Given "logged in user" do
   visit new_user_session_path(lang: "en")
   fill_in "Email", with: @user.email
   fill_in "Password", with: FactoryGirl.build(:user).password
-  click_button "Connexion"
+  click_button "Login"
 end

@@ -10,6 +10,7 @@
 //= require jquery.tokeninput
 //= require jquery.ui.datepicker
 //= require possessions
+//= require user_tag
 //= require_self
 
 // Place your application-specific JavaScript functions and classes here

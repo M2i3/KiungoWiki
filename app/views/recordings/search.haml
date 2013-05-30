@@ -3,25 +3,24 @@
 
 .row
   .span12
-    %form{:action=>recordings_path}
-      %input.search-query.span6{:name => "q", :type => "text", :value => params[:q] ? params[:q] : "", :placeholder=>"Chercher"}/
-      %input{:type=>"submit", :value=>"Chercher"}
+    %form{action: recordings_path}
+      %input.search-query.span6{name: "q", type: "text", value: params[:q] ? params[:q] : "", placeholder: t("search")}/
+      %input{type: "submit", value: t("search")}
 
 .row
   .span12
-    %p Une recherche dans les enregistrements peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants:
+    %p #{t('rsearch.search_recording_keywords')}:
     %dl
       %dt title:
       %dd 
-        Limite la recherche dans le titre de l'enregistrement seulement. Par exemple:
+        #{t('rsearch.limit_recording_title')}:
         %ul
           %li title:amsterdam
           %li title:"il nous faut regarder"  
 
       %dt recording_date:
       %dd 
-        Cherche en utilisant la date de l'enregistrement. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. 
-        Par exemple:
+        #{t('rsearch.limit_recording_date')}:
         %ul
           %li recording_date:1980-03-20
           %li recording_date:1960
@@ -29,13 +28,7 @@
 
       %dt recording_location:
       %dd 
-        Limite la recherche dans le lieu de l'enregistrement seulement. Par exemple:
+        #{t('rsearch.limit_recording_location')}:
         %ul
           %li recording_location:Montréal
           %li recording_location:"Los Angeles"  
-
-
-
-
-
-

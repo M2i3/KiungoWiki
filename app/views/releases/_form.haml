@@ -14,10 +14,10 @@
   %dt= form.label :recording_wiki_links_text
   %dd= form.text_field :recording_wiki_links_text, class: "release_recordings_title_lookup", :"data-pre"=>form.object.recording_wiki_links_combined_links_renamed.to_json
   = form.fields_for :supplementary_sections do |ss|
-    %dt= ss.label "Section Supplémentaire"
+    %dt= ss.label t("headers.supplement_section")
     %dd= ss.text_field :title
     %dd= ss.text_area :content, class: "span12"
 
   %p
-  %dt= link_to "Nouvelle section", controller: :releases, action: :add_supplementary_section, id: @release.id, class: "btn"
+  %dt= link_to t("headers.new_section"), controller: :releases, action: :add_supplementary_section, id: @release.id, class: "btn"
 

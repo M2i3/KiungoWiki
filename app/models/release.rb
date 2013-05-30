@@ -39,7 +39,9 @@ class Release
   accepts_nested_attributes_for :supplementary_sections
   validates_associated :supplementary_sections
   
-  has_many :possessions
+  embeds_many :tags, as: :taggable, class_name: "PublicTag"
+  
+  has_many :user_tags, as: :taggable
 
   # telling Mongoid::History how you want to track changes
   track_history   modifier_field: :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
@@ -137,7 +139,7 @@ class Release
   
   after_destroy do |doc|
     attrs = "" 
-    ReleaseWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: #{doc.send(attri)} "}
+    ReleaseWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|attri| attrs += "#{attri}: \"#{doc.send(attri)}\" "}
     [Artist, Recording].each do |klass|
       klass.where("release_wiki_links.release_id" => doc.id).all.each do |rec|
         rec.release_wiki_links.each do |release|

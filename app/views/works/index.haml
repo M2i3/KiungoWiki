@@ -1,6 +1,6 @@
 .page-header
   - if params[:q]
-    = title(t("headers.works_search_result", :q=>params[:q]))
+    = title(t("headers.works_search_result", q: params[:q]))
   - else
     = title(t("headers.works_index"))
 
@@ -9,13 +9,13 @@
     = alpha_work_links
 
 = paginate @works
-= render :partial=>"search_result", :object=>@works
+= render partial: "search_result", object: @works
 = paginate @works
 
 - if params[:q]
   %p
     = t("search_question")
-    = link_to t("new"), new_work_path(:q=>params[:q]), :class=>"btn"
+    = link_to t("new"), new_work_path(q: params[:q]), class: "btn"
 
 .row
   .span11

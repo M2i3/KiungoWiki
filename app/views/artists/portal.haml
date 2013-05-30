@@ -15,7 +15,7 @@
       .content
         = RedCloth.new(@feature_in_month.summary(750)).to_html.html_safe
       %p.pull-left 
-        = "#{t('see_artist')}:"
+        = "#{t('portal.see_artist')}:"
         = artist_wiki_link_path(@feature_in_month.featured_wiki_link)
       - if @feature_in_month.more?(750)
         %p.pull-right= link_to t("portal.continue_reading"), @feature_in_month
@@ -40,7 +40,7 @@
         = "#{t("portal.improve_artist")}:"
         %ul
           %li= link_to t("portal.without_work"), "#", class: "soon-available"
-          %li= link_to t("portal.without_registration"), "#", class: "soon-available"
+          %li= link_to t("portal.without_recording"), "#", class: "soon-available"
           %li= link_to t("portal.without_releases"), "#", class: "soon-available"
           %li= link_to t("portal.without_additional_sec"), "#", class: "soon-available"
 
@@ -62,5 +62,3 @@
   .span12
     %h2.soon-available
       = t('portal.by_tag')
-
-

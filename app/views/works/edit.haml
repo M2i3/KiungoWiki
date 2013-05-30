@@ -1,18 +1,18 @@
-= title("Modifier l'oeuvre")
+= title(t("headers.modify_work"))
 .row
-  = render :partial=>'links'
+  = render partial: 'links'
   .span12
     - unless @work.errors.empty?
       .alert.alert-error
-        %strong Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'oeuvre:
+        %strong #{t('messages.work_errors_warning')}:
         %br/
         = @work.errors.full_messages.join("</br>").html_safe
 
-    = form_for @work, :class=>"form-horizontal" do |f|
-      = render :partial=>'form', :object=>f
+    = form_for @work, class: "form-horizontal" do |f|
+      = render partial: 'form', object: f
       .formActions
-        = f.submit :class=>"btn btn-primary"
-        #{link_to t("delete"), @work, :method=>:delete, :class=>'btn'} 
-        ou #{link_to t("cancel"), :back, :class=>"btn"}
+        = f.submit class: "btn btn-primary"
+        #{link_to t("delete"), @work, method: :delete, class: 'btn'} 
+        #{t('or')} #{link_to t("cancel"), :back, class: "btn"}
 
 

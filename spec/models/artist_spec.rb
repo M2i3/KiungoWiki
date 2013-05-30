@@ -1,11 +1,13 @@
 require 'spec_helper'
 
 describe Artist do
+  it { should embed_many(:tags) }
+  it { should have_many(:user_tags) }
   it "should null out some wiki links that are attached to it" do
     artist = FactoryGirl.create(:artist)
     attr_string = ""
     ArtistWikiLink::SearchQuery::QUERY_ATTRS.keys.each do |attri| 
-      attr_string += "#{attri}: #{attri} "
+      attr_string += "#{attri}: \"#{attri}\" "
       artist.should_receive(attri).at_least(1).and_return attri
     end
     wiki_link = Object.new

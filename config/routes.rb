@@ -1,5 +1,7 @@
 KiungoWiki::Application.routes.draw do
 
+  resources :user_tags, only: :create
+
   resources :possessions
 
   resources :changes

@@ -1,12 +1,13 @@
 require 'spec_helper'
 
 describe Release do
-  it { should have_many(:possessions) }
+  it { should embed_many(:tags) }
+  it { should have_many(:user_tags) }
   it "should null out some wiki links that are attached to it when destroyed" do
     release = FactoryGirl.create(:release)
     attr_string = ""
     ReleaseWikiLink::SearchQuery::QUERY_ATTRS.keys.each do |attri| 
-      attr_string += "#{attri}: #{attri} "
+      attr_string += "#{attri}: \"#{attri}\" "
       release.should_receive(attri).at_least(1).and_return attri
     end
     wiki_link = Object.new

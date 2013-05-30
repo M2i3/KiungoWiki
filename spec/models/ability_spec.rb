@@ -54,4 +54,47 @@ describe Ability do
       end
     end
   end
+  describe "UserTag" do
+    let(:tag) { UserTag.new }
+    context "different owners" do
+      before :each do
+        tag.user = User.new
+      end
+      it "won't let you edit if you are not that tag's user" do
+        ability.should_not be_able_to :edit, tag
+      end
+      it "won't let you update if you are not that tag's user" do
+        ability.should_not be_able_to :update, tag
+      end
+      it "won't let you destroy if you are not that tag's user" do
+        ability.should_not be_able_to :destroy, tag
+      end
+      it "won't let you see other's tags" do
+        ability.should_not be_able_to :show, tag
+      end
+      it "cannot let all logged in users create a tag" do
+        ability.should_not be_able_to :create, tag
+      end
+    end
+    context "same owner" do
+      before :each do
+        tag.user = user
+      end
+      it "can let you edit if you are that tag's user" do
+        ability.should be_able_to :edit, tag
+      end
+      it "can let you update if you are that tag's user" do
+        ability.should be_able_to :update, tag
+      end
+      it "can let you destroy if you are that tag's user" do
+        ability.should be_able_to :destroy, tag
+      end
+      it "can let all users read each others tags" do
+        ability.should be_able_to :show, tag
+      end
+      it "can let all logged in users create a tags" do
+        ability.should be_able_to :create, tag
+      end
+    end
+  end
 end

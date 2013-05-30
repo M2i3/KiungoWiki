@@ -26,6 +26,7 @@ class Ability
         }
       end
       can :manage, Possession, owner: user
+      can :manage, UserTag, user: user
     end
 
     # Define abilities for the passed in user here. For example:

@@ -6,7 +6,7 @@
 .row      
   .span12
     %p
-      Les oeuvres constituent le matériel brut sur lequel sont construits les enregistrements et auxquels les interprètes prêtent leur voix et émotions. 
+      #{t('portal.work_explanation')}. 
 
 .row
   - if @feature_in_month
@@ -15,50 +15,48 @@
       .content
         = RedCloth.new(@feature_in_month.summary(750)).to_html.html_safe
       %p.pull-left 
-        Voir l'oeuvre:
+        #{t('portal.see_work')}:
         = work_wiki_link_path(@feature_in_month.featured_wiki_link)
       - if @feature_in_month.more?(750)
-        %p.pull-right= link_to "continuer la lecture", @feature_in_month
+        %p.pull-right= link_to t("portal.continue_reading"), @feature_in_month
 
   .span6
-    %h2 Ce que vous pouvez faire pour contribuer
+    %h2 #{t('portal.how_to_help')}
     %ul
       %li 
-        = link_to "Écrire la fiche d'une oeuvre", new_work_path
+        = link_to t("portal.new_work_text"), new_work_path
       %li 
-        Réviser la fiche d'une oeuvre modifiée récemment:
+        #{t('portal.revise_work')}:
         %ul 
           %li 
-            - Work.order_by(:updated_at=>:desc).limit(5).all.each do |work|
+            - Work.order_by(updated_at: :desc).limit(5).all.each do |work|
               %span.work>= link_to work.to_wiki_link.object_text, work_path(work.id)
               ;&nbsp;
-            = link_to "...", recent_changes_works_path, :title=>"consulter la liste complète des modifications récentes"
-          %li= link_to "consulter la liste complète des oeuvres modifiées récemment", recent_changes_works_path
+            = link_to "...", recent_changes_works_path, title: t("portal.recent_changes")
+          %li= link_to t("portal.recent_changes_work"), recent_changes_works_path
 
       %li
-        Améliorer la fiche d'une oeuvre:
+        #{t('portal.improve_work')}:
         %ul
-          %li= link_to "Sans artiste", "#", :class=>"soon-available"
-          %li= link_to "Sans enregistrement", "#", :class=>"soon-available"
-          %li= link_to "Sans paroles", "#", :class=>"soon-available"
-          %li= link_to "Sans catégorie", "#", :class=>"soon-available"
-          %li= link_to "Sans section(s) complémentaire(s)", "#", :class=>"soon-available"
+          %li= link_to t("portal.without_artist"), "#", class: "soon-available"
+          %li= link_to t("portal.without_recording"), "#", class: "soon-available"
+          %li= link_to t("portal.without_lyrics"), "#", class: "soon-available"
+          %li= link_to t("portal.without_categories"), "#", class: "soon-available"
+          %li= link_to t("portal.without_additional_sec"), "#", class: "soon-available"
 
 .row
   .span12
-    %h2 Par ordre alphabétique
+    %h2 #{t('portal.alphabetical')}
     %ul
       - alphabetic_work_grouping.each do |letter, heading|
         %li 
           %span.letter= heading
-          - Work.where(:cache_first_letter => letter).order_by(updated_at:1).limit(5).each do |work|
+          - Work.where(cache_first_letter: letter).order_by(updated_at:1).limit(5).each do |work|
             %span.work>= link_to work.to_wiki_link.object_text, work_path(work.id)
             ;&nbsp;
-          = link_to "...", alphabetic_works_path(letter: letter, page: 1), :title=>"consulter la liste complète des oeuvres commençant par \"#{letter}\""
-      %li= link_to "toutes les oeuvres", works_path(page: 1)
+          = link_to "...", alphabetic_works_path(letter: letter, page: 1), title: "#{t('portal.complete_work_alphabet')} \"#{letter}\""
+      %li= link_to t("portal.all_works"), works_path(page: 1)
 
 .row
   .span12
-    %h2.soon-available Par tag/catégorie
-
-
+    %h2.soon-available #{t('portal.by_tag')}

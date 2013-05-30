@@ -4,82 +4,82 @@
 .row
   .span12
     %form{action: artists_path}
-      %input.rsearch-query.span6{name: "q", type: "text", value: params[:q] ? params[:q] : "", placeholder: "Chercher"}/
-      %input{type: "submit", value: "Chercher"}
+      %input.rsearch-query.span6{name: "q", type: "text", value: params[:q] ? params[:q] : "", placeholder: t("search")}/
+      %input{type: "submit", value: t("search")}
 
 .row
   .span12
     %p
-      #{t('rsearch.search_keywords')}:
+      #{t('rsearch.search_artist_keywords')}:
     %dl
       %dt
-        #{Artist.human_attribute_name 'surname'}:
+        surname:
       %dd 
         #{t('rsearch.limit_artist_surname')}:
         %ul
           %li 
-            #{Artist.human_attribute_name 'surname'}:Brel
+            surname:Brel
           %li 
-            #{Artist.human_attribute_name 'surname'}:"de larochellière"
+            surname:"de larochellière"
 
       %dt 
-        #{Artist.human_attribute_name 'given_name'}:
+        given_name:
       %dd 
         #{t('rsearch.limit_artist_given_name')}:
         %ul
           %li 
-            #{Artist.human_attribute_name 'given_name'}:Jacques
+            given_name:Jacques
           %li 
-            #{Artist.human_attribute_name 'given_name'}:"Marie-Michèle"
+            given_name:"Marie-Michèle"
 
       %dt 
-        #{Artist.human_attribute_name 'birth_date'}:
+        birth_date:
       %dd 
         #{t('rsearch.limit_artist_birth_date')}:
         %ul
           %li 
-            #{Artist.human_attribute_name 'birth_date'}:1940-03-03
+            birth_date:1940-03-03
           %li 
-            #{Artist.human_attribute_name 'birth_date'}:1950
+            birth_date:1950
           %li 
-            #{Artist.human_attribute_name 'birth_date'}:1934-12
+            birth_date:1934-12
 
       %dt 
-        #{Artist.human_attribute_name 'birth_location'}:
+        birth_location:
       %dd 
         #{t('rsearch.limit_artist_birth_place')}:
         %ul
           %li 
-            #{Artist.human_attribute_name 'birth_location'}:Paris
+            birth_location:Paris
           %li 
-            #{Artist.human_attribute_name 'birth_location'}:"États-Unis"
+            birth_location:"États-Unis"
 
       %dt 
-        #{Artist.human_attribute_name 'death_date'}:
+        death_date:
       %dd 
         #{t('rsearch.limit_artist_death_date')}:
         %ul
           %li 
-            #{Artist.human_attribute_name 'death_date'}:2000-03-03
+            death_date:2000-03-03
           %li 
-            #{Artist.human_attribute_name 'death_date'}:1960
+            death_date:1960
           %li 
-            #{Artist.human_attribute_name 'death_date'}:1980-12
+            death_date:1980-12
       %dt 
-        #{Artist.human_attribute_name 'death_location'}:
+        death_location:
       %dd 
         #{t('rsearch.limit_artist_death_location')}:
         %ul
           %li 
-            #{Artist.human_attribute_name 'death_location'}:Memphis
+            death_location:Memphis
           %li
-            #{Artist.human_attribute_name 'death_location'}:"Los Angeles"
+            death_location:"Los Angeles"
       %dt 
-        #{Artist.human_attribute_name 'role'}:
+        role:
       %dd 
         = t('rsearch.limit_artist_birth_place')
         %ul
           %li 
-            #{Artist.human_attribute_name 'role'}:Auteur
+            role:Auteur
           %li 
-            #{Artist.human_attribute_name 'role'}:"Chef d'orchestre"
+            role:"Chef d'orchestre"
