@@ -1,6 +1,6 @@
 KiungoWiki::Application.routes.draw do
 
-  resources :user_tags, only: :create
+  resources :user_tags
 
   resources :possessions
 

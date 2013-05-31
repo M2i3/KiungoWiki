@@ -9,6 +9,6 @@ class UserTag
   end
   
   def taggable
-    self.taggable_class.constantize.find self.taggable_id
+    self.taggable_type.constantize.find self.taggable_id
   end
 end

@@ -65,6 +65,8 @@ fr:
     new_release: Nouvel Release
     modify_work: Modifier l'oeuvre
     new_work: Nouvelle Oeuvre
+    new_user_tag: ??
+    modify_user_tag: ??
 
   messages:
     info: Pour votre information.

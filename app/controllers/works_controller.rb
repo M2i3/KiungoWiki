@@ -8,8 +8,8 @@ class WorksController < ApplicationController
     @works = build_filter_from_params(params, Work.all.order_by(cache_normalized_title:1))
 
     respond_to do |format|
-      format.xml { render :xml=>@works }
-      format.json { render :json=>@works }
+      format.xml { render xml: @works }
+      format.json { render json: @works }
       format.html
     end
   end
@@ -31,10 +31,12 @@ class WorksController < ApplicationController
 
   def show
     @work = Work.find(params[:id])
-
+    if current_user
+      @user_tags = current_user.user_tags.where(taggable_class: @work.class.to_s, taggable_id:@work.id).all
+    end
     respond_to do |format|
-      format.xml { render :xml=>@work.to_xml(:except=>[:versions]) }
-      format.json { render :json=>@work }
+      format.xml { render xml: @work.to_xml(except: [:versions]) }
+      format.json { render json: @work }
       format.html
     end
   end

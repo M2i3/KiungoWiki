@@ -44,7 +44,7 @@ Spork.prefork do
     # examples within a transaction, remove the following line or assign false
     # instead of true.
     #  config.use_transactional_fixtures = true
-
+    config.include Devise::TestHelpers, type: :controller
     config.include FactoryGirl::Syntax::Methods
     config.include Mongoid::Matchers
     config.before(:each) do

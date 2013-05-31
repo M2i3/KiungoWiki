@@ -1,7 +1,7 @@
 class ReleasesController < ApplicationController
 
   # only registered users can edit this wiki
-  before_filter :authenticate_user!, :except => [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index]
+  before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index]
   authorize_resource
 
   def index
@@ -31,7 +31,10 @@ class ReleasesController < ApplicationController
   
   def show
     @release = Release.find(params[:id])
-    @possession = current_user.possessions.where("release_wiki_link.release_id" => @release.id).first if current_user
+    if current_user
+      @possession = current_user.possessions.where("release_wiki_link.release_id" => @release.id).first
+      @user_tags = current_user.user_tags.where(taggable_class: @release.class.to_s, taggable_id:@release.id).all
+    end
     respond_to do |format|
       format.xml { render xml: @release.to_xml(except: [:versions]) }
       format.json { render json: @release }
@@ -123,7 +126,7 @@ class ReleasesController < ApplicationController
   protected
   def filter_params
     {
-      :q => lambda {|releases, params| releases.queried(params[:q]) }
+      q: lambda {|releases, params| releases.queried(params[:q]) }
     }
   end
 

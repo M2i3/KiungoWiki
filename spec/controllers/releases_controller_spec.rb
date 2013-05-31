@@ -3,6 +3,7 @@ require 'spec_helper'
 describe ReleasesController do
   let(:user) { User.new }
   let(:release) { Object.new }
+  let(:id) { 99.to_param }
   before :each do
     allow_message_expectations_on_nil
     ApplicationController.any_instance.stub(:current_user).and_return user
@@ -19,16 +20,20 @@ describe ReleasesController do
     end
   end
   describe "GET show" do
-    it "should show a release upon request" do
-      id = 99.to_param
+    it "should show a release upon request along with their user tags if they are logged in" do
       Release.should_receive(:find).with(id).and_return release
-      release.should_receive(:id).and_return id
+      release.should_receive(:id).at_least(1).and_return id
       user.should_receive(:possessions).and_return Possession
       Possession.should_receive(:where).with("release_wiki_link.release_id" => id).and_return Possession
       Possession.should_receive(:first).and_return nil
+      user.should_receive(:user_tags).and_return UserTag
+      UserTag.should_receive(:where).with(taggable_id: id, taggable_class: release.class.to_s).and_return UserTag
+      tags = []
+      UserTag.should_receive(:all).and_return tags
       get :show, id: id
       assigns(:release).should eq release
       assigns(:possession).should eq nil
+      assigns(:user_tags).should eq tags
     end
   end
   describe "GET portal" do
@@ -85,7 +90,7 @@ describe ReleasesController do
       response.should redirect_to search_releases_path
       flash[:alert].should eq I18n.t("messages.release_new_without_query")
     end
-    it "should" do
+    it "should let you initiate a new release if you have the q param filled" do
       section = Object.new
       q = "test"
       link = {}

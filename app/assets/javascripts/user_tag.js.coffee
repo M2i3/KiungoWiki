@@ -3,7 +3,7 @@ $ ->
     jqxhr = $.post '/user_tags.json',
       user_tag:
         taggable_id: $(this).attr 'data-resource-id'
-        taggable_class: $(this).attr 'data-resource-class'
+        taggable_type: $(this).attr 'data-resource-class'
         name: $('input#name').val()
       (data) =>
         $('#addtagform').modal('hide')

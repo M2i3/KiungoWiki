@@ -63,6 +63,9 @@ en:
     new_release: New Release
     modify_work: Modify Work
     new_work: New Work
+    new_user_tag: New Tag
+    modify_user_tag: Modify Tag
+    user_tag_index: Tags
 
   messages:
     info: For your information.
