@@ -114,9 +114,9 @@ class ReleasesController < ApplicationController
 
     respond_to do |format|
       format.json { 
-        render json:(Release.queried(asq.objectq).limit(20).collect{|alb| 
+        render json:(Release.queried(asq.objectq).limit(20).collect{|rel| 
 
-          wiki_link_klass.new(reference_text: "oid:#{alb.id} #{asq.metaq}").combined_link
+          wiki_link_klass.new(reference_text: "oid:#{rel.id} #{asq.metaq}").combined_link
               
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }

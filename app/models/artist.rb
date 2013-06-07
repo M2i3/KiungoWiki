@@ -63,8 +63,8 @@ class Artist
                   track_destroy:  true     # track document destruction, default is false
 
   def set_name
-    if ![nil,""].include?(self.surname)
-      if ![nil,""].include?(self.given_name)
+    unless self.surname.blank?
+      unless self.given_name.blank?
         self.name = self.surname + ", " + self.given_name
       else
         self.name = self.surname

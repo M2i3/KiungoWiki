@@ -19,7 +19,7 @@ gem 'devise'
 #gem 'devise_rpx_connectable'
 # for text-to-html formatting
 gem 'RedCloth'
-gem 'mongoid_search'
+gem 'mongoid_search', '~> 0.3.2'
 
 gem "http_accept_language"
 
