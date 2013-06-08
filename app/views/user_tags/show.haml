@@ -9,6 +9,6 @@
   = "#{UserTag.human_attribute_name("name")}"
   = @user_tag.name
 
-= link_to t('modify'), edit_user_tag_path(@user_tag) 
+= link_to t('modify'), [:edit, @taggable, @user_tag]
 |
-= link_to t('back'), user_tags_path
+= link_to t('back'), [@taggable, :user_tags]

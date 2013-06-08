@@ -3,6 +3,6 @@
 
 = render 'form', submit_text: t('update')
 
-= link_to t('show'), @user_tag
+= link_to t('show'), [@taggable, @user_tag]
 |
-= link_to t('back'), user_tags_path
+= link_to t('back'), [@taggable, :user_tags]

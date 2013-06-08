@@ -1,7 +1,5 @@
 KiungoWiki::Application.routes.draw do
 
-  resources :user_tags
-
   resources :possessions
 
   resources :changes
@@ -17,6 +15,7 @@ KiungoWiki::Application.routes.draw do
   end
   
   resources :works do
+    resources :user_tags
     collection do
       get 'lookup'
       get 'portal'
@@ -30,6 +29,7 @@ KiungoWiki::Application.routes.draw do
   end
 
   resources :artists do
+    resources :user_tags
     collection do
       get 'lookup'
       get 'portal'
@@ -44,6 +44,7 @@ KiungoWiki::Application.routes.draw do
   end
 
   resources :releases do
+    resources :user_tags
     collection do
       get 'lookup'
       get 'portal'
@@ -57,6 +58,7 @@ KiungoWiki::Application.routes.draw do
   end
   
   resources :recordings do
+    resources :user_tags
     collection do
       get 'lookup'
       get 'portal'
