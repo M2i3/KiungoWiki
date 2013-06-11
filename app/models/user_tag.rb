@@ -8,10 +8,6 @@ class UserTag
     validates_presence_of field
   end
   
-  def taggable
-    self.taggable_type.constantize.find self.taggable_id
-  end
-  
   after_create do |doc|
     # if no tag is present that is relevent
     if doc.taggable.class.where("tags.name" => /#{doc.name}/i, id:doc.taggable.id).size == 0

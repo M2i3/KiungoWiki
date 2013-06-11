@@ -13,14 +13,15 @@ describe UserTagsController do
     UserTagsController.any_instance.stub(:authorize!)
     Artist.stub(:find).and_return resource
     resource.stub(:id).and_return 99
-    user.should_receive(:user_tags).and_return user
+    user.stub(:user_tags).and_return user
     tag.stub(:id).and_return 99
     tag.stub(:taggable).and_return resource
   end
   describe "GET index" do
     before :each do
       @user_tags = [tag]
-      user.should_receive(:where).with(taggable_type:"Artist", taggable_id:99).and_return @user_tags
+      resource.should_receive(:user_tags).and_return resource
+      resource.should_receive(:where).with(user_id:user).and_return @user_tags
     end
     it "assigns all user_tags as @user_tags" do
       @user_tags.should_not_receive(:where)

@@ -7,14 +7,6 @@ describe UserTag do
     it { should validate_presence_of field }
   end
   it { should belong_to :taggable }
-  it "should be able to retrieve its taggable" do
-    id = 99
-    artist = Artist.new
-    subject.taggable = artist
-    subject.taggable_id = id
-    Artist.should_receive(:find).with(id).and_return artist
-    subject.taggable.should eq artist
-  end
   # it "should be able to search and create a public tag inside of the resource if it's at or above the threshold" do
   #   artist = FactoryGirl.create(:artist)
   #   user = FactoryGirl.create(:user)

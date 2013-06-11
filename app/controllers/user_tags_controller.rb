@@ -6,7 +6,7 @@ class UserTagsController < ApplicationController
   authorize_resource :user_tag
   
   def index
-    @user_tags = current_user.user_tags.where(taggable_type:@taggable.class.to_s, taggable_id:@taggable.id)
+    @user_tags = @taggable.user_tags.where(user_id:current_user)
   end
   
   def show
