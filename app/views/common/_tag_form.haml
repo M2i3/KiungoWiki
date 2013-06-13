@@ -10,9 +10,16 @@
       %p
         %label{for: 'name'}
           = UserTag.human_attribute_name("name")
-        %input#name{type: 'text'}
+        %input#name.user_tag_lookup{type: 'text', value:resource.user_tags_text[current_user], 'data-pre' => resource.tokenized_user_tags(current_user)}
     .modal-footer
       %a.btn{"data-dismiss" => "modal"}
         = t('cancel')
-      %a#confirmaddtag.btn.btn-primary{"data-resource-id" => resource.id, "data-resource-class" => resource.class.to_s}
+      %a#confirmaddtag.btn.btn-primary
         = t('new')
+%p
+  %ul#tags
+    - resource.user_tags.each do |tag|
+      %li
+        = tag.name
+    
+  

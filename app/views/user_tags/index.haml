@@ -9,7 +9,6 @@
 
   .span8
     %h2= t('headers.user_tag_index')
-    = @user_tags.all.size.inspect
     - if @user_tags.size > 0
       %table.table.table-striped
         %thead

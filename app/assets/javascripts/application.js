@@ -187,6 +187,13 @@ $(document).ready(function () {
   $('input.labels_lookup').tokenInput("/labels/lookup.json", {
      classes: default_classes
   });
+  
+  /*
+    UserTag === UserTag === UserTag === UserTag === UserTag === UserTag === UserTag
+  */
+  $('input.user_tag_lookup').tokenInput("/user_tags/lookup.json", {
+     classes: default_classes
+  });
 
 });
 

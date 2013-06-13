@@ -156,6 +156,14 @@ class Work
   def to_wiki_link
     WorkWikiLink.new(:reference_text=>"oid:#{self.id}", :work=>self)
   end
+  
+  def user_tags_text
+    UserTagsWorker.new self
+  end
+  
+  def tokenized_user_tags user
+    self.user_tags.where(user:user).collect{|tag| {id:tag.name, name:tag.name} }.to_json
+  end
 
   scope :queried, ->(q) {
     current_query = all

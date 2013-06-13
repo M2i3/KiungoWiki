@@ -25,4 +25,16 @@ describe Artist do
     end
     artist.destroy
   end
+  it "should return a UserTagsWorker" do
+    subject.user_tags_text.should be_a UserTagsWorker
+  end
+  it "should return its tokenized labels according to the user" do
+    user = User.new
+    tag = UserTag.new
+    name = "test"
+    tag.stub(:name).and_return name
+    subject.should_receive(:user_tags).and_return subject
+    subject.should_receive(:where).with(user:user).and_return [tag]
+    subject.tokenized_user_tags(user).should eq [{id:name,name:name}].to_json
+  end
 end

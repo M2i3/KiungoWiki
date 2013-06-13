@@ -202,6 +202,14 @@ class Artist
   def to_wiki_link(klass=ArtistWikiLink)
     klass.new(reference_text: "oid:#{self.id}" , artist: self)
   end
+  
+  def user_tags_text
+    UserTagsWorker.new self
+  end
+  
+  def tokenized_user_tags user
+    self.user_tags.where(user:user).collect{|tag| {id:tag.name, name:tag.name} }.to_json
+  end
 
   scope :born_during_month_of, ->(month) {
     self.where(birth_date: /.*\-#{"%02d"%(month)}\-.*/)

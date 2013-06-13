@@ -13,14 +13,13 @@ describe UserTagsController do
     UserTagsController.any_instance.stub(:authorize!)
     Artist.stub(:find).and_return resource
     resource.stub(:id).and_return 99
-    user.stub(:user_tags).and_return user
+    resource.stub(:user_tags).and_return resource
     tag.stub(:id).and_return 99
     tag.stub(:taggable).and_return resource
   end
   describe "GET index" do
     before :each do
       @user_tags = [tag]
-      resource.should_receive(:user_tags).and_return resource
       resource.should_receive(:where).with(user_id:user).and_return @user_tags
     end
     it "assigns all user_tags as @user_tags" do
@@ -31,7 +30,7 @@ describe UserTagsController do
   end
   describe "POST create" do
     before :each do
-      user.should_receive(:build).with(taggable_type:"Artist", taggable_id:99).and_return tag
+      resource.should_receive(:build).with(user_id:user).and_return tag
       @save_mock = tag.should_receive(:save)
     end
     it "can create with valid params" do
@@ -48,7 +47,7 @@ describe UserTagsController do
   end
   describe "GET show" do
     before :each do
-      user.should_receive(:where).with(taggable_type:"Artist", taggable_id:99, id:id).and_return user
+      resource.should_receive(:where).with(user_id:user).and_return user
       @find_mock = user.should_receive(:first)
     end
     it "assigns the requested possession as @possession" do
@@ -60,7 +59,7 @@ describe UserTagsController do
 
   describe "GET new" do
     it "assigns a new possession as @possession" do
-      user.should_receive(:build).with(taggable_type:"Artist", taggable_id:99).and_return tag
+      resource.should_receive(:build).with(user_id:user).and_return tag
       UserTagsController.any_instance.should_receive(:authorize!)
       get :new, artist_id:99.to_param
       assigns(:user_tag).should eq(tag)
@@ -69,8 +68,8 @@ describe UserTagsController do
   
   describe "GET edit" do
     it "assigns the requested possession as @possession" do
-      user.should_receive(:where).with(taggable_type:"Artist", taggable_id:99, id:id).and_return user
-      user.should_receive(:first).and_return tag
+      resource.should_receive(:where).with(user_id:user).and_return resource
+      resource.should_receive(:first).and_return tag
       get :edit, id: id, artist_id:99.to_param
       assigns(:user_tag).should eq(tag)
     end
@@ -78,8 +77,8 @@ describe UserTagsController do
   
   describe "PUT update" do
     before :each do
-      user.should_receive(:where).with(taggable_type:"Artist", taggable_id:99, id:id).and_return user
-      user.should_receive(:first).and_return tag
+      resource.should_receive(:where).with(user_id:user).and_return resource
+      resource.should_receive(:first).and_return tag
     end
     it "with valid params can update" do
       params = { "these" => "params" }
@@ -97,10 +96,22 @@ describe UserTagsController do
     end
   end
   
+  describe "GET lookup" do
+    it "can look up their user tags" do
+      tags = [tag]
+      name = "test"
+      tag.stub(:name).and_return name
+      user.should_receive(:user_tags).and_return tags
+      tags.should_receive(:distinct).with(:name).and_return tags
+      get :lookup, format: :json, q:name
+      response.body.should eq [{id:name, name:name}, {id:name, name:"#{name} (nouveau)"}].to_json
+    end
+  end
+  
   describe "DELETE destroy" do
     it "destroys the requested possession" do
-      user.should_receive(:where).with(taggable_type:"Artist", taggable_id:99, id:id).and_return user
-      user.should_receive(:first).and_return tag
+      resource.should_receive(:where).with(user_id:user).and_return resource
+      resource.should_receive(:first).and_return tag
       tag.should_receive(:destroy)
       delete :destroy, id: id, artist_id:99.to_param
       response.should redirect_to(resource)

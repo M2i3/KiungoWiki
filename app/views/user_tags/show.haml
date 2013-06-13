@@ -3,10 +3,10 @@
 %p#notice
   = notice
 %p
-  = "#{UserTag.human_attribute_name("taggable")}"
-  = @user_tag.taggable
+  = "#{UserTag.human_attribute_name("taggable")}:"
+  = @user_tag.taggable.title
 %p
-  = "#{UserTag.human_attribute_name("name")}"
+  = "#{UserTag.human_attribute_name("name")}:"
   = @user_tag.name
 
 = link_to t('modify'), [:edit, @taggable, @user_tag]

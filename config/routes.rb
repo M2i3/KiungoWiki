@@ -1,5 +1,7 @@
 KiungoWiki::Application.routes.draw do
 
+  get 'user_tags/lookup' => 'user_tags#lookup', format: :json
+
   resources :possessions
 
   resources :changes
