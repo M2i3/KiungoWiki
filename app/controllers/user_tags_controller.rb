@@ -50,7 +50,7 @@ class UserTagsController < ApplicationController
     respond_to do |format|
       format.json do
         # 
-        render json: (current_user.user_tags.where(name:/#{params[:q].to_s}/).collect{|tag| 
+        render json: (current_user.user_tags.where(name:/#{params[:q].to_s}/i).collect{|tag| 
           {id:tag.name, name:tag.name}
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       end

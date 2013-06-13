@@ -29,20 +29,11 @@ describe UserTagsController do
     end
   end
   describe "POST create" do
-    before :each do
-      resource.should_receive(:build).with(user_id:user).and_return tag
-      @save_mock = tag.should_receive(:save)
-    end
     it "can create with valid params" do
-      @save_mock.and_return true
+      resource.should_receive(:user_tags_text).and_return resource
+      resource.should_receive(:[]=)
       post :create, user_tag: {}, format: :json, artist_id:99.to_param
-      assigns(:user_tag).should be_a(UserTag)
       response.status.should eq(201)
-    end
-    it "cannot create with invalid params" do
-      @save_mock.and_return(false)
-      post :create, user_tag: {}, format: :json, artist_id:99.to_param
-      response.status.should eq 422 
     end
   end
   describe "GET show" do
@@ -102,7 +93,7 @@ describe UserTagsController do
       name = "test"
       tag.stub(:name).and_return name
       user.should_receive(:user_tags).and_return tags
-      tags.should_receive(:distinct).with(:name).and_return tags
+      tags.should_receive(:where).with(name:/#{name}/i).and_return tags
       get :lookup, format: :json, q:name
       response.body.should eq [{id:name, name:name}, {id:name, name:"#{name} (nouveau)"}].to_json
     end
