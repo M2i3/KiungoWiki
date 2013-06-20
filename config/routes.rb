@@ -17,7 +17,6 @@ KiungoWiki::Application.routes.draw do
   end
   
   resources :works do
-    resources :user_tags
     collection do
       get 'lookup'
       get 'portal'
@@ -26,12 +25,12 @@ KiungoWiki::Application.routes.draw do
       get 'search'
     end
     member do
+      put 'user_tags' => 'user_tags#update', format: :json
       get 'add_supplementary_section'
     end
   end
 
   resources :artists do
-    resources :user_tags
     collection do
       get 'lookup'
       get 'portal'
@@ -41,12 +40,12 @@ KiungoWiki::Application.routes.draw do
       get 'list'
     end
     member do
+      put 'user_tags' => 'user_tags#update', format: :json
       get 'add_supplementary_section'
     end
   end
 
   resources :releases do
-    resources :user_tags
     collection do
       get 'lookup'
       get 'portal'
@@ -55,12 +54,12 @@ KiungoWiki::Application.routes.draw do
       get 'search'
     end
     member do
+      put 'user_tags' => 'user_tags#update', format: :json
       get 'add_supplementary_section'
     end
   end
   
   resources :recordings do
-    resources :user_tags
     collection do
       get 'lookup'
       get 'portal'
@@ -69,6 +68,7 @@ KiungoWiki::Application.routes.draw do
       get 'search'
     end
     member do
+      put 'user_tags' => 'user_tags#update', format: :json
       get 'add_supplementary_section'
     end
   end

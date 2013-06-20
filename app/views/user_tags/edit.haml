@@ -1,8 +1,0 @@
-%h1
-  = t('headers.modify_user_tag')
-
-= render 'form', submit_text: t('update')
-
-= link_to t('show'), [@taggable, @user_tag]
-|
-= link_to t('back'), [@taggable, :user_tags]

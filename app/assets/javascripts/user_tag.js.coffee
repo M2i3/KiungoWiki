@@ -4,6 +4,7 @@ $ ->
     jqxhr = $.post "#{window.location.pathname}/user_tags.json",
       user_tag:
         name: name
+      _method: 'PUT'
       (data) =>
         liTags = ""
         for tagName in name.split(",")
