@@ -1,7 +1,7 @@
 class WorksController < ApplicationController
 
   # only registered users can edit this wiki
-  before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index]
+  before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_artist]
   authorize_resource
 
   def index
@@ -13,13 +13,17 @@ class WorksController < ApplicationController
       format.html
     end
   end
+  
+  def without_artist
+    @works = Work.where("artist_wiki_links.artist_id" => nil).page(params[:page]).all
+  end
 
   def recent_changes
-    redirect_to changes_path(:scope=>"work")
+    redirect_to changes_path(scope: "work")
   end
 
   def portal
-    @feature_in_month = PortalArticle.where(:category =>"work", :publish_date.lte => Time.now).order_by(publish_date:-1).first
+    @feature_in_month = PortalArticle.where(category: "work", :publish_date.lte => Time.now).order_by(publish_date:-1).first
     respond_to do |format|
       format.html 
     end      
@@ -32,7 +36,7 @@ class WorksController < ApplicationController
   def show
     @work = Work.find(params[:id])
     if current_user
-      @user_tags = current_user.user_tags.where(taggable_class: @work.class.to_s, taggable_id:@work.id).all
+      @user_tags = @work.user_tags.where(user:current_user).all
     end
     respond_to do |format|
       format.xml { render xml: @work.to_xml(except: [:versions]) }
@@ -43,7 +47,7 @@ class WorksController < ApplicationController
 
   def new
     unless params[:q]
-      redirect_to search_works_path, :alert=>t("messages.work_new_without_query")
+      redirect_to search_works_path, alert: t("messages.work_new_without_query")
     else
       @work = Work.new(WorkWikiLink.search_query(params[:q]).to_hash)
       @supplementary_section = @work.supplementary_sections.build

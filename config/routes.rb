@@ -23,6 +23,7 @@ KiungoWiki::Application.routes.draw do
       get 'letter_:letter', action: "alphabetic_index", as: :alphabetic
       get 'recent_changes' #, :action=>"recent_changes", :recent_changes=>1, :as=>:recent_changes
       get 'search'
+      get 'without_artist'
     end
     member do
       put 'user_tags' => 'user_tags#update', format: :json
