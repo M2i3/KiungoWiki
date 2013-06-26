@@ -26,8 +26,8 @@ describe ReleasesController do
       user.should_receive(:possessions).and_return Possession
       Possession.should_receive(:where).with("release_wiki_link.release_id" => id).and_return Possession
       Possession.should_receive(:first).and_return nil
-      user.should_receive(:user_tags).and_return UserTag
-      UserTag.should_receive(:where).with(taggable_id: id, taggable_class: release.class.to_s).and_return UserTag
+      release.should_receive(:user_tags).and_return UserTag
+      UserTag.should_receive(:where).with(user:user).and_return UserTag
       tags = []
       UserTag.should_receive(:all).and_return tags
       get :show, id: id

@@ -33,7 +33,7 @@ class ReleasesController < ApplicationController
     @release = Release.find(params[:id])
     if current_user
       @possession = current_user.possessions.where("release_wiki_link.release_id" => @release.id).first
-      @user_tags = current_user.user_tags.where(taggable_class: @release.class.to_s, taggable_id:@release.id).all
+      @user_tags = @release.user_tags.where(user:current_user).all
     end
     respond_to do |format|
       format.xml { render xml: @release.to_xml(except: [:versions]) }

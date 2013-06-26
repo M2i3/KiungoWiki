@@ -14,13 +14,13 @@ describe ArtistsController do
     it "should show an artist upon request and list the users tags if there is any" do
       ApplicationController.any_instance.stub(:current_user).and_return user
       request.env['warden'].stub(:authenticate!).and_return user
-      artist.should_receive(:id).and_return id
-      user.should_receive(:user_tags).and_return UserTag
-      UserTag.should_receive(:where).with(taggable_id: id, taggable_class: artist.class.to_s).and_return UserTag
-      UserTag.should_receive(:all).and_return nil
+      artist.should_receive(:user_tags).and_return UserTag
+      UserTag.should_receive(:where).with(user:user).and_return UserTag
+      tags = []
+      UserTag.should_receive(:all).and_return tags
       get :show, id: id
       assigns(:artist).should eq artist
-      assigns(:user_tags).should eq nil
+      assigns(:user_tags).should eq tags
     end
     it "should not pull the user tags if no user is logged in" do
       user.should_not_receive(:user_tags)

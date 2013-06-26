@@ -32,7 +32,7 @@ class ArtistsController < ApplicationController
   def show
     @artist = Artist.find(params[:id])
     if current_user
-      @user_tags = current_user.user_tags.where(taggable_class: @artist.class.to_s, taggable_id:@artist.id).all
+      @user_tags = @artist.user_tags.where(user: current_user).all
     end
     respond_to do |format|
       format.xml { render xml: @artist.to_xml(except: [:versions]) }

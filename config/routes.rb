@@ -24,6 +24,10 @@ KiungoWiki::Application.routes.draw do
       get 'recent_changes' #, :action=>"recent_changes", :recent_changes=>1, :as=>:recent_changes
       get 'search'
       get 'without_artist'
+      get 'without_recordings'
+      get 'without_lyrics'
+      get 'without_tags'
+      get 'without_additonal_sections'
     end
     member do
       put 'user_tags' => 'user_tags#update', format: :json

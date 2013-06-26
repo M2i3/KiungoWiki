@@ -31,7 +31,7 @@ class RecordingsController < ApplicationController
   def show
     @recording = Recording.find(params[:id])
     if current_user
-      @user_tags = current_user.user_tags.where(taggable_class: @recording.class.to_s, taggable_id:@recording.id).all
+      @user_tags = @recording.user_tags.where(user:current_user).all
     end
     respond_to do |format|
       format.xml { render xml: @recording.to_xml(except: [:versions]) }

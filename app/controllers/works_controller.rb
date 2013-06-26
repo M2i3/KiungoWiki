@@ -17,6 +17,14 @@ class WorksController < ApplicationController
   def without_artist
     @works = Work.where("artist_wiki_links.artist_id" => nil).page(params[:page]).all
   end
+  
+  def without_recordings
+    @works = Work.where("recording_wiki_links.recording_id" => nil).page(params[:page]).all
+  end
+  
+  def without_lyrics
+    @works = Work.where(:lyrics.in => [nil,""]).page(params[:page]).all
+  end
 
   def recent_changes
     redirect_to changes_path(scope: "work")
