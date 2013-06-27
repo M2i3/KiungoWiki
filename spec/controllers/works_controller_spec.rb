@@ -33,26 +33,27 @@ describe WorksController do
       @works = []
       @page = "98"
       Work.should_receive(:page).with(@page).and_return Work
+      @where_mock = Work.should_receive(:where)
       Work.should_receive(:all).and_return @works
     end
     after :each do 
-      # assigns(:works).should eq @works
+      assigns(:works).should eq @works
     end
     describe "GET without_artists" do
       it "should handle pagination and show works without artists" do
-        Work.should_receive(:where).with("artist_wiki_links.artist_id" => nil).and_return Work
+        @where_mock.with("artist_wiki_links.artist_id" => nil).and_return Work
         get :without_artist, page:@page
       end
     end
     describe "GET without_recordings" do
       it "should handle pagination and show works without recordings" do
-        Work.should_receive(:where).with("recording_wiki_links.recording_id" => nil).and_return Work
+        @where_mock.with("recording_wiki_links.recording_id" => nil).and_return Work
         get :without_recordings, page:@page
       end
     end
     describe "GET without_lyrics" do
       it "should handle pagination and show works without lyrics" do
-        Work.should_receive(:where).with(:lyrics.in => [nil,""]).and_return Work
+        @where_mock.with(:lyrics.in => [nil,""]).and_return Work
         get :without_lyrics, page:@page
       end
     end
