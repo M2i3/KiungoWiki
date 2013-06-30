@@ -1,0 +1,6 @@
+.page-header
+  = title(Recording.model_name.human.pluralize)
+
+= paginate @recordings
+= render partial: "search_result", object: @recordings
+= paginate @recordings

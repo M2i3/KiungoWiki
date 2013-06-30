@@ -39,10 +39,10 @@
       %li
         = "#{t("portal.improve_artist")}:"
         %ul
-          %li= link_to t("portal.without_work"), "#", class: "soon-available"
-          %li= link_to t("portal.without_recording"), "#", class: "soon-available"
-          %li= link_to t("portal.without_releases"), "#", class: "soon-available"
-          %li= link_to t("portal.without_additional_sec"), "#", class: "soon-available"
+          %li= link_to t("portal.without_work"), without_work_artists_path
+          %li= link_to t("portal.without_recording"), without_recordings_artists_path
+          %li= link_to t("portal.without_releases"), without_releases_artists_path
+          %li= link_to t("portal.without_additional_sec"), without_supplementary_sections_artists_path
 
 .row
   .span12

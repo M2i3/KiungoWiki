@@ -15,6 +15,7 @@ class Artist
   field :death_location, type:  String
   field :origartistid, type:  String
   field :is_group, type:  Integer
+  field :missing_supplementary_sections, type: Boolean
 
   #
   # calculated values so we can index and sort
@@ -236,6 +237,9 @@ class Artist
         end
       end
     end
+  end
+  before_save do |doc|
+    doc.missing_supplementary_sections = doc.supplementary_sections.length == 0
   end
   
 end

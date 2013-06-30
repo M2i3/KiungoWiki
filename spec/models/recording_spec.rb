@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Recording do
   it { should embed_many(:tags) }
   it { should have_many(:user_tags) }
+  it { should have_field(:missing_tags).of_type Boolean }
+  it { should have_field(:missing_supplementary_sections).of_type Boolean }
 	describe "Testing for required values" do 
 		[:recording_date, :recording_location, :rythm, :duration].each {|field|	
 			it "#{field} should allow nil" do 

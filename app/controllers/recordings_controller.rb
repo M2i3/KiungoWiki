@@ -1,7 +1,7 @@
 class RecordingsController < ApplicationController
 
   # only registered users can edit this wiki
-  before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index]
+  before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_artist, :without_releases, :without_tags, :without_supplementary_sections]
 
   def index
     @recordings = build_filter_from_params(params, Recording.all.order_by(cache_normalized_title:1))
@@ -11,6 +11,22 @@ class RecordingsController < ApplicationController
       format.json { render json: @recordings }
       format.html
     end
+  end
+  
+  def without_artist
+    @recordings = Recording.where("artist_wiki_links.artist_id" => nil).page(params[:page]).all
+  end
+  
+  def without_releases
+    @recordings = Recording.where("release_wiki_link.release_id" => nil).page(params[:page]).all
+  end
+  
+  def without_tags
+    @recordings = Recording.where(missing_tags: true).page(params[:page]).all
+  end
+  
+  def without_supplementary_sections
+    @recordings = Recording.where(missing_supplementary_sections: true).page(params[:page]).all
   end
   
   def recent_changes    

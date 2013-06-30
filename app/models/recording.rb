@@ -11,6 +11,8 @@ class Recording
   field :duration, type:  Duration
   field :rythm, type:  Integer
   field :origrecordingid, type:  String
+  field :missing_tags, type: Boolean
+  field :missing_supplementary_sections, type: Boolean
 
   #
   # calculated values so we can index and sort
@@ -206,6 +208,11 @@ class Recording
         end
       end
     end
+  end
+  
+  before_save do |doc|
+    doc.missing_tags = doc.tags.length == 0
+    doc.missing_supplementary_sections = doc.supplementary_sections.length == 0
   end
   
 end

@@ -43,6 +43,10 @@ KiungoWiki::Application.routes.draw do
       get 'recent_changes' #, :action=>"recent_changes", :recent_changes=>1, :as=>:recent_changes
       get 'search'
       get 'list'
+      get 'without_work'
+      get 'without_recordings'
+      get 'without_releases'
+      get 'without_supplementary_sections'
     end
     member do
       put 'user_tags' => 'user_tags#update', format: :json
@@ -71,6 +75,10 @@ KiungoWiki::Application.routes.draw do
       get 'letter_:letter', action: "alphabetic_index", as: :alphabetic
       get 'recent_changes' #, :action=>"recent_changes", :recent_changes=>1, :as=>:recent_changes
       get 'search'
+      get 'without_artist'
+      get 'without_releases'
+      get 'without_tags'
+      get 'without_supplementary_sections'
     end
     member do
       put 'user_tags' => 'user_tags#update', format: :json

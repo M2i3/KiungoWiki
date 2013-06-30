@@ -38,10 +38,10 @@
       %li
         #{t('portal.improve_recording')}:
         %ul
-          %li= link_to t("portal.without_artist"), "#", class: "soon-available"
-          %li= link_to t("portal.without_categories"), "#", class: "soon-available"
-          %li= link_to t("portal.without_releases"), "#", class: "soon-available"
-          %li= link_to t("portal.without_additional_sec"), "#", class: "soon-available"
+          %li= link_to t("portal.without_artist"), without_artist_recordings_path
+          %li= link_to t("portal.without_categories"), without_tags_recordings_path
+          %li= link_to t("portal.without_releases"), without_releases_recordings_path
+          %li= link_to t("portal.without_additional_sec"), without_supplementary_sections_recordings_path
 
 .row
   .span12
