@@ -7,29 +7,31 @@ class Work
   #
   # basic entity information
   #
-  field :title, :type => String, :default => ""
-  field :date_written, :type => IncDate
-  field :copyright, :type => String
-  field :language_code, :type => String
-  field :publisher, :type => String
-  field :lyrics, :type => String
-  field :chords, :type => String
-  field :origworkid, :type => String
-  field :is_lyrics_verified, :type => Integer
-  field :is_credits_verified, :type => Integer
+  field :title, type: String, default: ""
+  field :date_written, type: IncDate
+  field :copyright, type: String
+  field :language_code, type: String
+  field :publisher, type: String
+  field :lyrics, type: String
+  field :chords, type: String
+  field :origworkid, type: String
+  field :is_lyrics_verified, type: Integer
+  field :is_credits_verified, type: Integer
+  field :missing_tags, type: Boolean
+  field :missing_supplementary_sections, type: Boolean
 
   #
   # calculated values so we can index and sort
   #
-  field :cache_normalized_title, :type => String, :default => ""
-  field :cache_first_letter, :type => String, :default => ""
+  field :cache_normalized_title, type: String, default: ""
+  field :cache_first_letter, type: String, default: ""
 
   before_save :update_cached_fields
 
   index({ cache_normalized_title: 1 }, { background: true })
   index({ cache_first_letter: 1, cache_normalized_title: 1 }, { background: true })
 
-  search_in :title, {:match => :all}
+  search_in :title, {match: :all}
 
   validates_presence_of :title
 
@@ -195,6 +197,11 @@ class Work
         end
       end
     end
+  end
+  
+  before_save do |doc|
+    doc.missing_tags = doc.tags.length == 0
+    doc.missing_supplementary_sections = doc.supplementary_sections.length == 0
   end
   
   #Work.all.group_by {|a| a.title_first_letter.upcase }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil

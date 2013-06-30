@@ -58,16 +58,16 @@ describe WorksController do
       end
     end
     describe "GET without_tags" do
-      # it "should handle pagination and show works without tags" do
-      #   Work.should_receive(:where).with("public_tags" => nil).and_return Work
-      #   get :without_artist, page:@page
-      # end
+      it "should handle pagination and show works without tags" do
+        @where_mock.with(missing_tags: true).and_return Work
+        get :without_tags, page:@page
+      end
     end
     describe "GET without_additonal_sections" do
-      # it "should handle pagination and show works without additional_sections" do
-      #   Work.should_receive(:where).with("artist_wiki_links.artist_id" => nil).and_return Work
-      #   get :without_artist, page:@page
-      # end
+      it "should handle pagination and show works without additional_sections" do
+        @where_mock.with(missing_supplementary_sections: true).and_return Work
+        get :without_supplementary_sections, page:@page
+      end
     end
   end
 end

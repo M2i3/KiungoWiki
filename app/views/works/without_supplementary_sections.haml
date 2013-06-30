@@ -1,0 +1,6 @@
+.page-header
+  = title(t("headers.works_index"))
+
+= paginate @works
+= render partial: "search_result", object: @works
+= paginate @works

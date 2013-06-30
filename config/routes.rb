@@ -27,7 +27,7 @@ KiungoWiki::Application.routes.draw do
       get 'without_recordings'
       get 'without_lyrics'
       get 'without_tags'
-      get 'without_additonal_sections'
+      get 'without_supplementary_sections'
     end
     member do
       put 'user_tags' => 'user_tags#update', format: :json

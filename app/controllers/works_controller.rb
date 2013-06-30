@@ -1,7 +1,7 @@
 class WorksController < ApplicationController
 
   # only registered users can edit this wiki
-  before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_artist, :without_recordings, :without_lyrics]
+  before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_artist, :without_recordings, :without_lyrics, :without_tags, :without_supplementary_sections]
   authorize_resource
 
   def index
@@ -24,6 +24,14 @@ class WorksController < ApplicationController
   
   def without_lyrics
     @works = Work.where(:lyrics.in => [nil,""]).page(params[:page]).all
+  end
+
+  def without_tags
+    @works = Work.where(missing_tags: true).page(params[:page]).all
+  end
+  
+  def without_supplementary_sections
+    @works = Work.where(missing_supplementary_sections: true).page(params[:page]).all
   end
 
   def recent_changes
