@@ -1,7 +1,7 @@
 class ReleasesController < ApplicationController
 
   # only registered users can edit this wiki
-  before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index]
+  before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_artist, :without_supplementary_sections, :without_recordings]
   authorize_resource
 
   def index
@@ -12,6 +12,18 @@ class ReleasesController < ApplicationController
       format.json { render json: @releases }
       format.html
     end
+  end
+  
+  def without_artist
+    @releases = Release.where("artist_wiki_links.artist_id" => nil).page(params[:page]).all
+  end
+  
+  def without_supplementary_sections
+    @releases = Release.where(missing_supplementary_sections: true).page(params[:page]).all
+  end
+  
+  def without_recordings
+    @releases = Release.where("recording_wiki_links.recording_id" => nil).page(params[:page]).all
   end
 
   def recent_changes

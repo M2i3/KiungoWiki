@@ -11,6 +11,7 @@ class Release
   field :reference_code, type: String
   field :number_of_recordings, type: Integer
   field :origalbumid, type: String
+  field :missing_supplementary_sections, type: Boolean
 
   #
   # calculated values so we can index and sort
@@ -159,6 +160,10 @@ class Release
         end
       end
     end
+  end
+  
+  before_save do |doc|
+    doc.missing_supplementary_sections = doc.supplementary_sections.length == 0
   end
 
   #Release.all.group_by {|a| a.title_first_letter.upcase }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Release do
   it { should embed_many(:tags) }
   it { should have_many(:user_tags) }
+  it { should have_field(:missing_supplementary_sections).of_type Boolean }
   it "should null out some wiki links that are attached to it when destroyed" do
     release = FactoryGirl.create(:release)
     attr_string = ""

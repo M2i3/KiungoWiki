@@ -173,4 +173,34 @@ describe ReleasesController do
       response.should redirect_to releases_url
     end
   end
+  context "GET without sections" do
+    before :each do
+      @releases = []
+      @page = "98"
+      Release.should_receive(:page).with(@page).and_return Release
+      @where_mock = Release.should_receive(:where)
+      Release.should_receive(:all).and_return @releases
+    end
+    after :each do 
+      assigns(:releases).should eq @releases
+    end
+    describe "GET without_artist" do
+      it "should handle pagination and show releases without artists" do
+        @where_mock.with("artist_wiki_links.artist_id" => nil).and_return Release
+        get :without_artist, page:@page
+      end
+    end
+    describe "GET without_additonal_sections" do
+      it "should handle pagination and show releases without additional_sections" do
+        @where_mock.with(missing_supplementary_sections: true).and_return Release
+        get :without_supplementary_sections, page:@page
+      end
+    end
+    describe "GET without_recordings" do
+      it "should handle pagination and show releases without recordings" do
+        @where_mock.with("recording_wiki_links.recording_id" => nil).and_return Release
+        get :without_recordings, page:@page
+      end
+    end
+  end
 end
