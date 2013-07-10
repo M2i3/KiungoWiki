@@ -31,16 +31,26 @@
         %thead
           %tr
             %th
-              = t('addmusic.release')
+              = Release.human_attribute_name("title")
+            %th 
+              = Release.human_attribute_name("media_type")
+            %th
+              = t('addmusic.labels')
         %tbody
           - @possessions.each do |possession|
             %tr
               %td
                 = release_wiki_link_path possession.release_wiki_link
               %td
+                = possession.release_wiki_link.media_type
+              %td
+                = possession.labels_text
+
+              %td
                 = link_to t('modify'), edit_possession_path(possession)
               %td
                 = link_to t('delete'), possession, method: :delete, confirm: t('messages.confirm')
+      = paginate @possessions
     - else
       %p.hero-unit
         - if @labelled

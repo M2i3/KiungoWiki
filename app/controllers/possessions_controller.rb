@@ -7,6 +7,8 @@ class PossessionsController < ApplicationController
     @labelled = params[:label]
     @possessions = current_user.possessions    
     @possessions = @possessions.where(labels:@labelled) if @labelled
+    @possessions = @possessions.page(params[:page]).all
+
     @labels = current_user.labels.order_by([:count, :desc])
     respond_to do |format|
       format.html # index.html.erb
