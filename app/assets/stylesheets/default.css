@@ -54,7 +54,7 @@ span.letter:after {
 
 
 /* getting the auto-complete not to display any visual cue of the box itself*/ 
-#token-input-name {
+li.token-input-input-token input {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;

@@ -25,7 +25,7 @@ class Possession
       # deleted labels
       (original.reject{|lab| new_labels.include? lab }).each do |label|
         found = Label.where(name:label,user:doc.owner).first
-        found.inc(:count, 1) if found # backwards compatiable
+        found.inc(:count, -1) if found # backwards compatiable
       end
     end
   end
