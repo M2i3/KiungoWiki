@@ -15,9 +15,9 @@ class UserTagsController < ApplicationController
     respond_to do |format|
       format.json do
         # 
-        render json: (current_user.user_tags.where(name:/#{params[:q].to_s}/i).collect{|tag| 
-          {id:tag.name, name:tag.name}
-        } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
+        render json: (current_user.user_tags.where(name:/#{params[:q].to_s}/i).distinct(:name).collect{|tag| 
+          {id:tag, name:tag}
+        } << {id: params[:q].to_s, name: params[:q].to_s}).uniq
       end
     end
   end

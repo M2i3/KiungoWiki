@@ -51,3 +51,17 @@ span.letter:after {
 .token-input-dropdown { 
   z-index: 9999 !important; 
 }
+
+
+/* getting the auto-complete not to display any visual cue of the box itself*/ 
+#token-input-name {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+  border: none;
+}

@@ -31,13 +31,18 @@ describe UserTagsController do
   
   describe "GET lookup" do
     it "can look up their user tags" do
-      tags = [tag]
       name = "test"
-      tag.stub(:name).and_return name
-      user.should_receive(:user_tags).and_return tags
-      tags.should_receive(:where).with(name:/#{name}/i).and_return tags
+      user_with_tags = FactoryGirl.create :user 
+      [name, name].each {|tag_name|      
+        user_with_tags.user_tags.create!(name: tag_name, taggable: (FactoryGirl.create :recording))
+      }
+      another_user_with_tags = FactoryGirl.create :user
+      another_user_with_tags.user_tags.create!(name: "testing", taggable: (FactoryGirl.create :recording))
+
+      ApplicationController.any_instance.stub(:current_user).and_return user_with_tags
+     
       get :lookup, format: :json, q:name
-      response.body.should eq [{id:name, name:name}, {id:name, name:"#{name} (nouveau)"}].to_json
+      response.body.should eq [{id:name, name:name}].to_json
     end
   end
 end
