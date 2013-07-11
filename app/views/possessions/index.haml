@@ -40,7 +40,7 @@
           - @possessions.each do |possession|
             %tr
               %td
-                = release_wiki_link_path possession.release_wiki_link
+                = link_to possession.display_title, possession
               %td
                 = possession.release_wiki_link.media_type
               %td

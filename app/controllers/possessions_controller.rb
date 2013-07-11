@@ -5,9 +5,9 @@ class PossessionsController < ApplicationController
   # GET /possessions.json
   def index
     @labelled = params[:label]
-    @possessions = current_user.possessions    
+    @possessions = current_user.possessions
     @possessions = @possessions.where(labels:@labelled) if @labelled
-    @possessions = @possessions.page(params[:page]).all
+    @possessions = @possessions.page(params[:page]).order_by(display_title:1).all
 
     @labels = current_user.labels.order_by([:count, :desc])
     respond_to do |format|

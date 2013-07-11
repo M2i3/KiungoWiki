@@ -3,6 +3,7 @@ class Possession
   
   belongs_to :owner, class_name: "User", index: true
   [:owner, :release_wiki_link].each {|field| validates_presence_of field }
+  field :display_title, type: String
   field :labels, type: Array, default: []
   field :rating, type: Integer, default: 0
   field :acquisition_date, type: Date
@@ -11,8 +12,12 @@ class Possession
   embeds_one :release_wiki_link, as: :linkable, class_name: "ReleaseWikiLink"
   validates_associated :release_wiki_link  
   accepts_nested_attributes_for :release_wiki_link
+
+  before_save do |doc|
+    doc.display_title = doc.release_wiki_link.title
+  end
   
-  after_save do |doc|
+  after_save do |doc|    
     if doc.changes.has_key? "labels"
       label_changes = doc.changes["labels"]
       original = label_changes[0]

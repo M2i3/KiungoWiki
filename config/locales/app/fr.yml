@@ -18,13 +18,13 @@ fr:
     artists_recent_changes: "Artistes modifiés récemments"
     artists_alphabetic_index: "Artistes commençant par %{heading}"
     artists_all_index: "Tous les artistes"
-    releases_portal: "Releases (portail)"
-    releases_index: "Releases"
-    releases_search_result: "Releases pour '%{q}'"
-    releases_search: "Recherche dans les releases"
-    releases_recent_changes: "Releases modifiés récemments"
-    releases_alphabetic_index: "Releases commençant par %{heading}"
-    releases_all_index: "Tous les releases"
+    releases_portal: "Parutions (portail)"
+    releases_index: "Parutions"
+    releases_search_result: "Parutions pour '%{q}'"
+    releases_search: "Recherche dans les parutions"
+    releases_recent_changes: "Parutions modifiés récemments"
+    releases_alphabetic_index: "Parutions commençant par %{heading}"
+    releases_all_index: "Toutes les parutions"
     recordings_portal: "Enregistrements (portail)"
     recordings_index: "Enregistrements"
     recordings_search_result: "Enregistrements pour '%{q}'"
@@ -32,7 +32,7 @@ fr:
     recordings_recent_changes: "Enregistrements modifiés récemments"
     recordings_alphabetic_index: "Enregistrements commençant par %{heading}"
     recordings_all_index: "Tous les enregistrements"
-    portal_article_release: "Release du mois: %{featured}"
+    portal_article_release: "Parution du mois: %{featured}"
     portal_article_artist: "Artiste du mois: %{featured}"
     portal_article_recording: "Enregistrement du mois: %{featured}"
     portal_article_work: "Oeuvre du mois: %{featured}"
@@ -61,8 +61,8 @@ fr:
     supplement_section: Section Supplémentaire
     new_section: Nouvelle section
     new_recording: Nouvel enregistrement
-    modify_release: Modifier l'release
-    new_release: Nouvel Release
+    modify_release: Modifier la parution
+    new_release: Nouvelle parution
     modify_work: Modifier l'oeuvre
     new_work: Nouvelle Oeuvre
     new_user_tag: ??
@@ -76,23 +76,23 @@ fr:
     work_new_without_query: Veuillez vous assurer que l'oeuvre que vous désirez créer n'existe pas déjà dans le wiki.
     recording_new_without_query: Veuillez vous assurer que l'enregistrement que vous désirez créer n'existe pas déjà dans le wiki.
     artist_new_without_query: Veuillez vous assurer que l'artiste que vous désirez créer n'existe pas déjà dans le wiki.
-    release_new_without_query: Veuillez vous assurer que l'release que vous désirez créer n'existe pas déjà dans le wiki.
+    release_new_without_query: Veuillez vous assurer que la parution que vous désirez créer n'existe pas déjà dans le wiki.
     confirm: Are you sure?
     artist_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel artiste
-    artist_no_work: ???
-    artist_no_recordings: ???
-    artist_no_releases: ???
+    artist_no_work: Artistes sans oeuvres
+    artist_no_recordings: Artistes sans enregistrements
+    artist_no_releases: Artistes sans parutions
     category_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer la catégorie
     article_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'article
     recording_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'enregistrement
-    recording_without_artist: ???
-    recording_without_release: ???
-    release_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'release
-    release_without_artist: ???
-    release_without_recording: ???
+    recording_without_artist: Enregistrements sans artistes
+    recording_without_release: Enregistrements sans parutions
+    release_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer la parution
+    release_without_artist: Parution sans artiste
+    release_without_recording: Parution sans enregistrement
     work_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'oeuvre
-    work_no_artists: ???
-    work_no_recordings: ???
+    work_no_artists: Oeuvres sans artiste
+    work_no_recordings: Oeuvres sans enregistrement
       
   portal:
     artist_explanation: Les artistes sont ceux qui créent les oeuvres et/ou les interprètent dans les enregistrements.
@@ -106,7 +106,7 @@ fr:
     improve_artist: Améliorer la fiche d'un(e) artiste
     without_work: Sans oeuvre
     without_recording: Sans enregistrement
-    without_releases: Sans release
+    without_releases: Sans parution
     without_additional_sec: Sans section(s) complémentaire(s)
     complete_artist_alphabet: consulter la liste complète des artistes commençant par
     all_artists: tous les artistes
@@ -122,12 +122,12 @@ fr:
     improve_recording: Améliorer la fiche d'un enregistrement
     complete_recording_alphabet: consulter la liste complète des enregistrements commençant par
     all_recordings: tous les enregistrements
-    release_explanation: Les releases regroupent plusieurs enregistrements interprétés par un ou plusieurs artistes
-    new_release_text: Écrire la fiche d'un release
-    revise_release: Réviser la fiche d'un release modifiée récemment
+    release_explanation: Les parutions regroupent plusieurs enregistrements interprétés par un ou plusieurs artistes
+    new_release_text: Écrire la fiche d'une parution
+    revise_release: Réviser la fiche d'une parution modifiée récemment
     recent_changes_release: consulter la liste complète des modifications récentes
-    see_release: Voir l'release
-    improve_release: Améliorer la fiche d'un release
+    see_release: Voir la parution
+    improve_release: Améliorer la fiche d'une parution
     work_explanation: Les oeuvres constituent le matériel brut sur lequel sont construits les enregistrements et auxquels les interprètes prêtent leur voix et émotions
     see_work: Voir l'oeuvre
     revise_work: Réviser la fiche d'une oeuvre modifiée récemment
@@ -154,18 +154,18 @@ fr:
     limit_recording_title: Limite la recherche dans le titre de l'enregistrement seulement. Par exemple
     limit_recording_date: Cherche en utilisant la date de l'enregistrement. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
     limit_recording_location: Limite la recherche dans le lieu de l'enregistrement seulement. Par exemple
-    search_release_keywords: Une recherche dans les releases peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants
-    limit_release_title: Limite la recherche dans le titre de l'release seulement. Par exemple
-    limit_release_date_released: Cherche en utilisant la date de parution de l'release. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
-    limit_release_label: Limite la recherche dans le nom de l'etiquette. Par exemple
+    search_release_keywords: Une recherche dans les parutions peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants
+    limit_release_title: Limite la recherche dans le titre de la parution seulement. Par exemple
+    limit_release_date_released: Cherche en utilisant la date de parution de la parution. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
+    limit_release_label: Limite la recherche dans le nom de la parution. Par exemple
     limit_release_media_type: Limite la recherche dans le type de support. Par exemple
     more_results: plus de résultats
     search_work_keywords: Une recherche dans les oeuvres peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants
     limit_work_title: Limite la recherche dans le titre de l'oeuvre seulement. Par exemple
-    limit_work_copyright: Effectue une recherche sur le copyright de l'oeuvre. Par exemple
-    limit_work_lyrics: Effectue la recherche sur les paroles de l'oeuvre. Par exemple
+    limit_work_copyright: "Effectue une recherche sur le copyright de l'oeuvre. Par exemple"
+    limit_work_lyrics: "Effectue la recherche sur les paroles de l'oeuvre. Par exemple"
     limit_work_date_written: Cherche en utilisant la date d'écriture de l'oeuvre. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
-    limit_work_language: Cherche en utilisant le code de langue de l'oeuvre. Par exemple
+    limit_work_language: "Cherche en utilisant le code de langue de l'oeuvre. Par exemple"
       
   show: Afficher
   modify: Modifier
@@ -174,7 +174,7 @@ fr:
   new: Créez-le
   search: Rechercher
   cancel: Annuler
-  modify_artist: Modifier l'artiste
+  modify_artist: "Modifier l'artiste"
   birth: Naissance
   death: Décès
   search_question: Vous n’avez pas trouvé ce que vous cherchiez ?
@@ -209,12 +209,12 @@ fr:
   addmusic:
     addtomusic: "Ajouter à ma musique"
     havemusic: "Déjà dans ma musique"
-    adderror: "Release non ajouté, veuillez ressayer de nouveau plus tard"
+    adderror: "Parution non ajoutée, veuillez ressayer de nouveau plus tard"
     labels: "Étiquettes"
     acquisitiondate: "Date d'acquisition "
     rating: "Classement"
     comments: "Commentaire"
-    release: "Release"
+    release: "Parutions"
     editpossession: "Éditer cette entrée"
     nomusic: "Vous n'avez pas de musique dans votre collection en ce moment"
     nomusiclabel: "Vous n'avez pas de musique pour cette étiquette"
@@ -223,8 +223,8 @@ fr:
   mongoid:
     models:
       release:
-        one: Release
-        other: Releases
+        one: Parution
+        other: Parutions
 
       artist:
         one: Artiste
@@ -273,13 +273,13 @@ fr:
         artist_wiki_links_text: Liens groupe-artistes
         work_wiki_links_text: Oeuvres
         recording_wiki_links_text: Enregistrements
-        release_wiki_links_text: Releases
+        release_wiki_links_text: Parutions
         is_member_of_group: Est membre du groupe
         group_is_composed_of: Membres du groupe
         relation: Relation
         nature: Nature
         role: Rôle
-        add_supplementary_section: Ajout d'une section supplémentaire
+        add_supplementary_section: "Ajout d'une section supplémentaire"
 
       change:
         change_type_text:
@@ -302,8 +302,8 @@ fr:
         work_name: Oeuvre
         work_title: Titre
         work_wiki_link: Un enregistrement de
-        work_wiki_link_text: Titre de l'oeuvre
-        recording_date: Date d'enregistrement
+        work_wiki_link_text: "Titre de l'oeuvre"
+        recording_date: "Date d'enregistrement"
         recording_location: Lieu
         duration: Durée
         rythm: Rythme
@@ -313,8 +313,8 @@ fr:
         artist_wiki_link: Artistes
         artist_wiki_links: Artistes
         artist_wiki_links_text: Artistes
-        release_wiki_links: Releases
-        release_wiki_links_text: Releases
+        release_wiki_links: Parutions
+        release_wiki_links_text: Parutions
         category: Catégorie
         category_wiki_link: Catégories
         category_wiki_links: Catégories
