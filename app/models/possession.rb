@@ -14,7 +14,7 @@ class Possession
   accepts_nested_attributes_for :release_wiki_link
 
   before_save do |doc|
-    doc.display_title = doc.release_wiki_link.title
+    doc.display_title = doc.release_wiki_link.display_text if doc.display_title.blank?
   end
   
   after_save do |doc|    

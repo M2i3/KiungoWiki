@@ -250,6 +250,10 @@ fr:
         one: Utilisateur
         other: Utilisateurs
 
+      possession:
+        one: Possession
+        other: Possessions    
+
     attributes:
       release:
         title: Titre
@@ -352,6 +356,9 @@ fr:
         password_confirmation: Confirmation du mot de passe
         current_password: Mot de passe actuel
         remember_me: Garder ma session active
+
+      possession:
+        display_title: Titre
 
     errors:
       messages:
