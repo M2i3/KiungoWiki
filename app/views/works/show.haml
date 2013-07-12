@@ -1,6 +1,9 @@
 = title(@work.title)
 .row
   = render partial: 'links'
+  - if current_user
+    = render partial: 'common/tag_form', locals: {title: @work.title, resource: @work}
+
   .span12
     .section.summary
       %p
@@ -70,9 +73,6 @@
                 %td= rwl.recording_date
                 %td= rwl.duration
                 %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
-
-    - if current_user
-      = render partial: 'common/tag_form', locals: {title: @work.title, resource: @work}
 
     %h2= Work.human_attribute_name("lyrics")
     %p=  RedCloth.new(@work.lyrics).to_html.html_safe 

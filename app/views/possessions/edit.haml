@@ -1,8 +1,7 @@
-%h1
-  = t('addmusic.editpossession')
+%h1= title(t('addmusic.editpossession'))
 
-= render 'form', submit_text: t('update')
+.row
+  = render partial: 'links'
+  .span12
+    = render 'form', submit_text: t('update')
 
-= link_to t('show'), @possession
-|
-= link_to t('back'), possessions_path

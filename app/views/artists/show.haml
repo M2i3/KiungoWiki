@@ -2,6 +2,8 @@
 
 .row
   = render partial: 'links'
+  - if current_user
+    = render partial: 'common/tag_form', locals: {title: @artist.name, resource: @artist}
   .span12
     .section.summary
       %p
@@ -17,9 +19,6 @@
         \: 
         - @artist.artist_wiki_links.each do |awl|
           #{artist_wiki_link_path(awl)};
-          
-    - if current_user
-      = render partial: 'common/tag_form', locals: {title: @artist.name, resource: @artist}
     
     %h2= Work.model_name.human.pluralize
     - if @artist.work_wiki_links.count == 0 

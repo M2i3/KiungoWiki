@@ -1,4 +1,4 @@
-%p
+%p.pull-right{style:"margin-right: 1em; margin-top:0"}
   = link_to t('tag'), "#addtagform", id: "addtag", "data-toggle" => "modal", class: "btn", role: "button"
   #addtagform.modal.hide.fade{tabindex: "-1", role: "dialog", "aria-labelledby" => "myModalLabel"}
     .modal-header
@@ -16,10 +16,6 @@
         = t('cancel')
       %a#confirmaddtag.btn.btn-primary
         = t('new')
-%p
-  %ul#tags
-    - resource.user_tags.each do |tag|
-      %li
-        = tag.name
+
     
   

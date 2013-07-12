@@ -50,7 +50,7 @@ span.letter:after {
 
 
 .token-input-list {
-  width: 620px !important;
+  width: 540px !important;
 }
 
 /* fix for having the jquery.token dropdown visible even in a modal box*/ 
@@ -70,4 +70,12 @@ li.token-input-input-token input {
   -o-transition: none;
   transition: none;
   border: none;
+}
+
+span.possession-label {
+  margin-right: 0.75em;
+}
+
+div#addmusicform.modal {
+  max-height: 600px;
 }

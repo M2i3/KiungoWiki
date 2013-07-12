@@ -2,66 +2,12 @@
 
 .row
   = render partial: 'links'
+  - if current_user
+    = render partial: 'common/tag_form', locals: {title: @release.title, resource: @release}
+    = render partial: 'add_music'
+
   .span12
     .section.summary
-      - if current_user
-        - if @possession
-          - link_text = t('addmusic.havemusic')
-        - else
-          - link_text = t('addmusic.addtomusic')
-        %p
-          = link_to link_text, "#addmusicform", id: "addmusic", "data-toggle" => "modal", class: "btn", role: "button"
-          #addmusicform.modal.hide.fade{tabindex: "-1", role: "dialog", "aria-labelledby" => "myModalLabel"}
-            .modal-header
-              %h3
-                = t('addmusic.addtomusic')
-            .modal-body
-              %p
-                = @release.title
-              %p
-                %label{'for' => 'labels'}
-                  = t('addmusic.labels')
-                - if @possession
-                  %input#labels.labels_lookup{type: 'text', 'data-pre' => @possession.tokenized_labels}
-                - else
-                  %input#labels.labels_lookup{type: 'text'}
-              %p
-                %label{'for' => 'acquisition_date'}
-                  = t('addmusic.acquisitiondate')
-                - if @possession
-                  %input#acquisition_date{ type: 'text', value: @possession.acquisition_date }
-                - else
-                  %input#acquisition_date{type: 'text'}
-              %p
-                %label{'for' => 'rating'}
-                  = t('addmusic.rating')
-                - if @possession
-                  %input#rating{type: 'text', value: @possession.rating}
-                - else
-                  %input#rating{type: 'text'}
-              %p
-                %label{for: 'comments'}
-                  = t('addmusic.comments')
-                %textarea#comments
-                  - if @possession
-                    = @possession.comments
-              #addmusic-trans{'style' => 'display:none;'}
-                %span#havemusic
-                  = t('addmusic.havemusic')
-                %span#adderror
-                  = t('addmusic.adderror')
-                %span#update
-                  = t('update')
-            .modal-footer
-              %a.btn{"data-dismiss" => "modal"}
-                = t('cancel')
-              - if @possession
-                %a#confirmaddmusic.btn.btn-primary{"data-possession-id" => @possession.id}
-                  = t('update')
-              - else
-                %a#confirmaddmusic.btn.btn-primary{"data-release-id" => @release.id}
-                  = t('addmusic.addtomusic')
-                
       %p
         = Release.human_attribute_name("title")
         \: #{@release.title}
@@ -77,9 +23,6 @@
       %p
         = Release.human_attribute_name("reference_code")
         \: #{@release.reference_code}
-
-    - if current_user
-      = render partial: 'common/tag_form', locals: {title: @release.title, resource: @release}
 
     %h2= Artist.model_name.human.pluralize
     - if @release.artist_wiki_links.count == 0 

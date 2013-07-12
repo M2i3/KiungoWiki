@@ -1,0 +1,5 @@
+%p
+  %ul#tags
+    - resource.user_tags.each do |tag|
+      %li
+        = tag.name

@@ -1,26 +1,24 @@
-%h1
-  = t('headers.possessions_index')
-%p#notice
-  = notice
-%p
-  = "#{t('addmusic.release')}:"
-  = release_wiki_link_path @possession.release_wiki_link
-%p
-  = "#{t('addmusic.labels')}:"
-  %ul
-    - @possession.labels.each do |label|
-      %li
-        = label
-%p
-  = "#{t('addmusic.acquisitiondate')}:"
-  = @possession.acquisition_date
-%p
-  = "#{t('addmusic.rating')}:"
-  = @possession.rating
-%p
-  = "#{t('addmusic.comments')}:"
-  = @possession.comments
+%h1= title(t('headers.possessions_index'))
 
-= link_to t('modify'), edit_possession_path(@possession) 
-|
-= link_to t('back'), possessions_path
+.row
+  = render partial: 'links'
+  .span12
+    %p
+      = "#{t('addmusic.release')}:"
+      = release_wiki_link_path @possession.release_wiki_link
+    %p
+      = "#{t('addmusic.labels')}:"
+      - @possession.labels.each do |label|
+        %span.label.possession-label
+          = label
+    %p
+      = "#{t('addmusic.acquisitiondate')}:"
+      = @possession.acquisition_date
+    %p
+      = "#{t('addmusic.rating')}:"
+      = @possession.rating
+    %p
+      = "#{t('addmusic.comments')}:"
+      = @possession.comments
+
+

@@ -24,6 +24,7 @@
     = f.text_field :rating
   %p
     = f.label :comments, t('addmusic.comments')
-    = f.text_area :comments
+    = f.text_area :comments, class: "span10"
   .actions
-    = f.submit submit_text
+    = f.submit class: "btn btn-primary"
+    #{t('or')} #{link_to t("cancel"), :back, class: "btn"}
