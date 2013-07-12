@@ -72,6 +72,19 @@ $(document).ready(function () {
           inputToken: "token-input-input-token"
       };
 
+  default_linear_classes = {
+          tokenList: "token-input-list-facebook",
+          token: "token-input-token-facebook",
+          tokenDelete: "token-input-delete-token-facebook",
+          selectedToken: "token-input-selected-token-facebook",
+          highlightedToken: "token-input-highlighted-token-facebook",
+          dropdown: "token-input-dropdown-facebook",
+          dropdownItem: "token-input-dropdown-item-facebook",
+          dropdownItem2: "token-input-dropdown-item2-facebook",
+          selectedDropdownItem: "token-input-selected-dropdown-item-facebook",
+          inputToken: "token-input-input-token-facebook"
+      };
+
 
   /* 
     Work === Work === Work === Work === Work === Work === Work === Work === Work === Work
@@ -185,14 +198,14 @@ $(document).ready(function () {
     Label === Label === Label === Label === Label === Label === Label
   */
   $('input.labels_lookup').tokenInput("/labels/lookup.json", {
-     classes: default_classes
+     classes: default_linear_classes
   });
   
   /*
     UserTag === UserTag === UserTag === UserTag === UserTag === UserTag === UserTag
   */
   $('input.user_tag_lookup').tokenInput("/user_tags/lookup.json", {
-     classes: default_classes
+     classes: default_linear_classes
   });
 
 });

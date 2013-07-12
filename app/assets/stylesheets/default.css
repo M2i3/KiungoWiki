@@ -49,18 +49,18 @@ span.letter:after {
 }
 
 
-.token-input-list {
+.token-input-list, .token-input-list-facebook {
   width: 540px !important;
 }
 
 /* fix for having the jquery.token dropdown visible even in a modal box*/ 
-.token-input-dropdown { 
+.token-input-dropdown, .token-input-dropdown-facebook { 
   z-index: 9999 !important; 
 }
 
 
 /* getting the auto-complete not to display any visual cue of the box itself*/ 
-li.token-input-input-token input {
+li.token-input-input-token input, li.token-input-input-token-facebook input {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
