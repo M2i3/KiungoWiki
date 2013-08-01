@@ -213,6 +213,7 @@ class Recording
   before_save do |doc|
     doc.missing_tags = doc.tags.length == 0
     doc.missing_supplementary_sections = doc.supplementary_sections.length == 0
+    true
   end
   
 end

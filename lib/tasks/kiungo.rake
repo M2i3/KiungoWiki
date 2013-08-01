@@ -48,7 +48,9 @@ namespace :kiungo do
                     :media_type=>rawSupport.media_type,
                     :reference_code=>rawSupport.reference_code,
                     :number_of_recordings=>rawSupport.number_of_pieces,
-                    :origalbumid=>rawSupport.support_id
+                    :origalbumid=>rawSupport.support_id,
+                    :alpha_ordering=>rawSupport.alpha_ordering,
+                    :numerical_ordering=>rawSupport.temporal_ordering
                    }
           unless ["0","",nil].include?(rawSupport.notes)
             params[:supplementary_sections]=[SupplementarySection.new({:title=>"Notes:",:content=>rawSupport.notes})]

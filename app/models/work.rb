@@ -202,6 +202,7 @@ class Work
   before_save do |doc|
     doc.missing_tags = doc.tags.length == 0
     doc.missing_supplementary_sections = doc.supplementary_sections.length == 0
+    true
   end
   
   #Work.all.group_by {|a| a.title_first_letter.upcase }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil

@@ -240,6 +240,7 @@ class Artist
   end
   before_save do |doc|
     doc.missing_supplementary_sections = doc.supplementary_sections.length == 0
+    true
   end
   
 end
