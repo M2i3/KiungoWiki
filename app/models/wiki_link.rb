@@ -1,8 +1,8 @@
 class  WikiLink
   include Mongoid::Document
 
-  field :reference_text, :default=>""
-  embedded_in :linkable, :polymorphic => true
+  field :reference_text, default: ""
+  embedded_in :linkable, polymorphic: true
 
   def reference_text=(value)
     self[:reference_text] = value

@@ -15,6 +15,8 @@ module NavigationHelpers
       possessions_path
     when /new possession/
       new_possession_path
+    when /see works without artists/
+      without_artist_works_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
