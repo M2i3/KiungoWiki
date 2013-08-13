@@ -19,6 +19,12 @@ module NavigationHelpers
       without_artist_works_path
     when /see works without recordings/
       without_recordings_works_path
+    when /see works without lyrics/
+      without_lyrics_works_path
+    when /see works without tags/
+      without_tags_works_path
+    when /see works without supplementary sections/
+      without_supplementary_sections_works_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

@@ -16,3 +16,21 @@ Feature: Resources missing data
     Then I should see the work without a recording
     And I should not see the work without a recording
     
+  Scenario: Can see which works have no lyrics
+    Given works with and without lyrics
+    When I go to see works without lyrics
+    Then I should see the work without lyrics
+    And I should not see the work without lyrics
+    
+  Scenario: Can see which works have no tags
+    Given works with and without tags
+    When I go to see works without tags
+    Then I should see the work without tags
+    And I should not see the work without tags
+    
+  Scenario: Can see which works have no supplementary sections
+    Given works with and without supplementary sections
+    When I go to see works without supplementary sections
+    Then I should see the work without supplementary sections
+    And I should not see the work without supplementary sections
+    
