@@ -1,15 +1,22 @@
 .page-header
   = title(Release.model_name.human.pluralize)
 
-.row
-  .span11
-    = alpha_release_links
+- unless params[:q]
+  .row
+    .span12
+      = alpha_release_links
+- else			
+  .row
+    .span12
+      = t("search_question")
+      = link_to t("new"), new_release_path(q: params[:q]), class: "btn"
 
 = paginate @releases
 = render partial: "search_result", object: @releases
 = paginate @releases
 
-.row
-  .span11
-    = alpha_release_links
+- unless params[:q]
+  .row
+    .span12
+      = alpha_release_links
 
