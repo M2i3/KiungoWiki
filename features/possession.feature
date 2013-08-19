@@ -13,7 +13,7 @@ Feature: Possessions
     Then I should see "Already in My Music"
     And the release should be in my possession
   
-  @javascript  
+  @javascript @wip
   Scenario: A user can label their possessions
     Given a user who is logged in and looking at a release
     When I add this release to my collection
@@ -31,7 +31,7 @@ Feature: Possessions
     And I remove a random possession
     Then it should not be shown in My Music
   
-  @javascript  
+  @javascript @wip 
   Scenario: A user can add a possession through the My Music section
     Given a release exists
     And a user who is logged in

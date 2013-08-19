@@ -1,15 +1,21 @@
 .page-header
   = title(Recording.model_name.human.pluralize)
 
-.row
-  .span11
-    = alpha_recording_links
+- unless params[:q]
+  .row
+    .span11
+      = alpha_recording_links
+- else			
+  .row
+    .span12
+      = t("search_question")
+      = link_to t("new"), new_recording_path(q: params[:q]), class: "btn"
 
 = paginate @recordings
 = render partial: "search_result", object: @recordings
 = paginate @recordings
 
-.row
-  .span11
-    = alpha_recording_links
-
+- unless params[:q]
+  .row
+    .span11
+      = alpha_recording_links
