@@ -51,7 +51,7 @@ Then(/^I should see the work without tags$/) do
 end
 
 Then(/^I should not see the work without tags$/) do
-  page.should have_content @with_tags.title
+  page.should_not have_content @with_tags.title
 end
 
 Given(/^works with and without supplementary sections$/) do
@@ -64,5 +64,61 @@ Then(/^I should see the work without supplementary sections$/) do
 end
 
 Then(/^I should not see the work without supplementary sections$/) do
-  page.should have_content @with_sections.title
+  page.should_not have_content @with_sections.title
+end
+
+Given(/^recordings with and without artists$/) do
+  @without_artist = FactoryGirl.create(:recording, title: "Without an Artist")
+  recording_artist_link = RecordingArtistWikiLink.new
+  recording_artist_link.referenced = FactoryGirl.create(:artist)
+  @with_artist = FactoryGirl.create(:recording, artist_wiki_links:[recording_artist_link], title: "With an artist")
+end
+
+Then(/^I should see the recording without artists$/) do
+  page.should have_content @without_artist.title
+end
+
+Then(/^I should not see the recording without artists$/) do
+  page.should_not have_content @with_artist.title
+end
+
+Given(/^recordings with and without releases$/) do
+  @without_release = FactoryGirl.create(:recording, title: "Without a release")
+  recording_release_link = RecordingReleaseWikiLink.new
+  recording_release_link.referenced = FactoryGirl.create(:release)
+  @with_release = FactoryGirl.create(:recording, release_wiki_links:[recording_release_link], title: "With a release")
+end
+
+Then(/^I should see the recording without releases$/) do
+  page.should have_content @without_release.title
+end
+
+Then(/^I should not see the recording without releases$/) do
+  page.should_not have_content @with_release.title
+end
+
+Given(/^recordings with and without tags$/) do
+  @without_tags = FactoryGirl.create(:recording, title: "Without tags", missing_tags: true)
+  @with_tags = FactoryGirl.create(:recording, title: "With tags", missing_tags: false)
+end
+
+Then(/^I should see the recording without tags$/) do
+  page.should have_content @without_tags.title
+end
+
+Then(/^I should not see the recording without tags$/) do
+  page.should_not have_content @with_tags.title
+end
+
+Given(/^recordings with and without supplementary sections$/) do
+  @without_sections = FactoryGirl.create(:recording, title: "Without tags", missing_supplementary_sections: true)
+  @with_sections = FactoryGirl.create(:recording, title: "With tags", missing_supplementary_sections: false)
+end
+
+Then(/^I should see the recording without supplementary sections$/) do
+  page.should have_content @without_sections.title
+end
+
+Then(/^I should not see the recording without supplementary sections$/) do
+  page.should_not have_content @without_sections.title
 end

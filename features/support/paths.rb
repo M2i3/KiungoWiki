@@ -25,6 +25,14 @@ module NavigationHelpers
       without_tags_works_path
     when /see works without supplementary sections/
       without_supplementary_sections_works_path
+    when /see recordings without artists/
+      without_artist_recordings_path
+    when /see recordings without releases/
+      without_releases_recordings_path
+    when /see recordings without tags/
+      without_tags_recordings_path
+    when /see recordings without supplementary sections/
+      without_supplementary_sections_recordings_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
