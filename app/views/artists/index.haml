@@ -1,15 +1,21 @@
 .page-header
   = title(Artist.model_name.human.pluralize)
 
-.row
-  .span11
-    = alpha_artist_links
+- unless params[:q]
+  .row
+    .span12
+      = alpha_artist_links
+- else			
+  .row
+    .span12
+      = t("search_question")
+      = link_to t("new"), new_artist_path(q: params[:q]), class: "btn"
 
 = paginate @artists
 = render partial: "search_result", object: @artists
 = paginate @artists
 
-.row
-  .span11
-    = alpha_artist_links
-
+- unless params[:q]
+  .row
+    .span12
+      = alpha_artist_links
