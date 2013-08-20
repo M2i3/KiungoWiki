@@ -30,7 +30,7 @@ end
 When(/^I fill in a few labels$/) do
   label = "test"
   fill_in "token-input-labels", with: label
-  select_token label
+  select_fb_token label
   find('a#confirmaddmusic').click
 end
 
@@ -46,7 +46,7 @@ When(/^I fill in possession info and submit$/) do
   select_token @release
   @label = "test"
   fill_in "token-input-possession_labels_text", with: @label
-  select_token @label
+  select_fb_token @label
   fill_in "Comments", with: "This album rocks!"
 end
 

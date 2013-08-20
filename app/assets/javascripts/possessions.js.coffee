@@ -5,7 +5,7 @@ $ ->
     haveText = $.trim($('span#havemusic').text())
     $releaseLink = $('a#addmusic')
     labels = []
-    $('li.token-input-token p').each ->
+    $('li.token-input-token-facebook p').each ->
       labels.push $(this).text()
     if $.trim($releaseLink.text()) != haveText
       jqxhr = $.post '/possessions.json',
