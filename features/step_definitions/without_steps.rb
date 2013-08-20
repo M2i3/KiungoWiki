@@ -111,8 +111,8 @@ Then(/^I should not see the recording without tags$/) do
 end
 
 Given(/^recordings with and without supplementary sections$/) do
-  @without_sections = FactoryGirl.create(:recording, title: "Without tags", missing_supplementary_sections: true)
-  @with_sections = FactoryGirl.create(:recording, title: "With tags", missing_supplementary_sections: false)
+  @without_sections = FactoryGirl.create(:recording, work_wiki_link_text: "Missing Supplementary Section")
+  @with_sections = FactoryGirl.create(:recording, work_wiki_link_text: "Has Supplementary Section", supplementary_sections: [{title: "A section", content:"Its content"}])
 end
 
 Then(/^I should see the recording without supplementary sections$/) do
@@ -120,5 +120,5 @@ Then(/^I should see the recording without supplementary sections$/) do
 end
 
 Then(/^I should not see the recording without supplementary sections$/) do
-  page.should_not have_content @without_sections.title
+  page.should_not have_content @with_sections.title
 end
