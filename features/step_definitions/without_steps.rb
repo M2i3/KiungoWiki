@@ -98,8 +98,10 @@ Then(/^I should not see the recording without releases$/) do
 end
 
 Given(/^recordings with and without tags$/) do
-  @without_tags = FactoryGirl.create(:recording, title: "Without tags", missing_tags: true)
-  @with_tags = FactoryGirl.create(:recording, title: "With tags", missing_tags: false)
+  @without_tags = FactoryGirl.create(:recording, work_wiki_link_text: "Without tags")
+  @with_tags = FactoryGirl.create(:recording, work_wiki_link_text: "With tags")
+  @with_tags.tags.build(size: 3, name: "Hello World")
+  @with_tags.save!
 end
 
 Then(/^I should see the recording without tags$/) do
