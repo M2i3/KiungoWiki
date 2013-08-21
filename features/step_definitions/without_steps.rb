@@ -55,8 +55,8 @@ Then(/^I should not see the work without tags$/) do
 end
 
 Given(/^works with and without supplementary sections$/) do
-  @without_sections = FactoryGirl.create(:work, title: "Without tags", missing_supplementary_sections: true)
-  @with_sections = FactoryGirl.create(:work, title: "With tags", missing_supplementary_sections: false)
+  @without_sections = FactoryGirl.create(:work, title: "Without supplementary sections")
+  @with_sections = FactoryGirl.create(:work, title: "With supplementary sections", supplementary_sections: [{title: "A section", content:"Its content"}])
 end
 
 Then(/^I should see the work without supplementary sections$/) do
