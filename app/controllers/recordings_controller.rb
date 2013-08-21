@@ -14,11 +14,10 @@ class RecordingsController < ApplicationController
   end
   
   def without_artist
-    @recordings = Recording.where("artist_wiki_links.artist_id" => nil).page(params[:page]).all
+    @recordings = Recording.where("typeof this.artist_wiki_links == 'undefined' || this.artist_wiki_links.length == 0").page(params[:page]).all
   end
   
   def without_releases
-#    @recordings =Recording.where("release_wiki_link.size" => 0).page(params[:page]).all
     @recordings = Recording.where("typeof this.release_wiki_links == 'undefined' || this.release_wiki_links.length == 0").page(params[:page]).all
   end
   

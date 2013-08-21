@@ -68,10 +68,9 @@ Then(/^I should not see the work without supplementary sections$/) do
 end
 
 Given(/^recordings with and without artists$/) do
-  @without_artist = FactoryGirl.create(:recording, title: "Without an Artist")
-  recording_artist_link = RecordingArtistWikiLink.new
-  recording_artist_link.referenced = FactoryGirl.create(:artist)
-  @with_artist = FactoryGirl.create(:recording, artist_wiki_links:[recording_artist_link], title: "With an artist")
+  @without_artist = FactoryGirl.create(:recording, work_wiki_link_text: "Without an Artist")
+  recording_artist_link = RecordingArtistWikiLink.new(reference_text: "oid:"+FactoryGirl.create(:artist).id.to_s)
+  @with_artist = FactoryGirl.create(:recording, artist_wiki_links:[recording_artist_link], work_wiki_link_text: "With an artist")
 end
 
 Then(/^I should see the recording without artists$/) do
