@@ -83,10 +83,9 @@ Then(/^I should not see the recording without artists$/) do
 end
 
 Given(/^recordings with and without releases$/) do
-  @without_release = FactoryGirl.create(:recording, title: "Without a release")
-  recording_release_link = RecordingReleaseWikiLink.new
-  recording_release_link.referenced = FactoryGirl.create(:release)
-  @with_release = FactoryGirl.create(:recording, release_wiki_links:[recording_release_link], title: "With a release")
+  @without_release = FactoryGirl.create(:recording, work_wiki_link_text: "Without a release")
+  recording_release_link = RecordingReleaseWikiLink.new(reference_text: "oid:"+FactoryGirl.create(:release).id.to_s)
+  @with_release = FactoryGirl.create(:recording, release_wiki_links:[recording_release_link], work_wiki_link_text: "With a release")
 end
 
 Then(/^I should see the recording without releases$/) do
