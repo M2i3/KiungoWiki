@@ -42,8 +42,10 @@ Then(/^I should not see the work without lyrics$/) do
 end
 
 Given(/^works with and without tags$/) do
-  @without_tags = FactoryGirl.create(:work, title: "Without tags", missing_tags: true)
-  @with_tags = FactoryGirl.create(:work, title: "With tags", missing_tags: false)
+  @without_tags = FactoryGirl.create(:work, title: "Without tags")
+  @with_tags = FactoryGirl.create(:work, title: "With tags")
+  @with_tags.tags.build(size: 3, name: "Hello World")
+  @with_tags.save!
 end
 
 Then(/^I should see the work without tags$/) do
