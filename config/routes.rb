@@ -95,6 +95,10 @@ KiungoWiki::Application.routes.draw do
       get 'search'
     end
   end
+  
+  namespace :admin do
+    resources :users
+  end
 
   match 'search' => 'search#index'
   match 'site_plan' => "home#site_plan"

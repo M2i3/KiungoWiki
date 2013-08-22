@@ -20,3 +20,15 @@ Then(/^I should see a delete link$/) do
     page.should have_link I18n.t('delete')
   end
 end
+
+Given(/^there are a few users$/) do
+  @users = FactoryGirl.create_list(:user, 5) 
+end
+
+Then(/^I should see the users of the wiki including myself$/) do
+  @users.each {|user|
+    page.should have_content user.nickname
+    page.should have_content user.email
+    page.should have_content user.groups.join(", ")
+  }
+end

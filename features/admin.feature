@@ -9,3 +9,14 @@ Feature: Administrative User
     And an artist, recording, release, and work
     When I visit each of these
     Then I should see a delete link
+  
+  Scenario: Only a super admin can see any of the admin pages
+    Given a user who is logged in
+    When I go on the users administration page
+    Then I should see a Not Authorized error
+    
+  Scenario: A super-admin can see all the users registered on the wiki
+    Given an admin is logged in
+    And there are a few users
+    When I am on the users administration page
+    Then I should see the users of the wiki including myself

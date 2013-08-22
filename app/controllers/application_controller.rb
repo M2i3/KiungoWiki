@@ -2,6 +2,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_language  
+  
+  rescue_from CanCan::AccessDenied, with: :not_authorized_error
+
+  protected
+  def not_authorized_error
+    render "common/not_authorized"
+  end
 
   private
   def set_language

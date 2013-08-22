@@ -33,6 +33,8 @@ module NavigationHelpers
       without_tags_recordings_path
     when /see recordings without supplementary sections/
       without_supplementary_sections_recordings_path
+    when /users administration/
+      admin_users_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
