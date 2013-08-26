@@ -42,13 +42,13 @@ describe RecordingsController do
     end
     describe "GET without_arist" do
       it "should handle pagination and show works without artists" do
-        @where_mock.with("artist_wiki_links.artist_id" => nil).and_return Recording
+        @where_mock.with("typeof this.artist_wiki_links == 'undefined' || this.artist_wiki_links.length == 0").and_return Recording
         get :without_artist, page:@page
       end
     end
     describe "GET without_releases" do
       it "should handle pagination and show works without lyrics" do
-        @where_mock.with("release_wiki_link.release_id" => nil).and_return Recording
+        @where_mock.with("typeof this.release_wiki_links == 'undefined' || this.release_wiki_links.length == 0").and_return Recording
         get :without_releases, page:@page
       end
     end

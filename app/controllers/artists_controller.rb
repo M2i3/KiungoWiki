@@ -3,7 +3,8 @@ class ArtistsController < ApplicationController
   # only registered users can edit this wiki
   before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_work, :without_recordings, :without_releases, :without_supplementary_sections]
   authorize_resource
-
+  skip_authorize_resource only: [:without_work, :without_recordings, :without_releases, :without_supplementary_sections]
+  
   def index
     @artists = build_filter_from_params(params, Artist.all.order_by(cache_normalized_name:1))
 
@@ -15,15 +16,15 @@ class ArtistsController < ApplicationController
   end
 
   def without_work
-    @artists = Artist.where("work_wiki_links.work_id" => nil).page(params[:page]).all
+    @artists = Artist.where("typeof this.work_wiki_links == 'undefined' || this.work_wiki_links.length == 0").page(params[:page]).all
   end
   
   def without_recordings
-    @artists = Artist.where("recording_wiki_links.recording_id" => nil).page(params[:page]).all
+    @artists = Artist.where("typeof this.recording_wiki_links == 'undefined' || this.recording_wiki_links.length == 0").page(params[:page]).all
   end
   
   def without_releases
-    @artists = Artist.where("release_wiki_link.release_id" => nil).page(params[:page]).all
+    @artists = Artist.where("typeof this.release_wiki_link == 'undefined' || this.release_wiki_link.length == 0").page(params[:page]).all
   end
   
   def without_supplementary_sections
