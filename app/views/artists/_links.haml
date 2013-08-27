@@ -4,4 +4,7 @@
   %li= link_to t("discuss"), "#"
   %li= link_to t("history"), "#"
   - if can? :destroy, @artist
-    %li= link_to t("delete"), @artist, method: :delete, confirm: t('messages.confirm')
+    %li
+      = t("administration")
+      %ul
+        %li= link_to t("delete"), @artist, method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"

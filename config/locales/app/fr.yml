@@ -186,6 +186,7 @@ fr:
   change: Changement
   credits: Crédits
   tag: tag
+  administration: Gestion
 
   actions:
     new_portal_article: Nouvel article

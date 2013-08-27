@@ -4,4 +4,7 @@
   %li= link_to t("discuss"), "#"
   %li= link_to t("history"), "#"
   - if can? :destroy, @work
-    %li= link_to t("delete"), @work, method: :delete, confirm: t('messages.confirm')
+    %li
+      = t("administration")
+      %ul
+        %li= link_to t("delete"), @work, method: :delete, confirm: t('messages.confirm')

@@ -20,3 +20,17 @@ Then(/^I should see a delete link$/) do
     page.should have_link I18n.t('delete')
   end
 end
+
+Then(/^I should see an administration section$/) do
+  @places_to_vist.each do |place|
+    visit place
+    page.should have_content I18n.t("administration")
+  end
+end
+
+Then(/^I should not see an administration section$/) do
+  @places_to_vist.each do |place|
+    visit place
+    page.should_not have_content I18n.t("administration")
+  end
+end
