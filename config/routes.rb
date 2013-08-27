@@ -8,6 +8,8 @@ KiungoWiki::Application.routes.draw do
 
   resources :portal_articles
 
+  resources :users, only: :index
+
   devise_for :users
 
   resources :labels, only: :index do
