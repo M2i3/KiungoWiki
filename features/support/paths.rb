@@ -35,6 +35,20 @@ module NavigationHelpers
       without_supplementary_sections_recordings_path
     when /users administration/
       admin_users_path
+    when /see artists without work/
+      without_work_artists_path
+    when /see artists without releases/
+      without_releases_artists_path
+    when /see artists without recordings/
+      without_recordings_artists_path
+    when /see artists without supplementary sections/
+      without_supplementary_sections_artists_path
+    when /see releases without artists/
+      without_artist_releases_path
+    when /see releases without recordings/
+      without_recordings_releases_path
+    when /see releases without supplementary sections/
+      without_supplementary_sections_releases_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

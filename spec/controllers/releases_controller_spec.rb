@@ -186,7 +186,7 @@ describe ReleasesController do
     end
     describe "GET without_artist" do
       it "should handle pagination and show releases without artists" do
-        @where_mock.with("artist_wiki_links.artist_id" => nil).and_return Release
+        @where_mock.with("typeof this.artist_wiki_links == 'undefined' || this.artist_wiki_links.length == 0").and_return Release
         get :without_artist, page:@page
       end
     end
@@ -198,7 +198,7 @@ describe ReleasesController do
     end
     describe "GET without_recordings" do
       it "should handle pagination and show releases without recordings" do
-        @where_mock.with("recording_wiki_links.recording_id" => nil).and_return Release
+        @where_mock.with("typeof this.recording_wiki_links == 'undefined' || this.recording_wiki_links.length == 0").and_return Release
         get :without_recordings, page:@page
       end
     end

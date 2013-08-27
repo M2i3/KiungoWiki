@@ -20,3 +20,22 @@ Feature: Administrative User
     And there are a few users
     When I am on the users administration page
     Then I should see the users of the wiki including myself
+    
+  Scenario: An admin can see the administration section
+    Given an admin is logged in
+    And an artist, recording, release, and work
+    When I visit each of these
+    Then I should see an administration section
+    
+  Scenario: An admin can see the administration section
+    Given an admin is logged in
+    And an artist, recording, release, and work
+    When I visit each of these
+    Then I should see an administration section
+    
+  Scenario: A user cannot see the administration section
+    Given a user who is logged in
+    And an artist, recording, release, and work
+    When I visit each of these
+    Then I should not see an administration section
+

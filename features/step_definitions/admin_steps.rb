@@ -31,4 +31,18 @@ Then(/^I should see the users of the wiki including myself$/) do
     page.should have_content user.email
     page.should have_content user.groups.join(", ")
   }
+
+Then(/^I should see an administration section$/) do
+  @places_to_vist.each do |place|
+    visit place
+    page.should have_content I18n.t("administration")
+  end
+end
+
+Then(/^I should not see an administration section$/) do
+  @places_to_vist.each do |place|
+    visit place
+    page.should_not have_content I18n.t("administration")
+  end
+
 end
