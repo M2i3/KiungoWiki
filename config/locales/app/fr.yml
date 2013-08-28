@@ -1,54 +1,53 @@
-# Étiquettes en français pour KiungoWiki
-
+---
 fr:
   headers:
-    home_index: "Accueil"
-    global_search_result: "Résultat de la recherche pour '%{q}'"
-    works_portal: "Oeuvres (portail)"
-    works_index: "Oeuvres"
-    works_search_result: "Oeuvres pour '%{q}'"
-    works_search: "Recherche dans les oeuvres"
-    works_recent_changes: "Oeuvres modifiées récemments"
-    works_alphabetic_index: "Oeuvres commençant par %{heading}"
-    works_all_index: "Toutes les oeuvres"
-    artists_portal: "Artistes (portail)"
-    artists_index: "Artistes"
-    artists_search_result: "Artistes pour '%{q}'"
-    artists_search: "Recherche dans les artistes"
-    artists_recent_changes: "Artistes modifiés récemments"
-    artists_alphabetic_index: "Artistes commençant par %{heading}"
-    artists_all_index: "Tous les artistes"
-    releases_portal: "Parutions (portail)"
-    releases_index: "Parutions"
-    releases_search_result: "Parutions pour '%{q}'"
-    releases_search: "Recherche dans les parutions"
-    releases_recent_changes: "Parutions modifiés récemments"
-    releases_alphabetic_index: "Parutions commençant par %{heading}"
-    releases_all_index: "Toutes les parutions"
-    recordings_portal: "Enregistrements (portail)"
-    recordings_index: "Enregistrements"
-    recordings_search_result: "Enregistrements pour '%{q}'"
-    recordings_search: "Recherche dans les enregistrements"
-    recordings_recent_changes: "Enregistrements modifiés récemments"
-    recordings_alphabetic_index: "Enregistrements commençant par %{heading}"
-    recordings_all_index: "Tous les enregistrements"
-    portal_article_release: "Parution du mois: %{featured}"
-    portal_article_artist: "Artiste du mois: %{featured}"
-    portal_article_recording: "Enregistrement du mois: %{featured}"
-    portal_article_work: "Oeuvre du mois: %{featured}"
-    portal_article_category: "Catégorie du mois: %{featured}"
+    home_index: Accueil
+    global_search_result: Résultat de la recherche pour '%{q}'
+    works_portal: Oeuvres (portail)
+    works_index: Oeuvres
+    works_search_result: Oeuvres pour '%{q}'
+    works_search: Recherche dans les oeuvres
+    works_recent_changes: Oeuvres modifiées récemments
+    works_alphabetic_index: Oeuvres commençant par %{heading}
+    works_all_index: Toutes les oeuvres
+    artists_portal: Artistes (portail)
+    artists_index: Artistes
+    artists_search_result: Artistes pour '%{q}'
+    artists_search: Recherche dans les artistes
+    artists_recent_changes: Artistes modifiés récemments
+    artists_alphabetic_index: Artistes commençant par %{heading}
+    artists_all_index: Tous les artistes
+    releases_portal: Parutions (portail)
+    releases_index: Parutions
+    releases_search_result: Parutions pour '%{q}'
+    releases_search: Recherche dans les parutions
+    releases_recent_changes: Parutions modifiés récemments
+    releases_alphabetic_index: Parutions commençant par %{heading}
+    releases_all_index: Toutes les parutions
+    recordings_portal: Enregistrements (portail)
+    recordings_index: Enregistrements
+    recordings_search_result: Enregistrements pour '%{q}'
+    recordings_search: Recherche dans les enregistrements
+    recordings_recent_changes: Enregistrements modifiés récemments
+    recordings_alphabetic_index: Enregistrements commençant par %{heading}
+    recordings_all_index: Tous les enregistrements
+    portal_article_release: 'Parution du mois: %{featured}'
+    portal_article_artist: 'Artiste du mois: %{featured}'
+    portal_article_recording: 'Enregistrement du mois: %{featured}'
+    portal_article_work: 'Oeuvre du mois: %{featured}'
+    portal_article_category: 'Catégorie du mois: %{featured}'
     portal_articles: Articles des portails
     site_plan: Plan du site
     recent_changes: Changements récents
-    terms_and_conditions: "Conditions d'utilisation"
-    contact_us: "Nous contacter"
-    about_us: "À propos de KiungoWiki"
-    my_profile: "Mon profil"
-    sign_out: "Se déconnecter"
-    sign_in: "Se connecter"
-    sign_up_sign_in: "Créer un compte ou se connecter"
-    sign_up: "Créer un compte"
-    categories_index: "Catégories"
+    terms_and_conditions: Conditions d'utilisation
+    contact_us: Nous contacter
+    about_us: À propos de KiungoWiki
+    my_profile: Mon profil
+    sign_out: Se déconnecter
+    sign_in: Se connecter
+    sign_up_sign_in: Créer un compte ou se connecter
+    sign_up: Créer un compte
+    categories_index: Catégories
     possessions_index: Ma musique
     possessions_all_music: Toute ma musique
     modify_category: Modifier la catégorie
@@ -57,7 +56,7 @@ fr:
     welcome_banner: Bienvenue sur KiungoWiki
     various_pages: Pages diverses
     modify_article: Modifier l'article
-    create_article: "Créer un article"
+    create_article: Créer un article
     supplement_section: Section Supplémentaire
     new_section: Nouvelle section
     new_recording: Nouvel enregistrement
@@ -67,38 +66,45 @@ fr:
     new_work: Nouvelle Oeuvre
     new_user_tag: Nouveau badge utilisateur
     modify_user_tag: Modifier un badge utilisateur
-    not_authorized: Vous n'êtes pas autorisé à consulter cette page
-
+    user_tag_index: 
   messages:
     info: Pour votre information.
-    error: Oops! une erreur est survenue!
-    alert: Un instant! Je dois vous avertir!
-    notice: Félicitation vous avez réussit!
-    work_new_without_query: Veuillez vous assurer que l'oeuvre que vous désirez créer n'existe pas déjà dans le wiki.
-    recording_new_without_query: Veuillez vous assurer que l'enregistrement que vous désirez créer n'existe pas déjà dans le wiki.
-    artist_new_without_query: Veuillez vous assurer que l'artiste que vous désirez créer n'existe pas déjà dans le wiki.
-    release_new_without_query: Veuillez vous assurer que la parution que vous désirez créer n'existe pas déjà dans le wiki.
-    confirm: Are you sure?
-    artist_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer le nouvel artiste
+    error: Oops ! Une erreur est survenue !
+    alert: Un instant ! Je dois vous avertir !
+    notice: Félicitation vous avez réussi !
+    work_new_without_query: Veuillez vous assurer que l'oeuvre que vous désirez créer
+      n'existe pas déjà dans le wiki.
+    recording_new_without_query: Veuillez vous assurer que l'enregistrement que vous
+      désirez créer n'existe pas déjà dans le wiki.
+    artist_new_without_query: Veuillez vous assurer que l'artiste que vous désirez
+      créer n'existe pas déjà dans le wiki.
+    release_new_without_query: Veuillez vous assurer que la parution que vous désirez
+      créer n'existe pas déjà dans le wiki.
+    confirm: Êtes-vous certain ?
+    artist_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer
+      le nouvel artiste
     artist_no_work: Artistes sans oeuvres
     artist_no_recordings: Artistes sans enregistrements
     artist_no_releases: Artistes sans parutions
-    category_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer la catégorie
-    article_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'article
-    recording_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'enregistrement
+    category_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer
+      la catégorie
+    article_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer
+      l'article
+    recording_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer
+      l'enregistrement
     recording_without_artist: Enregistrements sans artistes
     recording_without_release: Enregistrements sans parutions
-    release_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer la parution
+    release_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer
+      la parution
     release_without_artist: Parution sans artiste
     release_without_recording: Parution sans enregistrement
-    work_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'oeuvre
+    work_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer
+      l'oeuvre
     work_no_artists: Oeuvres sans artiste
     work_no_recordings: Oeuvres sans enregistrement
-    not_authorized: Nous sommes désolé mais vous n'êtes pas autorisé à consulter à cette page.
-    admin_user_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer utilisateur
-      
   portal:
-    artist_explanation: Les artistes sont ceux qui créent les oeuvres et/ou les interprètent dans les enregistrements.
+    artist_explanation: Les artistes sont ceux qui créent les oeuvres et/ou les interprètent
+      dans les enregistrements.
     continue_reading: continuer la lecture
     new_artist_text: Écrire la fiche d'un(e) artiste
     recent_changes: consulter la liste complète des modifications récentes
@@ -111,86 +117,96 @@ fr:
     without_recording: Sans enregistrement
     without_releases: Sans parution
     without_additional_sec: Sans section(s) complémentaire(s)
-    complete_artist_alphabet: consulter la liste complète des artistes commençant par
+    complete_artist_alphabet: consulter la liste complète des artistes commençant
+      par
     all_artists: tous les artistes
     alphabetical: Par ordre alphabétique
     by_tag: Par tag/catégorie
-    recording_explanation: Les enregistrements sont la réalisation sonore d'une oeuvre qui forment les éléments d'un release (ex. vinyle 33 tours, CD, etc) ou qui existent sur d'autres media (fichiers mp3, internet, etc).
+    recording_explanation: Les enregistrements sont la réalisation sonore d'une oeuvre
+      qui forment les éléments d'une parution (ex. vinyle 33 tours, CD, etc) ou qui
+      existent sur d'autres media (fichiers mp3, internet, etc).
     see_recording: Voir l'enregistrement
-    new_recording_text: Écrire la fiche d'un enregistrement
+    new_recording_text: Ajouter la fiche d'un enregistrement
     revise_recording: Réviser la fiche d'un enregistrement modifiée récemment
-    recent_changes_recording: consulter la liste complète des enregistrements modifiés récemment
+    recent_changes_recording: consulter la liste complète des enregistrements modifiés
+      récemment
     without_artist: Sans artistes
     without_categories: Sans catégorie
     improve_recording: Améliorer la fiche d'un enregistrement
-    complete_recording_alphabet: consulter la liste complète des enregistrements commençant par
+    complete_recording_alphabet: consulter la liste complète des enregistrements commençant
+      par
     all_recordings: tous les enregistrements
-    release_explanation: Les parutions regroupent plusieurs enregistrements interprétés par un ou plusieurs artistes
-    new_release_text: Écrire la fiche d'une parution
+    release_explanation: Les parutions regroupent plusieurs enregistrements interprétés
+      par un ou plusieurs artistes
+    new_release_text: Ajouter la fiche d'une parution
     revise_release: Réviser la fiche d'une parution modifiée récemment
     recent_changes_release: consulter la liste complète des modifications récentes
     see_release: Voir la parution
     improve_release: Améliorer la fiche d'une parution
-    work_explanation: Les oeuvres constituent le matériel brut sur lequel sont construits les enregistrements et auxquels les interprètes prêtent leur voix et émotions
+    work_explanation: Les oeuvres constituent le matériel brut sur lequel sont construits
+      les enregistrements et auxquels les interprètes prêtent leur voix et leurs émotions
     see_work: Voir l'oeuvre
     revise_work: Réviser la fiche d'une oeuvre modifiée récemment
-    new_work_text: Écrire la fiche d'une oeuvre
+    new_work_text: Ajouter la fiche d'une oeuvre
     recent_changes_work: consulter la liste complète des oeuvres modifiées récemment
     without_lyrics: Sans paroles
     improve_work: Améliorer la fiche d'une oeuvre
     all_works: toutes les oeuvres
     complete_work_alphabet: consulter la liste complète des oeuvres commençant par
-    
   home:
-    music_reference: La référence en musique qui mets en évidence le <strong>rôle des créateurs et interprêtes</strong>
-    work_link: Un Wiki sur les oeuvres audios ainsi que les <strong>liens entre ces oeuvres</strong> dans le temps et l'espace
-  
+    music_reference: Une référence en musique qui mets en évidence le <strong>rôle
+      des créateurs et interprêtes</strong>
+    work_link: Un Wiki sur les oeuvres audios ainsi que les <strong>liens entre ces
+      oeuvres</strong> dans le temps et l'espace
   rsearch:
-    search_artist_keywords: Une recherche dans les artistes peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants
-    limit_artist_surname: Limite la recherche dans le nom de l'artiste seulement. Par exemple
-    limit_artist_given_name: Limit the search to the given name of the artist only. For example
-    limit_artist_birth_date: Cherche en utilisant la date de naissance de l'artiste. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
-    limit_artist_birth_place: Limite la recherche dans le lieu de naissance de l'artiste seulement. Par exemple
-    limit_artist_death_date: Cherche en utilisant la date de décès de l'artiste. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
-    limit_artist_death_location: Limite la recherche dans le lieu du décès de l'artiste seulement. Par exemple
-    search_recording_keywords: Une recherche dans les enregistrements peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants
-    limit_recording_title: Limite la recherche dans le titre de l'enregistrement seulement. Par exemple
-    limit_recording_date: Cherche en utilisant la date de l'enregistrement. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
-    limit_recording_location: Limite la recherche dans le lieu de l'enregistrement seulement. Par exemple
-    search_release_keywords: Une recherche dans les parutions peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants
-    limit_release_title: Limite la recherche dans le titre de la parution seulement. Par exemple
-    limit_release_date_released: Cherche en utilisant la date de parution de la parution. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
-    limit_release_label: Limite la recherche dans le nom de la parution. Par exemple
+    search_artist_keywords: Une recherche dans les artistes peut prendre plusieurs
+      formes et être raffinée avec les mots-clefs suivants
+    limit_artist_surname: Limite la recherche dans le nom de famille de l'artiste
+      seulement. Par exemple
+    limit_artist_given_name: Limite la recherche dans le prénom de l'artiste seulement.
+      Par exemple
+    limit_artist_birth_date: Cherche en utilisant la date de naissance de l'artiste.
+      La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par
+      exemple
+    limit_artist_birth_place: Limite la recherche dans le lieu de naissance de l'artiste
+      seulement. Par exemple
+    limit_artist_death_date: Cherche en utilisant la date de décès de l'artiste. La
+      date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
+    limit_artist_death_location: Limite la recherche dans le lieu du décès de l'artiste
+      seulement. Par exemple
+    search_recording_keywords: Une recherche dans les enregistrements peut prendre
+      plusieurs formes et être raffinée avec les mots-clefs suivants
+    limit_recording_title: Limite la recherche dans le titre de l'enregistrement seulement.
+      Par exemple
+    limit_recording_date: Limite la recherche dans la date de l'enregistrement seulement.
+      La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par
+      exemple
+    limit_recording_location: Limite la recherche dans le lieu de l'enregistrement
+      seulement. Par exemple
+    search_release_keywords: Une recherche dans les parutions peut prendre plusieurs
+      formes et être raffinée avec les mots-clefs suivants
+    limit_release_title: Limite la recherche dans le titre de la parution seulement.
+      Par exemple
+    limit_release_date_released: Limite la recherhce dans la date de parution de la
+      parution seulement. La date doit être au format "aaaa-mm-jj" et peut être une
+      date partielle. Par exemple
+    limit_release_label: Limite la recherche dans le nom de l'étiquette de la parution.
+      Par exemple
     limit_release_media_type: Limite la recherche dans le type de support. Par exemple
     more_results: plus de résultats
-    search_work_keywords: Une recherche dans les oeuvres peut prendre plusieurs formes et être raffinée avec les mots-clefs suivants
-    limit_work_title: Limite la recherche dans le titre de l'oeuvre seulement. Par exemple
-    limit_work_copyright: "Effectue une recherche sur le copyright de l'oeuvre. Par exemple"
-    limit_work_lyrics: "Effectue la recherche sur les paroles de l'oeuvre. Par exemple"
-    limit_work_date_written: Cherche en utilisant la date d'écriture de l'oeuvre. La date doit être au format "aaaa-mm-jj" et peut être une date partielle. Par exemple
-    limit_work_language: "Cherche en utilisant le code de langue de l'oeuvre. Par exemple"
-      
-  show: Afficher
-  modify: Modifier
-  discuss: Discuter
-  history: Historique
-  new: Créez-le
-  search: Rechercher
-  cancel: Annuler
-  modify_artist: "Modifier l'artiste"
-  birth: Naissance
-  death: Décès
-  search_question: Vous n’avez pas trouvé ce que vous cherchiez ?
-  delete: Supprimer
-  or: ou
-  date: Fait le
-  page: Page
-  author: Auteur
-  change: Changement
-  credits: Crédits
-  tag: tag
-  administration: Gestion
-
+    search_work_keywords: Une recherche dans les oeuvres peut prendre plusieurs formes
+      et être raffinée avec les mots-clefs suivants
+    limit_work_title: Limite la recherche dans le titre de l'oeuvre seulement. Par
+      exemple
+    limit_work_copyright: Effectue une recherche sur le copyright de l'oeuvre. Par
+      exemple
+    limit_work_lyrics: Limite la recherche dans les paroles de l'oeuvre seulement.
+      Par exemple
+    limit_work_date_written: Limite la recherche dans la date d'écriture de l'oeuvre
+      seulement. La date doit être au format "aaaa-mm-jj" et peut être une date partielle.
+      Par exemple
+    limit_work_language: Limite la recherche dans le code de langue de l'oeuvre sewulement.
+      Par exemple
   actions:
     new_portal_article: Nouvel article
     new_artist_portal_article: sur un artiste
@@ -199,65 +215,55 @@ fr:
     new_release_portal_article: sur un release
     new_category_portal_article: sur une catégorie
     new_general_portal_article: article seulement
-
   views:
     created_at: Créé le
     updated_at: Modifié le
     pagination:
-      previous: "&laquo; Pr&eacute;c."
-      next: "Suiv. &raquo;"
-      truncate: "..."
-      last: "Dernier"
-      first: "Premier"
-
+      previous: '&laquo; Pr&eacute;c.'
+      next: Suiv. &raquo;
+      truncate: '...'
+      last: Dernier
+      first: Premier
   addmusic:
-    addtomusic: "Ajouter à ma musique"
-    havemusic: "Déjà dans ma musique"
-    adderror: "Parution non ajoutée, veuillez ressayer de nouveau plus tard"
-    labels: "Étiquettes"
-    acquisitiondate: "Date d'acquisition "
-    rating: "Classement"
-    comments: "Commentaire"
-    release: "Parutions"
-    editpossession: "Éditer cette entrée"
-    nomusic: "Vous n'avez pas de musique dans votre collection en ce moment"
-    nomusiclabel: "Vous n'avez pas de musique pour cette étiquette"
-    newpossession: "Nouvelle entrée"
-
+    addtomusic: Ajouter à ma musique
+    havemusic: Déjà dans ma musique
+    adderror: Parution non ajoutée, veuillez ressayer de nouveau ou vous assurer que
+      vous ne possédez pas déjà cette parution
+    labels: Étiquettes
+    acquisitiondate: Date d'achat
+    rating: Classement
+    comments: Commentaire
+    release: Parutions
+    editpossession: Éditer cette entrée
+    nomusic: Vous n'avez pas de musique dans votre collection en ce moment
+    nomusiclabel: Vous n'avez pas de musique pour cette étiquette
+    newpossession: Nouvelle entrée
   mongoid:
     models:
       release:
         one: Parution
         other: Parutions
-
       artist:
         one: Artiste
         other: Artistes
-
       category:
         one: Catégorie
         other: Catégories
-
       portal_article:
         one: Article
         other: Articles
-
       recording:
         one: Enregistrement
         other: Enregistrements
-
       work:
         one: Oeuvre
         other: Oeuvres
-
       user:
         one: Utilisateur
         other: Utilisateurs
-
       possession:
         one: Possession
-        other: Possessions    
-
+        other: Possessions
     attributes:
       release:
         title: Titre
@@ -268,7 +274,6 @@ fr:
         media_type: Format
         reference_code: Code de référence
         label: Étiquette
-
       artist:
         surname: Nom de famille
         given_name: Prénom
@@ -287,31 +292,26 @@ fr:
         relation: Relation
         nature: Nature
         role: Rôle
-        add_supplementary_section: "Ajout d'une section supplémentaire"
-
+        add_supplementary_section: Ajout d'une section supplémentaire
       change:
         change_type_text:
           created: Creation
           updated: Modification
-
       category:
         category: Catégorie
         category_name: Catégories
-
       portal_article:
         title: Titre
         publish_date: Date de publication
-        publish_date: Date de publication
         featured_wiki_link_text: Wiki link présenté
         content: Contenu
-
       recording:
         title: Titre
         work_name: Oeuvre
         work_title: Titre
         work_wiki_link: Un enregistrement de
-        work_wiki_link_text: "Titre de l'oeuvre"
-        recording_date: "Date d'enregistrement"
+        work_wiki_link_text: Titre de l'oeuvre
+        recording_date: Date d'enregistrement
         recording_location: Lieu
         duration: Durée
         rythm: Rythme
@@ -328,7 +328,6 @@ fr:
         category_wiki_links: Catégories
         category_wiki_links_text: Catégories
         role: Rôle
-
       work:
         work_wiki_links_text: Oeuvres reliées
         work_title: Titre
@@ -341,7 +340,7 @@ fr:
         language_name_french: Français
         language_code: Code de langue
         publisher: Éditeur
-        original_work: Oeuvre original
+        original_work: Oeuvre originale
         lyrics: Paroles
         chords: Accords
         relation: Relation
@@ -349,10 +348,9 @@ fr:
         nature_text:
           undetermined: Indéterminée
           has_a_translated_work: A comme traduction/adaptation
-          has_a_variant_work: A comme variante   
+          has_a_variant_work: A comme variante
           is_translated_from: Est une traduction/adaptation de
           is_variant_from: Est une variante de
-
       user:
         nickname: Alias
         email: Courriel
@@ -360,13 +358,356 @@ fr:
         password_confirmation: Confirmation du mot de passe
         current_password: Mot de passe actuel
         remember_me: Garder ma session active
-
       possession:
         display_title: Titre
-
     errors:
       messages:
         document_not_found: Document introuvable
-
-
-
+  errors:
+    messages:
+      expired: est périmé, veuillez en demander un nouveau
+      not_found: n'a pas été trouvé(e)
+      already_confirmed: est déjà confirmé(e), veuillez essayer de vous connecter
+      not_locked: n'est pas verrouillé(e)'
+      not_saved:
+        one: '1 erreur empêche d''enregistrer ce %{resource}:'
+        other: '%{count} erreurs empêchent d''enregistrer ce %{resource}:'
+      inclusion: n'est pas inclus(e) dans la liste
+      exclusion: n'est pas disponible
+      invalid: n'est pas valide
+      confirmation: ne concorde pas avec la confirmation
+      accepted: doit être accepté(e)
+      empty: doit être rempli(e)
+      blank: doit être rempli(e)
+      too_long: est trop long (pas plus de %{count} caractères)
+      too_short: est trop court (au moins %{count} caractères)
+      wrong_length: ne fait pas la bonne longueur (doit comporter %{count} caractères)
+      not_a_number: n'est pas un nombre
+      not_an_integer: doit être un nombre entier
+      greater_than: doit être supérieur à %{count}
+      greater_than_or_equal_to: doit être supérieur ou égal à %{count}
+      equal_to: doit être égal à %{count}
+      less_than: doit être inférieur à %{count}
+      less_than_or_equal_to: doit être inférieur ou égal à %{count}
+      odd: doit être impair
+      even: doit être pair
+    format: Le %{attribute} %{message}
+    template:
+      header:
+        one: 'Impossible d''enregistrer ce %{model} : 1 erreur'
+        other: 'Impossible d''enregistrer ce %{model} : %{count} erreurs'
+      body: 'Veuillez vérifier les champs suivants : '
+  devise:
+    failure:
+      already_authenticated: Vous êtes déjà connecté.
+      unauthenticated: Vous devez vous connecter ou vous enregistrer pour continuer.
+      unconfirmed: Vous devez confirmer votre compte par courriel.
+      locked: Votre compte est verrouillé.
+      invalid: Adresse de courriel ou mot de passe incorrect.
+      invalid_token: Jeton d'autentification incorrect.
+      timeout: Votre session est périmée, veuillez vous reconnecter pour continuer.
+      inactive: Votre compte n'est pas encore activé.
+    sessions:
+      signed_in: Connecté avec succès.
+      signed_out: Déconnecté avec succès.
+      sign_in: Se connecter
+      login: Connexion
+      login_with: Se connecter avec %{provider}
+    passwords:
+      send_instructions: Dans quelques minutes, vous allez recevoir un courriel vous
+        indiquant comment réinitialiser votre mot de passe.
+      updated: Votre mot de passe a été modifié avec succès. Vous êtes maintenant
+        connecté.
+      updated_not_active: Votre mot de passe a été modifié avec succès.
+      send_paranoid_instructions: Si votre adresse de courriel existe dans notre base
+        de données, vous recevrez un lien vous permettant de récupérer votre mot de
+        passe.
+      edit_header: Modifier votre mot de passe
+      new_password: Nouveau mot de passe
+      confirm_password: Confirmez votre nouveau mot de passe
+      change_password: Modifier mon mot de passe
+      new_header: Vous avez oublié votre mot de passe?
+      send_reset: Envoyez-moi les instructions pour réinitialiser mon mot de passe
+    confirmations:
+      new_header: Renvoyez les instructions pour confirmer votre compte
+      send_instructions: Vous allez recevoir sous quelques minutes un courriel comportant
+        des instructions sur la façon de confirmer votre compte.
+      send_paranoid_instructions: Si votre courriel existe sur notre base de données,
+        vous recevrez sous quelques minutes un message avec des instructions sur la
+        façon de confirmer votre compte.
+      confirmed: Votre compte a été confirmé avec succès. Vous êtes désormais connecté.
+      resend_instructions: Renvoyez les instructions pour confirmer votre compte
+      have_not_received: Vous n'avez pas reçu les instructions pour confirmer votre
+        compte?
+    registrations:
+      signed_up: Bienvenue! Vous vous êtes enregistré avec succès.
+      inactive_signed_up: Vous vous êtes enregistré avec succès. Cependant, nous n'avons
+        pas pu vous connecter car votre compte est %{reason}.
+      updated: Votre compte a été modifié avec succès.
+      destroyed: Au revoir! Votre compte a été annulé avec succès. Nous espérons vous
+        revoir bientôt.
+      reasons:
+        inactive: inactif
+        unconfirmed: non-confirmé
+        locked: verrouillé
+      modify_user: Modifier %{name}
+      close_account: Fermer mon compte
+      member_account: Vous ne désirez plus être membre de KiungoWiki?
+      certain_close: Êtes vous certains?
+      new_header: Créer un compte
+      signed_up_but_inactive: Vous vous êtes enregistré avec succès. Cependant, nous
+        n'avons pas pu vous connecter car votre compte n'a pas encore été activé.
+      signed_up_but_locked: Vous vous êtes enregistré avec succès. Cependant, nous
+        n'avons pas pu vous connecter car votre compte est verrouillé.
+      signed_up_but_unconfirmed: Un message avec un lien de confirmation vous a été
+        envoyé par courriel. Veuillez suivre ce lien pour activer votre compte.
+      update_needs_confirmation: Vous avez modifié votre compte avec succès, mais
+        nous devons vérifier votre nouvelle adresse courriel. Veuillez consulter vos
+        emails et cliquer sur le lien de confirmation pour finalizer votre nouvelle
+        adresse.
+    unlocks:
+      send_instructions: Dans quelques minutes, vous allez recevoir un courriel contenant
+        les instructions nécessaires au déverrouillage de votre compte.
+      unlocked: Votre compte a été débloqué avec succès. Veuillez vous connecter.
+      send_paranoid_instructions: Si votre compte existe, vous recevrez un courriel
+        indiquant comment le déverrouiller dans quelques minutes.
+      not_received: Vous n'avez pas reçu les instructions pour déverouiller votre
+        compte?
+      header: Renvoyer les instructions pour débloquer votre compte
+    omniauth_callbacks:
+      success: Autorisé avec succès par votre compte %{kind}.
+      failure: 'Nous n''avons pas pu vous autoriser à %{kind} pour la raison suivante
+        : ''%{reason}''.'
+    mailer:
+      confirmation_instructions:
+        welcome_message: Bienvenue %{email}!
+        subject: Instructions de confirmation
+        confirm: Confirmer mon compte
+        confirm_message: Vous pouvez confirmer votre compte avec le lien ci-dessous
+      reset_password_instructions:
+        hello_greeting: Bonjour %{email} !
+        subject: Instructions pour changer le mot de passe
+        reset_warning: Nous avons reçu une requête demandant de modifier votre mot
+          de passe. Vous pouvez continuer en suivant le lien ci-dessous.
+        change_password: Modifier mon mot de passe
+        please_ignore: Si vous n'avez pas fait cette demande, veuillez ignorer ce
+          courriel.
+        password_change: Votre mot de passe restera inchangé jusqu'à ce que vous suiviez
+          le lien ci-dessus pour en créer un nouveau.
+      unlock_instructions:
+        subject: Instructions pour déverrouiller le compte
+        greeting: Bonjour %{email}
+        account_locked: Votre compte a été verrouillé suite à un grand nombre de tentatives
+          infructueuses de se connecter.
+        click_link: Suivez le lien ci-dessous pour déverrouiller votre compte.
+        unlock: Déverrouillez mon compte
+  helpers:
+    actions: 
+    links:
+      back: 
+      cancel: 
+      confirm: 
+      destroy: 
+      new: 
+      edit: 
+    titles:
+      edit: 
+      save: 
+      new: 
+      delete: 
+    select:
+      prompt: Veuillez sélectionner
+    submit:
+      create: Créer un %{model}
+      update: Modifier cet %{model}
+      submit: Enregistrer ce %{model}
+  date:
+    formats:
+      default: '%d/%m/%Y'
+      short: '%e %b'
+      long: '%e %B %Y'
+    day_names:
+      '0': dimanche
+      '1': lundi
+      '2': mardi
+      '3': mercredi
+      '4': jeudi
+      '5': vendredi
+      '6': samedi
+    abbr_day_names:
+      '0': dim
+      '1': lun
+      '2': mar
+      '3': mer
+      '4': jeu
+      '5': ven
+      '6': sam
+    month_names:
+      '0': 
+      '1': janvier
+      '2': février
+      '3': mars
+      '4': avril
+      '5': mai
+      '6': juin
+      '7': juillet
+      '8': août
+      '9': septembre
+      '10': octobre
+      '11': novembre
+      '12': décembre
+    abbr_month_names:
+      '0': 
+      '1': jan.
+      '2': fév.
+      '3': mar.
+      '4': avr.
+      '5': mai
+      '6': juin
+      '7': juil.
+      '8': août
+      '9': sept.
+      '10': oct.
+      '11': nov.
+      '12': déc.
+    order:
+      '0': jour
+      '1': mois
+      '2': année
+  time:
+    formats:
+      default: '%d %B %Y %H:%M:%S'
+      short: '%d %b %H:%M'
+      long: '%A %d %B %Y %H:%M'
+    am: am
+    pm: pm
+  datetime:
+    distance_in_words:
+      half_a_minute: une demi-minute
+      less_than_x_seconds:
+        zero: moins d'une seconde
+        one: moins d'une seconde
+        other: moins de %{count} secondes
+      x_seconds:
+        one: 1 seconde
+        other: '%{count} secondes'
+      less_than_x_minutes:
+        zero: moins d'une minute
+        one: moins d'une minute
+        other: moins de %{count} minutes
+      x_minutes:
+        one: 1 minute
+        other: '%{count} minutes'
+      about_x_hours:
+        one: environ une heure
+        other: environ %{count} heures
+      x_days:
+        one: 1 jour
+        other: '%{count} jours'
+      about_x_months:
+        one: environ un mois
+        other: environ %{count} mois
+      x_months:
+        one: 1 mois
+        other: '%{count} mois'
+      about_x_years:
+        one: environ un an
+        other: environ %{count} ans
+      over_x_years:
+        one: plus d'un an
+        other: plus de %{count} ans
+      almost_x_years:
+        one: presqu'un an
+        other: presque %{count} ans
+    prompts:
+      year: Année
+      month: Mois
+      day: Jour
+      hour: Heure
+      minute: Minute
+      second: Seconde
+  number:
+    format:
+      separator: ','
+      delimiter: ' '
+      precision: 3.0
+      significant: 'FALSE'
+      strip_insignificant_zeros: 'FALSE'
+    currency:
+      format:
+        format: '%n %u'
+        unit: €
+        separator: ','
+        delimiter: ' '
+        precision: 2.0
+        significant: 'FALSE'
+        strip_insignificant_zeros: 'FALSE'
+    percentage:
+      format:
+        delimiter: 
+    precision:
+      format:
+        delimiter: 
+    human:
+      format:
+        delimiter: 
+        precision: 2.0
+        significant: 'TRUE'
+        strip_insignificant_zeros: 'TRUE'
+      storage_units:
+        format: '%n %u'
+        units:
+          byte:
+            one: octet
+            other: octets
+          kb: ko
+          mb: Mo
+          gb: Go
+          tb: To
+      decimal_units:
+        format: '%n %u'
+        units:
+          unit: 
+          thousand: millier
+          million: million
+          billion: milliard
+          trillion: billion
+          quadrillion: million de milliards
+  support:
+    array:
+      words_connector: ', '
+      two_words_connector: ' et '
+      last_word_connector: ' et '
+    select:
+      prompt: Veuillez sélectionner
+  activerecord:
+    errors:
+      messages:
+        taken: n'est pas disponible
+        record_invalid: 'La validation a échoué : %{errors}'
+        inclusion: n'est pas inclus(e) dans la liste
+        exclusion: n'est pas disponible
+        invalid: n'est pas valide
+        confirmation: ne concorde pas avec la confirmation
+        accepted: doit être accepté(e)
+        empty: doit être rempli(e)
+        blank: doit être rempli(e)
+        too_long: est trop long (pas plus de %{count} caractères)
+        too_short: est trop court (au moins %{count} caractères)
+        wrong_length: ne fait pas la bonne longueur (doit comporter %{count} caractères)
+        not_a_number: n'est pas un nombre
+        not_an_integer: doit être un nombre entier
+        greater_than: doit être supérieur à %{count}
+        greater_than_or_equal_to: doit être supérieur ou égal à %{count}
+        equal_to: doit être égal à %{count}
+        less_than: doit être inférieur à %{count}
+        less_than_or_equal_to: doit être inférieur ou égal à %{count}
+        odd: doit être impair
+        even: doit être pair
+      template:
+        header:
+          one: 'Impossible d''enregistrer ce %{model} : 1 erreur'
+          other: 'Impossible d''enregistrer ce %{model} : %{count} erreurs'
+        body: 'Veuillez vérifier les champs suivants : '
+      full_messages:
+        format: '%{attribute} %{message}'

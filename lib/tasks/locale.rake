@@ -16,7 +16,12 @@ namespace :locale do
         end
     
         def inspect_hash(content)
+          p content.inspect
           content.each {|pk,v|
+            p 'START OF INSPECT HASH'
+            p "pk: #{pk.inspect}\n"
+            p "v: #{v.inspect}\n"
+            p 'END OF INSPECT HASH'
             inspect_content(pk,v) {|k,v| yield [pk,k],v }
           }
         end
@@ -37,6 +42,7 @@ namespace :locale do
           if inspector
             self.send(inspector,content) {|k,v| yield k,v}
           else
+            raise
             yield pk, content
           end
         end
@@ -48,6 +54,7 @@ namespace :locale do
     LocaleInspector.open_files("./config/locales/**/*.yml") {|f,l,k,v|
       locale_matrix[k.flatten.reverse.join(".")][l] = v
       locales << l
+      raise
     #  puts k.flatten.reverse.join(".") + ": " + v.to_s + " (#{v.class.to_s}) #{l}"
     }
     
@@ -56,7 +63,7 @@ namespace :locale do
     CSV.open(export_file, "wb", force_quotes: true) do |csv|
   
       csv << locales.to_a + ["class", "key"]
-  
+      
       locale_matrix.each {|k,v|
         row = []
         klass = nil
@@ -74,5 +81,47 @@ namespace :locale do
     puts "Exported to #{export_file}"
 
 
+  end
+  task :import do
+    # "not_authorized.headers", "not_authorized.messages", "admin_user_errors_warning.messages", "administration" # missing key
+    s = Roo::Google.new "0Akn_zaMTt0NgdElPeVRxUVJXZUxYWUh2SVI3dGJ0eEE"#, user:"email@email.com", password:"password"
+    en = {}
+    fr = {}
+    (s.first_row..s.last_row).each do |row|
+      key = s.cell row, 4
+      if key
+        keys = key.split(".").reverse if key.include? "."
+        en_value = s.cell row, 1
+        fr_value = s.cell row, 2
+        if keys
+          en_marker = en
+          fr_marker = fr
+          keys.each_with_index do |k,i|
+            if (i + 1) == keys.length
+              en_marker[k] = en_value
+              fr_marker[k] = fr_value
+            else
+              unless en_marker.has_key? k
+                en_marker[k] = {}
+                fr_marker[k] = {}
+              end
+            end
+            if en_marker[k].is_a? Hash
+              en_marker = en_marker[k]
+              fr_marker = fr_marker[k]
+            end
+          end
+        end
+      end
+      
+    end
+    
+    def write_trans lang, trans
+      trans = {lang => trans}
+      File.open("#{Rails.root}/config/locales/app/#{lang}.yml", 'w') {|f| f.write(trans.to_yaml)}
+    end
+    
+    write_trans "en", en
+    write_trans "fr", fr
   end
 end

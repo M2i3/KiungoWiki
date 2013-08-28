@@ -29,6 +29,8 @@ end
 
 group :development do
   gem 'guard-bundler'
+  gem 'roo', '~> 1.12.1'
+  gem 'google-spreadsheet-ruby'
 end
 
 group :development, :test do
