@@ -94,6 +94,7 @@ en:
     work_no_artists: This work does not have any artists
     work_no_recordings: This work does not have any recordings
     not_authorized: We are sorry but you are not authorized to view this page.
+    admin_user_errors_warning: The following problem(s) prevent us from saving the user
   
   portal:
     artist_explanation: Artists are those who create works and/or interpret the records

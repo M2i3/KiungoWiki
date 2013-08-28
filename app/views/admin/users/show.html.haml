@@ -1,0 +1,12 @@
+= title(@user.nickname)
+.row
+  
+  .span12
+    .section.summary
+      %dl
+        %dt= User.human_attribute_name("nickname")
+        %dd= @user.nickname
+        %dt= User.human_attribute_name("email")
+        %dd= @user.email
+        %dt= User.human_attribute_name("groups")
+        %dd= @user.groups.join ', '

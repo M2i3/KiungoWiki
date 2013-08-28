@@ -38,3 +38,24 @@ Feature: Administrative User
     And there are a few users
     When I am on the users administration page
     Then I should see the users of the wiki including myself
+    
+  Scenario: A super-admin can see a user by clicking on their username in the index
+    Given an admin is logged in
+    And there are a few users
+    When I am on the users administration page
+    And I click on a user's name
+    Then I can see the user
+  
+  Scenario: A super-admin can update a user's information
+    Given an admin is logged in
+    And there are a few users
+    When I edit a user's information
+    Then the changes should be shown
+    
+  Scenario: A super-admin can destroy a user
+    Given an admin is logged in
+    And there are a few users
+    When I destroy a user with possessions
+    Then their possessions should also be gone
+    
+    
