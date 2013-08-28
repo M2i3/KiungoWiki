@@ -34,3 +34,15 @@ Then(/^I should not see an administration section$/) do
     page.should_not have_content I18n.t("administration")
   end
 end
+
+Given(/^there are a few users$/) do
+  @users = FactoryGirl.create_list(:user, 5) 
+end
+
+Then(/^I should see the users of the wiki including myself$/) do
+  @users.each {|user|
+    page.should have_content user.nickname
+    page.should have_content user.email
+    page.should have_content user.groups.join(", ")
+  }
+end

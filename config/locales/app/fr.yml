@@ -67,6 +67,7 @@ fr:
     new_work: Nouvelle Oeuvre
     new_user_tag: Nouveau badge utilisateur
     modify_user_tag: Modifier un badge utilisateur
+    not_authorized: Vous n'êtes pas autorisé à consulter cette page
 
   messages:
     info: Pour votre information.
@@ -93,6 +94,7 @@ fr:
     work_errors_warning: Le(s) problème(s) suivant(s) nous empêche d'enregistrer l'oeuvre
     work_no_artists: Oeuvres sans artiste
     work_no_recordings: Oeuvres sans enregistrement
+    not_authorized: Nous sommes désolé mais vous n'êtes pas autorisé à consulter à cette page.
       
   portal:
     artist_explanation: Les artistes sont ceux qui créent les oeuvres et/ou les interprètent dans les enregistrements.

@@ -66,6 +66,7 @@ en:
     new_user_tag: New Tag
     modify_user_tag: Modify Tag
     user_tag_index: Tags
+    not_authorized: You are not authorized to view this page
 
   messages:
     info: For your information.
@@ -92,6 +93,7 @@ en:
     work_errors_warning: The following problem(s) prevent us from saving the work
     work_no_artists: This work does not have any artists
     work_no_recordings: This work does not have any recordings
+    not_authorized: We are sorry but you are not authorized to view this page.
   
   portal:
     artist_explanation: Artists are those who create works and/or interpret the records

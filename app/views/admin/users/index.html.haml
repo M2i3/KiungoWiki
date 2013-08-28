@@ -1,0 +1,23 @@
+.page-header
+  = title(User.model_name.human.pluralize)
+
+= paginate @users
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= User.human_attribute_name("nickname")
+      %th= User.human_attribute_name("email")
+      %th= User.human_attribute_name("groups")
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td
+          = link_to user.nickname, admin_user_path(user)
+        %td
+          = user.email
+        %td
+          = user.groups.join(", ")
+
+= paginate @users
+

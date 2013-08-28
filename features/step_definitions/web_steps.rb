@@ -41,7 +41,7 @@ When /^(.*) within ([^:]+):$/ do |step, parent, table_or_string|
   with_scope(parent) { When "#{step}:", table_or_string }
 end
 
-Given /^(?:|I )am on (.+)$/ do |page_name|
+Given /^(?:|I )(?:go|am) on (?:|the )(.+)(?:| page)$/ do |page_name|
   visit path_to(page_name)
 end
 

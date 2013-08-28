@@ -47,6 +47,8 @@ module NavigationHelpers
       without_recordings_releases_path
     when /see releases without supplementary sections/
       without_supplementary_sections_releases_path
+    when /users administration/
+      admin_users_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
