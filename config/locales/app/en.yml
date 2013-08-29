@@ -1,53 +1,52 @@
----
 en:
   headers:
-    home_index: Home
-    global_search_result: Search Result for '%{q}'
-    works_portal: Works (portal)
-    works_index: Works
-    works_search_result: Works for '%{q}'
-    works_search: Searching Within the Works
-    works_recent_changes: Recently Modified Works
-    works_alphabetic_index: Works starting with %{heading}
-    works_all_index: All the Works
-    artists_portal: Artists (portal)
-    artists_index: Artists
-    artists_search_result: Artists for '%{q}'
-    artists_search: Searching Within the Artists
-    artists_recent_changes: Recently Modified Artists
-    artists_alphabetic_index: Artists starting with %{heading}
-    artists_all_index: All he Artists
-    releases_portal: Releases (portal)
-    releases_index: Releases
-    releases_search_result: Releases for '%{q}'
-    releases_search: Searching Within the Releases
-    releases_recent_changes: Recently Modified Releases
-    releases_alphabetic_index: Releases starting with %{heading}
-    releases_all_index: All the Albums
-    recordings_portal: Recordings (portal)
-    recordings_index: Recordings
-    recordings_search_result: Recordings for '%{q}'
-    recordings_search: Searching Within the Recordings
-    recordings_recent_changes: Recently Modified Recordings
-    recordings_alphabetic_index: Recordings starting with %{heading}
-    recordings_all_index: All the Recordings
-    portal_article_release: 'Release of the month: %{featured}'
-    portal_article_artist: 'Artist of the month: %{featured}'
-    portal_article_recording: 'Recording of the month: %{featured}'
-    portal_article_work: 'Work of the month: %{featured}'
-    portal_article_category: 'Category of the month: %{featured}'
+    home_index: "Home"
+    global_search_result: "Search Result for '%{q}'"
+    works_portal: "Works (portal)"
+    works_index: "Works"
+    works_search_result: "Works for '%{q}'"
+    works_search: "Searching Within the Works"
+    works_recent_changes: "Recently Modified Works"
+    works_alphabetic_index: "Works starting with %{heading}"
+    works_all_index: "All the Works"
+    artists_portal: "Artists (portal)"
+    artists_index: "Artists"
+    artists_search_result: "Artists for '%{q}'"
+    artists_search: "Searching Within the Artists"
+    artists_recent_changes: "Recently Modified Artists"
+    artists_alphabetic_index: "Artists starting with %{heading}"
+    artists_all_index: "All he Artists"    
+    releases_portal: "Releases (portal)"
+    releases_index: "Releases"
+    releases_search_result: "Releases for '%{q}'"
+    releases_search: "Searching Within the Releases"
+    releases_recent_changes: "Recently Modified Albums"
+    releases_alphabetic_index: "Releases starting with %{heading}"
+    releases_all_index: "All the Albums"
+    recordings_portal: "Recordings (portal)"
+    recordings_index: "Recordings"
+    recordings_search_result: "Recordings for '%{q}'"
+    recordings_search: "Searching Within the Recordings"
+    recordings_recent_changes: "Recently Modified Recordings"
+    recordings_alphabetic_index: "Recordings starting with %{heading}"
+    recordings_all_index: "All the Recordings"
+    portal_article_release: "Album of the month: %{featured}"
+    portal_article_artist: "Artist of the month: %{featured}"
+    portal_article_recording: "Recording of the month: %{featured}"
+    portal_article_work: "Work of the month: %{featured}"
+    portal_article_category: "Category of the month: %{featured}"
     portal_articles: Articles (portal)
     site_plan: Site Plan
     recent_changes: Recent Changes
-    terms_and_conditions: Terms and Conditions
-    contact_us: Contact Us
-    about_us: About KiungoWiki
-    my_profile: My Profile
-    sign_out: Sign Out
-    sign_in: Sign In
-    sign_up_sign_in: Sign Up/Sign In
-    sign_up: Sign Up
-    categories_index: Categories
+    terms_and_conditions: "Terms and Conditions"
+    contact_us: "Contact Us"
+    about_us: "About KiungoWiki"
+    my_profile: "My Profile"
+    sign_out: "Sign Out"
+    sign_in: "Sign In"
+    sign_up_sign_in: "Sign Up/Sign In"
+    sign_up: "Sign Up"
+    categories_index: "Categories"
     possessions_index: My Music
     possessions_all_music: All my Music
     modify_category: Edit Category
@@ -56,7 +55,7 @@ en:
     welcome_banner: Welcome to KiungoWiki
     various_pages: Various Pages
     modify_article: Modify Article
-    create_article: Create an Article
+    create_article: "Create an Article"
     supplement_section: Supplementary Section
     new_section: New Section
     new_recording: New Record
@@ -67,19 +66,17 @@ en:
     new_user_tag: New Tag
     modify_user_tag: Modify Tag
     user_tag_index: Tags
+    not_authorized: You are not authorized to view this page
+
   messages:
     info: For your information.
     error: Oops! An error has occured!
     alert: One moment! I must inform you!
     notice: Great! It worked!
-    work_new_without_query: Please make sure that the work you are about to create
-      does not already exist in the wiki.
-    recording_new_without_query: Please make sure that the recording you are about
-      to create does not already exist in the wiki.
-    artist_new_without_query: Please make sure that the artist you are about to create
-      does not already exist in the wiki.
-    release_new_without_query: Please make sure that the release you are about to
-      create does not already exist in the wiki.
+    work_new_without_query:  Please make sure that the work you are about to create does not already exist in the wiki.
+    recording_new_without_query: Please make sure that the recording you are about to create does not already exist in the wiki.
+    artist_new_without_query: Please make sure that the artist you are about to create does not already exist in the wiki.
+    release_new_without_query: Please make sure that the release you are about to create does not already exist in the wiki.
     confirm: Are you sure?
     artist_errors_warning: The following problem(s) prevent us from saving the artist
     artist_no_work: This artist does not have any works
@@ -87,17 +84,18 @@ en:
     artist_no_releases: This artist does not have any releases
     category_errors_warning: The following problem(s) prevent us from saving the category
     article_errors_warning: The following problem(s) prevent us from saving the article
-    recording_errors_warning: The following problem(s) prevent us from saving the
-      recording
+    recording_errors_warning: The following problem(s) prevent us from saving the recording
     recording_without_artist: This recording is not associated with any artist
     recording_without_release: This recording is not associated with any release
     release_errors_warning: The following problem(s) prevents us from saving the release
     release_without_artist: This release is not associated with any artist
-    release_without_recording: This release does not have any recording associated
-      with it
+    release_without_recording: This release does not have any recording associated with it
     work_errors_warning: The following problem(s) prevent us from saving the work
     work_no_artists: This work does not have any artists
     work_no_recordings: This work does not have any recordings
+    not_authorized: We are sorry but you are not authorized to view this page.
+    admin_user_errors_warning: The following problem(s) prevent us from saving the user
+  
   portal:
     artist_explanation: Artists are those who create works and/or interpret the records
     continue_reading: continue reading
@@ -116,9 +114,7 @@ en:
     all_artists: all artists
     alphabetical: Alphabetical
     by_tag: By tag/category
-    recording_explanation: The recordings are sound production of a work which form
-      the elements of a release (eg 33 rpm vinyl, CD, etc.) or that exist on other
-      media (mp3, internet, etc.).
+    recording_explanation: The recordings are sound production of a work which form the elements of a release (eg 33 rpm vinyl, CD, etc.) or that exist on other media (mp3, internet, etc.).
     see_recording: See Recording
     new_recording_text: Create a new recording
     revise_recording: Revise a recently changed recording
@@ -128,15 +124,13 @@ en:
     improve_recording: Improve a recording
     complete_recording_alphabet: Complete list of recordings starting with
     all_recordings: all recordings
-    release_explanation: Releases include several recordings interpreted by one or
-      many artists
+    release_explanation: Releases include several recordings or are interpreted by a number of artists
     new_release_text: Create a new release
     revise_release: Revise a recently changed release
     recent_changes_release: a complete list of recently modified releases
     see_release: See release
     improve_release: Improve a realease
-    work_explanation: Works are the raw material on which recordings are built and
-      to which performers lend their voices and emotions
+    work_explanation: Works are the raw material on which records are built and which performers lend their voices and emotions
     see_work: See the work
     revise_work: Revise a recently changed work
     new_work_text: Create a new work
@@ -145,51 +139,60 @@ en:
     improve_work: Improve a work
     all_works: all works
     complete_work_alphabet: consulter la liste complète des oeuvres commençant par
+    
   home:
     music_reference: ???
     work_link: ???
+    
+    
   rsearch:
-    search_artist_keywords: A search of the artists can take many forms and can be
-      refined with the following keywords
-    limit_artist_surname: Limit the search to the surname of the artist only. For
-      example
-    limit_artist_given_name: Limit the search to the given name of the artist only.
-      For example
-    limit_artist_birth_date: Search using the date of birth of the artist. The date
-      must be in "yyyy-mm-dd" format and can be a partial date. For example
-    limit_artist_birth_place: Limited research in the birthplace of the artist only.
-      For example
-    limit_artist_death_date: Search using the date of death of the artist. The date
-      must be in "yyyy-mm-dd" format and can be a partial date. For example
-    limit_artist_death_location: Limit research in the place of death of the artist
-      only. For example
-    search_recording_keywords: A search of recordings can take many forms and can
-      be refined with the following keywords
-    limit_recording_title: Limit the search to the title of the recording only. For
-      example
-    limit_recording_date: Limit the search to the recording date only. The date must
-      be in "yyyy-mm-dd" format and can be a partial date. For example
-    limit_recording_location: Limit the search to the recording location only. For
-      example
-    search_release_keywords: A search of the releases can take many forms and be refined
-      with the following keywords
+    search_artist_keywords: A search of the artists can take many forms and can be refined with the following keywords
+    limit_artist_surname: Limit the search to the surname of the artist only. For example
+    limit_artist_given_name: Limit the search to the given name of the artist only. For example
+    limit_artist_birth_date: Search using the date of birth of the artist. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
+    limit_artist_birth_place: Limited research in the birthplace of the artist only. For example
+    limit_artist_death_date: Search using the date of death of the artist. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
+    limit_artist_death_location: Limit research in the place of death of the artist only. For example
+    search_recording_keywords: A search of recordings can take many forms and can be refined with the following keywords
+    limit_recording_title: Limit the search to the title of the recording only. For example
+    limit_recording_date: Limit the search to the recording date only. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
+    limit_recording_location: Limit the search to the recording location only. For example
+    search_release_keywords: A search of the releases can take many forms and be refined with the following keywords
     limit_release_title: Limit the search to the title of the release only. For example
-    limit_release_date_released: Limit the search to the publication date of the release
-      only. The date must be in "yyyy-mm-dd" format and can be a partial date. For
-      example
+    limit_release_date_released: Search using the publication date of the release. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
     limit_release_label: Limit the search to the label of the release. For example
     limit_release_media_type: Limit the search to the type of media. For example
     more_results: more results
-    search_work_keywords: A search of work can take many forms and be refined with
-      the following keywords
+    search_work_keywords: A search of work can take many forms and be refined with the following keywords
     limit_work_title: Limit the search to the title of the work only. For example
-    limit_work_copyright: Limit the search to the copyright of the work only. For
-      example
+    limit_work_copyright: Limit the search to the copyright of the work only. For example
     limit_work_lyrics: Limit the search to the lyrics of the work only. For example
-    limit_work_date_written: Limit the search tothe date the work was written only.
-      The date must be in "yyyy-mm-dd" format and can be a partial date. For example
-    limit_work_language: Limit the search to the language code of the work only. For
-      example
+    limit_work_date_written: Search using the date the work was written. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
+    limit_work_language: Limit the search to the language code of the work. For example
+    
+  show: Show
+  modify: Modify
+  discuss: Discuss
+  history: History
+  new: Create it
+  search: Search
+  cancel: Cancel
+  modify_artist: Modify the artist
+  birth: Birth
+  death: Death
+  search_question: You have not found what you were looking for ?
+  delete: Delete
+  update: Update
+  back: Back
+  or: or
+  date: Date
+  page: Page
+  author: Author
+  change: Change
+  credits: Credits
+  tag: tag
+  administration: Administation
+
   actions:
     new_portal_article: New Article
     new_artist_portal_article: about an article
@@ -198,20 +201,21 @@ en:
     new_release_portal_article: about an release
     new_category_portal_article: about a category
     new_general_portal_article: article only
+
   views:
     created_at: Created at
     updated_at: Modified on
     pagination:
-      previous: '&laquo; Prev'
-      next: Next &raquo;
-      truncate: '...'
-      last: Last
-      first: First
+      previous: "&laquo; Prev"
+      next: "Next &raquo;"
+      truncate: "..."
+      last: "Last"
+      first: "First"
+
   addmusic:
     addtomusic: Add to My Music
     havemusic: Already in My Music
-    adderror: Album not added, please try again or be sure that you do not already
-      own this release
+    adderror: Album not added, please try again or be sure that you do not already own this release
     labels: Labels
     acquisitiondate: Acquisition Date
     rating: Rating
@@ -221,464 +225,3 @@ en:
     nomusic: You own no music, yet
     nomusiclabel: You have no music with this label
     newpossession: New Entry
-  mongoid:
-    models:
-      release:
-        one: 
-        other: 
-      artist:
-        one: 
-        other: 
-      category:
-        one: 
-        other: 
-      portal_article:
-        one: 
-        other: 
-      recording:
-        one: 
-        other: 
-      work:
-        one: 
-        other: 
-      user:
-        one: 
-        other: 
-      possession:
-        one: 
-        other: 
-    attributes:
-      release:
-        title: 
-        artist_wiki_link: 
-        artist_wiki_links_text: 
-        recording_wiki_links_text: 
-        date_released: 
-        media_type: 
-        reference_code: 
-        label: 
-      artist:
-        surname: 
-        given_name: 
-        name: 
-        birth_date: 
-        birth_location: 
-        death_date: 
-        death_location: 
-        is_group: 
-        artist_wiki_links_text: 
-        work_wiki_links_text: 
-        recording_wiki_links_text: 
-        release_wiki_links_text: 
-        is_member_of_group: 
-        group_is_composed_of: 
-        relation: 
-        nature: 
-        role: 
-        add_supplementary_section: 
-      change:
-        change_type_text:
-          created: 
-          updated: 
-      category:
-        category: 
-        category_name: 
-      portal_article:
-        title: 
-        publish_date: 
-        featured_wiki_link_text: 
-        content: 
-      recording:
-        title: 
-        work_name: 
-        work_title: 
-        work_wiki_link: 
-        work_wiki_link_text: 
-        recording_date: 
-        recording_location: 
-        duration: 
-        rythm: 
-        itemSection: 
-        itemId: 
-        trackNb: 
-        artist_wiki_link: 
-        artist_wiki_links: 
-        artist_wiki_links_text: 
-        release_wiki_links: 
-        release_wiki_links_text: 
-        category: 
-        category_wiki_link: 
-        category_wiki_links: 
-        category_wiki_links_text: 
-        role: 
-      work:
-        work_wiki_links_text: 
-        work_title: 
-        date_written: 
-        copyright: 
-        artist_wiki_link: 
-        artist_wiki_links_text: 
-        recording_wiki_links_text: 
-        language_name: 
-        language_name_french: 
-        language_code: 
-        publisher: 
-        original_work: 
-        lyrics: 
-        chords: 
-        relation: 
-        nature: 
-        nature_text:
-          undetermined: 
-          has_a_translated_work: 
-          has_a_variant_work: 
-          is_translated_from: 
-          is_variant_from: 
-      user:
-        nickname: 
-        email: 
-        password: 
-        password_confirmation: 
-        current_password: 
-        remember_me: 
-      possession:
-        display_title: 
-    errors:
-      messages:
-        document_not_found: 
-  errors:
-    messages:
-      expired: has expired, please request a new one
-      not_found: not found
-      already_confirmed: was already confirmed, please try signing in
-      not_locked: was not locked
-      not_saved:
-        one: '1 error prohibited this %{resource} from being saved:'
-        other: '%{count} errors prohibited this %{resource} from being saved:'
-      inclusion: 
-      exclusion: 
-      invalid: 
-      confirmation: 
-      accepted: 
-      empty: 
-      blank: 
-      too_long: 
-      too_short: 
-      wrong_length: 
-      not_a_number: 
-      not_an_integer: 
-      greater_than: 
-      greater_than_or_equal_to: 
-      equal_to: 
-      less_than: 
-      less_than_or_equal_to: 
-      odd: 
-      even: 
-    format: 
-    template:
-      header:
-        one: 
-        other: 
-      body: 
-  devise:
-    failure:
-      already_authenticated: You are already signed in.
-      unauthenticated: You need to sign in or sign up before continuing.
-      unconfirmed: You have to confirm your account before continuing.
-      locked: Your account is locked.
-      invalid: Invalid email adress or password.
-      invalid_token: Invalid authentication token.
-      timeout: Your session expired, please sign in again to continue.
-      inactive: Your account was not activated yet.
-    sessions:
-      signed_in: Signed in successfully.
-      signed_out: Signed out successfully.
-      sign_in: Sign in
-      login: Login
-      login_with: Login with %{provider}
-    passwords:
-      send_instructions: In a few minutes, you will receive an email with instructions
-        about how to reset your password.
-      updated: Your password was changed successfully. You are now signed in.
-      updated_not_active: Your password was changed successfully.
-      send_paranoid_instructions: If your email adress exists on our database, you
-        will receive a password recovery link on your e-mail
-      edit_header: Change your password
-      new_password: New password
-      confirm_password: Confirm new password
-      change_password: Change my password
-      new_header: Forgot your password?
-      send_reset: Send me reset password instructions
-    confirmations:
-      new_header: Resend confirmation instructions
-      send_instructions: You will receive an email with instructions about how to
-        confirm your account in a few minutes.
-      send_paranoid_instructions: If your e-mail exists on our database, you will
-        receive an email with instructions about how to confirm your account in a
-        few minutes.
-      confirmed: Your account was successfully confirmed. You are now signed in.
-      resend_instructions: Resend confirmation instructions
-      have_not_received: You have not received your confirmation instructions yet?
-    registrations:
-      signed_up: Welcome! You have signed up successfully.
-      inactive_signed_up: You have signed up successfully. However, we could not sign
-        you in because your account is %{reason}.
-      updated: You updated your account successfully.
-      destroyed: Bye! Your account was successfully cancelled. We hope to see you
-        again soon.
-      reasons:
-        inactive: inactive
-        unconfirmed: unconfirmed
-        locked: locked
-      modify_user: Edit %{name}
-      close_account: Close my account
-      member_account: You no longer wish to be a member of KiungoWiki?
-      certain_close: Are you certain?
-      new_header: Create an account
-      signed_up_but_inactive: 
-      signed_up_but_locked: 
-      signed_up_but_unconfirmed: 
-      update_needs_confirmation: 
-    unlocks:
-      send_instructions: In a few minutes, you will receive an email with instructions
-        about how to unlock your account.
-      unlocked: Your account was successfully unlocked. You are now signed in.
-      send_paranoid_instructions: If your account exists, you will receive an email
-        with instructions about how to unlock it in a few minutes.
-      not_received: You have not received instructions to unlock your account?
-      header: Resend unlock instructions
-    omniauth_callbacks:
-      success: Successfully authorized from %{kind} account.
-      failure: Could not authorize you from %{kind} because "%{reason}".
-    mailer:
-      confirmation_instructions:
-        welcome_message: Welcome %{email}!
-        subject: Confirmation instructions
-        confirm: Confirm my account
-        confirm_message: You can confirm your account through the link below
-      reset_password_instructions:
-        hello_greeting: Hello %{email} !
-        subject: Reset password instructions
-        reset_warning: Someone has requested a link to change your password, and you
-          can do this through the link below.
-        change_password: Change my password
-        please_ignore: If you did not request this, please ignore this email.
-        password_change: Your password will not change until you access the link above
-          and create a new one.
-      unlock_instructions:
-        subject: Unlock Instructions
-        greeting: Hello %{email}!
-        account_locked: Your account has been locked due to an excessive amount of
-          unsuccessful sign in attempts.
-        click_link: Click the link below to unlock your account
-        unlock: Unlock my account
-  helpers:
-    actions: Actions
-    links:
-      back: Back
-      cancel: Cancel
-      confirm: Are you sure?
-      destroy: Delete
-      new: New
-      edit: Edit
-    titles:
-      edit: Edit
-      save: Save
-      new: New
-      delete: Delete
-    select:
-      prompt: 
-    submit:
-      create: 
-      update: 
-      submit: 
-  date:
-    formats:
-      default: 
-      short: 
-      long: 
-    day_names:
-      '0': 
-      '1': 
-      '2': 
-      '3': 
-      '4': 
-      '5': 
-      '6': 
-    abbr_day_names:
-      '0': 
-      '1': 
-      '2': 
-      '3': 
-      '4': 
-      '5': 
-      '6': 
-    month_names:
-      '0': 
-      '1': 
-      '2': 
-      '3': 
-      '4': 
-      '5': 
-      '6': 
-      '7': 
-      '8': 
-      '9': 
-      '10': 
-      '11': 
-      '12': 
-    abbr_month_names:
-      '0': 
-      '1': 
-      '2': 
-      '3': 
-      '4': 
-      '5': 
-      '6': 
-      '7': 
-      '8': 
-      '9': 
-      '10': 
-      '11': 
-      '12': 
-    order:
-      '0': 
-      '1': 
-      '2': 
-  time:
-    formats:
-      default: 
-      short: 
-      long: 
-    am: 
-    pm: 
-  datetime:
-    distance_in_words:
-      half_a_minute: 
-      less_than_x_seconds:
-        zero: 
-        one: 
-        other: 
-      x_seconds:
-        one: 
-        other: 
-      less_than_x_minutes:
-        zero: 
-        one: 
-        other: 
-      x_minutes:
-        one: 
-        other: 
-      about_x_hours:
-        one: 
-        other: 
-      x_days:
-        one: 
-        other: 
-      about_x_months:
-        one: 
-        other: 
-      x_months:
-        one: 
-        other: 
-      about_x_years:
-        one: 
-        other: 
-      over_x_years:
-        one: 
-        other: 
-      almost_x_years:
-        one: 
-        other: 
-    prompts:
-      year: 
-      month: 
-      day: 
-      hour: 
-      minute: 
-      second: 
-  number:
-    format:
-      separator: 
-      delimiter: 
-      precision: 
-      significant: 
-      strip_insignificant_zeros: 
-    currency:
-      format:
-        format: 
-        unit: 
-        separator: 
-        delimiter: 
-        precision: 
-        significant: 
-        strip_insignificant_zeros: 
-    percentage:
-      format:
-        delimiter: 
-    precision:
-      format:
-        delimiter: 
-    human:
-      format:
-        delimiter: 
-        precision: 
-        significant: 
-        strip_insignificant_zeros: 
-      storage_units:
-        format: 
-        units:
-          byte:
-            one: 
-            other: 
-          kb: 
-          mb: 
-          gb: 
-          tb: 
-      decimal_units:
-        format: 
-        units:
-          unit: 
-          thousand: 
-          million: 
-          billion: 
-          trillion: 
-          quadrillion: 
-  support:
-    array:
-      words_connector: 
-      two_words_connector: 
-      last_word_connector: 
-    select:
-      prompt: 
-  activerecord:
-    errors:
-      messages:
-        taken: 
-        record_invalid: 
-        inclusion: 
-        exclusion: 
-        invalid: 
-        confirmation: 
-        accepted: 
-        empty: 
-        blank: 
-        too_long: 
-        too_short: 
-        wrong_length: 
-        not_a_number: 
-        not_an_integer: 
-        greater_than: 
-        greater_than_or_equal_to: 
-        equal_to: 
-        less_than: 
-        less_than_or_equal_to: 
-        odd: 
-        even: 
-      template:
-        header:
-          one: 
-          other: 
-        body: 
-      full_messages:
-        format: 

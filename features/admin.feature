@@ -57,5 +57,3 @@ Feature: Administrative User
     And there are a few users
     When I destroy a user with possessions
     Then their possessions should also be gone
-    
-    
