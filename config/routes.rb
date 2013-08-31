@@ -28,12 +28,13 @@ KiungoWiki::Application.routes.draw do
       get 'without_lyrics'
       get 'without_tags'
       get 'without_supplementary_sections'
+      post :preview
     end
     member do
       put 'user_tags' => 'user_tags#update', format: :json
       get 'add_supplementary_section'
       get :admin
-      match :preview, via: [:post, :put]
+      put :preview
     end
   end
 
@@ -49,12 +50,13 @@ KiungoWiki::Application.routes.draw do
       get 'without_recordings'
       get 'without_releases'
       get 'without_supplementary_sections'
+      post :preview
     end
     member do
       put 'user_tags' => 'user_tags#update', format: :json
       get 'add_supplementary_section'
       get :admin
-      match :preview, via: [:post, :put]
+      put :preview
     end
   end
 
@@ -68,12 +70,13 @@ KiungoWiki::Application.routes.draw do
       get 'without_artist'
       get 'without_recordings'
       get 'without_supplementary_sections'
+      post :preview
     end
     member do
       put 'user_tags' => 'user_tags#update', format: :json
       get 'add_supplementary_section'
       get :admin
-      match :preview, via: [:post, :put]
+      put :preview
     end
   end
   
@@ -88,12 +91,13 @@ KiungoWiki::Application.routes.draw do
       get 'without_releases'
       get 'without_tags'
       get 'without_supplementary_sections'
+      post :preview
     end
     member do
       put 'user_tags' => 'user_tags#update', format: :json
       get 'add_supplementary_section'
       get :admin
-      match :preview, via: [:post, :put]
+      put :preview
     end
   end
 

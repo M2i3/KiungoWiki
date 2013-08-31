@@ -4,5 +4,19 @@
   = render partial: 'links'
   - if current_user
     = render partial: 'common/tag_form', locals: {title: @recording.title, resource: @recording}
+  .span12
+    - unless @recording.errors.empty?
+      .alert.alert-error
+        %strong #{t('messages.recording_errors_warning')}:
+        %br/
+        = @recording.errors.full_messages.join("</br>").html_safe
+
+    = form_for @recording do |f|
+      = render partial: 'form', object: f
+      .formActions
+        = f.submit class: "btn btn-primary"
+        = link_to t("preview"), preview_recording_path(@recording), class: "btn btn-default preview"
+        #{link_to t("delete"), @recording, method: :delete, class: 'btn btn-danger'}
+        #{t('or')} #{link_to t("cancel"), :back, class: "btn"}
   = t('preview_warning')
   = render partial: 'info'

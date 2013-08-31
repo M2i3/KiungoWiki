@@ -71,6 +71,11 @@ class ReleasesController < ApplicationController
   def admin
     @release = Release.find(params[:id])
   end
+  
+  def preview
+    @release = Release.find(params[:id])
+    @release.assign_attributes params[:release]
+  end
 
   def create
     @release = Release.new(params[:release])

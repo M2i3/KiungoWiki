@@ -3,5 +3,19 @@
   = render partial: 'links'
   - if current_user
     = render partial: 'common/tag_form', locals: {title: @artist.name, resource: @artist}
+  .span12
+    - unless @artist.errors.empty?
+      .alert.alert-error
+        %strong #{t('messages.artist_errors_warning')}:
+        %br/
+        = @artist.errors.full_messages.join("</br>").html_safe
+
+    = form_for @artist do |f|
+      = render partial: 'form', object: f
+      .formActions
+        = f.submit class: "btn btn-primary"
+        = link_to t("preview"), preview_artist_path(@artist), class: "btn btn-default preview"
+        #{link_to t("delete"), @artist, method: :delete, class: 'btn btn-danger'} 
+        #{t('or')} #{link_to t("cancel"), :back, class: "btn"}
   = t("preview_warning")
   = render partial: 'info'

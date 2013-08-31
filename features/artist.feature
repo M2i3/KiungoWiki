@@ -18,3 +18,9 @@ Feature: Artists
     Then I should see the artist preview listed
     And a notice showing that it is a preview
     And the original artist should not be touched
+    
+  @javascript
+  Scenario: A user can update a record after a preview
+    Given I have already performed a preview on an existing artist
+    When I choose to accept the update
+    Then the artist should have the new data

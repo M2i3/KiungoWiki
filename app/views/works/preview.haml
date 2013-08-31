@@ -3,4 +3,5 @@
   = render partial: 'links'
   - if current_user
     = render partial: 'common/tag_form', locals: {title: @work.title, resource: @work}
+  = t('preview_warning')
   = render partial: 'info'

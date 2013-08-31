@@ -1,5 +1,5 @@
 Given(/^a release exists$/) do
-  FactoryGirl.create(:release)
+  @release = FactoryGirl.create(:release)
 end
 
 Given(/^a user who is logged in and looking at a release$/) do

@@ -1,2 +1,6 @@
+= title(@work.title)
 = t("administration")
-=link_to t("delete"), work_path(@work), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
+.row
+  = render partial: 'links'
+  = link_to t("delete"), work_path(@work), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
+  = render partial: 'info'

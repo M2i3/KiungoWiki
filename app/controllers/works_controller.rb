@@ -79,6 +79,11 @@ class WorksController < ApplicationController
     @work = Work.find(params[:id])
   end
   
+  def preview
+    @work = Work.find(params[:id])
+    @work.assign_attributes params[:work]
+  end
+  
   def create
 
     @work = Work.new(params[:work])

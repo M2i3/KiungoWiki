@@ -1,2 +1,6 @@
+= title(@release.title)
 = t("administration")
-=link_to t("delete"), release_path(@release), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
+.row
+  = render partial: 'links'
+  =link_to t("delete"), release_path(@release), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
+  = render partial: 'info'
