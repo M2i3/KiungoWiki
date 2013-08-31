@@ -3,8 +3,5 @@
   %li{class: current_page_classes(action: "edit")}= link_to t("modify"), edit_release_path(@release)
   %li= link_to t("discuss"), "#"
   %li= link_to t("history"), "#"
-  - if can? :destroy, @recording
-    %li
-      = t("administration")
-      %ul
-        %li= link_to t("delete"), @recording, method: :delete, confirm: t('messages.confirm')
+  - if can? :destroy, @release
+    %li{class: current_page_classes(action: "admin")}= link_to t('administration'), admin_release_path(@release)

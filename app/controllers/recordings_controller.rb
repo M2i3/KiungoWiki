@@ -68,6 +68,10 @@ class RecordingsController < ApplicationController
       end
     end
   end
+  
+  def admin
+    @recording = Recording.find(params[:id])
+  end
 
   def create
     @recording = Recording.new(params[:recording])

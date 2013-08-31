@@ -11,13 +11,14 @@ Given(/^an artist, recording, release, and work$/) do
 end
 
 When(/^I visit each of these$/) do
-  @places_to_vist = [artist_path(@artist, lang: "en"), recording_path(@recording, lang: "en"), release_path(@release, lang: "en"), work_path(@work, lang: "en")]
+  @places_to_vist = [artist_path(@artist), recording_path(@recording), release_path(@release), work_path(@work)]
 end
 
 Then(/^I should see a delete link$/) do
   @places_to_vist.each do |place|
     visit place
-    page.should have_link I18n.t('delete')
+    click_link I18n.t("administration")
+    page.should have_link I18n.t('delete'), href: place
   end
 end
 

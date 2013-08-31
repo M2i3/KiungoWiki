@@ -75,6 +75,10 @@ class WorksController < ApplicationController
     end
   end
 
+  def admin
+    @work = Work.find(params[:id])
+  end
+  
   def create
 
     @work = Work.new(params[:work])

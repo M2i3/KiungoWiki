@@ -87,6 +87,10 @@ class ArtistsController < ApplicationController
       end
     end
   end
+  
+  def admin
+    @artist = Artist.find(params[:id])
+  end
 
   def edit
     @artist = Artist.find(params[:id])
