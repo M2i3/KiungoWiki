@@ -1,0 +1,8 @@
+= title(@release.title)
+.row
+  = render partial: 'links'
+  - if current_user
+    = render partial: 'common/tag_form', locals: {title: @release.title, resource: @release}
+    = render partial: 'add_music'
+  = t("preview_warning")
+  = render partial: 'info'

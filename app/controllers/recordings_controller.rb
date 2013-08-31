@@ -72,6 +72,11 @@ class RecordingsController < ApplicationController
   def admin
     @recording = Recording.find(params[:id])
   end
+  
+  def preview
+    @recording = Recording.find(params[:id])
+    @recording.assign_attributes params[:recording]
+  end
 
   def create
     @recording = Recording.new(params[:recording])

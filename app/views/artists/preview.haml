@@ -1,7 +1,7 @@
 = title(@artist.name)
-
 .row
   = render partial: 'links'
   - if current_user
     = render partial: 'common/tag_form', locals: {title: @artist.name, resource: @artist}
+  = t("preview_warning")
   = render partial: 'info'

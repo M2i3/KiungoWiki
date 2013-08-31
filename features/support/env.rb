@@ -41,7 +41,7 @@ Spork.prefork do
   #
   ActionController::Base.allow_rescue = false
   Capybara.javascript_driver = :webkit
-  Capybara.default_wait_time = 30
+  Capybara.default_wait_time = 5
   # Remove/comment out the lines below if your app doesn't have a database.
   # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
   begin

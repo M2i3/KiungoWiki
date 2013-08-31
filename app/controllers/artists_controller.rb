@@ -94,7 +94,13 @@ class ArtistsController < ApplicationController
 
   def edit
     @artist = Artist.find(params[:id])
-  end 
+  end
+  
+  def preview
+    @artist = Artist.find(params[:id])
+    @artist.write_attributes(params[:artist])
+    @artist.update_cached_fields
+  end
 
   def add_supplementary_section
     @artist = Artist.find(params[:id])

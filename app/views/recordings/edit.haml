@@ -12,6 +12,7 @@
       = render partial: 'form', object: f
       .formActions
         = f.submit class: "btn btn-primary"
-        #{link_to t("delete"), @recording, method: :delete, class: 'btn'} 
+        = link_to t("preview"), preview_recording_path(@recording), class: "btn btn-default preview"
+        #{link_to t("delete"), @recording, method: :delete, class: 'btn btn-danger'}
         #{t('or')} #{link_to t("cancel"), :back, class: "btn"}
 

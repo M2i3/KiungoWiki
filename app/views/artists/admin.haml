@@ -1,2 +1,8 @@
+= title(@artist.name)
 = t("administration")
-=link_to t("delete"), artist_path(@artist), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
+.row
+  = render partial: 'links'
+  = link_to t("delete"), artist_path(@artist), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
+  - if current_user
+    = render partial: 'common/tag_form', locals: {title: @artist.name, resource: @artist}
+  = render partial: 'info'

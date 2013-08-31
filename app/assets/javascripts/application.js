@@ -207,6 +207,14 @@ $(document).ready(function () {
   $('input.user_tag_lookup').tokenInput("/user_tags/lookup.json", {
      classes: default_linear_classes
   });
+  
+  $('a.preview').on("click", function(event) {
+   event.preventDefault(); // stop the link from submitting
+   $this = $(this);
+   $form = $this.closest('form'); // grab the closest form
+   $form.attr('action', $this.attr('href')); // change the URL
+   $form.submit(); // submit the form
+  });
 
 });
 

@@ -33,6 +33,7 @@ KiungoWiki::Application.routes.draw do
       put 'user_tags' => 'user_tags#update', format: :json
       get 'add_supplementary_section'
       get :admin
+      match :preview, via: [:post, :put]
     end
   end
 
@@ -53,6 +54,7 @@ KiungoWiki::Application.routes.draw do
       put 'user_tags' => 'user_tags#update', format: :json
       get 'add_supplementary_section'
       get :admin
+      match :preview, via: [:post, :put]
     end
   end
 
@@ -71,6 +73,7 @@ KiungoWiki::Application.routes.draw do
       put 'user_tags' => 'user_tags#update', format: :json
       get 'add_supplementary_section'
       get :admin
+      match :preview, via: [:post, :put]
     end
   end
   
@@ -90,6 +93,7 @@ KiungoWiki::Application.routes.draw do
       put 'user_tags' => 'user_tags#update', format: :json
       get 'add_supplementary_section'
       get :admin
+      match :preview, via: [:post, :put]
     end
   end
 

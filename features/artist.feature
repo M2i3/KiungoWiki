@@ -9,3 +9,12 @@ Feature: Artists
     When I search for an artist with the query 'brel'
     Then I should see a "Create It" link button
     And I should not see the alphabetical index links
+    
+  @javascript
+  Scenario: A user can preview a change before it is saved
+    Given an artist exists
+    And a user who is logged in
+    When I update and preview an artist
+    Then I should see the artist preview listed
+    And a notice showing that it is a preview
+    And the original artist should not be touched
