@@ -49,6 +49,8 @@ Spork.prefork do
   rescue NameError
     raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
   end
+  
+  ENV['ADMIN_EMAIL'] = "admin@kiungowiki.org"
 end
 
 Spork.each_run do

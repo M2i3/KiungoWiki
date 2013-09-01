@@ -1,9 +1,9 @@
 class WorksController < ApplicationController
 
   # only registered users can edit this wiki
-  before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_artist, :without_recordings, :without_lyrics, :without_tags, :without_supplementary_sections]
+  before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_artist, :without_recordings, :without_lyrics, :without_tags, :without_supplementary_sections, :report]
   authorize_resource
-  skip_authorize_resource only: [:without_artist, :without_recordings, :without_lyrics, :without_tags, :without_supplementary_sections]
+  skip_authorize_resource only: [:without_artist, :without_recordings, :without_lyrics, :without_tags, :without_supplementary_sections, :report]
 
   def index
     @works = build_filter_from_params(params, Work.all.order_by(cache_normalized_title:1))
@@ -86,6 +86,13 @@ class WorksController < ApplicationController
       @work = Work.new
     end
     @work.assign_attributes params[:work]
+  end
+  
+  def report
+    @work = Work.find(params[:id])
+    if request.post?
+      Reports.claim(params).deliver
+    end
   end
   
   def create

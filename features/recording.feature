@@ -38,3 +38,19 @@ Feature: Recordings
     Given I have already performed a preview for a new recording
     When I choose to accept the creation
     Then the recording should have been created
+    
+  Scenario: Anyone can report content when there is a supplementary section
+    Given a recording with a supplementary section
+    When I view this recording
+    Then the report link should be visible
+    
+  Scenario: Anyone cannot report content when there is not a supplementary section
+    Given a recording without a supplementary section
+    When I view this recording
+    Then the report link should not be visible
+    
+  Scenario: An email should be sent to the admin and reporter upon submitting a report
+    Given a recording with a supplementary section
+    And I view this recording
+    When I report this resource
+    Then the administrator and I should receive an email

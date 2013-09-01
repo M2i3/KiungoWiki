@@ -1,0 +1,10 @@
+%dl
+  %dt= label_tag :name, t('report.name')
+  %dd= text_field_tag :name
+  %dt= label_tag :email, t('report.email')
+  %dd= text_field_tag :email
+  %dt= label_tag :phone, t('report.phone')
+  %dd= text_field_tag :phone
+  %dt= label_tag :details, t('report.details')
+  %dd= text_area_tag :details
+  = submit_tag t('report.submit')

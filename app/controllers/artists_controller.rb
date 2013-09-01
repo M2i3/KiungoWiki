@@ -1,9 +1,9 @@
 class ArtistsController < ApplicationController
 
   # only registered users can edit this wiki
-  before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_work, :without_recordings, :without_releases, :without_supplementary_sections]
+  before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_work, :without_recordings, :without_releases, :without_supplementary_sections, :report]
   authorize_resource
-  skip_authorize_resource only: [:without_work, :without_recordings, :without_releases, :without_supplementary_sections]
+  skip_authorize_resource only: [:without_work, :without_recordings, :without_releases, :without_supplementary_sections, :report]
   
   def index
     @artists = build_filter_from_params(params, Artist.all.order_by(cache_normalized_name:1))
@@ -104,6 +104,13 @@ class ArtistsController < ApplicationController
       @artist = Artist.new params[:artist]
     end
     @artist.update_cached_fields
+  end
+  
+  def report
+    @artist = Artist.find(params[:id])
+    if request.post?
+      Reports.claim(params).deliver
+    end
   end
 
   def add_supplementary_section

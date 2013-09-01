@@ -71,3 +71,45 @@ Then(/^the artist should have been created$/) do
   Artist.all.size.should == 1
   Artist.first.surname.should == @surname
 end
+
+Given(/^an artist with a supplementary section$/) do
+  @artist = FactoryGirl.create(:artist, supplementary_sections: [{title: "A section", content:"Its content"}])
+end
+
+When(/^I view this artist$/) do
+  visit artist_path @artist
+end
+
+Then(/^the report link should be visible$/) do
+  page.should have_link I18n.t('report_content')
+end
+
+Given(/^an artist without a supplementary section$/) do
+  step 'an artist exists'
+end
+
+Then(/^the report link should not be visible$/) do
+  page.should_not have_link I18n.t('report_content')
+end
+
+When(/^I report this resource$/) do
+  click_link I18n.t('report_content')
+  @name = "Testie"
+  @email = "email@email.com"
+  @details = "this is mine!"
+  @phone = "555-555-5555"
+  fill_in I18n.t('report.name'), with: @name
+  fill_in I18n.t('report.email'), with: @email
+  fill_in I18n.t('report.details'), with: @details
+  fill_in I18n.t('report.phone'), with: @phone
+  click_button I18n.t('report.submit')
+end
+
+Then(/^the administrator and I should receive an email$/) do
+  mail = ActionMailer::Base.deliveries.last
+  mail.to.should == [ENV['ADMIN_EMAIL']]
+  mail.cc.should == [@email]
+  [@details, @phone, @name].each do |value|
+    mail.body.should include value
+  end
+end

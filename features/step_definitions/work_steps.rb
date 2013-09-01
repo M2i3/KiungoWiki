@@ -1,5 +1,5 @@
 Given(/^a work exists$/) do
-  @work = FactoryGirl.create(:work)
+  @work = FactoryGirl.create(:work, lyrics: "")
 end
 
 When(/^I search for a work with the query '(.*)'$/) do |query|
@@ -44,4 +44,20 @@ end
 
 Then(/^no new work should have been created$/) do
   Work.all.size.should == 0
+end
+
+Given(/^a work with a supplementary section$/) do
+  @work = FactoryGirl.create(:work, title: "With supplementary sections", supplementary_sections: [{title: "A section", content:"Its content"}])
+end
+
+When(/^I view this work$/) do
+  visit work_path @work
+end
+
+Given(/^a work without a supplementary section$/) do
+  step 'a work exists'
+end
+
+Given(/^a work with lyrics$/) do
+  @work = FactoryGirl.create(:work, title: "With lyrics", lyrics: "Fa la la")
 end

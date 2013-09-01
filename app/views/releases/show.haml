@@ -6,3 +6,5 @@
     = render partial: 'common/tag_form', locals: {title: @release.title, resource: @release}
     = render partial: 'add_music'
   = render partial: 'info'
+  - if @release.supplementary_sections.size > 0
+    = link_to t('report_content'), report_release_path(@release)

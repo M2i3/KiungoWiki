@@ -35,6 +35,7 @@ KiungoWiki::Application.routes.draw do
       get 'add_supplementary_section'
       get :admin
       put :preview
+      match :report, via: [:get, :post]
     end
   end
 
@@ -57,6 +58,7 @@ KiungoWiki::Application.routes.draw do
       get 'add_supplementary_section'
       get :admin
       put :preview
+      match :report, via: [:get, :post]
     end
   end
 
@@ -77,6 +79,7 @@ KiungoWiki::Application.routes.draw do
       get 'add_supplementary_section'
       get :admin
       put :preview
+      match :report, via: [:get, :post]
     end
   end
   
@@ -98,6 +101,7 @@ KiungoWiki::Application.routes.draw do
       get 'add_supplementary_section'
       get :admin
       put :preview
+      match :report, via: [:get, :post]
     end
   end
 

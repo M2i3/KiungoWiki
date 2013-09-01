@@ -65,3 +65,15 @@ Then(/^the release should have been created$/) do
   Release.all.size.should == 1
   Release.first.title.should == @title
 end
+
+Given(/^a release with a supplementary section$/) do
+  @release = FactoryGirl.create(:release, supplementary_sections: [{title: "A section", content:"Its content"}])
+end
+
+When(/^I view this release$/) do
+  visit release_path @release
+end
+
+Given(/^a release without a supplementary section$/) do
+  step 'a release exists'
+end

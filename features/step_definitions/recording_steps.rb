@@ -60,3 +60,15 @@ Then(/^the recording should have been created$/) do
   Recording.all.size.should == 1
   Recording.first.recording_date_text.should == @date
 end
+
+Given(/^a recording with a supplementary section$/) do
+  @recording = FactoryGirl.create(:recording, supplementary_sections: [{title: "A section", content:"Its content"}])
+end
+
+Given(/^a recording without a supplementary section$/) do
+  step 'a recording exists'
+end
+
+When(/^I view this recording$/) do
+  visit recording_path @recording, lang:"en"
+end

@@ -29,8 +29,10 @@ Then(/^I should not see the work with a recording$/) do
 end
 
 Given(/^works with and without lyrics$/) do
-  @without_lyrics = FactoryGirl.create(:work, title: "Without lyrics", lyrics: "")
-  @with_lyrics = FactoryGirl.create(:work, title: "With lyrics", lyrics: "Fa la la")
+  step 'a work exists'
+  @without_lyrics = @work
+  step 'a work with lyrics'
+  @with_lyrics = @work
 end
 
 Then(/^I should see the work without lyrics$/) do
@@ -57,8 +59,10 @@ Then(/^I should not see the work with tags$/) do
 end
 
 Given(/^works with and without supplementary sections$/) do
-  @without_sections = FactoryGirl.create(:work, title: "Without supplementary sections")
-  @with_sections = FactoryGirl.create(:work, title: "With supplementary sections", supplementary_sections: [{title: "A section", content:"Its content"}])
+  step 'a work without a supplementary section'
+  @without_sections = @work
+  step 'a work with a supplementary section'
+  @with_sections = @work
 end
 
 Then(/^I should see the work without supplementary sections$/) do
