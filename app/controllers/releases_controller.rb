@@ -73,7 +73,11 @@ class ReleasesController < ApplicationController
   end
   
   def preview
-    @release = Release.find(params[:id])
+    if params[:id]
+      @release = Release.find(params[:id])
+    else
+      @release = Release.new
+    end
     @release.assign_attributes params[:release]
   end
 

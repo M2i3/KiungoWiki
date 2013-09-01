@@ -97,8 +97,12 @@ class ArtistsController < ApplicationController
   end
   
   def preview
-    @artist = Artist.find(params[:id])
-    @artist.write_attributes(params[:artist])
+    if params[:id]
+      @artist = Artist.find(params[:id])
+      @artist.assign_attributes params[:artist]
+    else
+      @artist = Artist.new params[:artist]
+    end
     @artist.update_cached_fields
   end
 

@@ -24,3 +24,17 @@ Feature: Artists
     Given I have already performed a preview on an existing artist
     When I choose to accept the update
     Then the artist should have the new data
+    
+  @javascript
+  Scenario: A user can preview a new record before saving
+    Given a user who is logged in
+    When I preview a new artist
+    Then I should see the artist preview listed
+    And a notice showing that it is a preview
+    And no new artist should have been created
+    
+  @javascript
+  Scenario: A user can create a record after a preview
+    Given I have already performed a preview for a new artist
+    When I choose to accept the creation
+    Then the artist should have been created

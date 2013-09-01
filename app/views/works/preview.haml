@@ -1,7 +1,23 @@
 = title(@work.title)
 .row
-  = render partial: 'links'
-  - if current_user
-    = render partial: 'common/tag_form', locals: {title: @work.title, resource: @work}
+  - unless @work.new_record?
+    = render partial: 'links'
+  .span12
+    - unless @work.errors.empty?
+      .alert.alert-error
+        %strong #{t('messages.work_errors_warning')}:
+        %br/
+        = @work.errors.full_messages.join("</br>").html_safe
+
+    = form_for @work, class: "form-horizontal" do |f|
+      = render partial: 'form', object: f
+      .formActions
+        = f.submit class: "btn btn-primary"
+        - unless @work.new_record?
+          = link_to t("preview"), preview_work_path(@work), class: "btn btn-default preview"
+          #{link_to t("delete"), @work, method: :delete, class: 'btn btn-danger'}
+        - else
+          = link_to t("preview"), preview_works_path, class: "btn btn-default preview"
+        #{t('or')} #{link_to t("cancel"), :back, class: "btn"}
   = t('preview_warning')
   = render partial: 'info'

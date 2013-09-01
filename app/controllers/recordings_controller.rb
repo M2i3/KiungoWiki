@@ -74,7 +74,11 @@ class RecordingsController < ApplicationController
   end
   
   def preview
-    @recording = Recording.find(params[:id])
+    if params[:id]
+      @recording = Recording.find(params[:id])
+    else
+      @recording = Recording.new
+    end
     @recording.assign_attributes params[:recording]
   end
 

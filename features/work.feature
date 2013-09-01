@@ -18,3 +18,17 @@ Feature: Works
     Then I should see the work preview listed
     And a notice showing that it is a preview
     And the original work should not be touched
+    
+  @javascript
+  Scenario: A user can update a record after a preview
+    Given I have already performed a preview on an existing work
+    When I choose to accept the update
+    Then the work should have the new data
+    
+  @javascript
+  Scenario: A user can preview a new record before saving
+    Given a user who is logged in
+    When I preview a new work
+    Then I should see the work preview listed
+    And a notice showing that it is a preview
+    And no new work should have been created

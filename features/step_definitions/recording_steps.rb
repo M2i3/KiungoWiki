@@ -35,3 +35,28 @@ Then(/^the recording should have the new data$/) do
   # works, but doesn't seem to show in DB?
   # @recording.reload.recording_date_text.should == @date
 end
+
+When(/^I preview a new recording$/) do
+  @date = "2013"
+  visit new_recording_path(q:@date)
+  fill_in "recording_recording_date_text", with: @date
+  click_link I18n.t("preview")
+end
+
+Then(/^no new recording should have been created$/) do
+  Recording.all.size.should == 0
+end
+
+Given(/^I have already performed a preview for a new recording$/) do
+  step 'a user who is logged in'
+  step 'I preview a new recording'
+  step 'I should see the recording preview listed'
+  step 'a notice showing that it is a preview'
+  step 'no new recording should have been created'
+end
+
+Then(/^the recording should have been created$/) do
+  find('li.active a', text:I18n.t('show'))
+  Recording.all.size.should == 1
+  Recording.first.recording_date_text.should == @date
+end

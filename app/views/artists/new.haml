@@ -13,4 +13,5 @@
       = render partial: 'form', object: f
       .formActions
         = f.submit class: "btn btn-primary"
+        = link_to t("preview"), preview_artists_path, class: "btn btn-default preview"
         #{t("or")} #{link_to t("cancel"), :back, class: "btn"}

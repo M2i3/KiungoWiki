@@ -80,7 +80,11 @@ class WorksController < ApplicationController
   end
   
   def preview
-    @work = Work.find(params[:id])
+    if params[:id]
+      @work = Work.find(params[:id])
+    else
+      @work = Work.new
+    end
     @work.assign_attributes params[:work]
   end
   

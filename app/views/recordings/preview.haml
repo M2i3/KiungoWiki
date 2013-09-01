@@ -1,9 +1,8 @@
 = title(@recording.title)
 
 .row
-  = render partial: 'links'
-  - if current_user
-    = render partial: 'common/tag_form', locals: {title: @recording.title, resource: @recording}
+  - unless @recording.new_record?
+    = render partial: 'links'
   .span12
     - unless @recording.errors.empty?
       .alert.alert-error
@@ -15,8 +14,11 @@
       = render partial: 'form', object: f
       .formActions
         = f.submit class: "btn btn-primary"
-        = link_to t("preview"), preview_recording_path(@recording), class: "btn btn-default preview"
-        #{link_to t("delete"), @recording, method: :delete, class: 'btn btn-danger'}
+        - unless @recording.new_record?
+          = link_to t("preview"), preview_recording_path(@recording), class: "btn btn-default preview"
+          #{link_to t("delete"), @recording, method: :delete, class: 'btn btn-danger'}
+        - else
+          = link_to t("preview"), preview_recordings_path, class: "btn btn-default preview"
         #{t('or')} #{link_to t("cancel"), :back, class: "btn"}
   = t('preview_warning')
   = render partial: 'info'

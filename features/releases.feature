@@ -18,3 +18,23 @@ Feature: Releases
     Then I should see the release preview listed
     And a notice showing that it is a preview
     And the original release should not be touched
+    
+  @javascript
+  Scenario: A user can update a record after a preview
+    Given I have already performed a preview on an existing release
+    When I choose to accept the update
+    Then the release should have the new data
+    
+  @javascript
+  Scenario: A user can preview a new record before saving
+    Given a user who is logged in
+    When I preview a new release
+    Then I should see the release preview listed
+    And a notice showing that it is a preview
+    And no new release should have been created
+    
+  @javascript
+  Scenario: A user can create a record after a preview
+    Given I have already performed a preview for a new release
+    When I choose to accept the creation
+    Then the release should have been created

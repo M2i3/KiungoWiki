@@ -42,3 +42,32 @@ Then(/^the artist should have the new data$/) do
   find('h1', text: @surname)
   @artist.reload.surname.should == @surname
 end
+
+When(/^I preview a new artist$/) do
+  @surname = "New Surname"
+  visit new_artist_path(q:@surname)
+  fill_in Artist.human_attribute_name("surname"), with: @surname
+  click_link I18n.t("preview")
+end
+
+Then(/^no new artist should have been created$/) do
+  Artist.all.size.should == 0
+end
+
+Given(/^I have already performed a preview for a new artist$/) do
+  step 'a user who is logged in'
+  step 'I preview a new artist'
+  step 'I should see the artist preview listed'
+  step 'a notice showing that it is a preview'
+  step 'no new artist should have been created'
+end
+
+When(/^I choose to accept the creation$/) do
+  click_button "Create"
+end
+
+Then(/^the artist should have been created$/) do
+  find('h1', text: @surname)
+  Artist.all.size.should == 1
+  Artist.first.surname.should == @surname
+end
