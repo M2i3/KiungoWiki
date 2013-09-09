@@ -9,6 +9,7 @@
       %th= User.human_attribute_name("nickname")
       %th= User.human_attribute_name("email")
       %th= User.human_attribute_name("groups")
+      %th
   %tbody
     - @users.each do |user|
       %tr
@@ -18,6 +19,9 @@
           = user.email
         %td
           = user.groups.join(", ")
+        %td
+          = link_to t('modify'), edit_admin_user_path(user), class: "btn btn-primary"
+          = link_to t('delete'), admin_user_path(user), method: :delete, class: 'btn btn-danger'
 
 = paginate @users
 

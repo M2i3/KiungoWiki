@@ -19,6 +19,6 @@
           = label :user, group
           = "<input id='user_#{group}' type=\"checkbox\" name=\"user[groups][]\" value=\"#{group}\" #{"checked" if @user.groups.include?(group)} />".html_safe
       .formActions
-        = f.submit class: "btn btn-primary"   
+        = f.submit class: "btn btn-primary"
         #{link_to t("delete"), admin_user_path(@user), method: :delete, class: 'btn btn-danger'} 
         #{t('or')} #{link_to t("cancel"), :back, class: "btn"}

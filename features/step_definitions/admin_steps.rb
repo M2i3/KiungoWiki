@@ -56,6 +56,8 @@ Then(/^I should see the users of the wiki including myself$/) do
     page.should have_content user.nickname
     page.should have_content user.email
     page.should have_content user.groups.join(", ")
+    page.should have_link I18n.t('modify')
+    page.should have_link I18n.t('delete')
   }
 end
 
@@ -72,7 +74,8 @@ end
 
 When(/^I edit a user's information$/) do
   @user = @users.first
-  visit edit_admin_user_path @user
+  visit admin_users_path
+  find(:xpath, "//a[@href='#{edit_admin_user_path(@user)}']").click
   @email = "tester@testies.com"
   fill_in User.human_attribute_name("email"), with: @email
   @nickname = "tester123"
