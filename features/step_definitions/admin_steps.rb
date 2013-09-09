@@ -14,11 +14,22 @@ When(/^I visit each of these$/) do
   @places_to_vist = [artist_path(@artist), recording_path(@recording), release_path(@release), work_path(@work)]
 end
 
-Then(/^I should see a delete link$/) do
+Then(/^I should see a delete link and warning$/) do
   @places_to_vist.each do |place|
     visit place
     click_link I18n.t("administration")
     page.should have_link I18n.t('delete'), href: place
+    warning =
+    if place == artist_path(@artist)
+      I18n.t('messages.delete_artist_warning')
+    elsif place == recording_path(@recording)
+      I18n.t('messages.delete_recording_warning')
+    elsif place == release_path(@release)
+      I18n.t('messages.delete_release_warning')
+    elsif place == work_path(@work)
+      I18n.t('messages.delete_work_warning')
+    end
+    page.should have_content warning
   end
 end
 

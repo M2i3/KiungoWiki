@@ -1,6 +1,6 @@
-= title(@work.title)
-= t("administration")
-.row
-  = render partial: 'links'
-  = link_to t("delete"), work_path(@work), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
-  = render partial: 'info'
+= title("#{t("administration")} - #{@work.title}")
+
+= render partial: 'links'
+%br
+= link_to t("delete"), work_path(@work), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
+= t('messages.delete_work_warning')

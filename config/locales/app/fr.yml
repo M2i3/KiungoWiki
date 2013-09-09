@@ -153,6 +153,10 @@ fr:
     improve_work: Améliorer la fiche d'une oeuvre
     all_works: toutes les oeuvres
     complete_work_alphabet: consulter la liste complète des oeuvres commençant par
+    delete_artist_warning: ???
+    delete_recording_warning: ???
+    delete_release_warning: ???
+    delete_work_warning: ???
   home:
     music_reference: Une référence en musique qui mets en évidence le <strong>rôle
       des créateurs et interprêtes</strong>

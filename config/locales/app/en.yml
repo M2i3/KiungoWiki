@@ -95,6 +95,10 @@ en:
     work_no_recordings: This work does not have any recordings
     not_authorized: We are sorry but you are not authorized to view this page.
     admin_user_errors_warning: The following problem(s) prevent us from saving the user
+    delete_artist_warning: "the following artist (WARNING: this operation cannot be reverted)"
+    delete_recording_warning: "the following recording (WARNING: this operation cannot be reverted)"
+    delete_release_warning: "the following release (WARNING: this operation cannot be reverted)"
+    delete_work_warning: "the following work (WARNING: this operation cannot be reverted)"
   
   portal:
     artist_explanation: Artists are those who create works and/or interpret the records

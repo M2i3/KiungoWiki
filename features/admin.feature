@@ -8,13 +8,7 @@ Feature: Administrative User
     Given an admin is logged in
     And an artist, recording, release, and work
     When I visit each of these
-    Then I should see a delete link
-    
-  Scenario: An admin can see the administration section
-    Given an admin is logged in
-    And an artist, recording, release, and work
-    When I visit each of these
-    Then I should see an administration section
+    Then I should see a delete link and warning
     
   Scenario: An admin can see the administration section
     Given an admin is logged in

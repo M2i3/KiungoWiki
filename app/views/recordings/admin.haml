@@ -1,2 +1,6 @@
-= t("administration")
-=link_to t("delete"), recording_path(@recording), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
+= title("#{t("administration")} - #{@recording.title}")
+
+= render partial: 'links'
+%br
+= link_to t("delete"), recording_path(@recording), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
+= t('messages.delete_recording_warning')
