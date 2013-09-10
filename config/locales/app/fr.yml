@@ -66,7 +66,8 @@ fr:
     new_work: Nouvelle Oeuvre
     new_user_tag: Nouveau badge utilisateur
     modify_user_tag: Modifier un badge utilisateur
-    user_tag_index: 
+    user_tag_index: ???
+    not_authorized: ???
   messages:
     info: Pour votre information.
     error: Oops ! Une erreur est survenue !
@@ -102,6 +103,13 @@ fr:
       l'oeuvre
     work_no_artists: Oeuvres sans artiste
     work_no_recordings: Oeuvres sans enregistrement
+    admin_user_errors_warning: ???
+    delete_artist_warning: ???
+    delete_recording_warning: ???
+    delete_release_warning: ???
+    delete_work_warning: ???
+    not_authorized: ???
+    
   portal:
     artist_explanation: Les artistes sont ceux qui créent les oeuvres et/ou les interprètent
       dans les enregistrements.
@@ -211,6 +219,38 @@ fr:
       Par exemple
     limit_work_language: Limite la recherche dans le code de langue de l'oeuvre sewulement.
       Par exemple
+  show: Afficher
+  modify: Modifier
+  discuss: Discuter
+  history: Historique
+  new: Créez-le
+  search: Rechercher
+  cancel: Annuler
+  modify_artist: "Modifier l'artiste"
+  birth: Naissance
+  death: Décès
+  search_question: Vous n’avez pas trouvé ce que vous cherchiez ?
+  delete: Supprimer
+  update: Update
+  back: Back
+  or: ou
+  date: Fait le
+  page: Page
+  author: Auteur
+  change: Changement
+  credits: Crédits
+  tag: tag
+  administration: Gestion
+  preview: Preview
+  preview_warning: "WARNING: This is a preview of your changes. They have not been saved into our wiki yet. If you are satisfied with the result make sure you click the [Create|Update] button before leaving"
+  report_content: Contact the wiki administrator about this content
+  report:
+    name: ???
+    email: ???
+    details: ???
+    submit: ???
+    title: ???
+    phone: ???
   actions:
     new_portal_article: Nouvel article
     new_artist_portal_article: sur un artiste
@@ -505,20 +545,7 @@ fr:
           infructueuses de se connecter.
         click_link: Suivez le lien ci-dessous pour déverrouiller votre compte.
         unlock: Déverrouillez mon compte
-  helpers:
-    actions: 
-    links:
-      back: 
-      cancel: 
-      confirm: 
-      destroy: 
-      new: 
-      edit: 
-    titles:
-      edit: 
-      save: 
-      new: 
-      delete: 
+  helpers: 
     select:
       prompt: Veuillez sélectionner
     submit:
@@ -645,16 +672,9 @@ fr:
         delimiter: ' '
         precision: 2.0
         significant: 'FALSE'
-        strip_insignificant_zeros: 'FALSE'
-    percentage:
-      format:
-        delimiter: 
-    precision:
-      format:
-        delimiter: 
+        strip_insignificant_zeros: 'FALSE' 
     human:
       format:
-        delimiter: 
         precision: 2.0
         significant: 'TRUE'
         strip_insignificant_zeros: 'TRUE'
@@ -671,7 +691,6 @@ fr:
       decimal_units:
         format: '%n %u'
         units:
-          unit: 
           thousand: millier
           million: million
           billion: milliard
