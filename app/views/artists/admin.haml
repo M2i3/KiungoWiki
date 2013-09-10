@@ -1,6 +1,7 @@
 = title("#{t("administration")} - #{@artist.name}")
 
 = render partial: 'links'
-%br
-= link_to t("delete"), artist_path(@artist), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
-= t('messages.delete_artist_warning')
+.row
+  .span12
+    = link_to t("delete"), artist_path(@artist), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
+    = t('messages.delete_artist_warning')

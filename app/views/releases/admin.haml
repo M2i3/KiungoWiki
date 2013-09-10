@@ -1,6 +1,7 @@
 = title("#{t("administration")} - #{@release.title}")
 
 = render partial: 'links'
-%br
-= link_to t("delete"), release_path(@release), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
-= t('messages.delete_release_warning')
+.row
+  .span12
+    = link_to t("delete"), release_path(@release), method: :delete, confirm: t('messages.confirm'), class: "btn btn-danger"
+    = t('messages.delete_release_warning')
