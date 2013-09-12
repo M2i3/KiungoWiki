@@ -4,6 +4,7 @@
   = render partial: 'links'
   - if current_user
     = render partial: 'common/tag_form', locals: {title: @recording.title, resource: @recording}
-  = render partial: 'info'
+  .span12
+    = render partial: 'info'
   - if @recording.supplementary_sections.size > 0
     = link_to t('report_content'), report_recording_path(@recording)

@@ -72,15 +72,11 @@ class Work
   end
 
   def artist_wiki_links_text=(value)
-    #puts "******************* handling new value #{value}"
-    self.artist_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
-
-    #puts "there are now #{self.artist_wiki_links.size}"
+    links = []
     value.split(",").each{|q| 
-      self.artist_wiki_links.build(:reference_text=>q.strip) 
+      links << WorkArtistWikiLink.new(:reference_text=>q.strip) 
     }    
-    #puts "there are now #{self.artist_wiki_links.size}"
-    #puts "parent changed?? #{self.changed?}"
+    self.artist_wiki_links = links
   end
 
   def first_artist_object_text
@@ -103,10 +99,11 @@ class Work
   end
 
   def recording_wiki_links_text=(value)
-    self.recording_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
+    links = []
     value.split(",").each{|q| 
-      self.recording_wiki_links.build(:reference_text=>q.strip) 
-    }    
+      links << WorkRecordingWikiLink.new(:reference_text=>q.strip) 
+    }
+    self.recording_wiki_links = links
   end
 
   def work_wiki_links_text
@@ -118,10 +115,11 @@ class Work
   end
 
   def work_wiki_links_text=(value)
-    self.work_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.work_wiki_links.clear does not work
+    links = []
     value.split(",").uniq.each{|q| 
-      self.work_wiki_links.build(:reference_text=>q.strip) 
-    }    
+      links << WorkWorkWikiLink.new(:reference_text=>q.strip) 
+    }
+    self.work_wiki_links = links    
   end
 
   def add_supplementary_section

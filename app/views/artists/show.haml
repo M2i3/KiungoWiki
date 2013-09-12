@@ -4,6 +4,7 @@
   = render partial: 'links'
   - if current_user
     = render partial: 'common/tag_form', locals: {title: @artist.name, resource: @artist}
-  = render partial: 'info'
+  .span12
+    = render partial: 'info'
   - if @artist.supplementary_sections.size > 0
     = link_to t('report_content'), report_artist_path(@artist)
