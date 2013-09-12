@@ -91,7 +91,9 @@ class WorksController < ApplicationController
   def report
     @work = Work.find(params[:id])
     if request.post?
-      Reports.claim(params).deliver
+      url = work_url(@work)
+      Reports.claim(@work, @work.title, url, params).deliver
+      redirect_to url, notice: I18n.t('report.email_sent')
     end
   end
   

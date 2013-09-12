@@ -84,7 +84,9 @@ class ReleasesController < ApplicationController
   def report
     @release = Release.find(params[:id])
     if request.post?
-      Reports.claim(params).deliver
+      url = release_url(@release)
+      Reports.claim(@release, @release.title, url, params).deliver
+      redirect_to url, notice: I18n.t('report.email_sent')
     end
   end
 

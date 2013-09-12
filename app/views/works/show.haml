@@ -5,5 +5,5 @@
     = render partial: 'common/tag_form', locals: {title: @work.title, resource: @work}
   .span12
     = render partial: 'info'
-  - if @work.supplementary_sections.size > 0 || !@work.lyrics.blank?
-    = link_to t('report_content'), report_work_path(@work)
+    - if @work.supplementary_sections.size > 0 || !@work.lyrics.blank?
+      = link_to t('report_content'), report_work_path(@work)

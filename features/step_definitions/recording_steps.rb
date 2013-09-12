@@ -72,3 +72,7 @@ end
 When(/^I view this recording$/) do
   visit recording_path @recording, lang:"en"
 end
+
+Then(/^I should be redirected to the recording$/) do
+  current_path.should == recording_path(@recording)
+end

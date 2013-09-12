@@ -77,3 +77,7 @@ end
 Given(/^a release without a supplementary section$/) do
   step 'a release exists'
 end
+
+Then(/^I should be redirected to the release$/) do
+  current_path.should == release_path(@release)
+end

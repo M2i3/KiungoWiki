@@ -251,6 +251,7 @@ fr:
     submit: ???
     title: ???
     phone: ???
+    email_sent: ???
   actions:
     new_portal_article: Nouvel article
     new_artist_portal_article: sur un artiste

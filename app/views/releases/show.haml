@@ -7,5 +7,5 @@
     = render partial: 'add_music'
   .span12
     = render partial: 'info'
-  - if @release.supplementary_sections.size > 0
-    = link_to t('report_content'), report_release_path(@release)
+    - if @release.supplementary_sections.size > 0
+      = link_to t('report_content'), report_release_path(@release)

@@ -109,7 +109,9 @@ class ArtistsController < ApplicationController
   def report
     @artist = Artist.find(params[:id])
     if request.post?
-      Reports.claim(params).deliver
+      url = artist_url(@artist)
+      Reports.claim(@artist, @artist.name, url, params).deliver
+      redirect_to url, notice: I18n.t("report.email_sent")
     end
   end
 

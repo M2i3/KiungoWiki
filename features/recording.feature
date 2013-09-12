@@ -54,3 +54,5 @@ Feature: Recordings
     And I view this recording
     When I report this resource
     Then the administrator and I should receive an email
+    And I should be redirected to the recording
+    And I should see a notice that an email has been sent

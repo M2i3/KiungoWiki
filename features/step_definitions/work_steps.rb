@@ -61,3 +61,7 @@ end
 Given(/^a work with lyrics$/) do
   @work = FactoryGirl.create(:work, title: "With lyrics", lyrics: "Fa la la")
 end
+
+Then(/^I should be redirected to the work$/) do
+  current_path.should == work_path(@work)
+end
