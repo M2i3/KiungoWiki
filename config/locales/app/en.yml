@@ -207,6 +207,7 @@ en:
     submit: send request
     title: Report Content
     phone: Phone number
+    email_sent: Email sent successfully
   
   actions:
     new_portal_article: New Article

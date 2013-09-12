@@ -54,3 +54,5 @@ Feature: Artists
     And I view this artist
     When I report this resource
     Then the administrator and I should receive an email
+    And I should be redirected to the artist
+    And I should see a notice that an email has been sent

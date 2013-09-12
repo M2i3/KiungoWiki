@@ -1,14 +1,17 @@
 = title(@work.title)
 .row
-  - unless @work.new_record?
-    = render partial: 'links'
   .span12
-    - unless @work.errors.empty?
-      .alert.alert-error
-        %strong #{t('messages.work_errors_warning')}:
-        %br/
-        = @work.errors.full_messages.join("</br>").html_safe
-
+    .alert
+      = t("preview_warning")
+    - unless @work.new_record?
+      = render partial: 'links'
+    = render partial: 'info'
+  - unless @work.errors.empty?
+    .alert.alert-error
+      %strong #{t('messages.work_errors_warning')}:
+      %br/
+      = @work.errors.full_messages.join("</br>").html_safe
+  .span12
     = form_for @work, class: "form-horizontal" do |f|
       = render partial: 'form', object: f
       .formActions
@@ -19,5 +22,3 @@
         - else
           = link_to t("preview"), preview_works_path, class: "btn btn-default preview"
         #{t('or')} #{link_to t("cancel"), :back, class: "btn"}
-  = t('preview_warning')
-  = render partial: 'info'

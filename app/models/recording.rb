@@ -92,10 +92,11 @@ class Recording
   end
 
   def artist_wiki_links_text=(value)
-    self.artist_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
+    links = []
     value.split(",").each{|q| 
-      self.artist_wiki_links.build(reference_text: q.strip) 
-    }    
+      links << RecordingArtistWikiLink.new(reference_text: q.strip) 
+    }
+    self.artist_wiki_links = links
   end
 
   def first_artist_object_text
@@ -111,10 +112,11 @@ class Recording
   end
 
   def release_wiki_links_text=(value)
-    self.release_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.release_wiki_links.clear does not work
+    links = []
     value.split(",").each{|q| 
-      self.release_wiki_links.build(reference_text: q.strip) 
-    }    
+      links << RecordingReleaseWikiLink.new(reference_text: q.strip) 
+    }
+    self.release_wiki_links = links
   end
 
   def category_wiki_links_text
@@ -126,10 +128,11 @@ class Recording
   end
 
   def category_wiki_links_text=(value)
-    self.category_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.release_wiki_links.clear does not work
+    links = []
     value.split(",").each{|q| 
-      self.category_wiki_links.build(reference_text: q.strip) 
-    }    
+      links << CategoryWikiLink.new(reference_text: q.strip) 
+    }
+    self.category_wiki_links = links 
   end
 
   def category_name

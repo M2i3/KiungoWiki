@@ -94,12 +94,11 @@ class Artist
   end
 
   def work_wiki_links_text=(value)
-    self.work_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.work_wiki_links.clear does not work
+    links = []
     value.split(",").uniq.each{|q| 
-      #puts "nb wwk bef = " + self.work_wiki_links.count.to_s
-      self.work_wiki_links.build(reference_text: q.strip) 
-      #puts "nb wwk aft= " + self.work_wiki_links.count.to_s
-    }    
+      links << ArtistWorkWikiLink.new(reference_text: q.strip)
+    }
+    self.work_wiki_links = links
   end
 
   def release_wiki_links_text
@@ -111,10 +110,11 @@ class Artist
   end
 
   def release_wiki_links_text=(value)
-    self.release_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.release_wiki_links.clear does not work
+    links = []
     value.split(",").uniq.each{|q| 
-      self.release_wiki_links.build(reference_text: q.strip) 
-    }    
+      links << ArtistReleaseWikiLink.new(reference_text: q.strip) 
+    }
+    self.release_wiki_links = links
   end
 
   def recording_wiki_links_text
@@ -133,10 +133,11 @@ class Artist
   end
 
   def recording_wiki_links_text=(value)
-    self.recording_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.recording_wiki_links.clear does not work
+    links = []
     value.split(",").uniq.each{|q| 
-      self.recording_wiki_links.build(reference_text: q.strip) 
-    }    
+      links << ArtistRecordingWikiLink.new(reference_text: q.strip) 
+    }
+    self.recording_wiki_links = links   
   end
 
   def artist_wiki_links_text
@@ -148,10 +149,11 @@ class Artist
   end
 
   def artist_wiki_links_text=(value)
-    self.artist_wiki_links.each{|a| a.destroy} #TODO find a way to do it at large since the self.artist_wiki_links.clear does not work
+    links = []
     value.split(",").each{|q| 
-      self.artist_wiki_links.build(reference_text: q.strip) 
-    }    
+      links << ArtistArtistWikiLink.new(reference_text: q.strip) 
+    }
+    self.artist_wiki_links = links  
   end
 
   def add_supplementary_section

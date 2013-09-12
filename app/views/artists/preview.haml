@@ -1,14 +1,16 @@
 = title(@artist.name)
 .row
-  - unless @artist.new_record?
-    = render partial: 'links'
   .span12
+    .alert
+      = t("preview_warning")
+    - unless @artist.new_record?
+      = render partial: 'links'
+    = render partial: 'info'
     - unless @artist.errors.empty?
       .alert.alert-error
         %strong #{t('messages.artist_errors_warning')}:
         %br/
         = @artist.errors.full_messages.join("</br>").html_safe
-
     = form_for @artist do |f|
       = render partial: 'form', object: f
       .formActions
@@ -19,5 +21,3 @@
         - else
           = link_to t("preview"), preview_artists_path, class: "btn btn-default preview"
         #{t('or')} #{link_to t("cancel"), :back, class: "btn"}
-  = t("preview_warning")
-  = render partial: 'info'

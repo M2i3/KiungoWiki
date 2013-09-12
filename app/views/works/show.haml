@@ -3,6 +3,7 @@
   = render partial: 'links'
   - if current_user
     = render partial: 'common/tag_form', locals: {title: @work.title, resource: @work}
-  = render partial: 'info'
-  - if @work.supplementary_sections.size > 0 || !@work.lyrics.blank?
-    = link_to t('report_content'), report_work_path(@work)
+  .span12
+    = render partial: 'info'
+    - if @work.supplementary_sections.size > 0 || !@work.lyrics.blank?
+      = link_to t('report_content'), report_work_path(@work)

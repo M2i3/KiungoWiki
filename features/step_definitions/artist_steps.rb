@@ -113,3 +113,11 @@ Then(/^the administrator and I should receive an email$/) do
     mail.body.should include value
   end
 end
+
+Then(/^I should be redirected to the artist$/) do
+  current_path.should == artist_path(@artist)
+end
+
+Then(/^I should see a notice that an email has been sent$/) do
+  page.should have_content I18n.t('report.email_sent')
+end

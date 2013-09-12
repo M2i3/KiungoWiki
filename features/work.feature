@@ -53,3 +53,5 @@ Feature: Works
     And I view this work
     When I report this resource
     Then the administrator and I should receive an email
+    And I should be redirected to the work
+    And I should see a notice that an email has been sent

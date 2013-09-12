@@ -85,7 +85,9 @@ class RecordingsController < ApplicationController
   def report
     @recording = Recording.find(params[:id])
     if request.post?
-      Reports.claim(params).deliver
+      url = recording_url(@recording)
+      Reports.claim(@recording, @recording.title, url, params).deliver
+      redirect_to url, notice: I18n.t('report.email_sent')
     end
   end
 

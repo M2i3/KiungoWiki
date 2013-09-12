@@ -1,9 +1,12 @@
 = title(@recording.title)
 
 .row
-  - unless @recording.new_record?
-    = render partial: 'links'
   .span12
+    .alert
+      = t("preview_warning")
+    - unless @recording.new_record?
+      = render partial: 'links'
+    = render partial: 'info'
     - unless @recording.errors.empty?
       .alert.alert-error
         %strong #{t('messages.recording_errors_warning')}:
@@ -20,5 +23,3 @@
         - else
           = link_to t("preview"), preview_recordings_path, class: "btn btn-default preview"
         #{t('or')} #{link_to t("cancel"), :back, class: "btn"}
-  = t('preview_warning')
-  = render partial: 'info'

@@ -82,6 +82,34 @@ namespace :locale do
 
 
   end
+  desc "Compares English and French and outputs missing keys in French"
+  task :compare do
+    def compare_yaml_hash(cf1, cf2, context = [])
+      cf1.each do |key, value|
+
+        unless cf2.key?(key)
+          puts "Missing key : #{key} in path #{context.join(".")}" 
+          next
+        end
+
+        value2 = cf2[key]
+        if (value.class != value2.class)
+          puts "Key value type mismatch : #{key} in path #{context.join(".")}" 
+          next
+        end
+
+        if value.is_a?(Hash)
+          compare_yaml_hash(value, cf2[key], (context + [key]))  
+          next
+        end
+
+        if (value != value2)
+          puts "Key value mismatch : #{key} in path #{context.join(".")}" 
+        end    
+      end
+    end
+    compare_yaml_hash(YAML.load_file("./config/locales/app/en.yml"), YAML.load_file("./config/locales/app/fr.yml"))
+  end
   task :import do
     # "not_authorized.headers", "not_authorized.messages", "admin_user_errors_warning.messages", "administration" # missing key
     s = Roo::Google.new "0Akn_zaMTt0NgdElPeVRxUVJXZUxYWUh2SVI3dGJ0eEE"#, user:"email@email.com", password:"password"
