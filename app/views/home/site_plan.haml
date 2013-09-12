@@ -6,3 +6,5 @@
     %h2 #{t('headers.various_pages')}
     %ul
       %li= link_to t("headers.portal_articles"), portal_articles_path
+      - if can? :show, User
+        %li= link_to  User.model_name.human.pluralize + " (Admin)", admin_users_path
