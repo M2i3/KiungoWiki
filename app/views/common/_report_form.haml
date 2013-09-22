@@ -1,10 +1,10 @@
 %dl
-  %dt= label_tag :name, t('report.name')
-  %dd= text_field_tag :name
-  %dt= label_tag :email, t('report.email')
-  %dd= text_field_tag :email
-  %dt= label_tag :phone, t('report.phone')
-  %dd= text_field_tag :phone
-  %dt= label_tag :details, t('report.details')
-  %dd= text_area_tag :details
-  = submit_tag t('report.submit')
+  %dt= form.label :name, t('report.name')
+  %dd= form.text_field :name
+  %dt= form.label :email, t('report.email')
+  %dd= form.text_field :email
+  %dt= form.label :phone, t('report.phone')
+  %dd= form.text_field :phone
+  %dt= form.label :details, t('report.details')
+  %dd= form.text_area :details
+  = form.submit t('report.submit')

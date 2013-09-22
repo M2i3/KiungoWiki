@@ -1,4 +1,4 @@
 = title(t('report.title'))
   
-= form_tag report_release_path(@release) do
-  = render partial: 'common/report_form'
+= form_for @report, url: report_release_path(@release) do |f|
+  = render partial: 'common/report_form', locals: {form: f}

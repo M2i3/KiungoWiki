@@ -8,7 +8,8 @@ describe Reports do
     let(:details) { "My song!" }
     let(:phone) { "8675309" }
     let(:params) { {name: name, email: email, phone: phone, details: details} }
-    let(:mail) { Reports.claim(entity, entity.name, artist_url(entity), params) }
+    let(:report) { ReportEntity.new params }
+    let(:mail) { Reports.claim(entity, entity.name, artist_url(entity), report) }
 
     it "renders the headers" do
       mail.subject.should eq "Removal Request for #{entity.class} - #{entity.name}"

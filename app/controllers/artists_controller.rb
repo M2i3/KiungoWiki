@@ -108,9 +108,10 @@ class ArtistsController < ApplicationController
   
   def report
     @artist = Artist.find(params[:id])
-    if request.post?
+    @report = ReportEntity.new params[:report_entity]
+    if request.post? && @report.valid?
       url = artist_url(@artist)
-      Reports.claim(@artist, @artist.name, url, params).deliver
+      Reports.claim(@artist, @artist.name, url, @report).deliver
       redirect_to url, notice: I18n.t("report.email_sent")
     end
   end

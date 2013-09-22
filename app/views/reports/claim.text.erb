@@ -1,7 +1,7 @@
-You have received the following request from <%= @params[:name]%>. You can contact the person by email at <%= @params[:email] %> or phone at <%= @params[:phone] %>
+You have received the following request from <%= @report.name %>. You can contact the person by email at <%= @report.email %> or phone at <%= @report.phone %>
 
 The request is about the <%= @entity.class %>, <%= @entity_name %> at URL <%= @url %>
 
 The following details were provided:
 
-<%= @params[:details] %>
+<%= @report.details %>

@@ -6,12 +6,12 @@ class Reports < ActionMailer::Base
   #
   #   en.reports.claim.subject
   #
-  def claim(entity, entity_name, url, params)
+  def claim(entity, entity_name, url, report)
     @greeting = "Hi"
-    @params = params
+    @report = report
     @entity = entity
     @entity_name = entity_name
     @url = url
-    mail to: ENV['ADMIN_EMAIL'], cc: params[:email], subject: "Removal Request for #{entity.class} - #{entity_name}"
+    mail to: ENV['ADMIN_EMAIL'], cc: @report.email, subject: "Removal Request for #{entity.class} - #{entity_name}"
   end
 end
