@@ -1,0 +1,32 @@
+en:
+  messages:
+    info: For your information.
+    error: Oops! An error has occured!
+    alert: One moment! I must inform you!
+    notice: Great! It worked!
+    work_new_without_query:  Please make sure that the work you are about to create does not already exist in the wiki.
+    recording_new_without_query: Please make sure that the recording you are about to create does not already exist in the wiki.
+    artist_new_without_query: Please make sure that the artist you are about to create does not already exist in the wiki.
+    release_new_without_query: Please make sure that the release you are about to create does not already exist in the wiki.
+    confirm: Are you sure?
+    artist_errors_warning: The following problem(s) prevent us from saving the artist
+    artist_no_work: This artist does not have any works
+    artist_no_recordings: This artist does not have any recordings
+    artist_no_releases: This artist does not have any releases
+    category_errors_warning: The following problem(s) prevent us from saving the category
+    article_errors_warning: The following problem(s) prevent us from saving the article
+    recording_errors_warning: The following problem(s) prevent us from saving the recording
+    recording_without_artist: This recording is not associated with any artist
+    recording_without_release: This recording is not associated with any release
+    release_errors_warning: The following problem(s) prevents us from saving the release
+    release_without_artist: This release is not associated with any artist
+    release_without_recording: This release does not have any recording associated with it
+    work_errors_warning: The following problem(s) prevent us from saving the work
+    work_no_artists: This work does not have any artists
+    work_no_recordings: This work does not have any recordings
+    not_authorized: We are sorry but you are not authorized to view this page.
+    admin_user_errors_warning: The following problem(s) prevent us from saving the user
+    delete_artist_warning: "the following artist (WARNING: this operation cannot be reverted)"
+    delete_recording_warning: "the following recording (WARNING: this operation cannot be reverted)"
+    delete_release_warning: "the following release (WARNING: this operation cannot be reverted)"
+    delete_work_warning: "the following work (WARNING: this operation cannot be reverted)"

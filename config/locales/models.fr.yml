@@ -1,0 +1,126 @@
+fr:
+  mongoid:
+    models:
+      release:
+        one: Parution
+        other: Parutions
+      artist:
+        one: Artiste
+        other: Artistes
+      category:
+        one: Catégorie
+        other: Catégories
+      portal_article:
+        one: Article
+        other: Articles
+      recording:
+        one: Enregistrement
+        other: Enregistrements
+      work:
+        one: Oeuvre
+        other: Oeuvres
+      user:
+        one: Utilisateur
+        other: Utilisateurs
+      possession:
+        one: Possession
+        other: Possessions
+    attributes:
+      release:
+        title: Titre
+        artist_wiki_link: Artiste principal
+        artist_wiki_links_text: Artiste principal
+        recording_wiki_links_text: Enregistrements
+        date_released: Date de parution
+        media_type: Format
+        reference_code: Code de référence
+        label: Étiquette
+      artist:
+        surname: Nom de famille
+        given_name: Prénom
+        name: Nom
+        birth_date: Date de naissance
+        birth_location: Lieu de naissance
+        death_date: Date de décès
+        death_location: Lieu de décès
+        is_group: Groupe
+        artist_wiki_links_text: Liens groupe-artistes
+        work_wiki_links_text: Oeuvres
+        recording_wiki_links_text: Enregistrements
+        release_wiki_links_text: Parutions
+        is_member_of_group: Est membre du groupe
+        group_is_composed_of: Membres du groupe
+        relation: Relation
+        nature: Nature
+        role: Rôle
+        add_supplementary_section: Ajout d'une section supplémentaire
+      change:
+        change_type_text:
+          created: Creation
+          updated: Modification
+      category:
+        category: Catégorie
+        category_name: Catégories
+      portal_article:
+        title: Titre
+        publish_date: Date de publication
+        featured_wiki_link_text: Wiki link présenté
+        content: Contenu
+      recording:
+        title: Titre
+        work_name: Oeuvre
+        work_title: Titre
+        work_wiki_link: Un enregistrement de
+        work_wiki_link_text: Titre de l'oeuvre
+        recording_date: Date d'enregistrement
+        recording_location: Lieu
+        duration: Durée
+        rythm: Rythme
+        itemSection: Face
+        itemId: No de disque
+        trackNb: Plage
+        artist_wiki_link: Artistes
+        artist_wiki_links: Artistes
+        artist_wiki_links_text: Artistes
+        release_wiki_links: Parutions
+        release_wiki_links_text: Parutions
+        category: Catégorie
+        category_wiki_link: Catégories
+        category_wiki_links: Catégories
+        category_wiki_links_text: Catégories
+        role: Rôle
+      work:
+        work_wiki_links_text: Oeuvres reliées
+        work_title: Titre
+        date_written: Date d'écriture
+        copyright: Droits d'auteurs
+        artist_wiki_link: Artistes
+        artist_wiki_links_text: Artistes
+        recording_wiki_links_text: Enregistrements
+        language_name: Langue
+        language_name_french: Français
+        language_code: Code de langue
+        publisher: Éditeur
+        original_work: Oeuvre originale
+        lyrics: Paroles
+        chords: Accords
+        relation: Relation
+        nature: Nature
+        nature_text:
+          undetermined: Indéterminée
+          has_a_translated_work: A comme traduction/adaptation
+          has_a_variant_work: A comme variante
+          is_translated_from: Est une traduction/adaptation de
+          is_variant_from: Est une variante de
+      user:
+        nickname: Alias
+        email: Courriel
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+        current_password: Mot de passe actuel
+        remember_me: Garder ma session active
+      possession:
+        display_title: Titre
+    errors:
+      messages:
+        document_not_found: Document introuvable
