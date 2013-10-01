@@ -60,3 +60,7 @@
   - @release.supplementary_sections.each do |ss|
     %h2= ss.title 
     = RedCloth.new(ss.content).to_html.html_safe
+
+- unless @release.new_record?
+  .well 
+    = content_tag(:small, updated_at(@release))
