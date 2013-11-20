@@ -78,7 +78,7 @@ fr:
         les instructions nécessaires au débloquage de votre compte."
       send_paranoid_instructions: "Si votre compte existe, vous recevrez un email indiquant
         comment le déverrouiller sous quelques minutes."
-      unlocked: "Votre compte a été débloqué avec succès. Veuillez vous connecter."
+      unlocked: "Votre compte a été débloqué avec succès. Vous êtes maintenant connecté."
       not_received: "Vous n'avez pas reçu les instructions pour déverouiller votre compte?"
       header: "Renvoyer les instructions pour débloquer votre compte"
 
