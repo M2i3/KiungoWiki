@@ -134,6 +134,7 @@ fr:
   preview: Preview
   preview_warning: "WARNING: This is a preview of your changes. They have not been saved into our wiki yet. If you are satisfied with the result make sure you click the [Create|Update] button before leaving"
   report_content: Contact the wiki administrator about this content
+  updated_at: "Modifié le %{update_date} à %{update_time} par %{update_username}."
   report:
     name: ???
     email: ???
