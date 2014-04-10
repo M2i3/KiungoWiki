@@ -3,6 +3,7 @@ class WorkWikiLink < WikiLink
 
   set_reference_class Work
   cache_attributes :title, :language_code, :date_written
+  field :role, type: String
 
   def title_with_objectq
     title_without_objectq.blank? ? self.objectq : title_without_objectq

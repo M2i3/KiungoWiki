@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby "2.0.0"
 
-gem 'rails', '3.2.14'
+gem 'rails', '3.2.17'
 gem "haml"
 gem 'formtastic', github: 'justinfrench/formtastic', branch: '2.1-stable'
 gem 'formtastic-bootstrap', github: 'cgunther/formtastic-bootstrap', branch: 'bootstrap2-rails3-2-formtastic-2-1'

@@ -3,6 +3,9 @@ class ReleaseWikiLink < WikiLink
 
   set_reference_class Release
   cache_attributes :title, :label, :date_released, :reference_code, :media_type
+  field :item_section, type: String
+  field :item_id, type: String
+  field :track_number, type: String
 
   def title_with_objectq
     title_without_objectq.blank? ? self.objectq : title_without_objectq
