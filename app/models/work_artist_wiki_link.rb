@@ -1,5 +1,6 @@
 class WorkArtistWikiLink < ArtistWikiLink
   include Mongoid::Document
+  field :relation, type:String
 
   def role
     searchref[:role]

@@ -58,7 +58,7 @@ $(document).ready(function(){
 
 });
 
-$(document).ready(function () {
+$(document).on('ready nested:fieldAdded', function () {
 
   default_classes = {
           tokenList: "token-input-list",
@@ -109,6 +109,7 @@ $(document).ready(function () {
   });
 
   $("input.work_works_title_lookup").tokenInput("/works/lookup.json?src=work", {
+     tokenLimit: 1,
      classes: default_classes
   });
 

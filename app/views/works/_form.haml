@@ -11,10 +11,20 @@
   %dd= form.text_field :publisher
   %dt= form.label :lyrics
   %dd= form.text_area :lyrics, :class=>"span12"
-  %dt= form.label :work_wiki_links_text
-  %dd= form.text_field :work_wiki_links_text, class: "work_works_title_lookup", :"data-pre"=>form.object.work_wiki_links_combined_links.to_json
-  %dt= form.label :artist_wiki_links_text
-  %dd= form.text_field :artist_wiki_links_text, class: "work_artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
+  = form.fields_for :work_wiki_links do |w|
+    %dt= w.label :reference_text
+    %p= w.link_to_remove t('delete'), class: 'btn btn-danger'
+    %dd= w.text_field :reference_text, class: "work_works_title_lookup", :"data-pre"=>[w.object.combined_link].to_json
+    %dt= w.label :relation
+    %dd= w.text_field :relation
+  %p= form.link_to_add t('add'), :work_wiki_links, class: 'btn btn-primary'
+  = form.fields_for :artist_wiki_links do |a|
+    %dt= a.label :reference_text
+    %p= a.link_to_remove t('delete'), class: 'btn btn-danger'
+    %dd= a.text_field :reference_text, class: "work_artists_lookup", :"data-pre"=> [a.object.combined_link].to_json
+    %dt= a.label :role
+    %dd= a.text_field :role
+  %p= form.link_to_add t('add'), :artist_wiki_links, class: 'btn btn-primary'
   %dt= form.label :recording_wiki_links_text
   %dd= form.text_field :recording_wiki_links_text, class: "work_recordings_title_lookup", :"data-pre"=>form.object.recording_wiki_links_combined_links_renamed.to_json
   = form.fields_for :supplementary_sections do |ss|

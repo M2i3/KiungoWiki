@@ -12,7 +12,7 @@
       %br/
       = @work.errors.full_messages.join("</br>").html_safe
   .span12
-    = form_for @work, class: "form-horizontal" do |f|
+    = nested_form_for @work, class: "form-horizontal" do |f|
       = render partial: 'form', object: f
       .formActions
         = f.submit class: "btn btn-primary"
