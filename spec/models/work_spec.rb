@@ -39,4 +39,8 @@ describe Work do
     subject.should_receive(:where).with(user:user).and_return [tag]
     subject.tokenized_user_tags(user).should eq [{id:name,name:name}].to_json
   end
+  it 'should remove accents from the normalized title' do
+    work = Work.new title:'Élie Rose'
+    expect(work.normalized_title).to eq 'elierose'
+  end
 end

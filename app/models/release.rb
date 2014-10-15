@@ -106,7 +106,7 @@ class Release
       mb_chars.
       normalize(:kd).
       to_s.
-      gsub(/[._:;'"`,?|+={}()!@#%^&*<>~\$\-\\\/\[\]]/, ' '). # strip punctuation
+      gsub(/[._:;'"`,?|+={}()!@#%^&*<>~\$\-\\\/\[\]\s+]/, ''). # strip punctuation
       gsub(/[^[:alnum:]\s]/,'').   # strip accents
       downcase.strip
   end
