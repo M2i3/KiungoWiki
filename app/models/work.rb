@@ -173,13 +173,13 @@ class Work
   def publishers_text=(value)
     self.publishers.clear
     value.split(",").each{|q| 
-      self.labels << q
+      self.publishers << q
     }    
   end
   
   def tokenized_publishers
     tokenized = []
-    self.publishers.each {|label| tokenized << {id:label, name:label}}
+    self.publishers.each {|publisher| tokenized << {id:publisher, name:publisher}}
     tokenized.to_json
   end
 

@@ -11,8 +11,8 @@
     - if @work.language_name
       #{@work.language_name.slice(0,1).capitalize + @work.language_name.slice(1..-1)}
   %p
-    = Work.human_attribute_name("publisher")
-    \: #{@work.publisher}
+    = Work.human_attribute_name("publishers")
+    \: #{@work.publishers.join(', ')}
 
 %h2 #{t('credits')}
 - if @work.artist_wiki_links.size == 0 

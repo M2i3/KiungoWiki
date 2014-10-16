@@ -210,6 +210,13 @@ $(document).on('ready nested:fieldAdded', function () {
   });
   
   /*
+    Publisher === Publisher === Publisher === Publisher === Publisher === Publisher === Publisher
+  */
+  $('input.publishers_lookup').tokenInput("/publishers/lookup.json", {
+     classes: default_linear_classes
+  });
+  
+  /*
     UserTag === UserTag === UserTag === UserTag === UserTag === UserTag === UserTag
   */
   $('input.user_tag_lookup').tokenInput("/user_tags/lookup.json", {

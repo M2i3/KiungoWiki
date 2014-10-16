@@ -10,6 +10,12 @@ KiungoWiki::Application.routes.draw do
 
   devise_for :users
 
+  resources :publishers, only: :index do
+    collection do
+      get 'lookup'
+    end
+  end
+
   resources :labels, only: :index do
     collection do
       get 'lookup'

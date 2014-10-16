@@ -67,14 +67,18 @@ Then(/^I should be redirected to the work$/) do
 end
 
 When(/^I add some publishers$/) do
+  visit edit_work_path @work
   @publisher = "test"
-  fill_in "token-input-labels", with: @publisher
-  select_fb_token label
-  raise
-  # find('a#confirmaddmusic').click
+  fill_in "token-input-work_publishers_text", with: @publisher
+  select_fb_token @publisher
+  find('input.btn-primary').click
 end
 
 Then(/^the work should have publishers$/) do
+  expect(page).to have_content @publisher
   expect(@work.reload.publishers.size).to eq 1
   expect(@work.publishers.first).to eq @publisher
+  publisher = Publisher.first
+  expect(publisher.count).to eq 1
+  expect(publisher.name).to eq @publisher
 end
