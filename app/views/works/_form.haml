@@ -7,8 +7,8 @@
   %dd= form.text_field :copyright
   %dt= form.label :language_code
   %dd= form.text_field :language_code
-  %dt= form.label :publisher
-  %dd= form.text_field :publisher
+  %dt= form.label :publishers
+  %dd= form.text_field :publishers, 'data-pre' => @work.tokenized_publishers
   %dt= form.label :lyrics
   %dd= form.text_area :lyrics, :class=>"span12"
   = form.fields_for :work_wiki_links do |w|

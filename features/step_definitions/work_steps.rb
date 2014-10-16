@@ -65,3 +65,16 @@ end
 Then(/^I should be redirected to the work$/) do
   current_path.should == work_path(@work)
 end
+
+When(/^I add some publishers$/) do
+  @publisher = "test"
+  fill_in "token-input-labels", with: @publisher
+  select_fb_token label
+  raise
+  # find('a#confirmaddmusic').click
+end
+
+Then(/^the work should have publishers$/) do
+  expect(@work.reload.publishers.size).to eq 1
+  expect(@work.publishers.first).to eq @publisher
+end

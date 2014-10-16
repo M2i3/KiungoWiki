@@ -55,3 +55,10 @@ Feature: Works
     Then the administrator and I should receive an email
     And I should be redirected to the work
     And I should see a notice that an email has been sent
+	
+  @javascript
+  Scenario: A user can add publishers to a work
+    Given a work exists
+    And a user who is logged in
+	When I add some publishers
+	Then the work should have publishers

@@ -5,6 +5,7 @@ describe Work do
   it { should have_many(:user_tags) }
   it { should have_field(:missing_tags).of_type Boolean }
   it { should have_field(:missing_supplementary_sections).of_type Boolean }
+  it { should have_field(:publishers).of_type(Array).with_default_value_of [] }
   it "should null out some wiki links that are attached to it when destroyed" do
     work = FactoryGirl.create(:work)
     attr_string = ""
@@ -42,5 +43,21 @@ describe Work do
   it 'should remove accents from the normalized title' do
     work = Work.new title:'Élie Rose'
     expect(work.normalized_title).to eq 'elierose'
+  end
+  it "should try to create some user labels after it's been saved" do
+    publisher = "publiser"
+    work = FactoryGirl.create(:work, publishers:[publisher])
+    expect(Publisher.all.size).to eq 1
+    pub = Publisher.first
+    expect(pub.name).to eq publisher
+  end
+  it "should be able to tokenize publishers" do
+    subject.publishers = ["publiser1", "publiser2"]
+    subject.tokenized_publishers.should eq [{id:"publiser1", name:"publiser1"},{id:"publiser2", name:"publiser2"}].to_json
+  end
+  it "should be able to set and retreive labels_text" do
+    publishers = ["publiser1", "publiser2"]
+    subject.publishers = publishers
+    subject.publishers_text.should eq publishers.join(", ")
   end
 end

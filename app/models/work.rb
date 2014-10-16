@@ -19,6 +19,7 @@ class Work
   field :is_credits_verified, type: Integer
   field :missing_tags, type: Boolean
   field :missing_supplementary_sections, type: Boolean
+  field :publishers, type: Array, default: []
 
   #
   # calculated values so we can index and sort
@@ -164,6 +165,23 @@ class Work
   def tokenized_user_tags user
     self.user_tags.where(user:user).collect{|tag| {id:tag.name, name:tag.name} }.to_json
   end
+  
+  def publishers_text
+    self.publishers.join(", ")
+  end
+
+  def publishers_text=(value)
+    self.publishers.clear
+    value.split(",").each{|q| 
+      self.labels << q
+    }    
+  end
+  
+  def tokenized_publishers
+    tokenized = []
+    self.publishers.each {|label| tokenized << {id:label, name:label}}
+    tokenized.to_json
+  end
 
   scope :queried, ->(q) {
     current_query = all
@@ -201,6 +219,24 @@ class Work
     doc.missing_tags = doc.tags.length == 0
     doc.missing_supplementary_sections = doc.supplementary_sections.length == 0
     true
+  end
+  
+  after_save do |doc|    
+    if doc.changes.has_key? "publishers"
+      publisher_changes = doc.changes["publishers"]
+      original = publisher_changes[0]
+      new_publishers = publisher_changes[1]
+      original = [] if original.nil?
+      # new labels
+      (new_publishers.reject{|pub| original.include? pub }).each do |publisher|
+        Publisher.where(name:publisher).first_or_create!.inc(:count, 1)
+      end
+      # deleted labels
+      (original.reject{|pub| new_publishers.include? pub }).each do |publisher|
+        found = Publisher.where(name:publisher).first
+        found.inc(:count, -1) if found # backwards compatiable
+      end
+    end
   end
   
   #Work.all.group_by {|a| a.title_first_letter.upcase }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
