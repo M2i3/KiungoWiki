@@ -1,9 +1,10 @@
 class WorkWorkWikiLink < WorkWikiLink
   include Mongoid::Document
+  field :relation, type:String
 
-  def relation
-    searchref[:relation] || "undetermined"
-  end
+  # def relation # not sure if needed?
+  #   searchref[:relation] || "undetermined"
+  # end
 
   def relation_text
     I18n.t("mongoid.attributes.work.nature_text.#{self.relation}")

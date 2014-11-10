@@ -11,6 +11,7 @@
 //= require jquery.ui.datepicker
 //= require possessions
 //= require user_tag
+//= require jquery_nested_form
 //= require_self
 
 // Place your application-specific JavaScript functions and classes here
@@ -57,7 +58,7 @@ $(document).ready(function(){
 
 });
 
-$(document).ready(function () {
+$(document).on('ready nested:fieldAdded', function () {
 
   default_classes = {
           tokenList: "token-input-list",
@@ -99,6 +100,7 @@ $(document).ready(function () {
   });
 
   $("input.artist_works_title_lookup").tokenInput("/works/lookup.json?src=artist", {
+     tokenLimit: 1,
      classes: default_classes
   });
 
@@ -107,6 +109,7 @@ $(document).ready(function () {
   });
 
   $("input.work_works_title_lookup").tokenInput("/works/lookup.json?src=work", {
+     tokenLimit: 1,
      classes: default_classes
   });
 
@@ -119,22 +122,27 @@ $(document).ready(function () {
   });
 
   $("input.artists_lookup").tokenInput("/artists/lookup.json", {
+     tokenLimit: 1,
      classes: default_classes
   });
 
   $("input.release_artists_lookup").tokenInput("/artists/lookup.json?src=release", {
+     tokenLimit: 1,
      classes: default_classes
   });
 
   $("input.artist_artists_lookup").tokenInput("/artists/lookup.json?src=artist", {
+     tokenLimit: 1,
      classes: default_classes
   });
 
   $("input.recording_artists_lookup").tokenInput("/artists/lookup.json?src=recording", {
+     tokenLimit: 1,
      classes: default_classes
   });
 
   $("input.work_artists_lookup").tokenInput("/artists/lookup.json?src=work", {
+     tokenLimit: 1,
      classes: default_classes
   });
 
@@ -198,6 +206,13 @@ $(document).ready(function () {
     Label === Label === Label === Label === Label === Label === Label
   */
   $('input.labels_lookup').tokenInput("/labels/lookup.json", {
+     classes: default_linear_classes
+  });
+  
+  /*
+    Publisher === Publisher === Publisher === Publisher === Publisher === Publisher === Publisher
+  */
+  $('input.publishers_lookup').tokenInput("/publishers/lookup.json", {
      classes: default_linear_classes
   });
   

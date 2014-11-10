@@ -93,5 +93,6 @@
   %h2= ss.title 
   = RedCloth.new(ss.content).to_html.html_safe
 
-.well 
-  = content_tag(:small, Artist.human_attribute_name("updated_at") + " " + @artist.updated_at.to_s)
+- unless @artist.new_record?
+  .well 
+    = content_tag(:small, updated_at(@artist))

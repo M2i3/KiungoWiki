@@ -68,4 +68,8 @@ module ApplicationHelper
   def site_message_class(msg_type)
    ({:info=>"alert-info", :error=>"alert-error", :alert=>"", :warning=>"", :notice=>"alert-success"}[msg_type]).to_s
   end
+  
+  def updated_at(resource)
+    t('updated_at', update_date:resource.updated_at.strftime('%Y-%m-%d'), update_time:resource.updated_at.strftime('%H:%M'), update_username:resource.modifier.try(:nickname))
+  end
 end

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby "2.0.0"
 
-gem 'rails', '3.2.14'
+gem 'rails', '3.2.19'
 gem "haml"
 gem 'formtastic', github: 'justinfrench/formtastic', branch: '2.1-stable'
 gem 'formtastic-bootstrap', github: 'cgunther/formtastic-bootstrap', branch: 'bootstrap2-rails3-2-formtastic-2-1'
@@ -20,7 +20,7 @@ gem 'devise'
 # for text-to-html formatting
 gem 'RedCloth'
 gem 'mongoid_search', '~> 0.3.2'
-
+gem 'nested_form'
 gem "http_accept_language"
 
 group :production do
@@ -45,7 +45,7 @@ group :development, :test do
   gem 'therubyracer'
   gem 'spork', "~> 1.0.0rc3"
   gem 'capybara', '~> 2.0.2'
-  gem "capybara-webkit", "~> 0.14.2"
+  gem "capybara-webkit", "~> 1.0.0"
   gem 'cucumber'
   gem 'launchy'
   gem 'factory_girl_rails', "~> 4.2.0"

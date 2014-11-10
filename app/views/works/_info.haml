@@ -11,8 +11,8 @@
     - if @work.language_name
       #{@work.language_name.slice(0,1).capitalize + @work.language_name.slice(1..-1)}
   %p
-    = Work.human_attribute_name("publisher")
-    \: #{@work.publisher}
+    = Work.human_attribute_name("publishers")
+    \: #{@work.publishers.join(', ')}
 
 %h2 #{t('credits')}
 - if @work.artist_wiki_links.size == 0 
@@ -23,12 +23,14 @@
       %thead
         %tr
           %th= Artist.model_name.human.pluralize
+          %th= WorkArtistWikiLink.human_attribute_name('role')
       %tbody
         - @work.artist_wiki_links.sort{|a,b| ((a.name.downcase <=> b.name.downcase) || 1)}.each do |awl|
           %tr
             %td= artist_wiki_link_path(awl)
+            %td= awl.role
 
-- if @work.work_wiki_links.size == 0 
+- if @work.work_wiki_links.empty?
 - else
   %h2= Work.human_attribute_name("relation").pluralize
   .right-size
@@ -39,6 +41,7 @@
           %th= Work.human_attribute_name("work_title") 
           %th= Work.human_attribute_name("language_name")
           %th= Work.human_attribute_name("date_written")
+          %th= WorkWikiLink.human_attribute_name("relation")
       %tbody
         - @work.work_wiki_links.each do |wwl|
           %tr
@@ -46,9 +49,10 @@
             %td= work_wiki_link_path(wwl)
             %td= wwl.language_name
             %td= wwl.date_written
+            %td= wwl.relation
 
 %h2= Recording.model_name.human.pluralize
-- if @work.recording_wiki_links.size == 0 
+- if @work.recording_wiki_links.empty?
   %p #{t('messages.work_no_recordings')}
 - else
   .right-size
@@ -74,6 +78,6 @@
   %h2= ss.title 
   = RedCloth.new(ss.content).to_html.html_safe
 
-
-.well 
-  = content_tag(:small, Work.human_attribute_name("updated_at") + " " + @work.updated_at.to_s)
+- unless @work.new_record?
+  .well 
+    = content_tag(:small, updated_at(@work))

@@ -3,6 +3,7 @@ class RecordingWikiLink < WikiLink
 
   set_reference_class Recording
   cache_attributes :title, :recording_date, :duration 
+  field :role, type: String
 
   def title_with_objectq
     title_without_objectq.blank? ? self.objectq : title_without_objectq

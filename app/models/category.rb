@@ -9,6 +9,8 @@ class Category
   field :category_name, type: String
   field :origcategoryid, type: String
   field :info, type: String, default: ""
+  field :cache_normalized_name, type: String, default: ''
+  index({ cache_normalized_name: 1 }, { background: true })
 
   search_in :category_name, {match: :all}
 
@@ -26,5 +28,17 @@ class Category
     current_query
   }
 
+  before_save do |doc|
+    doc.cache_normalized_name = doc.normalized_name
+  end
 
+  def normalized_name
+    self.category_name.to_s.
+      mb_chars.
+      normalize(:kd).
+      to_s.
+      gsub(/[._:;'"`,?|+={}()!@#%^&*<>~\$\-\\\/\[\]\s+]/, ''). # strip punctuation
+      gsub(/[^[:alnum:]\s]/,'').   # strip accents
+      downcase.strip
+  end
 end

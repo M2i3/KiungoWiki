@@ -38,4 +38,8 @@ describe Release do
     subject.should_receive(:where).with(user:user).and_return [tag]
     subject.tokenized_user_tags(user).should eq [{id:name,name:name}].to_json
   end
+  it 'should remove accents from the normalized title' do
+    release = Release.new title:'Élie Rose'
+    expect(release.normalized_title).to eq 'elierose'
+  end
 end

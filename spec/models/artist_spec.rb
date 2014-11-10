@@ -38,4 +38,9 @@ describe Artist do
     subject.should_receive(:where).with(user:user).and_return [tag]
     subject.tokenized_user_tags(user).should eq [{id:name,name:name}].to_json
   end
+  it { should accept_nested_attributes_for :artist_wiki_links }
+  it 'should change the normalized_name to remove the accents in the characters' do
+    artist = Artist.new name:"Élie Rose"
+    expect(artist.normalized_name).to eq 'elierose'
+  end
 end

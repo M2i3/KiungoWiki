@@ -4,6 +4,9 @@ class ArtistWikiLink < WikiLink
   set_reference_class Artist
   cache_attributes :name, :surname, :given_name, :birth_date, :birth_location
 
+  field :start_date, type: String
+  field :end_date, type: String
+
   def name(exclude_role=false)
     if artist
       case
