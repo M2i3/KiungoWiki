@@ -9,16 +9,16 @@
         %dd= form.text_field :nickname
  
         %dt= form.label :email
-        %dd= form.text_field :email 
+        %dd= form.password_field :email 
 
         %dt= form.label :password
-        %dd= form.text_field :password 
+        %dd= form.password_field :password 
 
         %dt= form.label :password_confirmation 
-        %dd= form.text_field :password_confirmation 
+        %dd= form.password_field :password_confirmation 
 
         %dt= form.label :current_password 
-        %dd= form.text_field :current_password
+        %dd= form.password_field :current_password
 
       = form.submit class: "btn btn-primary"
 
