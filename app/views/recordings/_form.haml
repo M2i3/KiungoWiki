@@ -11,10 +11,24 @@
   %dd= form.text_field :duration
   %dt= form.label :rythm
   %dd= form.text_field :rythm
-  %dt= form.label :artist_wiki_links_text
-  %dd= form.text_field :artist_wiki_links_text, class: "recording_artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
-  %dt= form.label :release_wiki_links_text
-  %dd= form.text_field :release_wiki_links_text, class: "recording_releases_title_lookup", :"data-pre"=>form.object.release_wiki_links_combined_links.to_json
+  .well
+    %h2= Artist.model_name.human.pluralize
+    = form.fields_for :artist_wiki_links do |a|
+      %p= a.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
+      %dt= a.label :reference_text
+      %dd= a.text_field :reference_text, class: "recording_artists_lookup", :"data-pre"=>[a.object.combined_link].to_json
+      %dt= a.label :role
+      %dd= a.text_field :role
+    %p= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :artist_wiki_links, class: 'btn btn-primary pull-right'
+  .well
+    %h2= Release.model_name.human.pluralize
+    = form.fields_for :release_wiki_links do |r|
+      %p= r.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
+      %dt= r.label :reference_text
+      %dd= r.text_field :reference_text, class: "recording_releases_title_lookup", :"data-pre"=>[r.object.combined_link].to_json
+      %dt= r.label :relation
+      %dd= r.text_field :relation
+    %p= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :release_wiki_links, class: 'btn btn-primary pull-right'
   = form.fields_for :supplementary_sections do |ss|
     %dt= ss.label t("headers.supplement_section")
     %dd= ss.text_field :title

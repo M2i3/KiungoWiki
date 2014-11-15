@@ -1,6 +1,6 @@
 class RecordingReleaseWikiLink < ReleaseWikiLink
   include Mongoid::Document
-
+  field :relation, type: String
   def trackNb
     searchref[:trackNb]
   end
