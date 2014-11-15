@@ -47,10 +47,10 @@
           %tr
             %td= recording_wiki_link_path(rwl)
             %td= rwl.recording_date
-            - unless rwl.itemId.blank? || rwl.itemId == "0"
-              %td= rwl.itemId 
-            - else
+            - if rwl.itemId.blank? || rwl.itemId == "0"
               %td= "1"
+            - else
+              %td= rwl.itemId
             - if ["33 tours","45 tours"].include?(@release.media_type)
               %td= rwl.itemSection
             %td= rwl.trackNb

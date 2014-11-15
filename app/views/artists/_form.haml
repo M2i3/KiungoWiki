@@ -13,32 +13,40 @@
   %dd= form.text_field :death_location
   %dt= form.label :is_group
   %dd= form.text_field :is_group
-  = form.fields_for :artist_wiki_links do |a|
-    %dt= a.label :reference_text
-    %p= a.link_to_remove t('delete'), class: 'btn btn-danger'
-    %dd= a.text_field :reference_text, class: "artist_artists_lookup", :"data-pre"=>[a.object.combined_link].to_json
-    %dt= a.label :start_date
-    %dd= a.text_field :start_date
-    %dt= a.label :end_date
-    %dd= a.text_field :end_date
-  %p= form.link_to_add t('add'), :artist_wiki_links, class: 'btn btn-primary'
-  = form.fields_for :work_wiki_links do |w|
-    %dt= w.label :reference_text
-    %p= w.link_to_remove t('delete'), class: 'btn btn-danger'
-    %dd= w.text_field :reference_text, class: "artist_works_title_lookup", :"data-pre"=>[w.object.combined_link].to_json
-    %dt= w.label :role
-    %dd= w.text_field :role
-    = form.link_to_add t('add'), :work_wiki_links, class: 'btn btn-primary'
-  = form.fields_for :recording_wiki_links do |rec|
-    %dt= rec.label :reference_text
-    %p= rec.link_to_remove t('delete'), class: 'btn btn-danger'
-    %dd= rec.text_field :reference_text, class: "artist_recordings_title_lookup", :"data-pre"=>[rec.object.combined_link].to_json
-    = form.link_to_add t('add'), :recording_wiki_links, class: 'btn btn-primary'
-  = form.fields_for :release_wiki_links do |rel|
-    %dt= rel.label :reference_text
-    %p= rel.link_to_remove t('delete'), class: 'btn btn-danger'
-    %dd= rel.text_field :reference_text, class: "artist_releases_title_lookup", :"data-pre"=>[rel.object.combined_link].to_json
-    = form.link_to_add t('add'), :release_wiki_links, class: 'btn btn-primary'
+  .well
+    %h2= Artist.model_name.human.pluralize
+    = form.fields_for :artist_wiki_links do |a|
+      %p= a.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
+      %dt= a.label :reference_text
+      %dd= a.text_field :reference_text, class: "artist_artists_lookup", :"data-pre"=>[a.object.combined_link].to_json
+      %dt= a.label :start_date
+      %dd= a.text_field :start_date
+      %dt= a.label :end_date
+      %dd= a.text_field :end_date
+    %p= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :artist_wiki_links, class: 'btn btn-primary pull-right'
+  .well
+    %h2= Work.model_name.human.pluralize
+    = form.fields_for :work_wiki_links do |w|
+      %dt= w.label :reference_text
+      %p= w.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
+      %dd= w.text_field :reference_text, class: "artist_works_title_lookup", :"data-pre"=>[w.object.combined_link].to_json
+      %dt= w.label :role
+      %dd= w.text_field :role
+    %p= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :work_wiki_links, class: 'btn btn-primary pull-right'
+  .well
+    %h2= Recording.model_name.human.pluralize
+    = form.fields_for :recording_wiki_links do |rec|
+      %dt= rec.label :reference_text
+      %p= rec.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
+      %dd= rec.text_field :reference_text, class: "artist_recordings_title_lookup", :"data-pre"=>[rec.object.combined_link].to_json
+    %p= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :recording_wiki_links, class: 'btn btn-primary pull-right'
+  .well
+    %h2= Release.model_name.human.pluralize
+    = form.fields_for :release_wiki_links do |rel|
+      %dt= rel.label :reference_text
+      %p= rel.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
+      %dd= rel.text_field :reference_text, class: "artist_releases_title_lookup", :"data-pre"=>[rel.object.combined_link].to_json
+    %p= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :release_wiki_links, class: 'btn btn-primary pull-right'
   = form.fields_for :supplementary_sections do |ss|
     %dt= ss.label t("headers.supplement_section")
     %dd= ss.text_field :title

@@ -179,6 +179,7 @@ $(document).on('ready nested:fieldAdded', function () {
   });
 
   $("input.release_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=release", {
+     tokenLimit: 1,
      classes: default_classes
   });
 

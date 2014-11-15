@@ -6,6 +6,7 @@
  *= require bootstrap-responsive
  *= require token-input
  *= require jquery.ui.datepicker
+ *= require twitter-bootstrap-static/sprites
  *= require default
  *= require_self
  * require bootstrap_and_overrides
