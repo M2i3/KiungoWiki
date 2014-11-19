@@ -1,3 +1,0 @@
-web:   bundle exec rails s -p $PORT  
-mongodb: mongod --port $MONGO_PORT 
-guard: bundle exec guard 

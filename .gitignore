@@ -12,3 +12,4 @@ tmp/
 .tropo_messaging_key
 mongoid_search
 coverage/
+Procfile.local
