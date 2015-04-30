@@ -44,8 +44,6 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'therubyracer'
   gem 'spork', "~> 1.0.0rc3"
-  gem 'capybara', '~> 2.0.2'
-  gem "capybara-webkit", "~> 1.0.0"
   gem 'cucumber'
   gem 'launchy'
   gem 'factory_girl_rails', "~> 4.2.0"
@@ -55,6 +53,8 @@ end
 
 group :test do
   gem 'cucumber-rails', '~> 1.3.0', require: false
+  gem 'capybara', '~> 2.0.2'
+  gem "capybara-webkit", "~> 1.0.0"
   gem "capybara-screenshot"
   gem 'simplecov', require: false
 end
