@@ -1,5 +1,5 @@
 .page-header
-  = title(Artist.model_name.human.pluralize)
+  = title(t("headers.artists_without_work"))
 
 = paginate @artists
 = render partial: "search_result", object: @artists

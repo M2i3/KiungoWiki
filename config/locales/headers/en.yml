@@ -9,13 +9,22 @@ en:
     works_recent_changes: "Recently Modified Works"
     works_alphabetic_index: "Works starting with %{heading}"
     works_all_index: "All the Works"
+    works_without_tags: Works Without Categories
+    works_without_supplementary_sections: Works Without Supplementary Sections
+    works_without_recordings: Works Without Recordings
+    works_without_lyrics: Works Without Lyrics
+    works_without_artist: Works Without Artists
     artists_portal: "Artists (portal)"
     artists_index: "Artists"
     artists_search_result: "Artists for '%{q}'"
     artists_search: "Searching Within the Artists"
     artists_recent_changes: "Recently Modified Artists"
     artists_alphabetic_index: "Artists starting with %{heading}"
-    artists_all_index: "All he Artists"    
+    artists_all_index: "All the Artists"    
+    artists_without_recordings: Artists Without Recordings
+    artists_without_releases: Artists Without Releases
+    artists_without_supplementary_sections: Artists Without Supplementary Sections
+    artists_without_work: Artists Without Work
     releases_portal: "Releases (portal)"
     releases_index: "Releases"
     releases_search_result: "Releases for '%{q}'"
@@ -23,6 +32,9 @@ en:
     releases_recent_changes: "Recently Modified Albums"
     releases_alphabetic_index: "Releases starting with %{heading}"
     releases_all_index: "All the Albums"
+    releases_without_artist: Releases Without Artists
+    releases_without_recordings: Releases Without Recordings
+    releases_without_supplementary_sections: Releases Without Supplementary Sections
     recordings_portal: "Recordings (portal)"
     recordings_index: "Recordings"
     recordings_search_result: "Recordings for '%{q}'"
@@ -30,6 +42,10 @@ en:
     recordings_recent_changes: "Recently Modified Recordings"
     recordings_alphabetic_index: "Recordings starting with %{heading}"
     recordings_all_index: "All the Recordings"
+    recordings_without_artist: Recordings Without Artists
+    recordings_without_releases: Recordings Without Releases
+    recordings_without_supplementary_sections: Recordings Without Supplementary Sections
+    recordings_without_tags: Recorgins Without Categories    
     portal_article_release: "Album of the month: %{featured}"
     portal_article_artist: "Artist of the month: %{featured}"
     portal_article_recording: "Recording of the month: %{featured}"

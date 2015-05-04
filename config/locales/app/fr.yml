@@ -30,6 +30,7 @@ fr:
       récemment
     without_artist: Sans artistes
     without_categories: Sans catégorie
+    without_tags: Sans catégories
     improve_recording: Améliorer la fiche d'un enregistrement
     complete_recording_alphabet: consulter la liste complète des enregistrements commençant
       par

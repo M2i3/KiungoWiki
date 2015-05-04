@@ -1,14 +1,15 @@
 all: bundle.install build
 	
 bundle.install:
-	docker run --rm -v "$(shell pwd)":/usr/src/app -w /usr/src/app registry:5001/kiungo/kiungowiki-test  bundle install
-# apt-get install -y qt4-dev-tools libqt4-dev libqt4-core libqt4-gui &&
-
-build:
-	docker build -t registry:5001/kiungo/kiungowiki ./
+	docker build -t kiungowiki-bundle-install -f ./dockerfiles/bundle.dockerfile ./
+	docker run --rm -v "$(shell pwd)":/usr/src/app -w /usr/src/app kiungowiki-bundle-install bundle install
+	docker rmi kiungowiki-bundle-install
 	
-build-test:
-	docker build -t registry:5001/kiungo/kiungowiki-test -f test.dockerfile ./
+build-test: 
+	docker build -t kiungowiki-test -f ./dockerfiles/test.dockerfile ./
+	
+build:
+	docker build -t registry:5001/kiungo/kiungowiki -f ./dockerfiles/Dockerfile ./
 	
 console: app.up
 	docker run --rm -it -v "$(shell pwd)":/usr/src/app -w /usr/src/app -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db registry:5001/kiungo/kiungowiki /bin/bash
@@ -17,17 +18,19 @@ run: build app.up
 	docker run --rm -it -p 3000:3000 --name kiungo--kiungowiki.web.0 -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db registry:5001/kiungo/kiungowiki
 
 logs:
-	docker exec -it talbott-merchandiser.web.0 tail -f /usr/src/app/log/development.log
-	
-	
+	docker exec -it kiungo--kiungowiki.web.0 tail -f /usr/src/app/log/development.log
+			
 test: test.unit test.spec
 	
-test.unit: build test-database.up
-	docker run --rm -it -e RAILS_ENV=test --link=kiungo--kiungowiki-test.mongodb.0:testdb registry:5001/kiungo/kiungowiki /usr/local/bundle/bin/rake test
+test.unit: build-test test-database.up
+	docker run --rm -it -e RAILS_ENV=test --link=kiungo--kiungowiki-test.mongodb.0:db kiungowiki-test /usr/local/bundle/bin/rake test
 
-test.spec: build test-database.up
-	docker run --rm -it -e RAILS_ENV=test --link=kiungo--kiungowiki-test.mongodb.0:testdb registry:5001/kiungo/kiungowiki /usr/local/bundle/bin/rake spec
-
+test.spec: build-test test-database.up
+	docker run --rm -it -e RAILS_ENV=test --link=kiungo--kiungowiki-test.mongodb.0:db kiungowiki-test /usr/local/bundle/bin/rake spec
+	
+test.cucumber: build-test test-database.up
+	docker run --rm -it -e RAILS_ENV=test --link=kiungo--kiungowiki-test.mongodb.0:db kiungowiki-test /bin/bash /usr/src/app/cucumber.sh
+	
 app.up: build database.up
 
 database.console: database.up

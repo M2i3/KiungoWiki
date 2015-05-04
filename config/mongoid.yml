@@ -71,7 +71,7 @@ test:
     default:
       database: kiungo_wiki_test
       hosts:
-        - localhost:<%= ENV['MONGO_PORT'] || 27017  %>
+        - <%= ENV['DB_PORT_27017_TCP_ADDR'] || ENV['MONGO_HOST'] || 'localhost'  %>:<%= ENV['DB_PORT_27017_TCP_PORT'] || ENV['MONGO_PORT'] || 27017  %>
       options:
         consistency: :strong
         # In the test environment we lower the retries and retry interval to

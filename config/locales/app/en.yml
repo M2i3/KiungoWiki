@@ -24,6 +24,7 @@ en:
     recent_changes_recording: a complete list of recently modified records
     without_artist: Without artists
     without_categories: Without categories
+    without_tags: Without categories
     improve_recording: Improve a recording
     complete_recording_alphabet: Complete list of recordings starting with
     all_recordings: all recordings
