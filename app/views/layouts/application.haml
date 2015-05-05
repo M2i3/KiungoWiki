@@ -10,6 +10,12 @@
     = stylesheet_link_tag "application"
 
     = javascript_include_tag "application"
+    
+    :javascript
+      var switchTo5x=true;
+      
+    %script{"type"=>"text/javascript", "src"=>"//w.sharethis.com/button/buttons.js"}
+    %script{"type"=>"text/javascript", "src"=>"//s.sharethis.com/loader.js"}
 
     :plain    
       <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -77,4 +83,5 @@
                 - else
                   %li= link_to "in english", lang:"en"
 
-          %p#copyright.span12 © 2013 - KiungoWiki
+          %p#copyright.span12= "© 2013-#{Time.now.year} - KiungoWiki"
+    = render partial: "common/sharethis"

@@ -23,10 +23,6 @@ gem 'mongoid_search', '~> 0.3.2'
 gem 'nested_form'
 gem "http_accept_language"
 
-group :production do
-  gem 'newrelic_rpm'
-end
-
 group :development do
   gem 'guard-bundler'
   gem 'roo', '~> 1.12.1'
