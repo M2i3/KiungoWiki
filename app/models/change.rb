@@ -7,7 +7,11 @@ class Change
 
 
   def display_text
-    wiki_link.display_text
+    if wiki_link
+      wiki_link.display_text
+    else
+      "Unknown"
+    end
   end
 
   def modifier_display_text
@@ -32,7 +36,11 @@ class Change
   end
 
   def wiki_link
-    self.trackable.to_wiki_link
+    if self.trackable
+      self.trackable.to_wiki_link
+    else
+      nil
+    end
   end
 
 end
