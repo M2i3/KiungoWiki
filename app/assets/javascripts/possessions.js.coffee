@@ -1,5 +1,5 @@
 $ ->
-  $('input#acquisition_date').datepicker dateFormat: "yy-mm-dd"
+  $('input#acquisition_date').datepicker dateFormat: "yyyy-mm-dd"
   $('a#confirmaddmusic').click (e) ->
     e.preventDefault()
     haveText = $.trim($('span#havemusic').text())

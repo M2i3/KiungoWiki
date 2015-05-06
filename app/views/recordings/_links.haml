@@ -3,5 +3,7 @@
   %li{class: current_page_classes(action: "edit")}= link_to t("modify"), edit_recording_path(@recording)
   %li= link_to t("discuss"), "#"
   %li= link_to t("history"), "#"
+  - if current_user
+    = render partial: 'common/tag_form', locals: {title: @recording.title, resource: @recording}
   - if can? :destroy, @recording
     %li{class: current_page_classes(action: "admin")}= link_to t('administration'), admin_recording_path(@recording)

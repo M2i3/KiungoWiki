@@ -2,8 +2,6 @@
 
 .row
   = render partial: 'links'
-  - if current_user
-    = render partial: 'common/tag_form', locals: {title: @recording.title, resource: @recording}
   .span12
     = render partial: 'info'
     - if @recording.supplementary_sections.size > 0

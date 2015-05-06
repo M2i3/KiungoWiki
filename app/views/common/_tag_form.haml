@@ -1,5 +1,5 @@
-%p.pull-right{style:"margin-right: 1em; margin-top:0"}
-  = link_to t('tag'), "#addtagform", id: "addtag", "data-toggle" => "modal", class: "btn", role: "button"
+%li
+  = link_to t('tag'), "#addtagform", id: "addtag", "data-toggle" => "modal"
   #addtagform.modal.hide.fade{tabindex: "-1", role: "dialog", "aria-labelledby" => "myModalLabel"}
     .modal-header
       %h3
@@ -9,7 +9,7 @@
         = title
       %p
         %label{for: 'name'}
-          = UserTag.human_attribute_name("name")
+          = t('tag')
         %input#name.user_tag_lookup{type: 'text', value:resource.user_tags_text[current_user], 'data-pre' => resource.tokenized_user_tags(current_user)}
     .modal-footer
       %a.btn{"data-dismiss" => "modal"}

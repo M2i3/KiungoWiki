@@ -3,5 +3,7 @@
   %li{class: current_page_classes(action: "edit")}= link_to t("modify"), edit_work_path(@work)
   %li= link_to t("discuss"), "#"
   %li= link_to t("history"), "#"
+  - if current_user
+    = render partial: 'common/tag_form', locals: {title: @work.title, resource: @work}
   - if can? :destroy, @work
     %li{class: current_page_classes(action: "admin")}= link_to t('administration'), admin_work_path(@work)

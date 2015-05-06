@@ -19,7 +19,7 @@ fr:
       par
     all_artists: tous les artistes
     alphabetical: Par ordre alphabétique
-    by_tag: Par tag/catégorie
+    by_tag: Par étiquettes/catégorie
     recording_explanation: Les enregistrements sont la réalisation sonore d'une oeuvre
       qui forment les éléments d'une parution (ex. vinyle 33 tours, CD, etc) ou qui
       existent sur d'autres media (fichiers mp3, internet, etc).
@@ -130,7 +130,7 @@ fr:
   author: Auteur
   change: Changement
   credits: Crédits
-  tag: tag
+  tag: Étiquettes/Catégories
   administration: Gestion
   preview: Preview
   preview_warning: "WARNING: This is a preview of your changes. They have not been saved into our wiki yet. If you are satisfied with the result make sure you click the [Create|Update] button before leaving"
@@ -163,7 +163,7 @@ fr:
       first: Premier
   addmusic:
     addtomusic: Ajouter à ma musique
-    havemusic: Déjà dans ma musique
+    havemusic: Dans ma musique
     adderror: Parution non ajoutée, veuillez ressayer de nouveau ou vous assurer que
       vous ne possédez pas déjà cette parution
     labels: Étiquettes

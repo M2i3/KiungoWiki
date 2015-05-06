@@ -3,5 +3,8 @@
   %li{class: current_page_classes(action: "edit")}= link_to t("modify"), edit_artist_path(@artist)
   %li= link_to t("discuss"), "#"
   %li= link_to t("history"), "#"
+  - if current_user
+    = render partial: 'common/tag_form', locals: {title: @artist.name, resource: @artist}
   - if can? :destroy, @artist
     %li{class: current_page_classes(action: "admin")}= link_to t('administration'), admin_artist_path(@artist)
+    

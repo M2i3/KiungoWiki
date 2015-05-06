@@ -131,7 +131,7 @@ en:
 
   addmusic:
     addtomusic: Add to My Music
-    havemusic: Already in My Music
+    havemusic: In My Music
     adderror: Album not added, please try again or be sure that you do not already own this release
     labels: Labels
     acquisitiondate: Acquisition Date

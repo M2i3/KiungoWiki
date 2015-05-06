@@ -3,5 +3,8 @@
   %li{class: current_page_classes(action: "edit")}= link_to t("modify"), edit_release_path(@release)
   %li= link_to t("discuss"), "#"
   %li= link_to t("history"), "#"
+  - if current_user
+    = render partial: 'common/tag_form', locals: {title: @release.title, resource: @release}
+    = render partial: 'add_music'
   - if can? :destroy, @release
     %li{class: current_page_classes(action: "admin")}= link_to t('administration'), admin_release_path(@release)

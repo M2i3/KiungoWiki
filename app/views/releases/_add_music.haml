@@ -1,11 +1,11 @@
-%p.pull-right{style:"margin-right: 1em; margin-top:-0.75em;"}
+%li
   - if @possession 
     - link_text = t('addmusic.havemusic')
     - icon_class = "icon-star"
   - else
     - link_text = t('addmusic.addtomusic')
     - icon_class = "icon-star-empty"
-  = link_to link_text, "#addmusicform", id: "addmusic", "data-toggle" => "modal", class: "btn", role: "button"
+  = link_to link_text, "#addmusicform", id: "addmusic", "data-toggle" => "modal"
   #addmusicform.modal.hide.fade{tabindex: "-1", role: "dialog", "aria-labelledby" => "myModalLabel"}
     .modal-header
       %h3
