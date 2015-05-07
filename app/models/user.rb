@@ -58,6 +58,8 @@ class User
   has_many :labels, dependent: :destroy
   has_many :user_tags, dependent: :destroy
 
+  # TODO: Check if that release_wiki_links isn't dead code
+  #
   def release_wiki_links_text
     release_wiki_links.collect{|v| v.reference_text }.join(",")
   end
@@ -71,5 +73,29 @@ class User
     value.split(",").uniq.each{|q| 
       self.release_wiki_links.build(:reference_text=>q.strip) 
     }    
+  end
+  
+  def groups_text
+    self.groups.join(", ")
+  end
+
+  def groups_text=(value)
+    self.groups.clear
+    value.split(",").collect{|g| g.strip }.uniq.each{|q| 
+      self.groups << q
+    }    
+  end
+  
+  def tokenized_groups
+    tokenized = []
+    self.groups.each {|group| tokenized << {id:group, name:group}}
+    tokenized.to_json
+  end
+  
+  
+  class << self
+    def groups
+      ["user", "reviewer", "super-admin"]
+    end
   end
 end

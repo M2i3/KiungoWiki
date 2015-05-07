@@ -119,7 +119,11 @@ KiungoWiki::Application.routes.draw do
   end
   
   namespace :admin do
-    resources :users
+    resources :users do
+      collection do
+        get 'lookup_groups'
+      end
+    end
   end
 
   match 'search' => 'search#index'

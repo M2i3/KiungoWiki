@@ -33,4 +33,20 @@ class Admin::UsersController < ApplicationController
     end
   end
   
+  def lookup_groups
+    respond_to do |format|
+      format.json do
+        # 
+        case params[:q].to_s
+        when "?", "*"
+          query = ".*"
+        else
+          query = Regexp.escape(params[:q].to_s)
+        end
+        
+        render json: (User.groups.select {|g| /#{query}/.match(g) }.collect{|g| {id:g, name:g} }).uniq
+      end
+    end
+  end
+  
 end

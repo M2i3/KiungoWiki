@@ -9,15 +9,13 @@
         = @user.errors.full_messages.join("</br>").html_safe
 
     = form_for @user, url: admin_user_path do |f|
-      %dt= f.label :nickname
-      %dd= f.text_field :nickname
-      %dt= f.label :email
-      %dd= f.text_field :email
-      %dt= f.label :groups
-      %dd
-        - ["user", "reviewer", "super-admin"].each do |group|
-          = label :user, group
-          = "<input id='user_#{group}' type=\"checkbox\" name=\"user[groups][]\" value=\"#{group}\" #{"checked" if @user.groups.include?(group)} />".html_safe
+      %dl
+        %dt= f.label :nickname
+        %dd= f.text_field :nickname
+        %dt= f.label :email
+        %dd= f.text_field :email
+        %dt= f.label :groups
+        %dd= f.text_field :groups_text, 'data-pre' => @user.tokenized_groups, class: 'usergroups_lookup'
       .formActions
         = f.submit class: "btn btn-primary"
         #{link_to t("delete"), admin_user_path(@user), method: :delete, class: 'btn btn-danger'} 

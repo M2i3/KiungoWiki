@@ -233,6 +233,14 @@ $(document).on('ready nested:fieldAdded', function () {
    $form.submit(); // submit the form
   });
 
+  /*
+    User Groups === User Groups === User Groups === User Groups === User Groups === User Groups === User Groups
+  */
+  $('input.usergroups_lookup').tokenInput("/admin/users/lookup_groups.json", {
+    classes: default_linear_classes,
+    hintText: "Type in a search term (use ? or * to see all available values)",
+  });
+
 });
 
 

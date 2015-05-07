@@ -654,11 +654,11 @@ $.TokenList = function (input, url_or_data, settings) {
 
     // Highlight the query part of the search term
     function highlight_term(value, term) {
-        return value.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + term + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<b>$1</b>");
+        return value.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + quote(term) + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<b>$1</b>");
     }
     
     function find_value_and_highlight_term(template, value, term) {
-        return template.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + value + ")(?![^<>]*>)(?![^&;]+;)", "g"), highlight_term(value, term));
+        return template.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + quote(value) + ")(?![^<>]*>)(?![^&;]+;)", "g"), highlight_term(value, term));
     }
 
     // Populate the results dropdown with some results
@@ -825,6 +825,11 @@ $.TokenList = function (input, url_or_data, settings) {
         }
         return url;
     }
+    
+    function quote(str) {
+        return (str+'').replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&");
+    }
+  
 };
 
 // Really basic cache for the results
