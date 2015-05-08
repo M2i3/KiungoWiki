@@ -8,6 +8,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery.tokeninput
+//= require jquery.particleground.min
 //= require jquery.ui.datepicker
 //= require possessions
 //= require user_tag
@@ -245,3 +246,14 @@ $(document).on('ready nested:fieldAdded', function () {
 });
 
 
+$(document).ready(function(){
+  $('#kiungoanimation').particleground({
+      dotColor: '#0088cc',
+      lineColor: '#0088cc',
+      particleRadius: 20,
+      lineWidth: 5,
+      density:7500,
+      curvedLines:true,
+      parallax: false
+  });
+});
