@@ -50,8 +50,8 @@
 
             %ul.nav.profile.pull-right
               %li
-                %form.navbar-search{action: search_url}
-                  %select.search-domain.span1{name:"search_domain"}
+                %form.navbar-search.form-inline{action: search_url}
+                  %select.search-domain.span1{name:"search_domain", style:"width:80px"}
                     = search_domain_options(@search_domain)
                   %input.search-query.span2{name: "q", type: "text", value: params[:q] ? params[:q] : "", placeholder: t("search")}/
               %li= link_to t("headers.possessions_index"), possessions_path
