@@ -238,7 +238,8 @@ $(document).on('ready nested:fieldAdded', function () {
   */
   $('input.usergroups_lookup').tokenInput("/admin/users/lookup_groups.json", {
     classes: default_linear_classes,
-    hintText: "Type in a search term (use ? or * to see all available values)",
+    preventDuplicates: true,
+    hintText: "Type in a search term (use ? or * to see all available values)"
   });
 
 });
