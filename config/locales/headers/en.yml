@@ -1,6 +1,8 @@
 en:
   headers:
+    all: "All"
     home_index: "Home"
+    help_index: "Help"
     global_search_result: "Search Result for '%{q}'"
     works_portal: "Works (portal)"
     works_index: "Works"

@@ -4,7 +4,8 @@ class ReleasesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_artist, :without_supplementary_sections, :without_recordings, :report]
   authorize_resource
   skip_authorize_resource only: [:without_artist, :without_recordings, :without_supplementary_sections, :report]
-
+  before_filter :set_search_domain
+  
   def index
     @releases = build_filter_from_params(params, Release.all.order_by(cache_normalized_title:1))
     
@@ -177,4 +178,9 @@ class ReleasesController < ApplicationController
 
     releases
   end
+
+  def set_search_domain
+    @search_domain = "releases"
+  end
+
 end

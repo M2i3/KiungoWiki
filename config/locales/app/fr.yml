@@ -15,8 +15,7 @@ fr:
     without_recording: Sans enregistrement
     without_releases: Sans parution
     without_additional_sec: Sans section(s) complémentaire(s)
-    complete_artist_alphabet: consulter la liste complète des artistes commençant
-      par
+    complete_artist_alphabet: consulter la liste complète des artistes commençant par
     all_artists: tous les artistes
     alphabetical: Par ordre alphabétique
     by_tag: Par étiquettes/catégorie
@@ -57,10 +56,10 @@ fr:
     delete_release_warning: ???
     delete_work_warning: ???
   home:
-    music_reference: Une référence en musique qui mets en évidence le <strong>rôle
-      des créateurs et interprêtes</strong>
-    work_link: Un Wiki sur les oeuvres audios ainsi que les <strong>liens entre ces
-      oeuvres</strong> dans le temps et l'espace
+    music_reference: "Une référence en musique qui mets en évidence le <strong>rôle
+      des créateurs et interprêtes</strong>"
+    work_link: "Un Wiki sur les oeuvres audios ainsi que les <strong>liens entre ces
+      oeuvres</strong> dans le temps et l'espace"
   rsearch:
     search_artist_keywords: Une recherche dans les artistes peut prendre plusieurs
       formes et être raffinée avec les mots-clefs suivants
@@ -110,6 +109,34 @@ fr:
       Par exemple
     limit_work_language: Limite la recherche dans le code de langue de l'oeuvre sewulement.
       Par exemple
+
+  search_count:
+    artists:
+      zero: '%{count} artiste'
+      one: '%{count} artiste'
+      other: '%{count} artistes'
+    works:
+      zero: '%{count} oeuvre'
+      one: '%{count} oeuvre'
+      other: '%{count} oeuvres'      
+    recordings:
+      zero: '%{count} enregistrement'
+      one: '%{count} enregistrement'
+      other: '%{count} enregistrements'      
+    releases:
+      zero: '%{count} parution'
+      one: '%{count} parution'
+      other: '%{count} parutions'            
+    my_music:
+      zero: '%{count} parution dans ma musique'
+      one: '%{count} parution dans ma musique'
+      other: '%{count} parutions dans ma musique'
+    categories:
+      zero: '%{count} catégorie'
+      one: '%{count} catégorie'
+      other: '%{count} catégories'            
+
+
   show: Afficher
   modify: Modifier
   discuss: Discuter
@@ -121,6 +148,7 @@ fr:
   birth: Naissance
   death: Décès
   search_question: Vous n’avez pas trouvé ce que vous cherchiez ?
+  search_count_description: "Nous avons trouvé %{count_list} pour la recherche sur '%{q}'"
   delete: Supprimer
   update: Update
   back: Back
@@ -152,6 +180,12 @@ fr:
     new_release_portal_article: sur un release
     new_category_portal_article: sur une catégorie
     new_general_portal_article: article seulement
+    new_entry: Créez une fiche sur
+    new_artist_entry: un(e) artiste
+    new_work_entry: une oeuvre
+    new_release_entry: une parution
+    new_recording_entry: un enregistrement
+    
   views:
     created_at: Créé le
     updated_at: Modifié le

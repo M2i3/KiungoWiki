@@ -4,7 +4,8 @@ class WorksController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_artist, :without_recordings, :without_lyrics, :without_tags, :without_supplementary_sections, :report]
   authorize_resource
   skip_authorize_resource only: [:without_artist, :without_recordings, :without_lyrics, :without_tags, :without_supplementary_sections, :report]
-
+  before_filter :set_search_domain
+  
   def index
     @works = build_filter_from_params(params, Work.all.order_by(cache_normalized_title:1))
 
@@ -189,4 +190,9 @@ class WorksController < ApplicationController
 
     works
   end
+
+  def set_search_domain
+    @search_domain = "works"
+  end
+
 end

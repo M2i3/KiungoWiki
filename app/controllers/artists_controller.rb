@@ -4,6 +4,7 @@ class ArtistsController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_work, :without_recordings, :without_releases, :without_supplementary_sections, :report]
   authorize_resource
   skip_authorize_resource only: [:without_work, :without_recordings, :without_releases, :without_supplementary_sections, :report]
+  before_filter :set_search_domain
   
   def index
     @artists = build_filter_from_params(params, Artist.all.order_by(cache_normalized_name:1))
@@ -189,5 +190,9 @@ class ArtistsController < ApplicationController
       artists = artists.page(params[:page])
 
       artists
+    end
+    
+    def set_search_domain
+      @search_domain = "artists"
     end
 end

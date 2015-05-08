@@ -73,7 +73,27 @@ en:
     limit_work_lyrics: Limit the search to the lyrics of the work only. For example
     limit_work_date_written: Search using the date the work was written. The date must be in "yyyy-mm-dd" format and can be a partial date. For example
     limit_work_language: Limit the search to the language code of the work. For example
-    
+  
+  search_count:
+    artists:
+      one: '%{count} artist'
+      other: '%{count} artists'
+    works:
+      one: '%{count} work'
+      other: '%{count} works'      
+    recordings:
+      one: '%{count} recording'
+      other: '%{count} recordings'      
+    releases:
+      one: '%{count} release'
+      other: '%{count} releases'            
+    my_music:
+      one: '%{count} my music release'
+      other: '%{count} my music releases'            
+    categories:
+      one: '%{count} category'
+      other: '%{count} categories'            
+      
   show: Show
   modify: Modify
   discuss: Discuss
@@ -85,6 +105,7 @@ en:
   birth: Birth
   death: Death
   search_question: You have not found what you were looking for ?
+  search_count_description: "We have found %{count_list} for the search '%{q}'"
   delete: Delete
   update: Update
   back: Back
@@ -118,7 +139,12 @@ en:
     new_release_portal_article: about an release
     new_category_portal_article: about a category
     new_general_portal_article: article only
-
+    new_entry: Create a new entry on 
+    new_artist_entry: an artist
+    new_work_entry: a work
+    new_release_entry: a release
+    new_recording_entry: a recording
+      
   views:
     created_at: Created at
     updated_at: Modified on

@@ -1,48 +1,63 @@
 .page-header
   = title(t("headers.global_search_result", q: params[:q]))
-
+  
 .row
   .span12
-    %h2= t("headers.artists_index")
-    = render partial: "artists/search_result", object: @artists
-    - unless @artists.last_page? 
-      .well= link_to_unless @artists.last_page?, t("rsearch.more_results"), artists_path(page: @artists.current_page + 1, q: params[:q])
-    = t("search_question")
-    = link_to t("new"), new_artist_path(q: params[:q]), class: "btn"
+    %p= search_count_description(params[:q], @search_counts)
 
-.row
-  .span12
-    %h2= t("headers.works_index")
-    = render partial: "works/search_result", object: @works
-    - unless @works.last_page? 
-      .well= link_to "plus de résultats", works_path(page: @works.current_page + 1, q: params[:q])
-    %p
-      = t("search_question")
-      = link_to t("new"), new_work_path(q: params[:q]), class: "btn"
+- if @search_counts[:artists].to_i > 0
+  .row
+    .span12
+      %h2= t("headers.artists_index")
+      = render partial: "artists/search_result", object: @artists
+      - unless @artists.last_page? 
+        .well= link_to t("rsearch.more_results"), artists_path(page: @artists.current_page + 1, q: params[:q])
 
-.row
-  .span12
-    %h2= t("headers.recordings_index")
-    = render partial: "recordings/search_result", object: @recordings
-    - unless @recordings.last_page? 
-      .well= link_to_unless @recordings.last_page?, "plus de résultats", recordings_path(page: @recordings.current_page + 1, q: params[:q])
-    = t("search_question")
-    = link_to t("new"), new_recording_path(q: params[:q]), class: "btn"
+- if @search_counts[:works].to_i > 0
+  .row
+    .span12
+      %h2= t("headers.works_index")
+      = render partial: "works/search_result", object: @works
+      - unless @works.last_page? 
+        .well= link_to "plus de résultats", works_path(page: @works.current_page + 1, q: params[:q])
 
-.row
-  .span12
-    %h2= t("headers.releases_index")
-    = render partial: "releases/search_result", object: @releases
-    - unless @releases.last_page? 
-      .well= link_to_unless @releases.last_page?, t("rsearch.more_results"), recordings_path(page: @releases.current_page + 1, q: params[:q])
-    = t("search_question")
-    = link_to t("new"), new_release_path(q: params[:q]), class: "btn"
+- if @search_counts[:recordings].to_i > 0
+  .row
+    .span12
+      %h2= t("headers.recordings_index")
+      = render partial: "recordings/search_result", object: @recordings
+      - unless @recordings.last_page? 
+        .well= link_to "plus de résultats", recordings_path(page: @recordings.current_page + 1, q: params[:q])
 
-.row
-  .span12
-    %h2= t("headers.categories_index")
-    = render partial: "categories/search_result", object: @categories
-    - unless @categories.last_page? 
-      .well= link_to_unless @categories.last_page?, t("rsearch.more_results"), recordings_path(page: @categories.current_page + 1, q: params[:q])
-    = t("search_question")
-    = link_to t("new"), new_category_path(q: params[:q]), class: "btn"
+- if @search_counts[:releases].to_i > 0
+  .row
+    .span12
+      %h2= t("headers.releases_index")
+      = render partial: "releases/search_result", object: @releases
+      - unless @releases.last_page? 
+        .well= link_to t("rsearch.more_results"), recordings_path(page: @releases.current_page + 1, q: params[:q])
+
+- if @search_counts[:categories].to_i > 0
+  .row
+    .span12
+      %h2= t("headers.categories_index")
+      = render partial: "categories/search_result", object: @categories
+      - unless @categories.last_page? 
+        .well= link_to t("rsearch.more_results"), recordings_path(page: @categories.current_page + 1, q: params[:q])
+
+
+- if @search_domain == "all"
+  .row
+    .span12
+      .well
+        = t("search_question")
+        - if @search_domain == "all"
+          %div.dropdown{style: "display: inline-block !important"}
+            %a.downdown-toggle{"data-toggle"=>"dropdown"}
+              = t("actions.new_entry")
+              %b.caret
+            %ul.dropdown-menu
+              %li= link_to t("actions.new_artist_entry"), new_artist_path(q: params[:q])
+              %li= link_to t("actions.new_work_entry"), new_work_path(q: params[:q])
+              %li= link_to t("actions.new_recording_entry"), new_recording_path(q: params[:q])
+              %li= link_to t("actions.new_release_entry"), new_release_path(q: params[:q])

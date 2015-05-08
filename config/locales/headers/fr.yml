@@ -1,6 +1,8 @@
 fr:
   headers:
+    all: Tout
     home_index: Accueil
+    help_index: "Aide"
     global_search_result: "Résultat de la recherche pour '%{q}'"
     works_portal: Oeuvres (portail)
     works_index: Oeuvres

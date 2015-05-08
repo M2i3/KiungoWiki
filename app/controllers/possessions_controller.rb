@@ -1,6 +1,8 @@
 class PossessionsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource except: :index
+  before_filter :set_search_domain
+  
   # GET /possessions
   # GET /possessions.json
   def index
@@ -77,6 +79,11 @@ class PossessionsController < ApplicationController
       format.html { redirect_to possessions_url }
       format.json { head :no_content }
     end
+  end
+
+  protected
+  def set_search_domain
+    @search_domain = "my-music"
   end
     
 end
