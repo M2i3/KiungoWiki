@@ -13,7 +13,7 @@
         %dt= f.label :nickname
         %dd= f.text_field :nickname
         %dt= f.label :email
-        %dd= f.text_field :email
+        %dd= f.text_field :email, autocomplete: "off" 
         %dt= f.label :groups
         %dd= f.text_field :groups_text, 'data-pre' => @user.tokenized_groups, class: 'usergroups_lookup'
       .formActions
