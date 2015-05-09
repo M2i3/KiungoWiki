@@ -250,10 +250,10 @@ $(document).ready(function(){
   $('#kiungoanimation').particleground({
       dotColor: '#0088cc',
       lineColor: '#0088cc',
-      particleRadius: 20,
+      particleRadius: 25,
       lineWidth: 5,
-      density:7500,
-      curvedLines:true,
+      density:8500,
+      proximity:103,
       parallax: false
   });
 });
