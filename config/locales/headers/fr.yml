@@ -11,11 +11,11 @@ fr:
     works_recent_changes: Oeuvres modifiées récemments
     works_alphabetic_index: "Oeuvres commençant par %{heading}"
     works_all_index: Toutes les oeuvres
-    works_without_tags: Oeuvres sans catégories
-    works_without_supplementary_sections: Oeuvres sans sections supplémentaires
-    works_without_recordings: Oeuvres sans enregistrements
-    works_without_lyrics: Oeuvres sans paroles 
-    works_without_artist: Oeuvres sans artistes
+    works_without_tags: Oeuvres sans catégorie
+    works_without_supplementary_sections: Oeuvres sans section complémentaire
+    works_without_recordings: Oeuvres sans enregistrement
+    works_without_lyrics: Oeuvres sans parole
+    works_without_artist: Oeuvres sans artiste
     artists_portal: Artistes (portail)
     artists_index: Artistes
     artists_search_result: "Artistes pour '%{q}'"
@@ -23,10 +23,10 @@ fr:
     artists_recent_changes: Artistes modifiés récemments
     artists_alphabetic_index: Artistes commençant par %{heading}
     artists_all_index: Tous les artistes
-    artists_without_recordings: Artistes sans enregistrements
-    artists_without_releases: Artistes sans parutions
-    artists_without_supplementary_sections: Artistes sans section(s) supplémentaire(s)
-    artists_without_work: Artistes sans oeuvres
+    artists_without_recordings: Artistes sans enregistrement
+    artists_without_releases: Artistes sans parution
+    artists_without_supplementary_sections: Artistes sans section complémentaire
+    artists_without_work: Artistes sans oeuvre
     releases_portal: Parutions (portail)
     releases_index: Parutions
     releases_search_result: "Parutions pour '%{q}'"
@@ -34,9 +34,9 @@ fr:
     releases_recent_changes: Parutions modifiés récemments
     releases_alphabetic_index: Parutions commençant par %{heading}
     releases_all_index: Toutes les parutions
-    releases_without_artist: Parutions sans artistes
-    releases_without_recordings: Parutions sans enregistrements
-    releases_without_supplementary_sections: Parutions sans section(s) supplémentaire(s)
+    releases_without_artist: Parutions sans artiste
+    releases_without_recordings: Parutions sans enregistrement
+    releases_without_supplementary_sections: Parutions sans section complémentaire
     recordings_portal: Enregistrements (portail)
     recordings_index: Enregistrements
     recordings_search_result: "Enregistrements pour '%{q}'"
@@ -44,10 +44,10 @@ fr:
     recordings_recent_changes: Enregistrements modifiés récemments
     recordings_alphabetic_index: Enregistrements commençant par %{heading}
     recordings_all_index: Tous les enregistrements
-    recordings_without_artist: "Enregistrements sans artistes"
-    recordings_without_releases: Enregistrements sans parutions
-    recordings_without_supplementary_sections: Enregistrements sans section(s) supplémentaire(s)
-    recordings_without_tags: Enregistrements sans catégories
+    recordings_without_artist: Enregistrements sans artiste
+    recordings_without_releases: Enregistrements sans parution
+    recordings_without_supplementary_sections: Enregistrements sans section complémentaire
+    recordings_without_tags: Enregistrements sans catégorie
     portal_article_release: 'Parution du mois: %{featured}'
     portal_article_artist: 'Artiste du mois: %{featured}'
     portal_article_recording: 'Enregistrement du mois: %{featured}'
