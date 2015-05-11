@@ -8,6 +8,9 @@ class SearchQuery
   def self.meta_fields
     []
   end
+  def self.primary_display_text
+    []
+  end
 
   attr_reader :q
 
@@ -83,11 +86,33 @@ class SearchQuery
         (var_expression.respond_to?(:each) ? var_expression : [var_expression])
     end
   end
+  
+  def metaq_fields 
+    (self.filled_query_fields & self.class.meta_fields)
+  end
+  def objectq_fields
+    (self.filled_query_fields - self.class.meta_fields)
+  end
 
   def metaq
-    (self.filled_query_fields & self.class.meta_fields).collect {|var_name| self.instance_variable_get("@full_#{var_name}") }.join(" ")
+    self.metaq_fields.collect {|var_name| self.instance_variable_get("@full_#{var_name}") }.join(" ")
   end
   def objectq
-    (self.filled_query_fields - self.class.meta_fields).collect {|var_name| self.instance_variable_get("@full_#{var_name}") }.join(" ")
+    self.objectq_fields.collect {|var_name| self.instance_variable_get("@full_#{var_name}") }.join(" ")
+  end
+  def objectq_display_text
+    primary_display_fields = (self.objectq_fields & self.class.primary_display_text)
+    additional_display_fields = (self.objectq_fields - self.class.primary_display_text)
+    
+    display_text = primary_display_fields.collect {|var_name| self.instance_variable_get("@#{var_name}") }.join(" ")
+    
+    unless additional_display_fields.empty?
+      display_text << " [ " unless primary_display_fields.empty?
+      display_text << additional_display_fields.collect {|var_name| self.instance_variable_get("@full_#{var_name}") }.join(" ")
+      display_text << " ]" unless primary_display_fields.empty?
+    end
+    
+        
+    display_text
   end
 end

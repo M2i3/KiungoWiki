@@ -7,10 +7,10 @@ class ReleaseWikiLink < WikiLink
   field :item_id, type: String
   field :track_number, type: String
 
-  def title_with_objectq
-    title_without_objectq.blank? ? self.objectq : title_without_objectq
+  def title_with_objectq_display_text
+    title_without_objectq_display_text.blank? ? self.objectq_display_text : title_without_objectq_display_text
   end
-  alias_method_chain :title, :objectq
+  alias_method_chain :title, :objectq_display_text
 
   def object_text
     self.title.to_s
@@ -41,6 +41,9 @@ class ReleaseWikiLink < WikiLink
     def self.catch_all
       "title"
     end 
+    def self.primary_display_text
+      [:title]
+    end
   end
 
 end

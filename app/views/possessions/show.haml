@@ -4,6 +4,10 @@
   = render partial: 'links'
   .span12
     %p
+      = "#{Work.human_attribute_name("display_title")}:"
+      = @possession.display_title
+  
+    %p
       = "#{t('addmusic.release')}:"
       = release_wiki_link_path @possession.release_wiki_link
     %p

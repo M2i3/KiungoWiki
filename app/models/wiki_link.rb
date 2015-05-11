@@ -45,6 +45,10 @@ class  WikiLink
   def objectq  
     self.searchref.objectq
   end
+  
+  def objectq_display_text
+    self.searchref.objectq_display_text
+  end
 
   def object_text
     throw NotImplementedError
