@@ -94,28 +94,33 @@ $(document).on('ready nested:fieldAdded', function () {
   $("input.work_title_lookup").tokenInput("/works/lookup.json", {
     tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
   
   $("input.works_title_lookup").tokenInput("/works/lookup.json", {
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
   $("input.artist_works_title_lookup").tokenInput("/works/lookup.json?src=artist", {
     tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
   $("input.recording_works_title_lookup").tokenInput("/works/lookup.json?src=recording", {
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
   $("input.work_works_title_lookup").tokenInput("/works/lookup.json?src=work", {
     tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
@@ -125,36 +130,41 @@ $(document).on('ready nested:fieldAdded', function () {
   $("input.artist_lookup").tokenInput("/artists/lookup.json", {
     tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
   $("input.artists_lookup").tokenInput("/artists/lookup.json", {
     tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
   $("input.release_artists_lookup").tokenInput("/artists/lookup.json?src=release", {
-    tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
   $("input.artist_artists_lookup").tokenInput("/artists/lookup.json?src=artist", {
     tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
   $("input.recording_artists_lookup").tokenInput("/artists/lookup.json?src=recording", {
     tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
   $("input.work_artists_lookup").tokenInput("/artists/lookup.json?src=work", {
     tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
@@ -164,24 +174,26 @@ $(document).on('ready nested:fieldAdded', function () {
   $("input.release_title_lookup").tokenInput("/releases/lookup.json", {
     tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
   
   $("input.releases_title_lookup").tokenInput("/releases/lookup.json", {
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
-
   });
 
   $("input.artist_releases_title_lookup").tokenInput("/releases/lookup.json?src=artist", {
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
-
   });
 
   $("input.recording_releases_title_lookup").tokenInput("/releases/lookup.json?src=recording", {
     tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
@@ -191,27 +203,32 @@ $(document).on('ready nested:fieldAdded', function () {
   $("input.recording_title_lookup").tokenInput("/recordings/lookup.json", {
     tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
   
   $("input.recordings_title_lookup").tokenInput("/recordings/lookup.json", {
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
   $("input.release_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=release", {
     tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
   $("input.artist_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=artist", {
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
   $("input.work_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=work", {
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
@@ -221,11 +238,13 @@ $(document).on('ready nested:fieldAdded', function () {
   $("input.category_lookup").tokenInput("/categories/lookup.json", {
     tokenLimit: 1,
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
 
   $("input.categories_lookup").tokenInput("/categories/lookup.json", {
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
   
@@ -234,6 +253,7 @@ $(document).on('ready nested:fieldAdded', function () {
   */
   $('input.labels_lookup').tokenInput("/labels/lookup.json", {
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
   
@@ -242,6 +262,7 @@ $(document).on('ready nested:fieldAdded', function () {
   */
   $('input.publishers_lookup').tokenInput("/publishers/lookup.json", {
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
   
@@ -250,6 +271,7 @@ $(document).on('ready nested:fieldAdded', function () {
   */
   $('input.user_tag_lookup').tokenInput("/user_tags/lookup.json", {
     enableHTML: true,
+    tokenDelimiter: "||",
     classes: default_classes
   });
   

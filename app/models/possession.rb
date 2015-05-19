@@ -41,7 +41,7 @@ class Possession
 
   def labels_text=(value)
     self.labels.clear
-    value.split(",").each{|q| 
+    value.split("||").each{|q| 
       self.labels << q
     }    
   end

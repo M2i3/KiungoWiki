@@ -61,7 +61,7 @@ class User
   # TODO: Check if that release_wiki_links isn't dead code
   #
   def release_wiki_links_text
-    release_wiki_links.collect{|v| v.reference_text }.join(",")
+    release_wiki_links.collect{|v| v.reference_text }.join("||")
   end
 
   def release_wiki_links_combined_links
@@ -70,7 +70,7 @@ class User
 
   def release_wiki_links_text=(value)
     self.release_wiki_links.reverse.each{|a| a.destroy} #TODO find a way to do it at large since the self.release_wiki_links.clear does not work
-    value.split(",").uniq.each{|q| 
+    value.split("||").uniq.each{|q| 
       self.release_wiki_links.build(:reference_text=>q.strip) 
     }    
   end
@@ -81,7 +81,7 @@ class User
 
   def groups_text=(value)
     self.groups.clear
-    value.split(",").collect{|g| g.strip }.uniq.each{|q| 
+    value.split("||").collect{|g| g.strip }.uniq.each{|q| 
       self.groups << q
     }    
   end

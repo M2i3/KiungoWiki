@@ -65,7 +65,7 @@ class Work
 
 
   def artist_wiki_links_text
-    artist_wiki_links.collect{|v| v.reference_text }.join(",")
+    artist_wiki_links.collect{|v| v.reference_text }.join("||")
   end
 
   def artist_wiki_links_combined_links
@@ -74,7 +74,7 @@ class Work
 
   def artist_wiki_links_text=(value)
     links = []
-    value.split(",").each{|q| 
+    value.split("||").each{|q| 
       links << WorkArtistWikiLink.new(:reference_text=>q.strip) 
     }    
     self.artist_wiki_links = links
@@ -85,7 +85,7 @@ class Work
   end
 
   def recording_wiki_links_text
-    recording_wiki_links.collect{|v| v.reference_text }.join(",")
+    recording_wiki_links.collect{|v| v.reference_text }.join("||")
   end
 
   def recording_wiki_links_combined_links
@@ -101,14 +101,14 @@ class Work
 
   def recording_wiki_links_text=(value)
     links = []
-    value.split(",").each{|q| 
+    value.split("||").each{|q| 
       links << WorkRecordingWikiLink.new(:reference_text=>q.strip) 
     }
     self.recording_wiki_links = links
   end
 
   def work_wiki_links_text
-    work_wiki_links.collect{|v| v.reference_text }.join(",")
+    work_wiki_links.collect{|v| v.reference_text }.join("||")
   end
 
   def work_wiki_links_combined_links
@@ -117,7 +117,7 @@ class Work
 
   def work_wiki_links_text=(value)
     links = []
-    value.split(",").uniq.each{|q| 
+    value.split("||").uniq.each{|q| 
       links << WorkWorkWikiLink.new(:reference_text=>q.strip) 
     }
     self.work_wiki_links = links    
@@ -172,7 +172,7 @@ class Work
 
   def publishers_text=(value)
     self.publishers.clear
-    value.split(",").each{|q| 
+    value.split("||").each{|q| 
       self.publishers << q
     }    
   end

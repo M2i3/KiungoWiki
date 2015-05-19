@@ -55,7 +55,7 @@ class Release
 
 
   def artist_wiki_links_text
-    artist_wiki_links.collect{|v| v.reference_text }.join(",")
+    artist_wiki_links.collect{|v| v.reference_text }.join("||")
   end
 
   def artist_wiki_links_combined_links
@@ -64,7 +64,7 @@ class Release
 
   def artist_wiki_links_text=(value)
     links = []
-    value.split(",").each{|q| 
+    value.split("||").each{|q| 
       links << ReleaseArtistWikiLink.new(reference_text: q.strip) 
     }
     self.artist_wiki_links = links
@@ -75,7 +75,7 @@ class Release
   end
   
   def recording_wiki_links_text
-    recording_wiki_links.collect{|v| v.reference_text }.join(",")
+    recording_wiki_links.collect{|v| v.reference_text }.join("||")
   end
 
   def recording_wiki_links_combined_links
@@ -91,7 +91,7 @@ class Release
 
   def recording_wiki_links_text=(value)
     links = []
-    value.split(",").each{|q| 
+    value.split("||").each{|q| 
       links << ReleaseRecordingWikiLink.new(reference_text: q.strip) 
     }
     self.recording_wiki_links = links

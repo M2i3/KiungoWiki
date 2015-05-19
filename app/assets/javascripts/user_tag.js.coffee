@@ -7,7 +7,7 @@ $ ->
       _method: 'PUT'
       (data) =>
         liTags = ""
-        for tagName in name.split(",")
+        for tagName in name.split("||")
           liTags += "<li>#{tagName}</li>"
         $('ul#tags').html liTags
         $('#addtagform').modal('hide')
