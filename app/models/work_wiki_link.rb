@@ -5,7 +5,7 @@ class WorkWikiLink < WikiLink
   cache_attributes :title, :language_code, :date_written
 
   def title_with_objectq
-    title_without_objectq.blank? ? self.objectq : title_without_objectq
+    title_without_objectq.blank? ? self.objectq_display_text : title_without_objectq
   end
   alias_method_chain :title, :objectq
 
