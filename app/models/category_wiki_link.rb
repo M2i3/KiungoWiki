@@ -24,7 +24,7 @@ class CategoryWikiLink < WikiLink
       })
     end
     def self.catch_all
-      "category_name"
+      :category_name
     end 
   end
 end

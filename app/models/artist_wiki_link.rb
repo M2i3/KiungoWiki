@@ -6,7 +6,7 @@ class ArtistWikiLink < WikiLink
 
   field :start_date, type: String
   field :end_date, type: String
-
+  
   def name(exclude_role=false)
     if artist
       case
@@ -55,7 +55,7 @@ class ArtistWikiLink < WikiLink
       superclass.query_expressions.merge QUERY_ATTRS
     end
     def self.catch_all
-      "name"
+      :name
     end 
   end
 end

@@ -39,7 +39,7 @@ class RecordingWikiLink < WikiLink
       super.merge QUERY_ATTRS
     end
     def self.catch_all
-      "title"
+      :title
     end 
   end
 end

@@ -163,8 +163,10 @@ class ArtistsController < ApplicationController
     respond_to do |format|
       format.json { 
         render json: (Artist.queried(asq.objectq).limit(20).collect{|art| 
+          
+          art.to_wiki_link(wiki_link_klass).combined_link
 
-          wiki_link_klass.new(reference_text: "oid:#{art.id} #{asq.metaq}").combined_link
+          #wiki_link_klass.new(reference_text: "oid:#{art.id} #{asq.metaq}").combined_link
 
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }

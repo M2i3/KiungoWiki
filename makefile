@@ -12,7 +12,7 @@ build:
 	docker build -t registry:5001/kiungo/kiungowiki -f ./dockerfiles/Dockerfile ./
 	
 console: app.up
-	docker run --rm -it -v "$(shell pwd)":/usr/src/app -w /usr/src/app -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db registry:5001/kiungo/kiungowiki /bin/bash
+	docker run --rm -it -v "$(shell pwd)":/usr/src/app -w /usr/src/app -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db registry:5001/kiungo/kiungowiki bundle exec rails c
 
 run: build app.up
 	docker run --rm -it -p 3000:3000 --name kiungo--kiungowiki.web.0 -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db registry:5001/kiungo/kiungowiki

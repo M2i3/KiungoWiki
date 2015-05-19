@@ -78,7 +78,7 @@ class  WikiLink
     []
   end
 
-  class << self
+  class << self    
 
     def set_reference_class(klass)
 

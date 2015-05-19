@@ -6,6 +6,7 @@ class Artist
 
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
 
+  field :signature, type:  String
   field :name, type:  String
   field :surname, type:  String, default:  ""
   field :given_name, type:  String, default:  ""
@@ -16,6 +17,7 @@ class Artist
   field :origartistid, type:  String
   field :is_group, type:  Integer
   field :missing_supplementary_sections, type: Boolean
+
 
   #
   # calculated values so we can index and sort
@@ -75,6 +77,9 @@ class Artist
         self.name = self.given_name
       end
     end
+  end
+  
+  def searchref
   end
 
   def release_title
@@ -200,10 +205,20 @@ class Artist
     self.set_name
     self.cache_normalized_name = self.normalized_name
     self.cache_first_letter = self.name_first_letter
+    self.signature = self.to_search_query.signature
   end
 
   def to_wiki_link(klass=ArtistWikiLink)
-    klass.new(reference_text: "oid:#{self.id}" , artist: self)
+    klass.new(reference_text: self.to_search_query.q, artist: self)
+#    klass.new(reference_text: "oid:#{self.id}" , artist: self)    
+  end
+  
+  def to_search_query
+    sq = ArtistWikiLink::SearchQuery.new
+    ArtistWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|key|
+      sq[key] = self[key]
+    }
+    sq
   end
   
   def user_tags_text
