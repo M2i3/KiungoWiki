@@ -20,7 +20,7 @@ class ArtistWikiLink < WikiLink
           self.name
       end
     else
-      self.objectq
+      self.objectq_display_text
     end #+ ((role.blank? || exclude_role) ? "" : " [#{self.role}]")
   end
 
@@ -57,5 +57,8 @@ class ArtistWikiLink < WikiLink
     def self.catch_all
       :name
     end 
+    def self.primary_display_text
+      [:name]
+    end
   end
 end
