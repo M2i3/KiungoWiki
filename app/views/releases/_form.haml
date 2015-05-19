@@ -13,6 +13,7 @@
   %dd= form.text_field :artist_wiki_links_text, class: "release_artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
 
   %h2= Recording.model_name.human.pluralize
+
   %table.table.table-striped
     %thead
       %tr
@@ -29,6 +30,7 @@
           %td= r.text_field :itemSection, class: "span1"
           %td= r.text_field :trackNb, class: "span1"
           %td= r.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'      
+    %tfoot
       %tr
         %td{colspan:5}
           = form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :recording_wiki_links, class: 'btn btn-primary pull-right'

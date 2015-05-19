@@ -28,7 +28,7 @@ body {
   width: 121px;
   height: 20px;
   background: url('header-logo.png');  
-text-indent: -999999px;
+  text-indent: -999999px;
 }
 
 span.letter:after {
