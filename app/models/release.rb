@@ -31,15 +31,15 @@ class Release
   validates_presence_of :title
 
   embeds_many :artist_wiki_links, as: :linkable, class_name: "ReleaseArtistWikiLink"
-  accepts_nested_attributes_for :artist_wiki_links
+  accepts_nested_attributes_for :artist_wiki_links, allow_destroy: true
   validates_associated :artist_wiki_links
 
   embeds_many :recording_wiki_links, as: :linkable, class_name: "ReleaseRecordingWikiLink"
-  accepts_nested_attributes_for :recording_wiki_links
+  accepts_nested_attributes_for :recording_wiki_links, allow_destroy: true
   validates_associated :recording_wiki_links
 
   embeds_many :supplementary_sections, class_name: "SupplementarySection"
-  accepts_nested_attributes_for :supplementary_sections
+  accepts_nested_attributes_for :supplementary_sections, allow_destroy: true
   validates_associated :supplementary_sections
   
   embeds_many :tags, as: :taggable, class_name: "PublicTag"

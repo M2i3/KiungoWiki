@@ -56,6 +56,14 @@ module ApplicationHelper
       ""
     end
   end
+  
+  def format_combined_link_pre(combined_link)
+    if combined_link == {:id=>"", :name=>""}
+      ''
+    else
+      [combined_link].to_json
+    end
+  end
 
   def current_page_classes(params ={}, classes="")
     if current_page?(params)

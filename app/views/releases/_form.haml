@@ -11,19 +11,29 @@
   %dd= form.text_field :reference_code
   %dt= form.label :artist_wiki_links_text
   %dd= form.text_field :artist_wiki_links_text, class: "release_artists_lookup", :"data-pre"=>form.object.artist_wiki_links_combined_links.to_json
-  .well
-    %h2= Recording.model_name.human.pluralize
-    = form.fields_for :recording_wiki_links do |r|
-      %p= r.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
-      %dt= r.label :reference_text
-      %dd= r.text_field :reference_text, class: "release_recordings_title_lookup", :"data-pre"=>[r.object.combined_link].to_json
-      %dt= r.label :itemSection, Recording.human_attribute_name("itemSection")
-      %dd= r.text_field :itemSection
-      %dt= r.label :itemId, Recording.human_attribute_name("itemId")
-      %dd= r.text_field :itemId
-      %dt= r.label :trackNb, Recording.human_attribute_name("trackNb")
-      %dd= r.text_field :trackNb
-    %p= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :recording_wiki_links, class: 'btn btn-primary pull-right'
+
+  %h2= Recording.model_name.human.pluralize
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= Recording.model_name.human
+        %th= Recording.human_attribute_name("itemId")
+        %th= Recording.human_attribute_name("itemSection")
+        %th= Recording.human_attribute_name("trackNb")
+        %th &nbsp;
+    %tbody
+      = form.fields_for :recording_wiki_links, wrapper: false do |r|
+        %tr.fields
+          %td= r.text_field :reference_text, class: "release_recordings_title_lookup", :"data-pre"=>format_combined_link_pre(r.object.combined_link)
+          %td= r.text_field :itemId, class: "span1"
+          %td= r.text_field :itemSection, class: "span1"
+          %td= r.text_field :trackNb, class: "span1"
+          %td= r.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'      
+      %tr
+        %td{colspan:5}
+          = form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :recording_wiki_links, class: 'btn btn-primary pull-right'
+    
+    
   = form.fields_for :supplementary_sections do |ss|
     %dt= ss.label t("headers.supplement_section")
     %dd= ss.text_field :title

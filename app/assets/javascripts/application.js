@@ -92,138 +92,165 @@ $(document).on('ready nested:fieldAdded', function () {
     Work === Work === Work === Work === Work === Work === Work === Work === Work === Work
   */
   $("input.work_title_lookup").tokenInput("/works/lookup.json", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
   
   $("input.works_title_lookup").tokenInput("/works/lookup.json", {
-     classes: default_classes
+    enableHTML: true,
+    classes: default_classes
   });
 
   $("input.artist_works_title_lookup").tokenInput("/works/lookup.json?src=artist", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
 
   $("input.recording_works_title_lookup").tokenInput("/works/lookup.json?src=recording", {
-     classes: default_classes
+    enableHTML: true,
+    classes: default_classes
   });
 
   $("input.work_works_title_lookup").tokenInput("/works/lookup.json?src=work", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
 
   /*
     Artist === Artist === Artist === Artist === Artist === Artist === Artist === Artist
   */
   $("input.artist_lookup").tokenInput("/artists/lookup.json", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
 
   $("input.artists_lookup").tokenInput("/artists/lookup.json", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
 
   $("input.release_artists_lookup").tokenInput("/artists/lookup.json?src=release", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
 
   $("input.artist_artists_lookup").tokenInput("/artists/lookup.json?src=artist", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
 
   $("input.recording_artists_lookup").tokenInput("/artists/lookup.json?src=recording", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
 
   $("input.work_artists_lookup").tokenInput("/artists/lookup.json?src=work", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
 
   /*
     Release === Release === Release === Release === Release === Release === Release === Release === Release
   */
   $("input.release_title_lookup").tokenInput("/releases/lookup.json", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
   
   $("input.releases_title_lookup").tokenInput("/releases/lookup.json", {
-     classes: default_classes
+    enableHTML: true,
+    classes: default_classes
+
   });
 
   $("input.artist_releases_title_lookup").tokenInput("/releases/lookup.json?src=artist", {
-     classes: default_classes
+    enableHTML: true,
+    classes: default_classes
+
   });
 
   $("input.recording_releases_title_lookup").tokenInput("/releases/lookup.json?src=recording", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
 
   /* 
     Recording === Recording === Recording === Recording === Recording === Recording === Recording
   */
   $("input.recording_title_lookup").tokenInput("/recordings/lookup.json", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
   
   $("input.recordings_title_lookup").tokenInput("/recordings/lookup.json", {
-     classes: default_classes
+    enableHTML: true,
+    classes: default_classes
   });
 
   $("input.release_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=release", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
 
   $("input.artist_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=artist", {
-     classes: default_classes
+    enableHTML: true,
+    classes: default_classes
   });
 
   $("input.work_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=work", {
-     classes: default_classes
+    enableHTML: true,
+    classes: default_classes
   });
 
   /*
     Category === Category === Category === Category === Category === Category === Category
   */
   $("input.category_lookup").tokenInput("/categories/lookup.json", {
-     tokenLimit: 1,
-     classes: default_classes
+    tokenLimit: 1,
+    enableHTML: true,
+    classes: default_classes
   });
 
   $("input.categories_lookup").tokenInput("/categories/lookup.json", {
-     classes: default_classes
+    enableHTML: true,
+    classes: default_classes
   });
   
   /*
     Label === Label === Label === Label === Label === Label === Label
   */
   $('input.labels_lookup').tokenInput("/labels/lookup.json", {
-     classes: default_linear_classes
+    enableHTML: true,
+    classes: default_classes
   });
   
   /*
     Publisher === Publisher === Publisher === Publisher === Publisher === Publisher === Publisher
   */
   $('input.publishers_lookup').tokenInput("/publishers/lookup.json", {
-     classes: default_linear_classes
+    enableHTML: true,
+    classes: default_classes
   });
   
   /*
     UserTag === UserTag === UserTag === UserTag === UserTag === UserTag === UserTag
   */
   $('input.user_tag_lookup').tokenInput("/user_tags/lookup.json", {
-     classes: default_linear_classes
+    enableHTML: true,
+    classes: default_classes
   });
   
   $('a.preview').on("click", function(event) {
@@ -243,6 +270,19 @@ $(document).on('ready nested:fieldAdded', function () {
     hintText: "Type in a search term (use ? or * to see all available values)"
   });
 
+});
+
+$(document).ready(function(){
+  window.NestedFormEvents.prototype.insertFieldsWithoutTable = window.NestedFormEvents.prototype.insertFields;
+  window.NestedFormEvents.prototype.insertFieldsWithTable = function(content, assoc, link) {
+    if ($(link).parent().prop("tagName") == "TD") {
+      var $tr = $(link).closest('tr');
+      return $(content).insertBefore($tr);      
+    } else {
+      return window.NestedFormEvents.prototype.insertFieldsWithoutTable(content,assoc,link);
+    }
+  }
+  window.NestedFormEvents.prototype.insertFields = window.NestedFormEvents.prototype.insertFieldsWithTable;
 });
 
 
