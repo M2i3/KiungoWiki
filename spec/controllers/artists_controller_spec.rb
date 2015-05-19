@@ -59,7 +59,7 @@ describe ArtistsController do
       end
     end
     describe "GET without_additonal_sections" do
-      it "should handle pagination and show works without additional_sections" do
+      it "should handle pagination and show works without supplementary_sections" do
         @where_mock.with(missing_supplementary_sections: true).and_return Artist
         get :without_supplementary_sections, page:@page
       end

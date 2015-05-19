@@ -191,7 +191,7 @@ describe ReleasesController do
       end
     end
     describe "GET without_additonal_sections" do
-      it "should handle pagination and show releases without additional_sections" do
+      it "should handle pagination and show releases without supplementary_sections" do
         @where_mock.with(missing_supplementary_sections: true).and_return Release
         get :without_supplementary_sections, page:@page
       end
