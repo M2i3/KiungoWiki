@@ -13,7 +13,7 @@ describe WorkWikiLink::SearchQuery do
 
   it "should set all the attributes in a complete query using what's left for the title" do
     wsq = WorkWikiLink::SearchQuery.new('copyright:"1994, Jean-Marc" date_written:2011-09-01 This is a search " query with no keyworkds" language_code:fr oid:4e81265241c25e24b6000001 publisher:"Pierre F." origworkid:123212')
-    wsq[:title].should eql('This is a search " query with no keyworkds" origworkid:123212')
+    wsq[:title].should eql('This is a search " query with no keyworkds"  origworkid:123212')
     wsq[:copyright].should eql("1994, Jean-Marc")
     wsq[:date_written].should eql("2011-09-01")
     wsq[:language_code].should eql("fr")
