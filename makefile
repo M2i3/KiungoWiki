@@ -29,7 +29,7 @@ test.spec: build-test test-database.up
 	docker run --rm -it -e RAILS_ENV=test --link=kiungo--kiungowiki-test.mongodb.0:db kiungowiki-test /usr/local/bundle/bin/rake spec
 	
 test.cucumber: build-test test-database.up
-	docker run --rm -it -e RAILS_ENV=test --link=kiungo--kiungowiki-test.mongodb.0:db kiungowiki-test /bin/bash /usr/src/app/cucumber.sh
+	docker run --rm -it -e RAILS_ENV=test --link=kiungo--kiungowiki-test.mongodb.0:db kiungowiki-test /bin/bash /usr/src/app/cucumber
 	
 app.up: build database.up
 

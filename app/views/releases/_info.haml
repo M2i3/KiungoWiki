@@ -55,7 +55,7 @@
               %td= rwl.itemSection
             %td= rwl.trackNb
             %td= rwl.duration
-            %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe 
+            %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe if rwl.recording
 
   - @release.supplementary_sections.each do |ss|
     %h2= ss.title 
