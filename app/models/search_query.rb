@@ -11,6 +11,9 @@ class SearchQuery
   def self.primary_display_text
     []
   end
+  def self.hidden_display_text
+    []
+  end
   
   def self.objectq_fields
     self.query_expressions.keys  - self.meta_fields - [:oid]
@@ -160,7 +163,7 @@ class SearchQuery
   end
   def objectq_display_text
     primary_display_fields = (self.objectq_fields & self.class.primary_display_text)
-    additional_display_fields = (self.objectq_fields - self.class.primary_display_text)
+    additional_display_fields = (self.objectq_fields - self.class.primary_display_text - self.class.hidden_display_text)
     
     display_text = primary_display_fields.collect {|var_name| self.instance_variable_get("@#{var_name}") }.join(" ")
     

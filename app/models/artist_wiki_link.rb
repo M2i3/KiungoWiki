@@ -60,5 +60,8 @@ class ArtistWikiLink < WikiLink
     def self.primary_display_text
       [:name]
     end
+    def self.hidden_display_text
+      [:surname,:given_name]
+    end
   end
 end
