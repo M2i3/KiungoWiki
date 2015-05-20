@@ -21,7 +21,7 @@ module ApplicationHelper
     if awl.artist_id
       link_to(awl.name, artist_path(id:awl.artist_id))
     else
-      link_to(awl.name, artists_path(q:awl.reference_text, signature:"", autofollow:true))
+      link_to(awl.name, artists_path(q:awl.reference_text, signature:awl.reference_signature, autofollow:true))
     end
   end
 

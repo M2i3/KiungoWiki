@@ -13,11 +13,11 @@ class ArtistsController < ApplicationController
       format.xml { render xml: @artists }
       format.json { render json: @artists }
       format.html {
-         redirect_to(@artists.first) if (params[:autofollow] and @artists.size == 1)
+         redirect_to(@artists.first) if (params[:autofollow] and @artists.size == 1 and @artists.first.signature == params[:signature])
       }
     end
   end
-
+  
   def without_work
     @artists = Artist.where("typeof this.work_wiki_links == 'undefined' || this.work_wiki_links.length == 0").page(params[:page]).all
   end
