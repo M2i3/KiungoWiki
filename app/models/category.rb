@@ -22,7 +22,7 @@ class Category
     asq.filled_query_fields.each {|field|
       case field
         when :category_name, :info
-          current_query = current_query.where(field=>/#{asq[field].downcase}/i)      
+          current_query = current_query.where(field=>/#{Regexp.quote(asq[field].downcase)}/i)
       end 
     }
     current_query

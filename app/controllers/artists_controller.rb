@@ -12,7 +12,9 @@ class ArtistsController < ApplicationController
     respond_to do |format|
       format.xml { render xml: @artists }
       format.json { render json: @artists }
-      format.html
+      format.html {
+         redirect_to(@artists.first) if (params[:autofollow] and @artists.size == 1)
+      }
     end
   end
 

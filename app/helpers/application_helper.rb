@@ -19,9 +19,9 @@ module ApplicationHelper
 
   def artist_wiki_link_path(awl)
     if awl.artist_id
-      link_to(awl.name, artist_path(:id=>awl.artist_id))
+      link_to(awl.name, artist_path(id:awl.artist_id))
     else
-      link_to(awl.name, artists_path(:q=>awl.reference_text))
+      link_to(awl.name, artists_path(q:awl.reference_text, signature:"", autofollow:true))
     end
   end
 

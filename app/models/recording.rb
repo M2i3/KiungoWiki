@@ -189,7 +189,7 @@ class Recording
         when :title
           current_query = current_query.csearch(rsq[field], match: :all)
         when :category_name
-          current_query = current_query.where(field=>/#{rsq[field].downcase}/i)
+          current_query = current_query.where(field=>/#{Regexp.quote(rsq[field].downcase)}/i)
         when :created_at, :duration, :recording_date, :rythm, :update_at
           current_query = current_query.where(field=>rsq[field])        
       end 

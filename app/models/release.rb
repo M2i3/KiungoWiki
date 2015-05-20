@@ -30,15 +30,15 @@ class Release
 
   validates_presence_of :title
 
-  embeds_many :artist_wiki_links, as: :linkable, class_name: "ReleaseArtistWikiLink"
+  embeds_many :artist_wiki_links, as: :linkable, class_name: "ReleaseArtistWikiLink", cascade_callbacks: true
   accepts_nested_attributes_for :artist_wiki_links, allow_destroy: true
   validates_associated :artist_wiki_links
 
-  embeds_many :recording_wiki_links, as: :linkable, class_name: "ReleaseRecordingWikiLink"
+  embeds_many :recording_wiki_links, as: :linkable, class_name: "ReleaseRecordingWikiLink", cascade_callbacks: true
   accepts_nested_attributes_for :recording_wiki_links, allow_destroy: true
   validates_associated :recording_wiki_links
 
-  embeds_many :supplementary_sections, class_name: "SupplementarySection"
+  embeds_many :supplementary_sections, class_name: "SupplementarySection", cascade_callbacks: true
   accepts_nested_attributes_for :supplementary_sections, allow_destroy: true
   validates_associated :supplementary_sections
   
@@ -142,7 +142,7 @@ class Release
         when :title
           current_query = current_query.csearch(asq[field], match: :all)
         when :label, :media_type, :reference_code
-          current_query = current_query.where(field=>/#{asq[field].downcase}/i)
+          current_query = current_query.where(field=>/#{Regexp.quote(asq[field].downcase)}/i)
         when :date_released, :created_at, :updated_at
           current_query = current_query.where(field=>asq[field])        
       end 

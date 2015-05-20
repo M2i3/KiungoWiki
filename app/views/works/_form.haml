@@ -11,23 +11,44 @@
   %dd= form.text_field :publishers_text, 'data-pre' => @work.tokenized_publishers, class: 'publishers_lookup'
   %dt= form.label :lyrics
   %dd= form.text_area :lyrics, :class=>"span12"
-  .well
-    %h2= Work.model_name.human.pluralize
-    = form.fields_for :work_wiki_links do |w|
-      %p= w.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
-      %dt= w.label :reference_text
-      %dd= w.text_field :reference_text, class: "work_works_title_lookup", :"data-pre"=>[w.object.combined_link].to_json
-      %dt= w.label :relation
-      %dd= w.text_field :relation
-    %p= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :work_wiki_links, class: 'btn btn-primary pull-right'
-  .well
-    = form.fields_for :artist_wiki_links do |a|
-      %p= a.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
-      %dt= a.label :reference_text
-      %dd= a.text_field :reference_text, class: "work_artists_lookup", :"data-pre"=> [a.object.combined_link].to_json
-      %dt= a.label :role
-      %dd= a.text_field :role
-    %p= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :artist_wiki_links, class: 'btn btn-primary pull-right'
+
+  %h2= t('credits')
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= Artist.model_name.human.pluralize
+        %th= WorkArtistWikiLink.human_attribute_name('role')
+        %th &nbsp;
+    %tbody
+      = form.fields_for :artist_wiki_links, wrapper: false do |a|
+        %tr.fields
+          %td= a.text_field :reference_text, class: "work_artists_lookup", :"data-pre"=>format_combined_link_pre(a.object.combined_link)
+          %td= a.text_field :role
+          %td= a.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
+    %tfoot
+      %tr
+        %td{colspan:3}
+          = form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :artist_wiki_links, class: 'btn btn-primary pull-right'
+
+  %h2= Work.model_name.human.pluralize
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= Work.human_attribute_name("work_title") 
+        %th= WorkWorkWikiLink.human_attribute_name("relation")
+        %th &nbsp;
+    %tbody
+      = form.fields_for :work_wiki_links, wrapper: false do |w|
+        %tr.fields
+          %td= w.text_field :reference_text, class: "work_works_title_lookup", :"data-pre"=>format_combined_link_pre(w.object.combined_link)
+          %td= w.text_field :relation
+          %td= w.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'      
+      
+    %tfoot
+      %tr
+        %td{colspan:3}
+          = form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :work_wiki_links, class: 'btn btn-primary pull-right'
+  
   %dt= form.label :recording_wiki_links_text
   %dd= form.text_field :recording_wiki_links_text, class: "work_recordings_title_lookup", :"data-pre"=>form.object.recording_wiki_links_combined_links_renamed.to_json
   = form.fields_for :supplementary_sections do |ss|

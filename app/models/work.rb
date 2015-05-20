@@ -37,19 +37,19 @@ class Work
   validates_presence_of :title
 
   embeds_many :artist_wiki_links, as: :linkable, class_name: "WorkArtistWikiLink"
+  accepts_nested_attributes_for :artist_wiki_links, allow_destroy: true
   validates_associated :artist_wiki_links
-  accepts_nested_attributes_for :artist_wiki_links
 
   embeds_many :recording_wiki_links, as: :linkable, class_name: "WorkRecordingWikiLink"
-  accepts_nested_attributes_for :recording_wiki_links
+  accepts_nested_attributes_for :recording_wiki_links, allow_destroy: true
   validates_associated :recording_wiki_links
 
   embeds_many :work_wiki_links, as: :linkable, class_name: "WorkWorkWikiLink"
-  accepts_nested_attributes_for :work_wiki_links
+  accepts_nested_attributes_for :work_wiki_links, allow_destroy: true
   validates_associated :work_wiki_links
 
   embeds_many :supplementary_sections, class_name: "SupplementarySection"
-  accepts_nested_attributes_for :supplementary_sections
+  accepts_nested_attributes_for :supplementary_sections, allow_destroy: true
   validates_associated :supplementary_sections
   
   embeds_many :tags, as: :taggable, class_name: "PublicTag"
@@ -191,7 +191,7 @@ class Work
         when :title
           current_query = current_query.csearch(wsq[field], match: :all)
         when :publisher, :copyright, :language_code, :lyrics
-          current_query = current_query.where(field=>/#{wsq[field].downcase}/i)
+          current_query = current_query.where(field=>/#{Regexp.quote(wsq[field].downcase)}/i)
         when :date_written, :created_at, :updated_at
           current_query = current_query.where(field=>wsq[field])        
       end 

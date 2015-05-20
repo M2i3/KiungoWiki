@@ -2,7 +2,10 @@ class  WikiLink
   include Mongoid::Document
 
   field :reference_text, default: ""
+  field :signature, default: nil
   embedded_in :linkable, polymorphic: true
+  
+  before_save :save_signature
 
   def reference_text=(value)
     self[:reference_text] = value
@@ -18,6 +21,10 @@ class  WikiLink
     else
       self.referenced = nil
     end
+  end
+  
+  def reference_signature
+    self.signature || self.searchref.signature
   end
 
   def combined_link
@@ -73,7 +80,10 @@ class  WikiLink
       self.unset(a.to_sym)
     }
   end
-
+  
+  def save_signature
+    self.signature = self.searchref.signature
+  end
   def cached_attributes
     []
   end
