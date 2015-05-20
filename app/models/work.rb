@@ -188,6 +188,8 @@ class Work
     wsq = WorkWikiLink.search_query(q)
     wsq.filled_query_fields.each {|field|
       case field
+        when :oid
+          current_query = current_query.where(:_id=>wsq[field])        
         when :title
           current_query = current_query.csearch(wsq[field], match: :all)
         when :publisher, :copyright, :language_code, :lyrics

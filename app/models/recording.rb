@@ -186,6 +186,8 @@ class Recording
     rsq = RecordingWikiLink.search_query(q)
     rsq.filled_query_fields.each {|field|
       case field
+        when :oid
+          current_query = current_query.where(:_id=>rsq[field])
         when :title
           current_query = current_query.csearch(rsq[field], match: :all)
         when :category_name

@@ -21,6 +21,8 @@ class Category
     asq = CategoryWikiLink.search_query(q)
     asq.filled_query_fields.each {|field|
       case field
+        when :oid
+          current_query = current_query.where(:_id=>asq[field])        
         when :category_name, :info
           current_query = current_query.where(field=>/#{Regexp.quote(asq[field].downcase)}/i)
       end 

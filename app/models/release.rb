@@ -139,6 +139,8 @@ class Release
     asq = ReleaseWikiLink.search_query(q)
     asq.filled_query_fields.each {|field|
       case field
+        when :oid
+          current_query = current_query.where(:_id=>asq[field])        
         when :title
           current_query = current_query.csearch(asq[field], match: :all)
         when :label, :media_type, :reference_code

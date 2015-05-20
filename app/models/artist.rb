@@ -170,6 +170,8 @@ class Artist
     asq = ArtistWikiLink.search_query(q)
     asq.filled_query_fields.each {|field|
       case field
+        when :oid
+          current_query = current_query.where(:_id=>asq[field])
         when :name
           current_query = current_query.csearch(asq[field], match: :all)
         when :surname, :given_name, :birth_location, :death_location
