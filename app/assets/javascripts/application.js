@@ -185,6 +185,7 @@ $(document).on('ready nested:fieldAdded', function () {
   });
 
   $("input.artist_releases_title_lookup").tokenInput("/releases/lookup.json?src=artist", {
+    tokenLimit: 1,
     enableHTML: true,
     tokenDelimiter: "||",
     classes: default_classes
@@ -221,6 +222,7 @@ $(document).on('ready nested:fieldAdded', function () {
   });
 
   $("input.artist_recordings_title_lookup").tokenInput("/recordings/lookup.json?src=artist", {
+    tokenLimit: 1,
     enableHTML: true,
     tokenDelimiter: "||",
     classes: default_classes

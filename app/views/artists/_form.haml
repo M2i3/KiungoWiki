@@ -9,47 +9,88 @@
   %dd= form.text_field :birth_location
   %dt= form.label :death_date
   %dd= form.text_field :death_date
-  %dt= form.label :death_location
+  %dt= form.label :death_location 
   %dd= form.text_field :death_location
   %dt= form.label :is_group
   %dd= form.text_field :is_group
-  .well
-    %h2= Artist.model_name.human.pluralize
-    = form.fields_for :artist_wiki_links do |a|
-      %p= a.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
-      %dt= a.label :reference_text
-      %dd= a.text_field :reference_text, class: "artist_artists_lookup", :"data-pre"=>[a.object.combined_link].to_json
-      %dt= a.label :start_date
-      %dd= a.text_field :start_date
-      %dt= a.label :end_date
-      %dd= a.text_field :end_date
-    %p= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :artist_wiki_links, class: 'btn btn-primary pull-right'
-  .well
-    %h2= Work.model_name.human.pluralize
-    = form.fields_for :work_wiki_links do |w|
-      %dt= w.label :reference_text
-      %p= w.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
-      %dd= w.text_field :reference_text, class: "artist_works_title_lookup", :"data-pre"=>[w.object.combined_link].to_json
-      %dt= w.label :role
-      %dd= w.text_field :role
-    %p= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :work_wiki_links, class: 'btn btn-primary pull-right'
-  .well
-    %h2= Recording.model_name.human.pluralize
-    = form.fields_for :recording_wiki_links do |rec|
-      %dt= rec.label :reference_text
-      %p= rec.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
-      %dd= rec.text_field :reference_text, class: "artist_recordings_title_lookup", :"data-pre"=>[rec.object.combined_link].to_json
-    %p= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :recording_wiki_links, class: 'btn btn-primary pull-right'
-  .well
-    %h2= Release.model_name.human.pluralize
-    = form.fields_for :release_wiki_links do |rel|
-      %dt= rel.label :reference_text
-      %p= rel.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
-      %dd= rel.text_field :reference_text, class: "artist_releases_title_lookup", :"data-pre"=>[rel.object.combined_link].to_json
-    %p= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :release_wiki_links, class: 'btn btn-primary pull-right'
+
+  %h2= Work.model_name.human.pluralize
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= Work.model_name.human.pluralize
+        %th= ArtistWorkWikiLink.human_attribute_name('role')
+        %th &nbsp;
+    %tbody    
+      = form.fields_for :work_wiki_links, wrapper: false do |w|
+        %tr.fields
+          %td= w.text_field :reference_text, class: "artist_works_title_lookup", :"data-pre"=>format_combined_link_pre(w.object.combined_link)
+          %td= w.text_field :role
+          %td= w.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
+    %tfoot
+      %tr
+        %td{colspan:3}
+          = form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :work_wiki_links, class: 'btn btn-primary pull-right'
+
+  %h2= Work.human_attribute_name("relation").pluralize
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= Artist.model_name.human
+        %th= ArtistArtistWikiLink.human_attribute_name('relation')
+        %th= ArtistArtistWikiLink.human_attribute_name('start_date')
+        %th= ArtistArtistWikiLink.human_attribute_name('end_date')
+        %th &nbsp;
+    %tbody
+      = form.fields_for :artist_wiki_links, wrapper: false do |a|
+        %tr.fields
+          %td= a.text_field :reference_text, class: "artist_artists_lookup", :"data-pre"=>format_combined_link_pre(a.object.combined_link)
+          %td= a.text_field :relation
+          %td= a.text_field :start_date, size: 10, class:"span1"
+          %td= a.text_field :end_date, size: 10, class:"span1"
+          %td= a.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
+    %tfoot
+      %tr
+        %td{colspan:5}
+          = form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :artist_wiki_links, class: 'btn btn-primary pull-right'
+          
+
+  %h2= Recording.model_name.human.pluralize
+  %table.table.table-striped
+    %thead
+      %tr= Recording.model_name.human
+      %tr &nbsp;
+    %tbody
+      = form.fields_for :recording_wiki_links, wrapper: false do |rec|
+        %tr.fields
+          %td= rec.text_field :reference_text, class: "artist_recordings_title_lookup", :"data-pre"=>format_combined_link_pre(rec.object.combined_link)
+          %td= rec.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
+    %tfoot
+      %tr
+        %td{colspan:2}
+          %td= form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :recording_wiki_links, class: 'btn btn-primary pull-right'
+    
+
+  %h2= Release.model_name.human.pluralize
+  %table.table.table-striped
+    %thead
+      %tr= Release.model_name.human
+      %tr &nbsp;
+    %tbody
+      = form.fields_for :release_wiki_links, wrapper: false do |rel|
+        %tr.fields
+          %td= rel.text_field :reference_text, class: "artist_releases_title_lookup", :"data-pre"=>format_combined_link_pre(rel.object.combined_link)
+          %td= rel.link_to_remove '<i class="icon-trash icon-white"></i>'.html_safe, class: 'btn btn-danger pull-right'
+    %tfoot
+      %tr
+        %td{colspan:2}
+          = form.link_to_add '<i class="icon-plus icon-white"></i>'.html_safe, :release_wiki_links, class: 'btn btn-primary pull-right'
+  
+  %h2= t("headers.supplementary_sections")
   = form.fields_for :supplementary_sections do |ss|
-    %dt= ss.label t("headers.supplement_section")
+    %dt= ss.label :title
     %dd= ss.text_field :title
+    %dt= ss.label :content
     %dd= ss.text_area :content, class: "span12"
   %p
   %dt= link_to t("headers.new_section"), {controller: :artists, action: :add_supplementary_section, id: @artist.id}, class: 'btn'

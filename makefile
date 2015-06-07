@@ -44,3 +44,12 @@ database.up:
 test-database.up:
 	docker inspect --format='{{.Name}}' kiungo--kiungowiki-test.mongodb.0 || docker create  --name kiungo--kiungowiki-test.mongodb.0 mongo:3
 	docker start kiungo--kiungowiki-test.mongodb.0
+	
+cleanup:
+	docker rm -f kiungo--kiungowiki.web.0
+	docker rm -f kiungo--kiungowiki.mongodb.0
+	docker rm -f kiungo--kiungowiki-test.mongodb.0
+	
+	docker rmi -f registry:5001/kiungo/kiungowiki
+	docker rmi -f kiungowiki-test
+	docker rmi -f kiungowiki-bundle-install

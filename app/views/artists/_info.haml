@@ -32,21 +32,25 @@
             %td= wwl.date_written
             %td= wwl.role
 
-- if @artist.artist_wiki_links.size == 0 
-- else
+- unless @artist.artist_wiki_links.size == 0 
   %h2= Work.human_attribute_name("relation").pluralize
   .right-size
     %table.table.table-striped
       %thead
         %tr
-          %th= Artist.human_attribute_name("nature")
-          %th= Artist.human_attribute_name("artist_wiki_links_text") 
-
+          %th= Artist.model_name.human
+          %th= ArtistArtistWikiLink.human_attribute_name('relation')
+          %th= ArtistArtistWikiLink.human_attribute_name('start_date')
+          %th= ArtistArtistWikiLink.human_attribute_name('end_date')
       %tbody
         - @artist.artist_wiki_links.each do |awl|
           %tr
-            %td= Artist.human_attribute_name(awl.relation)
             %td= artist_wiki_link_path(awl)
+            %td= awl.relation ? Artist.human_attribute_name(awl.relation) : ""
+            %td= awl.start_date
+            %td= awl.end_date
+
+
 
 %h2= Recording.model_name.human.pluralize
 - if @artist.recording_wiki_links.size == 0 

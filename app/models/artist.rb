@@ -36,24 +36,24 @@ class Artist
 
   embeds_many :work_wiki_links, as: :linkable, class_name: "ArtistWorkWikiLink"
   validates_associated :work_wiki_links
-  accepts_nested_attributes_for :work_wiki_links
+  accepts_nested_attributes_for :work_wiki_links, allow_destroy: true
 
   embeds_many :release_wiki_links, as: :linkable, class_name: "ArtistReleaseWikiLink"
-  accepts_nested_attributes_for :release_wiki_links
   validates_associated :release_wiki_links
+  accepts_nested_attributes_for :release_wiki_links, allow_destroy: true
 
   embeds_many :recording_wiki_links, as: :linkable, class_name: "ArtistRecordingWikiLink"
-  accepts_nested_attributes_for :recording_wiki_links
   validates_associated :recording_wiki_links
+  accepts_nested_attributes_for :recording_wiki_links, allow_destroy: true
 
   embeds_many :artist_wiki_links, as: :linkable, class_name: "ArtistArtistWikiLink"
-  accepts_nested_attributes_for :artist_wiki_links
   validates_associated :artist_wiki_links
+  accepts_nested_attributes_for :artist_wiki_links, allow_destroy: true
 
   embeds_many :supplementary_sections, class_name: "SupplementarySection"
-  accepts_nested_attributes_for :supplementary_sections
   validates_associated :supplementary_sections
-  
+  accepts_nested_attributes_for :supplementary_sections, allow_destroy: true
+    
   embeds_many :tags, as: :taggable, class_name: "PublicTag"
   
   has_many :user_tags, as: :taggable

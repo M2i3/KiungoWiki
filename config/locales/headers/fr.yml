@@ -83,6 +83,7 @@ fr:
     new_work: Nouvelle Oeuvre
     new_user_tag: Nouveau badge utilisateur
     modify_user_tag: Modifier un badge utilisateur
-    user_tag_index: ???
-    not_authorized: ???
+    user_tag_index: Étiquettes de l'utilisateur
+    not_authorized: Vous n'êtes pas authorisé à voir cette page
     date: Date
+    supplementary_sections: Sections complémentaires
