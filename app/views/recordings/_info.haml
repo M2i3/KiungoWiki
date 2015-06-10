@@ -55,7 +55,6 @@
           %th= Recording.human_attribute_name("itemSection")
           %th= Recording.human_attribute_name("trackNb") 
           %th= Release.human_attribute_name("reference_code")
-          %th= Release.human_attribute_name :relation
       %tbody
         - @recording.release_wiki_links.sort{|a,b| ((a.date_released <=> b.date_released) || 1)}.each do |awl|
           %tr
@@ -70,7 +69,6 @@
             %td= awl.itemSection
             %td= awl.trackNb
             %td= awl.reference_code
-            %td= awl.relation
 
   - @recording.supplementary_sections.each do |ss|
     %h2= ss.title 

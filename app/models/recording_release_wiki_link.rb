@@ -1,17 +1,8 @@
 class RecordingReleaseWikiLink < ReleaseWikiLink
   include Mongoid::Document
-  field :relation, type: String
-  def trackNb
-    searchref[:trackNb]
-  end
-
-  def itemId
-    searchref[:itemId]
-  end
-
-  def itemSection
-    searchref[:itemSection]
-  end
+  field :itemSection, type: String
+  field :itemId, type: String
+  field :trackNb, type: String
 
   class SearchQuery < self.superclass::SearchQuery 
     def self.query_expressions

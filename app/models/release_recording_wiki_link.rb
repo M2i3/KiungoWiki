@@ -4,18 +4,6 @@ class ReleaseRecordingWikiLink < RecordingWikiLink
   field :itemId, type: String
   field :trackNb, type: String
 
-  # def trackNb
-  #   searchref[:trackNb]
-  # end
-  #
-  # def itemId
-  #   searchref[:itemId]
-  # end
-  #
-  # def itemSection
-  #   searchref[:itemSection]
-  # end
-
   class SearchQuery < self.superclass::SearchQuery 
     def self.query_expressions
       super.merge({ 

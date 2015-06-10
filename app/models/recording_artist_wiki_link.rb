@@ -1,9 +1,7 @@
 class RecordingArtistWikiLink < ArtistWikiLink
   include Mongoid::Document
-
-  def role
-    searchref[:role]
-  end
+  
+  field :role, type:String
 
   class SearchQuery < self.superclass::SearchQuery 
     def self.query_expressions
