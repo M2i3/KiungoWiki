@@ -135,7 +135,15 @@ class  WikiLink
         class_eval <<-EOM
 
           def #{a}
-            self[:c_#{a}] ? c_#{a} : (referenced && referenced.#{a})
+            if self[:c_#{a}]
+              c_#{a}
+            else
+              if self.searchref[:#{a}]
+                self.searchref[:#{a}]
+              else
+                referenced && referenced.#{a}
+              end
+            end
           end
 
         EOM
