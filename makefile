@@ -15,7 +15,7 @@ console: app.up
 	docker run --rm -it -v "$(shell pwd)":/usr/src/app -w /usr/src/app -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db registry:5001/kiungo/kiungowiki bundle exec rails c
 
 run: build app.up
-	docker run --rm -it -p 3000:3000 --name kiungo--kiungowiki.web.0 -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db registry:5001/kiungo/kiungowiki
+	docker run --rm -it -p 3000:3000 --name kiungo--kiungowiki.web.0 -e SERVICE_NAME="kiungowiki-80" -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db registry:5001/kiungo/kiungowiki
 
 logs:
 	docker exec -it kiungo--kiungowiki.web.0 tail -f /usr/src/app/log/development.log
@@ -32,17 +32,25 @@ test.cucumber: build-test test-database.up
 	docker run --rm -it -e RAILS_ENV=test --link=kiungo--kiungowiki-test.mongodb.0:db kiungowiki-test /bin/bash /usr/src/app/cucumber
 	
 app.up: build database.up
+	
+database.import: database.up
+	@echo "# dump the data from the server"
+	@echo "mongodump --host=staff.mongohq.com --port=10096 --db=app847792 --username=jmlagace --password=<PASSWORD>"
+	@echo "# load the data into your local instance"
+	@echo "mongorestore --host mongo -d=kiungo_wiki_development ./dump/app847792"
+	@echo "# now you do it"
+	docker run -it --link kiungo--kiungowiki.mongodb.0:mongo --rm mongo:3  /bin/bash
 
 database.console: database.up
-	docker run -it --link kiungo--kiungowiki.mongodb.0:mongo --rm mongo sh -c 'mongo "$$MONGO_PORT_27017_TCP_ADDR:$$MONGO_PORT_27017_TCP_PORT/test"'
+	docker run -it --link kiungo--kiungowiki.mongodb.0:mongo --rm mongo:3 sh -c 'mongo "$$MONGO_PORT_27017_TCP_ADDR:$$MONGO_PORT_27017_TCP_PORT/test"'
 	
 database.up:
-	docker inspect --format='{{.Name}}' kiungo--kiungowiki-mongodb_data || mappc start-data kiungo--kiungowiki-mongodb data --volume=/data/db
-	docker inspect --format='{{.Name}}' kiungo--kiungowiki.mongodb.0 || docker create  --name kiungo--kiungowiki.mongodb.0 --volumes-from=kiungo--kiungowiki-mongodb_data mongo:3
+	mappc is-container kiungo--kiungowiki-mongodb_data || mappc start-data kiungo--kiungowiki-mongodb data --volume=/data/db
+	mappc is-container  kiungo--kiungowiki.mongodb.0 || docker create  --name kiungo--kiungowiki.mongodb.0 --volumes-from=kiungo--kiungowiki-mongodb_data mongo:3
 	docker start kiungo--kiungowiki.mongodb.0
 
 test-database.up:
-	docker inspect --format='{{.Name}}' kiungo--kiungowiki-test.mongodb.0 || docker create  --name kiungo--kiungowiki-test.mongodb.0 mongo:3
+	mappc is-container kiungo--kiungowiki-test.mongodb.0 || docker create  --name kiungo--kiungowiki-test.mongodb.0 mongo:3
 	docker start kiungo--kiungowiki-test.mongodb.0
 	
 cleanup:
