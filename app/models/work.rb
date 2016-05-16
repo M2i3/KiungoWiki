@@ -7,12 +7,13 @@ class Work
   #
   # basic entity information
   #
+  field :signature, type:  String
   field :title, type: String, default: ""
   field :date_written, type: IncDate
   field :copyright, type: String
   field :language_code, type: String
   field :publisher, type: String
-  field :lyrics, type: String
+  field :lyrics, type: String, default: ""
   field :chords, type: String
   field :origworkid, type: String
   field :is_lyrics_verified, type: Integer
@@ -29,8 +30,10 @@ class Work
 
   before_save :update_cached_fields
 
+  index({ signature: 1 }, { background: true })
   index({ cache_normalized_title: 1 }, { background: true })
   index({ cache_first_letter: 1, cache_normalized_title: 1 }, { background: true })
+  index({ origworkid: 1})
 
   search_in :title, {match: :all}
 
@@ -152,10 +155,21 @@ class Work
   def update_cached_fields
     self.cache_normalized_title = self.normalized_title
     self.cache_first_letter = self.title_first_letter
+    self.signature = self.to_search_query.signature
   end
 
-  def to_wiki_link
-    WorkWikiLink.new(:reference_text=>"oid:#{self.id}", :work=>self)
+  def to_wiki_link(klass=WorkWikiLink, attributes = {})
+    attributes.merge!({searchref: self.to_search_query})
+    #attributes.merge!({reference_text: self.to_search_query.q, :work=>self})
+    klass.new(attributes)
+  end
+  
+  def to_search_query
+    sq = WorkWikiLink::SearchQuery.new
+    WorkWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|key|
+      sq[key] = self[key]
+    }
+    sq
   end
   
   def user_tags_text

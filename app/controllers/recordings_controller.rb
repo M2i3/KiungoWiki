@@ -155,10 +155,10 @@ class RecordingsController < ApplicationController
 
     respond_to do |format|
       format.json { 
-        render :json=>(Recording.queried(rsq.objectq).limit(20).collect{|r| 
+        render :json=>(Recording.queried(rsq.objectq).limit(20).collect{|rec| 
 
-          wiki_link_klass.new(reference_text: "oid:#{r.id} #{rsq.metaq}").combined_link
-
+          rec.to_wiki_link(wiki_link_klass).combined_link
+          
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"}) 
       }
     end

@@ -12,7 +12,10 @@ class ReleasesController < ApplicationController
     respond_to do |format|
       format.xml { render xml: @releases }
       format.json { render json: @releases }
-      format.html
+      format.html {
+         redirect_to(@releases.first) if (params[:autofollow] and @releases.size == 1 and @releases.first.signature == params[:signature])
+      }
+
     end
   end
   
@@ -44,15 +47,24 @@ class ReleasesController < ApplicationController
   end
   
   def show
-    @release = Release.find(params[:id])
-    if current_user
-      @possession = current_user.possessions.where("release_wiki_link.release_id" => @release.id).first
-      @user_tags = @release.user_tags.where(user:current_user).all
+    @release = Release.where(signature: params[:id].split("_").last).first
+    unless @release
+      @release = Release.where(id: params[:id]).first
+      unless @release
+        puts "TODO: go to search if we have something to search with"
+      end
     end
-    respond_to do |format|
-      format.xml { render xml: @release.to_xml(except: [:versions]) }
-      format.json { render json: @release }
-      format.html
+    
+    if @release
+      if current_user
+        @possession = current_user.possessions.where("release_wiki_link.release_id" => @release.id).first
+        @user_tags = @release.user_tags.where(user:current_user).all
+      end
+      respond_to do |format|
+        format.xml { render xml: @release.to_xml(except: [:versions]) }
+        format.json { render json: @release }
+        format.html
+      end
     end
   end
 
@@ -152,8 +164,8 @@ class ReleasesController < ApplicationController
     respond_to do |format|
       format.json { 
         render json:(Release.queried(asq.objectq).limit(20).collect{|rel| 
-
-          wiki_link_klass.new(reference_text: "oid:#{rel.id} #{asq.metaq}").combined_link
+          
+          rel.to_wiki_link(wiki_link_klass).combined_link
               
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }

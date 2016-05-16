@@ -5,6 +5,7 @@ class Recording
   include Mongoid::History::Trackable
 
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
+  field :signature, type:  String
   field :title, type:  String
   field :recording_date, type:  IncDate
   field :recording_location, type:  String
@@ -22,8 +23,10 @@ class Recording
 
   before_save :update_cached_fields
 
+  index({ signature: 1 }, { background: true })
   index({ cache_normalized_title: 1 }, { background: true })
   index({ cache_first_letter: 1, cache_normalized_title: 1 }, { background: true })
+  index({ origrecordingid: 1})
 
   search_in :title, {match: :all}
 
@@ -37,18 +40,18 @@ class Recording
 
   embeds_one :work_wiki_link, as: :linkable, class_name: "RecordingWorkWikiLink"
   validates_associated :work_wiki_link  
-  accepts_nested_attributes_for :work_wiki_link
+  accepts_nested_attributes_for :work_wiki_link, allow_destroy: true
 
   embeds_many :artist_wiki_links, as: :linkable, class_name: "RecordingArtistWikiLink"
-  accepts_nested_attributes_for :artist_wiki_links
+  accepts_nested_attributes_for :artist_wiki_links, allow_destroy: true
   validates_associated :artist_wiki_links
 
   embeds_many :release_wiki_links, as: :linkable, class_name: "RecordingReleaseWikiLink"
-  accepts_nested_attributes_for :release_wiki_links
+  accepts_nested_attributes_for :release_wiki_links, allow_destroy: true
   validates_associated :release_wiki_links
 
   embeds_many :category_wiki_links, as: :linkable
-  accepts_nested_attributes_for :category_wiki_links
+  accepts_nested_attributes_for :category_wiki_links, allow_destroy: true
   validates_associated :category_wiki_links
 
   embeds_many :supplementary_sections, class_name: "SupplementarySection"
@@ -100,7 +103,8 @@ class Recording
   end
 
   def first_artist_object_text
-    self.artist_wiki_links.first && self.artist_wiki_links.first.name(true)
+    self.artist_wiki_links.first && self.artist_wiki_links.first.name
+    #TODO: Fix artist name display
   end
 
   def release_wiki_links_text
@@ -164,13 +168,22 @@ class Recording
   end
 
   def update_cached_fields
-    self[:title] = self.work_wiki_link.object_text 
+    self[:title] = self.work_wiki_link.title 
     self.cache_normalized_title = self.normalized_title
     self.cache_first_letter = self.title_first_letter
+    self.signature = self.to_search_query.signature
   end
 
-  def to_wiki_link
-    RecordingWikiLink.new(reference_text: "oid:#{self.id}", recording: self)
+  def to_wiki_link(klass=RecordingWikiLink)
+    klass.new(reference_text: self.to_search_query.q, recording: self)
+  end
+    
+  def to_search_query
+    sq = RecordingWikiLink::SearchQuery.new
+    RecordingWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|key|
+      sq[key] = self[key]
+    }
+    sq
   end
   
   def user_tags_text

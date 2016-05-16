@@ -27,8 +27,10 @@ class Artist
 
   before_save :update_cached_fields
 
+  index({ signature: 1 }, { background: true })
   index({ cache_normalized_name: 1 }, { background: true })
   index({ cache_first_letter: 1, cache_normalized_name: 1 }, { background: true })
+  index({ origartistid: 1})
 
   search_in :name, :surname, :given_name, :birth_location, :death_location, {match: :all}
 
@@ -210,8 +212,10 @@ class Artist
     self.signature = self.to_search_query.signature
   end
 
-  def to_wiki_link(klass=ArtistWikiLink)
-    klass.new(reference_text: self.to_search_query.q, artist: self)
+  def to_wiki_link(klass=ArtistWikiLink, attributes={})
+    #attributes.merge!({reference_text: self.to_search_query.q, artist: self})
+    attributes.merge!({reference_text: self.to_search_query.q})
+    klass.new(attributes)
 #    klass.new(reference_text: "oid:#{self.id}" , artist: self)    
   end
   

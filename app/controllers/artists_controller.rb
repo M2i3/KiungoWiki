@@ -50,14 +50,23 @@ class ArtistsController < ApplicationController
   end
   
   def show
-    @artist = Artist.find(params[:id])
-    if current_user
-      @user_tags = @artist.user_tags.where(user: current_user).all
-    end
-    respond_to do |format|
-      format.xml { render xml: @artist.to_xml(except: [:versions]) }
-      format.json { render json: @artist }
-      format.html
+    
+    @artist = Artist.where(signature: params[:id].split("_").last).first
+    unless @artist
+      @artist = Artist.find(params[:id])
+      respond_to do |format|
+        format.html { redirect_to( artist_path(id:@artist.to_search_query.url_encoded)) }
+        format.xml  { render :xml => @artist, :location => @artist }
+      end
+    else
+      if current_user
+        @user_tags = @artist.user_tags.where(user: current_user).all
+      end
+      respond_to do |format|
+        format.xml { render xml: @artist.to_xml(except: [:versions]) }
+        format.json { render json: @artist }
+        format.html
+      end
     end
   end
 
@@ -167,8 +176,6 @@ class ArtistsController < ApplicationController
         render json: (Artist.queried(asq.objectq).limit(20).collect{|art| 
           
           art.to_wiki_link(wiki_link_klass).combined_link
-
-          #wiki_link_klass.new(reference_text: "oid:#{art.id} #{asq.metaq}").combined_link
 
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }

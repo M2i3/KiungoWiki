@@ -5,7 +5,7 @@ module ApplicationHelper
     if wwl.work_id
       link_to(wwl.title, work_path(:id=>wwl.work_id))
     else
-      link_to(wwl.title, works_path(:q=>wwl.reference_text))
+      link_to(wwl.title, works_path(:q=>wwl.reference_text, signature:wwl.reference_signature, autofollow:true))
     end
   end
     
@@ -21,7 +21,8 @@ module ApplicationHelper
     if awl.artist_id
       link_to(awl.name, artist_path(id:awl.artist_id))
     else
-      link_to(awl.name, artists_path(q:awl.reference_text, signature:awl.reference_signature, autofollow:true))
+      link_to(awl.name, artist_path(id:awl.searchref.url_encoded))
+#      link_to(awl.name, artists_path(q:awl.reference_text, signature:awl.reference_signature, autofollow:true))
     end
   end
 
@@ -29,7 +30,7 @@ module ApplicationHelper
     if rwl.release_id
       link_to(rwl.title, release_path(:id=>rwl.release_id))
     else
-      link_to(rwl.title, releases_path(:q=>rwl.reference_text))
+      link_to(rwl.title, releases_path(q:rwl.reference_text, signature:rwl.reference_signature, autofollow:true))
     end
   end
   
@@ -37,7 +38,7 @@ module ApplicationHelper
   	if rwl.recording_id
   		link_to(rwl.title, recording_path(:id=>rwl.recording_id))
   	else
-  		link_to(rwl.title, recordings_path(:q=>rwl.reference_text))
+  		link_to(rwl.title, recordings_path(q:rwl.reference_text, signature:rwl.reference_signature, autofollow:true))
   	end
   end
 
@@ -79,5 +80,13 @@ module ApplicationHelper
   
   def updated_at(resource)
     t('updated_at', update_date:resource.updated_at.strftime('%Y-%m-%d'), update_time:resource.updated_at.strftime('%H:%M'), update_username:resource.modifier.try(:nickname))
+  end
+  
+  def sharethis_enabled?
+    !sharethis_publisher_id.nil?
+  end
+  def sharethis_publisher_id
+    ENV['SHARETHIS_PUBLISHER']
+    #"323da19c-f0a0-4030-87cb-7b76e958f722"
   end
 end

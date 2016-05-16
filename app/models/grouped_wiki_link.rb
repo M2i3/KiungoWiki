@@ -1,8 +1,8 @@
 class GroupedWikiLink
 
   def initialize(klass, wiki_links)
-    wiki_links.group_by{|wl| wl.objectq }.each{|objectq, links|
-      groups << GroupWikiLink.new(objectq, klass, links)
+    wiki_links.group_by{|wl| wl.signature }.each{|signature, links|
+      groups << GroupWikiLink.new(links.first.objectq, klass, links)
       
     }
   end

@@ -1,4 +1,4 @@
-class RawRecordingArtistRoleLink
+class ArtistRoleLink
   include Mongoid::Document
 
 #  set_database :raw_db

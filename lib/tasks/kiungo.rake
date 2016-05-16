@@ -1,4 +1,102 @@
 namespace :kiungo do
+  namespace :signature do
+    
+    desc "Calculate the signatures for all the entities"
+    task :all=>[:artists,:works,:recordings,:releases] do
+    end
+
+    desc "Calculate the signatures for the artists"
+    task :artists=>:environment do
+      load "lib/progress_bar.rb"
+      progress = ProgressBar.new(Artist.count/100)
+      
+      puts "Updating #{Artist.count} artists"
+      Artist.all.each {|w| 
+        progress.inc
+        w.touch
+        w.work_wiki_links.each {|l|
+          l.reference_text = l.referenced.to_search_query.q        
+        }  
+        w.release_wiki_links.each {|l|
+          l.reference_text = l.referenced.to_search_query.q        
+        }      
+        w.recording_wiki_links.each {|l|
+          l.reference_text = l.referenced.to_search_query.q        
+        }
+        w.artist_wiki_links.each {|l|
+          l.reference_text = l.referenced.to_search_query.q        
+        }
+        w.save
+      }
+      progress.done
+      puts "done"
+    end
+    
+    desc "Calculate the signatures for the works"
+    task :works=>:environment do
+      load "lib/progress_bar.rb"
+      progress = ProgressBar.new(Work.count/100)
+      puts "Updating #{Work.count} works"
+      Work.all.each {|w| 
+        progress.inc
+        w.touch 
+        w.recording_wiki_links.each {|l|
+          l.reference_text = l.referenced.to_search_query.q        
+        }
+        w.artist_wiki_links.each {|l|
+          l.reference_text = l.referenced.to_search_query.q        
+        }
+        w.work_wiki_links.each {|l|
+          l.reference_text = l.referenced.to_search_query.q        
+        }
+        w.save
+      }
+      progress.done
+      puts "done"
+    end
+    
+    desc "Calculate the signatures for the recordings"    
+    task :recordings=>:environment do        
+      load "lib/progress_bar.rb"
+      progress = ProgressBar.new(Recording.count/100)
+      puts "Updating #{Recording.count} recordings"
+      Recording.all.each {|w| 
+        progress.inc
+        w.touch        
+        w.work_wiki_link.reference_text = w.work_wiki_link.referenced.to_search_query.q        
+        w.artist_wiki_links.each {|l|
+          l.reference_text = l.referenced.to_search_query.q        
+        }
+        w.release_wiki_links.each {|l|
+          l.reference_text = l.referenced.to_search_query.q        
+        }      
+        w.save
+      }
+      progress.done
+      puts "done"
+    end
+    
+    desc "Calculate the signatures for the releases"    
+    task :releases=>:environment do
+      load "lib/progress_bar.rb"
+      progress = ProgressBar.new(Release.count/100)
+      puts "Updating #{Release.count} releases"
+      Release.all.each {|w| 
+        progress.inc
+        w.touch
+        w.artist_wiki_links.each {|l|
+          l.reference_text = l.referenced.to_search_query.q        
+        }
+        w.recording_wiki_links.each {|l|
+          l.reference_text = l.referenced.to_search_query.q        
+        }
+        w.save
+      }
+      progress.done
+      puts "done"
+    end
+  end
+  
   namespace :migration do
     desc "Migrate all the data from the Raw models to the application models"
     task :all=>:environment do

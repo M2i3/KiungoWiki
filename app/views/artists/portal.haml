@@ -31,7 +31,7 @@
         %ul 
           %li 
             - Artist.order_by(updated_at: :desc).limit(5).all.each do |artist|
-              %span.artist>= link_to artist.to_wiki_link.object_text, artist_path(artist.id)
+              %span.artist>= artist_wiki_link_path(artist.to_wiki_link)
               ;&nbsp;
             = link_to "...", recent_changes_artists_path, name: t("portal.recent_changes")
           %li= link_to t("portal.recent_changes_artist"), recent_changes_artists_path
@@ -53,7 +53,7 @@
         %li 
           %span.letter= heading
           - Artist.where(cache_first_letter: letter).order_by(updated_at:1).limit(5).each do |artist|
-            %span.artist>= link_to artist.to_wiki_link.object_text, artist_path(artist.id)
+            %span.artist>= artist_wiki_link_path(artist.to_wiki_link)
             ;&nbsp;
           = link_to "...", alphabetic_artists_path(letter: letter, page: 1), name: "#{t('portal.complete_artist_alphabet')} \"#{letter}\""
       %li= link_to t("portal.all_artists"), artists_path(page: 1)

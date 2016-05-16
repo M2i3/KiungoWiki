@@ -4,6 +4,7 @@ class Release
   include Mongoid::Search
   include Mongoid::History::Trackable
 
+  field :signature, type:  String
   field :title, type: String
   field :date_released, type: IncDate
   field :label, type: String
@@ -23,8 +24,10 @@ class Release
 
   before_save :update_cached_fields
 
+  index({ signature: 1 }, { background: true })
   index({ cache_normalized_title: 1 }, { background: true })
   index({ cache_first_letter: 1, cache_normalized_title: 1 }, { background: true })
+  index({ origalbumid: 1})
 
   search_in :title, :label, {match: :all}
 
@@ -120,10 +123,19 @@ class Release
   def update_cached_fields
     self.cache_normalized_title = self.normalized_title
     self.cache_first_letter = self.title_first_letter
+    self.signature = self.to_search_query.signature
   end
 
-  def to_wiki_link
-    ReleaseWikiLink.new(reference_text: "oid:#{self.id}", release: self)
+  def to_wiki_link(klass=ReleaseWikiLink)
+    klass.new(reference_text: self.to_search_query.q, release: self)
+  end
+  
+  def to_search_query
+    sq = ReleaseWikiLink::SearchQuery.new
+    ReleaseWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|key|
+      sq[key] = self[key]
+    }
+    sq
   end
   
   def user_tags_text

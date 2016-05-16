@@ -7,22 +7,22 @@ class ArtistWikiLink < WikiLink
   field :start_date, type: String
   field :end_date, type: String
   
-  def name(exclude_role=false)
-    if artist
-      case
-        when !self.surname.blank? && !self.given_name.blank?
-          self.surname + ", " + self.given_name
-        when !self.surname.blank?
-          self.surname
-        when !self.given_name.blank?
-          self.given_name
-        else
-          self.name
-      end
-    else
-      self.objectq_display_text
-    end #+ ((role.blank? || exclude_role) ? "" : " [#{self.role}]")
-  end
+  #def name(exclude_role=false)
+  #  #if artist
+  #    case
+  #      when !self.surname.blank? && !self.given_name.blank?
+  #        self.surname + ", " + self.given_name
+  #      when !self.surname.blank?
+  #        self.surname
+  #      when !self.given_name.blank?
+  #        self.given_name
+  #      else 
+  #        self.name
+  #    end
+  #    #else
+  #    #self.objectq_display_text
+  #    #end #+ ((role.blank? || exclude_role) ? "" : " [#{self.role}]")
+  #end
 
   def object_text
     self.name.to_s
@@ -33,7 +33,7 @@ class ArtistWikiLink < WikiLink
 
     unless self.birth_date.blank? && self.birth_location.blank?
       birth_text = []
-      birth_text << self.birth_date.year unless self.birth_date.blank?
+      birth_text << IncDate.new(self.birth_date).year unless self.birth_date.blank?
       birth_text << self.birth_location unless self.birth_location.blank?
 
       text << "(" + birth_text.join(", ") + ")"
@@ -55,13 +55,16 @@ class ArtistWikiLink < WikiLink
       superclass.query_expressions.merge QUERY_ATTRS
     end
     def self.catch_all
-      :name
+      :surname
     end 
     def self.primary_display_text
       [:name]
     end
     def self.hidden_display_text
       [:surname,:given_name]
+    end
+    def self.canonical_exclusion_fields
+      [:name]
     end
   end
 end

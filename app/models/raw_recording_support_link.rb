@@ -1,4 +1,4 @@
-class RawRecordingSupportLink
+class SupportLink
   include Mongoid::Document
 
 #  set_database :raw_db

@@ -54,7 +54,7 @@ class SearchController < ApplicationController
         when "works"
           redirect_to works_path(q: params[:q])
         when "recordings"
-          redirect_to releases_path(q: params[:q])
+          redirect_to recordings_path(q: params[:q])
         when "releases"
           redirect_to releases_path(q: params[:q])
         when "my-music"

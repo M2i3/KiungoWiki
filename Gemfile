@@ -6,8 +6,9 @@ gem "haml"
 gem 'formtastic', github: 'justinfrench/formtastic', branch: '2.1-stable'
 gem 'formtastic-bootstrap', github: 'cgunther/formtastic-bootstrap', branch: 'bootstrap2-rails3-2-formtastic-2-1'
 gem "thin"
-gem "mongoid", '~> 3.1.0'
-gem 'mongoid-history', '~> 0.3.3'
+gem "mongoid"#, "~> 4.0.0"
+#gem "mongoid", '~> 3.1.0'
+gem 'mongoid-history'#, '~> 0.3.3'
 #gem 'will_paginate', '>=3.0.pre'
 gem 'acts-as-taggable-on'
 # for pagination https://github.com/amatsuda/kaminari
@@ -20,6 +21,7 @@ gem 'devise'
 # for text-to-html formatting
 gem 'RedCloth'
 gem 'mongoid_search', '~> 0.3.2'
+gem 'parslet'
 gem 'nested_form'
 gem "http_accept_language"
 

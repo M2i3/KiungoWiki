@@ -125,10 +125,15 @@ KiungoWiki::Application.routes.draw do
       end
     end
   end
+  
+  
 
   match 'search' => 'search#index'
   match 'new_from_search' => 'search#new_from'
   match 'site_plan' => "home#site_plan"
 
+  get ':controller/:action', controller: "test_input"
+  post ':controller/:action', controller: "test_input"
+  
   root to: "home#index"
 end

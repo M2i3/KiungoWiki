@@ -1,63 +1,93 @@
+main_image := m2i3/kiungowiki
+bundle_install_image := kiungowiki-bundle-install
+app_container := kiungo--kiungowiki.web.0
+database_container := kiungo--kiungowiki.mongodb.0
+database_container_data := kiungo--kiungowiki-mongodb_data
+test_image := kiungowiki-test
+importer_image := kiungowiki-importer
+test_database_container := kiungo--kiungowiki-test.mongodb.0
+
+app_network := kiungowiki--dev
+test_app_network := kiungowiki--test
+
 all: bundle.install build
 	
 bundle.install:
-	docker build -t kiungowiki-bundle-install -f ./dockerfiles/bundle.dockerfile ./
-	docker run --rm -v "$(shell pwd)":/usr/src/app -w /usr/src/app kiungowiki-bundle-install bundle install
-	docker rmi kiungowiki-bundle-install
+	docker build -t $(bundle_install_image) -f ./dockerfiles/bundle.dockerfile ./
+	docker run --rm -v "$(shell pwd)":/usr/src/app -w /usr/src/app $(bundle_install_image) bundle install
+	docker rmi $(bundle_install_image)
 	
 build-test: 
-	docker build -t kiungowiki-test -f ./dockerfiles/test.dockerfile ./
+	docker build -t $(test_image)  -f ./dockerfiles/test.dockerfile ./
 	
 build:
-	docker build -t registry:5001/kiungo/kiungowiki -f ./dockerfiles/Dockerfile ./
+	ruby-check recent
+	docker build -t $(main_image) -f ./dockerfiles/Dockerfile ./
+
+bash: app.up
+	docker run --rm -it -v "$(shell pwd)":/usr/src/app -w /usr/src/app -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db $(main_image) /bin/bash
 	
 console: app.up
-	docker run --rm -it -v "$(shell pwd)":/usr/src/app -w /usr/src/app -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db registry:5001/kiungo/kiungowiki bundle exec rails c
+	docker run --rm -it -v "$(shell pwd)":/usr/src/app -w /usr/src/app -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db $(main_image) bundle exec rails c
 
 run: build app.up
-	docker run --rm -it -p 3000:3000 --name kiungo--kiungowiki.web.0 -e SERVICE_NAME="kiungowiki-80" -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db registry:5001/kiungo/kiungowiki
+	docker rm -f $(app_container) &> /dev/null || true
+	docker create --name $(app_container) --env-file=./.env -e SERVICE_NAME="kiungowiki-80" -e RAILS_ENV=development $(main_image)
+	docker network connect $(app_network) $(app_container) &> /dev/null || true
+	docker network connect --ip=10.254.0.2 m2i3app--router $(app_container) &> /dev/null || true
+	docker start $(app_container)
+
+t: build app.up
+	docker run -it --rm --name $(app_container) --env-file=./.env -e SERVICE_NAME="kiungowiki-80" -e RAILS_ENV=development $(main_image) /bin/bash
 
 logs:
-	docker exec -it kiungo--kiungowiki.web.0 tail -f /usr/src/app/log/development.log
-			
+	docker exec -it $(app_container) tail -f /usr/src/app/log/development.log || true
+	
 test: test.unit test.spec
 	
-test.unit: build-test test-database.up
-	docker run --rm -it -e RAILS_ENV=test --link=kiungo--kiungowiki-test.mongodb.0:db kiungowiki-test /usr/local/bundle/bin/rake test
+test.unit: build-test network.up test-database.up
+	docker run --rm -it -e RAILS_ENV=test --net=$(test_app_network) $(test_image)  /usr/local/bundle/bin/rake test
 
-test.spec: build-test test-database.up
-	docker run --rm -it -e RAILS_ENV=test --link=kiungo--kiungowiki-test.mongodb.0:db kiungowiki-test /usr/local/bundle/bin/rake spec
+test.spec: build-test network.up test-database.up
+	docker run --rm -it -e RAILS_ENV=test --net=$(test_app_network) $(test_image)  /usr/local/bundle/bin/rake spec
 	
-test.cucumber: build-test test-database.up
-	docker run --rm -it -e RAILS_ENV=test --link=kiungo--kiungowiki-test.mongodb.0:db kiungowiki-test /bin/bash /usr/src/app/cucumber
+test.cucumber: build-test network.up test-database.up
+	docker run --rm -it -e RAILS_ENV=test --net=$(test_app_network) $(test_image)  /bin/bash /usr/src/app/cucumber
 	
-app.up: build database.up
+app.up: build network.up database.up 
 	
-database.import: database.up
-	@echo "# dump the data from the server"
-	@echo "mongodump --host=staff.mongohq.com --port=10096 --db=app847792 --username=jmlagace --password=<PASSWORD>"
-	@echo "# load the data into your local instance"
-	@echo "mongorestore --host mongo -d=kiungo_wiki_development ./dump/app847792"
-	@echo "# now you do it"
-	docker run -it --link kiungo--kiungowiki.mongodb.0:mongo --rm mongo:3  /bin/bash
+network.up:
+	mappc is-network $(app_network) || docker network create $(app_network)
+	mappc is-network $(test_app_network) || docker network create $(test_app_network)
 
-database.console: database.up
-	docker run -it --link kiungo--kiungowiki.mongodb.0:mongo --rm mongo:3 sh -c 'mongo "$$MONGO_PORT_27017_TCP_ADDR:$$MONGO_PORT_27017_TCP_PORT/test"'
+network.cleanup: 
+	! mappc is-network $(app_network) || docker network rm $(app_network)
+	! mappc is-network $(test_app_network) || docker network rm $(test_app_network)
 	
-database.up:
-	mappc is-container kiungo--kiungowiki-mongodb_data || mappc start-data kiungo--kiungowiki-mongodb data --volume=/data/db
-	mappc is-container  kiungo--kiungowiki.mongodb.0 || docker create  --name kiungo--kiungowiki.mongodb.0 --volumes-from=kiungo--kiungowiki-mongodb_data mongo:3
-	docker start kiungo--kiungowiki.mongodb.0
+database.up: network.up
+	mappc is-container $(database_container_data) || mappc mkdata $(database_container_data) --volume=/data/db
+	mappc is-container $(database_container) || docker create --name $(database_container) --volumes-from=$(database_container_data) mongo:3
+	docker network connect --alias=db $(app_network) $(database_container) &> /dev/null || true
+	docker start $(database_container)
+	
 
 test-database.up:
 	mappc is-container kiungo--kiungowiki-test.mongodb.0 || docker create  --name kiungo--kiungowiki-test.mongodb.0 mongo:3
 	docker start kiungo--kiungowiki-test.mongodb.0
 	
-cleanup:
-	docker rm -f kiungo--kiungowiki.web.0
-	docker rm -f kiungo--kiungowiki.mongodb.0
-	docker rm -f kiungo--kiungowiki-test.mongodb.0
+import.accessdb: database.up
+	ruby-check recent
+	docker build -t $(importer_image)  -f ./dockerfiles/importer.dockerfile ./
+	docker run --rm -it -v "$(shell pwd)/../data":/mnt/import -v "$(shell pwd)":/usr/src/app -w /usr/src/app --env-file=./.env -e RAILS_ENV=development --net=$(app_network) $(importer_image) /bin/bash
 	
-	docker rmi -f registry:5001/kiungo/kiungowiki
-	docker rmi -f kiungowiki-test
-	docker rmi -f kiungowiki-bundle-install
+cleanup-all: cleanup cleanup-images
+	
+cleanup:
+	! mappc is-container $(app_container) || docker rm -f $(app_container) > /dev/null || true
+	! mappc is-container $(database_container) || docker rm -f $(database_container) > /dev/null  || true
+	! mappc is-container $(test_database_container) || docker rm -f $(test_database_container) > /dev/null  || true
+
+cleanup-images:
+	! mappc is-image $(main_image) || docker rmi -f $(main_image) || true
+	! mappc is-image $(test_image)  || docker rmi -f $(test_image)  || true
+	! mappc is-image $(bundle_install_image) || docker rmi -f $(bundle_install_image) || true

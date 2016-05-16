@@ -12,7 +12,10 @@ class WorksController < ApplicationController
     respond_to do |format|
       format.xml { render xml: @works }
       format.json { render json: @works }
-      format.html
+      format.html {
+         redirect_to(@works.first) if (params[:autofollow] and @works.size == 1 and @works.first.signature == params[:signature])
+      }
+      
     end
   end
   
@@ -52,7 +55,12 @@ class WorksController < ApplicationController
   end
 
   def show
-    @work = Work.find(params[:id])
+
+    @work = Work.where(signature: params[:id].split("_").last).first
+    unless @work
+      @work = Work.find(params[:id])
+    end
+    
     if current_user
       @user_tags = @work.user_tags.where(user:current_user).all
     end
@@ -165,7 +173,7 @@ class WorksController < ApplicationController
       format.json { 
         render :json=>(Work.queried(wsq.objectq).limit(20).collect{|w|
           
-          wiki_link_klass.new(reference_text: "oid:#{w.id} #{wsq.metaq}").combined_link
+          w.to_wiki_link(wiki_link_klass).combined_link
 
         } << {id: params[:q].to_s, name: params[:q].to_s + " (nouveau)"})           
       }

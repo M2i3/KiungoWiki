@@ -1,0 +1,18 @@
+= title("Testing parsing of the Work Search Query with Complex Encoding")
+
+.tabbable.row
+  .span12
+    %form{action: "work_search_query", method: "POST", multipart: true}
+      %input{type: "text", name: "search_query", value: params[:search_query]}
+      %input{type: "submit"}
+  -unless params[:search_query].nil?
+    .span12
+      %p
+        %h2 Search Query 
+        %span= params[:search_query]
+      %p
+        %h2 Object Content
+        %pre= @search_query.inspect
+      %p
+        %h2 Title
+        %span= @search_query[:title]

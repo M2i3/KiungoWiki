@@ -33,6 +33,7 @@ class WorkWikiLink < WikiLink
             self.work && self.work.first_artist_object_text],
             :sep=>" - ")],
         :sep=>" ").to_s
+
   end
 
   class SearchQuery < ::SearchQuery

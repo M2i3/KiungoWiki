@@ -1,0 +1,10 @@
+= title("Testing Text Encoding On Input and Render")
+
+.tabbable.row
+  .span12
+    %form{action: "text_encoding", method: "POST", multipart: true}
+      %input{type: "text", name: "a_field", value: params[:a_field]}
+      %input{type: "submit"}
+  -unless params[:a_field].nil?
+    .span12
+      %p= params[:a_field]

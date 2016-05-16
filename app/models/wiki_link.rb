@@ -8,6 +8,7 @@ class  WikiLink
   before_save :save_signature
 
   def reference_text=(value)
+    @search_ref = nil
     self[:reference_text] = value
     sq = self.class.search_query(value)
     if sq[:oid]
@@ -22,7 +23,7 @@ class  WikiLink
       self.referenced = nil
     end
   end
-  
+    
   def reference_signature
     self.signature || self.searchref.signature
   end
@@ -39,7 +40,11 @@ class  WikiLink
   end
 
   def searchref
-    self.class.search_query(self.reference_text)
+    @search_ref ||= self.class.search_query(reference_text)
+  end
+  def searchref=(value)
+    @search_ref = value
+    self.reference_text = @search_ref.q
   end
 
   def metaq  
@@ -102,11 +107,20 @@ class  WikiLink
             "#{klass.to_s.downcase}"
           end
         end
+        
+        def #{klass.to_s.downcase}_with_ghost
+          unless self.#{klass.to_s.downcase}_without_ghost
+            @referenced_object ||= (self.reference_signature && #{klass.to_s}.where(signature: self.reference_signature).extras(:hint => {:signature => 1}).limit(1).first ) || #{klass.to_s}.new
+          else
+            @referenced_object ||= self.#{klass.to_s.downcase}_without_ghost
+          end
+        end
       EOM
 
 
       belongs_to klass.to_s.downcase.to_sym, inverse_of: nil
-      
+
+      alias_method_chain klass.to_s.downcase.to_sym, :ghost      
     end
 
     def search_klass

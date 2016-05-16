@@ -28,6 +28,10 @@ class Ability
       can :manage, Possession, owner: user
       can :manage, UserTag, user: user
     end
+    
+    if ENV['DEBUG_TEST_INPUT'] 
+      can :manage, TestInputController
+    end
 
     # Define abilities for the passed in user here. For example:
     #

@@ -14,8 +14,9 @@
     :javascript
       var switchTo5x=true;
       
-    %script{"type"=>"text/javascript", "src"=>"//w.sharethis.com/button/buttons.js"}
-    %script{"type"=>"text/javascript", "src"=>"//s.sharethis.com/loader.js"}
+    - if sharethis_enabled?      
+      %script{"type"=>"text/javascript", "src"=>"//w.sharethis.com/button/buttons.js"}
+      %script{"type"=>"text/javascript", "src"=>"//s.sharethis.com/loader.js"}
 
     :plain    
       <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->

@@ -1,3 +1,6 @@
+require 'parslet' 
+require 'json'
+
 class SearchQuery
   def self.query_expressions
     {oid: :word}
@@ -14,6 +17,9 @@ class SearchQuery
   def self.hidden_display_text
     []
   end
+  def self.canonical_exclusion_fields
+    []
+  end
   
   def self.objectq_fields
     self.query_expressions.keys  - self.meta_fields - [:oid]
@@ -24,9 +30,7 @@ class SearchQuery
 # to make this work you'll need to change this class into a module
 #  self.query_expressions.keys.each {|key| attr_reader key }
 
-  def initialize(query_value = nil)
-    @q = nil
-    @field_order = []
+  def initialize(query_value = "")
     self.q = query_value    
   end
 
@@ -60,92 +64,99 @@ class SearchQuery
       
       if value.nil?
         self.instance_variable_set("@#{var_name}", nil)
-        self.instance_variable_set("@full_#{var_name}", nil)        
       else
         self.instance_variable_set("@#{var_name}", value.to_s)
-        self.instance_variable_set("@full_#{var_name}", var_name.to_s + ":" + format_value(self.class.query_expressions[var_name  ], value))
       end
     else
       raise "undefined field #{var_name}"
     end
   end
   
-  def q
+  def q(separator=" ")
     unless @q
       filled_fields = self.filled_query_fields
       values = []
       @field_order.each {|var_name|
         filled_fields.delete(var_name)
-        values << self.instance_variable_get("@full_#{var_name}") 
+        values << self.full_field(var_name)
       }
       
       filled_fields.each {|var_name|
-        values << self.instance_variable_get("@full_#{var_name}") 
+        values << self.full_field(var_name)
       }
-      puts values.inspect
-      @q = values.join(" ")
+      @q = values.join(separator)
     end
     
     @q
   end
+  
+  def url_encoded
+    self.q("_").gsub(' ', '-').gsub("'", '-').gsub(/[^a-zA-Z0-9\_\-\.\:]/, '') + "_" + self.signature
+  end
+  
 
   def q=(value)
-    @field_order = []
-    @q = value.to_s
-    value = " " + @q + " "
-    self.class.query_expressions.each {|var_name, var_expression|
 
-      self.instance_variable_set("@#{var_name}", nil)
-      self.instance_variable_set("@full_#{var_name}", nil)
-
-      build_expression(var_name, var_expression).each {|expression|
-        if match_result = expression.match(value) and not self.instance_variable_get("@#{var_name}")
-          
-          self.instance_variable_set("@#{var_name}", match_result[1].strip)
-          self.instance_variable_set("@full_#{var_name}", match_result[0].strip)
-          
-          # store the order of the value
-          @field_order << var_name
-          # remove the value found from the searh string
-          value[match_result.offset(0)[0]..(match_result.offset(0)[1] - 1 )] = " "
-        end        
-      }
-    }
-    if self.class.catch_all and not self.instance_variable_get("@#{self.class.catch_all}")
-      @field_order << self.class.catch_all
-      self.instance_variable_set("@#{self.class.catch_all}", value.strip)
-      self.instance_variable_set("@full_#{self.class.catch_all}", "#{self.class.catch_all}:\"#{value.strip}\"")  
-    end
+    unless @q == value.to_s
+      @field_order = []
+      @q = value.to_s
     
-    @field_order.compact!
-  end
 
-  def build_expression(var_name, var_expression)
-    case var_expression
-      when :word
-        [/ #{var_name}:([a-zA-Z0-9-]+?) /i]
-      when :text
-        [/ #{var_name}:"(.+?)"/i, / #{var_name}:(.+?) /i]
-      when :date
-        [/ #{var_name}:(.+?) /i]
-      when :numeric
-        [/ #{var_name}:([0-9]+?) /i]
-      when :character
-        [/ #{var_name}:([0-9a-zA-Z]?) /i]
-      when :duration
-        [/ #{var_name}:([0-9]+[:][0-5][0-9]?) /i]
-      else
-        (var_expression.respond_to?(:each) ? var_expression : [var_expression])
+      search_terms_symbols = SearchParser.new.parse(@q)
+      search_terms_symbols = [] if search_terms_symbols == ""
+      search_terms = []
+      self.class.query_expressions.each {|var_name, var_expression|
+        self.instance_variable_set("@#{var_name}", nil)
+      }
+    
+      search_terms_symbols.each {|term|
+
+        if term[:search_element]
+        
+          if term[:search_element].is_a?(Hash)
+        
+            var_name = term[:search_element][:field]
+        
+            if var_name && query_fields.include?(var_name.to_sym)  
+              self.instance_variable_set("@#{var_name}", decode_search_element(term[:search_element]))
+              @field_order << var_name
+            end
+
+          else
+          
+            search_terms << term[:search_element].str
+          
+          end
+
+        end
+      }
+    
+      if self.class.catch_all and not self.instance_variable_get("@#{self.class.catch_all}")
+        self.instance_variable_set("@#{self.class.catch_all}", search_terms.join(" "))
+        @field_order << self.class.catch_all
+      end
     end
   end
+
   
   def format_value(type, value)
     case type
       when :word, :date, :numeric, :character, :duration
         "#{value}"
     else
-        "\"#{value}\""
+      '"' + value.to_s.gsub('"','\"') + '"'
+      #JSON::dump(value)
     end   
+  end
+  
+  def decode_search_element(search_element)
+    if search_element[:value] 
+      search_element[:value].to_s
+    elsif search_element[:string]
+      #search_element[:string]
+      search_element[:string].to_s.gsub('\"','"')
+      #JSON.parse('["' + search_element[:string].to_s + '"]')[0]
+    end
   end
   
   def metaq_fields 
@@ -156,10 +167,10 @@ class SearchQuery
   end
 
   def metaq
-    self.metaq_fields.collect {|var_name| self.instance_variable_get("@full_#{var_name}") }.join(" ")
+    self.metaq_fields.collect {|var_name| self.full_field(var_name) }.join(" ")
   end
   def objectq
-    self.objectq_fields.collect {|var_name| self.instance_variable_get("@full_#{var_name}") }.join(" ")
+    self.objectq_fields.collect {|var_name| self.full_field(var_name) }.join(" ")
   end
   def objectq_display_text
     primary_display_fields = (self.objectq_fields & self.class.primary_display_text)
@@ -169,18 +180,53 @@ class SearchQuery
     
     unless additional_display_fields.empty?
       display_text << " [ " unless primary_display_fields.empty?
-      display_text << additional_display_fields.collect {|var_name| self.instance_variable_get("@full_#{var_name}") }.join(" ")
+      display_text << additional_display_fields.collect {|var_name| self.full_field(var_name) }.join(" ")
       display_text << " ]" unless primary_display_fields.empty?
     end
     
-        
     display_text
   end
   
   def canonical_text
-    (self.query_fields - self.class.meta_fields - [:oid]).collect {|var_name| "#{var_name}: " + self.instance_variable_get("@#{var_name}").to_s }.join("\n")
+    (self.query_fields - self.class.meta_fields - self.class.canonical_exclusion_fields - [:oid]).sort.collect {|var_name| "#{var_name}: " + self.instance_variable_get("@#{var_name}").to_s }.join("\n")
   end
   def signature
     Digest::SHA1.hexdigest(self.canonical_text)
+  end
+  
+  def full_field(var_name)
+    var_name.to_s + ":" + format_value(self.class.query_expressions[var_name], self.instance_variable_get("@#{var_name}"))
+  end
+  
+  class SearchParser < Parslet::Parser
+    rule(:colon) { str(":") }
+    rule(:space)  { match('\s').repeat(1) }
+    rule(:space?) { space.maybe }
+    rule(:spaces) { space.repeat(0) }
+    rule(:number) { match('[0-9]').repeat(1) }
+
+    rule(:word) { match('[^\s]').repeat(1) }
+
+    rule(:empty_string) {
+      str('"') >> str('"')      
+    }
+
+    rule(:string) {
+      str('"') >> (
+        str('\\') >> any |
+        str('"').absent? >> any 
+      ).repeat.as(:string) >> str('"') 
+    }
+
+    rule(:symbol) { match('[a-z_\-]').repeat(1) }
+    rule(:field) { symbol.as(:field) }
+    rule(:value) { ( empty_string | string | word.as(:value) ) }
+    rule(:domain_search) { ( field >> colon >> value ) }
+
+    rule(:search_element) { ( domain_search | word ).as(:search_element) >> space.maybe  } 
+    rule(:search_query) { space.maybe >> search_element.repeat(0) }
+
+    root(:search_query)
+
   end
 end

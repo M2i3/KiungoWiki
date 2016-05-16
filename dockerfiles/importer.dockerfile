@@ -12,9 +12,8 @@ COPY Gemfile /usr/src/app/
 COPY Gemfile.lock /usr/src/app/
 RUN bundle install
 
+RUN apt-get update && apt-get install -y mdbtools
+
 COPY . /usr/src/app
 
-EXPOSE 3000
-#CMD ["/usr/local/bundle/bin/bundle","exec","rails s -p 3000"]
-CMD ["/usr/local/bundle/bin/bundle","exec","thin start -p 3000"]
-
+CMD ["/bin/bash"]
