@@ -167,7 +167,9 @@ class Work
   def to_search_query
     sq = WorkWikiLink::SearchQuery.new
     WorkWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|key|
-      sq[key] = self[key]
+      unless key == :lyrics
+        sq[key] = self[key]
+      end
     }
     sq
   end

@@ -113,8 +113,11 @@ class PreviousDatabaseImporter
     import_artists
     
     import_works
-    import_work_publishers
     import_works_artists
+    import_work_publishers
+        
+    return true
+
     
     import_recordings
     import_recordings_artists
@@ -184,9 +187,11 @@ class PreviousDatabaseImporter
     puts "Load the publishers for the works..."
     ::Work.disable_tracking {
       MdbImporter.new("Lien Editeur Piece").each{|l|
-        if w = Work.where(:origworkid => l["RefPiece"]).extras(:hint => {:origworkid => 1}).limit(1).first
-          w.publishers << self.publishers[l["RefEditeur"]]
-          w.save!
+        if @work_filter.include?(l)
+          if w = Work.where(:origworkid => l["RefPiece"]).extras(:hint => {:origworkid => 1}).limit(1).first
+            w.publishers << self.publishers[l["RefEditeur"]]
+            w.save!
+          end
         end
       }     
     }
@@ -233,12 +238,10 @@ class PreviousDatabaseImporter
         puts "processing the #{artists_works.count} artists (3 of 3)"
         progress = Progress.new(artists_works.count)
         artists_works.each{|artistid,work_roles|
-          #extras(:hint => {:origartistid => 1})
-          a = Artist.where(:origartistid => artistid).first || raise("Cannot find artist for id #{artistid}")            
+          a = Artist.where(:origartistid => artistid).extras(:hint => {:origartistid => 1}).first || raise("Cannot find artist for id #{artistid}")            
           
           works = {}.tap {|h| 
-            #.extras(:hint => {:origworkid => 1})
-            Work.where(:origworkid.in => (work_roles.collect{|w| w[:ref]})).each {|w|
+            Work.where(:origworkid.in => (work_roles.collect{|w| w[:ref]})).extras(:hint => {:origworkid => 1}).each {|w|
               h[w.origworkid] = w
             }
           } 
@@ -349,9 +352,10 @@ if __FILE__==$0
     artists_filter = FilterByField.new("RefArtiste", ["45", "466", "384", "95", "2405", "94"])
     work_filter = FilterByField.new("RefPiece",["32","776","873","1016","1017","1018","1019","1020","1021","1022","1023","1024","1025","1026","1027","1028","1029","1030","1031","1032","1033","1034","1035","1036","1037","1038","1039","1040","1041","1042","1044","1045","1046","1047","1048","1049","1050","1051","1052","1053","1054","1055","1056","1057","1058","1059","1060","1061","1062","1063","1064","1065","1066","1067","1069","1070","1071","1072","1073","1074","1075","1076","1077","1078","1079","1080","1081","1082","1083","1084","1085","1086","1087","1089","1090","1091","1092","1093","1094","1256","3859","4047","4048","4049","4050","4783","4786","6930","6932","6933","6934","6935","6936","6938","6939","6940","6941","6942","6944","6945","6946","6947","6948","9471","9692","9693","9707","9708","9709","9711","9712","9713","9714","9742","9753","9754","9755","9756","9757","9758","9806","9807","9838","9839","9840","9841","9907","9908","9909","9910","9990","9991","9992","10021","10022","10023","10024","10025","10026","10027","10028","10029","10030","10043","10044"])
     importer = PreviousDatabaseImporter.new(artists_filter: artists_filter, work_filter: work_filter)
-    importer.import_artists
-    importer.import_works
-    importer.import_works_artists
+    importer.import
+#    importer.import_artists
+#    importer.import_works
+#    importer.import_works_artists
   end
 
    # MdbImporter.new("Étiquettes").each{|l| puts l.inspect }

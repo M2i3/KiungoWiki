@@ -25,10 +25,10 @@ build:
 	docker build -t $(main_image) -f ./dockerfiles/Dockerfile ./
 
 bash: app.up
-	docker run --rm -it -v "$(shell pwd)":/usr/src/app -w /usr/src/app -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db $(main_image) /bin/bash
+	docker run --rm -it -v "$(shell pwd)":/usr/src/app -w /usr/src/app --env-file=./.env --net=$(app_network) $(main_image) /bin/bash
 	
 console: app.up
-	docker run --rm -it -v "$(shell pwd)":/usr/src/app -w /usr/src/app -e RAILS_ENV=development --link=kiungo--kiungowiki.mongodb.0:db $(main_image) bundle exec rails c
+	docker run --rm -it -v "$(shell pwd)":/usr/src/app -w /usr/src/app --env-file=./.env --net=$(app_network) $(main_image) bundle exec rails c
 
 run: build app.up
 	docker rm -f $(app_container) &> /dev/null || true

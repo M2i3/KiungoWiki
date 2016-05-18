@@ -101,7 +101,6 @@ class SearchQuery
       @field_order = []
       @q = value.to_s
     
-
       search_terms_symbols = SearchParser.new.parse(@q)
       search_terms_symbols = [] if search_terms_symbols == ""
       search_terms = []
