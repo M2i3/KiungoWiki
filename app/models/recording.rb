@@ -174,8 +174,10 @@ class Recording
     self.signature = self.to_search_query.signature
   end
 
-  def to_wiki_link(klass=RecordingWikiLink)
-    klass.new(reference_text: self.to_search_query.q, recording: self)
+  def to_wiki_link(klass=RecordingWikiLink, attributes={})
+    attributes.merge!({reference_text: self.to_search_query.q})
+    klass.new(attributes)
+#    klass.new(reference_text: self.to_search_query.q, recording: self)
   end
     
   def to_search_query

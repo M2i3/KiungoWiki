@@ -78,7 +78,7 @@ test-database.up:
 import.accessdb: database.up
 	ruby-check recent
 	docker build -t $(importer_image)  -f ./dockerfiles/importer.dockerfile ./
-	docker run --rm -it -v "$(shell pwd)/../data":/mnt/import -v "$(shell pwd)":/usr/src/app -w /usr/src/app --env-file=./.env -e RAILS_ENV=development --net=$(app_network) $(importer_image) /bin/bash
+	docker run --rm -it -v "$(shell pwd)/../data":/mnt/import -v "$(shell pwd)":/usr/src/app -w /usr/src/app --env-file=./.env -e RAILS_ENV=development --net=$(app_network) $(importer_image) bundle exec rails c
 	
 cleanup-all: cleanup cleanup-images
 	
