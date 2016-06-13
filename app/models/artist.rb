@@ -216,7 +216,6 @@ class Artist
     #attributes.merge!({reference_text: self.to_search_query.q, artist: self})
     attributes.merge!({reference_text: self.to_search_query.q})
     klass.new(attributes)
-#    klass.new(reference_text: "oid:#{self.id}" , artist: self)    
   end
   
   def to_search_query

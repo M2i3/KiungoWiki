@@ -126,8 +126,9 @@ class Release
     self.signature = self.to_search_query.signature
   end
 
-  def to_wiki_link(klass=ReleaseWikiLink)
-    klass.new(reference_text: self.to_search_query.q, release: self)
+  def to_wiki_link(klass=ReleaseWikiLink, attributes={})
+    attributes.merge!({reference_text: self.to_search_query.q})
+    klass.new(attributes)
   end
   
   def to_search_query
