@@ -43,7 +43,7 @@ class MdbImporter
   
   def count
     unless @total_count  
-      IO.popen("mdb-export -d ==FLD== -R ==REC== -D %Y-%m-%d -Q  \"#{@import_file}\" \"#{@table_name}\"") {|file|
+      IO.popen("mdb-export -d ==FLD== -R ==REC== -D \"%Y-%m-%d %H:%M:%S\" -Q  \"#{@import_file}\" \"#{@table_name}\"") {|file|
         @total_count = file.read.split("==REC==").count - 1
       }
     end
@@ -54,7 +54,7 @@ class MdbImporter
   def each
     reset_progress
     headers = []
-    IO.popen("mdb-export -d ==FLD== -R ==REC== -D %Y-%m-%d -Q  \"#{@import_file}\" \"#{@table_name}\"") {|file|
+    IO.popen("mdb-export -d ==FLD== -R ==REC== -D \"%Y-%m-%d %H:%M:%S\" -Q  \"#{@import_file}\" \"#{@table_name}\"") {|file|
         
       file.read.split("==REC==").each do |line|
         if headers.empty?
@@ -118,6 +118,8 @@ class PreviousDatabaseImporter
     puts "creating the indexes to make sure everything runs faster"
     `rake db:mongoid:create_indexes`
     
+    import_categories
+    
     import_artists
     
     import_works
@@ -133,10 +135,26 @@ class PreviousDatabaseImporter
   end
   
   def wipe_all_data!
+    Category.collection.drop
     Artist.collection.drop
     Work.collection.drop
     Recording.collection.drop
     Release.collection.drop
+  end
+  
+  def import_categories
+    puts "Load the categories..."
+    #::Category.disable_tracking {
+      MdbImporter.new("Categories musicales").each{|l| 
+        
+        params = {:origcategoryid => l["RefCategorieMusicale"],
+                  :category_name => l["CategorieMusicale"]
+        }
+        
+        ::Category.create!(params)
+      }
+      #}
+    puts "... #{::Category.count} categories loaded"
   end
 
   def import_artists
@@ -278,13 +296,13 @@ class PreviousDatabaseImporter
         #.extras(:hint => {:origworkid => 1})
         if @recording_filter.include?(l) and @work_filter.include?(l)
           work = (works[l["RefPiece"]] ||= Work.where(:origworkid => l["RefPiece"]).limit(1).first)
-        
+          
           params = {:origrecordingid => l["RefVersion"],
                     :recording_date => l["Annee"],
-                    :duration => l["Duree"],
-                    :work_wiki_link_text => work.to_wiki_link.reference_text
+                    :duration => datetime_to_duration(l["Duree"]),
+                    :work_wiki_link_text => work.to_wiki_link.reference_text,
+                    :rythm => nil
                   }
-       
        #       field :publishers, type: Array, default: []
        
           unless ["0","",nil].include?(l["Remarque"])
@@ -416,7 +434,6 @@ class PreviousDatabaseImporter
     puts "Backlinking the releases into the artists"
     progress = Progress.new(artists_releases.count)
     ::Artist.disable_tracking {
-      # YOU ARE HERE!!!!
       
       artists_releases.each{|artist_id, data|
         #{artist: k, releases: [] }
@@ -434,11 +451,6 @@ class PreviousDatabaseImporter
   end
   
   def import_recordings_releases
-    #
-    #
-    #
-    #
-    
     puts "Load the relations between the recordings and their releases"
     
     ::Recording.disable_tracking {
@@ -499,15 +511,14 @@ class PreviousDatabaseImporter
     }
     
     puts "... relations loaded"
-    
-    
-    
-    
-    
-    #
-    #
-    #
-    #
+  end
+  
+  def datetime_to_duration(datetime)
+    begin
+      Duration.new((DateTime.parse(datetime).to_i - DateTime.parse("1899-12-30 00:00:00").to_i) / 60)
+    rescue
+      nil
+    end
   end
   
   #
@@ -538,7 +549,7 @@ if __FILE__==$0
   if false
     Dir.chdir("/mnt/import")
     (`mdb-tables -d ::: ./reference-chanson.mdb`).split(":::").collect{|t| t.strip }.select{|t| t != ""}.each {|t|
-      `mdb-export -d ==FLD== -R ==REC== -D %Y-%m-%d -Q -H ./reference-chanson.mdb \"#{t}\" > /tmp/#{URI.escape(t)}.txt`
+      `mdb-export -d ==FLD== -R ==REC== -D \"%Y-%m-%d %H:%M:%S\" -Q -H ./reference-chanson.mdb \"#{t}\" > /tmp/#{URI.escape(t)}.txt`
     }
   end
   
@@ -559,20 +570,21 @@ def do_import
     get_importer.import
 end
 
-def do_import_releases
+def do_import_categories
   PreviousDatabaseImporter.new.wipe_all_data!
   importer = get_importer
   
   puts "creating the indexes to make sure everything runs faster"
   `rake db:mongoid:create_indexes`
   
-  importer.import_artists
-  importer.import_releases
+  importer.import_categories
     
 end
 
 if false
+  load 'lib/mdb_importer.rb'  
+  do_import_categories
+  
   load 'lib/mdb_importer.rb'
-  #do_import_releases
   do_import
 end

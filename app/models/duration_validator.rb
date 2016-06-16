@@ -5,7 +5,7 @@ class DurationValidator < ActiveModel::EachValidator
     begin
       unless value.blank? && options[:allow_nil]
         elements = {}
-        elements[:seconds], elements[:minutes], elements[:hours] = value.to_s.split(':').collect{|p| Integer(p) }.reverse
+        elements[:seconds], elements[:minutes], elements[:hours] = value.to_s.split(':').collect{|p| p.to_i }.reverse
 
         [:seconds, :minutes, :hours].each {|k|
           raise "invalid duration #{k}" if elements[k] && elements[k] < 0   
@@ -15,7 +15,7 @@ class DurationValidator < ActiveModel::EachValidator
         
         
       end
-    rescue
+    rescue 
       record.errors[attribute] << 'must be a valid duration'
     end
   end

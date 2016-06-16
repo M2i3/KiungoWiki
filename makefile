@@ -36,6 +36,9 @@ run: build app.up
 	docker network connect $(app_network) $(app_container) &> /dev/null || true
 	docker network connect --ip=10.254.0.2 m2i3app--router $(app_container) &> /dev/null || true
 	docker start $(app_container)
+	docker exec -it $(app_container) bundle exec rails c
+	docker stop $(app_container)
+	docker rm -f $(app_container) 2> /dev/null 1>&2 || true
 
 t: build app.up
 	docker run -it --rm --name $(app_container) --env-file=./.env -e SERVICE_NAME="kiungowiki-80" -e RAILS_ENV=development $(main_image) /bin/bash

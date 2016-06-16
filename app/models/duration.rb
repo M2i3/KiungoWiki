@@ -18,7 +18,7 @@ class Duration
 
       when ::String
         begin 
-          @seconds, @minutes, @hours = object.split(':').collect{|p| Integer(p) }.reverse
+          @seconds, @minutes, @hours = object.split(':').collect{|p| p.to_i }.reverse
         rescue
           raise ArgumentError, "Unexpected duration string #{object} when instancing #{self.class.name}"      
         end
