@@ -4,10 +4,6 @@ class CategoryWikiLink < WikiLink
   set_reference_class Category
   cache_attributes :category_name
 
-  def category_name
-    (category && self.category.category_name) || self.objectq
-  end
-
   def origcategoryid
     (category && self.category.origcategoryid) || self.objectq
   end
@@ -15,18 +11,23 @@ class CategoryWikiLink < WikiLink
   def object_text
     text = self.category_name.to_s
   end
-
-
-  class SearchQuery < ::SearchQuery 
-    def self.query_expressions
-      superclass.query_expressions.merge({
+  
+  class SearchQuery < ::SearchQuery
+    QUERY_ATTRS = { 
         category_name: :text
-      })
+      }
+    def self.query_expressions
+      super.merge QUERY_ATTRS
     end
     def self.catch_all
       :category_name
     end 
+    def self.primary_display_text
+      [:category_name]
+    end    
   end
+  
+  
 end
 
 

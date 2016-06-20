@@ -216,7 +216,7 @@ namespace :kiungo do
             params = {}
             params = {:recording_date=>rawRecording.recording_date, 
                       :duration=>rawRecording.duration,
-                      :rythm=>rawRecording.rythm,
+                      :bpm=>rawRecording.bpm,
                       :work_wiki_link=>WorkWikiLink.new({:reference_text=>"oid:"+ w.id.to_s,:work_id=>w.id}),
                       :origrecordingid=>rawRecording.recording_id
                    }

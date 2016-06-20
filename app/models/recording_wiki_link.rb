@@ -33,7 +33,7 @@ class RecordingWikiLink < WikiLink
         recording_date: :date,
         duration: :duration,
         recording_location:  :text,
-        rythm: :word
+        bpm: :word
       }
     def self.query_expressions
       super.merge QUERY_ATTRS

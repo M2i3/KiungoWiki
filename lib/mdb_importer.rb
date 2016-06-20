@@ -10,6 +10,7 @@ end
 
 
 require 'uri'
+require 'csv'
 
 class Progress
   def initialize(total)
@@ -119,6 +120,7 @@ class PreviousDatabaseImporter
     `rake db:mongoid:create_indexes`
     
     import_categories
+    import_languages
     
     import_artists
     
@@ -144,7 +146,8 @@ class PreviousDatabaseImporter
   
   def import_categories
     puts "Load the categories..."
-    #::Category.disable_tracking {
+    #TODO: Missing the more complete list of caategories found in db/categories_for_mongo.csv
+    ::Category.disable_tracking {
       MdbImporter.new("Categories musicales").each{|l| 
         
         params = {:origcategoryid => l["RefCategorieMusicale"],
@@ -153,8 +156,22 @@ class PreviousDatabaseImporter
         
         ::Category.create!(params)
       }
-      #}
+    }
     puts "... #{::Category.count} categories loaded"
+  end
+  
+  def import_languages
+    puts "Load the languages..."
+    CSV.open("db/access_to_mongodb/languages_for_mongo.csv",{col_sep:"|", headers:true}) {|faster_csv| 
+      faster_csv.each{|l| 
+        unless l["language_code"].nil? || l["language_code"].empty?
+          Language.create!( :language_code => l["language_code"], 
+                            :language_name_french => l["language_name_french"], 
+                            :language_name_english => l["language_name_english"])
+        end
+      }
+    }
+    puts "... #{::Language.count} languages loaded"
   end
 
   def import_artists
@@ -189,7 +206,7 @@ class PreviousDatabaseImporter
           params = {:origworkid => l["RefPiece"],
                     :title => l["Titre"],
                     :date_written => l["Annee"],
-                    :language_code => l["RefLangue"],
+                    :language_code => language_to_code(l["RefLangue"]),
                     :is_lyrics_verified => l["TexteVerifie"],
                     :is_credits_verified => l["CreditsVerifie"],
                     :ref_piece_originale => l["RefPieceOriginale"]}
@@ -301,7 +318,8 @@ class PreviousDatabaseImporter
                     :recording_date => l["Annee"],
                     :duration => datetime_to_duration(l["Duree"]),
                     :work_wiki_link_text => work.to_wiki_link.reference_text,
-                    :rythm => nil
+                    :category_wiki_links_text => category_wiki_link(l["RefCategorieMusicale"]).reference_text,
+                    :bpm => rythm_to_bpm(l["RefRythme"])
                   }
        #       field :publishers, type: Array, default: []
        
@@ -309,9 +327,7 @@ class PreviousDatabaseImporter
             params[:supplementary_sections] = [SupplementarySection.new({:title=>"Notes",:content=>l["Remarque"]})]
           end
         
-          #field :rythm, type:  Integer
-
-        	#[RefCategorieMusicale]			Long Integer, 
+          #field :bpm, type:  Integer
         	#[RefRythme]			Long Integer,         
           @recordings_loaded << l["RefVersion"]
           recording = ::Recording.create!(params) 
@@ -519,6 +535,43 @@ class PreviousDatabaseImporter
     rescue
       nil
     end
+  end
+  
+  def category_wiki_link(origcategoryid)
+    unless @categories
+      @categories = Hash.new 
+      Category.each {|category|
+        @categories[category.origcategoryid.to_s] = category.to_wiki_link
+      }
+    end
+    
+    @categories[origcategoryid.to_s] || WikiLink.new
+  end
+  
+  def rythm_to_bpm(rythm)
+    # BPM determined using https://en.wikipedia.org/wiki/Tempo 
+    {"1" => 40, "4" => 72,  "5" => 92, "2" => 108, "6" => 120, "7" => 160, "3" => 200}[rythm.to_s]
+  end
+  
+  def language_to_code(language)
+    {1=>'fre',
+    2=>'eng',
+    3=>'003',
+    4=>'spa',
+    5=>'ita',
+    6=>'ger',
+    7=>'cos',
+    8=>'008',
+    9=>'por',
+    10=>'010',
+    11=>'011',
+    12=>'lat',
+    13=>'heb',
+    14=>'jpn',
+    15=>'015',
+    16=>'016',
+    17=>'017',
+    18=>'dut'}[language.to_i]
   end
   
   #

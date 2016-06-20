@@ -12,7 +12,7 @@ class RawRecording
   field :category_id, :type => String
   field :recording_id, :type => String
   field :notes, :type => String
-  field :rythm, :type => String
+  field :bpm, :type => String
   field :work_id, :type => String
 
   private 

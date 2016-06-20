@@ -6,6 +6,6 @@ FactoryGirl.define do
     recording_date_text ""
     recording_location_text ""
     duration_text nil
-    rythm_text nil
+    bpm_text nil
   end
 end

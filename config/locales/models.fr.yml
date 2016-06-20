@@ -75,7 +75,7 @@ fr:
         recording_date: Date d'enregistrement
         recording_location: Lieu
         duration: Durée
-        rythm: Rythme
+        bpm: Rythme
         itemSection: Face
         itemId: No de disque
         trackNb: Plage

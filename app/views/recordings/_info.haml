@@ -20,9 +20,9 @@
       = Recording.human_attribute_name("duration") 
       \: #{@recording.duration}
   %p
-    - unless @recording.rythm.blank?
-      = Recording.human_attribute_name("rythm") 
-      \:  #{@recording.rythm}bpm
+    - unless @recording.bpm.blank?
+      = Recording.human_attribute_name("bpm") 
+      \:  #{@recording.bpm}bpm
 
 %h2 #{t('credits')}
 - if @recording.artist_wiki_links == 0

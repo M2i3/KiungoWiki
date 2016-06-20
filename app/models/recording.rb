@@ -10,7 +10,7 @@ class Recording
   field :recording_date, type:  IncDate
   field :recording_location, type:  String
   field :duration, type:  Duration
-  field :rythm, type:  Integer
+  field :bpm, type:  Integer
   field :origrecordingid, type:  String
   field :missing_tags, type: Boolean
   field :missing_supplementary_sections, type: Boolean
@@ -36,7 +36,7 @@ class Recording
 #  validates_length_of :work_title, :in=>1..500, :allow_nil=>true
 #  validates_numericality_of :duration, :greater_than=>0, :allow_nil=>true  
 #  validates_format_of :recording_date_text, :with=>/^(\d{4})(?:-?(\d{0,2})(?:-?(\d{0,2}))?)?$/, :allow_nil=>true
-  validates_numericality_of :rythm, greater_than: 0, allow_nil: true
+  validates_numericality_of :bpm, greater_than: 0, allow_nil: true
 
   embeds_one :work_wiki_link, as: :linkable, class_name: "RecordingWorkWikiLink"
   validates_associated :work_wiki_link  
@@ -207,7 +207,7 @@ class Recording
           current_query = current_query.csearch(rsq[field], match: :all)
         when :category_name
           current_query = current_query.where(field=>/#{Regexp.quote(rsq[field].downcase)}/i)
-        when :created_at, :duration, :recording_date, :rythm, :update_at
+        when :created_at, :duration, :recording_date, :bpm, :update_at
           current_query = current_query.where(field=>rsq[field])        
       end 
     }

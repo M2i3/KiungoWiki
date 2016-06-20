@@ -23,6 +23,10 @@ class  WikiLink
       self.referenced = nil
     end
   end
+  
+  def signature
+    self[:signature] ||= self.searchref.signature
+  end
     
   def reference_signature
     self.signature || self.searchref.signature
@@ -87,7 +91,7 @@ class  WikiLink
   end
   
   def save_signature
-    self.signature = self.searchref.signature
+    self.signature = self.signature
   end
   def cached_attributes
     []

@@ -6,7 +6,7 @@ describe Recording do
   it { should have_field(:missing_tags).of_type Boolean }
   it { should have_field(:missing_supplementary_sections).of_type Boolean }
 	describe "Testing for required values" do 
-		[:recording_date, :recording_location, :rythm, :duration].each {|field|	
+		[:recording_date, :recording_location, :bpm, :duration].each {|field|	
 			it "#{field} should allow nil" do 
 				rec = FactoryGirl.build(:recording, field =>  nil)			
 				rec.valid?.should be_true
@@ -38,17 +38,17 @@ describe Recording do
 		}
 	end
 	
-	describe "Testing for the rythm" do	
+	describe "Testing for the bpm" do	
 		["a", -15, 0].each {|value|
-			it "when specified, rythm should be numerical and greater than 0 (#{value} is not valid)" do
-				rec = FactoryGirl.build(:recording, :rythm_text=>value)
+			it "when specified, bpm should be numerical and greater than 0 (#{value} is not valid)" do
+				rec = FactoryGirl.build(:recording, :bpm_text=>value)
 				rec.valid?.should be_false
 			end
 		}
 	
 		[1, 15, 300, 10000, 500000, 1000000].each {|value|
-			it "when specified, rythm should be numerical and greater than 0 (#{value} is valid)" do
-				rec = FactoryGirl.build(:recording, :rythm_text=>value)
+			it "when specified, bpm should be numerical and greater than 0 (#{value} is valid)" do
+				rec = FactoryGirl.build(:recording, :bpm_text=>value)
 				rec.valid?.should be_true
 			end
 		}
