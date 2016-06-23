@@ -2,7 +2,8 @@ class Possession
   include Mongoid::Document
   
   belongs_to :owner, class_name: "User", index: true
-  [:owner, :release_wiki_link].each {|field| validates_presence_of field }
+  validates_presence_of :owner
+  validates_presence_of :release_wiki_link
   field :display_title, type: String
   field :labels, type: Array, default: []
   field :rating, type: Integer, default: 0

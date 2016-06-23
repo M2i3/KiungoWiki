@@ -22,6 +22,8 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
+  
+  field :ref_proprietaire,   type: Integer
 
   ## Encryptable
   # field :password_salt, :type => String

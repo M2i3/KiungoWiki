@@ -133,15 +133,20 @@ class PreviousDatabaseImporter
     import_releases
     import_recordings_releases
     
+    import_users
+    import_users_releases
+    
 
   end
   
   def wipe_all_data!
     Category.collection.drop
+    Language.collection.drop
     Artist.collection.drop
     Work.collection.drop
     Recording.collection.drop
     Release.collection.drop
+    User.where(:email.ne => "jean-marc@m2i3.com").destroy_all
   end
   
   def import_categories
@@ -529,6 +534,45 @@ class PreviousDatabaseImporter
     puts "... relations loaded"
   end
   
+  def import_users
+    
+    puts "Load the users"
+    
+    MdbImporter.new("Proprietaires").each{|l|
+      random_password = 30.times.to_a.collect{|i| ("0".."z").to_a.sample}.join("")
+      User.create!({ :ref_proprietaire => l["RefProprietaire"], 
+                     :email => [l["PrenomProprietaire"], l["NomProprietaire"]].join(".") + "@invalid.inv", 
+                     :nickname => [l["PrenomProprietaire"], l["NomProprietaire"]].join(" "),
+                     :password => random_password,
+                     :password_confirmation => random_password
+                     })
+      
+    }
+    
+    puts "... #{::User.count} user(s) loaded [this number includes pre-defined users]"
+  end
+  
+  def import_users_releases
+    puts "Load the users releases"
+  
+    releases = Hash.new
+    users = Hash.new
+
+    MdbImporter.new("Lien Propriete").each{|l|
+      
+      user = (users[l["RefProprietaire"]] ||= User.where(:ref_proprietaire => l["RefProprietaire"]).first)
+      release = (releases[l["RefAlbum"]] ||= Release.where(:origalbumid => l["RefAlbum"]).first)
+
+      if user && release
+        user.possessions.create!(:release_wiki_link => release.to_wiki_link)
+        user.save!
+      end
+
+    }
+  
+    puts "releases loaded"
+  end
+  
   def datetime_to_duration(datetime)
     begin
       Duration.new((DateTime.parse(datetime).to_i - DateTime.parse("1899-12-30 00:00:00").to_i) / 60)
@@ -623,20 +667,24 @@ def do_import
     get_importer.import
 end
 
-def do_import_categories
+def do_import_partial
   PreviousDatabaseImporter.new.wipe_all_data!
   importer = get_importer
   
   puts "creating the indexes to make sure everything runs faster"
   `rake db:mongoid:create_indexes`
   
-  importer.import_categories
+  importer.import_artists
+  importer.import_releases
+  importer.import_users
+  importer.import_users_releases
+  
     
 end
 
 if false
   load 'lib/mdb_importer.rb'  
-  do_import_categories
+  do_import_partial
   
   load 'lib/mdb_importer.rb'
   do_import
