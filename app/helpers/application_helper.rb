@@ -1,53 +1,37 @@
 module ApplicationHelper
   include  M2i3WebBase::PageHelper
 
-  def work_wiki_link_path(wwl)
-    if wwl.work_id
-      link_to(wwl.title, work_path(:id=>wwl.work_id))
-    else
-      link_to(wwl.title, work_path(id:wwl.searchref.url_encoded))
-    end
+  def work_wiki_link_path(wiki_link)
+    wiki_link = wiki_link.to_wiki_link unless wiki_link.is_a?(WikiLink)
+    link_to(wiki_link.title, work_path(id:wiki_link.searchref.url_encoded))
   end
     
+  def artist_wiki_link_path(wiki_link)
+    wiki_link = wiki_link.to_wiki_link unless wiki_link.is_a?(WikiLink)
+    link_to(wiki_link.name, artist_path(id:wiki_link.searchref.url_encoded))
+  end
+
+  def release_wiki_link_path(wiki_link)
+    wiki_link = wiki_link.to_wiki_link unless wiki_link.is_a?(WikiLink)
+    link_to(wiki_link.title, release_path(id:wiki_link.searchref.url_encoded))
+  end
+  
+  def recording_wiki_link_path(wiki_link)
+    wiki_link = wiki_link.to_wiki_link unless wiki_link.is_a?(WikiLink)
+		link_to(wiki_link.title, recording_path(id:wiki_link.searchref.url_encoded))
+  end
+
+  def category_wiki_link_path(wiki_link)
+    wiki_link = wiki_link.to_wiki_link unless wiki_link.is_a?(WikiLink)
+		link_to(wiki_link.category_name, category_path(id:wiki_link.searchref.url_encoded))
+  end
+
   def tokeninput_formatted_combined_link(combined_link)
     if combined_link
       [combined_link].to_json
     else
       ""
     end
-  end
-
-  def artist_wiki_link_path(awl)
-    if awl.artist_id
-      link_to(awl.name, artist_path(id:awl.artist_id))
-    else
-      link_to(awl.name, artist_path(id:awl.searchref.url_encoded))
-#      link_to(awl.name, artists_path(q:awl.reference_text, signature:awl.reference_signature, autofollow:true))
-    end
-  end
-
-  def release_wiki_link_path(rwl)
-    if rwl.release_id
-      link_to(rwl.title, release_path(:id=>rwl.release_id))
-    else
-      link_to(rwl.title, releases_path(q:rwl.reference_text, signature:rwl.reference_signature, autofollow:true))
-    end
-  end
-  
-  def recording_wiki_link_path(rwl)
-  	if rwl.recording_id
-  		link_to(rwl.title, recording_path(:id=>rwl.recording_id))
-  	else
-  		link_to(rwl.title, recordings_path(q:rwl.reference_text, signature:rwl.reference_signature, autofollow:true))
-  	end
-  end
-
-  def category_wiki_link_path(cwl)
-  	if cwl.category_id
-  		link_to(cwl.category_name, category_path(:id=>cwl.category_id))
-  	else
-  		link_to(cwl.category_name, categories_path(:q=>cwl.reference_text))
-  	end
   end
 
   def format_date(date)

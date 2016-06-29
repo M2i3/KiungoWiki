@@ -4,6 +4,8 @@ class RecordingReleaseWikiLink < ReleaseWikiLink
   field :itemId, type: String
   field :trackNb, type: String
 
+  define_signed_as Recording, :release_wiki_links
+
   class SearchQuery < self.superclass::SearchQuery 
     def self.query_expressions
       super.merge({ 

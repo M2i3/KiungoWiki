@@ -7,6 +7,14 @@ class ReleaseWikiLink < WikiLink
   field :item_id, type: String
   field :track_number, type: String
 
+  class << self
+    def signed_as(signature)
+      [RecordingReleaseWikiLink, ArtistReleaseWikiLink].collect{|model|
+        model.signed_as(signature)
+      }.compact.first
+    end
+  end
+
   def title_with_objectq_display_text
     title_without_objectq_display_text.blank? ? self.objectq_display_text : title_without_objectq_display_text
   end

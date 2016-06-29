@@ -127,7 +127,7 @@ class Release
   end
 
   def to_wiki_link(klass=ReleaseWikiLink, attributes={})
-    attributes.merge!({reference_text: self.to_search_query.q})
+    attributes.merge!({searchref: self.to_search_query})
     klass.new(attributes)
   end
   

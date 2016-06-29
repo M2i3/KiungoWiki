@@ -46,14 +46,25 @@ class RecordingsController < ApplicationController
   end
   
   def show
-    @recording = Recording.find(params[:id])
-    if current_user
-      @user_tags = @recording.user_tags.where(user:current_user).all
-    end
-    respond_to do |format|
-      format.xml { render xml: @recording.to_xml(except: [:versions]) }
-      format.json { render json: @recording }
-      format.html
+    begin 
+      @recording = Recording.where(signature: params[:id].split("_").last).first
+      unless @recording
+        @recording = Recording.find(params[:id])
+      end
+      if current_user
+        @user_tags = @recording.user_tags.where(user:current_user).all
+      end
+      respond_to do |format|
+        format.xml { render xml: @recording.to_xml(except: [:versions]) }
+        format.json { render json: @recording }
+        format.html
+      end
+    rescue Mongoid::Errors::DocumentNotFound => ex
+      if @recording = RecordingWikiLink.signed_as(params[:id].split("_").last)
+        render :text => "We could not find " + @recording.objectq_display_text
+      else
+        raise ex
+      end
     end
   end
 

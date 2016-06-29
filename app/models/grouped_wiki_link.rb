@@ -1,4 +1,4 @@
-class GroupedWikiLink
+class GroupedWikiLink 
 
   def initialize(klass, wiki_links)
     wiki_links.group_by{|wl| wl.signature }.each{|signature, links|

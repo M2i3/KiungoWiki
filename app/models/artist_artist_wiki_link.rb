@@ -1,6 +1,8 @@
 class ArtistArtistWikiLink < ArtistWikiLink
   include Mongoid::Document
 
+  define_signed_as Artist, :artist_wiki_links
+
   def relation
     searchref[:relation]
   end

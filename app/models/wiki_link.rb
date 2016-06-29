@@ -6,7 +6,27 @@ class  WikiLink
   embedded_in :linkable, polymorphic: true
   
   before_save :save_signature
-
+  
+  class << self
+    
+    def define_signed_as(model, method)
+      define_singleton_method :signed_as do |signature|
+        model_instance =  model.where(:"#{method.to_s}.signature" => signature).first
+        if model_instance
+          if model_instance.send(method.to_sym).is_a?(WikiLink)
+            model_instance.send(method.to_sym)
+          else
+            model_instance.send(method.to_sym).where(:signature => signature).first
+          end
+        end
+      end
+    end
+    
+    def signed_as(signature)
+      raise NotImplementedError
+    end
+  end
+  
   def reference_text=(value)
     @search_ref = nil
     self[:reference_text] = value

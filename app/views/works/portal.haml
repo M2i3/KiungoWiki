@@ -30,7 +30,7 @@
         %ul 
           %li 
             - Work.order_by(updated_at: :desc).limit(5).all.each do |work|
-              %span.work>= link_to work.to_wiki_link.object_text, work_path(work.id)
+              %span.work>= work_wiki_link_path(work.to_wiki_link)
               ;&nbsp;
             = link_to "...", recent_changes_works_path, title: t("portal.recent_changes")
           %li= link_to t("portal.recent_changes_work"), recent_changes_works_path
@@ -52,7 +52,7 @@
         %li 
           %span.letter= heading
           - Work.where(cache_first_letter: letter).order_by(updated_at:1).limit(5).each do |work|
-            %span.work>= link_to work.to_wiki_link.object_text, work_path(work.id)
+            %span.work>= work_wiki_link_path(work.to_wiki_link)
             ;&nbsp;
           = link_to "...", alphabetic_works_path(letter: letter, page: 1), title: "#{t('portal.complete_work_alphabet')} \"#{letter}\""
       %li= link_to t("portal.all_works"), works_path(page: 1)

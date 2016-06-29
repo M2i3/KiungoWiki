@@ -30,7 +30,7 @@
         %ul 
           %li 
             - Recording.order_by(updated_at: :desc).limit(5).all.each do |recording|
-              %span.recording>= link_to recording.to_wiki_link.object_text, recording_path(recording.id)
+              %span.recording>= recording_wiki_link_path(recording)  
               ;&nbsp;
             = link_to "...", recent_changes_recordings_path, title: t("portal.recent_changes")
           %li= link_to t("portal.recent_changes_recording"), recent_changes_recordings_path
@@ -51,7 +51,7 @@
         %li 
           %span.letter= heading
           - Recording.where(cache_first_letter: letter).sort(updated_at:1).limit(5).each do |recording|
-            %span.recording>= link_to recording.to_wiki_link.object_text, recording_path(recording.id)
+            %span.recording>= recording_wiki_link_path(recording)  
             ;&nbsp;
           = link_to "...", alphabetic_recordings_path(letter: letter, page: 1), title: "#{t('portal.complete_recording_alphabet')} \"#{letter}\""
       %li= link_to t("portal.all_recordings"), recordings_path(page: 1)

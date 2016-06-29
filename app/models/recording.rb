@@ -175,9 +175,8 @@ class Recording
   end
 
   def to_wiki_link(klass=RecordingWikiLink, attributes={})
-    attributes.merge!({reference_text: self.to_search_query.q})
+    attributes.merge!({searchref: self.to_search_query})
     klass.new(attributes)
-#    klass.new(reference_text: self.to_search_query.q, recording: self)
   end
     
   def to_search_query

@@ -6,23 +6,14 @@ class ArtistWikiLink < WikiLink
 
   field :start_date, type: String
   field :end_date, type: String
-  
-  #def name(exclude_role=false)
-  #  #if artist
-  #    case
-  #      when !self.surname.blank? && !self.given_name.blank?
-  #        self.surname + ", " + self.given_name
-  #      when !self.surname.blank?
-  #        self.surname
-  #      when !self.given_name.blank?
-  #        self.given_name
-  #      else 
-  #        self.name
-  #    end
-  #    #else
-  #    #self.objectq_display_text
-  #    #end #+ ((role.blank? || exclude_role) ? "" : " [#{self.role}]")
-  #end
+
+  class << self
+    def signed_as(signature)
+      [WorkArtistWikiLink, RecordingArtistWikiLink, ReleaseArtistWikiLink, ArtistArtistWikiLink].collect{|model|
+        model.signed_as(signature)
+      }.compact.first
+    end
+  end
 
   def object_text
     self.name.to_s

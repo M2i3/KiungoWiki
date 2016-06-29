@@ -1,6 +1,8 @@
 class ArtistRecordingWikiLink < RecordingWikiLink
   include Mongoid::Document
 
+  define_signed_as Artist, :recording_wiki_links
+  
   def role
     searchref[:role]
   end

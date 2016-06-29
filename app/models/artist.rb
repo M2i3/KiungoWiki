@@ -213,8 +213,7 @@ class Artist
   end
 
   def to_wiki_link(klass=ArtistWikiLink, attributes={})
-    #attributes.merge!({reference_text: self.to_search_query.q, artist: self})
-    attributes.merge!({reference_text: self.to_search_query.q})
+    attributes.merge!({searchref: self.to_search_query})
     klass.new(attributes)
   end
   

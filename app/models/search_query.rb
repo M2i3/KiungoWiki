@@ -91,7 +91,8 @@ class SearchQuery
   end
   
   def url_encoded
-    self.q("_").gsub(' ', '-').gsub("'", '-').gsub(/[^a-zA-Z0-9\_\-\.\:]/, '') + "_" + self.signature
+    self.class.primary_display_text.collect{|k| self[k] }.join("-").parameterize + "_" + self.signature
+    #self.q("_").gsub(' ', '-').gsub("'", '-').gsub(/[^a-zA-Z0-9\_\-\.\:]/, '') + "_" + self.signature
   end
   
 

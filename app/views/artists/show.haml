@@ -5,8 +5,10 @@
   %span.small (individual)
 
 .row
-  .span9
+  .span12
     = render partial: 'links'
+.row
+  .span9
     .section.summary
       %p
         = date_location_formatted(t("birth"), @artist.birth_date, @artist.birth_location)
@@ -37,7 +39,7 @@
             - @artist.grouped_work_wiki_links.sort{|a,b| ((a.date_written <=> b.date_written) || 1) }.each do |wwl|
 
               %tr
-                %td= work_wiki_link_path(wwl)
+                %td= work_wiki_link_path(wwl.referenced)
                 %td= wwl.date_written
                 %td= wwl.role
 
@@ -111,9 +113,8 @@
         = content_tag(:small, updated_at(@artist))
 
   .span3
-    %div
-      %img{:src => "//lh4.ggpht.com/1Rw1DEbRB87sJ3sdx1g8yMrmx-Lt-VgYqhYolXv_y0hAZxbqoA1HAw1qT-JLk68-dHEL-QHmAA=w300", :height =>"auto",  :alt => ""}
-
+    = render partial: "common/adsense_side"
+    
+.row
   .span12
-    - if @artist.supplementary_sections.size > 0
-      = link_to t('report_content'), report_artist_path(@artist)
+    = link_to t('report_content'), report_artist_path(@artist)

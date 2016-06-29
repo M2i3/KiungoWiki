@@ -133,7 +133,7 @@ en:
   
   actions:
     new_portal_article: New Article
-    new_artist_portal_article: about an article
+    new_artist_portal_article: about an artist
     new_work_portal_article: about a work
     new_recording_portal_article: about a recording
     new_release_portal_article: about an release

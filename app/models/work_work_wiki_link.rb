@@ -2,6 +2,8 @@ class WorkWorkWikiLink < WorkWikiLink
   include Mongoid::Document
   field :relation, type:String
 
+  define_signed_as Work, :work_wiki_links
+
   # def relation # not sure if needed?
   #   searchref[:relation] || "undetermined"
   # end

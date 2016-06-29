@@ -4,6 +4,14 @@ class RecordingWikiLink < WikiLink
   set_reference_class Recording
   cache_attributes :title, :recording_date, :duration 
   field :role, type: String
+  
+  class << self
+    def signed_as(signature)
+      [WorkRecordingWikiLink, ArtistRecordingWikiLink, ReleaseRecordingWikiLink].collect{|model|
+        model.signed_as(signature)
+     }.compact.first
+    end
+  end
 
   def title_with_objectq
     title_without_objectq.blank? ? self.objectq_display_text : title_without_objectq

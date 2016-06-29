@@ -3,6 +3,14 @@ class WorkWikiLink < WikiLink
 
   set_reference_class Work
   cache_attributes :title, :language_code, :date_written
+  
+  class << self
+    def signed_as(signature)
+      [RecordingWorkWikiLink, ArtistWorkWikiLink, WorkWorkWikiLink].collect{|model|
+        model.signed_as(signature)
+      }.compact.first
+    end
+  end
 
   def title_with_objectq
     title_without_objectq.blank? ? self.objectq_display_text : title_without_objectq
@@ -50,6 +58,10 @@ class WorkWikiLink < WikiLink
     def self.catch_all
       :title
     end
+    def self.primary_display_text
+      [:title]
+    end
+    
   end
 
 end

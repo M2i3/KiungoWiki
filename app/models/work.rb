@@ -160,7 +160,6 @@ class Work
 
   def to_wiki_link(klass=WorkWikiLink, attributes = {})
     attributes.merge!({searchref: self.to_search_query})
-    #attributes.merge!({reference_text: self.to_search_query.q, :work=>self})
     klass.new(attributes)
   end
   

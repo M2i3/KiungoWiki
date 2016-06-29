@@ -140,6 +140,7 @@ class PreviousDatabaseImporter
   end
   
   def wipe_all_data!
+    Change.collection.drop
     Category.collection.drop
     Language.collection.drop
     Artist.collection.drop
