@@ -523,7 +523,7 @@ class PreviousDatabaseImporter
           
           wls = attributes.collect {|recording|
             r = recordings[recording[:ref]] || raise("Cannot find recording for id #{recording[:ref]}")
-            r.to_wiki_link(ReleaseRecordingWikiLink, {itemSection: release[:cote], itemId: release[:disque], trackNb: release[:plage]})
+            r.to_wiki_link(ReleaseRecordingWikiLink, {itemSection: recording[:cote], itemId: recording[:disque], trackNb: recording[:plage]})
           }
           release.recording_wiki_links = wls
           release.save!

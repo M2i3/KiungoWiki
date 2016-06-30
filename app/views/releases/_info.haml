@@ -47,14 +47,11 @@
           %tr
             %td= recording_wiki_link_path(rwl)
             %td= rwl.recording_date
-            - if rwl.itemId.blank? || rwl.itemId == "0"
-              %td= "1"
-            - else
-              %td= rwl.itemId
+            %td= rwl.itemId.to_i == 0 ? "1" : rwl.itemId
             - if ["33 tours","45 tours"].include?(@release.media_type)
               %td= rwl.itemSection
             %td= rwl.trackNb
-            %td= rwl.duration
+            %td= Duration.new(rwl.duration)
             %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe if rwl.recording
 
   - @release.supplementary_sections.each do |ss|

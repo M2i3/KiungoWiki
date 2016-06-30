@@ -34,6 +34,12 @@ class Duration
     @minutes = 0 if @minutes.nil?
     @seconds = 0 if @seconds.nil?
 
+    @minutes += (@seconds / 60)
+    @seconds = @seconds.modulo(60)
+
+    @hours += (@minutes / 60)
+    @minutes = @minutes.modulo(60)
+
     self
 
   end
