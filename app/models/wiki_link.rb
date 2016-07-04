@@ -98,7 +98,7 @@ class  WikiLink
   end
 
   class << self    
-    
+
     def define_signed_as(model, method)
       define_singleton_method :signed_as do |signature|
         signature = signature.split("_").last 
@@ -116,6 +116,7 @@ class  WikiLink
     def signed_as(signature)
       raise NotImplementedError
     end
+
 
     def set_reference_class(klass)
 
@@ -169,11 +170,6 @@ class  WikiLink
         field "c_#{a}".to_sym, options
 
         class_eval <<-EOM
-
-          def #{a}=(value)
-            c_#{a} = value
-            self.searchref[:#{a}] = value
-          end
 
           def #{a}
             if self[:c_#{a}]
