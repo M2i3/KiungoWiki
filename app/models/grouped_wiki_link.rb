@@ -59,5 +59,8 @@ class GroupedWikiLink
         super(name, *args, &block)
       end
     end
+    
+    def to_wiki_link
+    end
   end
 end

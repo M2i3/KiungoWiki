@@ -47,7 +47,7 @@ class RecordingsController < ApplicationController
   
   def show
     begin 
-      @recording = Recording.where(signature: params[:id].split("_").last).first
+      @recording = Recording.signed_as(params[:id]).first
       unless @recording
         @recording = Recording.find(params[:id])
       end

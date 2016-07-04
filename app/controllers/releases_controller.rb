@@ -47,7 +47,7 @@ class ReleasesController < ApplicationController
   end
   
   def show
-    @release = Release.where(signature: params[:id].split("_").last).first
+    @release = Release.signed_as(params[:id]).first
     unless @release
       @release = Release.where(id: params[:id]).first
       unless @release

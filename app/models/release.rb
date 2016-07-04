@@ -1,10 +1,6 @@
 class Release
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::Search
-  include Mongoid::History::Trackable
+  include WikiDocument
 
-  field :signature, type:  String
   field :title, type: String
   field :date_released, type: IncDate
   field :label, type: String
@@ -14,7 +10,6 @@ class Release
   field :origalbumid, type: String
   field :alpha_ordering, type: String
   field :numerical_ordering, type: Integer
-  field :missing_supplementary_sections, type: Boolean
 
   #
   # calculated values so we can index and sort
@@ -24,7 +19,6 @@ class Release
 
   before_save :update_cached_fields
 
-  index({ signature: 1 }, { background: true })
   index({ cache_normalized_title: 1 }, { background: true })
   index({ cache_first_letter: 1, cache_normalized_title: 1 }, { background: true })
   index({ origalbumid: 1})
@@ -40,22 +34,10 @@ class Release
   embeds_many :recording_wiki_links, as: :linkable, class_name: "ReleaseRecordingWikiLink", cascade_callbacks: true
   accepts_nested_attributes_for :recording_wiki_links, allow_destroy: true
   validates_associated :recording_wiki_links
-
-  embeds_many :supplementary_sections, class_name: "SupplementarySection", cascade_callbacks: true
-  accepts_nested_attributes_for :supplementary_sections, allow_destroy: true
-  validates_associated :supplementary_sections
   
   embeds_many :tags, as: :taggable, class_name: "PublicTag"
   
   has_many :user_tags, as: :taggable
-
-  # telling Mongoid::History how you want to track changes
-  track_history   modifier_field: :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
-                  version_field:  :version,   # adds "field :version, :type => Integer" to track current version, default is :version
-                  track_create:     true,    # track document creation, default is false
-                  track_update:     true,     # track document updates, default is true
-                  track_destroy:    true     # track document destruction, default is false
-
 
   def artist_wiki_links_text
     artist_wiki_links.collect{|v| v.reference_text }.join("||")
@@ -123,7 +105,6 @@ class Release
   def update_cached_fields
     self.cache_normalized_title = self.normalized_title
     self.cache_first_letter = self.title_first_letter
-    self.signature = self.to_search_query.signature
   end
 
   def to_wiki_link(klass=ReleaseWikiLink, attributes={})
@@ -181,10 +162,6 @@ class Release
     end
   end
   
-  before_save do |doc|
-    doc.missing_supplementary_sections = doc.supplementary_sections.length == 0
-    true
-  end
 
   #Release.all.group_by {|a| a.title_first_letter.upcase }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil
   #Release.all.group_by {|a| a.date_released.year.to_s }.sort{|a, b| a <=> b}.each {|a| puts "* [" + a[0] + "] - " + a[1][0..4].collect{|b| "[" + b.title + "]"}.join(", ") + (a[1][5] ? ", [...]": "") }; nil

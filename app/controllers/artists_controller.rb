@@ -51,7 +51,7 @@ class ArtistsController < ApplicationController
   
   def show
     
-    @artist = Artist.where(signature: params[:id].split("_").last).first
+    @artist = Artist.signed_as(params[:id]).first
     unless @artist
       @artist = Artist.find(params[:id])
       respond_to do |format|

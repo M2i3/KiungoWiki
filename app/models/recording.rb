@@ -1,11 +1,7 @@
 class Recording 
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::Search
-  include Mongoid::History::Trackable
+  include WikiDocument
 
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
-  field :signature, type:  String
   field :title, type:  String
   field :recording_date, type:  IncDate
   field :recording_location, type:  String
@@ -13,7 +9,6 @@ class Recording
   field :bpm, type:  Integer
   field :origrecordingid, type:  String
   field :missing_tags, type: Boolean
-  field :missing_supplementary_sections, type: Boolean
 
   #
   # calculated values so we can index and sort
@@ -23,7 +18,6 @@ class Recording
 
   before_save :update_cached_fields
 
-  index({ signature: 1 }, { background: true })
   index({ cache_normalized_title: 1 }, { background: true })
   index({ cache_first_letter: 1, cache_normalized_title: 1 }, { background: true })
   index({ origrecordingid: 1})
@@ -54,21 +48,8 @@ class Recording
   accepts_nested_attributes_for :category_wiki_links, allow_destroy: true
   validates_associated :category_wiki_links
 
-  embeds_many :supplementary_sections, class_name: "SupplementarySection"
-  accepts_nested_attributes_for :supplementary_sections
-  validates_associated :supplementary_sections
-
   embeds_many :tags, as: :taggable, class_name: "PublicTag"
   has_many :user_tags, as: :taggable, class_name: "UserTag"
-  
-  # telling Mongoid::History how you want to track changes
-  track_history   modifier_field: :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
-                  version_field: :version,   # adds "field :version, type:  Integer" to track current version, default is :version
-                  track_create:  true,    # track document creation, default is false
-                  track_update:  true,     # track document updates, default is true
-                  track_destroy:  true     # track document destruction, default is false
-
-
 
   def release_title
     self.release_wiki_link.title 
@@ -171,7 +152,6 @@ class Recording
     self[:title] = self.work_wiki_link.title 
     self.cache_normalized_title = self.normalized_title
     self.cache_first_letter = self.title_first_letter
-    self.signature = self.to_search_query.signature
   end
 
   def to_wiki_link(klass=RecordingWikiLink, attributes={})
@@ -227,12 +207,6 @@ class Recording
         end
       end
     end
-  end
-  
-  before_save do |doc|
-    doc.missing_tags = doc.tags.length == 0
-    doc.missing_supplementary_sections = doc.supplementary_sections.length == 0
-    true
   end
   
 end

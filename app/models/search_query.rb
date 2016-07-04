@@ -65,7 +65,8 @@ class SearchQuery
       if value.nil?
         self.instance_variable_set("@#{var_name}", nil)
       else
-        self.instance_variable_set("@#{var_name}", value.to_s)
+        var_type = self.class.query_expressions[var_name.to_sym]
+        self.instance_variable_set("@#{var_name}", cast_search_element(var_type, value.to_s))
       end
     else
       raise "undefined field #{var_name}"
@@ -77,7 +78,7 @@ class SearchQuery
       filled_fields = self.filled_query_fields
       values = []
       @field_order.each {|var_name|
-        filled_fields.delete(var_name)
+        filled_fields.delete(var_name.to_sym)
         values << self.full_field(var_name)
       }
       
@@ -116,9 +117,10 @@ class SearchQuery
           if term[:search_element].is_a?(Hash)
         
             var_name = term[:search_element][:field]
+            var_type = self.class.query_expressions[var_name.to_sym]
         
             if var_name && query_fields.include?(var_name.to_sym)  
-              self.instance_variable_set("@#{var_name}", decode_search_element(term[:search_element]))
+              self.instance_variable_set("@#{var_name}", cast_search_element(var_type, decode_search_element(term[:search_element])))
               @field_order << var_name
             end
 
@@ -153,9 +155,26 @@ class SearchQuery
     if search_element[:value] 
       search_element[:value].to_s
     elsif search_element[:string]
-      #search_element[:string]
       search_element[:string].to_s.gsub('\"','"')
-      #JSON.parse('["' + search_element[:string].to_s + '"]')[0]
+    end
+  end
+  
+  def cast_search_element(type, value)
+    begin
+      case type
+      when :text, :word
+        value.to_s
+      when :date
+        IncDate.new(value)
+      when :duration
+        Duration.new(value)
+      when :numeric
+        value.to_i
+      else
+        value
+      end
+    rescue
+      nil
     end
   end
   

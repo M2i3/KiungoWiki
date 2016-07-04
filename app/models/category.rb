@@ -1,9 +1,5 @@
 class Category 
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::Search
-  include Mongoid::History::Trackable  
-#TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
+  include WikiDocument
   #after_initialize :set_defaults
 
   field :category_name, type: String
@@ -11,20 +7,12 @@ class Category
   field :info, type: String, default: ""
   field :cache_normalized_name, type: String, default: ''
   
-  index({ signature: 1 }, { background: true })
   index({ cache_normalized_name: 1 }, { background: true })
 
   search_in :category_name, {match: :all}
 
   validates_presence_of :category_name
   
-  # telling Mongoid::History how you want to track changes
-  track_history   modifier_field: :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
-                  version_field: :version,   # adds "field :version, type:  Integer" to track current version, default is :version
-                  track_create:  true,    # track document creation, default is false
-                  track_update:  true,     # track document updates, default is true
-                  track_destroy:  true     # track document destruction, default is false
-
   scope :queried, ->(q) {
     current_query = all
     asq = CategoryWikiLink.search_query(q)

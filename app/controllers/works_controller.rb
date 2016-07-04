@@ -56,19 +56,32 @@ class WorksController < ApplicationController
 
   def show
 
-    @work = Work.where(signature: params[:id].split("_").last).first
+    @work = Work.signed_as(params[:id]).first
     unless @work
-      @work = Work.find(params[:id])
+      @work = Work.where(id: params[:id]).first
     end
     
-    if current_user
-      @user_tags = @work.user_tags.where(user:current_user).all
+    if @work
+      
+      if current_user
+        @user_tags = @work.user_tags.where(user:current_user).all
+      end
+      respond_to do |format|
+        format.xml { render xml: @work.to_xml(except: [:versions]) }
+        format.json { render json: @work }
+        format.html
+      end
+      
+    else 
+      
+      if @wl = WorkWikiLink.signed_as(params[:id])
+        redirect_to new_work_path(q: @wl.searchref.q)
+      else
+        raise Mongoid::Errors::DocumentNotFound
+      end
+      
     end
-    respond_to do |format|
-      format.xml { render xml: @work.to_xml(except: [:versions]) }
-      format.json { render json: @work }
-      format.html
-    end
+
   end
 
   def new

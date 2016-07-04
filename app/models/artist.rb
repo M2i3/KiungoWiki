@@ -1,12 +1,8 @@
 class Artist 
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::Search
-  include Mongoid::History::Trackable
-
+  include WikiDocument
+  
 #TODO: Re-enable some form of versioning most likely using https://github.com/aq1018/mongoid-history instead of the Mongoid::Versioning module
 
-  field :signature, type:  String
   field :name, type:  String
   field :surname, type:  String, default:  ""
   field :given_name, type:  String, default:  ""
@@ -16,8 +12,6 @@ class Artist
   field :death_location, type:  String
   field :origartistid, type:  String
   field :is_group, type:  Integer
-  field :missing_supplementary_sections, type: Boolean
-
 
   #
   # calculated values so we can index and sort
@@ -27,7 +21,6 @@ class Artist
 
   before_save :update_cached_fields
 
-  index({ signature: 1 }, { background: true })
   index({ cache_normalized_name: 1 }, { background: true })
   index({ cache_first_letter: 1, cache_normalized_name: 1 }, { background: true })
   index({ origartistid: 1})
@@ -52,20 +45,9 @@ class Artist
   validates_associated :artist_wiki_links
   accepts_nested_attributes_for :artist_wiki_links, allow_destroy: true
 
-  embeds_many :supplementary_sections, class_name: "SupplementarySection"
-  validates_associated :supplementary_sections
-  accepts_nested_attributes_for :supplementary_sections, allow_destroy: true
-    
   embeds_many :tags, as: :taggable, class_name: "PublicTag"
   
   has_many :user_tags, as: :taggable
-
-  # telling Mongoid::History how you want to track changes
-  track_history   modifier_field: :modifier, # adds "referenced_in :modifier" to track who made the change, default is :modifier
-                  version_field: :version,   # adds "field :version, type:  Integer" to track current version, default is :version
-                  track_create:  true,    # track document creation, default is false
-                  track_update:  true,     # track document updates, default is true
-                  track_destroy:  true     # track document destruction, default is false
 
   def set_name
     unless self.surname.blank?
@@ -209,7 +191,6 @@ class Artist
     self.set_name
     self.cache_normalized_name = self.normalized_name
     self.cache_first_letter = self.name_first_letter
-    self.signature = self.to_search_query.signature
   end
 
   def to_wiki_link(klass=ArtistWikiLink, attributes={})
@@ -259,9 +240,4 @@ class Artist
       end
     end
   end
-  before_save do |doc|
-    doc.missing_supplementary_sections = doc.supplementary_sections.length == 0
-    true
-  end
-  
 end
