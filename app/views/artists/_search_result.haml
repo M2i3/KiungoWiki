@@ -10,7 +10,7 @@
     - search_result.each do |artist|
       %tr
         %td
-          = link_to artist.name, artist_path(artist)
+          = artist_wiki_link_path(artist.to_wiki_link)
         %td
           - if (artist.birth_date != "0-00-00") then
             = artist.birth_date

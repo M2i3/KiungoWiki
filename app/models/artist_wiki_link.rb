@@ -2,7 +2,7 @@ class ArtistWikiLink < WikiLink
   include Mongoid::Document
 
   set_reference_class Artist
-  cache_attributes :name, :surname, :given_name, :birth_date, :birth_location
+  cache_attributes :name, :surname, :given_name, :birth_date, :birth_location, :is_group
 
   field :start_date, type: String
   field :end_date, type: String
@@ -40,7 +40,8 @@ class ArtistWikiLink < WikiLink
             birth_date: :date,
             birth_location: :text,
             death_date: :date,
-            death_location: :text
+            death_location: :text,
+            is_group: :boolean
           }
     def self.query_expressions
       superclass.query_expressions.merge QUERY_ATTRS

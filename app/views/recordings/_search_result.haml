@@ -8,7 +8,7 @@
     %tbody
       - search_result.each do |recording|
         %tr
-          %td= link_to recording.title, recording_path(recording)
+          %td= recording_wiki_link_path(recording.to_wiki_link)
           %td= recording.recording_date
           %td= recording.duration
           %td= recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe

@@ -74,21 +74,17 @@ class SearchQuery
   end
   
   def q(separator=" ")
-    unless @q
-      filled_fields = self.filled_query_fields
-      values = []
-      @field_order.each {|var_name|
-        filled_fields.delete(var_name.to_sym)
-        values << self.full_field(var_name)
-      }
-      
-      filled_fields.each {|var_name|
-        values << self.full_field(var_name)
-      }
-      @q = values.join(separator)
-    end
+    filled_fields = self.filled_query_fields
+    values = []
+    @field_order.each {|var_name|
+      filled_fields.delete(var_name.to_sym)
+      values << self.full_field(var_name)
+    }
     
-    @q
+    filled_fields.each {|var_name|
+      values << self.full_field(var_name)
+    }
+    values.join(separator)
   end
   
   def url_encoded

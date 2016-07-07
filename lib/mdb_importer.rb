@@ -192,7 +192,7 @@ class PreviousDatabaseImporter
                     :birth_location => l["LieuNaissance"],
                     :death_date => l["DateDeces"],
                     :death_location => l["LieuDécès"],
-                    :is_group => l["Collectif"] }
+                    :is_group => (l["Collectif"].to_i == 1) }
               
           unless ["0","",nil].include?(l["Remarques"])
             params[:supplementary_sections] = [SupplementarySection.new({:title=>"Notes biographiques",:content=>l["Remarques"]})]
@@ -252,14 +252,14 @@ class PreviousDatabaseImporter
     
     ::Work.disable_tracking {
       ::Artist.disable_tracking {
-        artists_works = Hash.new{|h,k|  h[k]=[]}
-        works_artists = Hash.new{|h,k|  h[k]=[]}
+        artists_works = Hash.new{|h,k|  h[k]=Hash.new{|h,k| h[k] = {ref: k, roles: []}}}
+        works_artists = Hash.new{|h,k|  h[k]=Hash.new{|h,k| h[k] = {ref: k, roles: []}}}
         
         puts "pre-loading to speed up updates (1 of 3)"
         MdbImporter.new("Lien Artiste Auteur-compositeur").each{|l|
           if @work_filter.include?(l) and @artist_filter.include?(l)
-            artists_works[l["RefArtiste"]] << {ref: l["RefPiece"], role: l["RefRole"]}
-            works_artists[l["RefPiece"]] << {ref: l["RefArtiste"], role: l["RefRole"]}
+            artists_works[l["RefArtiste"]][l["RefPiece"]][:roles] << l["RefRole"]
+            works_artists[l["RefPiece"]][l["RefArtiste"]][:roles] << l["RefRole"]
           end
         }
         
@@ -269,14 +269,14 @@ class PreviousDatabaseImporter
           w = Work.where(:origworkid => workid).first || raise("Cannot find work for id #{workid}")
           artists = {}.tap {|h| 
             # .extras(:hint => {:origartistid => 1})
-            Artist.where(:origartistid.in => (artist_roles.collect{|a| a[:ref]})).each {|a|
+            Artist.where(:origartistid.in => (artist_roles.collect{|k,a| a[:ref]})).each {|a|
               h[a.origartistid] = a
             }
           } 
                     
-          awls = artist_roles.collect {|artist|
+          awls = artist_roles.collect {|k,artist|
             a = artists[artist[:ref]] || raise("Cannot find artist for id #{artistid}")            
-            a.to_wiki_link(WorkArtistWikiLink, {role: self.roles[artist[:role]]})
+            a.to_wiki_link(WorkArtistWikiLink, {role: artist[:roles].collect{|role| self.roles[role] }.join(", ") })
           }
           w.artist_wiki_links = awls
           w.save!
@@ -290,14 +290,14 @@ class PreviousDatabaseImporter
           a = Artist.where(:origartistid => artistid).extras(:hint => {:origartistid => 1}).first || raise("Cannot find artist for id #{artistid}")            
           
           works = {}.tap {|h| 
-            Work.where(:origworkid.in => (work_roles.collect{|w| w[:ref]})).extras(:hint => {:origworkid => 1}).each {|w|
+            Work.where(:origworkid.in => (work_roles.collect{|k,w| w[:ref]})).extras(:hint => {:origworkid => 1}).each {|w|
               h[w.origworkid] = w
             }
           } 
           
-          awls = work_roles.collect {|work|
+          awls = work_roles.collect {|k,work|
             w = works[work[:ref]] || raise("Cannot find work for id #{workid}")
-            w.to_wiki_link(ArtistWorkWikiLink, {role: self.roles[work[:role]]})
+            w.to_wiki_link(ArtistWorkWikiLink, {role: work[:roles].collect{|role| self.roles[role] }.join(", ") })
           }
           a.work_wiki_links = awls
           a.save!
@@ -366,14 +366,14 @@ class PreviousDatabaseImporter
     ::Recording.disable_tracking {
       ::Artist.disable_tracking {
         
-        artists_recordings = Hash.new{|h,k|  h[k]=[]}
-        recordings_artists = Hash.new{|h,k|  h[k]=[]}
+        artists_recordings = Hash.new{|h,k|  h[k]=Hash.new{|h,k| h[k] = {ref: k, roles: []}}}
+        recordings_artists = Hash.new{|h,k|  h[k]=Hash.new{|h,k| h[k] = {ref: k, roles: []}}}
         
         puts "pre-loading to speed up updates (1 of 3)"
         MdbImporter.new("Lien Artiste Interprete").each{|l|
           if @recording_filter.include?(l, "RéfVersion") and @artist_filter.include?(l) and @recordings_loaded.include?(l["RéfVersion"])
-            artists_recordings[l["RefArtiste"]] << {ref: l["RéfVersion"], role: l["RefRole"]}
-            recordings_artists[l["RéfVersion"]] << {ref: l["RefArtiste"], role: l["RefRole"]}
+            artists_recordings[l["RefArtiste"]][l["RéfVersion"]][:roles] << l["RefRole"]
+            recordings_artists[l["RéfVersion"]][l["RefArtiste"]][:roles] << l["RefRole"]
           end
         }
         
@@ -383,14 +383,14 @@ class PreviousDatabaseImporter
           r = Recording.where(:origrecordingid => recordingid).first || raise("Cannot find recording for id #{recordingid}")
           artists = {}.tap {|h| 
             # .extras(:hint => {:origartistid => 1})
-            Artist.where(:origartistid.in => (artist_roles.collect{|a| a[:ref]})).each {|a|
+            Artist.where(:origartistid.in => (artist_roles.collect{|k,a| a[:ref]})).each {|a|
               h[a.origartistid] = a
             }
           } 
                     
-          awls = artist_roles.collect {|artist|
+          awls = artist_roles.collect {|k,artist|
             a = artists[artist[:ref]] || raise("Cannot find artist for id #{artist[:ref]}")            
-            a.to_wiki_link(RecordingArtistWikiLink, {role: self.roles[artist[:role]]})
+            a.to_wiki_link(RecordingArtistWikiLink, {role: artist[:roles].collect{|role| self.roles[role] }.join(", ") })
           }
           r.artist_wiki_links = awls
           r.save!
@@ -403,14 +403,14 @@ class PreviousDatabaseImporter
           a = Artist.where(:origartistid => artistid).extras(:hint => {:origartistid => 1}).first || raise("Cannot find artist for id #{artistid}")
 
           recordings = {}.tap {|h| 
-            Recording.where(:origrecordingid.in => (recording_roles.collect{|w| w[:ref]})).extras(:hint => {:origrecordingid => 1}).each {|r|
+            Recording.where(:origrecordingid.in => (recording_roles.collect{|k,w| w[:ref]})).extras(:hint => {:origrecordingid => 1}).each {|r|
               h[r.origrecordingid] = r
             }
           } 
           
-          awls = recording_roles.collect {|recording|
+          awls = recording_roles.collect {|k,recording|
             r = recordings[recording[:ref]] || raise("Cannot find recording for id #{recording[:ref]}")
-            r.to_wiki_link(ArtistRecordingWikiLink, {role: self.roles[recording[:role]]})
+            r.to_wiki_link(ArtistRecordingWikiLink, {role: recording[:roles].collect{|role| self.roles[role] }.join(", ") })
           }
           a.recording_wiki_links = awls
           a.save!
@@ -436,13 +436,19 @@ class PreviousDatabaseImporter
           params = {:origalbumid => l["RefAlbum"],
                     :title => l["TitreAlbum"],
                     :date_released => l["Annee"],
-                    :label => self.labels[l["RefEtiquette"]],
-                    :media_type => self.media_types[l["RefFormat"]],
                     :reference_code => l["NoAlbum"],
                     :alpha_ordering => l["Ordre1Alpha"],
-                    :numerical_ordering => l["Ordre2Num"],
-                    :artist_wiki_links => [artist.to_wiki_link(ReleaseArtistWikiLink)]
+                    :numerical_ordering => l["Ordre2Num"]
                   }
+          unless l["RefEtiquette"].to_i == 0 
+            params[:label] = self.labels[l["RefEtiquette"]]
+          end
+          unless  l["RefFormat"].to_i == 0 
+            params[:media_type] = self.media_types[l["RefFormat"]]
+          end
+          if artist
+            params[:artist_wiki_links] = [artist.to_wiki_link(ReleaseArtistWikiLink)]
+          end
           unless ["0","",nil].include?(l["Remarques"])
             params[:supplementary_sections] = [SupplementarySection.new({:title=>"Notes",:content=>l["Remarques"]})]
           end

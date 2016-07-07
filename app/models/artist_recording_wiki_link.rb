@@ -1,12 +1,10 @@
 class ArtistRecordingWikiLink < RecordingWikiLink
   include Mongoid::Document
 
+  field :role, type:String
+  
   define_signed_as Artist, :recording_wiki_links
   
-  def role
-    searchref[:role]
-  end
-
   class SearchQuery < self.superclass::SearchQuery 
     def self.query_expressions
       super.merge({ 
