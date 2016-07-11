@@ -1,8 +1,96 @@
 = title(@recording.title)
 
 .row
-  = render partial: 'links'
   .span12
-    = render partial: 'info'
+    = render partial: 'links'
+.row
+  .span9
+    .section.summary
+      %p
+        = Recording.human_attribute_name("work_wiki_link")
+        \: #{work_wiki_link_path(@recording.work_wiki_link)}
+      %p
+        - unless @recording.recording_date.blank?
+          = Recording.human_attribute_name("recording_date") 
+          \: #{@recording.recording_date}
+      %p
+        - unless @recording.recording_location.blank?
+          = Recording.human_attribute_name("recording_location") 
+          \: #{@recording.recording_location}
+      %p
+        - unless @recording.category_wiki_links.first.blank?
+          = Recording.human_attribute_name("category")
+          \: 
+          #{@recording.category_wiki_links.collect{|v| v.category_name}.join(', ').html_safe}
+      %p
+        - unless @recording.duration.to_s.blank?
+          = Recording.human_attribute_name("duration") 
+          \: #{@recording.duration}
+      %p
+        - unless @recording.bpm.blank?
+          = Recording.human_attribute_name("bpm") 
+          \:  #{@recording.bpm}bpm
+
+    %h2 #{t('credits')}
+    - if @recording.artist_wiki_links == 0
+      %p #{t('messages.recording_without_artist')}.
+    - else
+      %table.table.table-striped
+        %thead
+          %tr
+            %th= Artist.model_name.human.pluralize
+            %th= Artist.human_attribute_name :role
+        %tbody
+          - @recording.artist_wiki_links.each do |awl|
+            %tr
+              %td= artist_wiki_link_path(awl)
+              %td= awl.role
+
+    %h2= Release.model_name.human.pluralize
+    - if @recording.release_wiki_links.length == 0
+      %p #{t('messages.recording_without_release')}.
+    - else
+      .right-size
+        %table.table.table-striped
+          %thead
+            %tr
+              %th= Release.human_attribute_name("title")
+              %th= Release.human_attribute_name("date_released")
+              %th= Release.human_attribute_name("label")
+              %th= Release.human_attribute_name("media_type")
+              %th= Recording.human_attribute_name("itemId")
+              %th= Recording.human_attribute_name("itemSection")
+              %th= Recording.human_attribute_name("trackNb") 
+              %th= Release.human_attribute_name("reference_code")
+          %tbody
+            - @recording.release_wiki_links.sort{|a,b| ((a.date_released <=> b.date_released) || 1)}.each do |awl|
+              %tr
+                %td= release_wiki_link_path(awl)
+                %td= awl.date_released
+                %td= awl.label
+                %td= awl.media_type
+                - unless awl.itemId.blank?
+                  %td= awl.itemId 
+                - else
+                  %td= "1"
+                %td= awl.itemSection
+                %td= awl.trackNb
+                %td= awl.reference_code
+
+    - @recording.supplementary_sections.each do |ss|
+      %h2= ss.title 
+      = RedCloth.new(ss.content).to_html.html_safe
+    
+    - unless @recording.new_record?
+      .well 
+        = content_tag(:small, updated_at(@recording))
+    
     - if @recording.supplementary_sections.size > 0
       = link_to t('report_content'), report_recording_path(@recording)
+
+  .span3
+    = render partial: "common/adsense_side"
+    
+.row
+  .span12
+    = link_to t('report_content'), report_recording_path(@recording)

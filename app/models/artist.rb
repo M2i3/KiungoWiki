@@ -167,10 +167,6 @@ class Artist
     current_query
   }
 
-  def grouped_work_wiki_links
-    GroupedWikiLink.new(ArtistWorkWikiLink, self.work_wiki_links).groups
-  end
-
   def normalized_name
     self.name.to_s.
       mb_chars.
