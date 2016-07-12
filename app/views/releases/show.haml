@@ -1,8 +1,77 @@
 = title(@release.title)
 
 .row
-  = render partial: 'links'
   .span12
-    = render partial: 'info'
-    - if @release.supplementary_sections.size > 0
-      = link_to t('report_content'), report_release_path(@release)
+    = render partial: 'links'
+.row
+  .span9
+    .section.summary
+      %p
+        = Release.human_attribute_name("title")
+        \: #{@release.title}
+      %p
+        = Release.human_attribute_name("date_released")
+        \: #{@release.date_released}
+      %p
+        = Release.human_attribute_name("label")
+        \: #{@release.label}
+      %p
+        = Release.human_attribute_name("media_type")
+        \: #{@release.media_type}
+      %p
+        = Release.human_attribute_name("reference_code")
+        \: #{@release.reference_code}
+
+    %h2= Artist.model_name.human.pluralize
+    - if @release.artist_wiki_links.size == 0 
+      %p #{t('messages.release_without_artist')}
+    - else
+      %table.table.table-striped
+        %tbody
+          %th= Artist.human_attribute_name("name")
+          - @release.artist_wiki_links.each do |artist|
+            %tr
+              %td= artist_wiki_link_path(artist)
+
+    %h2= Recording.model_name.human.pluralize
+    - if @release.recording_wiki_links == 0
+      %p #{t('messages.release_without_recording')}.
+    - else
+      .right-size
+        %table.table.table-striped
+          %thead
+            %tr
+              %th= Recording.human_attribute_name("title")
+              %th= Recording.human_attribute_name("recording_date")
+              %th= Recording.human_attribute_name("itemId")
+              - if ["33 tours","45 tours"].include?(@release.media_type)
+                %th= Recording.human_attribute_name("itemSection")
+              %th= Recording.human_attribute_name("trackNb")
+              %th= Recording.human_attribute_name("duration")
+              %th= Recording.human_attribute_name("artist_wiki_link")
+          %tbody
+            - @release.recording_wiki_links.sort{|a,b| [a.itemId.to_i, a.itemSection.to_s, a.trackNb.to_i] <=> [b.itemId.to_i, b.itemSection.to_s, b.trackNb.to_i] }.each do |rwl|
+              %tr
+                %td= recording_wiki_link_path(rwl)
+                %td= rwl.recording_date
+                %td= rwl.itemId.to_i == 0 ? "1" : rwl.itemId
+                - if ["33 tours","45 tours"].include?(@release.media_type)
+                  %td= rwl.itemSection
+                %td= rwl.trackNb
+                %td= Duration.new(rwl.duration)
+                %td= rwl.recording.artist_wiki_links.collect{|awl| artist_wiki_link_path(awl) }.join(", ").html_safe if rwl.recording
+
+      - @release.supplementary_sections.each do |ss|
+        %h2= ss.title 
+        = RedCloth.new(ss.content).to_html.html_safe
+
+    - unless @release.new_record?
+      .well 
+        = content_tag(:small, updated_at(@release))
+    
+  .span3
+    = render partial: "common/adsense_side"
+    
+.row
+  .span12
+    = link_to t('report_content'), report_release_path(@release)
