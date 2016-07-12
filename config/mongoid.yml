@@ -78,6 +78,7 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
+        connect_timeout: 15
 
 staging:
   sessions:
@@ -86,6 +87,7 @@ staging:
       options:
         skip_version_check: true
         safe: true
+
 
 
 production:
