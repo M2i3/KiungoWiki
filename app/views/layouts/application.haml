@@ -86,5 +86,11 @@
                 - else
                   %li= link_to "in english", lang:"en"
 
-          %p#copyright.span12= "© 2013-#{Time.now.year} - KiungoWiki"
+          %p#copyright.span6= "© 2013-#{Time.now.year} - KiungoWiki"
+          
+          - unless content_for(:title).empty?
+            %p#report-content.span6
+              = link_to t('report_content'), report_path(display_text: content_for(:title), return_to: request.original_url)
+          
+
     = render partial: "common/sharethis"

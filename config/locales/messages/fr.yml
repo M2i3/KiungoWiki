@@ -4,34 +4,24 @@ fr:
     error: Oops ! Une erreur est survenue !
     alert: Un instant ! Je dois vous avertir !
     notice: Félicitation vous avez réussi !
-    work_new_without_query: Veuillez vous assurer que l'oeuvre que vous désirez créer
-      n'existe pas déjà dans le wiki.
-    recording_new_without_query: Veuillez vous assurer que l'enregistrement que vous
-      désirez créer n'existe pas déjà dans le wiki.
-    artist_new_without_query: Veuillez vous assurer que l'artiste que vous désirez
-      créer n'existe pas déjà dans le wiki.
-    release_new_without_query: Veuillez vous assurer que la parution que vous désirez
-      créer n'existe pas déjà dans le wiki.
+    work_new_without_query: Veuillez vous assurer que l'oeuvre que vous désirez créer n'existe pas déjà dans le wiki.
+    recording_new_without_query: Veuillez vous assurer que l'enregistrement que vous désirez créer n'existe pas déjà dans le wiki.
+    artist_new_without_query: Veuillez vous assurer que l'artiste que vous désirez créer n'existe pas déjà dans le wiki.
+    release_new_without_query: Veuillez vous assurer que la parution que vous désirez créer n'existe pas déjà dans le wiki.
     confirm: Êtes-vous certain ?
-    artist_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer
-      le nouvel artiste
+    artist_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer le nouvel artiste
     artist_no_work: Artistes sans oeuvres
     artist_no_recordings: Artistes sans enregistrements
     artist_no_releases: Artistes sans parutions
-    category_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer
-      la catégorie
-    article_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer
-      l'article
-    recording_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer
-      l'enregistrement
+    category_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer la catégorie
+    article_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer l'article
+    recording_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer l'enregistrement
     recording_without_artist: Enregistrements sans artistes
     recording_without_release: Enregistrements sans parutions
-    release_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer
-      la parution
+    release_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer la parution
     release_without_artist: Parution sans artiste
     release_without_recording: Parution sans enregistrement
-    work_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer
-      l'oeuvre
+    work_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer l'oeuvre
     work_no_artists: Oeuvres sans artiste
     work_no_recordings: Oeuvres sans enregistrement
     admin_user_errors_warning: ???
@@ -40,3 +30,4 @@ fr:
     delete_release_warning: ???
     delete_work_warning: ???
     not_authorized: ???
+    report_errors_warning: Le(s) problème(s) suivant(s) nous empêche(nt) d'enregistrer la requête.

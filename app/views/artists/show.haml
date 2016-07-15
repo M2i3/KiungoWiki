@@ -117,4 +117,4 @@
     
 .row
   .span12
-    = link_to t('report_content'), report_artist_path(@artist)
+    = link_to t('report_content'), report_path(display_text: @artist.name, entity_type: @artist.class, return_to: artist_path(id:@artist.to_wiki_link.searchref.url_encoded))

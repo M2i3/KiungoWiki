@@ -30,3 +30,4 @@ en:
     delete_recording_warning: "the following recording (WARNING: this operation cannot be reverted)"
     delete_release_warning: "the following release (WARNING: this operation cannot be reverted)"
     delete_work_warning: "the following work (WARNING: this operation cannot be reverted)"
+    report_errors_warning: The following problem(s) prevents us from sending your report

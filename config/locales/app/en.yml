@@ -121,8 +121,8 @@ en:
   preview_warning: "WARNING: This is a preview of your changes. They have not been saved into our wiki yet. If you are satisfied with the result make sure you click the [Create|Update] button before leaving"
   report_content: Contact the wiki administrator about this content
   report_explanations: 
-    - We manually investigate all problems reported on this website. 
-    - Please allow 48 to 72 hours before an administrator reaches out to you with an answer.
+    - "We manually investigate all problems reported on this website."
+    - "Please, allow 48 to 72 hours before an administrator reaches out to you with an answer."
 
   updated_at: Updated on %{update_date} at %{update_time} by %{update_username}.
   
@@ -133,7 +133,7 @@ en:
     submit: send request
     title: Report Content
     phone: Phone number
-    email_sent: Email sent successfully
+    email_sent: "Your message has been sent to an administrator. Please, allow 48 to 72 hours before an administrator reaches out to you with an answer."
   
   actions:
     new_portal_article: New Article

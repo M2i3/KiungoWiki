@@ -162,10 +162,10 @@ fr:
   administration: Gestion
   preview: Preview
   preview_warning: "WARNING: This is a preview of your changes. They have not been saved into our wiki yet. If you are satisfied with the result make sure you click the [Create|Update] button before leaving"
-  report_content: Contact the wiki administrator about this content
+  report_content: Contacter l'administrateur du wiki à propos de cette page
   report_explanations: 
     - Nous étudions manuellement tous les problèmes signalés sur ce site.
-    - S'il-vous-plaît accordez 48 à 72 heures pour qu'un administrateur vous contacte avec une réponse.
+    - S'il-vous-plaît, accordez 48 à 72 heures pour qu'un administrateur vous contacte avec une réponse.
       
   updated_at: "Modifié le %{update_date} à %{update_time} par %{update_username}."
   report:
@@ -175,7 +175,7 @@ fr:
     submit: envoyer
     title: rapporter un problème
     phone: téléphone
-    email_sent: courriel envoyé avec succès
+    email_sent: "Votre message a été envoyé à un administrateur. S'il-vous-plaît, accordez 48 à 72 heures pour qu'un administrateur vous contacte avec une réponse."
     
   actions:
     new_portal_article: Nouvel article

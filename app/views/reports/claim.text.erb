@@ -1,7 +1,10 @@
-You have received the following request from <%= @report.name %>. You can contact the person by email at <%= @report.email %> or phone at <%= @report.phone %>
+Hello,
 
-The request is about the <%= @entity.class %>, <%= @entity_name %> at URL <%= @url %>
+You have received a message from <%= @report.name %>. You can contact the person by email at <%= @report.email %>.
+
+The request is about the <%= @report.entity_type %>, <%= @report.display_text %> at URL <%= @report.entity_url %>
 
 The following details were provided:
 
 <%= @report.details %>
+

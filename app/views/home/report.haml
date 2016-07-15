@@ -1,0 +1,30 @@
+= title(t('report.title'))
+
+.row
+  .span12
+    %br
+    - t(:report_explanations).each do |line| 
+      %p= line
+
+.row
+  .span12
+    = form_for @report, url: report_path do |f|
+      - unless @report.errors.empty?
+        .alert.alert-error
+          %strong #{t('messages.release_errors_warning')}:
+          %br/
+          = @report.errors.full_messages.join("</br>").html_safe
+      = f.hidden_field :entity_url
+      = f.hidden_field :display_text
+      = f.hidden_field :entity_type
+      
+      %dl
+        %dt= f.label :name, t('report.name')
+        %dd= f.text_field :name, class: "span6"
+        %dt= f.label :email, t('report.email')
+        %dd= f.text_field :email, class: "span6"
+        %dt= f.label :details, t('report.details')
+        %dd= f.text_area :details, class: "span6"
+        = f.submit t('report.submit')
+
+

@@ -1,5 +1,5 @@
 class ReleasesController < ApplicationController
-
+  
   # only registered users can edit this wiki
   before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_artist, :without_supplementary_sections, :without_recordings, :report]
   authorize_resource
@@ -94,15 +94,17 @@ class ReleasesController < ApplicationController
     @release.assign_attributes params[:release]
   end
   
-  def report
-    @release = Release.find(params[:id])
-    @report = ReportEntity.new params[:report_entity]
-    if request.post? && @report.valid?
-      url = release_url(@release)
-      Reports.claim(@release, @release.title, url, @report).deliver
-      redirect_to url, notice: I18n.t('report.email_sent')
-    end
-  end
+#  def report
+#    @release = Release.find(params[:id])
+#    @report = ReportEntity.new params[:report_entity]
+#    if request.post? 
+#      if @report.valid?
+#        url = release_url(@release)
+#        Reports.claim(@release, @release.title, url, @report).deliver
+#       redirect_to url, notice: I18n.t('report.email_sent')
+#      end
+#    end
+#  end
 
   def create
     @release = Release.new(params[:release])

@@ -74,4 +74,5 @@
     
 .row
   .span12
-    = link_to t('report_content'), report_release_path(@release)
+    = link_to t('report_content'), report_path(display_text: @release.title, entity_type: @release.class, return_to: release_path(id:@release.to_wiki_link.searchref.url_encoded))
+    

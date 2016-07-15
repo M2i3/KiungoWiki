@@ -131,6 +131,8 @@ KiungoWiki::Application.routes.draw do
   match 'search' => 'search#index'
   match 'new_from_search' => 'search#new_from'
   match 'site_plan' => "home#site_plan"
+  
+  match 'report' => "home#report"
 
   get ':controller/:action', controller: "test_input"
   post ':controller/:action', controller: "test_input"

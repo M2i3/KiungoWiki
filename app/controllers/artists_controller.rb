@@ -118,16 +118,6 @@ class ArtistsController < ApplicationController
     @artist.update_cached_fields
   end
   
-  def report
-    @artist = Artist.find(params[:id])
-    @report = ReportEntity.new params[:report_entity]
-    if request.post? && @report.valid?
-      url = artist_url(@artist)
-      Reports.claim(@artist, @artist.name, url, @report).deliver
-      redirect_to url, notice: I18n.t("report.email_sent")
-    end
-  end
-
   def add_supplementary_section
     @artist = Artist.find(params[:id])
     @artist.add_supplementary_section

@@ -5,7 +5,7 @@ class WorksController < ApplicationController
   authorize_resource
   skip_authorize_resource only: [:without_artist, :without_recordings, :without_lyrics, :without_tags, :without_supplementary_sections, :report]
   before_filter :set_search_domain
-  
+
   def index
     @works = build_filter_from_params(params, Work.all.order_by(cache_normalized_title:1))
 
@@ -108,16 +108,6 @@ class WorksController < ApplicationController
       @work = Work.new
     end
     @work.assign_attributes params[:work]
-  end
-  
-  def report
-    @work = Work.find(params[:id])
-    @report = ReportEntity.new params[:report_entity]
-    if request.post? && @report.valid?
-      url = work_url(@work)
-      Reports.claim(@work, @work.title, url, @report).deliver
-      redirect_to url, notice: I18n.t('report.email_sent')
-    end
   end
   
   def create

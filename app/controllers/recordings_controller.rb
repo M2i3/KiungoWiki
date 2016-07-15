@@ -3,7 +3,7 @@ class RecordingsController < ApplicationController
   # only registered users can edit this wiki
   before_filter :authenticate_user!, except: [:show, :index, :lookup, :portal, :recent_changes, :search, :alphabetic_index, :without_artist, :without_releases, :without_tags, :without_supplementary_sections, :report]
   before_filter :set_search_domain
-  
+
   def index
     @recordings = build_filter_from_params(params, Recording.all.order_by(cache_normalized_title:1))
 
@@ -94,16 +94,6 @@ class RecordingsController < ApplicationController
     @recording.assign_attributes params[:recording]
   end
   
-  def report
-    @recording = Recording.find(params[:id])
-    @report = ReportEntity.new params[:report_entity]
-    if request.post? && @report.valid?
-      url = recording_url(@recording)
-      Reports.claim(@recording, @recording.title, url, @report).deliver
-      redirect_to url, notice: I18n.t('report.email_sent')
-    end
-  end
-
   def create
     @recording = Recording.new(params[:recording])
 
