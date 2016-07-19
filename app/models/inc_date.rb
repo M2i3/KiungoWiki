@@ -6,7 +6,7 @@ class IncDate < String
   attr_reader :day, :month, :year
   alias mday day
 
-  def initialize(value)
+  def initialize(value =  nil)
 
     value = nil if value.blank?
 

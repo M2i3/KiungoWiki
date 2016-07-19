@@ -175,11 +175,7 @@ class  WikiLink
             if self[:c_#{a}]
               c_#{a}
             else
-              if self.searchref[:#{a}]
-                self.searchref[:#{a}]
-              else
-                referenced && referenced.#{a}
-              end
+              self.searchref[:#{a}]
             end
           end
 

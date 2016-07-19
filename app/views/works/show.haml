@@ -32,7 +32,7 @@
               %th= Artist.model_name.human.pluralize
               %th= WorkArtistWikiLink.human_attribute_name('role')
           %tbody
-            - @work.artist_wiki_links.sort{|a,b| ((a.name.downcase <=> b.name.downcase) || 1)}.each do |awl|
+            - @work.artist_wiki_links.sort_by{|a| [a.name.downcase] }.each do |awl|
               %tr
                 %td= artist_wiki_link_path(awl)
                 %td= awl.role
@@ -71,7 +71,7 @@
               %th= Recording.human_attribute_name("duration")
               %th= Recording.human_attribute_name("artist_wiki_link")
           %tbody
-            - @work.recording_wiki_links.sort{|a,b| ((a.recording_date <=> b.recording_date) || 1)}.each do |rwl|
+            - @work.recording_wiki_links.sort_by{|a| [a.recording_date || IncDate.new] }.each do |rwl|
               %tr
                 %td= recording_wiki_link_path(rwl)
                 %td= rwl.recording_date

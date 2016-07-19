@@ -36,7 +36,7 @@
               %th= Work.human_attribute_name("date_written")
               %th= WorkWikiLink.human_attribute_name("role")       
           %tbody
-            - @artist.work_wiki_links.sort_by{|a| [a.date_written, a.title]}.each do |wwl|
+            - @artist.work_wiki_links.sort_by{|a| [a.date_written || IncDate.new, a.title || ""]}.each do |wwl|
 
               %tr
                 %td= work_wiki_link_path(wwl)
@@ -76,7 +76,7 @@
               %th= Recording.human_attribute_name("duration")
               %th= Recording.human_attribute_name("role")
           %tbody
-            - @artist.recording_wiki_links.sort_by{|a| [a.recording_date] }.each do |rwl| 
+            - @artist.recording_wiki_links.sort_by{|a| [a.recording_date || IncDate.new] }.each do |rwl| 
               %tr
                 %td= recording_wiki_link_path(rwl)
                 %td= rwl.recording_date    
@@ -97,7 +97,7 @@
               %th= Release.human_attribute_name("label")
 
           %tbody
-            - @artist.release_wiki_links.sort{|a,b| ((a.date_released <=> b.date_released) || 1)}.each do |awl|
+            - @artist.release_wiki_links.sort_by{|a| [a.date_released || IncDate.new] }.each do |awl|
               %tr
                 %td= release_wiki_link_path(awl)
                 %td= awl.date_released
