@@ -1,27 +1,41 @@
 class  WikiLink
   include Mongoid::Document
+  include ::WikiLinkFields
 
-  field :reference_text, default: ""
+#  field :reference_text, default: ""
   field :signature, default: nil
   embedded_in :linkable, polymorphic: true
-  
+    
   before_save :save_signature
   
   def reference_text=(value)
-    @search_ref = nil
-    self[:reference_text] = value
-    sq = self.class.search_query(value)
-    if sq[:oid]
-      if self.referenced.nil? || self.referenced.id.to_s != sq[:oid]
-        begin 
-          self.referenced = self.class.referenced_klass.find(sq[:oid]) 
-        rescue Mongoid::Errors::DocumentNotFound
-          self.referenced = nil
-        end
-      end
-    else
-      self.referenced = nil
-    end
+    self.searchref = self.class.search_query(value)
+  end
+  
+  def reference_text
+    self.searchref.q
+  end
+  
+  def searchref
+    @search_ref
+      @search_ref = self.class.search_query
+      self.class.wiki_link_fields.each {|k,v|
+        @search_ref[k] = self[k]
+      }
+      self.class.wiki_link_additional_fields.each {|k,v|
+        @search_ref[k] = self[k]
+      }
+    
+    @search_ref
+  end
+  def searchref=(value)
+    @search_ref = value
+    self.class.wiki_link_fields.each {|k,v|
+      self[k] = @search_ref[k]
+    }
+    self.class.wiki_link_additional_fields.each {|k,v|
+      self[k] = @search_ref[k]
+    }
   end
   
   def signature
@@ -41,14 +55,6 @@ class  WikiLink
   end
   def referenced
     self.send(self.class.reference_field.to_sym)
-  end
-
-  def searchref
-    @search_ref ||= self.class.search_query(reference_text)
-  end
-  def searchref=(value)
-    @search_ref = value
-    self.reference_text = @search_ref.q
   end
 
   def metaq  
@@ -74,29 +80,10 @@ class  WikiLink
     object_text + (self.metaq.blank? ? "" : " (#{self.metaq})")
   end
 
-  def update_cached_attributes
-    cached_attributes.each{|a|
-      if referenced
-        self.send("c_#{a}=".to_sym, referenced.send(a.to_sym))
-      else
-        self.send("c_#{a}=".to_sym, nil)
-      end
-    }
-  end
-
-  def flush_cached_attributes
-    cached_attributes.each{|a| 
-      self.unset(a.to_sym)
-    }
-  end
-  
   def save_signature
     self.signature = self.signature
   end
-  def cached_attributes
-    []
-  end
-
+  
   class << self    
 
     def define_signed_as(model, method)
@@ -147,50 +134,14 @@ class  WikiLink
     end
 
     def search_klass
-      self::SearchQuery
+      unless self == WikiLink
+        self::SearchQuery
+      else
+        ::SearchQuery
+      end
     end
-
-    def cache_attributes(*attributes)
-
-      attributes_list = attributes.collect{|a| ":#{a}"}.join(", ")
-
-      class_eval <<-EOM
-        def cached_attributes          
-          super + [#{attributes_list}]
-        end
-      EOM
-
-      attributes.each{|a|
-
-        options = {}
-        [:type].each{|option|
-          options[option] = referenced_klass.fields[a.to_s].options[option] if referenced_klass.fields[a.to_s].options[option]
-        }
-
-        field "c_#{a}".to_sym, options
-
-        class_eval <<-EOM
-
-          def #{a}
-            if self[:c_#{a}]
-              c_#{a}
-            else
-              self.searchref[:#{a}]
-            end
-          end
-
-        EOM
-        
-      }
-
-#
-# Don't enable it yet, the propagation mechanism is not in place
-#
-#      before_save :update_cached_attributes
-
-    end
-
-    def search_query(q)
+    
+    def search_query(q = "")
       if self.respond_to?(:search_klass)
         self.search_klass.new(q)
       else
@@ -201,5 +152,3 @@ class  WikiLink
   end # class << self
 
 end
-
-

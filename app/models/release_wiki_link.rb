@@ -2,10 +2,16 @@ class ReleaseWikiLink < WikiLink
   include Mongoid::Document
 
   set_reference_class Release
-  cache_attributes :title, :label, :date_released, :reference_code, :media_type
-  field :item_section, type: String
-  field :item_id, type: String
-  field :track_number, type: String
+  
+  wiki_link_field :title, type: String
+  wiki_link_field :label, type: String
+  wiki_link_field :date_released, type: IncDate
+  wiki_link_field :reference_code, type: String
+  wiki_link_field :media_type, type: String
+  
+  wiki_link_additional_field :item_section, type: String
+  wiki_link_additional_field :item_id, type: String
+  wiki_link_additional_field :track_number, type: String
 
   class << self
     def signed_as(signature)

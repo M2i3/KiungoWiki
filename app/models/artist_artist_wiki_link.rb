@@ -1,5 +1,8 @@
 class ArtistArtistWikiLink < ArtistWikiLink
   include Mongoid::Document
+  
+  wiki_link_additional_field :start_date, type: IncDate
+  wiki_link_additional_field :end_date, type: IncDate
 
   define_signed_as Artist, :artist_wiki_links
 

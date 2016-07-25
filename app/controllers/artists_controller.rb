@@ -56,7 +56,7 @@ class ArtistsController < ApplicationController
       @artist = Artist.find(params[:id])
       respond_to do |format|
         format.html { redirect_to( artist_path(id:@artist.to_search_query.url_encoded)) }
-        format.xml  { render :xml => @artist, :location => @artist }
+        format.xml  { render :xml => @artist, :location => artist_path(id: @artist.to_search_query.url_encoded, format:"xml") }
       end
     else
       if current_user

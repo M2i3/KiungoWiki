@@ -154,19 +154,6 @@ class Recording
     self.cache_first_letter = self.title_first_letter
   end
 
-  def to_wiki_link(klass=RecordingWikiLink, attributes={})
-    attributes.merge!({searchref: self.to_search_query})
-    klass.new(attributes)
-  end
-    
-  def to_search_query
-    sq = RecordingWikiLink::SearchQuery.new
-    RecordingWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|key|
-      sq[key] = self[key]
-    }
-    sq
-  end
-  
   def user_tags_text
     UserTagsWorker.new self
   end

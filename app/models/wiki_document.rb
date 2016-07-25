@@ -33,6 +33,12 @@ module WikiDocument
     index({ update_missing_supplementary_sections: 1 }, { background: true })
   end
   
+  module ClassMethods
+    def wiki_link_class
+      (self.to_s + "WikiLink").constantize
+    end
+  end
+  
   def update_signature
     self.signature = self.to_search_query.signature
     true
@@ -42,5 +48,22 @@ module WikiDocument
     self.missing_supplementary_sections = self.supplementary_sections.length == 0
     true
   end
-   
+  
+  def to_wiki_link(klass=self.class.wiki_link_class, attributes = {})
+#    attributes.merge!({searchref: self.to_search_query})
+    klass.new {|wl|
+      klass.wiki_link_fields.each {|k,attributes|
+        wl[k] = self[k]
+      }
+      attributes.each {|k, value|
+        wl[k] = value        
+      }
+    }
+  end
+  
+  def to_search_query
+    self.to_wiki_link.searchref
+  end
+  
+  
 end

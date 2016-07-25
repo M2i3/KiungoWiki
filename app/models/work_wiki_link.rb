@@ -2,7 +2,11 @@ class WorkWikiLink < WikiLink
   include Mongoid::Document
 
   set_reference_class Work
-  cache_attributes :title, :language_code, :date_written
+
+  wiki_link_field :title, type: String, default: ""
+  wiki_link_field :date_written, type: IncDate
+  wiki_link_field :copyright, type: String
+  wiki_link_field :language_code, type: String
   
   class << self
     def signed_as(signature)
@@ -16,10 +20,6 @@ class WorkWikiLink < WikiLink
     title_without_objectq.blank? ? self.objectq_display_text : title_without_objectq
   end
   alias_method_chain :title, :objectq
-
-#  def work_wiki_links
-#     (self.work && self.work.work_wiki_links) || ""
-#  end
 
   def language_name
     unless["0","",nil].include?(Language.where(:language_code=>self.language_code).first); 

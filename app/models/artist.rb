@@ -188,19 +188,6 @@ class Artist
     self.cache_normalized_name = self.normalized_name
     self.cache_first_letter = self.name_first_letter
   end
-
-  def to_wiki_link(klass=ArtistWikiLink, attributes={})
-    attributes.merge!({searchref: self.to_search_query})
-    klass.new(attributes)
-  end
-  
-  def to_search_query
-    sq = ArtistWikiLink::SearchQuery.new
-    ArtistWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|key|
-      sq[key] = self[key]
-    }
-    sq
-  end
   
   def user_tags_text
     UserTagsWorker.new self

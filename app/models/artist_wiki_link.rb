@@ -2,10 +2,15 @@ class ArtistWikiLink < WikiLink
   include Mongoid::Document
 
   set_reference_class Artist
-  cache_attributes :name, :surname, :given_name, :birth_date, :birth_location, :is_group
-
-  field :start_date, type: String
-  field :end_date, type: String
+  
+  wiki_link_field :name, type:  String
+  wiki_link_field :surname, type:  String, default:  ""
+  wiki_link_field :given_name, type:  String, default:  ""
+  wiki_link_field :birth_date, type:  IncDate
+  wiki_link_field :birth_location, type:  String
+  wiki_link_field :death_date, type:  IncDate
+  wiki_link_field :death_location, type:  String
+  wiki_link_field :is_group, type:  Integer
 
   class << self
     def signed_as(signature)

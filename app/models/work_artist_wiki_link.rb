@@ -1,6 +1,7 @@
 class WorkArtistWikiLink < ArtistWikiLink
   include Mongoid::Document
-  field :role, type:String
+  
+  wiki_link_additional_field :role, type:String
   
   define_signed_as Work, :artist_wiki_links
   

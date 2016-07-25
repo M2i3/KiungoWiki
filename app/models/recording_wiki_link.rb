@@ -2,8 +2,14 @@ class RecordingWikiLink < WikiLink
   include Mongoid::Document
 
   set_reference_class Recording
-  cache_attributes :title, :recording_date, :duration 
-  field :role, type: String
+  
+  wiki_link_field :title, type:  String
+  wiki_link_field :recording_date, type:  IncDate
+  wiki_link_field :recording_location, type:  String
+  wiki_link_field :duration, type:  Duration
+  wiki_link_field :bpm, type:  Integer
+
+  wiki_link_additional_field :role, type: String
   
   class << self
     def signed_as(signature)

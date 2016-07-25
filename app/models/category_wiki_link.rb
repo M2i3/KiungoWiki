@@ -2,7 +2,8 @@ class CategoryWikiLink < WikiLink
   include Mongoid::Document
 
   set_reference_class Category
-  cache_attributes :category_name
+  
+  wiki_link_field :category_name, type: String, default: ""
 
   def origcategoryid
     (category && self.category.origcategoryid) || self.objectq

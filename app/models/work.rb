@@ -139,21 +139,6 @@ class Work
     self.cache_normalized_title = self.normalized_title
     self.cache_first_letter = self.title_first_letter
   end
-
-  def to_wiki_link(klass=WorkWikiLink, attributes = {})
-    attributes.merge!({searchref: self.to_search_query})
-    klass.new(attributes)
-  end
-  
-  def to_search_query
-    sq = WorkWikiLink::SearchQuery.new
-    WorkWikiLink::SearchQuery::QUERY_ATTRS.keys.each {|key|
-      unless key == :lyrics
-        sq[key] = self[key]
-      end
-    }
-    sq
-  end
   
   def user_tags_text
     UserTagsWorker.new self

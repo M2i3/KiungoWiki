@@ -12,18 +12,6 @@ class PortalArticle
   embeds_one :featured_wiki_link, as: :linkable, class_name:"Link"
   index({category: 1, publish_date: 1})
 
-  def title
-    if self.featured_wiki_link
-      I18n.t("headers.portal_article_#{self.category}", :featured=>self.featured_wiki_link.object_text)
-    else
-      self[:title]
-    end
-  end
-
-  def generated_title?
-    self.category != "general"
-  end
-
   def summary(length=nil)
     if length
       self.content[0..length] + (self.content.size > length ? "..." : "")
