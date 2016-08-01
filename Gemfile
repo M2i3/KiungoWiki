@@ -2,14 +2,12 @@ source 'https://rubygems.org'
 ruby "2.0.0"
 
 gem 'rails', '3.2.20'
-gem "haml"
+gem 'haml'
 gem 'formtastic', github: 'justinfrench/formtastic', branch: '2.1-stable'
 gem 'formtastic-bootstrap', github: 'cgunther/formtastic-bootstrap', branch: 'bootstrap2-rails3-2-formtastic-2-1'
-gem "thin"
-gem "mongoid"#, "~> 4.0.0"
-#gem "mongoid", '~> 3.1.0'
+gem 'thin'
+gem 'mongoid'#, "~> 4.0.0"
 gem 'mongoid-history'#, '~> 0.3.3'
-#gem 'will_paginate', '>=3.0.pre'
 gem 'acts-as-taggable-on'
 # for pagination https://github.com/amatsuda/kaminari
 gem 'kaminari'
@@ -23,7 +21,9 @@ gem 'RedCloth'
 gem 'mongoid_search', '~> 0.3.2'
 gem 'parslet'
 gem 'nested_form'
-gem "http_accept_language"
+gem 'http_accept_language'
+
+
 
 group :development do
   gem 'guard-bundler'
@@ -52,8 +52,8 @@ end
 group :test do
   gem 'cucumber-rails', '~> 1.3.0', require: false
   gem 'capybara', '~> 2.0.2'
-  gem "capybara-webkit", "~> 1.0.0"
-  gem "capybara-screenshot"
+  gem 'capybara-webkit', "~> 1.0.0"
+  gem 'capybara-screenshot'
   gem 'simplecov', require: false
 end
 
@@ -61,8 +61,10 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'yui-compressor'
   gem 'execjs'
-  gem "jquery-rails", '~> 2.2.1'
+  gem 'jquery-rails', '~> 2.2.1'
   gem 'jquery-ui-rails', '~> 4.0.2'
   gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails'
+  gem 'angularjs-rails'
+  gem 'angular_rails_csrf'
 end
 

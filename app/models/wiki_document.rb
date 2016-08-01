@@ -20,6 +20,7 @@ module WikiDocument
 
     before_save :update_signature
     index({ signature: 1 }, { background: true })
+    after_save :propate_changes_if_signature_changed
     
     scope :signed_as, ->(signature) {
       where(signature: signature.split("_").last)
@@ -38,17 +39,7 @@ module WikiDocument
       (self.to_s + "WikiLink").constantize
     end
   end
-  
-  def update_signature
-    self.signature = self.to_search_query.signature
-    true
-  end
-  
-  def update_missing_supplementary_sections
-    self.missing_supplementary_sections = self.supplementary_sections.length == 0
-    true
-  end
-  
+
   def to_wiki_link(klass=self.class.wiki_link_class, attributes = {})
 #    attributes.merge!({searchref: self.to_search_query})
     klass.new {|wl|
@@ -65,5 +56,34 @@ module WikiDocument
     self.to_wiki_link.searchref
   end
   
+
+  protected
+  def update_signature
+    @original_signature = self.signature
+    self.signature = self.to_search_query.signature
+    true
+  end
   
+
+  def propate_changes_if_signature_changed
+    if @original_signature != self.signature
+      propagate_changes
+    end
+  end
+  
+  def propagate_changes
+    if self.class.wiki_link_class.respond_to?(:all_signed_as)
+      me_wiki_link_attributes = self.to_wiki_link.attributes
+      self.class.wiki_link_class.all_signed_as(@original_signature).each{|wl|
+         wl.update_attributes(me_wiki_link_attributes)
+         wl.save
+      }
+    end
+  end
+  
+  def update_missing_supplementary_sections
+    self.missing_supplementary_sections = self.supplementary_sections.length == 0
+    true
+  end
+
 end

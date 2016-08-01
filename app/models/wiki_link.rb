@@ -81,12 +81,40 @@ class  WikiLink
   end
 
   def save_signature
-    self.signature = self.signature
+    self.signature = self.searchref.signature
   end
   
   class << self    
 
+    def define_subclass_signed_as(models)
+      models = [models].flatten.collect{|m| m.to_s.classify }
+      define_singleton_method :all_signed_as do |signature|
+        models.collect{|model|
+          model.constantize.all_signed_as(signature)
+        }.flatten.compact
+      end
+      define_singleton_method :signed_as do |signature|
+        models.collect{|model|
+          model.constantize.signed_as(signature)
+        }.compact.first
+      end
+    end
     def define_signed_as(model, method)
+      define_singleton_method :all_signed_as do |signature|
+        signature = signature.split("_").last 
+        model_instances =  model.where(:"#{method.to_s}.signature" => signature)
+        if model_instances.empty?
+          []
+        else
+          model_instances.collect{|model_instance|
+            if model_instance.send(method.to_sym).is_a?(WikiLink)
+              model_instance.send(method.to_sym)
+            else
+              model_instance.send(method.to_sym).where(:signature => signature)
+            end
+          }.flatten
+        end
+      end
       define_singleton_method :signed_as do |signature|
         signature = signature.split("_").last 
         model_instance =  model.where(:"#{method.to_s}.signature" => signature).first
@@ -99,11 +127,6 @@ class  WikiLink
         end
       end
     end
-    
-    def signed_as(signature)
-      raise NotImplementedError
-    end
-
 
     def set_reference_class(klass)
 

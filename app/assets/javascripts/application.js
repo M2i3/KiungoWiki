@@ -13,6 +13,10 @@
 //= require possessions
 //= require user_tag
 //= require jquery_nested_form
+//= require angular
+//= require angular-route.js
+//= require angular-resource.js
+//= require artists.js
 //= require_self
 
 // Place your application-specific JavaScript functions and classes here
@@ -321,3 +325,25 @@ $(document).ready(function(){
       parallax: false
   });
 });
+
+
+function getMetaTagValue(name) { 
+   var metas = document.getElementsByTagName('meta'); 
+
+   for (var i=0; i<metas.length; i++) { 
+      if (metas[i].getAttribute("name") == name) { 
+         return metas[i].getAttribute("content"); 
+      } 
+   } 
+
+    return "";
+} 
+
+// Declare app level module which depends on views, and components
+
+
+
+'use strict';
+var kiungoWikiApp = angular.module('KiungoWiki', [
+  'kwArtist'
+]);

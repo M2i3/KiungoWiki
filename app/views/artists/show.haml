@@ -118,3 +118,49 @@
 .row
   .span12
     = link_to t('report_content'), report_path(display_text: @artist.name, entity_type: @artist.class, return_to: artist_path(id:@artist.to_wiki_link.searchref.url_encoded))
+    
+.row
+  .span12
+    .message{"ng-controller"=>"ArtistFormCtrl"}
+      .field 
+        %label Signature
+        .value{"ng-model"=>"artist.signature"}
+      .field 
+        %label Given Name        
+        .value{"ng-model"=>"artist.given_name"}      
+      .field 
+        %label Surname
+        .value{"ng-model"=>"artist.surname"}      
+      %table.table.table-striped.work-wiki-links
+        %thead
+          %tr
+            %th= Work.human_attribute_name("title")
+            %th= Work.human_attribute_name("date_written")
+            %th= WorkWikiLink.human_attribute_name("role")       
+        %tbody
+          %tr.work-wiki-link{"ng-repeat"=>"work in artist.work_wiki_links track by getWikiLinkID(work)"}
+            %td
+              %input{"ng-model"=>"work.title"}
+            %td
+              %input{"ng-model"=>"work.date_written"}
+            %td
+              %input{"ng-model"=>"work.role"}
+        
+
+      %table.table.table-striped
+        %thead
+          %tr
+            %th= Recording.human_attribute_name("title")
+            %th= Recording.human_attribute_name("recording_date")
+            %th= Recording.human_attribute_name("duration")
+            %th= Recording.human_attribute_name("role")
+        %tbody
+          %tr.recording-wiki-link{"ng-repeat"=>"recording in artist.recording_wiki_links track by getWikiLinkID(recording)"}
+            %td
+              %input{"ng-model"=>"recording.title"}
+            %td
+              %input{"ng-model"=>"recording.recording_date"}
+            %td
+              %input{"ng-model"=>"recording.duration"}
+            %td
+              %input{"ng-model"=>"recording.role"}

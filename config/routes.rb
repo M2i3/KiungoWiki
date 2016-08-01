@@ -131,6 +131,7 @@ KiungoWiki::Application.routes.draw do
   match 'search' => 'search#index'
   match 'new_from_search' => 'search#new_from'
   match 'site_plan' => "home#site_plan"
+  match 'random' => "home#random"
   
   match 'report' => "home#report"
 

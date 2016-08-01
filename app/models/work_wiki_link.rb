@@ -7,15 +7,10 @@ class WorkWikiLink < WikiLink
   wiki_link_field :date_written, type: IncDate
   wiki_link_field :copyright, type: String
   wiki_link_field :language_code, type: String
+  wiki_link_field :origworkid, type: String
   
-  class << self
-    def signed_as(signature)
-      [RecordingWorkWikiLink, ArtistWorkWikiLink, WorkWorkWikiLink].collect{|model|
-        model.signed_as(signature)
-      }.compact.first
-    end
-  end
-
+  define_subclass_signed_as [:recording_work_wiki_link, :artist_work_wiki_link, :work_work_wiki_link]
+  
   def title_with_objectq
     title_without_objectq.blank? ? self.objectq_display_text : title_without_objectq
   end
@@ -50,7 +45,8 @@ class WorkWikiLink < WikiLink
         lyrics: :text,
         date_written: :date,
         language_code:  :word,
-        publisher: :text
+        publisher: :text,
+        origworkid: :word
       }
     def self.query_expressions
       superclass.query_expressions.merge QUERY_ATTRS

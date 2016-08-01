@@ -6,29 +6,15 @@
 
     %meta{"http-equiv" => "Content-Type", content: "text/html; charset=utf-8"}
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+    %meta{name: "json-src", content: @json_src}
 
     = stylesheet_link_tag "application"
-
-    = javascript_include_tag "application"
-    
-    :javascript
-      var switchTo5x=true;
-      
-    - if sharethis_enabled?      
-      %script{"type"=>"text/javascript", "src"=>"//w.sharethis.com/button/buttons.js"}
-      %script{"type"=>"text/javascript", "src"=>"//s.sharethis.com/loader.js"}
-
-    :plain    
-      <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-      <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-      <![endif]-->
 
     = csrf_meta_tag
 
     = render partial: "common/google_analytics"
 
-  %body{"data-spy"=>"scroll", "data-target"=>".subnav", "data-offset"=>50}
+  %body{"data-spy"=>"scroll", "data-target"=>".subnav", "data-offset"=>50, "ng-app"=>"KiungoWiki"}
 
     #header.navbar.navbar-fixed-top
       .navbar-inner
@@ -63,10 +49,16 @@
                 %li= link_to t("headers.sign_up_sign_in"), new_user_session_path
 
     #kiungoanimation= " "
-    #content  
+    #content
       .container
         = render partial: "common/site_messages"  
         = yield
+
+    .m-app-loading{"ng-if"=>"::false"}
+      .animated-container
+        .messaging
+          %h1 the app is loading...
+          %p Please stand by it will be right with you!
 
 
     %footer#footer.footer
@@ -94,3 +86,19 @@
           
 
     = render partial: "common/sharethis"
+    
+    = javascript_include_tag "application"
+  
+    :javascript
+      var switchTo5x=true;
+    
+    - if sharethis_enabled?      
+      %script{"type"=>"text/javascript", "src"=>"//w.sharethis.com/button/buttons.js"}
+      %script{"type"=>"text/javascript", "src"=>"//s.sharethis.com/loader.js"}
+
+    :plain    
+      <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+      <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+  

@@ -48,7 +48,7 @@ class Artist
   embeds_many :tags, as: :taggable, class_name: "PublicTag"
   
   has_many :user_tags, as: :taggable
-
+  
   def set_name
     unless self.surname.blank?
       unless self.given_name.blank?

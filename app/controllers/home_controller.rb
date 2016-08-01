@@ -22,4 +22,8 @@ class HomeController < ApplicationController
       end 
     end
   end
+  
+  def random
+    render json: {text: rand(1..99999999999999999999999999999).to_s(36)}
+  end
 end

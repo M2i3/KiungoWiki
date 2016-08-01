@@ -11,15 +11,10 @@ class ArtistWikiLink < WikiLink
   wiki_link_field :death_date, type:  IncDate
   wiki_link_field :death_location, type:  String
   wiki_link_field :is_group, type:  Integer
+  wiki_link_field :origartistid, type:  String
 
-  class << self
-    def signed_as(signature)
-      [WorkArtistWikiLink, RecordingArtistWikiLink, ReleaseArtistWikiLink, ArtistArtistWikiLink].collect{|model|
-        model.signed_as(signature)
-      }.compact.first
-    end
-  end
-
+  define_subclass_signed_as [:work_artist_wiki_link, :recording_artist_wiki_link, :release_artist_wiki_link, :artist_artist_wiki_link]
+  
   def object_text
     self.name.to_s
   end
@@ -46,7 +41,8 @@ class ArtistWikiLink < WikiLink
             birth_location: :text,
             death_date: :date,
             death_location: :text,
-            is_group: :boolean
+            is_group: :boolean,
+            origartistid: :word
           }
     def self.query_expressions
       superclass.query_expressions.merge QUERY_ATTRS

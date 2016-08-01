@@ -8,16 +8,11 @@ class RecordingWikiLink < WikiLink
   wiki_link_field :recording_location, type:  String
   wiki_link_field :duration, type:  Duration
   wiki_link_field :bpm, type:  Integer
+  wiki_link_field :origrecordingid, type:  String
 
   wiki_link_additional_field :role, type: String
   
-  class << self
-    def signed_as(signature)
-      [WorkRecordingWikiLink, ArtistRecordingWikiLink, ReleaseRecordingWikiLink].collect{|model|
-        model.signed_as(signature)
-     }.compact.first
-    end
-  end
+  define_subclass_signed_as [:work_recording_wiki_link, :artist_recording_wiki_link, :release_recording_wiki_link]
 
   def title_with_objectq
     title_without_objectq.blank? ? self.objectq_display_text : title_without_objectq
@@ -47,7 +42,8 @@ class RecordingWikiLink < WikiLink
         recording_date: :date,
         duration: :duration,
         recording_location:  :text,
-        bpm: :word
+        bpm: :word,
+        origrecordingid: :word
       }
     def self.query_expressions
       super.merge QUERY_ATTRS

@@ -8,18 +8,13 @@ class ReleaseWikiLink < WikiLink
   wiki_link_field :date_released, type: IncDate
   wiki_link_field :reference_code, type: String
   wiki_link_field :media_type, type: String
+  wiki_link_field :origalbumid, type: String
   
   wiki_link_additional_field :item_section, type: String
   wiki_link_additional_field :item_id, type: String
   wiki_link_additional_field :track_number, type: String
 
-  class << self
-    def signed_as(signature)
-      [RecordingReleaseWikiLink, ArtistReleaseWikiLink].collect{|model|
-        model.signed_as(signature)
-      }.compact.first
-    end
-  end
+  define_subclass_signed_as [:recording_release_wiki_link, :artist_release_wiki_link]
 
   def title_with_objectq_display_text
     title_without_objectq_display_text.blank? ? self.objectq_display_text : title_without_objectq_display_text
@@ -47,7 +42,8 @@ class ReleaseWikiLink < WikiLink
         media_type: :text,
         date_released: :date,
         label: :text,
-        reference_code: :text
+        reference_code: :text,
+        origalbumid: :word
       }
     def self.query_expressions
       superclass.query_expressions.merge QUERY_ATTRS

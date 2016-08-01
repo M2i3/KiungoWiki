@@ -62,6 +62,7 @@ class ArtistsController < ApplicationController
       if current_user
         @user_tags = @artist.user_tags.where(user: current_user).all
       end
+      @json_src = artist_path(id:@artist.to_search_query.url_encoded, format:'json')
       respond_to do |format|
         format.xml { render xml: @artist.to_xml(except: [:versions]) }
         format.json { render json: @artist }
